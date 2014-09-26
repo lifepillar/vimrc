@@ -7,6 +7,10 @@ inspiration. If you feel that I should cite the source of some snippet, please
 let me know! Note that I use this on OS X: minor modifications might be
 necessary for other systems. 
 
+### How it looks like
+
+![Screenshot](vimrc.png)
+
 ### Requirements
 
 - A fairly recent Vim (7.3 or later) (`brew install vim` recommended on OS X).
@@ -51,9 +55,4 @@ necessary for other systems.
 - Hard-wrap paragraphs at text width with `,r`.
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the source!)
-
-
-### How it looks like
-
-![Screenshot](vimrc.png)
 
