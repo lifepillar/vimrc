@@ -288,9 +288,6 @@
 		" Use F9 to toggle tag bar.
 		nnoremap <silent> <F9> :TagbarToggle<CR>
 	" }}
-	" Utilsnips {{
-
-	" }}
 	" Undotree {{
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
