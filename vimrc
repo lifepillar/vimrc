@@ -292,7 +292,7 @@
 		nnoremap <silent> <F9> :TagbarToggle<CR>
 	" }}
 	" Undotree {{
-		" Use F7 to toggle undo tree:
+		" Use F8 to toggle undo tree:
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
