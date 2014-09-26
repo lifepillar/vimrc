@@ -111,7 +111,7 @@
 
 " Find, replace, and auto-complete {{
 	" set gdefault " Apply substitutions globally by default
-	set hlsearch " Highlight search terms.
+	" set hlsearch " Highlight search terms.
 	set incsearch " Search as you type.
 	set ignorecase " Case-insensitive search by default.
 	set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
