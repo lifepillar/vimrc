@@ -254,6 +254,7 @@
 				set linespace=7
 				set guioptions-=r " hide right scrollbar
 			endif
+			set wrap
 			set noshowmode
 			set noshowcmd
 			Limelight
@@ -266,6 +267,7 @@
 				set linespace=0
 				set guioptions+=r
 			endif
+			set nowrap
 			set showmode
 			set showcmd
 			Limelight!
