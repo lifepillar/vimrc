@@ -18,8 +18,10 @@ necessary for other systems.
 
 ### Installation
 
-    git clone https://github.com/lifepillar/lifepillar-vim-config.git ~/.vim
-    cd ~/.vim
+    cd
+    git clone https://github.com/lifepillar/lifepillar-vim-config.git .vim
+    ln -s .vim/vimrc .vimrc
+    cd .vim
     git submodule init
     git submodule update
     mkdir tmp
@@ -29,6 +31,7 @@ necessary for other systems.
 
 ### Update
 
+    cd ~/.vim
     git checkout master
     git pull origin master
     git checkout local
