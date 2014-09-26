@@ -1,7 +1,7 @@
 " Modeline and Notes {{
 " vim: set sw=3 ts=3 sts=0 noet tw=78 foldmarker={{,}} foldlevel=0 foldmethod=marker nospell:
 "
-" Remember to check "Set locale environment variables on startup" in Terminal.app's preferences.
+" Remember to check "Set locale environment variables on startup" in OS X Terminal.app's preferences.
 " }}
 
 " Environment {{
@@ -20,7 +20,7 @@
 	" }}
 	filetype plugin on " Enable loading the plugin files for specific file types.
 	filetype indent on " Load indent files for specific file types.
-	runtime bundle/pathogen/autoload/pathogen.vim
+	runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
 	execute pathogen#infect()
 	set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
 	set autoread " Re-read file if it is changed by an external program.
@@ -99,7 +99,7 @@
 	set showmatch " Show matching brackets/parenthesis
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
 	set splitright " Puts new vsplit windows to the right of the current
-   set splitbelow " Puts new split windows to the bottom of the current
+	set splitbelow " Puts new split windows to the bottom of the current
 	" Load matchit.vim, but only if the user hasn't installed a newer version.
 	if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 		runtime! macros/matchit.vim " Enable % to go to matching keyword/tag.
@@ -171,7 +171,7 @@
 	nnoremap <Leader>n :set invnumber<CR>:set nornu<CR>
 	" Toggle relative line numbers with ,m:
 	nnoremap <Leader>m :set invnumber<CR>:set rnu<CR>
-	" Toggle background color with <F7>:
+	" Toggle background color with F7:
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
 	" Find merge conflict markers with ,fc:
 	nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
@@ -182,6 +182,7 @@
 	cnoremap <C-n> <Down>
 	" cnoremap <C-b> <Left>
 	" cnoremap <C-f> <Right>
+	" Allow using alt-arrows to jump over words in OS X, as in Terminal.app:
 	cnoremap <Esc>b <S-Left>
 	cnoremap <Esc>f <S-Right>
 " }}
@@ -285,10 +286,11 @@
 		let g:signify_disable_by_default = 1 " See Fugitive
 	" }}
 	" Tagbar {{
-		" Use F9 to toggle tag bar.
+		" Use F9 to toggle tag bar:
 		nnoremap <silent> <F9> :TagbarToggle<CR>
 	" }}
 	" Undotree {{
+		" Use F7 to toggle undo tree:
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
