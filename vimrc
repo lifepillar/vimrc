@@ -202,13 +202,13 @@
 	set background=dark
 	if filereadable(expand("~/.vim/bundle/solarized/colors/solarized.vim"))
 	"	let g:solarized_termcolors=256
-	" 	let g:solarized_termtrans=0
+	"	let g:solarized_termtrans=0
 	"	let g:solarized_degrade=0
 	"	let g:solarized_bold=1
 	"	let g:solarized_underline=1
 	"	let g:solarized_italic=1
-	" 	let g:solarized_contrast="normal"  " high, low, normal
-	" 	let g:solarized_visibility="normal" " high, low, normal
+	"	let g:solarized_contrast="normal"   " high, low, normal
+	"	let g:solarized_visibility="normal" " high, low, normal
 		colorscheme solarized
 	endif
 	" set ruler " Show the line and column number of the cursor position.
