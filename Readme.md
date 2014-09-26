@@ -38,17 +38,17 @@ necessary for other systems.
 - Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
 - Uses Solarized theme by default (toggle dark/light background with `F7`).
-- Distraction-free mode (toggle with <leader>`F`).
+- Distraction-free mode (toggle with `,F`).
 - Keeps the edited line vertically centered.
 - Airline status line extended to show tab width and type, and BOM flag.
-- Toggle hard/soft tabs with <leader>`t` (default: hard tabs).
-- Increase/decrease tab width with <leader>`[` and <leader>`]`, respectively.
+- Toggle hard/soft tabs with `,t` (default: hard tabs).
+- Increase/decrease tab width with `,[` and `,]`, respectively.
 - Copy/paste to/from system clipboard by default.
-- Toggle invisibles with <leader>`i`.
-- Toggle spell-checking with <leader>`s`.
-- Select all with <leader>`a`.
-- Remove all trailing spaces with <leader>`ts`.
-- Hard-wrap paragraphs at text width with <leader>r.
+- Toggle invisibles with `,i`.
+- Toggle spell-checking with `,s`.
+- Select all with `,a`.
+- Remove all trailing spaces with `,ts`.
+- Hard-wrap paragraphs at text width with `,r`.
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the source!)
 
