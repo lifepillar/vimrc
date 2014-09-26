@@ -1,0 +1,57 @@
+[submodule "bundle/airline"]
+	path = bundle/airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "bundle/pathogen"]
+	path = bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/goyo"]
+	path = bundle/goyo
+	url = https://github.com/junegunn/goyo.vim.git
+[submodule "bundle/irblack"]
+	path = bundle/irblack
+	url = https://github.com/wesgibbs/vim-irblack.git
+[submodule "bundle/jellybeans"]
+	path = bundle/jellybeans
+	url = https://github.com/nanotech/jellybeans.vim.git
+[submodule "bundle/ledger"]
+	path = bundle/ledger
+	url = https://github.com/ledger/vim-ledger.git
+[submodule "bundle/limelight"]
+	path = bundle/limelight
+	url = https://github.com/junegunn/limelight.vim.git
+[submodule "bundle/molokai"]
+	path = bundle/molokai
+	url = https://github.com/tomasr/molokai.git
+[submodule "bundle/seoul256"]
+	path = bundle/seoul256
+	url = https://github.com/junegunn/seoul256.vim.git
+[submodule "bundle/signify"]
+	path = bundle/signify
+	url = https://github.com/mhinz/vim-signify.git
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "bundle/base16"]
+	path = bundle/base16
+	url = https://github.com/chriskempson/base16-vim.git
+[submodule "bundle/tomorrow"]
+	path = bundle/tomorrow
+	url = https://github.com/chriskempson/vim-tomorrow-theme.git
+[submodule "bundle/undotree"]
+	path = bundle/undotree
+	url = https://github.com/mbbill/undotree.git
+[submodule "bundle/wordy"]
+	path = bundle/wordy
+	url = https://github.com/reedes/vim-wordy.git
