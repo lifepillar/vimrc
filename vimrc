@@ -196,7 +196,7 @@
 	" set colorcolumn=80 " Show page guide at column 80.
 	set laststatus=2 " Always show status line.
 	set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
-	set shortmess-=r " Don-t use abbreviations for 'readonly'
+	set shortmess-=r " Don't use abbreviations for 'readonly'
 	set showcmd " Show (partial) command in the last line of the screen.
 	set listchars=tab:\▸\ ,trail:\•,eol:\¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	" Theme
