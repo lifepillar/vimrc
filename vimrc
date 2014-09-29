@@ -129,8 +129,8 @@
 	vnoremap ; :
 	vnoremap : ;
 	let mapleader = ","
-	" Save a file with ,w:
-	nnoremap <silent> <Leader>w :w<CR>
+	" Close current buffer with ,w:
+	nnoremap <silent> <Leader>w :bd<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer:
 	nnoremap <silent> <Leader>t :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer:
