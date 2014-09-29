@@ -168,9 +168,9 @@
 	nnoremap <Leader>9 :9b<CR>
 	nnoremap <Leader>0 :10b<CR>
 	" Toggle absolute line numbers with ,n:
-	nnoremap <Leader>n :set invnumber<CR>:set nornu<CR>
+	nnoremap <silent> <Leader>n :set invnumber<CR>:set nornu<CR>
 	" Toggle relative line numbers with ,m:
-	nnoremap <Leader>m :set invnumber<CR>:set rnu<CR>
+	nnoremap <silent> <Leader>m :set invnumber<CR>:set rnu<CR>
 	" Toggle background color with F7:
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
 	" Find merge conflict markers with ,fc:
