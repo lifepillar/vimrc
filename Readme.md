@@ -5,7 +5,7 @@ few plugins (as Git submodules). This configuration is mostly built from other
 people's code and ideas, but I haven't kept track of my many sources of
 inspiration. If you feel that I should cite the source of some snippet, please
 let me know! Note that I use this on OS X: minor modifications might be
-necessary for other systems. 
+necessary for other systems.
 
 ### How it looks like
 
@@ -45,7 +45,7 @@ necessary for other systems.
 - Distraction-free mode (toggle with `,F`).
 - Keeps the edited line vertically centered.
 - Airline status line extended to show tab width and type, and BOM flag.
-- Toggle hard/soft tabs with `,t` (default: hard tabs).
+- Toggle hard/soft tabs with `,t` (default: soft tabs).
 - Increase/decrease tab width with `,[` and `,]`, respectively.
 - Copy/paste to/from system clipboard by default.
 - Toggle invisibles with `,i`.

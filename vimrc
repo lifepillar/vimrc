@@ -104,9 +104,9 @@
 	if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 		runtime! macros/matchit.vim " Enable % to go to matching keyword/tag.
 	endif
-	" Use hard tabs by default:
-	set noexpandtab
-	call SetGlobalTabWidth(3)
+	" Use soft tabs by default:
+	set expandtab
+	call SetGlobalTabWidth(4)
 " }}
 
 " Find, replace, and auto-complete {{
