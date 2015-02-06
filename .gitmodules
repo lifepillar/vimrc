@@ -58,3 +58,6 @@
 [submodule "bundle/rust.vim"]
 	path = bundle/rust
 	url = https://github.com/wting/rust.vim.git
+[submodule "bundle/swift"]
+	path = bundle/swift
+	url = git://github.com/toyamarinyon/vim-swift.git
