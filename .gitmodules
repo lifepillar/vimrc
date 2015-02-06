@@ -56,5 +56,5 @@
 	path = bundle/wordy
 	url = https://github.com/reedes/vim-wordy.git
 [submodule "bundle/rust.vim"]
-	path = bundle/rust.vim
+	path = bundle/rust
 	url = https://github.com/wting/rust.vim.git
