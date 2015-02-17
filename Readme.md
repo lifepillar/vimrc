@@ -36,6 +36,10 @@ necessary for other systems.
 
 …and fix conflicts.
 
+### Update plugins
+
+    git submodule update --remote
+
 ###  Some features
 
 - Foldable and thoroughly commented `vimrc`.
