@@ -217,7 +217,7 @@
 		if has('gui_macvim')
 			set guifont=Monaco:h14
 			set guioptions+=a " Yank/paste to/from OS X clipboard
-			set guicursor=n-v-c:ver10 " Use a thin vertical bar as the cursor
+			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
 			set transparency=4
 		endif
 	" }}
