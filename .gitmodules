@@ -55,7 +55,7 @@
 [submodule "bundle/wordy"]
 	path = bundle/wordy
 	url = https://github.com/reedes/vim-wordy.git
-[submodule "bundle/rust.vim"]
+[submodule "bundle/rust"]
 	path = bundle/rust
 	url = https://github.com/wting/rust.vim.git
 [submodule "bundle/swift"]
