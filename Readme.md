@@ -47,7 +47,6 @@ necessary for other systems.
 - Airline status line extended to show tab width and type, and BOM flag.
 - Toggle hard/soft tabs with `,t` (default: soft tabs).
 - Increase/decrease tab width with `,[` and `,]`, respectively.
-- Copy/paste to/from system clipboard by default.
 - Toggle invisibles with `,i`.
 - Toggle spell-checking with `,s`.
 - Select all with `,a`.

@@ -86,7 +86,7 @@
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
 	set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
 	set scrolloff=999 " Keep the edited line vertically centered.
-	set clipboard=unnamed " Use system clipboard by default.
+	" set clipboard=unnamed " Use system clipboard by default.
 	" See :h scroll-smooth
 	noremap <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 	noremap <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
