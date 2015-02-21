@@ -9,6 +9,7 @@
 	" See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
 	scriptencoding utf-8
 	set encoding=utf-8
+	set nobomb
 	set fileformats=unix,mac,dos
 	syntax enable
 	filetype on " Enable file type detection.
