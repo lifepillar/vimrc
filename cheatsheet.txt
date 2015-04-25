@@ -1,0 +1,49 @@
+  ---
+  Modeline and notes
+  vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=0 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
+  Blah blah
+---
+  File
+  :e <path> - New/open buffer
+  :bd       - Close buffer
+  :w        - Save buffer
+  :ls       - List buffers
+---
+  Edit
+  ,a        - Select all
+  ,ts       - Remove trailing space
+---
+  Text
+  TODO
+---
+  View
+  TODO
+---
+  Search
+  TODO
+---
+  Go
+  TODO
+---
+  Window
+  ctrl-W n      - New window
+  ctrl-W c      - Close window
+  ctrl-W o      - Close all inactive windows
+  ctrl-W s      - Split horizontally
+  ctrl-W v      - Split vertically
+  ctrl-W h      - Edit window to the left [ctrl-W ←]
+  ctrl-W j      - Edit window below [ctrl-W ↓]
+  ctrl-W k      - Edit window above [ctrl-W ↑]
+  ctrl-W l      - Edit window to the right [ctrl-W →]
+  ctrl-W =      - Make all windows the same size
+  ctrl-W [n] -  - Decrease height
+  ctrl-W [n] +  - Increase height
+  ctrl-W [n] <  - Decrease width
+  ctrl-W [n] >  - Increase width
+---
+  Tabs
+  :tabnew - New tab
+  :tabn  - Next tab
+  :tabp  - Previous tab
+---
+
