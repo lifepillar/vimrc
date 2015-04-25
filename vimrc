@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=3 ts=3 sts=0 noet tw=78 foldmarker={{,}} foldlevel=0 foldmethod=marker nospell:
+" vim: set sw=3 ts=3 sts=0 noet tw=78 foldmarker={{,}} foldlevel=0 foldmethod=marker foldtext=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " Remember to check "Set locale environment variables on startup" in OS X Terminal.app's preferences.
 " }}
