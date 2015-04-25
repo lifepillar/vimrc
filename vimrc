@@ -106,7 +106,7 @@
 	endif
 	" Use soft tabs by default:
 	set expandtab
-	call SetGlobalTabWidth(4)
+	call SetGlobalTabWidth(2)
 " }}
 
 " Find, replace, and auto-complete {{
