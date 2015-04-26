@@ -1,49 +1,190 @@
-  ---
-  Modeline and notes
-  vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=0 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
-  Blah blah
+---
+  About
+  vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
+
+  [n] denotes an optional number.
+  <c> denotes a single character.
+  <p> denots a pattern.
+  [move] denotes an optional move command.
+  <cmd> denotes a command.
+
+  Commands starting with a comma and function keys are user-defined.
+  This cheat sheet is roughly organized after TextWrangler's menu structure.
 ---
   File
-  :e <path> - New/open buffer
-  :bd       - Close buffer
-  :w        - Save buffer
-  :ls       - List buffers
+  :e <path>       - New/open file
+  :[n]bd          - Close file
+  ,w
+  :w              - Save file
+  :w!             - Save RO file
+  :wq             - Save and quit
+  :wqa            - Save all and quit
+  :ls             - List open files
+  :[n]b           - Go to file n
+  :q              - Quit
+  :q!             - Quit without saving
+  :qa!            - Quit all without saving
 ---
   Edit
-  ,a        - Select all
-  ,ts       - Remove trailing space
+    Basic
+    <Esc>         - Return to normal mode
+    i             - Insert at cursor
+    a             - Append after the cursor
+    I             - Insert at the start of line
+    A             - Append at the end of line
+    o             - Open new line below
+    O             - Open new line above
+    r <c>         - Replace char
+    R             - Replace mode (overwrite)
+    .             - Repeat last command
+  u               - Undo
+  ctrl-r          - Redo
+  <F8>            - Toggle Undotree
+  d               - Cut selection
+  d [move]        - Cut to the move-to point
+  di <c>          - Delete inside nearest matching pairs of chars
+  [n]x            - Cut char(s)
+  [n]X            - Cut prev char(s)
+  [n]dd           - Cut line(s)
+  y               - Copy selection
+  y[move]        - Copy to the move-to point
+  yy              - Copy line
+  Y
+  p               - Paste after cursor
+  P               - Paste before cursor
+  c               - Replace selection
+  c [move]        - Replace up to the move-to point
+  cc              - Replace line
+  v               - Visual mode (selection)
+  V               - Linewise visual mode
+  ctrl-v          - Visual block mode
+  ctrl-v [move] I - Insert in multiple lines
+  ctrl-v [move] A - Append to multiple lines
+  {v}             - Select paragraph
+  gv              - Reselect last selection
+  ,a              - Select all
+  ,ts             - Remove trailing space
+  J               - Join with next line
+    Text options
+    ,t    - Toggle hard/soft tabs
+    ,[    - Decrease tab width
+    ,]    - Increase tab width
+    ,n    - Toggle line numbers
+    ,m    - Toggle relative line numbers
+    ,i    - Toggle invisibles
+    ,s    - Toggle spell checking
 ---
   Text
   TODO
 ---
   View
-  TODO
+    Scrolling
+    ctrl-f        - Scroll down a page
+    ctrl-b        - Scroll up a page
+    ctrl-d        - Scroll down half a page
+    ctrl-u        - Scroll up half a page
+    ctrl-e        - Scroll down a bit (two lines)
+    ctrl-y        - Scroll up a bit (two lines)
+    zl            - Scroll right
+    zh            - Scroll left
+  zo              - Fold
+  zc              - Unfold
+  zM              - Fold all
+  zR              - Unfold all
+  <F7>            - Toggle background color
+  ,F              - Toggle distraction-free mode.
 ---
   Search
-  TODO
+  /[p]            - Search forward
+  ?[p]            - Search backward
+  n               - Find next in same direction
+  N               - Find next in opposite direction
+  ,h              - Toggle highlighting
+  :s/[p]/[p]/ [n] - Find and replace in line(s)
+  :%s/[p]/[p]/g   - Find and replace all
+  v [move] :s/... - Find and replace in selection
+  V [move] :s/...
+  ctrl-V [move] :s/...
 ---
   Go
-  TODO
+    Basic movement
+    [n]h          - Move left
+    [n]←
+    [n]l          - Move right
+    [n]→
+    [n]k          - Move up
+    [n]↑
+    [n]j          - Move down
+    [n]↓
+    [n]w          - Start of next punctuation-separated word
+    [n]b          - Start of prev punctuation-separated word
+    [n]e          - End of next punctuation-separated word
+    [n]ge         - End of prev punctuation-separated word
+    [n]W          - Start of next space-separated word
+    [n]B          - Start of prev space-separated word
+    [n]E          - End of next space-separated word
+    [n]gE         - End of prev space-separated word
+    0             - Start of line
+    $             - End of line
+    ^             - First non-blank char of line
+    [n]}          - Next blank line
+    [n]{          - Prev blank line
+    gg            - First line
+    G             - Last line
+  [n]G            - Go to line…
+  :[n]
+  [n]f <c>        - Find next <c> in current line
+  [n]F <c>        - Find prev <c> in current line
+  ctrl-o          - Go to older cursor position
+  %               - Jump between matching () or {}
+  ctrl-i          - Go to newer cursor position
+  ctrl-]          - Follow link
+  ctrl-T          - Back to prev link
+  ma              - Set mark called 'a'
+  mb              - Set mark called 'b'
+  mc              - Well, you've got it ;)
+  `a              - Go to mark 'a'
+  `b              - Go to mark 'b'
+  `c              - ...
 ---
   Window
-  ctrl-W n      - New window
-  ctrl-W c      - Close window
-  ctrl-W o      - Close all inactive windows
-  ctrl-W s      - Split horizontally
-  ctrl-W v      - Split vertically
-  ctrl-W h      - Edit window to the left [ctrl-W ←]
-  ctrl-W j      - Edit window below [ctrl-W ↓]
-  ctrl-W k      - Edit window above [ctrl-W ↑]
-  ctrl-W l      - Edit window to the right [ctrl-W →]
-  ctrl-W =      - Make all windows the same size
-  ctrl-W [n] -  - Decrease height
-  ctrl-W [n] +  - Increase height
-  ctrl-W [n] <  - Decrease width
-  ctrl-W [n] >  - Increase width
+  :new            - New window (horizontal split)
+  ctrl-w n
+  :vnew           - New window (vertical split)
+  ctrl-w c        - Close window
+  ctrl-w o        - Close all inactive windows
+  ctrl-w s        - Split horizontally
+  ctrl-w v        - Split vertically
+  ctrl-w x        - Exchange windows
+  ctrl-w ctrl-x
+  ctrl-w K        - Horizontal layout
+  ctrl-w H        - Vertical layout
+  ctrl-w w        - Edit next window
+  ctrl-w ctrl-w
+  ctrl-w h        - Edit window to the left
+  ctrl-w ←
+  ctrl-w j        - Edit window below
+  ctrl-w ↓
+  ctrl-w k        - Edit window above
+  ctrl-w ↑
+  ctrl-w l        - Edit window to the right
+  ctrl-w →
+  ctrl-w =        - Make all windows the same size
+  ctrl-w _        - Maximize height
+  ctrl-w |        - Maximize width
+  ctrl-w [n] -    - Decrease height
+  ctrl-w [n] +    - Increase height
+  ctrl-w [n] <    - Decrease width
+  ctrl-w [n] >    - Increase width
 ---
   Tabs
-  :tabnew - New tab
-  :tabn  - Next tab
-  :tabp  - Previous tab
+  :tabs             - List tabs
+  :tabnew           - New tab
+  gt                - Next tab
+  gT                - Previous tab
+  :tabclose         - Close tab
+  :tabonly          - Close all other tabs
+  :tabo
+  :tabdo <cmd>      - Execute cmd in all tabs
 ---
 
