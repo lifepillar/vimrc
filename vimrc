@@ -150,6 +150,8 @@
 	nnoremap <Leader>ts :call RemoveTrailingSpace()<CR>
 	" Select all with ,a:
 	nnoremap <silent> <Leader>a ggVG<CR>
+	" Capitalize words in selected text with ,U (see h gU):
+	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 	" Toggle search highlighting with ,h:
 	nnoremap <silent> <Leader>h :set invhlsearch<CR>
 	" Hard-wrap paragraphs at textwidth with ,r:
