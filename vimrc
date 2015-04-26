@@ -132,6 +132,7 @@
 	vnoremap ; :
 	vnoremap : ;
 	let mapleader = ","
+	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 	" Close current buffer with ,w:
 	nnoremap <silent> <Leader>w :bd<CR>
