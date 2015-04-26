@@ -155,7 +155,7 @@
 	" Toggle search highlighting with ,h:
 	nnoremap <silent> <Leader>h :set invhlsearch<CR>
 	" Hard-wrap paragraphs at textwidth with ,r:
-	nnoremap <silent> <leader>r gqip
+	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
 	" ,l       : list buffers
 	" ,b ,f ,g : go back/forward/last-used
