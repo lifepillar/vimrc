@@ -1,15 +1,16 @@
 ---
-  About
-  vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
-
-  [n] denotes an optional number.
-  <c> denotes a single character.
-  <p> denots a pattern.
-  [move] denotes an optional move command.
-  <cmd> denotes a command.
-
-  Commands starting with a comma and function keys are user-defined.
-  This cheat sheet is roughly organized after TextWrangler's menu structure.
+    About
+    vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
+  
+    [n] denotes an optional number.
+    <c> denotes a single character.
+    <p> denots a pattern.
+    [move] denotes an optional move command.
+    <cmd> denotes a command.
+    [cmd] denotes an optional command.
+  
+    Commands starting with a comma and function keys are user-defined.
+    This cheat sheet is roughly organized after TextWrangler's menu structure.
 ---
   File
   :e <path>       - New/open file
