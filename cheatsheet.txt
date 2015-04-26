@@ -233,4 +233,7 @@
   :tabo
   :tabdo <cmd>    - Execute cmd in all tabs
 ---
+  Misc
+  :echo <var>     - Show the value of a variable
+  :set <var>      - Show the value of a setting
 
