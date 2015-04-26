@@ -1,16 +1,29 @@
 ---
     About
     vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
-  
+
+    Use ,cs to open this cheat sheet in Vim.
+
+    <path> denotes a file path.
+    <n> denotes a mandatory number.
     [n] denotes an optional number.
     <c> denotes a single character.
-    <p> denots a pattern.
+    [p] denotes a pattern.
     [move] denotes an optional move command.
     <cmd> denotes a command.
     [cmd] denotes an optional command.
-  
-    Commands starting with a comma and function keys are user-defined.
-    This cheat sheet is roughly organized after TextWrangler's menu structure.
+
+    Commands starting with a comma and
+    function keys are user-defined.
+
+    This cheat sheet is roughly
+    organized after TextWrangler's menu
+    structure, because TextWrangler is
+    the editor I most familiar with.
+
+    Note that the explanation of some
+    commands is simplified: refer to
+    Vim's help for all the details.
 ---
   File
   :e <path>       - New/open file
@@ -20,8 +33,15 @@
   :w!             - Save RO file
   :wq             - Save and quit
   :wqa            - Save all and quit
-  :ls             - List open files
-  :[n]b           - Go to file n
+  ,l              - List open files
+  :ls
+  :[n]b           - Edit file n
+  ,1              - Edit file 1
+  …               …
+  ,0              - Edit file 10
+  ,f              - Edit next file
+  ,b              - Edit prev file
+  ,g              - Edit last used file
   :q              - Quit
   :q!             - Quit without saving
   :qa!            - Quit all without saving
@@ -48,11 +68,13 @@
   [n]X            - Cut prev char(s)
   [n]dd           - Cut line(s)
   y               - Copy selection
-  y[move]        - Copy to the move-to point
+  y[move]         - Copy to the move-to point
   yy              - Copy line
   Y
   p               - Paste after cursor
   P               - Paste before cursor
+  ]p              - Paste and align with current line
+  ]P              - Paste and align with current line
   c               - Replace selection
   c [move]        - Replace up to the move-to point
   cc              - Replace line
@@ -66,17 +88,32 @@
   ,a              - Select all
   ,ts             - Remove trailing space
   J               - Join with next line
-    Text options
-    ,t    - Toggle hard/soft tabs
-    ,[    - Decrease tab width
-    ,]    - Increase tab width
-    ,n    - Toggle line numbers
-    ,m    - Toggle relative line numbers
-    ,i    - Toggle invisibles
-    ,s    - Toggle spell checking
 ---
   Text
-  TODO
+  U               - Change selection to uppercase
+  u               - Change selection to lowercase
+  gU [move]       - Change to uppercase
+  gu [move]       - Change to lowercase
+  gUU             - Change line to uppercase
+  guu             - Change line to lowercase
+  ,U              - Capitalize selected words
+  <               - Shift selection to the left
+  >               - Shift selection to the right
+  <%              - Shift block to the left
+  >%              - Shift block to the right
+  ,a=             - Reindent all (C-style)
+  :set tw=<n>     - Set text width (0 = window width)
+  gw              - Hard-wrap selection at text width
+  gw [move]       - Wrap text up to move-to point
+  gww             - Wrap text in current line
+  ,r              - Hard-wrap paragraph
+  ,t              - Toggle hard/soft tabs
+  ,[              - Decrease tab width
+  ,]              - Increase tab width
+  :retab          - Detab (needs expandtab on - see ,t)
+  :retab!         - Entab (needs expandtab off - see ,t)
+  ,s              - Toggle spell checking
+  z=              - Suggest corrections
 ---
   View
     Scrolling
@@ -88,24 +125,30 @@
     ctrl-y        - Scroll up a bit (two lines)
     zl            - Scroll right
     zh            - Scroll left
+  :set wrap       - Soft-wrap text
+  :set nowrap     - Do not wrap text
+  ,n              - Toggle line numbers
+  ,m              - Toggle relative line numbers
+  ,i              - Toggle invisibles
   zo              - Fold
   zc              - Unfold
   zM              - Fold all
   zR              - Unfold all
   <F7>            - Toggle background color
-  ,F              - Toggle distraction-free mode.
+  ,F              - Toggle distraction-free mode
+  :set cc=<n>     - Page guide at column n
+  :set cc=""      - No page guide
 ---
   Search
   /[p]            - Search forward
   ?[p]            - Search backward
-  n               - Find next in same direction
-  N               - Find next in opposite direction
+  n               - Find next (same direction)
+  N               - Find prev (opposite direction)
+  [cmd] gn        - Select next match (and apply cmd)
+  [cmd] gN        - Select prev match (and apply cmd)
   ,h              - Toggle highlighting
-  :s/[p]/[p]/ [n] - Find and replace in line(s)
+  :s/[p]/[p]/     - Find and replace in selection
   :%s/[p]/[p]/g   - Find and replace all
-  v [move] :s/... - Find and replace in selection
-  V [move] :s/...
-  ctrl-V [move] :s/...
 ---
   Go
     Basic movement
@@ -132,21 +175,23 @@
     [n]{          - Prev blank line
     gg            - First line
     G             - Last line
-  [n]G            - Go to line…
-  :[n]
-  [n]f <c>        - Find next <c> in current line
-  [n]F <c>        - Find prev <c> in current line
-  ctrl-o          - Go to older cursor position
+  :[n]            - Go to line…
+  [n]G
+  [n]f <c>        - Find next (nth) <c> in current line
+  [n]F <c>        - Find prev (nth) <c> in current line
   %               - Jump between matching () or {}
+  ctrl-o          - Go to older cursor position
   ctrl-i          - Go to newer cursor position
   ctrl-]          - Follow link
   ctrl-T          - Back to prev link
   ma              - Set mark called 'a'
-  mb              - Set mark called 'b'
-  mc              - Well, you've got it ;)
   `a              - Go to mark 'a'
+  mb              - Set mark called 'b'
   `b              - Go to mark 'b'
-  `c              - ...
+  …               …
+  mA              - Set global mark 'A'
+  `A              - Go to global mark 'A'
+  …               …
 ---
   Window
   :new            - New window (horizontal split)
@@ -158,8 +203,8 @@
   ctrl-w v        - Split vertically
   ctrl-w x        - Exchange windows
   ctrl-w ctrl-x
-  ctrl-w K        - Horizontal layout
-  ctrl-w H        - Vertical layout
+  ctrl-w K        - Arrange horizontally
+  ctrl-w H        - Arrange vertically
   ctrl-w w        - Edit next window
   ctrl-w ctrl-w
   ctrl-w h        - Edit window to the left
@@ -179,13 +224,13 @@
   ctrl-w [n] >    - Increase width
 ---
   Tabs
-  :tabs             - List tabs
-  :tabnew           - New tab
-  gt                - Next tab
-  gT                - Previous tab
-  :tabclose         - Close tab
-  :tabonly          - Close all other tabs
+  :tabs           - List tabs
+  :tabnew         - New tab
+  gt              - Next tab
+  gT              - Previous tab
+  :tabclose       - Close tab
+  :tabonly        - Close all other tabs
   :tabo
-  :tabdo <cmd>      - Execute cmd in all tabs
+  :tabdo <cmd>    - Execute cmd in all tabs
 ---
 
