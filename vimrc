@@ -132,7 +132,7 @@
 	vnoremap ; :
 	vnoremap : ;
 	let mapleader = ","
-	nnoremap <silent> <Leader>cs :40vsplit ${HOME}/.vim/cheatsheet.txt<CR>
+	nnoremap <silent> <Leader>cs :vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 	" Close current buffer with ,w:
 	nnoremap <silent> <Leader>w :bd<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer:
