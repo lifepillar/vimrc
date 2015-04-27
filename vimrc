@@ -234,9 +234,13 @@
 
 " Plugins {{
 	" Airline {{
+		if !exists('g:airline_symbols')
+			let g:airline_symbols = {}
+		endif
 		" Use the default set of separators with a few customizations
 		let g:airline_left_sep = ''
 		let g:airline_right_sep=''
+		let g:airline_symbols.readonly = 'RO'
 		" Modify encoding/file format section to display BOM. Also show hard/soft tabs status:
 		let g:airline_section_y="%{(&fenc!=''?&fenc:&enc)}%{(&bomb?',BOM':'')}%{strlen(&ff)>0?'['.&ff.']':''} %{&expandtab==\"expandtab\"?'⇥ ':'˽ '}%{&tabstop}"
 	" }}
