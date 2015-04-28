@@ -180,6 +180,7 @@
   G             - Last line
  :[n]            - Go to line…
  [n]G
+ [n]|            - Go to column…
  [n]f <c>        - Find next (nth) <c> in current line
  [n]F <c>        - Find prev (nth) <c> in current line
  %               - Jump between matching () or {}
