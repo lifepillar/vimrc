@@ -1,29 +1,29 @@
 ---
-    About
-    vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
+  About
+  vim: set sw=2 ts=2 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
-    Use ,cs to open this cheat sheet in Vim.
+  Use ,cs to open this file in Vim.
 
-    <path> denotes a file path.
-    <n> denotes a mandatory number.
-    [n] denotes an optional number.
-    <c> denotes a single character.
-    [p] denotes a pattern.
-    [move] denotes an optional move command.
-    <cmd> denotes a command.
-    [cmd] denotes an optional command.
+  <n> denotes a mandatory number.
+  [n] denotes an optional number.
+  <c> denotes a single character.
+  [p] denotes a pattern.
+  [move] denotes a move command.
+  Other placeholders should be clear
+  enough from the context.
 
-    Commands starting with a comma and
-    function keys are user-defined.
+  Function keys and commands starting
+  with a comma are user-defined.
 
-    This cheat sheet is roughly
-    organized after TextWrangler's menu
-    structure, because TextWrangler is
-    the editor I most familiar with.
+  This cheat sheet is roughly
+  organized after TextWrangler's menu
+  structure, because TextWrangler is
+  the editor I am most familiar with.
 
-    Note that the explanation of some
-    commands is simplified: refer to
-    Vim's help for all the details.
+  Note that this not a replacement
+  for a manual. The comments are
+  (overly) simplified: refer to Vim's
+  help for all the details.
 ---
   File
   :e <path>       - New/open file
