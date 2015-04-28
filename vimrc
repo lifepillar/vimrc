@@ -234,29 +234,34 @@
 
 " Plugins {{
 	" Airline {{
-		if !exists('g:airline_symbols')
-			let g:airline_symbols = {}
-		endif
-		" Use the default set of separators with a few customizations
-		let g:airline_left_sep = ''
-		let g:airline_right_sep=''
-		let g:airline_symbols.readonly = 'RO'
-		let g:airline_inactive_collapse=0
-
-		" Modify encoding/file format section to display BOM. Also show hard/soft tabs status:
+		" Modify encoding/file format section to display BOM:
 		function FileInfo()
 			return printf('%s%s%s', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', strlen(&ff)>0?'['.&ff.']':'')
 		endfunction
 
+		" Show hard/soft tabs status:
 		function TabsText()
 			return printf('%s %d', &expandtab=="expandtab"?'⇥':'˽', &tabstop)
 		endfunction
 
-		call airline#parts#define_function('fileinfo', 'FileInfo')
-		call airline#parts#define_function('tab', 'TabsText')
+		" Change modified symbol:
+		function Modified()
+			return printf(' %s', &modified?'◇':'')
+		endfunction
 
 		function! AirlineInit()
-		  let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
+			if !exists('g:airline_symbols')
+				let g:airline_symbols = {}
+			endif
+			let g:airline_left_sep = ''
+			let g:airline_right_sep=''
+			let g:airline_symbols.readonly='✗'
+			let g:airline_inactive_collapse=0
+			call airline#parts#define_function('fileinfo', 'FileInfo')
+			call airline#parts#define_function('tab', 'TabsText')
+			call airline#parts#define_function('modified', 'Modified')
+			let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
+			let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
 		endfunction
 		autocmd User AirlineAfterInit call AirlineInit()
 	" }}
