@@ -248,6 +248,15 @@
 			return printf(' %s', &modified?'◇':'')
 		endfunction
 
+		function! AirlineThemePatch(palette)
+		  if g:airline_theme == 'solarized'
+			 let a:palette.insert['airline_a'][3] = 4
+			 let a:palette.insert['airline_z'][3] = 4
+		  endif
+		endfunction
+
+		let g:airline_theme_patch_func = 'AirlineThemePatch'
+
 		function! AirlineInit()
 			if !exists('g:airline_symbols')
 				let g:airline_symbols = {}
