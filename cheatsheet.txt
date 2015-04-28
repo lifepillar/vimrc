@@ -63,18 +63,21 @@
   <F8>            - Toggle Undotree
   d               - Cut selection
   d [move]        - Cut to the move-to point
-  di <c>          - Delete inside nearest matching pairs of chars
+  di <c>          - Cut  inside nearest matching pairs of chars
   [n]x            - Cut char(s)
   [n]X            - Cut prev char(s)
   [n]dd           - Cut line(s)
+  "*d             - Cut into system clipboard
   y               - Copy selection
   y[move]         - Copy to the move-to point
   yy              - Copy line
   Y
+  "*y             - Copy to system clipboard
   p               - Paste after cursor
   P               - Paste before cursor
   ]p              - Paste and align with current line
   ]P              - Paste and align with current line
+  "*p             - Paste from system clipboard
   c               - Replace selection
   c [move]        - Replace up to the move-to point
   cc              - Replace line
