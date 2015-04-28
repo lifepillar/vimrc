@@ -242,8 +242,23 @@
 		let g:airline_right_sep=''
 		let g:airline_symbols.readonly = 'RO'
 		let g:airline_inactive_collapse=0
+
 		" Modify encoding/file format section to display BOM. Also show hard/soft tabs status:
-		let g:airline_section_y="%{(&fenc!=''?&fenc:&enc)}%{(&bomb?',BOM':'')}%{strlen(&ff)>0?'['.&ff.']':''} %{&expandtab==\"expandtab\"?'⇥ ':'˽ '}%{&tabstop}"
+		function FileInfo()
+			return printf('%s%s%s', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', strlen(&ff)>0?'['.&ff.']':'')
+		endfunction
+
+		function TabsText()
+			return printf('%s %d', &expandtab=="expandtab"?'⇥':'˽', &tabstop)
+		endfunction
+
+		call airline#parts#define_function('fileinfo', 'FileInfo')
+		call airline#parts#define_function('tab', 'TabsText')
+
+		function! AirlineInit()
+		  let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
+		endfunction
+		autocmd User AirlineAfterInit call AirlineInit()
 	" }}
 	" Fugitive {{
 		nnoremap <silent> <Leader>gs :Gstatus<CR>
