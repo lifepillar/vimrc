@@ -215,12 +215,12 @@
 	"	let g:solarized_degrade=0
 	"	let g:solarized_bold=1
 	"	let g:solarized_underline=1
+		let g:solarized_underline=0
 	"	let g:solarized_italic=1
 	"	let g:solarized_contrast="normal"   " high, low, normal
 	"	let g:solarized_visibility="normal" " high, low, normal
 		colorscheme solarized
 	endif
-	highlight Folded term=bold cterm=NONE ctermfg=10
 	" set ruler " Show the line and column number of the cursor position.
 	" GUI settings {{
 		if has('gui_macvim')
