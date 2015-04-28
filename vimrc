@@ -254,6 +254,9 @@
 			endif
 			let g:airline_left_sep = ''
 			let g:airline_right_sep=''
+			" See https://github.com/bling/vim-airline/issues/617
+			let g:airline_left_alt_sep=''
+			let g:airline_right_alt_sep=''
 			let g:airline_symbols.readonly='✗'
 			let g:airline_inactive_collapse=0
 			call airline#parts#define_function('fileinfo', 'FileInfo')
