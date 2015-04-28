@@ -241,6 +241,7 @@
 		let g:airline_left_sep = ''
 		let g:airline_right_sep=''
 		let g:airline_symbols.readonly = 'RO'
+		let g:airline_inactive_collapse=0
 		" Modify encoding/file format section to display BOM. Also show hard/soft tabs status:
 		let g:airline_section_y="%{(&fenc!=''?&fenc:&enc)}%{(&bomb?',BOM':'')}%{strlen(&ff)>0?'['.&ff.']':''} %{&expandtab==\"expandtab\"?'⇥ ':'˽ '}%{&tabstop}"
 	" }}
