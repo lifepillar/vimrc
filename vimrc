@@ -250,6 +250,7 @@
 
 		function! AirlineThemePatch(palette)
 		  if g:airline_theme == 'solarized'
+			 " FIXME: gui colors
 			 let a:palette.insert['airline_a'][3] = 4
 			 let a:palette.insert['airline_z'][3] = 4
 		  endif
