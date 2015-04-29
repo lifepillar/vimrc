@@ -186,6 +186,7 @@
  [n]f <c>        - Find next (nth) <c> in current line
  [n]F <c>        - Find prev (nth) <c> in current line
  %               - Jump between matching () or {}
+ <F9>            - Toggle Tagbar
  ctrl-o          - Go to older cursor position
  ctrl-i          - Go to newer cursor position
  ctrl-]          - Follow link
