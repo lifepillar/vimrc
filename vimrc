@@ -292,14 +292,13 @@
 			let g:airline_left_alt_sep=''
 			let g:airline_right_alt_sep=''
 			let g:airline_symbols.readonly='✗'
-			let g:airline_symbols.linenr = '⌖'
 			let g:airline_inactive_collapse=0
 			call airline#parts#define_function('fileinfo', 'FileInfo')
 			call airline#parts#define_function('tab', 'TabsText')
 			call airline#parts#define_function('modified', 'Modified')
 			let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
 			let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
-			let g:airline_section_z = airline#section#create(['windowswap', 'linenr', ' %3v ', '%3p%%'])
+			let g:airline_section_z = airline#section#create(['windowswap', '%5l', ' %2v ', '%3p%%'])
 		endfunction
 		autocmd User AirlineAfterInit call AirlineInit()
 	" }}
