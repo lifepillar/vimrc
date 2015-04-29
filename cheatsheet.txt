@@ -27,6 +27,7 @@
 ---
  File
  :e <path>       - New/open file
+ ctrl-p          - Open CtrlP (show mru by default)
  :[n]bd          - Close file
  ,w
  :w              - Save file
