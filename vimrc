@@ -251,9 +251,9 @@
 		function! AirlineThemePatch(palette)
 			if g:airline_theme == 'solarized'
 				" Use cyan for insert mode:
-				let a:palette.insert['airline_a'][1] = '#859900'
+				let a:palette.insert['airline_a'][1] = '#2aa198'
 				let a:palette.insert['airline_a'][3] = 6
-				let a:palette.insert['airline_z'][1] = '#859900'
+				let a:palette.insert['airline_z'][1] = '#2aa198'
 				let a:palette.insert['airline_z'][3] = 6
 				" Use two colors instead of three for the active status line:
 				let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
