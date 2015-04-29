@@ -163,6 +163,8 @@
   [n]↑
   [n]j          - Move down
   [n]↓
+  [n]gj         - Move down in soft-wrapped lines
+  [n]gk         - Move up in soft-wrapped lines
   [n]w          - Start of next punctuation-separated word
   [n]b          - Start of prev punctuation-separated word
   [n]e          - End of next punctuation-separated word
