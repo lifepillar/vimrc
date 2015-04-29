@@ -233,7 +233,7 @@
 		" Modify encoding/file format section to display BOM:
 		function FileInfo()
 			let lfcr = &ff=='unix'?'␊ (Unix)':&ff=='mac'?'␍ (Classic Mac)':&ff=='dos'?'␍␊ (Windows)':'[unk]'
-			return printf('%s%s %s', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', lfcr)
+			return printf('%s%s%s %s', &spell?&spelllang.' ':'', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', lfcr)
 		endfunction
 
 		" Show hard/soft tabs status:
