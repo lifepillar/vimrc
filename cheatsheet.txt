@@ -31,7 +31,6 @@
  File
   Basic
   :e <path>       - New/open file
-  ctrl-p          - Open CtrlP (show mru by default)
   :[n]bd          - Close file
   ,w
   :w              - Save file
@@ -50,8 +49,6 @@
  ,f              - Edit next file
  ,b              - Edit prev file
  ,g              - Edit last used file
- ,gs             - Git status
- ,gd             - Git diff
 ---
  Edit
   Basic
@@ -68,7 +65,6 @@
   .             - Repeat last command
  u               - Undo
  ctrl-r          - Redo
- <F8>            - Toggle Undotree
  d               - Cut selection
  d [move]        - Cut to the move-to point
  di <c>          - Cut  inside nearest matching pairs of chars
@@ -127,7 +123,6 @@
  ]s              - Go to next mispelled word
  [s              - Go to prev mispelled word
  z=              - Suggest corrections
- :Wordy <tab>    - Browse and load a Wordy dictionary
 ---
  View
   Scrolling
@@ -197,7 +192,6 @@
  [n]f <c>        - Find next (nth) <c> in current line
  [n]F <c>        - Find prev (nth) <c> in current line
  %               - Jump between matching () or {}
- <F9>            - Toggle Tagbar
  ctrl-o          - Go to older cursor position
  ctrl-i          - Go to newer cursor position
  ctrl-]          - Follow link
@@ -250,6 +244,25 @@
  :tabonly        - Close all other tabs
  :tabo
  :tabdo <cmd>    - Execute cmd in all tabs
+---
+ Plugins
+  CtrlP
+  ctrl-p         - Open Ctrlp in MRU mode
+ --
+  Fugitive
+  ,gs            - Git status
+  ,gd            - Git diff
+ --
+  Ledger
+ --
+  Tagbar
+  <F9>            - Toggle Tagbar
+ --
+  Undotree
+  <F8>            - Toggle Undotree
+ --
+  Wordy
+  :Wordy <tab>    - Browse and load a Wordy dictionary
 ---
  Misc
  :echo <var>     - Show the value of a variable
