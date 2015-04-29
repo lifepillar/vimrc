@@ -40,6 +40,7 @@
   :q              - Quit
   :q!             - Quit without saving
   :qa!            - Quit all without saving
+ :mks            - Save session (restore with vim -S)
  ,l              - List open files
  :ls
  :[n]b           - Edit file n
@@ -266,5 +267,6 @@
 ---
  Misc
  :echo <var>     - Show the value of a variable
+ :map            - View all mappings
  :set <var>      - Show the value of a setting
 
