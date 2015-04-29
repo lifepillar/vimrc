@@ -44,20 +44,22 @@ necessary for other systems.
 
 ###  Some features
 
+- A cheat sheet always at hand with `,cs`.
 - Foldable and thoroughly commented `vimrc`.
 - Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
+- `<Ctrl>-j` mapped to `<Esc>` in insert and visual mode for convenience (`<Esc>` is too far up there!).
 - Uses Solarized theme by default (toggle dark/light background with `F7`).
 - Distraction-free mode (toggle with `,F`).
 - Keeps the edited line vertically centered.
-- Airline status line extended to show tab width and type, and BOM flag.
+- Customized Airline status line extended to show tab width and type, and BOM flag.
 - Toggle hard/soft tabs with `,t` (default: soft tabs).
 - Increase/decrease tab width with `,[` and `,]`, respectively.
 - Toggle invisibles with `,i`.
 - Toggle spell-checking with `,s`.
 - Select all with `,a`.
 - Remove all trailing spaces with `,ts`.
-- Hard-wrap paragraphs at text width with `,r`.
+- Hard-wrap paragraphs with `,r`.
 - Key bindings in command mode similar to those used by the shell.
-- Etc... (read the source!)
+- Etc... (read the cheat sheet and the source!)
 
