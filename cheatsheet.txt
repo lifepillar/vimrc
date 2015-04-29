@@ -256,6 +256,7 @@
  --
   Ledger
   ctrl-x         - Autocomplete
+  ctrl-t         - New transaction from word under cursor
   <space>        - Toggle transaction state
  --
   Tagbar

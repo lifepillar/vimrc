@@ -371,6 +371,7 @@
 		au FileType ledger nnoremap <silent> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use ctrl-x to autocomplete:
 		au FileType ledger inoremap <silent> <C-x> <C-x><C-o>
+		au FileType ledger nnoremap <silent> <C-t> :exe 'read !ledger entry --file '.shellescape(expand("%"), 1).' '.shellescape(expand("<cWORD>"), 1)<CR>
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
