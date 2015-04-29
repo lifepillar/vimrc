@@ -312,6 +312,10 @@
 		endfunction
 		autocmd User AirlineAfterInit call AirlineInit()
 	" }}
+	" CtrlP {{
+		" Open CtrlP in MRU mode by default
+		let g:ctrlp_cmd = 'CtrlPMRU'
+	" }}
 	" Fugitive {{
 		nnoremap <silent> <Leader>gs :Gstatus<CR>
 		nnoremap <silent> <Leader>gd :Gdiff<CR>
