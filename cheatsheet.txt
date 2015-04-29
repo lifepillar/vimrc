@@ -1,6 +1,6 @@
 ---
   About
-  vim: set sw=1 ts=1 sts=0 et nonu nornu foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
+  vim: set sw=1 ts=1 sts=0 et nonu nornu nowrap foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
   Use ,cs to open this file in Vim.
 
@@ -163,7 +163,7 @@
   [n]↑
   [n]j          - Move down
   [n]↓
-  [n]gj         - Move down in soft-wrapped lines
+  [n]gj         - Move down i soft-wrapped lines
   [n]gk         - Move up in soft-wrapped lines
   [n]w          - Start of next punctuation-separated word
   [n]b          - Start of prev punctuation-separated word
