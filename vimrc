@@ -247,6 +247,27 @@
 		endfunction
 
 		function! AirlineThemePatch(palette)
+			" Use two colors instead of three for the active status line:
+			let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
+			let a:palette.normal['airline_x'] = a:palette.normal['airline_y']
+			if has_key(a:palette.normal_modified, 'airline_c')
+				unlet a:palette.normal_modified['airline_c']
+			endif
+			let a:palette.insert['airline_c'] = a:palette.insert['airline_b']
+			let a:palette.insert['airline_x'] = a:palette.insert['airline_y']
+			if has_key(a:palette.insert_modified, 'airline_c')
+				unlet a:palette.insert_modified['airline_c']
+			endif
+			let a:palette.visual['airline_c'] = a:palette.visual['airline_b']
+			let a:palette.visual['airline_x'] = a:palette.visual['airline_y']
+			if has_key(a:palette.visual_modified, 'airline_c')
+				unlet a:palette.visual_modified['airline_c']
+			endif
+			let a:palette.replace['airline_c'] = a:palette.replace['airline_b']
+			let a:palette.replace['airline_x'] = a:palette.replace['airline_y']
+			if has_key(a:palette.replace_modified, 'airline_c')
+				unlet a:palette.replace_modified['airline_c']
+			endif
 			if g:airline_theme == 'solarized'
 				" Change color of readonly symbol (I don't like red on gray):
 				let a:palette.accents.red = ['#eee8d5','', 7,'']
@@ -255,19 +276,6 @@
 				let a:palette.insert['airline_a'][3] = 6
 				let a:palette.insert['airline_z'][1] = '#2aa198'
 				let a:palette.insert['airline_z'][3] = 6
-				" Use two colors instead of three for the active status line:
-				let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
-				let a:palette.normal['airline_x'] = a:palette.normal['airline_y']
-				unlet a:palette.normal_modified['airline_c']
-				let a:palette.insert['airline_c'] = a:palette.insert['airline_b']
-				let a:palette.insert['airline_x'] = a:palette.insert['airline_y']
-				unlet a:palette.insert_modified['airline_c']
-				let a:palette.visual['airline_c'] = a:palette.visual['airline_b']
-				let a:palette.visual['airline_x'] = a:palette.visual['airline_y']
-				unlet a:palette.visual_modified['airline_c']
-				let a:palette.replace['airline_c'] = a:palette.replace['airline_b']
-				let a:palette.replace['airline_x'] = a:palette.replace['airline_y']
-				unlet a:palette.replace_modified['airline_c']
 				" Make inactive status lines less prominent:
 				if &background == 'dark'
 					let a:palette.inactive = airline#themes#generate_color_map(
