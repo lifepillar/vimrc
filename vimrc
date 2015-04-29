@@ -249,11 +249,38 @@
 		endfunction
 
 		function! AirlineThemePatch(palette)
-		  if g:airline_theme == 'solarized'
-			 " FIXME: gui colors
-			 let a:palette.insert['airline_a'][3] = 4
-			 let a:palette.insert['airline_z'][3] = 4
-		  endif
+			if g:airline_theme == 'solarized'
+				" Use cyan for insert mode:
+				let a:palette.insert['airline_a'][1] = '#859900'
+				let a:palette.insert['airline_a'][3] = 6
+				let a:palette.insert['airline_z'][1] = '#859900'
+				let a:palette.insert['airline_z'][3] = 6
+				" Use two colors instead of three for the active status line:
+				let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
+				let a:palette.normal['airline_x'] = a:palette.normal['airline_y']
+				unlet a:palette.normal_modified['airline_c']
+				let a:palette.insert['airline_c'] = a:palette.insert['airline_b']
+				let a:palette.insert['airline_x'] = a:palette.insert['airline_y']
+				unlet a:palette.insert_modified['airline_c']
+				let a:palette.visual['airline_c'] = a:palette.visual['airline_b']
+				let a:palette.visual['airline_x'] = a:palette.visual['airline_y']
+				unlet a:palette.visual_modified['airline_c']
+				let a:palette.replace['airline_c'] = a:palette.replace['airline_b']
+				let a:palette.replace['airline_x'] = a:palette.replace['airline_y']
+				unlet a:palette.replace_modified['airline_c']
+				" Make inactive status lines less prominent:
+				if &background == 'dark'
+					let a:palette.inactive = airline#themes#generate_color_map(
+						\ ['#657b83', '#073642', '11', '0', ''],
+						\ ['#657b83', '#073642', '11', '0', ''],
+						\ ['#657b83', '#073642', '11', '0', ''])
+				else
+					let a:palette.inactive = airline#themes#generate_color_map(
+						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
+						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
+						\ ['#93a1a1', '#eee8d5', '14', '7', ''])
+				endif
+			endif
 		endfunction
 
 		let g:airline_theme_patch_func = 'AirlineThemePatch'
