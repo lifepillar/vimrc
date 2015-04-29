@@ -29,14 +29,18 @@
   help for all the details.
 ---
  File
- :e <path>       - New/open file
- ctrl-p          - Open CtrlP (show mru by default)
- :[n]bd          - Close file
- ,w
- :w              - Save file
- :w!             - Save RO file
- :wq             - Save and quit
- :wqa            - Save all and quit
+  Basic
+  :e <path>       - New/open file
+  ctrl-p          - Open CtrlP (show mru by default)
+  :[n]bd          - Close file
+  ,w
+  :w              - Save file
+  :w!             - Save RO file
+  :wq             - Save and quit
+  :wqa            - Save all and quit
+  :q              - Quit
+  :q!             - Quit without saving
+  :qa!            - Quit all without saving
  ,l              - List open files
  :ls
  :[n]b           - Edit file n
@@ -46,9 +50,8 @@
  ,f              - Edit next file
  ,b              - Edit prev file
  ,g              - Edit last used file
- :q              - Quit
- :q!             - Quit without saving
- :qa!            - Quit all without saving
+ ,gs             - Git status
+ ,gd             - Git diff
 ---
  Edit
   Basic
