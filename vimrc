@@ -248,6 +248,8 @@
 
 		function! AirlineThemePatch(palette)
 			if g:airline_theme == 'solarized'
+				" Change color of readonly symbol (I don't like red on gray):
+				let a:palette.accents.red = ['#eee8d5','', 7,'']
 				" Use cyan for insert mode:
 				let a:palette.insert['airline_a'][1] = '#2aa198'
 				let a:palette.insert['airline_a'][3] = 6
