@@ -68,25 +68,25 @@
  ctrl-r          - Redo
  d               - Cut selection
  d [move]        - Cut to the move-to point
- di <c>          - Cut  inside nearest matching pairs of chars
+ [n]dd           - Cut line(s)
+ di <c>          - Cut between matching pairs of <c>
  [n]x            - Cut char(s)
  [n]X            - Cut prev char(s)
- [n]dd           - Cut line(s)
  "*d             - Cut into system clipboard
  y               - Copy selection
- y[move]         - Copy to the move-to point
+ y [move]        - Copy to the move-to point
  yy              - Copy line
- Y
  "*y             - Copy to system clipboard
  p               - Paste after cursor
  P               - Paste before cursor
- ]p              - Paste and align with current line
- ]P              - Paste and align with current line
+ ]p              - Paste below and align with current line
+ ]P              - Paste above and align with current line
  "*p             - Paste from system clipboard
  c               - Replace selection
  c [move]        - Replace up to the move-to point
  cc              - Replace line
- v               - Visual mode (selection)
+ ci <c>          - Replace between matching pair of <c>
+ v               - Visual mode (selection) 
  V               - Linewise visual mode
  ctrl-v          - Visual block mode
  ctrl-v [move] I - Insert in multiple lines
@@ -98,6 +98,7 @@
  J               - Join with next line
 ---
  Text
+ ~               - Change case
  U               - Change selection to uppercase
  u               - Change selection to lowercase
  gU [move]       - Change to uppercase
@@ -108,6 +109,7 @@
  <               - Shift selection to the left
  >               - Shift selection to the right
  <%              - Shift block to the left
+ ==              - Fix line indent
  >%              - Shift block to the right
  ,a=             - Reindent all (C-style)
  :set tw=<n>     - Set text width (0 = window width)
@@ -190,6 +192,8 @@
  :[n]            - Go to line…
  [n]G
  [n]|            - Go to column…
+ *               - Forward search for word under cursor
+ #               - Backward search for word under cursor
  [n]f <c>        - Find next (nth) <c> in current line
  [n]F <c>        - Find prev (nth) <c> in current line
  %               - Jump between matching () or {}
