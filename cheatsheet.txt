@@ -255,6 +255,8 @@
   ,gd            - Git diff
  --
   Ledger
+  ctrl-x         - Autocomplete
+  <space>        - Toggle transaction state
  --
   Tagbar
   <F9>            - Toggle Tagbar
