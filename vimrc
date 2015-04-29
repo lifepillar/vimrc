@@ -336,7 +336,6 @@
 				set guioptions-=r " hide right scrollbar
 			endif
 			set wrap
-			set noshowmode
 			set noshowcmd
 			Limelight
 		endfunction
@@ -349,7 +348,6 @@
 				set guioptions+=r
 			endif
 			set nowrap
-			set showmode
 			set showcmd
 			Limelight!
 		endfunction
