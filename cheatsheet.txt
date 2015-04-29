@@ -117,7 +117,10 @@
  :retab          - Detab (needs expandtab on - see ,t)
  :retab!         - Entab (needs expandtab off - see ,t)
  ,s              - Toggle spell checking
+ ]s              - Go to next mispelled word
+ [s              - Go to prev mispelled word
  z=              - Suggest corrections
+ :Wordy <tab>    - Browse and load a Wordy dictionary
 ---
  View
   Scrolling
