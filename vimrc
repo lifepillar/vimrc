@@ -292,7 +292,7 @@
 			let g:airline_left_alt_sep=''
 			let g:airline_right_alt_sep=''
 			let g:airline_symbols.readonly='✗'
-			let g:airline_symbols.linenr = '␤'
+			let g:airline_symbols.linenr = '⌖'
 			let g:airline_inactive_collapse=0
 			call airline#parts#define_function('fileinfo', 'FileInfo')
 			call airline#parts#define_function('tab', 'TabsText')
