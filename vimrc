@@ -98,6 +98,7 @@
 	map zl zL
 	map zh zH
 	set showmatch " Show matching brackets/parenthesis
+	set matchtime=2 " show matching bracket for 0.2 seconds
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
 	set splitright " Puts new vsplit windows to the right of the current
 	set splitbelow " Puts new split windows to the bottom of the current
