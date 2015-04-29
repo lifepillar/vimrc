@@ -77,10 +77,8 @@
 	func! ToggleBackgroundColor()
 		if &background == 'dark'
 			let &background = 'light'
-			hi Folded term=bold cterm=NONE ctermfg=10
 		else
 			let &background = 'dark'
-			hi Folded term=bold cterm=NONE ctermfg=10
 		endif
 	endfunc
 " }}
@@ -369,3 +367,4 @@
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
+
