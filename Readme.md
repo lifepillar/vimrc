@@ -9,7 +9,8 @@ necessary for other systems.
 
 ### How it looks like
 
-![Screenshot](vimrc.png)
+![Solarized Dark](solarized_dark.png)
+![Solarized Light](solarized_light.png)
 
 ### Requirements
 
