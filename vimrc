@@ -129,6 +129,9 @@
 	nnoremap : ;
 	vnoremap ; :
 	vnoremap : ;
+	" Use ctrl-j as Esc in insert/visual mode (convenient).
+	inoremap <C-j> <Esc>
+	vnoremap <C-j> <Esc>
 	let mapleader = ","
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>

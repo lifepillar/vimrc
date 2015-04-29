@@ -12,8 +12,11 @@
   Other placeholders should be clear
   enough from the context.
 
-  Function keys and commands starting
-  with a comma are user-defined.
+  Every user-defined command either
+  starts with a comma or is a function
+  key. The only exception is ctrl-j,
+  which is mapped to Esc in insert and
+  visual mode for convenience.
 
   This cheat sheet is roughly
   organized after TextWrangler's menu
@@ -50,6 +53,7 @@
  Edit
   Basic
   <Esc>         - Return to normal mode
+  ctrl-j
   i             - Insert at cursor
   a             - Append after the cursor
   I             - Insert at the start of line
