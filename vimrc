@@ -279,9 +279,9 @@
 				" Make inactive status lines less prominent:
 				if &background == 'dark'
 					let a:palette.inactive = airline#themes#generate_color_map(
-						\ ['#657b83', '#073642', '11', '0', ''],
-						\ ['#657b83', '#073642', '11', '0', ''],
-						\ ['#657b83', '#073642', '11', '0', ''])
+						\ ['#586e75', '#073642', '10', '0', ''],
+						\ ['#586e75', '#073642', '10', '0', ''],
+						\ ['#586e75', '#073642', '10', '0', ''])
 				else
 					let a:palette.inactive = airline#themes#generate_color_map(
 						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
