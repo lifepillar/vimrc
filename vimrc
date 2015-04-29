@@ -95,8 +95,8 @@
 	nnoremap <C-e> <C-e><C-e>
 	nnoremap <C-y> <C-y><C-y>
 	" Easier horizontal scrolling:
-	map zl zL
-	map zh zH
+	nnoremap zl 10zl
+	nnoremap zh 10zh
 	set showmatch " Show matching brackets/parenthesis
 	set matchtime=2 " show matching bracket for 0.2 seconds
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
