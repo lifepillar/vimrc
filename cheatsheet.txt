@@ -271,4 +271,4 @@
  :echo <var>     - Show the value of a variable
  :map            - View all mappings
  :set <var>      - Show the value of a setting
-
+ :shell          - Open a shell from Vim
