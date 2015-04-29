@@ -31,9 +31,6 @@
 [submodule "bundle/seoul256"]
 	path = bundle/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
-[submodule "bundle/signify"]
-	path = bundle/signify
-	url = https://github.com/mhinz/vim-signify.git
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git

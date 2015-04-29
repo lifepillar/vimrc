@@ -323,7 +323,6 @@
 		nnoremap <silent> <Leader>gw :Gwrite<CR>
 		nnoremap <silent> <Leader>ge :Gedit<CR>
 		nnoremap <silent> <Leader>ga :Git add -p %<CR>
-		nnoremap <silent> <Leader>gg :SignifyToggle<CR>
 	"}}
 	" Goyo {{
 		" Toggle distraction-free mode with ,F:
@@ -361,10 +360,6 @@
 		let g:ledger_maxwidth = 70
 		let g:ledger_fillstring = '    ·'
 		" let g:ledger_detailed_first = 1:
-	" }}
-	" Signify {{
-		let g:signify_vcs_list = [ 'git' ]
-		let g:signify_disable_by_default = 1 " See Fugitive
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
