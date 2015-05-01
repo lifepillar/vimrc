@@ -235,90 +235,40 @@
 	" }}
 " }}
 
+" Status line {{
+
+	function! HighlightSearch()
+	  if &hls
+		 return 'H'
+	  else
+		 return ''
+	  endif
+	endfunction
+
+	hi User1 guifg=#ffdad8  guibg=#880c0e
+	hi User2 guifg=#000000  guibg=#F4905C
+	hi User3 guifg=#292b00  guibg=#f4f597
+	hi User4 guifg=#112605  guibg=#aefe7B
+	hi User5 guifg=#051d00  guibg=#7dcc7d
+	hi User7 guifg=#ffffff  guibg=#880c0e gui=bold
+	hi User8 guifg=#ffffff  guibg=#5b7fbb
+	hi User9 guifg=#ffffff  guibg=#810085
+	hi User0 guifg=#ffffff  guibg=#094afe
+
+	set statusline=
+	set statusline+=%7*\[%n]                                  "buffernr
+	set statusline+=%1*\ %<%F\                                "File+path
+	set statusline+=%2*\ %y\                                  "FileType
+	set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+	set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+	set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+	set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
+	set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
+	set statusline+=%9*\ col:%03c\                            "Colnr
+	set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+" }}
+
 " Plugins {{
-	" Airline {{
-		" Modify encoding/file format section to display BOM:
-		function FileInfo()
-			let lfcr = &ff=='unix'?'␊ (Unix)':&ff=='mac'?'␍ (Classic Mac)':&ff=='dos'?'␍␊ (Windows)':'[unk]'
-			return printf('%s%s %s', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', lfcr)
-		endfunction
-
-		" Show hard/soft tabs status:
-		function TabsText()
-			return printf('%s %d', &expandtab=="expandtab"?'⇥':'˽', &tabstop)
-		endfunction
-
-		" Change modified symbol:
-		function Modified()
-			return printf(' %s', &modified?'◇':'')
-		endfunction
-
-		function! AirlineThemePatch(palette)
-			" Use two colors instead of three for the active status line:
-			let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
-			let a:palette.normal['airline_x'] = a:palette.normal['airline_y']
-			if has_key(a:palette.normal_modified, 'airline_c')
-				unlet a:palette.normal_modified['airline_c']
-			endif
-			let a:palette.insert['airline_c'] = a:palette.insert['airline_b']
-			let a:palette.insert['airline_x'] = a:palette.insert['airline_y']
-			if has_key(a:palette.insert_modified, 'airline_c')
-				unlet a:palette.insert_modified['airline_c']
-			endif
-			let a:palette.visual['airline_c'] = a:palette.visual['airline_b']
-			let a:palette.visual['airline_x'] = a:palette.visual['airline_y']
-			if has_key(a:palette.visual_modified, 'airline_c')
-				unlet a:palette.visual_modified['airline_c']
-			endif
-			let a:palette.replace['airline_c'] = a:palette.replace['airline_b']
-			let a:palette.replace['airline_x'] = a:palette.replace['airline_y']
-			if has_key(a:palette.replace_modified, 'airline_c')
-				unlet a:palette.replace_modified['airline_c']
-			endif
-			if g:airline_theme == 'solarized'
-				" Change color of readonly symbol (I don't like red on gray):
-				let a:palette.accents.red = ['#eee8d5','', 7,'']
-				" Use cyan for insert mode:
-				let a:palette.insert['airline_a'][1] = '#2aa198'
-				let a:palette.insert['airline_a'][3] = 6
-				let a:palette.insert['airline_z'][1] = '#2aa198'
-				let a:palette.insert['airline_z'][3] = 6
-				" Make inactive status lines less prominent:
-				if &background == 'dark'
-					let a:palette.inactive = airline#themes#generate_color_map(
-						\ ['#586e75', '#073642', '10', '0', ''],
-						\ ['#586e75', '#073642', '10', '0', ''],
-						\ ['#586e75', '#073642', '10', '0', ''])
-				else
-					let a:palette.inactive = airline#themes#generate_color_map(
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''])
-				endif
-			endif
-		endfunction
-
-		let g:airline_theme_patch_func = 'AirlineThemePatch'
-
-		function! AirlineInit()
-			if !exists('g:airline_symbols')
-				let g:airline_symbols = {}
-			endif
-			let g:airline_left_sep = ''
-			let g:airline_right_sep=''
-			let g:airline_left_alt_sep=''
-			let g:airline_right_alt_sep=''
-			let g:airline_symbols.readonly='✗'
-			let g:airline_inactive_collapse=0
-			call airline#parts#define_function('fileinfo', 'FileInfo')
-			call airline#parts#define_function('tab', 'TabsText')
-			call airline#parts#define_function('modified', 'Modified')
-			let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
-			let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
-			let g:airline_section_z = airline#section#create(['windowswap', '%5l', ' %2v ', '%3p%%'])
-		endfunction
-		autocmd User AirlineAfterInit call AirlineInit()
-	" }}
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
 		let g:ctrlp_cmd = 'CtrlPMRU'
