@@ -289,7 +289,7 @@
 		else
 			let stat = '%#Inactive#'
 		endif
-		let stat .= ' %<%F ' . mod . ' ' . ro . '%=%Y  ' . enc . ' ' . ff . ' ' . tabs . ' '
+		let stat .= ' %.20F ' . mod . ' ' . ro . '%=%Y  ' . enc . ' ' . ff . ' ' . tabs . ' '
 		if a:active
 			let stat .= modeinfo[1]
 		endif
