@@ -262,7 +262,7 @@
 					\ 's':      ['SELECT',  '%#VisualMode#' ],
 					\ 'S':      ['S-LINE',  '%#VisualMode#' ],
 					\ "\<C-s>": ['S-BLOCK', '%#VisualMode#' ] }
-		return get(mode_map, mode(), ['??????', 'Warnings'])
+		return get(mode_map, mode(), ['??????', '%#Warnings#'])
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
