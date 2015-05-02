@@ -267,7 +267,7 @@
 	" Build the status line the way I want - no fat light plugins!
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
-	function! BuildStatusLine(bufnum, active)
+	func! BuildStatusLine(bufnum, active)
 		let encoding = getbufvar(a:bufnum, '&fenc')
 		if encoding == ''
 			let encoding = getbufvar(a:bufnum, '&enc')
@@ -307,22 +307,22 @@
 		let stat .= ' %5l %2v %3p%%'  " Line number, column number, percentage through file
 		let stat .= '%*'  " Reset color
 		return stat
-	endfunction
+	endfunc
 
-	function! s:RefreshStatus()
+	func! RefreshStatusLines()
 		for nr in range(1, winnr('$'))
 			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
 		endfor
-	endfunction
+	endfunc
 
-	function! s:RefreshCurrent()
+	func! RefreshActiveStatusLine()
 		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ')')
-	endfunction
+	endfunc
 
 	augroup status
 		autocmd!
-		autocmd VimEnter,WinEnter,BufWinEnter * call <SID>RefreshStatus()
-		au InsertEnter,InsertLeave call <SID>RefreshCurrent()
+		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
+		au InsertEnter,InsertLeave call <SID>RefreshActiveStatusLine()
 	augroup END
 " }}
 
