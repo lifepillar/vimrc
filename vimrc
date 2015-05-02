@@ -239,6 +239,7 @@
 " Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
+	" Solarized Dark
 	hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
 	hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
 	hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
