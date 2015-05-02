@@ -316,7 +316,7 @@
 	endfunc
 
 	func! RefreshActiveStatusLine()
-		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ')')
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winbufnr(winnr()) . ',1)')
 	endfunc
 
 	augroup status
