@@ -237,36 +237,93 @@
 " }}
 
 " Status line {{
+	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
-	function! HighlightSearch()
-	  if &hls
-		 return 'H'
-	  else
-		 return ''
-	  endif
+	hi User1 ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75  " Main color for active status line
+	hi User2 ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1  " Normal mode
+	hi User3 ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198  " Insert mode
+	hi User4 ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16  " Replace mode
+	hi User5 ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682  " Visual mode
+	hi User6 ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f  " Warning
+	hi User7 ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642  " Inactive status line
+
+	" Return the string to show for the current mode
+	function! CheckMode()
+		let mode_map = {
+					\ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
+					\ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
+					\ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK' }
+		return get(mode_map, mode(), '??????')
 	endfunction
 
-	hi User1 guifg=#ffdad8  guibg=#880c0e
-	hi User2 guifg=#000000  guibg=#F4905C
-	hi User3 guifg=#292b00  guibg=#f4f597
-	hi User4 guifg=#112605  guibg=#aefe7B
-	hi User5 guifg=#051d00  guibg=#7dcc7d
-	hi User7 guifg=#ffffff  guibg=#880c0e gui=bold
-	hi User8 guifg=#ffffff  guibg=#5b7fbb
-	hi User9 guifg=#ffffff  guibg=#810085
-	hi User0 guifg=#ffffff  guibg=#094afe
+	" Return the color to use for the current mode
+	function! ModeColor()
+		let mode_map = {
+					\ 'n': '2', 'i': '3', 'R': '4', 'v': '5',
+					\ 'V': '5', 'c': '4', "\<C-v>": '5', 's': '5',
+					\ 'S': '5', "\<C-s>": '5' }
+		return get(mode_map, mode(), '6')
+	endfunction
 
-	set statusline=
-	set statusline+=%7*\[%n]                                  "buffernr
-	set statusline+=%1*\ %<%F\                                "File+path
-	set statusline+=%2*\ %y\                                  "FileType
-	set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-	set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-	set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-	set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
-	set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
-	set statusline+=%9*\ col:%03c\                            "Colnr
-	set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+		
+	" Build the status line the way I want - no fat light plugins!
+	function! MyStatusLine(winnum)
+		let active = a:winnum == winnr() " Are we drawing for the active window?
+		let bufnum = winbufnr(a:winnum)  " Number of current buffer
+
+		let encoding = getbufvar(bufnum, '&fenc')
+		if encoding == ''
+			let encoding = getbufvar(bufnum, '&enc')
+		endif
+		if getbufvar(bufnum, '&bomb')
+			let encoding .= ',BOM'
+		endif
+
+		let ff = getbufvar(bufnum, '&ff')
+		let fileformat = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
+
+		let stat = ''  " Status line
+		if active
+			let stat .= '%' . ModeColor() . '* ' . CheckMode() . ' '  " Current mode
+			let stat .= '%1*'  " Main bg/fg color for active status line
+		else
+			let stat .= '%7*'  " Bg/fg color for inactive status line
+		endif
+
+		let stat .= ' %<%F '  " Full path
+		let stat .= getbufvar(bufnum, '&modified') ? '◇ ' : '  '  " Symbol for modified file
+		let stat .= getbufvar(bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
+
+		let stat .= '%='
+		let stat .= ' %Y  '  " File type
+		let stat .= encoding . ' ' . fileformat .' '
+		let stat .= (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥' : '˽') . ' ' . getbufvar(bufnum, '&tabstop') . ' '
+
+		if active
+			let stat .= '%*'  " Reset color
+			let stat .= '%' . ModeColor() . '*'
+		endif
+
+		let stat .= ' %5l %2v %3p%%'  " Line number, column number, percentage through file
+		let stat .= '%*'  " Reset color
+		return stat
+	endfunction
+
+	function! s:RefreshStatus()
+		for nr in range(1, winnr('$'))
+			call setwinvar(nr, '&statusline', '%!MyStatusLine(' . nr . ')')
+		endfor
+	endfunction	
+
+	function! s:RefreshCurrent()
+		call setwinvar(winnr(), '&statusline', '%!MyStatusLine(' . winnr() . ')')
+	endfunction
+
+	augroup status
+		autocmd!
+		autocmd VimEnter,WinEnter,BufWinEnter * call <SID>RefreshStatus()
+		au InsertEnter,InsertLeave call <SID>RefreshCurrent()
+	augroup END
 " }}
 
 " Plugins {{
