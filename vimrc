@@ -239,28 +239,29 @@
 " Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
-	hi User1 ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75  " Main color for active status line
-	hi User2 ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1  " Normal mode
-	hi User3 ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198  " Insert mode
-	hi User4 ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16  " Replace mode
-	hi User5 ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682  " Visual mode
-	hi User6 ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f  " Warning
-	hi User7 ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642  " Inactive status line
+	hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+	hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+	hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+	hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+	hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+	hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+	hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+	hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
 
 	" Return the text and color to be used for the current mode
 	func! GetModeInfo()
 		let mode_map = {
-					\ 'n':      ['NORMAL',  '2'],
-					\ 'i':      ['INSERT',  '3'],
-					\ 'R':      ['REPLACE', '4'],
-	  				\ 'v':      ['VISUAL',  '5'],
-					\ 'V':      ['V-LINE',  '5'],
-					\ "\<C-v>": ['V-BLOCK', '5'],
-					\ 'c':      ['COMMAND', '5'],
-					\ 's':      ['SELECT',  '5'],
-					\ 'S':      ['S-LINE',  '5'],
-					\ "\<C-s>": ['S-BLOCK', '5'] }
-		return get(mode_map, mode(), ['??????', '6'])
+					\ 'n':      ['NORMAL',  '%#NormalMode#' ],
+					\ 'i':      ['INSERT',  '%#InsertMode#' ],
+					\ 'R':      ['REPLACE', '%#ReplaceMode#'],
+	  				\ 'v':      ['VISUAL',  '%#VisualMode#' ],
+					\ 'V':      ['V-LINE',  '%#VisualMode#' ],
+					\ "\<C-v>": ['V-BLOCK', '%#VisualMode#' ],
+					\ 'c':      ['COMMAND', '%#CommandMode#'],
+					\ 's':      ['SELECT',  '%#VisualMode#' ],
+					\ 'S':      ['S-LINE',  '%#VisualMode#' ],
+					\ "\<C-s>": ['S-BLOCK', '%#VisualMode#' ] }
+		return get(mode_map, mode(), ['??????', 'Warnings'])
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
@@ -279,16 +280,16 @@
 		let ff = getbufvar(bufnum, '&ff')
 		let fileformat = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
 
-		let stat = ''  " Status line
+		let stat = ''
 		if active
 			let modeinfo = GetModeInfo()
-			let stat .= '%' . modeinfo[1] . '* ' . modeinfo[0] . ' '  " Current mode
+			let stat .= modeinfo[1] . modeinfo[0] . ' '  " Current mode
 			if getbufvar(bufnum, '&paste')
 				let stat .= 'PASTE '
 			endif
-			let stat .= '%1*'  " Main bg/fg color for active status line
+			let stat .= '%#Active#'
 		else
-			let stat .= '%7*'  " Bg/fg color for inactive status line
+			let stat .= '%#Inactive#'
 		endif
 
 		let stat .= ' %<%F '  " Full path
@@ -301,9 +302,7 @@
 		let stat .= (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥' : '˽') . ' ' . getbufvar(bufnum, '&tabstop') . ' '
 
 		if active
-			let stat .= '%*'  " Reset color
-			let modeinfo = GetModeInfo()
-			let stat .= '%' . modeinfo[1] . '*'
+			let stat .= modeinfo[1]
 		endif
 
 		let stat .= ' %5l %2v %3p%%'  " Line number, column number, percentage through file
@@ -315,7 +314,7 @@
 		for nr in range(1, winnr('$'))
 			call setwinvar(nr, '&statusline', '%!MyStatusLine(' . nr . ')')
 		endfor
-	endfunction	
+	endfunction
 
 	function! s:RefreshCurrent()
 		call setwinvar(winnr(), '&statusline', '%!MyStatusLine(' . winnr() . ')')
