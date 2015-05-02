@@ -265,6 +265,20 @@
 		return get(mode_map, mode(), ['??????', '%#Warnings#'])
 	endfunc
 
+	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
+	" See also TODO: add link to Airline source
+	func! StatusLineWarnings(bufnum)
+		if !exists(getbufvar(a:bufnum, 'statusline_trailing_space_warning'))
+			let pos = search('\s\+$', 'nw')
+			if pos != 0
+				let b:statusline_trailing_space_warning = 'Trailing spaces (' . pos . ')'
+			else
+				let b:statusline_trailing_space_warning = ''
+			endif
+		endif
+		return getbufvar(a:bufnum, 'statusline_trailing_space_warning')
+	endfunc
+
 	" Build the status line the way I want - no fat light plugins!
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
@@ -293,8 +307,15 @@
 		if a:active
 			let stat .= modeinfo[1]
 		endif
-		let stat .= ' %5l %2v %3p%% %*'  " Line number, column number, percentage through file
-
+		let stat .= ' %5l %2v %3p%% '  " Line number, column number, percentage through file
+		let warnings = StatusLineWarnings(a:bufnum)
+		if warnings != ''
+			if a:active
+				let stat .= '%#Warnings#'
+			endif
+			let stat .= ' ' . warnings . ' '
+		endif
+		let stat .= '%*'
 		return stat
 	endfunc
 
@@ -312,6 +333,7 @@
 		autocmd!
 		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
 		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
+		autocmd bufwritepost * unlet! b:statusline_trailing_space_warning
 	augroup END
 " }}
 
