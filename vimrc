@@ -267,7 +267,7 @@
 	function! MyStatusLine(winnum)
 		let active = a:winnum == winnr() " Are we drawing for the active window?
 		let bufnum = winbufnr(a:winnum)  " Number of current buffer
-		
+
 		let encoding = getbufvar(bufnum, '&fenc')
 		if encoding == ''
 			let encoding = getbufvar(bufnum, '&enc')
