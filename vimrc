@@ -268,44 +268,32 @@
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
 	func! BuildStatusLine(bufnum, active)
-		let encoding = getbufvar(a:bufnum, '&fenc')
-		if encoding == ''
-			let encoding = getbufvar(a:bufnum, '&enc')
+		let enc = getbufvar(a:bufnum, '&fenc')
+		if enc == ''
+			let enc = getbufvar(a:bufnum, '&enc')
 		endif
 		if getbufvar(a:bufnum, '&bomb')
-			let encoding .= ',BOM'
+			let enc .= ',BOM'
 		endif
-
 		let ff = getbufvar(a:bufnum, '&ff')
-		let fileformat = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
+		let ff = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
+		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ' '  " Symbol for modified file
+		let ro  = getbufvar(a:bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
+		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
 
-		let stat = ''
 		if a:active
 			let modeinfo = GetModeInfo()
-			let stat .= modeinfo[1] . modeinfo[0] . ' '  " Current mode
-			if getbufvar(a:bufnum, '&paste')
-				let stat .= 'PASTE '
-			endif
-			let stat .= '%#Active#'
+			let paste = getbufvar(a:bufnum, '&paste') ? ' PASTE ' : ' '
+			let stat =  modeinfo[1] . ' ' . modeinfo[0] . paste . '%#Active#'
 		else
-			let stat .= '%#Inactive#'
+			let stat = '%#Inactive#'
 		endif
-
-		let stat .= ' %<%F '  " Full path
-		let stat .= getbufvar(a:bufnum, '&modified') ? '◇ ' : '  '  " Symbol for modified file
-		let stat .= getbufvar(a:bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
-
-		let stat .= '%='
-		let stat .= ' %Y  '  " File type
-		let stat .= encoding . ' ' . fileformat .' '
-		let stat .= (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥' : '˽') . ' ' . getbufvar(a:bufnum, '&tabstop') . ' '
-
+		let stat .= ' %<%F ' . mod . ' ' . ro . '%=%Y  ' . enc . ' ' . ff . ' ' . tabs . ' '
 		if a:active
 			let stat .= modeinfo[1]
 		endif
+		let stat .= ' %5l %2v %3p%% %*'  " Line number, column number, percentage through file
 
-		let stat .= ' %5l %2v %3p%%'  " Line number, column number, percentage through file
-		let stat .= '%*'  " Reset color
 		return stat
 	endfunc
 
