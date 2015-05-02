@@ -265,26 +265,25 @@
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
-	function! MyStatusLine(winnum)
-		let active = a:winnum == winnr() " Are we drawing for the active window?
-		let bufnum = winbufnr(a:winnum)  " Number of current buffer
-
-		let encoding = getbufvar(bufnum, '&fenc')
+	" bufnum: buffer number
+	" active: 1=active, 0=inactive
+	function! BuildStatusLine(bufnum, active)
+		let encoding = getbufvar(a:bufnum, '&fenc')
 		if encoding == ''
-			let encoding = getbufvar(bufnum, '&enc')
+			let encoding = getbufvar(a:bufnum, '&enc')
 		endif
-		if getbufvar(bufnum, '&bomb')
+		if getbufvar(a:bufnum, '&bomb')
 			let encoding .= ',BOM'
 		endif
 
-		let ff = getbufvar(bufnum, '&ff')
+		let ff = getbufvar(a:bufnum, '&ff')
 		let fileformat = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
 
 		let stat = ''
-		if active
+		if a:active
 			let modeinfo = GetModeInfo()
 			let stat .= modeinfo[1] . modeinfo[0] . ' '  " Current mode
-			if getbufvar(bufnum, '&paste')
+			if getbufvar(a:bufnum, '&paste')
 				let stat .= 'PASTE '
 			endif
 			let stat .= '%#Active#'
@@ -293,15 +292,15 @@
 		endif
 
 		let stat .= ' %<%F '  " Full path
-		let stat .= getbufvar(bufnum, '&modified') ? '◇ ' : '  '  " Symbol for modified file
-		let stat .= getbufvar(bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
+		let stat .= getbufvar(a:bufnum, '&modified') ? '◇ ' : '  '  " Symbol for modified file
+		let stat .= getbufvar(a:bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
 
 		let stat .= '%='
 		let stat .= ' %Y  '  " File type
 		let stat .= encoding . ' ' . fileformat .' '
-		let stat .= (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥' : '˽') . ' ' . getbufvar(bufnum, '&tabstop') . ' '
+		let stat .= (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥' : '˽') . ' ' . getbufvar(a:bufnum, '&tabstop') . ' '
 
-		if active
+		if a:active
 			let stat .= modeinfo[1]
 		endif
 
@@ -312,12 +311,12 @@
 
 	function! s:RefreshStatus()
 		for nr in range(1, winnr('$'))
-			call setwinvar(nr, '&statusline', '%!MyStatusLine(' . nr . ')')
+			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
 		endfor
 	endfunction
 
 	function! s:RefreshCurrent()
-		call setwinvar(winnr(), '&statusline', '%!MyStatusLine(' . winnr() . ')')
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ')')
 	endfunction
 
 	augroup status
