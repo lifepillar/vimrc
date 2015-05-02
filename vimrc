@@ -247,30 +247,26 @@
 	hi User6 ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f  " Warning
 	hi User7 ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642  " Inactive status line
 
-	" Return the string to show for the current mode
-	function! CheckMode()
+	func! GetModeInfo()
 		let mode_map = {
-					\ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
-					\ 'V': 'V-LINE', 'c': 'COMMAND', "\<C-v>": 'V-BLOCK', 's': 'SELECT',
-					\ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK' }
-		return get(mode_map, mode(), '??????')
-	endfunction
+					\ 'n':      ['NORMAL',  '2'],
+					\ 'i':      ['INSERT',  '3'],
+					\ 'R':      ['REPLACE', '4'],
+	  				\ 'v':      ['VISUAL',  '5'],
+					\ 'V':      ['V-LINE',  '5'],
+					\ "\<C-v>": ['V-BLOCK', '5'],
+					\ 'c':      ['COMMAND', '5'],
+					\ 's':      ['SELECT',  '5'],
+					\ 'S':      ['S-LINE',  '5'],
+					\ "\<C-s>": ['S-BLOCK', '5'] }
+		return get(mode_map, mode(), ['??????', '6'])
+	endfunc
 
-	" Return the color to use for the current mode
-	function! ModeColor()
-		let mode_map = {
-					\ 'n': '2', 'i': '3', 'R': '4', 'v': '5',
-					\ 'V': '5', 'c': '4', "\<C-v>": '5', 's': '5',
-					\ 'S': '5', "\<C-s>": '5' }
-		return get(mode_map, mode(), '6')
-	endfunction
-
-		
 	" Build the status line the way I want - no fat light plugins!
 	function! MyStatusLine(winnum)
 		let active = a:winnum == winnr() " Are we drawing for the active window?
 		let bufnum = winbufnr(a:winnum)  " Number of current buffer
-
+		
 		let encoding = getbufvar(bufnum, '&fenc')
 		if encoding == ''
 			let encoding = getbufvar(bufnum, '&enc')
@@ -284,7 +280,11 @@
 
 		let stat = ''  " Status line
 		if active
-			let stat .= '%' . ModeColor() . '* ' . CheckMode() . ' '  " Current mode
+			let modeinfo = GetModeInfo()
+			let stat .= '%' . modeinfo[1] . '* ' . modeinfo[0] . ' '  " Current mode
+			if getbufvar(bufnum, '&paste')
+				let stat .= 'PASTE '
+			endif
 			let stat .= '%1*'  " Main bg/fg color for active status line
 		else
 			let stat .= '%7*'  " Bg/fg color for inactive status line
@@ -301,7 +301,8 @@
 
 		if active
 			let stat .= '%*'  " Reset color
-			let stat .= '%' . ModeColor() . '*'
+			let modeinfo = GetModeInfo()
+			let stat .= '%' . modeinfo[1] . '*'
 		endif
 
 		let stat .= ' %5l %2v %3p%%'  " Line number, column number, percentage through file
