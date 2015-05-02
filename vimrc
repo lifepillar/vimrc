@@ -247,6 +247,7 @@
 	hi User6 ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f  " Warning
 	hi User7 ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642  " Inactive status line
 
+	" Return the text and color to be used for the current mode
 	func! GetModeInfo()
 		let mode_map = {
 					\ 'n':      ['NORMAL',  '2'],
