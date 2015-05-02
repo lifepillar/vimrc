@@ -54,7 +54,7 @@
  Edit
   Basic
   <Esc>         - Return to normal mode
-  ctrl-j
+  ctrl-[
   i             - Insert at cursor
   a             - Append after the cursor
   I             - Insert at the start of line
