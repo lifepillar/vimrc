@@ -322,7 +322,7 @@
 	augroup status
 		autocmd!
 		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
-		au InsertEnter,InsertLeave call <SID>RefreshActiveStatusLine()
+		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 	augroup END
 " }}
 
