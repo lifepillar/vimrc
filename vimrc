@@ -265,18 +265,22 @@
 		return get(mode_map, mode(), ['??????', '%#Warnings#'])
 	endfunc
 
+	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-	" See also TODO: add link to Airline source
-	func! StatusLineWarnings(bufnum)
-		if !exists(getbufvar(a:bufnum, 'statusline_trailing_space_warning'))
-			let pos = search('\s\+$', 'nw')
+	" See also whitespace.vim in Airline (https://github.com/bling/vim-airline)
+	func! StatusLineWarnings()
+		if !exists('b:statusline_warnings')
+			let b:statusline_warnings = ''
+			let pos = search('\s$', 'nw')
 			if pos != 0
-				let b:statusline_trailing_space_warning = 'Trailing spaces (' . pos . ')'
-			else
-				let b:statusline_trailing_space_warning = ''
+				let b:statusline_warnings .= 'Trailing spaces (' . pos . ')'
+			endif
+			let pos = search('\v(^ +\t)|(^\t+ )', 'nw')
+			if pos != 0
+				let b:statusline_warnings .= 'Mixed indent (' . pos . ')'
 			endif
 		endif
-		return getbufvar(a:bufnum, 'statusline_trailing_space_warning')
+		return b:statusline_warnings
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
@@ -308,14 +312,14 @@
 			let stat .= modeinfo[1]
 		endif
 		let stat .= ' %5l %2v %3p%% '  " Line number, column number, percentage through file
-		let warnings = StatusLineWarnings(a:bufnum)
-		if warnings != ''
-			if a:active
-				let stat .= '%#Warnings#'
+		if a:active
+			let warnings = StatusLineWarnings()
+			if warnings != ''
+				let stat .= '%#Warnings#' . ' ' . warnings . ' '
 			endif
-			let stat .= ' ' . warnings . ' '
 		endif
 		let stat .= '%*'
+
 		return stat
 	endfunc
 
@@ -333,10 +337,10 @@
 		autocmd!
 		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
 		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
-		autocmd bufwritepost * unlet! b:statusline_trailing_space_warning
+		autocmd BufWritePost * unlet! b:statusline_warnings
 	augroup END
 " }}
-
+    
 " Plugins {{
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
