@@ -325,9 +325,12 @@
 		if a:active
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
+			if warnings != ''
+				let warnings = join(['%#Warnings#', warnings]) . ' '
+			endif
 			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
 			return join([modeinfo[1], currmode, '%#Active#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs,
-						\  modeinfo[1], '%5l %2v %3p%%', '%#Warnings#', warnings, '%*'])
+						\  modeinfo[1], '%5l %2v %3p%%', warnings]) . '%*'
 		else
 			return join(['%#Inactive#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs, '%l %v %3p%% %*'])
 		endif
