@@ -239,24 +239,17 @@
 		" }}
 		" Seoul256 {{
 		func! Seoul256StatusLine()
+			hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372 cterm=bold gui=bold
+			hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
+			hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
+			hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
+			hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
+			hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
+			hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
 			if &background ==? 'dark'
-				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
-				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+				hi Inactive ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
 			else
-				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
-				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+				hi Inactive ctermfg=238 ctermbg=251 guifg=#565656 guibg=#d1d0d1
 			endif
 		endfunc
 		" }}
