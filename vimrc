@@ -385,8 +385,6 @@
 	" }}
 " }}
 
-	
-    
 " Plugins {{
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
