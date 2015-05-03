@@ -86,7 +86,7 @@
  c [move]        - Replace up to the move-to point
  cc              - Replace line
  ci <c>          - Replace between matching pair of <c>
- v               - Visual mode (selection) 
+ v               - Visual mode (selection)
  V               - Linewise visual mode
  ctrl-v          - Visual block mode
  ctrl-v [move] I - Insert in multiple lines
