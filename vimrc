@@ -307,7 +307,7 @@
 		let stat = AltStatusLine(a:bufnum, a:active)
 		if stat != ''
 			return stat
-		end
+		endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
 		if enc == ''
