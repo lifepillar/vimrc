@@ -285,10 +285,30 @@
 		return b:statusline_warnings
 	endfunc
 
+	" Alternative status lines (e.g., for help files)
+	func! AltStatusLine(bufnum, active)
+		let stat = ''
+	
+		if getbufvar(a:bufnum, '&ft') ==? 'help'
+			if a:active
+				let stat = '%#NormalMode# HELP %#Active# %f   ⚔ %=%#NormalMode# %5l %2v %3p%% %*'
+			else
+				let stat = '%#Inactive# HELP  %f   ⚔ %= %5l %2v %3p%% %*'
+			endif
+		endif
+
+		return stat
+	endfunc
+
 	" Build the status line the way I want - no fat light plugins!
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
 	func! BuildStatusLine(bufnum, active)
+		let stat = AltStatusLine(a:bufnum, a:active)
+		if stat != ''
+			return stat
+		end
+
 		let enc = getbufvar(a:bufnum, '&fenc')
 		if enc == ''
 			let enc = getbufvar(a:bufnum, '&enc')
