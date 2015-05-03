@@ -224,10 +224,12 @@
 			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
 			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
 			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			hi VertSplit   ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
 		else
 			hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
 			hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
 			hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a11a guibg=#eee8d5
+			hi VertSplit   ctermfg=14 ctermbg=7  guifg=#93a11a guibg=#eee8d5
 		endif
 		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
