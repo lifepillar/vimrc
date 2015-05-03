@@ -243,7 +243,7 @@
 		" Seoul256 {{
 		func! Seoul256StatusLine()
 			if &background ==? 'dark'
-				hi Active      ctermfg=95 ctermbg=187 guifg=#eee8d5 guibg=#586e75
+				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
 				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
 				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
@@ -252,7 +252,7 @@
 				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
 				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
 			else
-				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
 				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
 				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
