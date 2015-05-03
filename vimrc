@@ -9,6 +9,7 @@
 	" See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
 	scriptencoding utf-8
 	set encoding=utf-8
+	set termencoding=utf-8
 	set nobomb
 	set fileformats=unix,mac,dos
 	syntax enable
@@ -209,19 +210,174 @@
 	set showcmd " Show (partial) command in the last line of the screen.
 	set noshowmode " Do not show current mode because it is already shown in status line
 	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-	" Theme
+	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
+	" Default theme
 	set background=dark
-	if filereadable(expand("~/.vim/bundle/solarized/colors/solarized.vim"))
-	"	let g:solarized_termcolors=256
-	"	let g:solarized_termtrans=0
-	"	let g:solarized_degrade=0
-		let g:solarized_bold=0
-		let g:solarized_underline=0
-	"	let g:solarized_italic=1
-	"	let g:solarized_contrast="normal"   " high, low, normal
-	"	let g:solarized_visibility="normal" " high, low, normal
-		colorscheme solarized
-	endif
+	let g:solarized_bold=0
+	let g:solarized_underline=0
+	colorscheme solarized
+	" Status line themes {{
+		" Solarized {{
+		func! SolarizedStatusLine()
+			if &background ==? 'dark'
+				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+				hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
+			else
+				hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
+				hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
+				hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a1a1 guibg=#eee8d5
+				hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
+			endif
+			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+		endfunc
+		" }}
+		" Seoul256 {{
+		func! Seoul256StatusLine()
+			if &background ==? 'dark'
+				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			else
+				hi Active      ctermfg=187 ctermbg=95 guifg=#dfdebd guibg=#9a7372
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			endif
+		endfunc
+		" }}
+
+	" Set up highlight groups for the current theme and background
+	func! UpdateHighlight()
+		if g:colors_name ==? 'solarized'
+			call SolarizedStatusLine()
+		elseif g:colors_name ==? 'seoul256'
+			call Seoul256StatusLine()
+		endif
+	endfunc
+	" }}
+	" Status line {{
+	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+
+	" Return the text and color to be used for the current mode
+	func! GetModeInfo()
+		let mode_map = {
+					\ 'n':      ['NORMAL',  '%#NormalMode#' ],
+					\ 'i':      ['INSERT',  '%#InsertMode#' ],
+					\ 'R':      ['REPLACE', '%#ReplaceMode#'],
+					\ 'v':      ['VISUAL',  '%#VisualMode#' ],
+					\ 'V':      ['V-LINE',  '%#VisualMode#' ],
+					\ "\<C-v>": ['V-BLOCK', '%#VisualMode#' ],
+					\ 'c':      ['COMMAND', '%#CommandMode#'],
+					\ 's':      ['SELECT',  '%#VisualMode#' ],
+					\ 'S':      ['S-LINE',  '%#VisualMode#' ],
+					\ "\<C-s>": ['S-BLOCK', '%#VisualMode#' ] }
+		return get(mode_map, mode(), ['??????', '%#Warnings#'])
+	endfunc
+
+	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
+	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
+	func! StatusLineWarnings()
+		if !exists('b:statusline_warnings')
+			let b:statusline_warnings = ''
+			let trail = search('\s$', 'nw')
+			let mix = search('\v(^ +\t)|(^\t+ )', 'nw')
+			if trail != 0
+				let b:statusline_warnings .= 'Trailing space (' . trail . ')'
+				if mix != 0
+					let b:statusline_warnings .= ' '
+				endif
+			endif
+			if mix != 0
+				let b:statusline_warnings .= 'Mixed indent (' . mix . ')'
+			endif
+		endif
+		return b:statusline_warnings
+	endfunc
+
+	" Alternative status lines (e.g., for help files)
+	func! AltStatusLine(bufnum, active)
+		let stat = ''
+
+		if getbufvar(a:bufnum, '&ft') ==? 'help'
+			if a:active
+				let stat = '%#NormalMode# HELP %#Active# %f   ⚔ %=%#NormalMode# %5l %2v %3p%% %*'
+			else
+				let stat = '%#Inactive# HELP  %f   ⚔ %= %5l %2v %3p%% %*'
+			endif
+		endif
+
+		return stat
+	endfunc
+
+	" Build the status line the way I want - no fat light plugins!
+	" bufnum: buffer number
+	" active: 1=active, 0=inactive
+	func! BuildStatusLine(bufnum, active)
+		let stat = AltStatusLine(a:bufnum, a:active)
+		if stat != ''
+			return stat
+		endif
+
+		let enc = getbufvar(a:bufnum, '&fenc')
+		if enc == ''
+			let enc = getbufvar(a:bufnum, '&enc')
+		endif
+		if getbufvar(a:bufnum, '&bomb')
+			let enc .= ',BOM'
+		endif
+		let ff = getbufvar(a:bufnum, '&ff')
+		let ff = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
+		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ' '  " Symbol for modified file
+		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ' '  " Symbol for read-only/unmodifiable
+		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
+
+		if a:active
+			let modeinfo = GetModeInfo()
+			let warnings = StatusLineWarnings()
+			if warnings != ''
+				let warnings = join(['%#Warnings#', warnings]) . ' '
+			endif
+			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
+			return join([modeinfo[1], currmode, '%#Active#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs,
+						\  modeinfo[1], '%5l %2v %3p%%', warnings]) . '%*'
+		else
+			return join(['%#Inactive#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs, '%l %v %3p%% %*'])
+		endif
+	endfunc
+
+	func! RefreshStatusLines()
+		for nr in range(1, winnr('$'))
+			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
+		endfor
+	endfunc
+
+	func! RefreshActiveStatusLine()
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winbufnr(winnr()) . ',1)')
+	endfunc
+
+	augroup status
+		autocmd!
+		autocmd VimEnter,ColorScheme * call UpdateHighlight()
+		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
+		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
+		autocmd BufWritePost * unlet! b:statusline_warnings
+	augroup END
+	" }}
 	" GUI settings {{
 		if has('gui_macvim')
 			set guifont=Monaco:h14
@@ -233,89 +389,6 @@
 " }}
 
 " Plugins {{
-	" Airline {{
-		" Modify encoding/file format section to display BOM:
-		function FileInfo()
-			let lfcr = &ff=='unix'?'␊ (Unix)':&ff=='mac'?'␍ (Classic Mac)':&ff=='dos'?'␍␊ (Windows)':'[unk]'
-			return printf('%s%s %s', &fenc!=''?&fenc:&enc, &bomb?',BOM':'', lfcr)
-		endfunction
-
-		" Show hard/soft tabs status:
-		function TabsText()
-			return printf('%s %d', &expandtab=="expandtab"?'⇥':'˽', &tabstop)
-		endfunction
-
-		" Change modified symbol:
-		function Modified()
-			return printf(' %s', &modified?'◇':'')
-		endfunction
-
-		function! AirlineThemePatch(palette)
-			" Use two colors instead of three for the active status line:
-			let a:palette.normal['airline_c'] = a:palette.normal['airline_b']
-			let a:palette.normal['airline_x'] = a:palette.normal['airline_y']
-			if has_key(a:palette.normal_modified, 'airline_c')
-				unlet a:palette.normal_modified['airline_c']
-			endif
-			let a:palette.insert['airline_c'] = a:palette.insert['airline_b']
-			let a:palette.insert['airline_x'] = a:palette.insert['airline_y']
-			if has_key(a:palette.insert_modified, 'airline_c')
-				unlet a:palette.insert_modified['airline_c']
-			endif
-			let a:palette.visual['airline_c'] = a:palette.visual['airline_b']
-			let a:palette.visual['airline_x'] = a:palette.visual['airline_y']
-			if has_key(a:palette.visual_modified, 'airline_c')
-				unlet a:palette.visual_modified['airline_c']
-			endif
-			let a:palette.replace['airline_c'] = a:palette.replace['airline_b']
-			let a:palette.replace['airline_x'] = a:palette.replace['airline_y']
-			if has_key(a:palette.replace_modified, 'airline_c')
-				unlet a:palette.replace_modified['airline_c']
-			endif
-			if g:airline_theme == 'solarized'
-				" Change color of readonly symbol (I don't like red on gray):
-				let a:palette.accents.red = ['#eee8d5','', 7,'']
-				" Use cyan for insert mode:
-				let a:palette.insert['airline_a'][1] = '#2aa198'
-				let a:palette.insert['airline_a'][3] = 6
-				let a:palette.insert['airline_z'][1] = '#2aa198'
-				let a:palette.insert['airline_z'][3] = 6
-				" Make inactive status lines less prominent:
-				if &background == 'dark'
-					let a:palette.inactive = airline#themes#generate_color_map(
-						\ ['#586e75', '#073642', '10', '0', ''],
-						\ ['#586e75', '#073642', '10', '0', ''],
-						\ ['#586e75', '#073642', '10', '0', ''])
-				else
-					let a:palette.inactive = airline#themes#generate_color_map(
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''],
-						\ ['#93a1a1', '#eee8d5', '14', '7', ''])
-				endif
-			endif
-		endfunction
-
-		let g:airline_theme_patch_func = 'AirlineThemePatch'
-
-		function! AirlineInit()
-			if !exists('g:airline_symbols')
-				let g:airline_symbols = {}
-			endif
-			let g:airline_left_sep = ''
-			let g:airline_right_sep=''
-			let g:airline_left_alt_sep=''
-			let g:airline_right_alt_sep=''
-			let g:airline_symbols.readonly='✗'
-			let g:airline_inactive_collapse=0
-			call airline#parts#define_function('fileinfo', 'FileInfo')
-			call airline#parts#define_function('tab', 'TabsText')
-			call airline#parts#define_function('modified', 'Modified')
-			let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
-			let g:airline_section_y = airline#section#create(['fileinfo', ' ', 'tab'])
-			let g:airline_section_z = airline#section#create(['windowswap', '%5l', ' %2v ', '%3p%%'])
-		endfunction
-		autocmd User AirlineAfterInit call AirlineInit()
-	" }}
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
 		let g:ctrlp_cmd = 'CtrlPMRU'
