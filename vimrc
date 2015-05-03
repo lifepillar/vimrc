@@ -324,25 +324,13 @@
 
 		if a:active
 			let modeinfo = GetModeInfo()
-			let paste = getbufvar(a:bufnum, '&paste') ? ' PASTE ' : ' '
-			let stat =  modeinfo[1] . ' ' . modeinfo[0] . paste . '%#Active#'
-		else
-			let stat = '%#Inactive#'
-		endif
-		let stat .= ' %.20F ' . mod . ' ' . ro . '%=%Y  ' . enc . ' ' . ff . ' ' . tabs . ' '
-		if a:active
-			let stat .= modeinfo[1]
-		endif
-		let stat .= ' %5l %2v %3p%% '  " Line number, column number, percentage through file
-		if a:active
 			let warnings = StatusLineWarnings()
-			if warnings != ''
-				let stat .= '%#Warnings#' . ' ' . warnings . ' '
-			endif
+			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
+			return join([modeinfo[1], currmode, '%#Active#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs,
+						\  modeinfo[1], '%5l %2v %3p%%', '%#Warnings#', warnings, '%*'])
+		else
+			return join(['%#Inactive#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs, '%l %v %3p%% %*'])
 		endif
-		let stat .= '%*'
-
-		return stat
 	endfunc
 
 	func! RefreshStatusLines()
