@@ -215,39 +215,60 @@
 	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	" Theme
 	set background=dark
-	if filereadable(expand("~/.vim/bundle/solarized/colors/solarized.vim"))
-	"	let g:solarized_termcolors=256
-	"	let g:solarized_termtrans=0
-	"	let g:solarized_degrade=0
-		let g:solarized_bold=0
-		let g:solarized_underline=0
-	"	let g:solarized_italic=1
-	"	let g:solarized_contrast="normal"   " high, low, normal
-	"	let g:solarized_visibility="normal" " high, low, normal
-		colorscheme solarized
-	endif
-	" GUI settings {{
-		if has('gui_macvim')
-			set guifont=Monaco:h14
-			set guioptions+=a " Yank/paste to/from OS X clipboard
-			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-			set transparency=4
+	let g:solarized_bold=0
+	let g:solarized_underline=0
+	colorscheme solarized
+	" Status line themes {{
+	func! SolarizedStatusLine()
+		if &background ==? 'dark'
+			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+		else
+			hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
+			hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
+			hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a11a guibg=#eee8d5
 		endif
+		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+		hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+		hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+		hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+	endfunc
+
+	func! Seoul256StatusLine()
+		if &background ==? 'dark'
+			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+		else
+			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+		endif
+	endfunc
+
+	" Set up highlight groups for the current theme and background
+	func! UpdateHighlight()
+		if g:colors_name ==? 'solarized'
+			call SolarizedStatusLine()
+		elseif g:colors_name ==? 'seoul256'
+			call Seoul256StatusLine()
+		endif
+	endfunc
 	" }}
-" }}
-
-" Status line {{
+	" Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
-
-	" Solarized Dark
-	hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-	hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-	hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-	hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-	hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-	hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-	hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-	hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
 
 	" Return the text and color to be used for the current mode
 	func! GetModeInfo()
@@ -255,7 +276,7 @@
 					\ 'n':      ['NORMAL',  '%#NormalMode#' ],
 					\ 'i':      ['INSERT',  '%#InsertMode#' ],
 					\ 'R':      ['REPLACE', '%#ReplaceMode#'],
-	  				\ 'v':      ['VISUAL',  '%#VisualMode#' ],
+					\ 'v':      ['VISUAL',  '%#VisualMode#' ],
 					\ 'V':      ['V-LINE',  '%#VisualMode#' ],
 					\ "\<C-v>": ['V-BLOCK', '%#VisualMode#' ],
 					\ 'c':      ['COMMAND', '%#CommandMode#'],
@@ -288,7 +309,7 @@
 	" Alternative status lines (e.g., for help files)
 	func! AltStatusLine(bufnum, active)
 		let stat = ''
-	
+
 		if getbufvar(a:bufnum, '&ft') ==? 'help'
 			if a:active
 				let stat = '%#NormalMode# HELP %#Active# %f   ⚔ %=%#NormalMode# %5l %2v %3p%% %*'
@@ -348,11 +369,23 @@
 
 	augroup status
 		autocmd!
+		autocmd VimEnter,ColorScheme * call UpdateHighlight()
 		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
 		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 		autocmd BufWritePost * unlet! b:statusline_warnings
 	augroup END
+	" }}
+	" GUI settings {{
+		if has('gui_macvim')
+			set guifont=Monaco:h14
+			set guioptions+=a " Yank/paste to/from OS X clipboard
+			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+			set transparency=4
+		endif
+	" }}
 " }}
+
+	
     
 " Plugins {{
 	" CtrlP {{
