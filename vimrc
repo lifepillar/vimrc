@@ -270,13 +270,16 @@
 	func! StatusLineWarnings()
 		if !exists('b:statusline_warnings')
 			let b:statusline_warnings = ''
-			let pos = search('\s$', 'nw')
-			if pos != 0
-				let b:statusline_warnings .= 'Trailing spaces (' . pos . ')'
+			let trail = search('\s$', 'nw')
+			let mix = search('\v(^ +\t)|(^\t+ )', 'nw')
+			if trail != 0
+				let b:statusline_warnings .= 'Trailing space (' . trail . ')'
+				if mix != 0
+					let b:statusline_warnings .= ' '
+				endif
 			endif
-			let pos = search('\v(^ +\t)|(^\t+ )', 'nw')
-			if pos != 0
-				let b:statusline_warnings .= 'Mixed indent (' . pos . ')'
+			if mix != 0
+				let b:statusline_warnings .= 'Mixed indent (' . mix . ')'
 			endif
 		endif
 		return b:statusline_warnings
