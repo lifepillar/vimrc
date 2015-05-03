@@ -299,7 +299,7 @@
 		let ff = getbufvar(a:bufnum, '&ff')
 		let ff = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
 		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ' '  " Symbol for modified file
-		let ro  = getbufvar(a:bufnum, '&readonly') ? '✗'  : ' '   " Symbol for read-only file
+		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ' '  " Symbol for read-only file
 		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
 
 		if a:active
