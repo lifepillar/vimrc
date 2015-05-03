@@ -267,7 +267,6 @@
 
 	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-	" See also whitespace.vim in Airline (https://github.com/bling/vim-airline)
 	func! StatusLineWarnings()
 		if !exists('b:statusline_warnings')
 			let b:statusline_warnings = ''
