@@ -213,53 +213,56 @@
 	set showcmd " Show (partial) command in the last line of the screen.
 	set noshowmode " Do not show current mode because it is already shown in status line
 	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-	" Theme
 	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
+	" Default theme
 	set background=dark
 	let g:solarized_bold=0
 	let g:solarized_underline=0
 	colorscheme solarized
 	" Status line themes {{
-	func! SolarizedStatusLine()
-		if &background ==? 'dark'
-			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-			hi VertSplit   ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-		else
-			hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
-			hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
-			hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a11a guibg=#eee8d5
-			hi VertSplit   ctermfg=14 ctermbg=7  guifg=#93a11a guibg=#eee8d5
-		endif
-		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-		hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-	endfunc
-
-	func! Seoul256StatusLine()
-		if &background ==? 'dark'
-			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+		" Solarized {{
+		func! SolarizedStatusLine()
+			if &background ==? 'dark'
+				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+				hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
+			else
+				hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
+				hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
+				hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a1a1 guibg=#eee8d5
+				hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
+			endif
 			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
 			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
 			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
 			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-		else
-			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-		endif
-	endfunc
+		endfunc
+		" }}
+		" Seoul256 {{
+		func! Seoul256StatusLine()
+			if &background ==? 'dark'
+				hi Active      ctermfg=95 ctermbg=187 guifg=#eee8d5 guibg=#586e75
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			else
+				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+				hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+				hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+				hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+				hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			endif
+		endfunc
+		" }}
 
 	" Set up highlight groups for the current theme and background
 	func! UpdateHighlight()
