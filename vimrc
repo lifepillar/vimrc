@@ -42,6 +42,24 @@
 " }}
 
 " Helper functions {{
+	" Update theme.
+	" Note that UpdateHighlight() is automatically triggered by ColorScheme event.
+	func! SetTheme(name)
+		if a:name ==# 'solarized'
+			let g:solarized_bold=1
+			let g:solarized_underline=0
+			colorscheme solarized
+		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
+			let g:seoul256_background = 236
+			let g:seoul256_light_background = 255
+			if &background ==# 'dark'
+				colorscheme seoul256
+			else
+				colorscheme seoul256-light
+			endif
+		endif
+	endfunc
+
 	" Set tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
 	func! SetTabWidth(w)
 		let twd=(a:w>0)?(a:w):1 " Disallow non-positive width
