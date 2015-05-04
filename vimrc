@@ -310,22 +310,15 @@
 	endfunc
 
 	" Alternative status lines (e.g., for help files)
-	func! AltStatusLine(winnum, bufnum, active)
-		let stat = ''
-
+	func! AltStatusLine(wd, bufnum, active)
+		let stat = []
 		if getbufvar(a:bufnum, '&ft') ==? 'help'
 			if a:active
-				let stat = '%#NormalMode# HELP %#Active# %f ⚔ %='
-				if winwidth(a:winnum) > 40
-					let stat .= '%#NormalMode# %5l %2v %3p%%'
-				endif
-				let stat .= ' %*'
+				let stat = ['%#NormalMode# HELP %#Active# %<%f ⚔ %=']
+				let stat = ConcatIf(stat, ['%#NormalMode# %5l %2v %3p%%'], 40, a:wd)
 			else
-				let stat = '%#Inactive# HELP  %f ⚔ %='
-			 	if winwidth(a:winnum) > 40
-					let stat .= '%5l %2v %3p%% %*'
-				endif
-				let stat .= ' %*'
+				let stat = ['%#Inactive# HELP  %<%f ⚔ %=']
+				let stat = ConcatIf(stat, ['%5l %2v %3p%%'], 40, a:wd)
 			endif
 		endif
 
@@ -333,13 +326,13 @@
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
-	" winnum: window number
+	" wd: window width
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
-	func! BuildStatusLine(winnum, bufnum, active)
-		let altstat = AltStatusLine(a:winnum, a:bufnum, a:active)
-		if altstat != ''
-			return altstat
+	func! BuildStatusLine(wd, bufnum, active)
+		let stat = AltStatusLine(a:wd, a:bufnum, a:active)
+		if stat != []
+			return join(stat)
 		endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
@@ -355,48 +348,38 @@
 		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
 		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ''  " Symbol for read-only/unmodifiable
 		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
-		let wd = winwidth(a:winnum)
 		if a:active
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
-			if warnings != ''
-				let warnings = join(['%#Warnings#', warnings])
-			endif
 			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
-			let stat = [modeinfo[1], currmode, '%#Active#', '%<%F', mod, ro, '%=%Y']
-			if wd > 80
-				let stat += [enc, ff, tabs]
+			let rhs = [modeinfo[1], '%5l %2v %3p%%']
+			if warnings != ''
+				let rhs += ['%#Warnings#', warnings]
 			endif
-			if wd > 60
-				let stat += [modeinfo[1], '%5l %2v %3p%%', warnings]
-			endif
-			return join(stat) . ' %*'
+			let stat = [modeinfo[1], currmode, '%#Active#', '%<%F', mod, ro, '%=', ft]
 		else
-			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=%Y'] 
-			if wd > 80
-				let stat += [enc, ff, tabs]
-			endif
-			if wd > 60
-				let stat += ['%l %v %3p%% %*']
-			endif
-			return join(stat)
+			let rhs = ['%5l %2v %3p%%']
+			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=', ft]
 		endif
+		let stat = ConcatIf(stat, [enc, ff, tabs], 80, a:wd)
+		let stat = ConcatIf(stat, rhs, 60, a:wd)
+		return join(stat) . ' '
 	endfunc
 
 	func! RefreshStatusLines()
 		for nr in range(1, winnr('$'))
-			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . nr . ',' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
+			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winwidth(nr) . ',' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
 		endfor
 	endfunc
 
 	func! RefreshActiveStatusLine()
-		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ',' . winbufnr(winnr()) . ',1)')
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winwidth(winnr()) . ',' . winbufnr(winnr()) . ',1)')
 	endfunc
 
 	augroup status
 		autocmd!
 		autocmd VimEnter,ColorScheme * call UpdateHighlight()
-		autocmd VimEnter,WinEnter,BufWinEnter * call RefreshStatusLines()
+		autocmd VimEnter,WinEnter,BufWinEnter,VimResized * call RefreshStatusLines()
 		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 		autocmd BufWritePost * unlet! b:statusline_warnings
 	augroup END
