@@ -361,7 +361,7 @@
 			let rhs = ['%5l %2v %3p%%']
 			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=', ft]
 		endif
-		let stat = ConcatIf(stat, [enc, ff, tabs], 80, a:wd)
+		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, a:wd)
 		let stat = ConcatIf(stat, rhs, 60, a:wd)
 		return join(stat) . ' '
 	endfunc
