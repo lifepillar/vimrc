@@ -349,7 +349,7 @@
 	func! BuildStatusLine(wd, bufnum, active)
 		let stat = AltStatusLine(a:wd, a:bufnum, a:active)
 		if stat != []
-			return join(stat)
+			return join(stat) . ' '
 		endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
