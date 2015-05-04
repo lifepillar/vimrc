@@ -94,11 +94,8 @@
 	endfunc
 
 	func! ToggleBackgroundColor()
-		if &background == 'dark'
-			let &background = 'light'
-		else
-			let &background = 'dark'
-		endif
+		let &background = (&background == 'dark') ? 'light' : 'dark'
+		call SetTheme(g:colors_name)
 	endfunc
 " }}
 
