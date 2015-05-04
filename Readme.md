@@ -48,7 +48,6 @@ necessary for other systems.
 - Foldable and thoroughly commented `vimrc`.
 - Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
-- `<Ctrl>-j` mapped to `<Esc>` in insert and visual mode for convenience (`<Esc>` is too far up there!).
 - Uses Solarized theme by default (toggle dark/light background with `F7`).
 - Distraction-free mode (toggle with `,F`).
 - Keeps the edited line vertically centered.
