@@ -303,14 +303,22 @@
 	endfunc
 
 	" Alternative status lines (e.g., for help files)
-	func! AltStatusLine(bufnum, active)
+	func! AltStatusLine(winnum, bufnum, active)
 		let stat = ''
 
 		if getbufvar(a:bufnum, '&ft') ==? 'help'
 			if a:active
-				let stat = '%#NormalMode# HELP %#Active# %f   ⚔ %=%#NormalMode# %5l %2v %3p%% %*'
+				let stat = '%#NormalMode# HELP %#Active# %f ⚔ %='
+				if winwidth(a:winnum) > 40
+					let stat .= '%#NormalMode# %5l %2v %3p%%'
+				endif
+				let stat .= ' %*'
 			else
-				let stat = '%#Inactive# HELP  %f   ⚔ %= %5l %2v %3p%% %*'
+				let stat = '%#Inactive# HELP  %f ⚔ %='
+			 	if winwidth(a:winnum) > 40
+					let stat .= '%5l %2v %3p%% %*'
+				endif
+				let stat .= ' %*'
 			endif
 		endif
 
@@ -318,12 +326,13 @@
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
+	" winnum: window number
 	" bufnum: buffer number
 	" active: 1=active, 0=inactive
-	func! BuildStatusLine(bufnum, active)
-		let stat = AltStatusLine(a:bufnum, a:active)
-		if stat != ''
-			return stat
+	func! BuildStatusLine(winnum, bufnum, active)
+		let altstat = AltStatusLine(a:winnum, a:bufnum, a:active)
+		if altstat != ''
+			return altstat
 		endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
@@ -333,34 +342,48 @@
 		if getbufvar(a:bufnum, '&bomb')
 			let enc .= ',BOM'
 		endif
+		let ft = getbufvar(a:bufnum, '&ft')
 		let ff = getbufvar(a:bufnum, '&ff')
 		let ff = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
-		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ' '  " Symbol for modified file
-		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ' '  " Symbol for read-only/unmodifiable
+		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
+		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ''  " Symbol for read-only/unmodifiable
 		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
-
+		let wd = winwidth(a:winnum)
 		if a:active
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
 			if warnings != ''
-				let warnings = join(['%#Warnings#', warnings]) . ' '
+				let warnings = join(['%#Warnings#', warnings])
 			endif
 			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
-			return join([modeinfo[1], currmode, '%#Active#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs,
-						\  modeinfo[1], '%5l %2v %3p%%', warnings]) . '%*'
+			let stat = [modeinfo[1], currmode, '%#Active#', '%<%F', mod, ro, '%=%Y']
+			if wd > 80
+				let stat += [enc, ff, tabs]
+			endif
+			if wd > 60
+				let stat += [modeinfo[1], '%5l %2v %3p%%', warnings]
+			endif
+			return join(stat) . ' %*'
 		else
-			return join(['%#Inactive#', '%.20F', mod, ro, '%=%Y ', enc, ff, tabs, '%l %v %3p%% %*'])
+			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=%Y'] 
+			if wd > 80
+				let stat += [enc, ff, tabs]
+			endif
+			if wd > 60
+				let stat += ['%l %v %3p%% %*']
+			endif
+			return join(stat)
 		endif
 	endfunc
 
 	func! RefreshStatusLines()
 		for nr in range(1, winnr('$'))
-			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
+			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . nr . ',' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
 		endfor
 	endfunc
 
 	func! RefreshActiveStatusLine()
-		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winbufnr(winnr()) . ',1)')
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ',' . winbufnr(winnr()) . ',1)')
 	endfunc
 
 	augroup status
