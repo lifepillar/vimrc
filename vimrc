@@ -46,6 +46,8 @@
 	" Note that UpdateHighlight() is automatically triggered by ColorScheme event.
 	func! SetTheme(name)
 		if a:name ==# 'solarized'
+			" Note that to display Solarized colors correctly,
+			" you *must* have Terminal.app set to Solarized theme, too!
 			let g:solarized_bold=1
 			let g:solarized_underline=0
 			colorscheme solarized
