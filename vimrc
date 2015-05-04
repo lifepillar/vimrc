@@ -227,10 +227,10 @@
 	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	" Default theme
-	set background=dark
-	let g:solarized_bold=0
-	let g:solarized_underline=0
-	colorscheme solarized
+	if !has('gui_macvim')
+		let &background = 'dark'
+		call SetTheme('solarized')
+	endif
 	" Status line themes {{
 		" Solarized {{
 		func! SolarizedStatusLine()
