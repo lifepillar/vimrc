@@ -234,7 +234,7 @@
 	" Status line themes {{
 		" Solarized {{
 		func! SolarizedStatusLine()
-			if &background ==? 'dark'
+			if &background ==# 'dark'
 				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
 				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
 				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
@@ -261,7 +261,7 @@
 			hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
 			hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
 			hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
-			if &background ==? 'dark'
+			if &background ==# 'dark'
 				hi Inactive ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
 			else
 				hi Inactive ctermfg=238 ctermbg=251 guifg=#565656 guibg=#d1d0d1
@@ -271,9 +271,9 @@
 
 	" Set up highlight groups for the current theme and background
 	func! UpdateHighlight()
-		if g:colors_name ==? 'solarized'
+		if g:colors_name ==# 'solarized'
 			call SolarizedStatusLine()
-		elseif g:colors_name ==? 'seoul256'
+		elseif g:colors_name ==# 'seoul256' || g:colors_name ==# 'seoul256-light'
 			call Seoul256StatusLine()
 		endif
 	endfunc
@@ -327,7 +327,7 @@
 	" Alternative status lines (e.g., for help files)
 	func! AltStatusLine(wd, bufnum, active)
 		let stat = []
-		if getbufvar(a:bufnum, '&ft') ==? 'help'
+		if getbufvar(a:bufnum, '&ft') ==# 'help'
 			if a:active
 				let stat = ['%#NormalMode# HELP %#Active# %<%f ⚔ %=']
 				let stat = ConcatIf(stat, ['%#NormalMode# %5l %2v %3p%%'], 40, a:wd)
@@ -359,7 +359,7 @@
 		endif
 		let ft = getbufvar(a:bufnum, '&ft')
 		let ff = getbufvar(a:bufnum, '&ff')
-		let ff = (ff ==? 'unix') ? '␊ (Unix)' : (ff ==? 'mac') ? '␍ (Classic Mac)' : (ff ==? 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
+		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
 		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
 		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ''  " Symbol for read-only/unmodifiable
 		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
