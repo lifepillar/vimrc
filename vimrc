@@ -282,6 +282,13 @@
 		return get(mode_map, mode(), ['??????', '%#Warnings#'])
 	endfunc
 
+	func! ConcatIf(l1, l2, minwd, wd)
+		if a:minwd >= a:wd
+			return a:l1
+		endif
+		return a:l1 + a:l2
+	endfunc
+
 	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
 	func! StatusLineWarnings()
