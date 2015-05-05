@@ -256,7 +256,7 @@
 		" }}
 		" Seoul256 {{
 		func! Seoul256StatusLine()
-			hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372 cterm=bold gui=bold
+			hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372
 			hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
 			hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
 			hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
