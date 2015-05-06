@@ -409,7 +409,7 @@
 			au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 			autocmd BufWritePost * unlet! b:statusline_warnings
 		augroup END
-		doautocmd ColorScheme
+		doautocmd VimEnter
 	endfunc!
 
 	func! DisableStatusLine()
