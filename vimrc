@@ -393,13 +393,32 @@
 		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winwidth(winnr()) . ',' . winbufnr(winnr()) . ',1)')
 	endfunc
 
-	augroup status
-		autocmd!
-		autocmd VimEnter,ColorScheme * call UpdateHighlight()
-		autocmd VimEnter,WinEnter,BufWinEnter,VimResized * call RefreshStatusLines()
-		au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
-		autocmd BufWritePost * unlet! b:statusline_warnings
-	augroup END
+	func! EnableStatusLine()
+		let g:stl = &statusline
+		augroup status
+			autocmd!
+			autocmd VimEnter,ColorScheme * call UpdateHighlight()
+			autocmd VimEnter,WinEnter,BufWinEnter,VimResized * call RefreshStatusLines()
+			au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
+			autocmd BufWritePost * unlet! b:statusline_warnings
+		augroup END
+		call UpdateHighlight()
+	endfunc!
+
+	func! DisableStatusLine()
+		augroup status
+			autocmd!
+		augroup END
+		augroup! status
+		let &statusline = g:stl
+		for t in range(1, tabpagenr('$'))
+			for n in range(1, tabpagewinnr(t, '$'))
+				call settabwinvar(t, n, '&statusline', '')
+			endfor
+		endfor
+	endfunc!
+
+	call EnableStatusLine()
 	" }}
 	" GUI settings {{
 		if has('gui_macvim')
@@ -434,6 +453,7 @@
 		" Toggle distraction-free mode with ,F:
 		nnoremap <silent> <Leader>F :Goyo<CR>
 		function! s:goyo_enter()
+			call DisableStatusLine()
 			if has('gui_macvim')
 				set fullscreen
 				set guifont=Monaco:h14
@@ -455,6 +475,7 @@
 			set nowrap
 			set showcmd
 			Limelight!
+			call EnableStatusLine()
 		endfunction
 
 		autocmd! User GoyoEnter
