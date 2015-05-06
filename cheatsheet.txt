@@ -53,7 +53,7 @@
 ---
  Edit
   Basic
-  <Esc>         - Return to normal mode
+  <esc>         - Return to normal mode
   ctrl-[
   i             - Insert at cursor
   a             - Append after the cursor
