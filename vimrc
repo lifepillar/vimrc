@@ -337,7 +337,8 @@
 	" Alternative status lines (e.g., for help files)
 	func! AltStatusLine(wd, bufnum, active)
 		let stat = []
-		if getbufvar(a:bufnum, '&ft') ==# 'help'
+		let ft = getbufvar(a:bufnum, '&ft')
+		if ft ==# 'help'
 			if a:active
 				let stat = ['%#NormalMode# HELP %#Active# %<%f ⚔ %=']
 				let stat = ConcatIf(stat, ['%#NormalMode# %5l %2v %3p%%'], 40, a:wd)
@@ -345,6 +346,10 @@
 				let stat = ['%#Inactive# HELP  %<%f ⚔ %=']
 				let stat = ConcatIf(stat, ['%5l %2v %3p%%'], 40, a:wd)
 			endif
+		elseif ft ==# 'undotree' || ft ==# 'diff'
+			let stat = a:active ? ['%#NormalMode#', ft,  '%#Active#'] : ['%#Inactive#', ft]
+		elseif ft ==# 'tagbar'
+			let stat = a:active ? ['%#NormalMode# Tagbar %#Active#'] : ['%#Inactive# Tagbar', tagbar#currenttag('%s','')]
 		endif
 
 		return stat
