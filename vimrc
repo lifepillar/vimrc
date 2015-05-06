@@ -215,24 +215,6 @@
 " }}
 
 " Appearance {{
-	set title " Set the terminal title.
-	set number " Turn line numbering on.
-	set relativenumber " Display line numbers relative to the line with the cursor.
-	set nowrap " Don't wrap lines by default.
-	set linebreak " If wrapping is enabled, wrap at word boundaries.
-	" set colorcolumn=80 " Show page guide at column 80.
-	set laststatus=2 " Always show status line.
-	set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
-	set shortmess-=r " Don't use abbreviations for 'readonly'
-	set showcmd " Show (partial) command in the last line of the screen.
-	set noshowmode " Do not show current mode because it is already shown in status line
-	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
-	" Default theme
-	if !has('gui_macvim')
-		let &background = 'dark'
-		call SetTheme('solarized')
-	endif
 	" Status line themes {{
 		" Solarized {{
 		func! SolarizedStatusLine()
@@ -420,6 +402,24 @@
 
 	call EnableStatusLine()
 	" }}
+	set title " Set the terminal title.
+	set number " Turn line numbering on.
+	set relativenumber " Display line numbers relative to the line with the cursor.
+	set nowrap " Don't wrap lines by default.
+	set linebreak " If wrapping is enabled, wrap at word boundaries.
+	" set colorcolumn=80 " Show page guide at column 80.
+	set laststatus=2 " Always show status line.
+	set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
+	set shortmess-=r " Don't use abbreviations for 'readonly'
+	set showcmd " Show (partial) command in the last line of the screen.
+	set noshowmode " Do not show current mode because it is already shown in status line
+	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
+	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
+	" Default theme
+	if !has('gui_macvim')
+		let &background = 'dark'
+		call SetTheme('solarized')
+	endif
 	" GUI settings {{
 		if has('gui_macvim')
 			set guifont=Monaco:h14
