@@ -12,6 +12,7 @@
 	set termencoding=utf-8
 	set nobomb
 	set fileformats=unix,mac,dos
+	set ttimeoutlen=100 " Faster feedback in status line when returning to normal mode
 	syntax enable
 	filetype on " Enable file type detection.
 	" File-type specific configuration {{
