@@ -416,20 +416,17 @@
 	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	" Default theme
-	if !has('gui_macvim')
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions+=a " Yank/paste to/from OS X clipboard
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+		let &background = 'light'
+		call SetTheme('solarized')
+	else
 		let &background = 'dark'
 		call SetTheme('solarized')
 	endif
-	" GUI settings {{
-		if has('gui_macvim')
-			set guifont=Monaco:h14
-			set guioptions+=a " Yank/paste to/from OS X clipboard
-			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-			set transparency=4
-			let &background = 'light'
-			call SetTheme('solarized')
-		endif
-	" }}
 " }}
 
 " Plugins {{
