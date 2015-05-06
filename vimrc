@@ -384,7 +384,7 @@
 			au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 			autocmd BufWritePost * unlet! b:statusline_warnings
 		augroup END
-		call UpdateHighlight()
+		doautocmd ColorScheme
 	endfunc!
 
 	func! DisableStatusLine()
