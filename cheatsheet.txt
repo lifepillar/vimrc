@@ -106,6 +106,7 @@
  gUU             - Change line to uppercase
  guu             - Change line to lowercase
  ,U              - Capitalize selected words
+ ctrl-n          - Autocomplete
  <               - Shift selection to the left
  >               - Shift selection to the right
  <%              - Shift block to the left
