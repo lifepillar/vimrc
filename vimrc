@@ -215,43 +215,68 @@
 " }}
 
 " Appearance {{
+	set title " Set the terminal title.
+	set number " Turn line numbering on.
+	set relativenumber " Display line numbers relative to the line with the cursor.
+	set nowrap " Don't wrap lines by default.
+	set linebreak " If wrapping is enabled, wrap at word boundaries.
+	" set colorcolumn=80 " Show page guide at column 80.
+	set laststatus=2 " Always show status line.
+	set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
+	set shortmess-=r " Don't use abbreviations for 'readonly'
+	set showcmd " Show (partial) command in the last line of the screen.
+	set noshowmode " Do not show current mode because it is already shown in status line
+	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
+	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
+	" Default theme
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions+=a " Yank/paste to/from OS X clipboard
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+		let &background = 'light'
+		call SetTheme('solarized')
+	else
+		let &background = 'dark'
+		call SetTheme('solarized')
+	endif
 	" Status line themes {{
-		" Solarized {{
-		func! SolarizedStatusLine()
-			if &background ==# 'dark'
-				hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-				hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-				hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-				hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
-			else
-				hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
-				hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
-				hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a1a1 guibg=#eee8d5
-				hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
-			endif
-			hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-			hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-			hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-			hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-			hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
-		endfunc
-		" }}
-		" Seoul256 {{
-		func! Seoul256StatusLine()
-			hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372
-			hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
-			hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
-			hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
-			hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
-			hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
-			hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
-			if &background ==# 'dark'
-				hi Inactive ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
-			else
-				hi Inactive ctermfg=238 ctermbg=251 guifg=#565656 guibg=#d1d0d1
-			endif
-		endfunc
-		" }}
+	" Solarized {{
+	func! SolarizedStatusLine()
+		if &background ==# 'dark'
+			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
+			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
+			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
+			hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
+		else
+			hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
+			hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
+			hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a1a1 guibg=#eee8d5
+			hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
+		endif
+		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
+		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
+		hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+		hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
+		hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+	endfunc
+	" }}
+	" Seoul256 {{
+	func! Seoul256StatusLine()
+		hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372
+		hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
+		hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
+		hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
+		hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
+		hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
+		hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
+		if &background ==# 'dark'
+			hi Inactive ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
+		else
+			hi Inactive ctermfg=238 ctermbg=251 guifg=#565656 guibg=#d1d0d1
+		endif
+	endfunc
+	" }}
 
 	" Set up highlight groups for the current theme and background
 	func! UpdateHighlight()
@@ -398,35 +423,10 @@
 				call settabwinvar(t, n, '&statusline', '')
 			endfor
 		endfor
-	endfunc!
+		endfunc!
 
-	call EnableStatusLine()
-	" }}
-	set title " Set the terminal title.
-	set number " Turn line numbering on.
-	set relativenumber " Display line numbers relative to the line with the cursor.
-	set nowrap " Don't wrap lines by default.
-	set linebreak " If wrapping is enabled, wrap at word boundaries.
-	" set colorcolumn=80 " Show page guide at column 80.
-	set laststatus=2 " Always show status line.
-	set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
-	set shortmess-=r " Don't use abbreviations for 'readonly'
-	set showcmd " Show (partial) command in the last line of the screen.
-	set noshowmode " Do not show current mode because it is already shown in status line
-	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
-	" Default theme
-	if has('gui_macvim')
-		set guifont=Monaco:h14
-		set guioptions+=a " Yank/paste to/from OS X clipboard
-		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-		set transparency=4
-		let &background = 'light'
-		call SetTheme('solarized')
-	else
-		let &background = 'dark'
-		call SetTheme('solarized')
-	endif
+		call EnableStatusLine()
+		" }}
 " }}
 
 " Plugins {{
