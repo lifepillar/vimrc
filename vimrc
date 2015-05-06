@@ -439,6 +439,34 @@
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
 		let g:ctrlp_cmd = 'CtrlPMRU'
+		let g:ctrlp_status_func = {
+					\ 'main': 'CtrlP_Main',
+					\ 'prog': 'CtrlP_Progress',
+					\ }
+
+		" See https://gist.github.com/kien/1610859
+		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
+		"            a:1    a:2      a:3       a:4  a:5   a:6  a:7
+		func! CtrlP_Main(...)
+			if a:1 ==# 'prt'
+				let color = '%#InsertMode#'
+				let rhs = color . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
+			else
+				let color = '%#VisualMode#'
+				let rhs = color . ' select %*'
+			endif
+			let item = color . ' ' . a:5 . ' %*'
+			let dir = ' ' . getcwd()
+			return item . dir . '%=' . rhs
+		endfunc
+
+		" Argument: len
+		"           a:1
+		func! CtrlP_Progress(...)
+			let len = '%#Warnings# ' . a:1 . ' %*'
+			let dir = ' %=%<%#Warnings#' . getcwd() . ' %*'
+			return len . dir
+		endf
 	" }}
 	" Fugitive {{
 		nnoremap <silent> <Leader>gs :Gstatus<CR>
