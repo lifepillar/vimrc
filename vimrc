@@ -366,12 +366,8 @@
 		endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
-		if enc == ''
-			let enc = getbufvar(a:bufnum, '&enc')
-		endif
-		if getbufvar(a:bufnum, '&bomb')
-			let enc .= ',BOM'
-		endif
+		if enc == '' | let enc = getbufvar(a:bufnum, '&enc') | endif
+		if getbufvar(a:bufnum, '&bomb') | let enc .= ',BOM' | endif
 		let ft = getbufvar(a:bufnum, '&ft')
 		let ff = getbufvar(a:bufnum, '&ff')
 		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
