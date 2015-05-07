@@ -259,15 +259,15 @@
 	" Solarized {{
 	func! SolarizedStatusLine()
 		if &background ==# 'dark'
-			hi Active      ctermfg=7  ctermbg=10 guifg=#eee8d5 guibg=#586e75
-			hi NormalMode  ctermfg=15 ctermbg=14 guifg=#fdf6e3 guibg=#93a1a1
-			hi Inactive    ctermfg=10 ctermbg=0  guifg=#586e75 guibg=#073642
-			hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
+			hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
+			hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
+			hi NormalMode   ctermfg=15  ctermbg=14  guifg=#fdf6e3 guibg=#93a1a1
+			hi VertSplit    ctermfg=0   ctermbg=0   guifg=#073642 guibg=#073642
 		else
-			hi Active      ctermfg=7  ctermbg=14 guifg=#eee8d5 guibg=#93a1a1
-			hi NormalMode  ctermfg=15 ctermbg=10 guifg=#fdf6e3 guibg=#586e75
-			hi Inactive    ctermfg=14 ctermbg=7  guifg=#93a1a1 guibg=#eee8d5
-			hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
+			hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
+			hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+			hi NormalMode   ctermfg=15  ctermbg=10  guifg=#fdf6e3 guibg=#586e75
+			hi VertSplit    ctermfg=7   ctermbg=7   guifg=#eee8d5 guibg=#eee8d5
 		endif
 		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
@@ -278,18 +278,18 @@
 	" }}
 	" Seoul256 {{
 	func! Seoul256StatusLine()
-		hi Active      ctermfg=187 ctermbg=95  guifg=#dfdebd guibg=#9a7372
+		if &background ==# 'dark'
+			hi StatusLineNC ctermbg=187 ctermfg=239 guibg=#dfdebd guifg=#616161 term=reverse cterm=reverse gui=reverse
+		else
+			hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
+		endif
+		hi StatusLine  ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
 		hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
 		hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
 		hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
 		hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
 		hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
 		hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
-		if &background ==# 'dark'
-			hi Inactive ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
-		else
-			hi Inactive ctermfg=238 ctermbg=251 guifg=#565656 guibg=#d1d0d1
-		endif
 	endfunc
 	" }}
 
@@ -349,18 +349,17 @@
 		let ft = getbufvar(a:bufnum, '&ft')
 		if ft ==# 'help'
 			if a:active
-				let stat = ['%#NormalMode# HELP %#Active# %<%f ⚔ %=']
+				let stat = ['%#NormalMode# HELP %* %<%f ⚔ %=']
 				let stat = ConcatIf(stat, ['%#NormalMode# %5l %2v %3p%%'], 40, a:wd)
 			else
-				let stat = ['%#Inactive# HELP  %<%f ⚔ %=']
-				let stat = ConcatIf(stat, ['%5l %2v %3p%%'], 40, a:wd)
+				let stat = [' HELP  %<%f ⚔']
+				let stat = ConcatIf(stat, ['%= %5l %2v %3p%%'], 40, a:wd)
 			endif
 		elseif ft ==# 'undotree' || ft ==# 'diff'
-			let stat = a:active ? ['%#NormalMode#', ft,  '%#Active#'] : ['%#Inactive#', ft]
+			let stat = a:active ? ['%#NormalMode#', ft] : ['', ft]
 		elseif ft ==# 'tagbar'
-			let stat = a:active ? ['%#NormalMode# Tagbar %#Active#'] : ['%#Inactive# Tagbar', tagbar#currenttag('%s','')]
+			let stat = a:active ? ['%#NormalMode# Tagbar'] : [' Tagbar', tagbar#currenttag('%s','')]
 		endif
-
 		return stat
 	endfunc
 
@@ -370,7 +369,7 @@
 	" active: 1=active, 0=inactive
 	func! BuildStatusLine(wd, bufnum, active)
 		let stat = AltStatusLine(a:wd, a:bufnum, a:active)
-		if stat != [] | return join(stat) . ' ' | endif
+		if stat != [] | return join(stat) . ' %*' | endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
 		if enc == '' | let enc = getbufvar(a:bufnum, '&enc') | endif
@@ -385,16 +384,16 @@
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
 			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
-			let stat = [modeinfo[1], currmode, '%#Active#', '%<%F', mod, ro, '%=', ft]
+			let stat = [modeinfo[1], currmode, '%*', '%<%F', mod, ro, '%=', ft]
 			let rhs = [modeinfo[1], '%5l %2v %3p%%']
-			if warnings != '' | let rhs += ['%#Warnings#', warnings] | endif
+			if warnings != '' | let rhs += ['%*%#Warnings#', warnings] | endif
 		else
-			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=', ft]
+			let stat = [' %<%F', mod, ro, '%=', ft]
 			let rhs = ['%5l %2v %3p%%']
 		endif
 		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, a:wd)
 		let stat = ConcatIf(stat, rhs, 60, a:wd)
-		return join(stat) . ' '
+		return join(stat) . ' %*'
 	endfunc
 
 	func! RefreshStatusLines()
