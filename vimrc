@@ -308,9 +308,7 @@
 	endfunc
 
 	func! ConcatIf(l1, l2, minwd, wd)
-		if a:minwd >= a:wd
-			return a:l1
-		endif
+		if a:minwd >= a:wd | return a:l1 | endif
 		return a:l1 + a:l2
 	endfunc
 
@@ -323,13 +321,9 @@
 			let mix = search('\v(^ +\t)|(^\t+ )', 'nw')
 			if trail != 0
 				let b:statusline_warnings .= 'Trailing space (' . trail . ')'
-				if mix != 0
-					let b:statusline_warnings .= ' '
-				endif
+				if mix != 0 | let b:statusline_warnings .= ' ' | endif
 			endif
-			if mix != 0
-				let b:statusline_warnings .= 'Mixed indent (' . mix . ')'
-			endif
+			if mix != 0 | let b:statusline_warnings .= 'Mixed indent (' . mix . ')' | endif
 		endif
 		return b:statusline_warnings
 	endfunc
@@ -361,9 +355,7 @@
 	" active: 1=active, 0=inactive
 	func! BuildStatusLine(wd, bufnum, active)
 		let stat = AltStatusLine(a:wd, a:bufnum, a:active)
-		if stat != []
-			return join(stat) . ' '
-		endif
+		if stat != [] | return join(stat) . ' ' | endif
 
 		let enc = getbufvar(a:bufnum, '&fenc')
 		if enc == '' | let enc = getbufvar(a:bufnum, '&enc') | endif
@@ -378,14 +370,12 @@
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
 			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
-			let rhs = [modeinfo[1], '%5l %2v %3p%%']
-			if warnings != ''
-				let rhs += ['%#Warnings#', warnings]
-			endif
 			let stat = [modeinfo[1], currmode, '%#Active#', '%<%F', mod, ro, '%=', ft]
+			let rhs = [modeinfo[1], '%5l %2v %3p%%']
+			if warnings != '' | let rhs += ['%#Warnings#', warnings] | endif
 		else
-			let rhs = ['%5l %2v %3p%%']
 			let stat = ['%#Inactive#', '%<%F', mod, ro, '%=', ft]
+			let rhs = ['%5l %2v %3p%%']
 		endif
 		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, a:wd)
 		let stat = ConcatIf(stat, rhs, 60, a:wd)
