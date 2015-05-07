@@ -108,7 +108,7 @@
 		redraw
 		let counter=1
 		while counter<&scroll
-			let counter+=1
+			let counter+=2
 			sleep 10m
 			redraw
 			exec "normal ".scrollaction
