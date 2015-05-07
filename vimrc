@@ -291,20 +291,21 @@
 	" Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
+	let g:mode_map = {
+				\ 'n':      ['NORMAL',  '%#NormalMode#' ],
+				\ 'i':      ['INSERT',  '%#InsertMode#' ],
+				\ 'R':      ['REPLACE', '%#ReplaceMode#'],
+				\ 'v':      ['VISUAL',  '%#VisualMode#' ],
+				\ 'V':      ['V-LINE',  '%#VisualMode#' ],
+				\ "\<C-v>": ['V-BLOCK', '%#VisualMode#' ],
+				\ 'c':      ['COMMAND', '%#CommandMode#'],
+				\ 's':      ['SELECT',  '%#VisualMode#' ],
+				\ 'S':      ['S-LINE',  '%#VisualMode#' ],
+				\ "\<C-s>": ['S-BLOCK', '%#VisualMode#' ] }
+
 	" Return the text and color to be used for the current mode
 	func! GetModeInfo()
-		let mode_map = {
-					\ 'n':      ['NORMAL',  '%#NormalMode#' ],
-					\ 'i':      ['INSERT',  '%#InsertMode#' ],
-					\ 'R':      ['REPLACE', '%#ReplaceMode#'],
-					\ 'v':      ['VISUAL',  '%#VisualMode#' ],
-					\ 'V':      ['V-LINE',  '%#VisualMode#' ],
-					\ "\<C-v>": ['V-BLOCK', '%#VisualMode#' ],
-					\ 'c':      ['COMMAND', '%#CommandMode#'],
-					\ 's':      ['SELECT',  '%#VisualMode#' ],
-					\ 'S':      ['S-LINE',  '%#VisualMode#' ],
-					\ "\<C-s>": ['S-BLOCK', '%#VisualMode#' ] }
-		return get(mode_map, mode(), ['??????', '%#Warnings#'])
+		return get(g:mode_map, mode(), ['??????', '%#Warnings#'])
 	endfunc
 
 	func! ConcatIf(l1, l2, minwd, wd)
