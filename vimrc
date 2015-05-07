@@ -100,6 +100,20 @@
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 		call SetTheme(g:colors_name)
 	endfunc
+
+	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
+	function SmoothScroll(up)
+		let scrollaction=a:up?"\<C-y>":"\<C-e>"
+		exec "normal ".scrollaction
+		redraw
+		let counter=1
+		while counter<&scroll
+			let counter+=1
+			sleep 10m
+			redraw
+			exec "normal ".scrollaction
+		endwhile
+	endfunction
 " }}
 
 " Editing {{
@@ -107,9 +121,9 @@
 	set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
 	set scrolloff=999 " Keep the edited line vertically centered.
 	" set clipboard=unnamed " Use system clipboard by default.
-	" See :h scroll-smooth
-	noremap <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
-	noremap <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+	" Smooth scrolling that works both in terminal and in MacVim
+	nnoremap <C-U> :call SmoothScroll(1)<Enter>
+	nnoremap <C-D> :call SmoothScroll(0)<Enter>
 	" Scroll the viewport faster.
 	nnoremap <C-e> <C-e><C-e>
 	nnoremap <C-y> <C-y><C-y>
