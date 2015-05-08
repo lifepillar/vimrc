@@ -127,6 +127,7 @@
  ]s              - Go to next mispelled word
  [s              - Go to prev mispelled word
  z=              - Suggest corrections
+ ga              - Character info for char under cursor
 ---
  View
   Scrolling
