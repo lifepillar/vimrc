@@ -241,7 +241,7 @@
 	set shortmess-=r " Don't use abbreviations for 'readonly'
 	set showcmd " Show (partial) command in the last line of the screen.
 	set noshowmode " Do not show current mode because it is already shown in status line
-	set listchars=tab:▸\ ,trail:·,eol:¬ " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
+	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	" Default theme
 	if has('gui_macvim')
