@@ -528,11 +528,11 @@
 		" let g:ledger_detailed_first = 1
 		" let g:ledger_fold_blanks = 0
 		" Toggle transaction state with <space>:
-		au FileType ledger nnoremap <silent> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
-		" Use ctrl-x to autocomplete:
-		au FileType ledger inoremap <silent> <C-x> <C-x><C-o>
-		au FileType ledger nnoremap <silent> <C-t> :call LedgerEntry()<CR>
-		au FileType ledger inoremap <silent> <C-t> <Esc>:call LedgerEntry()<CR>
+		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
+		" Use tab to autocomplete:
+		au FileType ledger inoremap <silent><buffer> <Tab> <C-x><C-o>
+		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
+		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
