@@ -525,7 +525,8 @@
 
 		let g:ledger_maxwidth = 70
 		let g:ledger_fillstring = '    ·'
-		" let g:ledger_detailed_first = 1:
+		" let g:ledger_detailed_first = 1
+		" let g:ledger_fold_blanks = 0
 		" Toggle transaction state with <space>:
 		au FileType ledger nnoremap <silent> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use ctrl-x to autocomplete:
