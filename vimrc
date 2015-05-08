@@ -90,10 +90,10 @@
 	" Delete trailing white space
 	func! RemoveTrailingSpace()
 		" Mark current cursor position (see :h restore-position):
-		exe "normal msHmt"
+		normal msHmt
 		%s/\s\+$//ge
 		" Restore cursor position
-		exe "normal 'tzt`s"
+		normal 'tzt`s
 	endfunc
 
 	func! ToggleBackgroundColor()
