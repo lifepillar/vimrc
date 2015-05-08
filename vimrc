@@ -515,6 +515,14 @@
 		autocmd  User GoyoLeave call <SID>goyo_leave()
 	" }}
 	" Ledger {{
+	func! LedgerEntry()
+		let line = shellescape(getline("."))
+		d
+		let entr = system('ledger -f ' . shellescape(expand('%')) . ' entry ' . line)
+		call append(".", split(entr, "\n"))
+		normal j
+	endfunc
+
 		let g:ledger_maxwidth = 70
 		let g:ledger_fillstring = '    ·'
 		" let g:ledger_detailed_first = 1:
@@ -522,7 +530,8 @@
 		au FileType ledger nnoremap <silent> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use ctrl-x to autocomplete:
 		au FileType ledger inoremap <silent> <C-x> <C-x><C-o>
-		au FileType ledger nnoremap <silent> <C-t> :exe 'read !ledger entry --file '.shellescape(expand("%"), 1).' '.shellescape(expand("<cWORD>"), 1)<CR>
+		au FileType ledger nnoremap <silent> <C-t> :call LedgerEntry()<CR>
+		au FileType ledger inoremap <silent> <C-t> <Esc>:call LedgerEntry()<CR>
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
