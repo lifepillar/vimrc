@@ -103,15 +103,15 @@
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
 	function SmoothScroll(up)
-		let scrollaction=a:up?"\<C-y>":"\<C-e>"
-		exec "normal ".scrollaction
+		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
+		exec "normal " . scrollaction
 		redraw
-		let counter=1
-		while counter<&scroll
-			let counter+=2
+		let counter = 1
+		while counter < &scroll
+			let counter += 2
 			sleep 10m
 			redraw
-			exec "normal ".scrollaction
+			exec "normal " . scrollaction
 		endwhile
 	endfunction
 " }}
