@@ -114,6 +114,14 @@
 			exec "normal " . scrollaction
 		endwhile
 	endfunction
+
+	" Move the cursor to the specified column,
+	" filling the line with spaces if necessary.
+	func! GotoCol(pos)
+		exec "normal " . a:pos . "|"
+		let diff = a:pos - virtcol('.')
+		if diff > 0 | exec "normal " . diff . "a " | endif
+	endfunc
 " }}
 
 " Editing {{
