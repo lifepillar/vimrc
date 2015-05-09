@@ -52,6 +52,11 @@
 			let g:solarized_bold=1
 			let g:solarized_underline=0
 			colorscheme solarized
+			if &background ==# 'dark'
+				hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1
+			else
+				hi MatchParen ctermbg=7 ctermfg=0 guibg=#eee8d5 guifg=#073642
+			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
 			let g:seoul256_background = 236
 			let g:seoul256_light_background = 255
