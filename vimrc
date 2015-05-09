@@ -523,14 +523,6 @@
 		autocmd  User GoyoLeave call <SID>goyo_leave()
 	" }}
 	" Ledger {{
-	func! LedgerEntry()
-		let line = shellescape(getline("."))
-		d
-		let entr = system('ledger -f ' . shellescape(expand('%')) . ' entry ' . line)
-		call append(".", split(entr, "\n"))
-		normal j
-	endfunc
-
 		let g:ledger_maxwidth = 70
 		let g:ledger_fillstring = '    ·'
 		" let g:ledger_detailed_first = 1
@@ -538,6 +530,16 @@
 		let g:ledger_decimal_sep = ','
 		let g:ledger_thousand_sep = '.'
 		let g:ledger_align_at = 60
+
+		" Enter a new transaction based on the text in the current line
+		" (a wrapper around 'ledger entry'):
+		func! LedgerEntry()
+			let line = shellescape(getline("."))
+			d
+			let entr = system('ledger -f ' . shellescape(expand('%')) . ' entry ' . line)
+			call append(".", split(entr, "\n"))
+			normal j
+		endfunc
 
 		" Aligns the amount expressions after an account name at the decimal point.
 		"
@@ -584,9 +586,10 @@
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use tab to autocomplete:
 		au FileType ledger inoremap <silent><buffer> <Tab> <C-x><C-o>
+		" Enter a new transaction based on the text in the current line:
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
-		" Align amounts in selected transactions (this assumes that
+		" Align amounts in selected transactions (these assume that
 		" (1) the decimal separator is a comma, and
 		" (2) the commodity goes after the amount, as in 1.000,00 EUR):
 		au FileType ledger vnoremap <silent><buffer> ,A :Tabularize /^\s\+[^,]\+\s\+\zs(\=\s*[=-]\=\(\(\d\+\.\)\+\)\=\d\+,\d\+/l20r1l0<CR>
