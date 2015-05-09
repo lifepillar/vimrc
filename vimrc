@@ -537,6 +537,7 @@
 		" (1) the decimal separator is a comma, and
 		" (2) the commodity goes after the amount, as in 1.000,00 EUR):
 		au FileType ledger vnoremap <silent><buffer> ,A :Tabularize /^\s\+[^,]\+\s\+\zs(\=\s*[=-]\=\(\(\d\+\.\)\+\)\=\d\+,\d\+/l20r1l0<CR>
+		au FileType ledger nnoremap <silent><buffer> ,A :Tabularize /^\s\+[^,]\+\s\+\zs(\=\s*[=-]\=\(\(\d\+\.\)\+\)\=\d\+,\d\+/l20r1l0<CR>
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
