@@ -535,6 +535,51 @@
 		let g:ledger_fillstring = '    ·'
 		" let g:ledger_detailed_first = 1
 		" let g:ledger_fold_blanks = 0
+		let g:ledger_decimal_sep = ','
+		let g:ledger_thousand_sep = '.'
+		let g:ledger_align_at = 60
+
+		" Aligns the amount expressions after an account name at the decimal point.
+		"
+		" Given a range of lines, moves the amount expression of each posting so
+		" that all decimal separators are aligned at the same column. The column
+		" where decimal separator should occur is given by g:ledger_align_at.
+		"
+		" For example, given:
+		"
+		"   2015/05/09 Some Payee
+		"     Expenses:Other    $120,23  ; Tags here
+		"     Expenses:Something  $-4,99
+		"     Expenses:More                 ($12,34 + $16,32)
+		"
+		"  after selecting the above, 'call AlignCommodities()' will produce:
+		"
+		"   2015/05/09 Some Payee
+		"      Expenses:Other                                    $120,23  ; Tags here
+		"      Expenses:Something                                 $-4,99
+		"      Expenses:More                                     ($12,34 + $16,32)
+		"
+		func! AlignCommodities()
+			" Match everything after the account name (excluding spaces), if it contains a decimal separator:
+			let rexpr = '^\s\+[^\s].\{-}\s\s\+\zs.*' . g:ledger_decimal_sep . '.*$'
+			for lineno in range(a:firstline, a:lastline)
+				" Extract the part of the line after the account name (excluding spaces):
+				let rhs = matchstr(getline(lineno), rexpr)
+				if rhs != ''
+					" Go to the current line:
+					exec 'normal ' . lineno . 'G'
+					" Remove everything after the account name (including spaces):
+					.s/^\s\+[^\s].\{-}\zs\s\s.*$//
+					" Find the position of the first decimal separator:
+					let pos = match(rhs, g:ledger_decimal_sep)
+					" Go to the column that allows us to align the decimal separator at g:ledger_align_at:
+					call GotoCol(g:ledger_align_at - pos - 1)
+					" Append the part of the line that was previously removed:
+					exe 'normal a' . rhs
+				endif
+			endfor
+		endfunc!
+
 		" Toggle transaction state with <space>:
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use tab to autocomplete:
