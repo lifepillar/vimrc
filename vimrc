@@ -530,6 +530,9 @@
 		let g:ledger_decimal_sep = ','
 		let g:ledger_thousand_sep = '.'
 		let g:ledger_align_at = 60
+		let g:ledger_default_commodity = 'EUR'
+		let g:ledger_commodity_before = 0
+		let g:ledger_commodity_sep = ' '
 
 		" Enter a new transaction based on the text in the current line
 		" (a wrapper around 'ledger entry'):
@@ -582,6 +585,20 @@
 			endfor
 		endfunc!
 
+		func! AlignAmountAtCursor()
+			" Select and cut text:
+			normal BvEd
+			" Paste text at the correct column and append/prepend default commodity:
+			if g:ledger_commodity_before
+				call GotoCol(g:ledger_align_at - match(@", g:ledger_decimal_sep) - len(g:ledger_default_commodity) - len(g:ledger_commodity_sep) - 1)
+				exe 'normal a' . g:ledger_default_commodity . g:ledger_commodity_sep
+				normal p
+			else
+				call GotoCol(g:ledger_align_at - match(@", g:ledger_decimal_sep) - 1)
+				exe 'normal pa' . g:ledger_commodity_sep . g:ledger_default_commodity
+			endif
+		endfunc!
+
 		" Toggle transaction state with <space>:
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use tab to autocomplete:
@@ -589,11 +606,10 @@
 		" Enter a new transaction based on the text in the current line:
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
-		" Align amounts in selected transactions (these assume that
-		" (1) the decimal separator is a comma, and
-		" (2) the commodity goes after the amount, as in 1.000,00 EUR):
-		au FileType ledger vnoremap <silent><buffer> ,A :Tabularize /^\s\+[^,]\+\s\+\zs(\=\s*[=-]\=\(\(\d\+\.\)\+\)\=\d\+,\d\+/l20r1l0<CR>
-		au FileType ledger nnoremap <silent><buffer> ,A :Tabularize /^\s\+[^,]\+\s\+\zs(\=\s*[=-]\=\(\(\d\+\.\)\+\)\=\d\+,\d\+/l20r1l0<CR>
+		" Align amounts at the decimal point:
+		au FileType ledger vnoremap <silent><buffer> ,A :call AlignCommodities()<CR>
+		" Align the amount just entered and append default currency:
+		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>o
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
