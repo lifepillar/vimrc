@@ -39,7 +39,8 @@
 		set undolevels=1000         " Maximum number of changes that can be undone.
 		set undoreload=10000        " Maximum number lines to save for undo on a buffer reload.
 	endif
-	set nowritebackup " Don't write backup files.
+	set nobackup " Do not keep a backup copy of a file.
+	set nowritebackup " Don't write temporary backup files.
 " }}
 
 " Helper functions {{
