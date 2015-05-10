@@ -529,7 +529,7 @@
 		autocmd  User GoyoLeave call <SID>goyo_leave()
 	" }}
 	" Ledger {{
-		let g:ledger_maxwidth = 70
+		let g:ledger_maxwidth = 63
 		let g:ledger_fillstring = '    ·'
 		" let g:ledger_detailed_first = 1
 		" let g:ledger_fold_blanks = 0
