@@ -549,20 +549,19 @@
 			normal j
 		endfunc
 
-		" Aligns the amount expressions after an account name at the decimal point.
+		" Aligns the amount expression after an account name at the decimal point.
 		"
-		" Given a range of lines, moves the amount expression of each posting so
-		" that all decimal separators are aligned at the same column. The column
-		" where decimal separator should occur is given by g:ledger_align_at.
+		" This function moves the amount expression of a posting so that the decimal
+		" separator is aligned at the column specified by g:ledger_align_at.
 		"
-		" For example, given:
+		" For example, after selecting:
 		"
 		"   2015/05/09 Some Payee
 		"     Expenses:Other    $120,23  ; Tags here
 		"     Expenses:Something  $-4,99
 		"     Expenses:More                 ($12,34 + $16,32)
 		"
-		"  after selecting the above, 'call AlignCommodities()' will produce:
+		"  :'<,'>call AlignCommodities() produces:
 		"
 		"   2015/05/09 Some Payee
 		"      Expenses:Other                                    $120,23  ; Tags here
