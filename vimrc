@@ -570,14 +570,17 @@
 		"      Expenses:More                                     ($12,34 + $16,32)
 		"
 		func! AlignCommodities()
-			" Extract the part of the line after the account name (excluding spaces),
-			" provided that it contains a decimal separator:
-			let rhs = matchstr(getline('.'), '^\s\+[^\s].\{-}\s\s\+\zs.*' . g:ledger_decimal_sep . '.*$')
+			" Extract the part of the line after the account name (excluding spaces):
+			let rhs = matchstr(getline('.'), '\m^\s\+[^;[:space:]].\{-}\(\t\|  \)\s*\zs.*$')
 			if rhs != ''
 				" Remove everything after the account name (including spaces):
-				.s/^\s\+[^\s].\{-}\zs\s\s.*$//
-				" Find the position of the first decimal separator:
-				let pos = match(rhs, g:ledger_decimal_sep)
+				.s/\m^\s\+[^[:space:]].\{-}\zs\(\t\|  \).*$//
+				if g:ledger_decimal_sep == ''
+					let pos = matchend(rhs, '\m\d\+')
+				else
+					" Find the position of the first decimal separator:
+					let pos = match(rhs, '\V' . g:ledger_decimal_sep)
+				endif
 				" Go to the column that allows us to align the decimal separator at g:ledger_align_at:
 				call GotoCol(g:ledger_align_at - pos - 1)
 				" Append the part of the line that was previously removed:
