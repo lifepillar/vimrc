@@ -570,25 +570,22 @@
 		"      Expenses:More                                     ($12,34 + $16,32)
 		"
 		func! AlignCommodities()
-			" Match everything after the account name (excluding spaces), if it contains a decimal separator:
-			let rexpr = '^\s\+[^\s].\{-}\s\s\+\zs.*' . g:ledger_decimal_sep . '.*$'
-			for lineno in range(a:firstline, a:lastline)
-				" Extract the part of the line after the account name (excluding spaces):
-				let rhs = matchstr(getline(lineno), rexpr)
-				if rhs != ''
-					" Go to the current line:
-					exec 'normal ' . lineno . 'G'
-					" Remove everything after the account name (including spaces):
-					.s/^\s\+[^\s].\{-}\zs\s\s.*$//
-					" Find the position of the first decimal separator:
-					let pos = match(rhs, g:ledger_decimal_sep)
-					" Go to the column that allows us to align the decimal separator at g:ledger_align_at:
-					call GotoCol(g:ledger_align_at - pos - 1)
-					" Append the part of the line that was previously removed:
-					exe 'normal a' . rhs
-				endif
-			endfor
+			" Extract the part of the line after the account name (excluding spaces),
+			" provided that it contains a decimal separator:
+			let rhs = matchstr(getline('.'), '^\s\+[^\s].\{-}\s\s\+\zs.*' . g:ledger_decimal_sep . '.*$')
+			if rhs != ''
+				" Remove everything after the account name (including spaces):
+				.s/^\s\+[^\s].\{-}\zs\s\s.*$//
+				" Find the position of the first decimal separator:
+				let pos = match(rhs, g:ledger_decimal_sep)
+				" Go to the column that allows us to align the decimal separator at g:ledger_align_at:
+				call GotoCol(g:ledger_align_at - pos - 1)
+				" Append the part of the line that was previously removed:
+				exe 'normal a' . rhs
+			endif
 		endfunc!
+
+		command! -range AlignCommodities <line1>,<line2>call AlignCommodities()
 
 		func! AlignAmountAtCursor()
 			" Select and cut text:
@@ -612,7 +609,7 @@
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
 		" Align amounts at the decimal point:
-		au FileType ledger vnoremap <silent><buffer> ,A :call AlignCommodities()<CR>
+		au FileType ledger vnoremap <silent><buffer> ,A :AlignCommodities<CR>
 		" Align the amount just entered and append default currency:
 		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>o
 	" }}
