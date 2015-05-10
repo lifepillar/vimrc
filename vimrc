@@ -589,6 +589,7 @@
 
 		command! -range AlignCommodities <line1>,<line2>call AlignCommodities()
 
+		" Aligns the amount just entered (or under the cursor) and appends/prepend the default currency.
 		func! AlignAmountAtCursor()
 			" Select and cut text:
 			normal BvEd
@@ -612,7 +613,6 @@
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
 		" Align amounts at the decimal point:
 		au FileType ledger vnoremap <silent><buffer> ,A :AlignCommodities<CR>
-		" Align the amount just entered and append default currency:
 		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>o
 	" }}
 	" Tagbar {{
