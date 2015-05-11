@@ -289,3 +289,5 @@
  :map            - View all mappings
  :set <var>      - Show the value of a setting
  :shell          - Open a shell from Vim
+ :so $VIMRUNTIME/syntax/hitest.vim  - View highlight groups
+
