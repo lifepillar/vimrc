@@ -9,9 +9,9 @@ necessary for other systems.
 
 ### How it looks like
 
-![Solarized Dark](solarized_dark.png)
+![Solarized Dark](screenshots/solarized_dark.png)
 
-![Solarized Light](solarized_light.png)
+![Solarized Light](screenshots/solarized_light.png)
 
 ### Requirements
 

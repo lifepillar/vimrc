@@ -2,6 +2,6 @@
 !/.gitignore
 !/vimrc
 !/bundle
+!/screenshots
 !/cheatsheet.txt
 !/Readme.md
-!/*.png
