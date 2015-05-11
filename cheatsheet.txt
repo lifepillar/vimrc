@@ -2,292 +2,318 @@
   About
   vim: set sw=1 ts=1 sts=0 et nonu nornu nowrap foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
-  Use ,cs to open this file in Vim.
-
-  <n> denotes a mandatory number.
-  [n] denotes an optional number.
-  <c> denotes a single character.
-  [p] denotes a pattern.
-  [move] denotes a move command.
-  Other placeholders should be clear
-  enough from the context.
-
-  Every user-defined command either
-  starts with a comma or is a function
-  key. The only exception is ctrl-j,
-  which is mapped to Esc in insert and
-  visual mode for convenience.
+  Use ,cs (press comma, then c, then s)
+  to open this file in Vim.
 
   This cheat sheet is roughly
   organized after TextWrangler's menu
   structure, because TextWrangler is
   the editor I am most familiar with.
+  Looks nice when viewed with Monaco.
 
   Note that this not a replacement
-  for a manual. The comments are
+  for a manual. The comments are often
   (overly) simplified: refer to Vim's
-  help for all the details.
+  help pages for all the details.
+
+  NOTATION:
+
+  ⓝ      denotes a (possibly optional)
+         number.
+
+  ⓒ      denotes a single character.
+
+  ‹P›    denotes a pattern (i.e., a
+         regular expression).
+
+  ‹Cmd›  denotes a command (e.g., d to
+         delete).
+
+  ‹Move› denotes an arbitrary move
+         command (e.g., 4jll).
+
+  ‹Path› denotes a file path or a
+         file name.
+
+  ‹Var›  denotes a variable name.
+
+  «C-…» means the ctrl character must
+  be pressed along with what follows.
+  A space after this key combination
+  must not be typed literally!
+
+  Similarly, other special keys are
+  written between « and ».
+
+  All other characters are meant to be
+  typed literally.
+
 ---
  File
   Basic
-  :e <path>       - New/open file
-  :[n]bd          - Close file
+  :e ‹Path›      - New/open file
+  :ⓝ bd          - Close file
   ,w
-  :w              - Save file
-  :w!             - Save RO file
-  :wq             - Save and quit
-  :wqa            - Save all and quit
-  :q              - Quit
-  :q!             - Quit without saving
-  :qa!            - Quit all without saving
- :mks            - Save session (restore with vim -S)
- ,l              - List open files
+  :w             - Save file
+  :w!            - Save read-only file
+  :wq            - Save and quit
+  :wqa           - Save all and quit
+  :q             - Quit
+  :q!            - Quit without saving
+  :qa!           - Quit all without saving
+ :mks          - Save session
+                 (restore with vim -S)
+ ,l            - List open files
  :ls
- :[n]b           - Edit file n
- ,1              - Edit file 1
- …               …
- ,0              - Edit file 10
- ,f              - Edit next file
- ,b              - Edit prev file
- ,g              - Edit last used file
+ :ⓝ b          - Edit file n
+ ,1            - Edit file 1
+ …             …
+ ,0            - Edit file 10
+ ,f            - Edit next file
+ ,b            - Edit prev file
+ ,g            - Edit last used file
 ---
  Edit
   Basic
-  <esc>         - Return to normal mode
-  ctrl-[
-  i             - Insert at cursor
-  a             - Append after the cursor
-  I             - Insert at the start of line
-  A             - Append at the end of line
-  o             - Open new line below
-  O             - Open new line above
-  r <c>         - Replace char
-  R             - Replace mode (overwrite)
-  .             - Repeat last command
- u               - Undo
- ctrl-r          - Redo
- d               - Cut selection
- d [move]        - Cut to the move-to point
- [n]dd           - Cut line(s)
- 0D              - Clear line
- di <c>          - Cut between matching pairs of <c>
- [n]x            - Cut char(s)
- [n]X            - Cut prev char(s)
- "*d             - Cut into system clipboard
- y               - Copy selection
- y [move]        - Copy to the move-to point
- yy              - Copy line
- "*y             - Copy to system clipboard
- p               - Paste after cursor
- P               - Paste before cursor
- ]p              - Paste below and align with current line
- ]P              - Paste above and align with current line
- "*p             - Paste from system clipboard
- c               - Replace selection
- c [move]        - Replace up to the move-to point
- cc              - Replace line
- ci <c>          - Replace between matching pair of <c>
- v               - Visual mode (selection)
- V               - Linewise visual mode
- ctrl-v          - Visual block mode
- ctrl-v [move] I - Insert in multiple lines
- ctrl-v [move] A - Append to multiple lines
- {v}             - Select paragraph
- gv              - Reselect last selection
- ,a              - Select all
- ,ts             - Remove trailing space
- J               - Join with next line
+  «Esc»        - Return to normal mode
+  «C-[»
+  i            - Insert at cursor
+  a            - Append after the cursor
+  I            - Insert at the start of line
+  A            - Append at the end of line
+  o            - Open new line below
+  O            - Open new line above
+  rⓒ           - Replace char
+ ,1            - Edit file 1
+ …             …
+ ,0            - Edit file 10
+  R            - Replace mode (overwrite)
+  .            - Repeat last command
+ u             - Undo
+ «C-r»         - Redo
+ d             - Cut selection
+ d‹Move›       - Cut to the move-to point
+ ⓝ dd          - Cut line(s)
+ 0D            - Clear line
+ diⓒ           - Cut between matching pairs of chars
+ ⓝ x           - Cut char(s)
+ ⓝ X           - Cut prev char(s)
+ "*d           - Cut into system clipboard
+ y             - Copy selection
+ y‹Move›       - Copy to the move-to point
+ yy            - Copy line
+ "*y           - Copy to system clipboard
+ p             - Paste after cursor
+ P             - Paste before cursor
+ ]p            - Paste below and align with current line
+ ]P            - Paste above and align with current line
+ "*p           - Paste from system clipboard
+ c             - Replace selection
+ c‹Move›       - Replace up to the move-to point
+ cc            - Replace line
+ ci ⓒ          - Replace between matching pair of chars
+ v             - Visual mode (selection)
+ V             - Linewise visual mode
+ «C-v»         - Visual block mode
+ «C-v»‹Move›I  - Insert in multiple lines
+ «C-v»‹Move›A  - Append to multiple lines
+ {v}           - Select paragraph
+ gv            - Reselect last selection
+ ,a            - Select all
+ ,ts           - Remove trailing space
+ J             - Join with next line
 ---
  Text
- ~               - Change case
- U               - Change selection to uppercase
- u               - Change selection to lowercase
- gU [move]       - Change to uppercase
- gu [move]       - Change to lowercase
- gUU             - Change line to uppercase
- guu             - Change line to lowercase
- ,U              - Capitalize selected words
- ctrl-n          - Autocomplete
- >               - Indent selected text
- <               - Unindent selected text
- >%              - Indent block
- <%              - Unindent block
- >>              - Indent line
- <<              - Unindent line
- ctrl-t          - Indent in Insert mode
- ctrl-d          - Unindent in Insert mode
- = [move]        - Adjust indentation
- ==              - Adjust line indentation
- ,a=             - Reindent all
- :set tw=<n>     - Set text width (0 = window width)
- gw              - Hard-wrap selection at text width
- gw [move]       - Wrap text up to move-to point
- gww             - Wrap text in current line
- ,r              - Hard-wrap paragraph
- ,t              - Toggle hard/soft tabs
- ,[              - Decrease tab width
- ,]              - Increase tab width
- :retab          - Detab (needs expandtab on - see ,t)
- :retab!         - Entab (needs expandtab off - see ,t)
- ,s              - Toggle spell checking
- ]s              - Go to next mispelled word
- [s              - Go to prev mispelled word
- z=              - Suggest corrections
- ga              - Character info for char under cursor
+ ~             - Change case
+ U             - Change selection to uppercase
+ u             - Change selection to lowercase
+ gU‹Move›      - Change to uppercase
+ gu‹Move›      - Change to lowercase
+ gUU           - Change line to uppercase
+ guu           - Change line to lowercase
+ ,U            - Capitalize selected words
+ «C-n»         - Autocomplete
+ >             - Indent selected text
+ <             - Unindent selected text
+ >%            - Indent block
+ <%            - Unindent block
+ >>            - Indent line
+ <<            - Unindent line
+ «C-t»         - Indent in Insert mode
+ «C-d»         - Unindent in Insert mode
+ =‹Move›       - Adjust indentation
+ ==            - Adjust line indentation
+ ,a=           - Reindent all
+ :set tw=<n>   - Set text width (0 = window width)
+ gw            - Hard-wrap selection at text width
+ gw‹Move›      - Wrap text up to move-to point
+ gww           - Wrap text in current line
+ ,r            - Hard-wrap paragraph
+ ,t            - Toggle hard/soft tabs
+ ,[            - Decrease tab width
+ ,]            - Increase tab width
+ :retab        - Detab (needs expandtab on - see ,t)
+ :retab!       - Entab (needs expandtab off - see ,t)
+ ,s            - Toggle spell checking
+ ]s            - Go to next mispelled word
+ [s            - Go to prev mispelled word
+ z=            - Suggest corrections
+ ga            - Character info for char under cursor
 ---
  View
   Scrolling
-  ctrl-f        - Scroll down a page
-  ctrl-b        - Scroll up a page
-  ctrl-d        - Scroll down half a page
-  ctrl-u        - Scroll up half a page
-  ctrl-e        - Scroll down a bit (two lines)
-  ctrl-y        - Scroll up a bit (two lines)
-  zl            - Scroll right
-  zh            - Scroll left
- :set wrap       - Soft-wrap text
- :set nowrap     - Do not wrap text
- ,n              - Toggle line numbers
- ,m              - Toggle relative line numbers
- ,i              - Toggle invisibles
- zo              - Fold
- zc              - Unfold
- zM              - Fold all
- zR              - Unfold all
- <F7>            - Toggle background color
- ,F              - Toggle distraction-free mode
- :set cc=<n>     - Page guide at column n
- :set cc=""      - No page guide
+  «C-f»        - Scroll down a page
+  «C-b»        - Scroll up a page
+  «C-d»        - Scroll down half a page
+  «C-u»        - Scroll up half a page
+  «C-e»        - Scroll down a bit (two lines)
+  «C-y»        - Scroll up a bit (two lines)
+  zl           - Scroll right
+  zh           - Scroll left
+ :set wrap     - Soft-wrap text
+ :set nowrap   - Do not wrap text
+ ,n            - Toggle line numbers
+ ,m            - Toggle relative line numbers
+ ,i            - Toggle invisibles
+ zo            - Fold
+ zc            - Unfold
+ zM            - Fold all
+ zR            - Unfold all
+ «F7»          - Toggle background color
+ ,F            - Toggle distraction-free mode
+ :set cc=<n>   - Page guide at column n
+ :set cc=""    - No page guide
 ---
  Search
- /[p]            - Search forward
- ?[p]            - Search backward
- n               - Find next (same direction)
- N               - Find prev (opposite direction)
- [cmd] gn        - Select next match (and apply cmd)
- [cmd] gN        - Select prev match (and apply cmd)
- ,h              - Toggle highlighting
- :s/[p]/[p]/     - Find and replace in selection
- :%s/[p]/[p]/g   - Find and replace all
+ /‹P›          - Search forward
+ ?‹P›          - Search backward
+ n             - Find next (same direction)
+ N             - Find prev (opposite direction)
+ ‹Cmd›gn       - Select next match (and apply cmd)
+ ‹Cmd›gN       - Select prev match (and apply cmd)
+ ,h            - Toggle highlighting
+ :s/‹P›/‹P›/   - Find and replace in selection
+ :%s/‹P›/‹P›/g - Find and replace all
 ---
  Go
   Basic movement
-  [n]h          - Move left
-  [n]←
-  [n]l          - Move right
-  [n]→
-  [n]k          - Move up
-  [n]↑
-  [n]j          - Move down
-  [n]↓
-  [n]gj         - Move down i soft-wrapped lines
-  [n]gk         - Move up in soft-wrapped lines
-  [n]w          - Start of next punctuation-separated word
-  [n]b          - Start of prev punctuation-separated word
-  [n]e          - End of next punctuation-separated word
-  [n]ge         - End of prev punctuation-separated word
-  [n]W          - Start of next space-separated word
-  [n]B          - Start of prev space-separated word
-  [n]E          - End of next space-separated word
-  [n]gE         - End of prev space-separated word
-  0             - Start of line
-  $             - End of line
-  ^             - First non-blank char of line
-  [n]}          - Next blank line
-  [n]{          - Prev blank line
-  gg            - First line
-  G             - Last line
- :[n]            - Go to line…
- [n]G
- [n]|            - Go to column…
- *               - Forward search for word under cursor
- #               - Backward search for word under cursor
- [n]f <c>        - Find next (nth) <c> in current line
- [n]F <c>        - Find prev (nth) <c> in current line
- %               - Jump between matching () or {}
- ctrl-o          - Go to older cursor position
- ctrl-i          - Go to newer cursor position
- ctrl-]          - Follow link
- ctrl-T          - Back to prev link
- ma              - Set mark called 'a'
- `a              - Go to mark 'a'
- mb              - Set mark called 'b'
- `b              - Go to mark 'b'
- …               …
- mA              - Set global mark 'A'
- `A              - Go to global mark 'A'
- …               …
+  ⓝ h          - Move left
+  ⓝ ←
+  ⓝ l          - Move right
+  ⓝ →
+  ⓝ k          - Move up
+  ⓝ ↑
+  ⓝ j          - Move down
+  ⓝ ↓
+  ⓝ gj         - Move down i soft-wrapped lines
+  ⓝ gk         - Move up in soft-wrapped lines
+  ⓝ w          - Start of next punctuation-separated word
+  ⓝ b          - Start of prev punctuation-separated word
+  ⓝ e          - End of next punctuation-separated word
+  ⓝ ge         - End of prev punctuation-separated word
+  ⓝ W          - Start of next space-separated word
+  ⓝ B          - Start of prev space-separated word
+  ⓝ E          - End of next space-separated word
+  ⓝ gE         - End of prev space-separated word
+  0            - Start of line
+  $            - End of line
+  ^            - First non-blank char of line
+  ⓝ }          - Next blank line
+  ⓝ {          - Prev blank line
+  gg           - First line
+  G            - Last line
+ :ⓝ            - Go to line…
+ ⓝ G
+ ⓝ |           - Go to column…
+ *             - Forward search for word under cursor
+ #             - Backward search for word under cursor
+ ⓝ fⓒ          - Find next (nth) ⓒ  in current line
+ ⓝ Fⓒ          - Find prev (nth) ⓒ  in current line
+ %             - Jump between matching () or {}
+ «C-o»         - Go to older cursor position
+ «C-i»         - Go to newer cursor position
+ «C-]»         - Follow link
+ «C-T»         - Back to prev link
+ ma            - Set mark called 'a'
+ `a            - Go to mark 'a'
+ mb            - Set mark called 'b'
+ `b            - Go to mark 'b'
+ …             …
+ mA            - Set global mark 'A'
+ `A            - Go to global mark 'A'
+ …             …
 ---
  Window
- :new            - New window (horizontal split)
- ctrl-w n
- :vnew           - New window (vertical split)
- ctrl-w c        - Close window
- ctrl-w o        - Close all inactive windows
- ctrl-w s        - Split horizontally
- ctrl-w v        - Split vertically
- ctrl-w x        - Exchange windows
- ctrl-w ctrl-x
- ctrl-w K        - Arrange horizontally
- ctrl-w H        - Arrange vertically
- ctrl-w w        - Edit next window
- ctrl-w ctrl-w
- ctrl-h          - Edit window to the left
- ctrl-w h
- ctrl-w ←
- ctrl-j          - Edit window below
- ctrl-w j
- ctrl-w ↓
- ctrl-k          - Edit window above
- ctrl-w ↑
- ctrl-w k
- ctrl-l          - Edit window to the right
- ctrl-w l
- ctrl-w →
- ctrl-w =        - Make all windows the same size
- ctrl-w _        - Maximize height
- ctrl-w |        - Maximize width
- ctrl-w [n] -    - Decrease height
- ctrl-w [n] +    - Increase height
- ctrl-w [n] <    - Decrease width
- ctrl-w [n] >    - Increase width
+ :new          - New window (horizontal split)
+ «C-w» n
+ :vnew         - New window (vertical split)
+ «C-w» c       - Close window
+ «C-w» o       - Close all inactive windows
+ «C-w» s       - Split horizontally
+ «C-w» v       - Split vertically
+ «C-w» x       - Exchange windows
+ «C-w» «C-x»
+ «C-w» K       - Arrange horizontally
+ «C-w» H       - Arrange vertically
+ «C-w» w       - Edit next window
+ «C-w» «C-w»
+ «C-h»         - Edit window to the left
+ «C-w» h
+ «C-w» ←
+ «C-j»         - Edit window below
+ «C-w» j
+ «C-w» ↓
+ «C-k»         - Edit window above
+ «C-w» ↑
+ «C-w» k
+ «C-l»         - Edit window to the right
+ «C-w» l
+ «C-w» →
+ «C-w» =       - Make all windows the same size
+ «C-w» _       - Maximize height
+ «C-w» |       - Maximize width
+ «C-w» ⓝ  -    - Decrease height
+ «C-w» ⓝ  +    - Increase height
+ «C-w» ⓝ  <    - Decrease width
+ «C-w» ⓝ  >    - Increase width
 ---
  Tabs
- :tabs           - List tabs
- :tabnew         - New tab
- gt              - Next tab
- gT              - Previous tab
- :tabclose       - Close tab
- :tabonly        - Close all other tabs
+ :tabs         - List tabs
+ :tabnew       - New tab
+ gt            - Next tab
+ gT            - Previous tab
+ :tabclose     - Close tab
+ :tabonly      - Close all other tabs
  :tabo
- :tabdo <cmd>    - Execute cmd in all tabs
+ :tabdo ‹Cmd›  - Execute cmd in all tabs
 ---
  Plugins
   CtrlP
-  ctrl-p         - Open Ctrlp in MRU mode
+  «C-p»        - Open Ctrlp in MRU mode
  --
   Fugitive
-  ,gs            - Git status
-  ,gd            - Git diff
+  ,gs          - Git status
+  ,gd          - Git diff
  --
   Ledger
-  ctrl-x         - Autocomplete
-  ctrl-t         - New transaction from word under cursor
-  <space>        - Toggle transaction state
+  «Tab»        - Autocomplete
+  «C-x»«C-o»
+  «C-t»        - New transaction from text in the current line
+  «Space»      - Toggle transaction state
  --
   Tagbar
-  <F9>            - Toggle Tagbar
+  «F9»         - Toggle Tagbar
  --
   Undotree
-  <F8>            - Toggle Undotree
+  «F8»         - Toggle Undotree
  --
   Wordy
-  :Wordy <tab>    - Browse and load a Wordy dictionary
+  :Wordy «Tab» - Browse and load a Wordy dictionary
 ---
  Misc
- :echo <var>     - Show the value of a variable
- :map            - View all mappings
- :set <var>      - Show the value of a setting
- :shell          - Open a shell from Vim
- :so $VIMRUNTIME/syntax/hitest.vim  - View highlight groups
+ :echo ‹Var›   - Show the value of a variable
+ :map          - View all mappings
+ :set ‹Var›    - Show the value of a setting
+ :shell        - Open a shell from Vim
+ :h hitest.vim - Learn how to view highlight groups
 
