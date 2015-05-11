@@ -55,8 +55,14 @@
 			colorscheme solarized
 			if &background ==# 'dark'
 				hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1
+				hi Folded     ctermbg=8            guifg=#002b36
+				hi TabLineSel ctermfg=8            guifg=#002b36
+				hi LineNr     ctermbg=8            guifg=#002b36
 			else
 				hi MatchParen ctermbg=7 ctermfg=0 guibg=#eee8d5 guifg=#073642
+				hi Folded     ctermbg=15          guibg=#fdf6e3
+				hi TabLineSel ctermfg=15          guifg=#fdf6e3
+				hi LineNr     ctermbg=15          guifg=#fdf6e3
 			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
 			let g:seoul256_background = 236
@@ -266,7 +272,9 @@
 	" Default theme
 	if has('gui_macvim')
 		set guifont=Monaco:h14
-		set guioptions+=a " Yank/paste to/from OS X clipboard
+		set guioptions-=aP " Do not use system clipboard by default
+		set guioptions-=T  " No toolbar
+		set guioptions-=lL " No left scrollbar
 		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
 		set transparency=4
 		let &background = 'light'
