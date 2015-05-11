@@ -87,8 +87,8 @@
  ,1            - Edit file 1
  …             …
  ,0            - Edit file 10
-  R            - Replace mode (overwrite)
-  .            - Repeat last command
+ R             - Replace mode (overwrite)
+ .             - Repeat last command
  u             - Undo
  «C-r»         - Redo
  d             - Cut selection
