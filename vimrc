@@ -108,7 +108,7 @@
 	endfunc
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
-	function SmoothScroll(up)
+	function! SmoothScroll(up)
 		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
 		exec "normal " . scrollaction
 		redraw
