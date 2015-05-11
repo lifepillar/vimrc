@@ -107,12 +107,17 @@
  guu             - Change line to lowercase
  ,U              - Capitalize selected words
  ctrl-n          - Autocomplete
- <               - Shift selection to the left
- >               - Shift selection to the right
- <%              - Shift block to the left
- ==              - Fix line indent
- >%              - Shift block to the right
- ,a=             - Reindent all (C-style)
+ >               - Indent selected text
+ <               - Unindent selected text
+ >%              - Indent block
+ <%              - Unindent block
+ >>              - Indent line
+ <<              - Unindent line
+ ctrl-t          - Indent in Insert mode
+ ctrl-d          - Unindent in Insert mode
+ = [move]        - Adjust indentation
+ ==              - Adjust line indentation
+ ,a=             - Reindent all
  :set tw=<n>     - Set text width (0 = window width)
  gw              - Hard-wrap selection at text width
  gw [move]       - Wrap text up to move-to point
