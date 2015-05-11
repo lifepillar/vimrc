@@ -69,6 +69,7 @@
  d               - Cut selection
  d [move]        - Cut to the move-to point
  [n]dd           - Cut line(s)
+ 0D              - Clear line
  di <c>          - Cut between matching pairs of <c>
  [n]x            - Cut char(s)
  [n]X            - Cut prev char(s)
