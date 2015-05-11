@@ -58,11 +58,13 @@
 				hi Folded     ctermbg=8            guifg=#002b36
 				hi TabLineSel ctermfg=8            guifg=#002b36
 				hi LineNr     ctermbg=8            guifg=#002b36
+				hi TabLineSel ctermfg=8             guifg=#002b36
 			else
 				hi MatchParen ctermbg=7 ctermfg=0 guibg=#eee8d5 guifg=#073642
 				hi Folded     ctermbg=15          guibg=#fdf6e3
 				hi TabLineSel ctermfg=15          guifg=#fdf6e3
 				hi LineNr     ctermbg=15          guifg=#fdf6e3
+				hi TabLineSel ctermfg=15            guifg=#fdf6e3
 			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
 			let g:seoul256_background = 236
