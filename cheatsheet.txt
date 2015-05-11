@@ -226,13 +226,17 @@
  ctrl-w H        - Arrange vertically
  ctrl-w w        - Edit next window
  ctrl-w ctrl-w
- ctrl-w h        - Edit window to the left
+ ctrl-h          - Edit window to the left
+ ctrl-w h
  ctrl-w ←
- ctrl-w j        - Edit window below
+ ctrl-j          - Edit window below
+ ctrl-w j
  ctrl-w ↓
- ctrl-w k        - Edit window above
+ ctrl-k          - Edit window above
  ctrl-w ↑
- ctrl-w l        - Edit window to the right
+ ctrl-w k
+ ctrl-l          - Edit window to the right
+ ctrl-w l
  ctrl-w →
  ctrl-w =        - Make all windows the same size
  ctrl-w _        - Maximize height

@@ -223,6 +223,11 @@
 	nnoremap <Leader>8 :8b<CR>
 	nnoremap <Leader>9 :9b<CR>
 	nnoremap <Leader>0 :10b<CR>
+	" Move between windows with ctrl-h/j/k/l:
+	nnoremap <silent> <C-h> <C-w>h
+	nnoremap <silent> <C-j> <C-w>j
+	nnoremap <silent> <C-k> <C-w>k
+	nnoremap <silent> <C-l> <C-w>l
 	" Toggle absolute line numbers with ,n:
 	nnoremap <silent> <Leader>n :set invnumber<CR>:set nornu<CR>
 	" Toggle relative line numbers with ,m:
