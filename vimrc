@@ -54,12 +54,14 @@
 			let g:solarized_underline=0
 			colorscheme solarized
 			if &background ==# 'dark'
+				hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1
 				hi Folded      ctermbg=8             guifg=#002b36
 				hi TabLineSel  ctermfg=8  ctermbg=7  guifg=#002b36 guifg=#eee8d5
 				hi LineNr      ctermbg=8             guifg=#002b36
 				hi clear Title
 			else
+				hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
 				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642
 				hi Folded      ctermbg=15            guibg=#fdf6e3
 				hi TabLineSel  ctermfg=15 ctermbg=0  guifg=#fdf6e3 guifg=#073642
@@ -305,12 +307,10 @@
 			hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
 			hi NormalMode   ctermfg=15  ctermbg=14  guifg=#fdf6e3 guibg=#93a1a1
-			hi VertSplit    ctermfg=0   ctermbg=0   guifg=#073642 guibg=#073642
 		else
 			hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
 			hi NormalMode   ctermfg=15  ctermbg=10  guifg=#fdf6e3 guibg=#586e75
-			hi VertSplit    ctermfg=7   ctermbg=7   guifg=#eee8d5 guibg=#eee8d5
 		endif
 		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
 		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
