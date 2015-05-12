@@ -54,18 +54,16 @@
 			let g:solarized_underline=0
 			colorscheme solarized
 			if &background ==# 'dark'
-				hi VertSplit   ctermfg=0  ctermbg=0  guifg=#073642 guibg=#073642
-				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1
-				hi Folded      ctermbg=8             guifg=#002b36
-				hi TabLineSel  ctermfg=8  ctermbg=7  guifg=#002b36 guifg=#eee8d5
-				hi LineNr      ctermbg=8             guifg=#002b36
+				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+				hi Folded      ctermbg=8  ctermfg=12 guibg=#002b36 guifg=#657b83 term=bold    cterm=bold    gui=bold
+				hi TabLineSel  ctermbg=7  ctermfg=8  guibg=#eee8d5 guifg=#002b36 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			else
-				hi VertSplit   ctermfg=7  ctermbg=7  guifg=#eee8d5 guibg=#eee8d5
-				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642
-				hi Folded      ctermbg=15            guibg=#fdf6e3
-				hi TabLineSel  ctermfg=15 ctermbg=0  guifg=#fdf6e3 guifg=#073642
-				hi LineNr      ctermbg=15            guifg=#fdf6e3
+				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+				hi Folded      ctermbg=15 ctermfg=11 guibg=#fdf6e3 guifg=#657b83 term=bold    cterm=bold    gui=bold
+				hi TabLineSel  ctermbg=0  ctermfg=15 guibg=#073642 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
