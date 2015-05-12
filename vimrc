@@ -331,13 +331,13 @@
 		else
 			hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
 		endif
-		hi StatusLine  ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
-		hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
-		hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
-		hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
-		hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
-		hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
-		hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
+		hi StatusLine      ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
+		hi NormalMode      ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+		hi InsertMode      ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi ReplaceMode     ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
+		hi VisualMode      ctermbg=89  ctermfg=252 guibg=#9b1d72 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+		hi CommandMode     ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+		hi Warnings        ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
 	endfunc
 	" }}
 
