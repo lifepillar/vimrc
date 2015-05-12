@@ -57,14 +57,14 @@
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1
 				hi Folded      ctermbg=8             guifg=#002b36
 				hi TabLineSel  ctermfg=8  ctermbg=7  guifg=#002b36 guifg=#eee8d5
-				hi Title       ctermfg=0  ctermbg=15 guifg=#073642 guibg=#fdf6e3
 				hi LineNr      ctermbg=8             guifg=#002b36
+				hi clear Title
 			else
 				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642
 				hi Folded      ctermbg=15            guibg=#fdf6e3
 				hi TabLineSel  ctermfg=15 ctermbg=0  guifg=#fdf6e3 guifg=#073642
-				hi Title       ctermfg=7  ctermbg=8  guifg=#eee8d5 guifg=#002b36
 				hi LineNr      ctermbg=15            guifg=#fdf6e3
+				hi clear Title
 			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
 			let g:seoul256_background = 236
@@ -136,6 +136,19 @@
 		let diff = a:pos - virtcol('.')
 		if diff > 0 | exec "normal " . diff . "a " | endif
 	endfunc
+
+	" Run an external command and send the output to a new buffer.
+	function! RunShellCommand(command)
+		let command = join(map(split(a:command), 'expand(v:val)'))
+		botright new
+		setlocal buftype=nowrite bufhidden=wipe noswapfile nowrap number
+		echo 'Execute ' . command . '...'
+		execute '%!'. command
+		silent! redraw
+		echo 'Done: ' . command
+	endfunction
+
+	command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
 " }}
 
 " Editing {{
@@ -558,11 +571,8 @@
 		" Enter a new transaction based on the text in the current line
 		" (a wrapper around 'ledger entry'):
 		func! LedgerEntry()
-			let line = shellescape(getline("."))
-			d
-			let entr = system('ledger -f ' . shellescape(expand('%')) . ' entry ' . line)
-			call append(".", split(entr, "\n"))
-			normal j
+			normal 0D
+			exe 'read !ledger -f ' . shellescape(expand('%')) . ' entry ' . shellescape(@")
 		endfunc
 
 		" Aligns the amount expression after an account name at the decimal point.
@@ -629,7 +639,14 @@
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
 		" Align amounts at the decimal point:
 		au FileType ledger vnoremap <silent><buffer> ,A :AlignCommodities<CR>
-		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>o
+		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>
+
+		func! BalanceReport()
+			call inputsave()
+			let accounts = input("Accounts: ", "^asset ^liab")
+			call inputrestore()
+			call RunShellCommand('ledger -f % cleared --real ' . accounts)
+		endfunc
 	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
