@@ -311,17 +311,17 @@
 		if &background ==# 'dark'
 			hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermfg=15  ctermbg=14  guifg=#fdf6e3 guibg=#93a1a1
+			hi NormalMode   ctermbg=14  ctermfg=15  guibg=#93a1a1 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		else
 			hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermfg=15  ctermbg=10  guifg=#fdf6e3 guibg=#586e75
+			hi NormalMode   ctermbg=10  ctermfg=15  guibg=#586e75 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		endif
-		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-		hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+		hi InsertMode      ctermbg=6   ctermfg=15  guibg=#2aa19  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b1  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 	endfunc
 	" }}
 	" Seoul256 {{
