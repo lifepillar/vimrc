@@ -56,13 +56,11 @@
 			if &background ==# 'dark'
 				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
-				hi Folded      ctermbg=8  ctermfg=12 guibg=#002b36 guifg=#657b83 term=bold    cterm=bold    gui=bold
 				hi TabLineSel  ctermbg=7  ctermfg=8  guibg=#eee8d5 guifg=#002b36 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			else
 				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
 				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
-				hi Folded      ctermbg=15 ctermfg=11 guibg=#fdf6e3 guifg=#657b83 term=bold    cterm=bold    gui=bold
 				hi TabLineSel  ctermbg=0  ctermfg=15 guibg=#073642 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			endif
