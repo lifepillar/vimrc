@@ -35,6 +35,8 @@
   ‹Path› denotes a file path or a
          file name.
 
+  ‹Reg›  denotes a register (", *, …).
+
   ‹Var›  denotes a variable name.
 
   «C-…» means the ctrl character must
@@ -47,7 +49,6 @@
 
   All other characters are meant to be
   typed literally.
-
 ---
  File
   Basic
@@ -117,6 +118,7 @@
  «C-v»         - Visual block mode
  «C-v»‹Move›I  - Insert in multiple lines
  «C-v»‹Move›A  - Append to multiple lines
+ «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
  gv            - Reselect last selection
  ,a            - Select all
@@ -311,8 +313,10 @@
   :Wordy «Tab» - Browse and load a Wordy dictionary
 ---
  Misc
+ :«C-r»‹Reg›   - Paste in command
  :echo ‹Var›   - Show the value of a variable
  :map          - View all mappings
+ :reg          - View registers
  :set ‹Var›    - Show the value of a setting
  :shell        - Open a shell from Vim
  :h hitest.vim - Learn how to view highlight groups
