@@ -45,7 +45,7 @@
 
 " Helper functions {{
 	" Update theme.
-	" Note that UpdateHighlight() is automatically triggered by ColorScheme event.
+	" Note that UpdateHighlight() is automatically triggered by the ColorScheme event.
 	func! SetTheme(name)
 		if a:name ==# 'solarized'
 			" Note that to display Solarized colors correctly,
