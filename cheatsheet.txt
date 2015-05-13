@@ -98,15 +98,19 @@
  ⓝ x           - Cut char(s)
  ⓝ X           - Cut prev char(s)
  "*d           - Ⓥ Cut into system clipboard
+ "‹Reg›d       - Ⓥ Cut into register
  y             - Ⓥ Copy
  y‹Move›       - Copy to the move-to point
  yy            - Copy line
- "*y           - Ⓥ Copy to system clipboard
+ "*y           - Ⓥ Copy into system clipboard
+ "‹Reg›y       - Ⓥ Copy into register
  p             - Paste after cursor
  P             - Paste before cursor
  ]p            - Paste below and align with current line
  ]P            - Paste above and align with current line
  "*p           - Paste from system clipboard
+ "‹Reg›p       - Paste from register
+ :«C-r»‹Reg›   - Paste into command line
  c             - Ⓥ Replace
  c‹Move›       - Replace up to the move-to point
  cc            - Replace line
@@ -118,10 +122,13 @@
  «C-v»‹Move›A  - Append to multiple lines
  «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
- gv            - Reselect last selection
- ggvG          - Select all
+ gv            - Reselect
+ ggVG          - Select all
  ,ts           - Remove trailing space
  J             - Join with next line
+ q‹Reg›        - Start recording (press q to stop)
+ @‹Reg›        - Run recorded macro
+ @@            - Repeat last macro
 ---
  Text
  ~             - Change case
@@ -143,7 +150,7 @@
  «C-d»         - Ⓘ Unindent
  =‹Move›       - Reindent up to the move-to point
  ==            - Reindent line
- ggvG=         - Reindent all
+ ggVG=         - Reindent all
  :set tw=<n>   - Set text width (0 = window width)
  gw            - Ⓥ Hard-wrap at text width
  gw‹Move›      - Wrap up to move-to point
@@ -318,11 +325,10 @@
   :Wordy «Tab» - Browse and load a Wordy dictionary
 ---
  Misc
- :«C-r»‹Reg›   - Paste in command
  :echo ‹Var›   - Show the value of a variable
  :map          - View all mappings
  :reg          - View registers
  :set ‹Var›    - Show the value of a setting
- :shell        - Open a shell from Vim
+ :shell        - Open a shell
  :h hitest.vim - Learn how to view highlight groups
 
