@@ -233,22 +233,22 @@
 	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
 	" ,l       : list buffers
-	" ,b ,f ,g : go back/forward/last-used
-	" ,1 ,2 ,3 : go to buffer 1/2/3 etc:
 	nnoremap <Leader>l :ls<CR>
+	" ,b ,f ,g : go back/forward/last-used
 	nnoremap <Leader>b :bp<CR>
 	nnoremap <Leader>f :bn<CR>
 	nnoremap <Leader>g :e#<CR>
-	nnoremap <Leader>1 :1b<CR>
-	nnoremap <Leader>2 :2b<CR>
-	nnoremap <Leader>3 :3b<CR>
-	nnoremap <Leader>4 :4b<CR>
-	nnoremap <Leader>5 :5b<CR>
-	nnoremap <Leader>6 :6b<CR>
-	nnoremap <Leader>7 :7b<CR>
-	nnoremap <Leader>8 :8b<CR>
-	nnoremap <Leader>9 :9b<CR>
-	nnoremap <Leader>0 :10b<CR>
+	" ,1 ,2 ,3 : go to tab 1/2/3 etc:
+	nnoremap <Leader>1 1gt
+	nnoremap <Leader>2 2gt
+	nnoremap <Leader>3 3gt
+	nnoremap <Leader>4 4gt
+	nnoremap <Leader>5 5gt
+	nnoremap <Leader>6 6gt
+	nnoremap <Leader>7 7gt
+	nnoremap <Leader>8 8gt
+	nnoremap <Leader>9 9gt
+	nnoremap <Leader>0 10gt
 	" Move between windows with ctrl-h/j/k/l:
 	nnoremap <silent> <C-h> <C-w>h
 	nnoremap <silent> <C-j> <C-w>j

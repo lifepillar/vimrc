@@ -67,9 +67,6 @@
  ,l            - List open files
  :ls
  :ⓝ b          - Edit file n
- ,1            - Edit file 1
- …             …
- ,0            - Edit file 10
  ,f            - Edit next file
  ,b            - Edit prev file
  ,g            - Edit last used file
@@ -285,6 +282,8 @@
  :tabnew       - New tab
  gt            - Next tab
  gT            - Previous tab
+ ,ⓝ            - Go to tab ⓝ
+ ⓝ gt
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
  :tabo
