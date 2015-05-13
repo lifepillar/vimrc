@@ -45,7 +45,7 @@
 
 " Helper functions {{
 	" Update theme.
-	" Note that UpdateHighlight() is automatically triggered by ColorScheme event.
+	" Note that UpdateHighlight() is automatically triggered by the ColorScheme event.
 	func! SetTheme(name)
 		if a:name ==# 'solarized'
 			" Note that to display Solarized colors correctly,
@@ -54,16 +54,14 @@
 			let g:solarized_underline=0
 			colorscheme solarized
 			if &background ==# 'dark'
-				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1
-				hi Folded      ctermbg=8             guifg=#002b36
-				hi TabLineSel  ctermfg=8  ctermbg=7  guifg=#002b36 guifg=#eee8d5
-				hi LineNr      ctermbg=8             guifg=#002b36
+				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+				hi TabLineSel  ctermbg=7  ctermfg=8  guibg=#eee8d5 guifg=#002b36 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			else
-				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642
-				hi Folded      ctermbg=15            guibg=#fdf6e3
-				hi TabLineSel  ctermfg=15 ctermbg=0  guifg=#fdf6e3 guifg=#073642
-				hi LineNr      ctermbg=15            guifg=#fdf6e3
+				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+				hi TabLineSel  ctermbg=0  ctermfg=15 guibg=#073642 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
 				hi clear Title
 			endif
 		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
@@ -71,8 +69,15 @@
 			let g:seoul256_light_background = 255
 			if &background ==# 'dark'
 				colorscheme seoul256
+				hi VertSplit   ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
+				hi TabLineSel  ctermbg=236 ctermfg=187 guibg=#3f3f3f guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+				hi TabLine     ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
+				hi TabLineFill ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
 			else
 				colorscheme seoul256-light
+				hi TabLineSel  ctermbg=255 ctermfg=238 guibg=#f0f1f1 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
+				hi TabLine     ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
+				hi TabLineFill ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
 			endif
 		endif
 	endfunc
@@ -304,19 +309,17 @@
 		if &background ==# 'dark'
 			hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermfg=15  ctermbg=14  guifg=#fdf6e3 guibg=#93a1a1
-			hi VertSplit    ctermfg=0   ctermbg=0   guifg=#073642 guibg=#073642
+			hi NormalMode   ctermbg=14  ctermfg=15  guibg=#93a1a1 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		else
 			hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
 			hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermfg=15  ctermbg=10  guifg=#fdf6e3 guibg=#586e75
-			hi VertSplit    ctermfg=7   ctermbg=7   guifg=#eee8d5 guibg=#eee8d5
+			hi NormalMode   ctermbg=10  ctermfg=15  guibg=#586e75 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		endif
-		hi InsertMode  ctermfg=15 ctermbg=6  guifg=#fdf6e3 guibg=#2aa198
-		hi ReplaceMode ctermfg=15 ctermbg=9  guifg=#fdf6e3 guibg=#cb4b16
-		hi VisualMode  ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi CommandMode ctermfg=15 ctermbg=5  guifg=#fdf6e3 guibg=#d33682
-		hi Warnings    ctermfg=15 ctermbg=1  guifg=#fdf6e3 guibg=#dc322f
+		hi InsertMode      ctermbg=6   ctermfg=15  guibg=#2aa19  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b1  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 	endfunc
 	" }}
 	" Seoul256 {{
@@ -326,13 +329,13 @@
 		else
 			hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
 		endif
-		hi StatusLine  ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
-		hi NormalMode  ctermfg=187 ctermbg=239 guifg=#dfdebd guibg=#616161
-		hi InsertMode  ctermfg=187 ctermbg=65  guifg=#fdf6e3 guibg=#719872
-		hi ReplaceMode ctermfg=238 ctermbg=220 guifg=#565656 guibg=#ffdd00
-		hi VisualMode  ctermfg=252 ctermbg=89  guifg=#d9d9d9 guibg=#9b1d72
-		hi CommandMode ctermfg=187 ctermbg=52  guifg=#dfdebd guibg=#730b00
-		hi Warnings    ctermfg=252 ctermbg=52  guifg=#d9d9d9 guibg=#730b00
+		hi StatusLine      ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
+		hi NormalMode      ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+		hi InsertMode      ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		hi ReplaceMode     ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
+		hi VisualMode      ctermbg=89  ctermfg=252 guibg=#9b1d72 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+		hi CommandMode     ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+		hi Warnings        ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
 	endfunc
 	" }}
 
