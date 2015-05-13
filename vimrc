@@ -236,6 +236,11 @@
 	nnoremap <Leader>b :bp<CR>
 	nnoremap <Leader>f :bn<CR>
 	nnoremap <Leader>g :e#<CR>
+	" Move between windows with ctrl-h/j/k/l:
+	nnoremap <silent> <C-h> <C-w>h
+	nnoremap <silent> <C-j> <C-w>j
+	nnoremap <silent> <C-k> <C-w>k
+	nnoremap <silent> <C-l> <C-w>l
 	" ,1 ,2 ,3 : go to tab 1/2/3 etc:
 	nnoremap <Leader>1 1gt
 	nnoremap <Leader>2 2gt
@@ -247,11 +252,6 @@
 	nnoremap <Leader>8 8gt
 	nnoremap <Leader>9 9gt
 	nnoremap <Leader>0 10gt
-	" Move between windows with ctrl-h/j/k/l:
-	nnoremap <silent> <C-h> <C-w>h
-	nnoremap <silent> <C-j> <C-w>j
-	nnoremap <silent> <C-k> <C-w>k
-	nnoremap <silent> <C-l> <C-w>l
 	" Toggle absolute line numbers with ,n:
 	nnoremap <silent> <Leader>n :set invnumber<CR>:set nornu<CR>
 	" Toggle relative line numbers with ,m:
