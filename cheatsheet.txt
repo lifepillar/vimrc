@@ -302,6 +302,8 @@
   «C-x»«C-o»
   «C-t»        - New transaction from text in the current line
   «Space»      - Toggle transaction state
+  ,a           - Align selection at decimal point
+  «C-l»        - Align amount just entered (Insert mode)
  --
   Tagbar
   «F9»         - Toggle Tagbar

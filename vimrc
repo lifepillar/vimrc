@@ -637,7 +637,7 @@
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
 		" Align amounts at the decimal point:
-		au FileType ledger vnoremap <silent><buffer> ,A :AlignCommodities<CR>
+		au FileType ledger vnoremap <silent><buffer> ,a :AlignCommodities<CR>
 		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>
 
 		func! BalanceReport()
