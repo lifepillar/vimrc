@@ -117,7 +117,7 @@
  «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
  gv            - Reselect last selection
- ,a            - Select all
+ ggvG          - Select all
  ,ts           - Remove trailing space
  J             - Join with next line
 ---
