@@ -49,6 +49,12 @@
 
   All other characters are meant to be
   typed literally.
+
+  In the comments the following
+  symbols are used:
+
+  Ⓘ  Type in Insert mode
+  Ⓥ  Type in Visual mode
 ---
  File
   Basic
@@ -88,27 +94,27 @@
  .             - Repeat last command
  u             - Undo
  «C-r»         - Redo
- d             - Cut selection
+ d             - Ⓥ Cut
  d‹Move›       - Cut to the move-to point
  ⓝ dd          - Cut line(s)
  0D            - Clear line
  diⓒ           - Cut between matching pairs of chars
  ⓝ x           - Cut char(s)
  ⓝ X           - Cut prev char(s)
- "*d           - Cut into system clipboard
- y             - Copy selection
+ "*d           - Ⓥ Cut into system clipboard
+ y             - Ⓥ Copy
  y‹Move›       - Copy to the move-to point
  yy            - Copy line
- "*y           - Copy to system clipboard
+ "*y           - Ⓥ Copy to system clipboard
  p             - Paste after cursor
  P             - Paste before cursor
  ]p            - Paste below and align with current line
  ]P            - Paste above and align with current line
  "*p           - Paste from system clipboard
- c             - Replace selection
+ c             - Ⓥ Replace
  c‹Move›       - Replace up to the move-to point
  cc            - Replace line
- ci ⓒ          - Replace between matching pair of chars
+ ciⓒ           - Replace between matching pair of chars
  v             - Visual mode (selection)
  V             - Linewise visual mode
  «C-v»         - Visual block mode
@@ -123,29 +129,29 @@
 ---
  Text
  ~             - Change case
- U             - Change selection to uppercase
- u             - Change selection to lowercase
+ U             - Ⓥ Change to uppercase
+ u             - Ⓥ Change to lowercase
  gU‹Move›      - Change to uppercase
  gu‹Move›      - Change to lowercase
  gUU           - Change line to uppercase
  guu           - Change line to lowercase
- ,U            - Capitalize selected words
- «C-n»         - Autocomplete
- >             - Indent selected text
- <             - Unindent selected text
+ ,U            - Ⓥ Capitalize words
+ «C-n»         - Ⓘ Autocomplete
+ >             - Ⓥ Indent text
+ <             - Ⓥ Unindent text
  >%            - Indent block
  <%            - Unindent block
  >>            - Indent line
  <<            - Unindent line
- «C-t»         - Indent in Insert mode
- «C-d»         - Unindent in Insert mode
- =‹Move›       - Adjust indentation
- ==            - Adjust line indentation
- ,a=           - Reindent all
+ «C-t»         - Ⓘ Indent
+ «C-d»         - Ⓘ Unindent
+ =‹Move›       - Reindent up to the move-to point
+ ==            - Reindent line
+ ggvG=         - Reindent all
  :set tw=<n>   - Set text width (0 = window width)
- gw            - Hard-wrap selection at text width
- gw‹Move›      - Wrap text up to move-to point
- gww           - Wrap text in current line
+ gw            - Ⓥ Hard-wrap at text width
+ gw‹Move›      - Wrap up to move-to point
+ gww           - Wrap current line
  ,r            - Hard-wrap paragraph
  ,t            - Toggle hard/soft tabs
  ,[            - Decrease tab width
@@ -187,10 +193,11 @@
  ?‹P›          - Search backward
  n             - Find next (same direction)
  N             - Find prev (opposite direction)
- ‹Cmd›gn       - Select next match (and apply cmd)
- ‹Cmd›gN       - Select prev match (and apply cmd)
+ ‹Cmd›gn       - Select next match and apply ‹Cmd›
+ ‹Cmd›gN       - Select prev match and apply ‹Cmd›
  ,h            - Toggle highlighting
- :s/‹P›/‹P›/   - Find and replace in selection
+ :s/‹P›/‹P›/   - Ⓥ Find and replace
+ :s/‹P›/‹P›/g  - Find and replace in line
  :%s/‹P›/‹P›/g - Find and replace all
 ---
  Go
@@ -203,7 +210,7 @@
   ⓝ ↑
   ⓝ j          - Move down
   ⓝ ↓
-  ⓝ gj         - Move down i soft-wrapped lines
+  ⓝ gj         - Move down in soft-wrapped lines
   ⓝ gk         - Move up in soft-wrapped lines
   ⓝ w          - Start of next punctuation-separated word
   ⓝ b          - Start of prev punctuation-separated word
@@ -227,11 +234,11 @@
  #             - Backward search for word under cursor
  ⓝ fⓒ          - Find next (nth) ⓒ  in current line
  ⓝ Fⓒ          - Find prev (nth) ⓒ  in current line
- %             - Jump between matching () or {}
+ %             - Jump between matching characters
  «C-o»         - Go to older cursor position
  «C-i»         - Go to newer cursor position
  «C-]»         - Follow link
- «C-T»         - Back to prev link
+ «C-t»         - Back to prev link
  ma            - Set mark called 'a'
  `a            - Go to mark 'a'
  mb            - Set mark called 'b'
@@ -298,12 +305,12 @@
   ,gd          - Git diff
  --
   Ledger
-  «Tab»        - Autocomplete
+  «Tab»        - Ⓘ Autocomplete
   «C-x»«C-o»
-  «C-t»        - New transaction from text in the current line
+  «C-t»        - Ⓘ New transaction from text
   «Space»      - Toggle transaction state
-  ,a           - Align selection at decimal point
-  «C-l»        - Align amount just entered (Insert mode)
+  ,a           - Ⓥ Align at decimal point
+  «C-l»        - Ⓘ Align amount just entered
  --
   Tagbar
   «F9»         - Toggle Tagbar
