@@ -257,6 +257,7 @@
  «C-w» «C-x»
  «C-w» K       - Arrange horizontally
  «C-w» H       - Arrange vertically
+ :ball         - Open a window for each buffer
  «C-w» w       - Edit next window
  «C-w» «C-w»
  «C-h»         - Edit window to the left
@@ -287,6 +288,7 @@
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
  :tabo
+ :tab ball     - Open a tab for each buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
 ---
  Plugins
