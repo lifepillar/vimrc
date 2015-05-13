@@ -54,7 +54,6 @@
   Basic
   :e ‹Path›      - New/open file
   :ⓝ bd          - Close file
-  ,w
   :w             - Save file
   :w!            - Save read-only file
   :wq            - Save and quit
