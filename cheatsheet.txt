@@ -87,9 +87,6 @@
   o            - Open new line below
   O            - Open new line above
   rⓒ           - Replace char
- ,1            - Edit file 1
- …             …
- ,0            - Edit file 10
  R             - Replace mode (overwrite)
  .             - Repeat last command
  u             - Undo
