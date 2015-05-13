@@ -9,7 +9,6 @@
   organized after TextWrangler's menu
   structure, because TextWrangler is
   the editor I am most familiar with.
-  Looks nice when viewed with Monaco.
 
   Note that this not a replacement
   for a manual. The comments are often
