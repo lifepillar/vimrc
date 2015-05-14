@@ -205,6 +205,8 @@
  :s/‹P›/‹P›/   - Ⓥ Find and replace
  :s/‹P›/‹P›/g  - Find and replace in line
  :%s/‹P›/‹P›/g - Find and replace all
+ :FindAll ‹P›  - Find all
+ :MultiFind ‹P›- Search all open files
 ---
  Go
   Basic movement

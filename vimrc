@@ -142,6 +142,16 @@
 		if diff > 0 | exec "normal " . diff . "a " | endif
 	endfunc
 
+	" Find all occurrences of a pattern in a file
+	func! FindAll(pattern)
+		exec "lvimgrep " . a:pattern . " % | lopen"
+	endfunc
+
+	" Find all occurrences of a pattern in all open files
+	func! MultiFind(pattern)
+		exec "noautocmd bufdo vimgrepadd " . a:pattern . " % | copen"
+	endfunc
+
 	" Run an external command and send the output to a new buffer.
 	function! RunShellCommand(command)
 		let command = join(map(split(a:command), 'expand(v:val)'))
@@ -198,6 +208,10 @@
 		set wildignorecase " Ignore case when completing file names and directories.
 	endif
 	" set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+	" Find all in current buffer
+	command! -nargs=1 FindAll call FindAll(<q-args>)
+	" Find all in all open buffers
+	command! -nargs=1 MultiFind call MultiFind(<q-args>)
 " }}
 
 " Key mappings (plugins excluded) {{
