@@ -179,8 +179,8 @@
   zh           - Scroll left
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
- ,n            - Toggle line numbers
- ,m            - Toggle relative line numbers
+ ,N            - Toggle line numbers
+ ,M            - Toggle relative line numbers
  ,i            - Toggle invisibles
  zo            - Fold
  zc            - Unfold
