@@ -72,7 +72,9 @@
  :ls
  :ⓝ b          - Edit file n
  ,n            - Edit next file
+ :bn
  ,p            - Edit prev file
+ :bp
  ,l            - Edit last used file
 ---
  Edit
