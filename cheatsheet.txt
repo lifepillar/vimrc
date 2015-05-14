@@ -68,12 +68,12 @@
   :qa!           - Quit all without saving
  :mks          - Save session
                  (restore with vim -S)
- ,l            - List open files
+ ,b            - List open files
  :ls
  :ⓝ b          - Edit file n
- ,f            - Edit next file
- ,b            - Edit prev file
- ,g            - Edit last used file
+ ,n            - Edit next file
+ ,p            - Edit prev file
+ ,l            - Edit last used file
 ---
  Edit
   Basic

@@ -228,12 +228,12 @@
 	" Hard-wrap paragraphs at textwidth with ,r:
 	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
-	" ,l       : list buffers
-	nnoremap <Leader>l :ls<CR>
-	" ,b ,f ,g : go back/forward/last-used
-	nnoremap <Leader>b :bp<CR>
-	nnoremap <Leader>f :bn<CR>
-	nnoremap <Leader>g :e#<CR>
+	" ,b       : show the list of buffers
+	nnoremap <Leader>b :ls<CR>
+	" ,p ,n ,l : go to previous/next/last used buffer
+	nnoremap <Leader>p :bp<CR>
+	nnoremap <Leader>n :bn<CR>
+	nnoremap <Leader>l :e#<CR>
 	" Move between windows with ctrl-h/j/k/l:
 	nnoremap <silent> <C-h> <C-w>h
 	nnoremap <silent> <C-j> <C-w>j
