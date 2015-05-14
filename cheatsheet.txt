@@ -283,6 +283,8 @@
  «C-l»         - Edit window to the right
  «C-w» l
  «C-w» →
+ «C-w» t       - Edit top window
+ «C-w» b       - Edit bottom window
  «C-w» =       - Make all windows the same size
  «C-w» _       - Maximize height
  «C-w» |       - Maximize width
