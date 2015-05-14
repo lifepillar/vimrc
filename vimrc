@@ -144,7 +144,7 @@
 
 	" Find all occurrences of a pattern in a file
 	func! FindAll(pattern)
-		exec "lvimgrep " . a:pattern . " % | lopen"
+		exec "noautocmd lvimgrep " . a:pattern . " % | lopen"
 	endfunc
 
 	" Find all occurrences of a pattern in all open files
