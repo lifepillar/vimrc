@@ -229,6 +229,8 @@
 	nnoremap <silent> <Leader>] :call IncreaseTabWidth(+1)<CR>
 	" Decrease tab width by one in the current buffer:
 	nnoremap <silent> <Leader>[ :call IncreaseTabWidth(-1)<CR>
+	" Select all with ,A:
+	nnoremap <silent> <Leader>A ggVG
 	" Toggle invisibles in the current buffer with ,i:
 	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
 	" Toggle spelling in the current buffer with ,s:

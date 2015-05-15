@@ -56,7 +56,7 @@ necessary for other systems.
 - Increase/decrease tab width with `,[` and `,]`, respectively.
 - Toggle invisibles with `,i`.
 - Toggle spell-checking with `,s`.
-- Select all with `,a`.
+- Select all with `,A`.
 - Remove all trailing spaces with `,ts`.
 - Hard-wrap paragraphs with `,r`.
 - Key bindings in command mode similar to those used by the shell.

@@ -126,7 +126,8 @@
  «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
  gv            - Reselect
- ggVG          - Select all
+ ,A            - Select all
+ ggVG
  ,ts           - Remove trailing space
  J             - Join with next line
  q‹Reg›        - Start recording (press q to stop)
