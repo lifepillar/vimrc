@@ -44,14 +44,14 @@ necessary for other systems.
 
 ###  Some features
 
-- A cheat sheet always at hand with `,cs`.
+- A *cheat sheet* always at hand with `,cs`.
 - Foldable and thoroughly commented `vimrc`.
 - Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
-- Uses Solarized theme by default (toggle dark/light background with `F7`).
-- Distraction-free mode (toggle with `,F`).
+- Uses *Solarized theme* by default (toggle dark/light background with `F7`).
+- *Distraction-free mode* (toggle with `,F`).
 - Keeps the edited line vertically centered.
-- Handcrafted, collapsible, "plugin-free" status line.
+- Handcrafted, collapsible, *"plugin-free" status line*.
 - Toggle hard/soft tabs with `,t` (default: soft tabs).
 - Increase/decrease tab width with `,[` and `,]`, respectively.
 - Toggle invisibles with `,i`.
