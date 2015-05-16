@@ -179,7 +179,7 @@
 		let &l:filetype = ft
 		exec "read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
 		normal ggdd
-		setlocal nomodifiable
+		setlocal readonly nomodifiable
 		diffthis
 		wincmd p
 		diffthis
