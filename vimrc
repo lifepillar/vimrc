@@ -392,7 +392,7 @@
 		if !exists('b:statusline_warnings')
 			let b:statusline_warnings = ''
 			let trail = search('\s$', 'nw')
-			let mix = search('\v(^ +\t)|(^\t+ )', 'nw')
+			let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
 			if trail != 0
 				let b:statusline_warnings .= 'Trailing space (' . trail . ')'
 				if mix != 0 | let b:statusline_warnings .= ' ' | endif
