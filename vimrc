@@ -177,8 +177,7 @@
 		leftabove vnew
 		setlocal buftype=nowrite bufhidden=wipe noswapfile nowrap number
 		let &l:filetype = ft
-		exec "read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
-		normal ggdd
+		exec "0read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
 		setlocal readonly nomodifiable
 		diffthis
 		wincmd p
