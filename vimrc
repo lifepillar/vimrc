@@ -164,6 +164,28 @@
 	endfunction
 
 	command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
+
+	" Show a vertical diff (use <C-w> H to arrange horizontally)
+	" between the current buffer and its last committed version.
+	" Use :diffoff to dismiss diff mode.
+	func! GitDiff()
+		let file = expand("%:t") " Get file name
+		let dir = expand("%:p:h") " Get directory containing the file
+		let ft = getbufvar("%", '&ft') " Get file type
+		" Open a new buffer in a vertical split, set its properties
+		" and send the result of 'git show' to the new buffer:
+		botright vnew
+		setlocal buftype=nowrite bufhidden=wipe noswapfile nowrap number
+		let &l:filetype = ft
+		exec "read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
+		normal ggdd
+		setlocal nomodifiable
+		diffthis
+		wincmd p
+		diffthis
+	endfunc
+
+	command! -nargs=0 GitDiff call GitDiff()
 " }}
 
 " Editing {{
