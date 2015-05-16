@@ -165,7 +165,7 @@
 
 	command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
 
-	" Show a vertical diff (use <C-w> H to arrange horizontally)
+	" Show a vertical diff (use <C-w> K to arrange horizontally)
 	" between the current buffer and its last committed version.
 	" Use :diffoff to dismiss diff mode.
 	func! GitDiff()
