@@ -293,8 +293,8 @@
 	nnoremap <silent> <Leader>M :set invnumber<CR>:set rnu<CR>
 	" Toggle background color with F7:
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
-	" Find merge conflict markers with ,fc:
-	nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+	" Find merge conflict markers with ,C:
+	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing):
 	cnoremap <C-a> <Home>
 	cnoremap <C-e> <End>

@@ -219,6 +219,7 @@
   :diffget      - Ⓥ Get differences
   :diffput      - Ⓥ Put differences
   ,gd           - Git diff with HEAD
+  ,C            - Find merge conflict markers
 ---
  Go
   Basic movement
