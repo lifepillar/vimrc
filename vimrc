@@ -157,14 +157,11 @@
 	endfunc
 
 	" Run an external command and send the output to a new buffer.
+	" Note that no expansion is performed by this function: the command is passed to :! as is.
 	function! RunShellCommand(command)
-		let command = join(map(split(a:command), 'expand(v:val)'))
-		botright new
-		setlocal buftype=nowrite bufhidden=wipe noswapfile nowrap number
-		echo 'Execute ' . command . '...'
-		execute '%!'. command
-		silent! redraw
-		echo 'Done: ' . command
+		botright vnew
+		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		exec '%!'. a:command
 	endfunction
 
 	command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
