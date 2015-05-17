@@ -30,6 +30,8 @@
 	set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
 	set autoread " Re-read file if it is changed by an external program.
 	set hidden " Allow buffer switching without saving.
+	set formatoptions-=o " Do not automatically insert comment when opening a line
+	set formatoptions+=j " Remove extra comment when joining lines
 	set history=1000 " Keep a longer history.
 	" Consolidate temporary files in a central spot:
 	set backupdir=~/.vim/tmp
