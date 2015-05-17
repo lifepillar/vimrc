@@ -127,23 +127,23 @@
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
 	function! SmoothScroll(up)
 		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
-		exec "normal " . scrollaction
+		exec "normal" scrollaction
 		redraw
 		let counter = 1
 		while counter < &scroll
 			let counter += 2
 			sleep 10m
 			redraw
-			exec "normal " . scrollaction
+			exec "normal" scrollaction
 		endwhile
 	endfunction
 
 	" Move the cursor to the specified column,
 	" filling the line with spaces if necessary.
 	func! GotoCol(pos)
-		exec "normal " . a:pos . "|"
+		exec "normal" a:pos . "|"
 		let diff = a:pos - virtcol('.')
-		if diff > 0 | exec "normal " . diff . "a " | endif
+		if diff > 0 | exec "normal" diff . "a " | endif
 	endfunc
 
 	" Find all occurrences of a pattern in a file
@@ -177,7 +177,7 @@
 		rightbelow vnew
 		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
 		let &l:filetype = ft
-		exec "%!git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
+		exec "%!git" "-C" shellescape(dir) "show" "HEAD:" . shellescape(file)
 		setlocal readonly nomodifiable
 		au BufWinLeave <buffer> diffoff!
 		diffthis
@@ -611,7 +611,7 @@
 		func! LedgerEntry()
 			let l = line('.') - 1 " Insert transaction at current line (i.e., below the line above the current)
 			normal "xdd
-			exec l . 'read !ledger -f ' . shellescape(expand('%')) . ' entry ' . shellescape(@x)
+			exec l . 'read !ledger -f' shellescape(expand('%')) 'entry' shellescape(@x)
 		endfunc
 
 		" Aligns the amount expression after an account name at the decimal point.
