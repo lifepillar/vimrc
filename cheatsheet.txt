@@ -208,6 +208,17 @@
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll ‹P›  - Find all
  :MultiFind ‹P›- Search all open files
+  Differences
+  :diffthis     - Use this file for diff
+  :diffoff!     - Exit diff mode
+  :diffupdate   - Re-scan files
+  ]c            - Next difference
+  [c            - Prev difference
+  dp            - Diff put
+  do            - Diff obtain
+  :diffget      - Ⓥ Get differences
+  :diffput      - Ⓥ Put differences
+  ,gd           - Git diff with HEAD
 ---
  Go
   Basic movement
