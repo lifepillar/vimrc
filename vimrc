@@ -600,6 +600,12 @@
 		let g:ledger_commodity_before = 0
 		let g:ledger_commodity_sep = ' '
 
+		func! Ledger(args)
+			call RunShellCommand('ledger -f ' . shellescape(expand('%')) . ' ' . a:args)
+		endfunc
+
+		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
+
 		" Enter a new transaction based on the text in the current line
 		" (a wrapper around 'ledger entry'):
 		func! LedgerEntry()
