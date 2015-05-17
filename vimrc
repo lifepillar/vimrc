@@ -293,6 +293,14 @@
 	nnoremap <silent> <Leader>M :set invnumber<CR>:set rnu<CR>
 	" Toggle background color with F7:
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
+	" Apply 'git diff' to the current buffer with ,gd:
+	nnoremap <silent> <Leader>gd :GitDiff<CR>
+	" Show the output of 'git status' with ,gs:
+	nnoremap <silent> <Leader>gs :Shell git status<CR>
+	nnoremap <silent> <Leader>gc :!git commit<CR>
+	" Show the revision history for the current file with ,gl:
+	nnoremap <silent> <Leader>gl :Shell git log --pretty=oneline --abbrev-commit -- %<CR>
+	nnoremap <silent> <Leader>ga :Shell git add -p %<CR>
 	" Find merge conflict markers with ,C:
 	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing):
