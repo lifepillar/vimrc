@@ -178,16 +178,13 @@
 		rightbelow vnew
 		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
 		let &l:filetype = ft
-		exec "read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
-		normal ggdd
+		exec "%!git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
 		setlocal readonly nomodifiable
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
 		diffthis
 	endfunc
-
-	command! -nargs=0 GitDiff call GitDiff()
 " }}
 
 " Editing {{
@@ -297,7 +294,7 @@
 	" Toggle background color with F7:
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
 	" Apply 'git diff' to the current buffer with ,gd:
-	nnoremap <silent> <Leader>gd :GitDiff<CR>
+	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
 	" Show the output of 'git status' with ,gs:
 	nnoremap <silent> <Leader>gs :Shell git status<CR>
 	nnoremap <silent> <Leader>gc :!git commit<CR>
