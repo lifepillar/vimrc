@@ -173,7 +173,7 @@
 		let ft = getbufvar("%", '&ft') " Get file type
 		" Open a new buffer in a vertical split, set its properties
 		" and send the result of 'git show' to the new buffer:
-		leftabove vnew
+		rightbelow vnew
 		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
 		let &l:filetype = ft
 		exec "0read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
