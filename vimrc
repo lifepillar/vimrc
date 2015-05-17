@@ -626,7 +626,7 @@
 		"      Expenses:Something                                 $-4,99
 		"      Expenses:More                                     ($12,34 + $16,32)
 		"
-		func! AlignCommodities()
+		func! AlignCommodity()
 			" Extract the part of the line after the account name (excluding spaces):
 			let rhs = matchstr(getline('.'), '\m^\s\+[^;[:space:]].\{-}\(\t\|  \)\s*\zs.*$')
 			if rhs != ''
@@ -645,7 +645,7 @@
 			endif
 		endfunc!
 
-		command! -range AlignCommodities <line1>,<line2>call AlignCommodities()
+		command! -range AlignCommodities <line1>,<line2>call AlignCommodity()
 
 		" Aligns the amount just entered (or under the cursor) and appends/prepend the default currency.
 		func! AlignAmountAtCursor()
