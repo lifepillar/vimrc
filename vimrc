@@ -683,7 +683,7 @@
 			call inputsave()
 			let accounts = input("Accounts: ", "^asset ^liab")
 			call inputrestore()
-			call RunShellCommand('ledger -f % cleared --real ' . accounts)
+			call Ledger('cleared --real ' . accounts)
 		endfunc
 	" }}
 	" Tagbar {{
