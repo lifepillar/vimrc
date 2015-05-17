@@ -110,11 +110,11 @@
 
 	" Delete trailing white space
 	func! RemoveTrailingSpace()
-		" Mark current cursor position (see :h restore-position):
-		normal msHmt
+		" Save window state:
+		let l:winview = winsaveview()
 		%s/\s\+$//ge
-		" Restore cursor position
-		normal 'tzt`s
+		" Restore window state:
+		call winrestview(l:winview)
 	endfunc
 
 	func! ToggleBackgroundColor()
