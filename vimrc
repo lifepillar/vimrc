@@ -167,7 +167,6 @@
 
 	" Show a vertical diff (use <C-w> K to arrange horizontally)
 	" between the current buffer and its last committed version.
-	" Use :diffoff to dismiss diff mode.
 	func! GitDiff()
 		let file = expand("%:t") " Get file name
 		let dir = expand("%:p:h") " Get directory containing the file
@@ -179,6 +178,7 @@
 		let &l:filetype = ft
 		exec "0read !git -C " . shellescape(dir) . " show HEAD:" . shellescape(file)
 		setlocal readonly nomodifiable
+		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
 		diffthis
