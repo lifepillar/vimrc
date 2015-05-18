@@ -461,8 +461,6 @@
 			endif
 		elseif ft ==# 'undotree' || ft ==# 'diff'
 			let stat = a:active ? ['%#NormalMode#', ft] : ['', ft]
-		elseif ft ==# 'tagbar'
-			let stat = a:active ? ['%#NormalMode# Tagbar'] : [' Tagbar', tagbar#currenttag('%s','')]
 		endif
 		return stat
 	endfunc
@@ -708,10 +706,6 @@
 			call inputrestore()
 			call Ledger('cleared --real ' . accounts)
 		endfunc
-	" }}
-	" Tagbar {{
-		" Use F9 to toggle tag bar:
-		nnoremap <silent> <F9> :TagbarToggle<CR>
 	" }}
 	" Undotree {{
 		" Use F8 to toggle undo tree:
