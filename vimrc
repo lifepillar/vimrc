@@ -632,7 +632,7 @@
 		" Enter a new transaction based on the text in the current line
 		" (a wrapper around 'ledger entry'):
 		func! LedgerEntry()
-			let l = line('.') - 1 " Insert transaction at current line (i.e., below the line above the current)
+			let l = line('.') - 1 " Insert transaction at current line (i.e., below the line above the current one)
 			normal "xdd
 			exec l . 'read !ledger -f' shellescape(expand('%')) 'entry' shellescape(@x)
 		endfunc
@@ -649,7 +649,7 @@
 		"     Expenses:Something  $-4,99
 		"     Expenses:More                 ($12,34 + $16,32)
 		"
-		"  :'<,'>call AlignCommodities() produces:
+		"  :'<,'>call AlignCommodity() produces:
 		"
 		"   2015/05/09 Some Payee
 		"      Expenses:Other                                    $120,23  ; Tags here
