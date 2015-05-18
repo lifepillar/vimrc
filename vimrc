@@ -176,7 +176,7 @@
 			call setline(3,substitute(getline(2),'.','=','g'))
 		endif
 		execute '%!'. expanded_cmdline
-		setlocal readonly nomodifiable
+		setlocal nomodifiable
 		1
 	endfunction
 
@@ -482,7 +482,7 @@ nnoremap <silent> <Leader>gl :Shell git -C %:p:h log --oneline -- %<CR>
 		let ff = getbufvar(a:bufnum, '&ff')
 		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
 		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
-		let ro  = getbufvar(a:bufnum, '&readonly') ? (getbufvar(a:bufnum, '&modifiable') ? '✗' : '⚔') : ''  " Symbol for read-only/unmodifiable
+		let ro  = getbufvar(a:bufnum, '&modifiable') ? (getbufvar(a:bufnum, '&readonly') ? '✗' : '') : '⚔'  " Symbol for read-only/unmodifiable
 		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
 		if a:active
 			let modeinfo = GetModeInfo()
@@ -624,7 +624,7 @@ nnoremap <silent> <Leader>gl :Shell git -C %:p:h log --oneline -- %<CR>
 			botright vnew
 			setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
 			exec '%!ledger -f' ledger_file a:args
-			setlocal readonly nomodifiable
+			setlocal nomodifiable
 		endfunc
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
