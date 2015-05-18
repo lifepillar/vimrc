@@ -156,12 +156,29 @@
 		exec "noautocmd bufdo vimgrepadd " . a:pattern . " % | copen"
 	endfunc
 
-	" Run an external command and send the output to a new buffer.
-	" Note that no expansion is performed by this function: the command is passed to :! as is.
-	function! RunShellCommand(command)
+	" Runs an external command and displays its output in a new buffer.
+	" The first argument is the string with the command to be executed;
+	" the second optional argument is used only for debugging.
+	" See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+	" See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
+	function! RunShellCommand(cmdline, ...)
+		let expanded_cmdline = a:cmdline
+		for part in split(a:cmdline, ' ')
+			if part[0] =~ '\v[%#<]'
+				let expanded_part = fnameescape(expand(part))
+				let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+			endif
+		endfor
 		botright vnew
-		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
-		exec '%!'. a:command
+		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+		if a:0 > 0
+			call setline(1, 'You entered:    ' . a:cmdline)
+			call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+			call setline(3,substitute(getline(2),'.','=','g'))
+		endif
+		execute '%!'. expanded_cmdline
+		setlocal readonly nomodifiable
+		1
 	endfunction
 
 	command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
