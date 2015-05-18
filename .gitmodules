@@ -16,9 +16,6 @@
 [submodule "bundle/limelight"]
 	path = bundle/limelight
 	url = https://github.com/junegunn/limelight.vim.git
-[submodule "bundle/molokai"]
-	path = bundle/molokai
-	url = https://github.com/tomasr/molokai.git
 [submodule "bundle/seoul256"]
 	path = bundle/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
