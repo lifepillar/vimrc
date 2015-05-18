@@ -48,7 +48,7 @@
 " }}
 
 " Helper functions {{
-	" Update theme.
+	" Call this function to change the theme instead of invoking colorscheme.
 	" Note that UpdateHighlight() is automatically triggered by the ColorScheme event.
 	func! SetTheme(name)
 		if a:name ==# 'solarized'
@@ -86,7 +86,7 @@
 		endif
 	endfunc
 
-	" Set tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
+	" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
 	func! SetTabWidth(w)
 		let twd=(a:w>0)?(a:w):1 " Disallow non-positive width
 		" For the following assignment, see :help let-&.
@@ -96,7 +96,7 @@
 		let &l:softtabstop=twd
 	endfunc
 
-	" Set tab width globally.
+	" Set the tab width globally.
 	func! SetGlobalTabWidth(w)
 		let twd=(a:w>0)?(a:w):1
 		let &tabstop=twd
@@ -104,13 +104,13 @@
 		let &softtabstop=twd
 	endfunc
 
-	" Alter tab width in the current buffer.
+	" Alter the tab width in the current buffer.
 	" To decrease the tab width, pass a negative value.
 	func! IncreaseTabWidth(incr)
 		call SetTabWidth(&tabstop + a:incr)
 	endfunc
 
-	" Delete trailing white space
+	" Delete trailing white space.
 	func! RemoveTrailingSpace()
 		" Save window state:
 		let l:winview = winsaveview()
@@ -146,17 +146,17 @@
 		if diff > 0 | exec "normal" diff . "a " | endif
 	endfunc
 
-	" Find all occurrences of a pattern in a file
+	" Find all occurrences of a pattern in a file.
 	func! FindAll(pattern)
 		exec "noautocmd lvimgrep " . a:pattern . " % | lopen"
 	endfunc
 
-	" Find all occurrences of a pattern in all open files
+	" Find all occurrences of a pattern in all open files.
 	func! MultiFind(pattern)
 		exec "noautocmd bufdo vimgrepadd " . a:pattern . " % | copen"
 	endfunc
 
-	" Runs an external command and displays its output in a new buffer.
+	" Run an external command and display its output in a new buffer.
 	" The first argument is the string with the command to be executed;
 	" the second optional argument is used only for debugging.
 	" See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
@@ -313,6 +313,7 @@
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
 	" Show the output of 'git status' with ,gs:
 	nnoremap <silent> <Leader>gs :Shell git status<CR>
+	" Invoke 'git commit' with ,gc (must be set up on the Git side):
 	nnoremap <silent> <Leader>gc :!git commit<CR>
 	" Show the revision history for the current file with ,gl:
 	nnoremap <silent> <Leader>gl :Shell git log --oneline -- %<CR>
@@ -629,15 +630,14 @@
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
 
-		" Enter a new transaction based on the text in the current line
-		" (a wrapper around 'ledger entry'):
+		" Enter a new transaction based on the text in the current line.
 		func! LedgerEntry()
 			let l = line('.') - 1 " Insert transaction at current line (i.e., below the line above the current one)
 			normal "xdd
 			exec l . 'read !ledger -f' shellescape(expand('%')) 'entry' shellescape(@x)
 		endfunc
 
-		" Aligns the amount expression after an account name at the decimal point.
+		" Align the amount expression after an account name at the decimal point.
 		"
 		" This function moves the amount expression of a posting so that the decimal
 		" separator is aligned at the column specified by g:ledger_align_at.
@@ -677,7 +677,7 @@
 
 		command! -range AlignCommodities <line1>,<line2>call AlignCommodity()
 
-		" Aligns the amount just entered (or under the cursor) and appends/prepend the default currency.
+		" Align the amount just entered (or under the cursor) and append/prepend the default currency.
 		func! AlignAmountAtCursor()
 			" Select and cut text:
 			normal BvEd
