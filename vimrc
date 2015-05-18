@@ -315,7 +315,7 @@
 	" Invoke 'git commit' with ,gc (must be set up on the Git side):
 	nnoremap <silent> <Leader>gc :!git commit<CR>
 	" Show the revision history for the current file with ,gl:
-	nnoremap <silent> <Leader>gl :Shell git log --oneline -- %<CR>
+nnoremap <silent> <Leader>gl :Shell git -C %:p:h log --oneline -- %<CR>
 	nnoremap <silent> <Leader>ga :Shell git add -p %<CR>
 	" Find merge conflict markers with ,C:
 	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
