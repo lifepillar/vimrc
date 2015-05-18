@@ -7,9 +7,6 @@
 [submodule "bundle/goyo"]
 	path = bundle/goyo
 	url = https://github.com/junegunn/goyo.vim.git
-[submodule "bundle/irblack"]
-	path = bundle/irblack
-	url = https://github.com/wesgibbs/vim-irblack.git
 [submodule "bundle/jellybeans"]
 	path = bundle/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
