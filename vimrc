@@ -545,6 +545,7 @@
 					\ 'main': 'CtrlP_Main',
 					\ 'prog': 'CtrlP_Progress',
 					\ }
+		let g:ctrlp_extensions = ['funky']
 
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
