@@ -16,12 +16,6 @@
 	set ttyfast
 	syntax enable
 	filetype on " Enable file type detection.
-	" File-type specific configuration {{
-		autocmd BufNewFile,BufReadPost *.md,*.mmd set filetype=markdown; spell spelllang=en
-		" Instead of reverting the cursor to the last position in the buffer, we
-		" set it to the first line when editing a git commit message:
-		au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-	" }}
 	filetype plugin on " Enable loading the plugin files for specific file types.
 	filetype indent on " Load indent files for specific file types.
 	runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
@@ -44,6 +38,14 @@
 	endif
 	set nobackup " Do not keep a backup copy of a file.
 	set nowritebackup " Don't write temporary backup files.
+" }}
+
+" File-type specific configuration {{
+	autocmd BufNewFile,BufReadPost *.md,*.mmd setlocal filetype=markdown dictionary=/usr/share/dict/words spell spelllang=en
+	autocmd BufNewFile,BufReadPost *.txt setlocal dictionary=/usr/share/dict/words spell spelllang=en
+	" Instead of reverting the cursor to the last position in the buffer, we
+	" set it to the first line when editing a git commit message:
+	au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}
 
 " Helper functions {{
@@ -461,8 +463,6 @@
 			endif
 		elseif ft ==# 'undotree' || ft ==# 'diff'
 			let stat = a:active ? ['%#NormalMode#', ft] : ['', ft]
-		elseif ft ==# 'tagbar'
-			let stat = a:active ? ['%#NormalMode# Tagbar'] : [' Tagbar', tagbar#currenttag('%s','')]
 		endif
 		return stat
 	endfunc
@@ -547,6 +547,7 @@
 					\ 'main': 'CtrlP_Main',
 					\ 'prog': 'CtrlP_Progress',
 					\ }
+		let g:ctrlp_extensions = ['funky']
 
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
@@ -708,10 +709,6 @@
 			call inputrestore()
 			call Ledger('cleared --real ' . accounts)
 		endfunc
-	" }}
-	" Tagbar {{
-		" Use F9 to toggle tag bar:
-		nnoremap <silent> <F9> :TagbarToggle<CR>
 	" }}
 	" Undotree {{
 		" Use F8 to toggle undo tree:

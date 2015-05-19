@@ -7,9 +7,6 @@
 [submodule "bundle/goyo"]
 	path = bundle/goyo
 	url = https://github.com/junegunn/goyo.vim.git
-[submodule "bundle/irblack"]
-	path = bundle/irblack
-	url = https://github.com/wesgibbs/vim-irblack.git
 [submodule "bundle/jellybeans"]
 	path = bundle/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
@@ -19,9 +16,6 @@
 [submodule "bundle/limelight"]
 	path = bundle/limelight
 	url = https://github.com/junegunn/limelight.vim.git
-[submodule "bundle/molokai"]
-	path = bundle/molokai
-	url = https://github.com/tomasr/molokai.git
 [submodule "bundle/seoul256"]
 	path = bundle/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
@@ -31,9 +25,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "bundle/tagbar"]
-	path = bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/base16"]
 	path = bundle/base16
 	url = https://github.com/chriskempson/base16-vim.git
@@ -55,3 +46,6 @@
 [submodule "bundle/gruvbox"]
 	path = bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
+[submodule "bundle/ctrlp-funky"]
+	path = bundle/ctrlp-funky
+	url = https://github.com/vim-scripts/ctrlp-funky.git
