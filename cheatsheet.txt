@@ -93,6 +93,8 @@
  .             - Repeat last command
  u             - Undo
  «C-r»         - Redo
+ g-            - Go to prev change
+ g+            - Go the next change
  d             - Ⓥ Cut
  d‹Move›       - Cut to the move-to point
  ⓝ dd          - Cut line(s)
