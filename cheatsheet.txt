@@ -135,6 +135,9 @@
  q‹Reg›        - Start recording (press q to stop)
  @‹Reg›        - Run recorded macro
  @@            - Repeat last macro
+ :norm @‹Reg›  - Ⓥ Repeat macro on each line
+ :g/‹P›/norm @‹Reg›
+               - Ⓥ Repeat macro on lines matching ‹P›
 ---
  Text
  ~             - Change case
