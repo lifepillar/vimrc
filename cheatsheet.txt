@@ -328,10 +328,6 @@
   CtrlP
   «C-p»        - Open Ctrlp in MRU mode
  --
-  Fugitive
-  ,gs          - Git status
-  ,gd          - Git diff
- --
   Ledger
   «Tab»        - Ⓘ Autocomplete
   «C-x»«C-o»
