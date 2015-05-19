@@ -350,8 +350,10 @@
   :Wordy «Tab» - Browse and load a Wordy dictionary
 ---
  Misc
+ :cd ‹Path›    - Change directory
  :echo ‹Var›   - Show the value of a variable
  :map          - View all mappings
+ :pwd          - Current directory
  :reg          - View registers
  :set ‹Var›    - Show the value of a setting
  :shell        - Open a shell
