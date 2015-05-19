@@ -30,12 +30,10 @@
 	set backupdir=~/.vim/tmp
 	set directory=~/.vim/tmp
 	set viminfo+=n~/.vim/viminfo
-	if has('persistent_undo')
-		set undofile
-		set undodir=~/.vim/tmp
-		set undolevels=1000         " Maximum number of changes that can be undone.
-		set undoreload=10000        " Maximum number lines to save for undo on a buffer reload.
-	endif
+	set undofile
+	set undodir=~/.vim/tmp
+	set undolevels=1000         " Maximum number of changes that can be undone.
+	set undoreload=10000        " Maximum number lines to save for undo on a buffer reload.
 	set nobackup " Do not keep a backup copy of a file.
 	set nowritebackup " Don't write temporary backup files.
 " }}
