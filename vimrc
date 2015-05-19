@@ -240,9 +240,7 @@
 	set ignorecase " Case-insensitive search by default.
 	set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
 	set wildmenu " Show possible matches when autocompleting.
-	if exists("&wildignorecase") " Vim >=7.3 build 107.
-		set wildignorecase " Ignore case when completing file names and directories.
-	endif
+	set wildignorecase " Ignore case when completing file names and directories.
 	" set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
 	" Find all in current buffer
 	command! -nargs=1 FindAll call FindAll(<q-args>)
