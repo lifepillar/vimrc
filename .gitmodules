@@ -46,6 +46,6 @@
 [submodule "bundle/gruvbox"]
 	path = bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
-[submodule "bundle/ctrlp-funky"]
+[submodule "ctrlp-funky"]
 	path = bundle/ctrlp-funky
-	url = https://github.com/vim-scripts/ctrlp-funky.git
+	url = https://github.com/tacahiroy/ctrlp-funky.git
