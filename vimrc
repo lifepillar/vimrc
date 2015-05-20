@@ -214,7 +214,6 @@
 	func! Git3WayDiff()
 		let filename = shellescape(expand("%:t"))
 		let ft = getbufvar("%", "&ft") " Get the file type
-		diffthis
 		" Show the version from the current branch on the left:
 		call Git("show :2:./" . filename, "l")
 		let &l:filetype = ft
@@ -227,6 +226,7 @@
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
+		diffthis
 	endfunc
 
 	command! -nargs=0 Conflicts call Git3WayDiff()
