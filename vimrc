@@ -339,11 +339,11 @@
 	" Apply 'git diff' to the current buffer with ,gd:
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
 	" Show the output of 'git status' with ,gs:
-	nnoremap <silent> <Leader>gs :Shell git -C %:p:h status<CR>:set ft=gitcommit<CR>
+	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
 	" Invoke 'git commit' with ,gc (must be set up on the Git side):
 	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
 	" Show the revision history for the current file with ,gl:
-	nnoremap <silent> <Leader>gl :Shell git -C %:p:h log --oneline -- %<CR>
+	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
 	" Find merge conflict markers with ,C:
 	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
