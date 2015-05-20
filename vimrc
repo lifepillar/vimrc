@@ -227,6 +227,8 @@
 		diffthis
 		wincmd p
 	endfunc
+
+	command! -nargs=0 Conflicts call Git3WayDiff()
 " }}
 
 " Editing {{
