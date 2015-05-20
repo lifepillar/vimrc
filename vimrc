@@ -645,13 +645,8 @@
 		let g:ledger_bin = 'ledger'
 
 		" Run an arbitrary ledger command.
-		" Note that args are passed to ledger as they are.
 		func! Ledger(args)
-			let ledger_file = shellescape(expand('%'))
-			botright vnew
-			setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
-			exec '%!ledger -f' ledger_file a:args
-			setlocal nomodifiable
+			call RunShellCommand(g:ledger_bin . " -f % " . a:args, "r")
 		endfunc
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
