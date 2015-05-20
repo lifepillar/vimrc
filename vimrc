@@ -195,19 +195,13 @@
 
 	" Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
 	command! -complete=shellcmd -nargs=+ Git call Git(<q-args>, "B")
+
 	" Show a vertical diff (use <C-w> K to arrange horizontally)
 	" between the current buffer and its last committed version.
 	func! GitDiff()
-		let file = expand("%:t") " Get file name
-		let dir = expand("%:p:h") " Get directory containing the file
-		let ft = getbufvar("%", '&ft') " Get file type
-		" Open a new buffer in a vertical split, set its properties
-		" and send the result of 'git show' to the new buffer:
-		rightbelow vnew
-		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		let ft = getbufvar("%", '&ft') " Get the file type
+		call Git("show HEAD:./" . expand("%:t"), 'r')
 		let &l:filetype = ft
-		exec "%!git" "-C" shellescape(dir) "show" "HEAD:./" . shellescape(file)
-		setlocal readonly nomodifiable
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
@@ -215,26 +209,20 @@
 	endfunc
 
 	" Show a three-way diff. Useful for fixing merge conflicts.
+	" This assumes that the current file is the working copy, of course.
 	func! Git3WayDiff()
-		let file = expand("%:t") " Get file name
-		let dir = expand("%:p:h") " Get directory containing the file
-		let ft = getbufvar("%", '&ft') " Get file type
+		let filename = expand("%:t")
+		let ft = getbufvar("%", "&ft") " Get the file type
+		diffthis
 		" Show the version from the current branch on the left:
-		leftabove vnew
-		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		call Git("show :2:./" . filename, "l")
 		let &l:filetype = ft
-		exec "%!git" "-C" shellescape(dir) "show" ":2:./" . shellescape(file)
-		setlocal readonly nomodifiable
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
-		diffthis
 		" Show version from the other branch on the right:
-		rightbelow vnew
-		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		call Git("show :3:./" . filename, "r")
 		let &l:filetype = ft
-		exec "%!git" "-C" shellescape(dir) "show" ":3:./" . shellescape(file)
-		setlocal readonly nomodifiable
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
