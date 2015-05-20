@@ -659,7 +659,7 @@
 				" Remove everything after the account name (including spaces):
 				.s/\m^\s\+[^[:space:]].\{-}\zs\(\t\|  \).*$//
 				if g:ledger_decimal_sep == ''
-					let pos = matchend(rhs, '\m\d\+')
+					let pos = matchend(rhs, '\m\d[^[:space:]]*')
 				else
 					" Find the position of the first decimal separator:
 					let pos = match(rhs, '\V' . g:ledger_decimal_sep)
@@ -673,17 +673,19 @@
 
 		command! -range AlignCommodities <line1>,<line2>call AlignCommodity()
 
-		" Align the amount just entered (or under the cursor) and append/prepend the default currency.
+		" Align the amount under the cursor and append/prepend the default currency.
 		func! AlignAmountAtCursor()
 			" Select and cut text:
-			normal BvEd
+			normal viWd
+			" Find the position of the decimal separator
+			let pos = match(@", g:ledger_decimal_sep) " 0 if g:ledger_decimal_sep is the empty string
 			" Paste text at the correct column and append/prepend default commodity:
 			if g:ledger_commodity_before
-				call GotoCol(g:ledger_align_at - match(@", g:ledger_decimal_sep) - len(g:ledger_default_commodity) - len(g:ledger_commodity_sep) - 1)
+				call GotoCol(g:ledger_align_at - (pos > 0 ? pos : len(@"))  - len(g:ledger_default_commodity) - len(g:ledger_commodity_sep) - 1)
 				exe 'normal a' . g:ledger_default_commodity . g:ledger_commodity_sep
 				normal p
 			else
-				call GotoCol(g:ledger_align_at - match(@", g:ledger_decimal_sep) - 1)
+				call GotoCol(g:ledger_align_at - (pos > 0 ? pos : len(@")) - 1)
 				exe 'normal pa' . g:ledger_commodity_sep . g:ledger_default_commodity
 			endif
 		endfunc!
