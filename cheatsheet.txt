@@ -223,7 +223,6 @@
   do            - Diff obtain
   :diffget      - Ⓥ Get differences
   :diffput      - Ⓥ Put differences
-  ,gd           - Git diff with HEAD
   ,C            - Find merge conflict markers
 ---
  Go
@@ -323,6 +322,14 @@
  :tabo
  :tab ball     - Open a tab for each buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
+---
+ Git
+ ,gs           - Git status
+ ,gd           - Git diff with HEAD
+ ,gl           - Git file log
+ ,ga           - Git add
+ ,gc           - Git commit
+ :Conflicts    - Three-way diff
 ---
  Plugins
   CtrlP
