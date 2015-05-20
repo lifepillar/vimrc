@@ -169,9 +169,9 @@
 		for part in split(a:cmdline, ' ')
 			if part =~ '\v^[%#<]'
 				let expanded_part = expand(part)
-				let cmd .= ' ' . (expanded_part == "" ? shellescape(part, 1) : shellescape(expanded_part))
+				let cmd .= ' ' . (expanded_part == "" ? part : shellescape(expanded_part))
 			else
-				let cmd .= ' ' . shellescape(part, 1)
+				let cmd .= ' ' . part
 			endif
 		endfor
 		exec get(winpos_map, a:pos, "bo new")
@@ -200,7 +200,7 @@
 	" between the current buffer and its last committed version.
 	func! GitDiff()
 		let ft = getbufvar("%", '&ft') " Get the file type
-		call Git("show HEAD:./" . expand("%:t"), 'r')
+		call Git("show HEAD:./" . shellescape(expand("%:t")), 'r')
 		let &l:filetype = ft
 		au BufWinLeave <buffer> diffoff!
 		diffthis
@@ -211,7 +211,7 @@
 	" Show a three-way diff. Useful for fixing merge conflicts.
 	" This assumes that the current file is the working copy, of course.
 	func! Git3WayDiff()
-		let filename = expand("%:t")
+		let filename = shellescape(expand("%:t"))
 		let ft = getbufvar("%", "&ft") " Get the file type
 		diffthis
 		" Show the version from the current branch on the left:
