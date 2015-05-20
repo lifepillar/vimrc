@@ -200,6 +200,32 @@
 		wincmd p
 		diffthis
 	endfunc
+
+	" Show a three-way diff. Useful for fixing merge conflicts.
+	func! Git3WayDiff()
+		let file = expand("%:t") " Get file name
+		let dir = expand("%:p:h") " Get directory containing the file
+		let ft = getbufvar("%", '&ft') " Get file type
+		" Show the version from the current branch on the left:
+		leftabove vnew
+		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		let &l:filetype = ft
+		exec "%!git" "-C" shellescape(dir) "show" ":2:./" . shellescape(file)
+		setlocal readonly nomodifiable
+		au BufWinLeave <buffer> diffoff!
+		diffthis
+		wincmd p
+		diffthis
+		" Show version from the other branch on the right:
+		rightbelow vnew
+		setlocal buftype=nofile bufhidden=wipe noswapfile nowrap number
+		let &l:filetype = ft
+		exec "%!git" "-C" shellescape(dir) "show" ":3:./" . shellescape(file)
+		setlocal readonly nomodifiable
+		au BufWinLeave <buffer> diffoff!
+		diffthis
+		wincmd p
+	endfunc
 " }}
 
 " Editing {{
