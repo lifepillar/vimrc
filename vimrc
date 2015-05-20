@@ -178,6 +178,7 @@
 		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
 		execute '%!'. cmd
 		setlocal nomodifiable
+		"echomsg cmd  " Uncomment this for debugging
 		1
 	endfunction
 
