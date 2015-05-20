@@ -600,8 +600,8 @@
 
 		autocmd! User GoyoEnter
 		autocmd! User GoyoLeave
-		autocmd  User GoyoEnter call <SID>goyo_enter()
-		autocmd  User GoyoLeave call <SID>goyo_leave()
+		autocmd! User GoyoEnter call <SID>goyo_enter()
+		autocmd! User GoyoLeave call <SID>goyo_leave()
 	" }}
 	" Ledger {{
 		let g:ledger_maxwidth = 63
