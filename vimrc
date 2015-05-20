@@ -344,6 +344,7 @@
 	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
 	" Show the revision history for the current file with ,gl:
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
+	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
 	" Find merge conflict markers with ,C:
 	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
