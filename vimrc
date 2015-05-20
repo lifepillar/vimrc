@@ -655,7 +655,7 @@
 		func! LedgerEntry()
 			let l = line('.') - 1 " Insert transaction at current line (i.e., below the line above the current one)
 			normal "xdd
-			exec l . 'read !ledger -f' shellescape(expand('%')) 'entry' shellescape(@x)
+			exec l . "read !" g:ledger_bin "-f" shellescape(expand('%')) 'entry' shellescape(@x)
 		endfunc
 
 		" Align the amount expression after an account name at the decimal point.
