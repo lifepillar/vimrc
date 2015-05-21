@@ -658,7 +658,7 @@
 			let l = line('.') - 1 " Insert transaction at the current line (i.e., below the line above the current one)
 			let query = getline('.')
 			normal "_dd
-			exec l . 'read !ledger -f' shellescape(expand('%')) 'entry' shellescape(query)
+			exec l . 'read !' g:ledger_bin '-f' shellescape(expand('%')) 'entry' shellescape(query)
 		endfunc
 
 		" Align the amount expression after an account name at the decimal point.
