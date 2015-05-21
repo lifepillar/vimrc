@@ -644,7 +644,6 @@
 		let g:ledger_default_commodity = 'EUR'
 		let g:ledger_commodity_before = 0
 		let g:ledger_commodity_sep = ' '
-		let g:ledger_bin = 'ledger'
 
 		" Run an arbitrary ledger command.
 		func! Ledger(args)
