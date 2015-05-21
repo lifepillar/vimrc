@@ -124,7 +124,7 @@
 	endfunc
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
-	function! SmoothScroll(up)
+	func! SmoothScroll(up)
 		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
 		exec "normal" scrollaction
 		redraw
@@ -135,7 +135,7 @@
 			redraw
 			exec "normal" scrollaction
 		endwhile
-	endfunction
+	endfunc
 
 	" Move the cursor to the specified column,
 	" filling the line with spaces if necessary.
@@ -160,7 +160,7 @@
 	" pos: a letter specifying the position of the output window.
 	" See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 	" See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
-	function! RunShellCommand(cmdline, pos) abort
+	func! RunShellCommand(cmdline, pos) abort
 		let winpos_map = {
 			\ "T": "to new",  "t": "abo new", "B": "bo new",  "b": "bel new",
 			\ "L": "to vnew", "l": "abo vnew", "R": "bo vnew", "r": "bel vnew"
@@ -180,7 +180,7 @@
 		setlocal nomodifiable
 		"echomsg cmd  " Uncomment this for debugging
 		1
-	endfunction
+	endfunc
 
 	command! -complete=shellcmd -nargs=+ Shell      call RunShellCommand(<q-args>, "B")
 	command! -complete=shellcmd -nargs=+ ShellRight call RunShellCommand(<q-args>, "R")
@@ -603,7 +603,7 @@
 	" Goyo {{
 		" Toggle distraction-free mode with ,F:
 		nnoremap <silent> <Leader>F :Goyo<CR>
-		function! s:goyo_enter()
+		func! s:goyo_enter()
 			call DisableStatusLine()
 			if has('gui_macvim')
 				set fullscreen
@@ -614,9 +614,9 @@
 			set wrap
 			set noshowcmd
 			Limelight
-		endfunction
+		endfunc
 
-		function! s:goyo_leave()
+		func! s:goyo_leave()
 			if has('gui_macvim')
 				set nofullscreen
 				set guifont=Monaco:h14
@@ -627,7 +627,7 @@
 			set showcmd
 			Limelight!
 			call EnableStatusLine()
-		endfunction
+		endfunc
 
 		autocmd! User GoyoEnter
 		autocmd! User GoyoLeave
