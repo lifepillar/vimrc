@@ -5,16 +5,6 @@
   Use ,cs (press comma, then c, then s)
   to open this file in Vim.
 
-  This cheat sheet is roughly
-  organized after TextWrangler's menu
-  structure, because TextWrangler is
-  the editor I am most familiar with.
-
-  Note that this not a replacement
-  for a manual. The comments are often
-  (overly) simplified: refer to Vim's
-  help pages for all the details.
-
   NOTATION:
 
   ⓝ      denotes a (possibly optional)
@@ -40,9 +30,6 @@
 
   «C-…» means the ctrl character must
   be pressed along with what follows.
-  A space after this key combination
-  must not be typed literally!
-
   Similarly, other special keys are
   written between « and ».
 
