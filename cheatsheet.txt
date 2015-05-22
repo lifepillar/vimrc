@@ -136,8 +136,7 @@
  @‹Reg›        - Run recorded macro
  @@            - Repeat last macro
  :norm @‹Reg›  - Ⓥ Repeat macro on each line
- :g/‹P›/norm @‹Reg›
-               - Ⓥ Repeat macro on lines matching ‹P›
+ :g/‹P›/‹Cmd›  - Repeat ‹Cmd› on lines matching ‹P›
 ---
  Text
  ~             - Change case
@@ -205,12 +204,10 @@
  ?‹P›          - Search backward
  n             - Find next (same direction)
  N             - Find prev (opposite direction)
- ‹Cmd›gn       - Select next match and apply ‹Cmd›
- ‹Cmd›gN       - Select prev match and apply ‹Cmd›
+ gn            - Select (up to) next match
+ gN            - Select (up to) prev match
  ,h            - Toggle highlighting
- :s/‹P›/‹P›/   - Ⓥ Find and replace
- &             - Repeat last substitution
- :s/‹P›/‹P›/g  - Find and replace in line
+ :s/‹P›/‹P›/g  - Ⓥ Find and replace
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll ‹P›  - Find all
  :MultiFind ‹P›- Search all open files
