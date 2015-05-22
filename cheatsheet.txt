@@ -207,6 +207,8 @@
  gn            - Select (up to) next match
  gN            - Select (up to) prev match
  ,h            - Toggle highlighting
+ *             - Forward search for word under cursor
+ #             - Backward search for word under cursor
  :s/‹P›/‹P›/g  - Ⓥ Find and replace
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll ‹P›  - Find all
@@ -253,8 +255,6 @@
  :ⓝ            - Go to line…
  ⓝ G
  ⓝ |           - Go to column…
- *             - Forward search for word under cursor
- #             - Backward search for word under cursor
  ⓝ fⓒ          - Find next (nth) ⓒ  in current line
  ⓝ Fⓒ          - Find prev (nth) ⓒ  in current line
  %             - Jump between matching characters
