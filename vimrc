@@ -363,7 +363,7 @@
 	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
 	" Find merge conflict markers with ,C
-	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
+	nnoremap <leader>C /\v^[<\|=>]{7}<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
 	cnoremap <C-a> <Home>
 	cnoremap <C-e> <End>
