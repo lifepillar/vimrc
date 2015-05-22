@@ -26,7 +26,7 @@
 	set formatoptions-=o " Do not automatically insert comment when opening a line
 	set formatoptions+=j " Remove extra comment when joining lines
 	set history=1000 " Keep a longer history.
-	" Consolidate temporary files in a central spot:
+	" Consolidate temporary files in a central spot
 	set backupdir=~/.vim/tmp
 	set directory=~/.vim/tmp
 	set viminfo+=n~/.vim/viminfo
@@ -42,7 +42,7 @@
 	autocmd BufNewFile,BufReadPost *.md,*.mmd setlocal filetype=markdown dictionary=/usr/share/dict/words spell spelllang=en
 	autocmd BufNewFile,BufReadPost *.txt setlocal dictionary=/usr/share/dict/words spell spelllang=en
 	" Instead of reverting the cursor to the last position in the buffer, we
-	" set it to the first line when editing a git commit message:
+	" set it to the first line when editing a git commit message
 	au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}
 
@@ -111,10 +111,10 @@
 
 	" Delete trailing white space.
 	func! RemoveTrailingSpace()
-		" Save window state:
+		" Save window state
 		let l:winview = winsaveview()
 		%s/\s\+$//ge
-		" Restore window state:
+		" Restore window state
 		call winrestview(l:winview)
 	endfunc
 
@@ -214,13 +214,13 @@
 	func! Git3WayDiff()
 		let filename = shellescape(expand("%:t"))
 		let ft = getbufvar("%", "&ft") " Get the file type
-		" Show the version from the current branch on the left:
+		" Show the version from the current branch on the left
 		call Git("show :2:./" . filename, "l")
 		let &l:filetype = ft
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
-		" Show version from the other branch on the right:
+		" Show version from the other branch on the right
 		call Git("show :3:./" . filename, "r")
 		let &l:filetype = ft
 		au BufWinLeave <buffer> diffoff!
@@ -243,7 +243,7 @@
 	" Scroll the viewport faster.
 	nnoremap <C-e> <C-e><C-e>
 	nnoremap <C-y> <C-y><C-y>
-	" Easier horizontal scrolling:
+	" Easier horizontal scrolling
 	nnoremap zl 10zl
 	nnoremap zh 10zh
 	set showmatch " Show matching brackets/parenthesis
@@ -258,7 +258,7 @@
 	" Shift left/right repeatedly
 	vnoremap > >gv
 	vnoremap < <gv
-	" Use soft tabs by default:
+	" Use soft tabs by default
 	set expandtab
 	call SetGlobalTabWidth(2)
 " }}
@@ -287,30 +287,30 @@
 	let mapleader = ","
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
-	" Toggle between hard tabs and soft tabs in the current buffer:
+	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> <Leader>t :setlocal invexpandtab<CR>
-	" Increase tab width by one in the current buffer:
+	" Increase tab width by one in the current buffer
 	nnoremap <silent> <Leader>] :call IncreaseTabWidth(+1)<CR>
-	" Decrease tab width by one in the current buffer:
+	" Decrease tab width by one in the current buffer
 	nnoremap <silent> <Leader>[ :call IncreaseTabWidth(-1)<CR>
 	" Add blank line below or above the current line, but stay in normal mode
 	" (see http://vim.wikia.com/wiki/Quickly_adding_and_deleting_empty_lines)
-	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter):
+	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
 	nnoremap <silent> <Leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 	nnoremap <silent> <Leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
-	" Select all with ,A:
+	" Select all with ,A
 	nnoremap <silent> <Leader>A ggVG
-	" Toggle invisibles in the current buffer with ,i:
+	" Toggle invisibles in the current buffer with ,i
 	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
-	" Toggle spelling in the current buffer with ,s:
+	" Toggle spelling in the current buffer with ,s
 	nnoremap <silent> <Leader>s :setlocal spell!<CR>
-	" Remove trailing space globally with ,ts:
+	" Remove trailing space globally with ,ts
 	nnoremap <Leader>ts :call RemoveTrailingSpace()<CR>
-	" Capitalize words in selected text with ,U (see h gU):
+	" Capitalize words in selected text with ,U (see h gU)
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
-	" Toggle search highlighting with ,h:
+	" Toggle search highlighting with ,h
 	nnoremap <silent> <Leader>h :set invhlsearch<CR>
-	" Hard-wrap paragraphs at textwidth with ,r:
+	" Hard-wrap paragraphs at textwidth with ,r
 	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
 	" ,b       : show the list of buffers
@@ -319,12 +319,12 @@
 	nnoremap <Leader>p :bp<CR>
 	nnoremap <Leader>n :bn<CR>
 	nnoremap <Leader>l :e#<CR>
-	" Move between windows with ctrl-h/j/k/l:
+	" Move between windows with ctrl-h/j/k/l
 	nnoremap <silent> <C-h> <C-w>h
 	nnoremap <silent> <C-j> <C-w>j
 	nnoremap <silent> <C-k> <C-w>k
 	nnoremap <silent> <C-l> <C-w>l
-	" ,1 ,2 ,3 : go to tab 1/2/3 etc:
+	" ,1 ,2 ,3 : go to tab 1/2/3 etc
 	nnoremap <Leader>1 1gt
 	nnoremap <Leader>2 2gt
 	nnoremap <Leader>3 3gt
@@ -335,32 +335,32 @@
 	nnoremap <Leader>8 8gt
 	nnoremap <Leader>9 9gt
 	nnoremap <Leader>0 10gt
-	" Toggle absolute line numbers with ,n:
+	" Toggle absolute line numbers with ,n
 	nnoremap <silent> <Leader>N :set invnumber<CR>:set nornu<CR>
-	" Toggle relative line numbers with ,m:
+	" Toggle relative line numbers with ,m
 	nnoremap <silent> <Leader>M :set invnumber<CR>:set rnu<CR>
-	" Toggle background color with F7:
+	" Toggle background color with F7
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
-	" Apply 'git diff' to the current buffer with ,gd:
+	" Apply 'git diff' to the current buffer with ,gd
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
-	" Show the output of 'git status' with ,gs:
+	" Show the output of 'git status' with ,gs
 	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
-	" Invoke 'git commit' with ,gc (must be set up on the Git side):
+	" Invoke 'git commit' with ,gc (must be set up on the Git side)
 	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
-	" Show the revision history for the current file with ,gl:
+	" Show the revision history for the current file with ,gl
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
-	" Find merge conflict markers with ,C:
+	" Find merge conflict markers with ,C
 	nnoremap <leader>C /\v^[<\|=>]{7}( .*\|$)<CR>
-	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing):
+	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
 	cnoremap <C-a> <Home>
 	cnoremap <C-e> <End>
 	cnoremap <C-p> <Up>
 	cnoremap <C-n> <Down>
 	" cnoremap <C-b> <Left>
 	" cnoremap <C-f> <Right>
-	" Allow using alt-arrows to jump over words in OS X, as in Terminal.app:
+	" Allow using alt-arrows to jump over words in OS X, as in Terminal.app
 	cnoremap <Esc>b <S-Left>
 	cnoremap <Esc>f <S-Right>
 " }}
@@ -606,7 +606,7 @@
 		endf
 	" }}
 	" Goyo {{
-		" Toggle distraction-free mode with ,F:
+		" Toggle distraction-free mode with ,F
 		nnoremap <silent> <Leader>F :Goyo<CR>
 		func! s:goyo_enter()
 			call DisableStatusLine()
@@ -686,20 +686,20 @@
 		"      Expenses:More                                     ($12,34 + $16,32)
 		"
 		func! AlignCommodity()
-			" Extract the part of the line after the account name (excluding spaces):
+			" Extract the part of the line after the account name (excluding spaces)
 			let rhs = matchstr(getline('.'), '\m^\s\+[^;[:space:]].\{-}\(\t\|  \)\s*\zs.*$')
 			if rhs != ''
-				" Remove everything after the account name (including spaces):
+				" Remove everything after the account name (including spaces)
 				.s/\m^\s\+[^[:space:]].\{-}\zs\(\t\|  \).*$//
 				if g:ledger_decimal_sep == ''
 					let pos = matchend(rhs, '\m\d[^[:space:]]*')
 				else
-					" Find the position of the first decimal separator:
+					" Find the position of the first decimal separator
 					let pos = match(rhs, '\V' . g:ledger_decimal_sep)
 				endif
-				" Go to the column that allows us to align the decimal separator at g:ledger_align_at:
+				" Go to the column that allows us to align the decimal separator at g:ledger_align_at
 				call GotoCol(g:ledger_align_at - pos - 1)
-				" Append the part of the line that was previously removed:
+				" Append the part of the line that was previously removed
 				exe 'normal a' . rhs
 			endif
 		endfunc!
@@ -708,11 +708,11 @@
 
 		" Align the amount under the cursor and append/prepend the default currency.
 		func! AlignAmountAtCursor()
-			" Select and cut text:
+			" Select and cut text
 			normal viWd
 			" Find the position of the decimal separator
 			let pos = match(@", g:ledger_decimal_sep) " 0 if g:ledger_decimal_sep is the empty string
-			" Paste text at the correct column and append/prepend default commodity:
+			" Paste text at the correct column and append/prepend default commodity
 			if g:ledger_commodity_before
 				call GotoCol(g:ledger_align_at - (pos > 0 ? pos : len(@"))  - len(g:ledger_default_commodity) - len(g:ledger_commodity_sep) - 1)
 				exe 'normal a' . g:ledger_default_commodity . g:ledger_commodity_sep
@@ -723,14 +723,14 @@
 			endif
 		endfunc!
 
-		" Toggle transaction state with <space>:
+		" Toggle transaction state with <space>
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
-		" Use tab to autocomplete:
+		" Use tab to autocomplete
 		au FileType ledger inoremap <silent><buffer> <Tab> <C-x><C-o>
-		" Enter a new transaction based on the text in the current line:
+		" Enter a new transaction based on the text in the current line
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
 		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
-		" Align amounts at the decimal point:
+		" Align amounts at the decimal point
 		au FileType ledger vnoremap <silent><buffer> <Leader>a :AlignCommodities<CR>
 		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>
 
@@ -742,7 +742,7 @@
 		endfunc
 	" }}
 	" Undotree {{
-		" Use F8 to toggle undo tree:
+		" Use F8 to toggle undo tree
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
