@@ -199,6 +199,7 @@
  *             - Forward search for word under cursor
  #             - Backward search for word under cursor
  :s/‹P›/‹P›/g  - Ⓥ Find and replace
+ :s/‹P›/‹P›/gc - Ⓥ As above, with confirmation
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll ‹P›  - Find all
  :MultiFind ‹P›- Search all open files
