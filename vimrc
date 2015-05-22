@@ -293,6 +293,11 @@
 	nnoremap <silent> <Leader>] :call IncreaseTabWidth(+1)<CR>
 	" Decrease tab width by one in the current buffer:
 	nnoremap <silent> <Leader>[ :call IncreaseTabWidth(-1)<CR>
+	" Add blank line below or above the current line, but stay in normal mode
+	" (see http://vim.wikia.com/wiki/Quickly_adding_and_deleting_empty_lines)
+	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter):
+	nnoremap <silent> <Leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
+	nnoremap <silent> <Leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 	" Select all with ,A:
 	nnoremap <silent> <Leader>A ggVG
 	" Toggle invisibles in the current buffer with ,i:
