@@ -53,7 +53,7 @@ necessary for other systems.
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, **"plugin-free" status line**.
 - Toggle hard/soft tabs with `,t` (default: soft tabs).
-- Increase/decrease tab width with `,[` and `,]`, respectively.
+- Increase/decrease tab width with `+` and `-`, respectively.
 - Toggle invisibles with `,i`.
 - Toggle spell-checking with `,s`.
 - Select all with `,A`.

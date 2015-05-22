@@ -290,9 +290,9 @@
 	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> <Leader>t :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer
-	nnoremap <silent> <Leader>] :call IncreaseTabWidth(+1)<CR>
+	nnoremap <silent> + :call IncreaseTabWidth(+1)<CR>
 	" Decrease tab width by one in the current buffer
-	nnoremap <silent> <Leader>[ :call IncreaseTabWidth(-1)<CR>
+	nnoremap <silent> - :call IncreaseTabWidth(-1)<CR>
 	" Add blank line below or above the current line, but stay in normal mode
 	" (see http://vim.wikia.com/wiki/Quickly_adding_and_deleting_empty_lines)
 	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
