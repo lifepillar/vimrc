@@ -209,6 +209,7 @@
  ‹Cmd›gN       - Select prev match and apply ‹Cmd›
  ,h            - Toggle highlighting
  :s/‹P›/‹P›/   - Ⓥ Find and replace
+ &             - Repeat last substitution
  :s/‹P›/‹P›/g  - Find and replace in line
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll ‹P›  - Find all
