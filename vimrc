@@ -298,6 +298,17 @@
 	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
 	nnoremap <silent> <Leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 	nnoremap <silent> <Leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
+	" Enclose word or selected text between quotes or parentheses
+	nnoremap <Leader>' ciw'<C-r>"'<Esc>
+	vnoremap <Leader>' c'<C-r>"'<Esc>
+	nnoremap <Leader>" ciw"<C-r>""<Esc>
+	vnoremap <Leader>" c"<C-r>""<Esc>
+	nnoremap <Leader>( ciw(<C-r>")<Esc>
+	vnoremap <Leader>( c(<C-r>")<Esc>
+	nnoremap <Leader>[ ciw[<C-r>"]<Esc>
+	vnoremap <Leader>[ c[<C-r>"]<Esc>
+	nnoremap <Leader>{ ciw{ <C-r>" }<Esc>
+	vnoremap <Leader>{ c{ <C-r>" }<Esc>
 	" Select all with ,A
 	nnoremap <silent> <Leader>A ggVG
 	" Toggle invisibles in the current buffer with ,i
