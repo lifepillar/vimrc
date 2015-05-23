@@ -7,6 +7,29 @@ inspiration. If you feel that I should cite the source of some snippet, please
 let me know! Note that I use this on OS X: minor modifications might be
 necessary for other systems.
 
+### Supported themes
+
+I like to use both dark and light themes, even in the terminal,
+and I like to easily switch between different themes.
+The following themes are supported both in the terminal and in MacVim:
+
+- [Solarized](https://github.com/altercation/vim-colors-solarized)
+- [Seoul256](https://github.com/junegunn/seoul256.vim)
+
+Solarized is the default theme. The 16 color version of the theme is used,
+so your terminal **must** be configured to use Solarized, too! The other themes
+are 256 color themes, which should display correctly no matter what colors
+your terminal uses.
+
+To change the active theme, try:
+
+```
+:Solarized
+:Seoul256
+```
+
+Use `<F7>` to switch between dark and light background.
+
 ### How it looks like
 
 ![Solarized Dark](screenshots/solarized_dark.png)
@@ -48,7 +71,6 @@ necessary for other systems.
 - Foldable and thoroughly commented `vimrc`.
 - Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
-- Uses **Solarized theme** by default (toggle dark/light background with `F7`).
 - **Distraction-free mode** (toggle with `,F`).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, **"plugin-free" status line**.
