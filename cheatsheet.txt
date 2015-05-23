@@ -58,11 +58,11 @@
  ,b            - List open files
  :ls
  :ⓝ b          - Edit file n
- ,n            - Edit next file
+ L             - Edit next file
  :bn
- ,p            - Edit prev file
+ H             - Edit prev file
  :bp
- ,l            - Edit last used file
+ M             - Edit last used file
  :bufdo ‹Cmd›  - Run ‹Cmd› in all buffers
 ---
  Edit

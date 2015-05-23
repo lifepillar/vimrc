@@ -326,10 +326,10 @@
 	" Mappings to access buffers.
 	" ,b       : show the list of buffers
 	nnoremap <Leader>b :ls<CR>
-	" ,p ,n ,l : go to previous/next/last used buffer
-	nnoremap <Leader>p :bp<CR>
-	nnoremap <Leader>n :bn<CR>
-	nnoremap <Leader>l :e#<CR>
+	" Remap H,L, and M to go to previous/next/last used buffer
+	nnoremap H :bp<CR>
+	nnoremap L :bn<CR>
+	nnoremap M :e#<CR>
 	" Move between windows with ctrl-h/j/k/l
 	nnoremap <silent> <C-h> <C-w>h
 	nnoremap <silent> <C-j> <C-w>j
