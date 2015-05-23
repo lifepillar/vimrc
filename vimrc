@@ -607,6 +607,9 @@
 			return len . dir
 		endf
 	" }}
+	" Easy Align {{
+		vmap <Enter> <Plug>(EasyAlign)
+	" }}
 	" Goyo {{
 		" Toggle distraction-free mode with ,F
 		nnoremap <silent> <Leader>F :Goyo<CR>

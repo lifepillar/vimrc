@@ -322,6 +322,9 @@
  Plugins
   CtrlP
   «C-p»        - Open Ctrlp in MRU mode
+--
+  Easy Align
+  <Enter>      - Ⓥ Trigger Easy Align
  --
   Ledger
   «Tab»        - Ⓘ Autocomplete
