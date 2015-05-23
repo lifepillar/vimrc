@@ -757,6 +757,8 @@
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
 		nnoremap <silent> <F9> :TagbarToggle<CR>
+		let g:tagbar_autofocus = 1
+		let g:tagbar_iconchars = ['▸', '▾']
 	" }}
 	" Undotree {{
 		" Use F8 to toggle undo tree
