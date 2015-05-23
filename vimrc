@@ -47,45 +47,6 @@
 " }}
 
 " Helper functions {{
-	" Call this function to change the theme instead of invoking colorscheme.
-	" Note that UpdateHighlight() is automatically triggered by the ColorScheme event.
-	func! SetTheme(name)
-		if a:name ==# 'solarized'
-			" Note that to display Solarized colors correctly,
-			" you *must* have Terminal.app set to Solarized theme, too!
-			let g:solarized_bold=1
-			let g:solarized_underline=0
-			colorscheme solarized
-			if &background ==# 'dark'
-				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
-				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
-				hi clear Title
-			else
-				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
-				hi TabLineSel  ctermbg=10 ctermfg=15 guibg=#586e75 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
-				hi TabLine     ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-				hi TabLineFill ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-				hi clear Title
-			endif
-		elseif a:name ==# 'seoul256' || a:name ==# 'seoul256-light'
-			let g:seoul256_background = 236
-			let g:seoul256_light_background = 255
-			if &background ==# 'dark'
-				colorscheme seoul256
-				hi VertSplit   ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
-				hi TabLineSel  ctermbg=236 ctermfg=187 guibg=#3f3f3f guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-				hi TabLine     ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
-				hi TabLineFill ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
-			else
-				colorscheme seoul256-light
-				hi TabLineSel  ctermbg=255 ctermfg=238 guibg=#f0f1f1 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
-				hi TabLine     ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
-				hi TabLineFill ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
-			endif
-		endif
-	endfunc
-
 	" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
 	func! SetTabWidth(w)
 		let twd=(a:w>0)?(a:w):1 " Disallow non-positive width
@@ -121,7 +82,6 @@
 
 	func! ToggleBackgroundColor()
 		let &background = (&background == 'dark') ? 'light' : 'dark'
-		call SetTheme(g:colors_name)
 	endfunc
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
@@ -382,70 +342,127 @@
 	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	set fillchars+=fold:\·
-	" Default theme
-	if has('gui_macvim')
-		set guifont=Monaco:h14
-		set guioptions-=aP " Do not use system clipboard by default
-		set guioptions-=T  " No toolbar
-		set guioptions-=lL " No left scrollbar
-		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-		set transparency=4
-		let &background = 'light'
-		call SetTheme('solarized')
-	else
-		let &background = 'dark'
-		call SetTheme('solarized')
-	endif
-	" Status line themes {{
-	let g:status_line_theme_map = {
-		\ 'solarized':      'SolarizedStatusLine',
-		\ 'seoul256':       'Seoul256StatusLine',
-		\ 'seoul256-light': 'Seoul256StatusLine' }
-
-	" Solarized {{
-	func! SolarizedStatusLine()
-		if &background ==# 'dark'
-			hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
-			hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermbg=14  ctermfg=15  guibg=#93a1a1 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		else
-			hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-			hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermbg=10  ctermfg=15  guibg=#586e75 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+	" MacVim {{
+		if has('gui_macvim')
+			set guifont=Monaco:h14
+			set guioptions-=aP " Do not use system clipboard by default
+			set guioptions-=T  " No toolbar
+			set guioptions-=lL " No left scrollbar
+			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+			set transparency=4
+			let &background = 'light'
 		endif
-		hi InsertMode      ctermbg=6   ctermfg=15  guibg=#2aa19  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b1  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-	endfunc
 	" }}
-	" Seoul256 {{
-	func! Seoul256StatusLine()
-		if &background ==# 'dark'
-			hi StatusLineNC ctermbg=187 ctermfg=239 guibg=#dfdebd guifg=#616161 term=reverse cterm=reverse gui=reverse
-		else
-			hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
-		endif
-		hi StatusLine      ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
-		hi NormalMode      ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-		hi InsertMode      ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		hi ReplaceMode     ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
-		hi VisualMode      ctermbg=23  ctermfg=252 guibg=#007173 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-		hi CommandMode     ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-		hi Warnings        ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-	endfunc
-	" }}
+" }}
 
-	" Set up highlight groups for the current theme and background
-	func! UpdateHighlight()
+" Themes {{
+	" To add support for a new theme:
+	" 1. Add an entry to g:theme_map
+	" 2. Define a corresponding function to tweak the theme. This function
+	"    should at least define the hightlight groups for the status line.
+	let g:theme_map = {
+				\ 'solarized':      'SolarizedHighlightGroups',
+				\ 'seoul256':       'Seoul256HighlightGroups',
+				\ 'seoul256-light': 'Seoul256HighlightGroups' }
+
+	" Set up highlight groups for the current theme and background.
+	func! UpdateHighlightGroups()
 		if exists('g:colors_name')
-			let hlfun = get(g:status_line_theme_map, g:colors_name, '')
+			let hlfun = get(g:theme_map, g:colors_name, '')
 			if hlfun != '' | call eval(hlfun . '()') | endif
 		endif
 	endfunc
+
+	autocmd ColorScheme * call UpdateHighlightGroups()
+
+	" Solarized {{
+		" Activate the Solarized theme.
+		" Note that to display Solarized colors correctly,
+		" you *must* have Terminal.app set to Solarized theme, too!
+		func! Solarized()
+			let g:solarized_bold=1
+			let g:solarized_underline=0
+			colorscheme solarized
+		endfunc
+
+		command! -nargs=0 Solarized call Solarized()
+
+		func! SolarizedHighlightGroups()
+			if &background ==# 'dark'
+				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+			else
+				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+				hi TabLineSel  ctermbg=10 ctermfg=15 guibg=#586e75 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
+				hi TabLine     ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
+				hi TabLineFill ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
+			endif
+			hi clear Title
+
+			" Status line
+			if &background ==# 'dark'
+				hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
+				hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
+				hi NormalMode   ctermbg=14  ctermfg=15  guibg=#93a1a1 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			else
+				hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
+				hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+				hi NormalMode   ctermbg=10  ctermfg=15  guibg=#586e75 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			endif
+			hi InsertMode      ctermbg=6   ctermfg=15  guibg=#2aa19  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b1  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d3368  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322  guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+		endfunc
 	" }}
-	" Status line {{
+	" Seoul256 {{
+		func! Seoul256()
+			let g:seoul256_background = 236
+			let g:seoul256_light_background = 255
+			if  &background == 'dark'
+				colorscheme seoul256
+			else
+				colorscheme seoul256-light
+			endif
+		endfunc
+
+		command! -nargs=0 Seoul256 call Seoul256()
+
+		func! Seoul256HighlightGroups()
+			if &background ==# 'dark'
+				hi VertSplit   ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
+				hi TabLineSel  ctermbg=236 ctermfg=187 guibg=#3f3f3f guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+				hi TabLine     ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
+				hi TabLineFill ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
+			else
+				hi TabLineSel  ctermbg=255 ctermfg=238 guibg=#f0f1f1 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
+				hi TabLine     ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
+				hi TabLineFill ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
+			endif
+
+			" Status line
+			if &background ==# 'dark'
+				hi StatusLineNC ctermbg=187 ctermfg=239 guibg=#dfdebd guifg=#616161 term=reverse cterm=reverse gui=reverse
+			else
+				hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
+			endif
+			hi StatusLine      ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
+			hi NormalMode      ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+			hi InsertMode      ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi ReplaceMode     ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
+			hi VisualMode      ctermbg=23  ctermfg=252 guibg=#007173 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+			hi CommandMode     ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+			hi Warnings        ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+		endfunc
+	" }}
+
+	" Default theme
+	call Solarized()
+" }}
+
+" Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 	let g:mode_map = {
@@ -553,12 +570,11 @@
 		let g:stl = &statusline
 		augroup status
 			autocmd!
-			autocmd VimEnter,ColorScheme * call UpdateHighlight()
 			autocmd VimEnter,WinEnter,BufWinEnter,VimResized * call RefreshStatusLines()
 			au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
 			autocmd BufWritePost * unlet! b:statusline_warnings
 		augroup END
-		doautocmd VimEnter
+		call RefreshStatusLines()
 	endfunc!
 
 	func! DisableStatusLine()
@@ -572,10 +588,9 @@
 				call settabwinvar(t, n, '&statusline', '')
 			endfor
 		endfor
-		endfunc!
+	endfunc!
 
-		call EnableStatusLine()
-		" }}
+	call EnableStatusLine()
 " }}
 
 " Plugins {{
