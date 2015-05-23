@@ -81,6 +81,17 @@
 	endfunc
 
 	func! ToggleBackgroundColor()
+		" Seoul256 with custom background colors requires
+		" special treatment to switch between dark and light background:
+		if exists('g:colors_name')
+			if g:colors_name ==# 'seoul256'
+				colorscheme seoul256-light
+				return
+			elseif g:colors_name ==# 'seoul256-light'
+				colorscheme seoul256
+				return
+			endif
+		endif
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endfunc
 
