@@ -331,6 +331,15 @@
   ,a           - Ⓥ Align at decimal point
   «C-l»        - Ⓘ Align amount just entered
  --
+  Surround
+  ysiwⓒ       - Surround word with ⓒ
+  Sⓒ          - Ⓥ Surround with ⓒ
+  S …         - Ⓥ  (Linewise) Surround with text
+  dsⓒ         - Remove delimiters
+  csⓒ ⓒ       - Change delimiters
+  cstⓒ        - Replace tags with ⓒ
+  dst         - Remove enclosing tags
+--
   Tagbar
   «F9»         - Toggle Tagbar
  --
