@@ -397,6 +397,11 @@
 		call SetTheme('solarized')
 	endif
 	" Status line themes {{
+	let g:status_line_theme_map = {
+		\ 'solarized':      'SolarizedStatusLine',
+		\ 'seoul256':       'Seoul256StatusLine',
+		\ 'seoul256-light': 'Seoul256StatusLine' }
+
 	" Solarized {{
 	func! SolarizedStatusLine()
 		if &background ==# 'dark'
@@ -434,10 +439,9 @@
 
 	" Set up highlight groups for the current theme and background
 	func! UpdateHighlight()
-		if g:colors_name ==# 'solarized'
-			call SolarizedStatusLine()
-		elseif g:colors_name ==# 'seoul256' || g:colors_name ==# 'seoul256-light'
-			call Seoul256StatusLine()
+		if exists('g:colors_name')
+			let hlfun = get(g:status_line_theme_map, g:colors_name, '')
+			if hlfun != '' | call eval(hlfun . '()') | endif
 		endif
 	endfunc
 	" }}
