@@ -354,7 +354,6 @@
 			set guioptions-=lL " No left scrollbar
 			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
 			set transparency=4
-			let &background = 'light'
 		endif
 	" }}
 " }}
