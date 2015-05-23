@@ -402,6 +402,7 @@
 				hi TabLineFill ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
 			endif
 			hi clear Title
+			hi clear Folded
 
 			" Status line
 			if &background ==# 'dark'
