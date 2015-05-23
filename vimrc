@@ -3,7 +3,6 @@
 "
 " Remember to check "Set locale environment variables on startup" in OS X Terminal.app's preferences.
 " }}
-
 " Environment {{
 	set nocompatible " Must be first line.
 	" See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
@@ -37,7 +36,6 @@
 	set nobackup " Do not keep a backup copy of a file.
 	set nowritebackup " Don't write temporary backup files.
 " }}
-
 " File-type specific configuration {{
 	autocmd BufNewFile,BufReadPost *.md,*.mmd setlocal filetype=markdown dictionary=/usr/share/dict/words spell spelllang=en
 	autocmd BufNewFile,BufReadPost *.txt setlocal dictionary=/usr/share/dict/words spell spelllang=en
@@ -45,7 +43,6 @@
 	" set it to the first line when editing a git commit message
 	au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}
-
 " Helper functions {{
 	" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
 	func! SetTabWidth(w)
@@ -203,7 +200,6 @@
 
 	command! -nargs=0 Conflicts call Git3WayDiff()
 " }}
-
 " Editing {{
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
 	set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
@@ -234,7 +230,6 @@
 	set expandtab
 	call SetGlobalTabWidth(2)
 " }}
-
 " Find, replace, and auto-complete {{
 	" set gdefault " Apply substitutions globally by default
 	" set hlsearch " Highlight search terms.
@@ -249,7 +244,6 @@
 	" Find all in all open buffers
 	command! -nargs=1 MultiFind call MultiFind(<q-args>)
 " }}
-
 " Key mappings (plugins excluded) {{
 	" Swap ; and :  Convenient.
 	nnoremap ; :
@@ -336,7 +330,6 @@
 	cnoremap <Esc>b <S-Left>
 	cnoremap <Esc>f <S-Right>
 " }}
-
 " Appearance {{
 	set title " Set the terminal title.
 	set number " Turn line numbering on.
@@ -365,7 +358,6 @@
 		endif
 	" }}
 " }}
-
 " Themes {{
 	" To add support for a new theme:
 	" 1. Add an entry to g:theme_map
@@ -472,7 +464,6 @@
 	" Default theme
 	call Solarized()
 " }}
-
 " Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
@@ -603,7 +594,6 @@
 
 	call EnableStatusLine()
 " }}
-
 " Plugins {{
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
