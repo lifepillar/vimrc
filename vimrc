@@ -366,6 +366,13 @@
 
 	" Set up highlight groups for the current theme and background.
 	func! UpdateHighlightGroups()
+		" Set default values for the highlight groups of the status line
+		hi link NormalMode  StatusLine
+		hi link InsertMode  StatusLine
+		hi link VisualMode  StatusLine
+		hi link ReplaceMode StatusLine
+		hi link CommandMode StatusLine
+		hi link Warnings    StatusLine
 		if exists('g:colors_name')
 			let fn = 'CustomizeTheme_' . substitute(tolower(g:colors_name), '[-]', '_', 'g')
 			if exists('*' . fn)
