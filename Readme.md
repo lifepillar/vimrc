@@ -9,26 +9,21 @@ necessary for other systems.
 
 ### Supported themes
 
-I like to use both dark and light themes, even in the terminal,
-and I like to easily switch between different themes.
+I like to use both dark and light themes, even in the terminal, and I like to
+switch between them depending on light conditions, my mood, or file content.
 The following themes are supported both in the terminal and in MacVim:
 
-- [Solarized](https://github.com/altercation/vim-colors-solarized)
-- [Seoul256](https://github.com/junegunn/seoul256.vim)
+- [Solarized](https://github.com/altercation/vim-colors-solarized) (light/dark)
+- [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
 
-Solarized is the default theme. The 16 color version of the theme is used,
-so your terminal **must** be configured to use Solarized, too! The other themes
-are 256 color themes, which should display correctly no matter what colors
-your terminal uses.
+Solarized is the default theme. The 16 color version of the theme is used, so
+your terminal **must** be configured to use Solarized, too! The other themes
+are 256 color themes, which should display just fine in MacVim, and use very
+similar, if not identical, colors in the terminal, no matter what colors the
+terminal is using.
 
-To change the active theme, try:
-
-```
-:Solarized
-:Seoul256
-```
-
-Use `<F7>` to switch between dark and light background.
+Use `<F7>` to switch between light and dark background for themes that support
+both.
 
 ### How it looks like
 
