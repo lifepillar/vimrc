@@ -13,6 +13,7 @@
 	set fileformats=unix,mac,dos
 	set ttimeoutlen=100 " Faster feedback in status line when returning to normal mode
 	set ttyfast
+	set updatetime=1000 " Trigger CursorHold event after one second
 	syntax enable
 	filetype on " Enable file type detection.
 	filetype plugin on " Enable loading the plugin files for specific file types.
