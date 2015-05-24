@@ -22,8 +22,6 @@
 	set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
 	set autoread " Re-read file if it is changed by an external program.
 	set hidden " Allow buffer switching without saving.
-	set formatoptions-=o " Do not automatically insert comment when opening a line
-	set formatoptions+=j " Remove extra comment when joining lines
 	set history=1000 " Keep a longer history.
 	" Consolidate temporary files in a central spot
 	set backupdir=~/.vim/tmp
@@ -220,6 +218,8 @@
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
 	set splitright " Puts new vsplit windows to the right of the current
 	set splitbelow " Puts new split windows to the bottom of the current
+	set formatoptions-=o " Do not automatically insert comment when opening a line
+	set formatoptions+=j " Remove extra comment when joining lines
 	" Load matchit.vim, but only if the user hasn't installed a newer version.
 	if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 		runtime! macros/matchit.vim " Enable % to go to matching keyword/tag.
