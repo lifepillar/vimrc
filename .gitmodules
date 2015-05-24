@@ -61,3 +61,6 @@
 [submodule "bundle/papercolor"]
 	path = bundle/papercolor
 	url = https://github.com/NLKNguyen/papercolor-theme.git
+[submodule "bundle/showmarks"]
+	path = bundle/showmarks
+	url = https://github.com/jacquesbh/vim-showmarks.git
