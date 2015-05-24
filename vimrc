@@ -601,6 +601,24 @@
 	endfunc!
 
 	call EnableStatusLine()
+
+	" Force updating the status lines when windows are resized
+	nnoremap <silent> <C-w><C-o> <C-w>o:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w>o     <C-w>o:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w><Bar> <C-w><Bar>:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w><lt>  <C-w><lt>:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w>>     <C-w>>:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w>=     <C-w>=:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w>H     <C-w>H:call RefreshStatusLines()<CR>
+	nnoremap <silent> <C-w>K     <C-w>K:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w><C-o> <C-w>o:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w>o     <C-w>o:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w><Bar> <C-w><Bar>:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w><lt>  <C-w><lt>:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w>>     <C-w>>:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w>=     <C-w>=:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w>H     <C-w>H:call RefreshStatusLines()<CR>
+	vnoremap <silent> <C-w>K     <C-w>K:call RefreshStatusLines()<CR>
 " }}
 " Plugins {{
 	" CtrlP {{
