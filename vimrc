@@ -344,7 +344,7 @@
 	set noshowmode " Do not show current mode because it is already shown in status line
 	set diffopt+=vertical " Diff in vertical mode
 	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-	set fillchars+=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
+	set fillchars=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	set fillchars+=fold:\·
 	" MacVim {{
 		if has('gui_macvim')
