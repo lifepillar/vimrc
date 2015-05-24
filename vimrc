@@ -359,15 +359,15 @@
 " }}
 " Themes {{
 	" To add support for a new theme, define a function called
-	" HighlightGroups_<theme_name>. That function will be automatically called
+	" CustomizeTheme_<theme_name>. That function will be automatically called
 	" after the color scheme is activated. The function should at least
 	" define the hightlight groups for the status line, but it can also
-	" be used to override the theme's highlight groups.
+	" be used to override the theme's settings and highlight groups.
 
 	" Set up highlight groups for the current theme and background.
 	func! UpdateHighlightGroups()
 		if exists('g:colors_name')
-			let fn = 'HighlightGroups_' . substitute(tolower(g:colors_name), '[-]', '_', 'g')
+			let fn = 'CustomizeTheme_' . substitute(tolower(g:colors_name), '[-]', '_', 'g')
 			if exists('*' . fn)
 				call eval(fn . '()')
 			endif
@@ -380,7 +380,7 @@
 		let g:solarized_bold = 1
 		let g:solarized_underline = 0
 
-		func! HighlightGroups_solarized()
+		func! CustomizeTheme_solarized()
 			if &background ==# 'dark'
 				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
@@ -415,7 +415,7 @@
 		let g:seoul256_background = 236
 		let g:seoul256_light_background = 255
 
-		func! HighlightGroups_seoul256()
+		func! CustomizeTheme_seoul256()
 			hi VertSplit    ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
 			hi TabLineSel   ctermbg=236 ctermfg=187 guibg=#3f3f3f guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
 			hi TabLine      ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
@@ -431,7 +431,7 @@
 			hi Warnings     ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
 		endfunc
 
-		func! HighlightGroups_seoul256_light()
+		func! CustomizeTheme_seoul256_light()
 			hi TabLineSel   ctermbg=255 ctermfg=238 guibg=#f0f1f1 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
 			hi TabLine      ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
 			hi TabLineFill  ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
@@ -447,11 +447,11 @@
 		endfunc
 	" }}
 	" PaperColor {{
-		func! HighlightGroups_papercolor()
+		func! CustomizeTheme_papercolor()
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			hi StatusLine term=NONE cterm=NONE gui=NONE
-			hi TabLine      ctermbg=255 ctermfg=24  guibg=#f5f5f5 guifg=#005f87 term=reverse cterm=reverse gui=reverse
+			hi TabLine      ctermbg=255 ctermfg=24  guibg=#4d4d4c guifg=#005f87 term=reverse cterm=reverse gui=reverse
 			" Status line
 			hi NormalMode   ctermbg=24  ctermfg=254 guibg=#005f87 guifg=#efefef term=NONE    cterm=NONE    gui=NONE
 			hi InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
