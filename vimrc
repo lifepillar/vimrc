@@ -446,6 +446,21 @@
 			hi Warnings     ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
 		endfunc
 	" }}
+	" PaperColor {{
+		func! HighlightGroups_papercolor()
+			set fillchars=vert:\|,fold:\·
+			hi clear Title
+			hi StatusLine term=NONE cterm=NONE gui=NONE
+			hi TabLine      ctermbg=255 ctermfg=24  guibg=#f5f5f5 guifg=#005f87 term=reverse cterm=reverse gui=reverse
+			" Status line
+			hi NormalMode   ctermbg=24  ctermfg=254 guibg=#005f87 guifg=#efefef term=NONE    cterm=NONE    gui=NONE
+			hi InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi VisualMode   ctermbg=25  ctermfg=255 guibg=#4271ae guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi CommandMode  ctermbg=238 ctermfg=255 guibg=#4d4d4c guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi Warnings     ctermbg=161 ctermfg=255 guibg=#d7005f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+		endfunc
+	" }}
 
 	" Default theme
 	colorscheme solarized
