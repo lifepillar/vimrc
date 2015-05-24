@@ -367,7 +367,7 @@
 	" Set up highlight groups for the current theme and background.
 	func! UpdateHighlightGroups()
 		if exists('g:colors_name')
-			let fn = 'HighlightGroups_' . substitute(g:colors_name, '[-]', '_', 'g')
+			let fn = 'HighlightGroups_' . substitute(tolower(g:colors_name), '[-]', '_', 'g')
 			if exists('*' . fn)
 				call eval(fn . '()')
 			endif
@@ -377,16 +377,8 @@
 	autocmd ColorScheme * call UpdateHighlightGroups()
 
 	" Solarized {{
-		" Activate the Solarized theme.
-		" Note that to display Solarized colors correctly,
-		" you *must* have Terminal.app set to Solarized theme, too!
-		func! Solarized()
-			let g:solarized_bold=1
-			let g:solarized_underline=0
-			colorscheme solarized
-		endfunc
-
-		command! -nargs=0 Solarized call Solarized()
+		let g:solarized_bold = 1
+		let g:solarized_underline = 0
 
 		func! HighlightGroups_solarized()
 			if &background ==# 'dark'
@@ -420,17 +412,8 @@
 		endfunc
 	" }}
 	" Seoul256 {{
-		func! Seoul256()
-			let g:seoul256_background = 236
-			let g:seoul256_light_background = 255
-			if  &background == 'dark'
-				colorscheme seoul256
-			else
-				colorscheme seoul256-light
-			endif
-		endfunc
-
-		command! -nargs=0 Seoul256 call Seoul256()
+		let g:seoul256_background = 236
+		let g:seoul256_light_background = 255
 
 		func! HighlightGroups_seoul256()
 			hi VertSplit    ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
@@ -465,7 +448,7 @@
 	" }}
 
 	" Default theme
-	call Solarized()
+	colorscheme solarized
 " }}
 " Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
