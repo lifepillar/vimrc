@@ -470,7 +470,11 @@
 	" }}
 
 	" Default theme
-	colorscheme solarized
+	if filereadable($HOME . '/.vim/default-theme.vim')
+		exec 'source' $HOME . '/.vim/default-theme.vim'
+	else
+		colorscheme solarized
+	endif
 " }}
 " Status line {{
 	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
