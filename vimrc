@@ -281,7 +281,7 @@
 	" Mappings to access buffers.
 	" ,b       : show the list of buffers
 	nnoremap <Leader>b :ls<CR>
-	" Remap H,L, and M to go to previous/next/last used buffer
+	" Remap H, L, and M to go to previous/next/last used buffer
 	nnoremap H :bp<CR>
 	nnoremap L :bn<CR>
 	nnoremap M :e#<CR>
