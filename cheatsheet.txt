@@ -322,7 +322,7 @@
  Plugins
   CtrlP
   «C-p»        - Open Ctrlp in MRU mode
---
+ --
   Easy Align
   <Enter>      - Ⓥ Trigger Easy Align
  --
@@ -342,7 +342,7 @@
   csⓒ ⓒ       - Change delimiters
   cstⓒ        - Replace tags with ⓒ
   dst         - Remove enclosing tags
---
+ --
   Tagbar
   «F9»         - Toggle Tagbar
  --
