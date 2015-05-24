@@ -482,7 +482,7 @@
 
 	" Return the text and color to be used for the current mode
 	func! GetModeInfo()
-		return get(g:mode_map, mode(), ['??????', '%#Warnings#'])
+		return get(g:mode_map, mode(), ['PENDING', '%#Warnings#'])
 	endfunc
 
 	func! ConcatIf(l1, l2, minwd, wd)
