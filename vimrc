@@ -365,7 +365,7 @@
 	" be used to override the theme's settings and highlight groups.
 
 	" Set up highlight groups for the current theme and background.
-	func! UpdateHighlightGroups()
+	func! CustomizeTheme()
 		" Set default values for the highlight groups of the status line
 		hi link NormalMode  StatusLine
 		hi link InsertMode  StatusLine
@@ -381,7 +381,7 @@
 		endif
 	endfunc
 
-	autocmd ColorScheme * call UpdateHighlightGroups()
+	autocmd ColorScheme * call CustomizeTheme()
 
 	" Solarized {{
 		let g:solarized_bold = 1
