@@ -796,6 +796,19 @@
 			call Ledger('cleared --real ' . accounts)
 		endfunc
 	" }}
+	" Show Marks {{
+		func! ToggleShowMarks()
+			if exists('b:showmarks')
+				NoShowMarks
+			else
+				DoShowMarks
+			endif
+		endfunc
+
+		" Toggle marks with ,m
+		nnoremap <silent> ,m :call ToggleShowMarks()<CR>
+		nnoremap ` :ShowMarksOnce<CR>`
+	" }}
 	" Tagbar {{
 		" Use F9 to toggle tag bar:
 		nnoremap <silent> <F9> :TagbarToggle<CR>

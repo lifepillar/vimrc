@@ -336,6 +336,9 @@
   ,a           - Ⓥ Align at decimal point
   «C-l»        - Ⓘ Align amount just entered
  --
+  Show Marks
+  ,m          - Toggle marks
+ --
   Surround
   ysiwⓒ       - Surround word with ⓒ
   Sⓒ          - Ⓥ Surround with ⓒ
