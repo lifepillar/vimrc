@@ -402,6 +402,7 @@
 			endif
 			hi clear Title
 			hi clear Folded
+			hi clear SignColumn
 
 			" Status line
 			if &background ==# 'dark'
