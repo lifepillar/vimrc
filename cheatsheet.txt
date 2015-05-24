@@ -293,10 +293,10 @@
  «C-w» =       - Make all windows the same size
  «C-w» _       - Maximize height
  «C-w» |       - Maximize width
- «C-w» ⓝ  -    - Decrease height
- «C-w» ⓝ  +    - Increase height
- «C-w» ⓝ  <    - Decrease width
- «C-w» ⓝ  >    - Increase width
+ ⓝ «C-w» -     - Decrease height
+ ⓝ «C-w» +     - Increase height
+ ⓝ «C-w» <     - Decrease width
+ ⓝ «C-w» >     - Increase width
 ---
  Tabs
  :tabs         - List tabs
