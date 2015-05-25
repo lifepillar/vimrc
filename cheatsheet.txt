@@ -262,6 +262,7 @@
  …             …
  :marks        - View all marks
  :delmarks …   - Remove marks
+ gx            - Open URL under cursor
 ---
  Window
  :new          - New window (horizontal split)
