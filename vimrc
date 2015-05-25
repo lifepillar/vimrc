@@ -348,16 +348,16 @@
 	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 	set fillchars=vert:\  " Get rid of vertical split separator (http://stackoverflow.com/questions/9001337/vim-split-bar-styling)
 	set fillchars+=fold:\·
-	" MacVim {{
-		if has('gui_macvim')
-			set guifont=Monaco:h14
-			set guioptions-=aP " Do not use system clipboard by default
-			set guioptions-=T  " No toolbar
-			set guioptions-=lL " No left scrollbar
-			set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-			set transparency=4
-		endif
-	" }}
+" }}
+" MacVim {{
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions-=aP " Do not use system clipboard by default
+		set guioptions-=T  " No toolbar
+		set guioptions-=lL " No left scrollbar
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+	endif
 " }}
 " Themes {{
 	" To add support for a new theme, define a function called
