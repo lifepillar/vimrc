@@ -670,7 +670,7 @@
 		func! s:goyo_enter()
 			call DisableStatusLine()
 			if has('gui_macvim')
-				set fullscreen
+				"set fullscreen
 				set guifont=Monaco:h14
 				set linespace=7
 				set guioptions-=r " hide right scrollbar
@@ -682,7 +682,7 @@
 
 		func! s:goyo_leave()
 			if has('gui_macvim')
-				set nofullscreen
+				"set nofullscreen
 				set guifont=Monaco:h14
 				set linespace=0
 				set guioptions+=r
