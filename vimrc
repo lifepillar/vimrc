@@ -539,26 +539,27 @@
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
-	" wd: window width
-	" bufnum: buffer number
-	" active: 1=active, 0=inactive
-	func! BuildStatusLine(wd, bufnum, active)
-		let stat = AltStatusLine(a:wd, a:bufnum, a:active)
+	" nr: window number
+	func! BuildStatusLine(nr)
+		let wd = winwidth(a:nr)
+		let bufnum = winbufnr(a:nr)
+		let active = (a:nr == winnr())
+		let stat = AltStatusLine(wd, bufnum, active)
 		if stat != [] | return join(stat) . ' %*' | endif
 
-		let enc = getbufvar(a:bufnum, '&fenc')
-		if enc == '' | let enc = getbufvar(a:bufnum, '&enc') | endif
-		if getbufvar(a:bufnum, '&bomb') | let enc .= ',BOM' | endif
-		let ft = getbufvar(a:bufnum, '&ft')
-		let ff = getbufvar(a:bufnum, '&ff')
+		let enc = getbufvar(bufnum, '&fenc')
+		if enc == '' | let enc = getbufvar(bufnum, '&enc') | endif
+		if getbufvar(bufnum, '&bomb') | let enc .= ',BOM' | endif
+		let ft = getbufvar(bufnum, '&ft')
+		let ff = getbufvar(bufnum, '&ff')
 		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
-		let mod = getbufvar(a:bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
-		let ro  = getbufvar(a:bufnum, '&modifiable') ? (getbufvar(a:bufnum, '&readonly') ? '✗' : '') : '⚔'  " Symbol for read-only/unmodifiable
-		let tabs = (getbufvar(a:bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(a:bufnum, '&tabstop')
-		if a:active
+		let mod = getbufvar(bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
+		let ro  = getbufvar(bufnum, '&modifiable') ? (getbufvar(bufnum, '&readonly') ? '✗' : '') : '⚔'  " Symbol for read-only/unmodifiable
+		let tabs = (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(bufnum, '&tabstop')
+		if active
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
-			let currmode = modeinfo[0] . (getbufvar(a:bufnum, '&paste') ? ' PASTE' : '')
+			let currmode = modeinfo[0] . (getbufvar(bufnum, '&paste') ? ' PASTE' : '')
 			let stat = [modeinfo[1], currmode, '%*', '%<%F', mod, ro, '%=', ft]
 			let rhs = [modeinfo[1], '%5l %2v %3p%%']
 			if warnings != '' | let rhs += ['%*%#Warnings#', warnings] | endif
@@ -566,19 +567,19 @@
 			let stat = [' %<%F', mod, ro, '%=', ft]
 			let rhs = ['%5l %2v %3p%%']
 		endif
-		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, a:wd)
-		let stat = ConcatIf(stat, rhs, 60, a:wd)
+		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, wd)
+		let stat = ConcatIf(stat, rhs, 60, wd)
 		return join(stat) . ' %*'
 	endfunc
 
 	func! RefreshStatusLines()
 		for nr in range(1, winnr('$'))
-			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . winwidth(nr) . ',' . winbufnr(nr) . ',' . (nr == winnr()) . ')')
+			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . nr . ')')
 		endfor
 	endfunc
 
 	func! RefreshActiveStatusLine()
-		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winwidth(winnr()) . ',' . winbufnr(winnr()) . ',1)')
+		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ')')
 	endfunc
 
 	func! EnableStatusLine()
