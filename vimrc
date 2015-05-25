@@ -281,8 +281,6 @@
 	" Hard-wrap paragraphs at textwidth with ,r
 	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
-	" ,b       : show the list of buffers
-	nnoremap <Leader>b :ls<CR>
 	" Remap H, L, and M to go to previous/next/last used buffer
 	nnoremap H :bp<CR>
 	nnoremap L :bn<CR>
@@ -636,6 +634,8 @@
 					\ 'prog': 'CtrlP_Progress',
 					\ }
 		let g:ctrlp_extensions = ['funky']
+		" Show the list of buffers with ,b
+		nnoremap <Leader>b :CtrlPBuffer<CR>
 
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
