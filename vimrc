@@ -478,10 +478,21 @@
 	endif
 " }}
 " Status line {{
-	" This was very helpful: http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+	" These were very helpful resources:
+	" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+	" http://article.gmane.org/gmane.editors.vim/119421/
+
+	" Global unique window id. We use this to identify each window, instead of
+	" winnr(), because a window number may change (e.g., when windows are
+	" rotated, see `h window-moving`). See SetupLocalStatusLine().
+	let g:window_id = 0
+
+	" Return the current window number of the window identified by window_id.
+	func! WinNrFromId(window_id)
+		return filter(range(1, winnr('$')), 'getwinvar(v:val, "custom_window_id") == ' . a:window_id)[0]
+	endfunc
 
 	let g:mode_map = {
-	" Return the text and color to be used for the current mode
 				\ '__':     ['------',   '%#NormalMode#' ],
 				\ 'n':      ['NORMAL',   '%#NormalMode#' ],
 				\ 'i':      ['INSERT',   '%#InsertMode#' ],
@@ -495,10 +506,12 @@
 				\ "\<C-s>": ['S-BLOCK',  '%#VisualMode#' ],
 				\ 't':      ['TERMINAL', '%#CommandMode#'] }
 
+	" Return the text and color to be used for the current mode.
 	func! GetModeInfo()
 		return get(g:mode_map, mode(), ['PENDING', '%#Warnings#'])
 	endfunc
 
+	" Concatenate list l1 and l2 if wd > minwd, otherwise return l1.
 	func! ConcatIf(l1, l2, minwd, wd)
 		if a:minwd >= a:wd | return a:l1 | endif
 		return a:l1 + a:l2
@@ -541,11 +554,12 @@
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
-	" nr: window number
-	func! BuildStatusLine(nr)
-		let wd = winwidth(a:nr)
-		let bufnum = winbufnr(a:nr)
-		let active = (a:nr == winnr())
+	" wid: custom unique window id
+	func! BuildStatusLine(wid)
+		let nr = WinNrFromId(a:wid)
+		let wd = winwidth(nr)
+		let bufnum = winbufnr(nr)
+		let active = (nr == winnr())
 		let stat = AltStatusLine(wd, bufnum, active)
 		if stat != [] | return join(stat) . ' %*' | endif
 
@@ -574,59 +588,32 @@
 		return join(stat) . ' %*'
 	endfunc
 
-	func! RefreshStatusLines()
-		for nr in range(1, winnr('$'))
-			call setwinvar(nr, '&statusline', '%!BuildStatusLine(' . nr . ')')
-		endfor
+	" Define a local status line. This is called once for each new window.
+	func! SetupLocalStatusLine()
+		let g:window_id += 1
+		call setwinvar(winnr(), "custom_window_id", g:window_id)
+		exec 'setl statusline=%!BuildStatusLine(' . g:window_id  . ')'
 	endfunc
 
-	func! RefreshActiveStatusLine()
-		call setwinvar(winnr(), '&statusline', '%!BuildStatusLine(' . winnr() . ')')
+	" Reset the value of the local status line. For some reason, this and the
+	" autocmd below are needed for the status line to be updated when windows
+	" are split with <C-w><C-s> and similar mappings.
+	func! ResetLocalStatusLine()
+		let &l:statusline=''
 	endfunc
+
+	autocmd WinEnter,BufWinEnter * call ResetLocalStatusLine()
 
 	func! EnableStatusLine()
-		let g:stl = &statusline
-		augroup status
-			autocmd!
-			autocmd VimEnter,WinEnter,BufWinEnter,VimResized * call RefreshStatusLines()
-			au InsertEnter,InsertLeave call * RefreshActiveStatusLine()
-			autocmd BufWritePost * unlet! b:statusline_warnings
-		augroup END
-		call RefreshStatusLines()
+		let g:default_stl = &statusline
+		set statusline=%!SetupLocalStatusLine()
 	endfunc!
 
 	func! DisableStatusLine()
-		augroup status
-			autocmd!
-		augroup END
-		augroup! status
-		let &statusline = g:stl
-		for t in range(1, tabpagenr('$'))
-			for n in range(1, tabpagewinnr(t, '$'))
-				call settabwinvar(t, n, '&statusline', '')
-			endfor
-		endfor
+		let &statusline = g:default_stl
 	endfunc!
 
 	call EnableStatusLine()
-
-	" Force updating the status lines when windows are resized
-	nnoremap <silent> <C-w><C-o> <C-w>o:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w>o     <C-w>o:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w><Bar> <C-w><Bar>:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w><lt>  <C-w><lt>:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w>>     <C-w>>:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w>=     <C-w>=:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w>H     <C-w>H:call RefreshStatusLines()<CR>
-	nnoremap <silent> <C-w>K     <C-w>K:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w><C-o> <C-w>o:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w>o     <C-w>o:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w><Bar> <C-w><Bar>:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w><lt>  <C-w><lt>:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w>>     <C-w>>:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w>=     <C-w>=:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w>H     <C-w>H:call RefreshStatusLines()<CR>
-	vnoremap <silent> <C-w>K     <C-w>K:call RefreshStatusLines()<CR>
 " }}
 " Plugins {{
 	" CtrlP {{
