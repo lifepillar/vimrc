@@ -487,11 +487,6 @@
 	" rotated, see `h window-moving`). See SetupLocalStatusLine().
 	let g:window_id = 0
 
-	" Return the current window number of the window identified by window_id.
-	func! WinNrFromId(window_id)
-		return filter(range(1, winnr('$')), 'getwinvar(v:val, "custom_window_id") == ' . a:window_id)[0]
-	endfunc
-
 	let g:mode_map = {
 				\ '__':     ['------',   '%#NormalMode#' ],
 				\ 'n':      ['NORMAL',   '%#NormalMode#' ],
@@ -515,6 +510,18 @@
 	func! ConcatIf(l1, l2, minwd, wd)
 		if a:minwd >= a:wd | return a:l1 | endif
 		return a:l1 + a:l2
+	endfunc
+
+	" Return the current window number of the window identified by window_id.
+	func! WinNrFromId(window_id)
+		return filter(map(range(1, winnr('$')),
+			\ 'getwinvar(v:val, "&statusline") is# "%!BuildStatusLine(" . getwinvar(v:val, "custom_window_id") . ")" ?
+				\ [v:val, getwinvar(v:val, "custom_window_id")] :
+				\ (getwinvar(v:val, "custom_window_id") is# "") ?
+				\ [setwinvar(v:val, "custom_window_id", extend(s:, {"last_window_id": get(s:, "last_window_id", 0) + 1}).last_window_id),
+				\  setwinvar(v:val, "&statusline", "%!BuildStatusLine(" . s:last_window_id . ")"), v:val, s:last_window_id][-2:] :
+				\ [setwinvar(v:val, "&statusline", "%!BuildStatusLine(" . getwinvar(v:val, "custom_window_id") . ")"),
+				\ v:val, getwinvar(v:val, "custom_window_id")][-2:]'), 'v:val[1] == a:window_id')[0][0]
 	endfunc
 
 	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
@@ -553,9 +560,12 @@
 		return stat
 	endfunc
 
+	let g:nnn = 0
 	" Build the status line the way I want - no fat light plugins!
 	" wid: custom unique window id
 	func! BuildStatusLine(wid)
+		"let g:nnn+=1
+		"echomsg "BuildStatusLine called: " . g:nnn
 		let nr = WinNrFromId(a:wid)
 		let wd = winwidth(nr)
 		let bufnum = winbufnr(nr)
@@ -576,11 +586,11 @@
 			let modeinfo = GetModeInfo()
 			let warnings = StatusLineWarnings()
 			let currmode = modeinfo[0] . (getbufvar(bufnum, '&paste') ? ' PASTE' : '')
-			let stat = [modeinfo[1], currmode, '%*', '%<%F', mod, ro, '%=', ft]
+			let stat = [modeinfo[1], currmode, '%*', '%<%F', mod, ro, '%=', 'wid:'.a:wid, 'nr:'.nr,  ft]
 			let rhs = [modeinfo[1], '%5l %2v %3p%%']
 			if warnings != '' | let rhs += ['%*%#Warnings#', warnings] | endif
 		else
-			let stat = [' %<%F', mod, ro, '%=', ft]
+			let stat = [' %<%F', mod, ro, '%=', 'wid:'.a:wid, 'nr:'.nr, ft]
 			let rhs = ['%5l %2v %3p%%']
 		endif
 		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, wd)
@@ -591,18 +601,10 @@
 	" Define a local status line. This is called once for each new window.
 	func! SetupLocalStatusLine()
 		let g:window_id += 1
-		call setwinvar(winnr(), "custom_window_id", g:window_id)
-		exec 'setl statusline=%!BuildStatusLine(' . g:window_id  . ')'
+		"call setwinvar(winnr(), "custom_window_id", g:window_id)
+		call setwinvar(winnr(), "custom_window_id", extend(s:, {"last_window_id": get(s:, "last_window_id", 0) + 1}).last_window_id)
+		exec 'setl statusline=%!BuildStatusLine(' . getwinvar(winnr(), "custom_window_id")  . ')'
 	endfunc
-
-	" Reset the value of the local status line. For some reason, this and the
-	" autocmd below are needed for the status line to be updated when windows
-	" are split with <C-w><C-s> and similar mappings.
-	func! ResetLocalStatusLine()
-		let &l:statusline=''
-	endfunc
-
-	autocmd WinEnter,BufWinEnter * call ResetLocalStatusLine()
 
 	func! EnableStatusLine()
 		let g:default_stl = &statusline
