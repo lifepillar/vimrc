@@ -516,9 +516,10 @@
 					if mix != 0 | let b:statusline_warnings .= ' ' | endif
 				endif
 				if mix != 0 | let b:statusline_warnings .= 'Mixed indent (' . mix . ')' | endif
+				let b:statusline_warnings .= ' '
 			endif
 		endif
-		return b:statusline_warnings . ' ' 
+		return b:statusline_warnings
 	endfunc
 
 	" Alternative status lines (e.g., for help files)
@@ -800,5 +801,5 @@
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
-       
+
 
