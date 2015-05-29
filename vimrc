@@ -272,8 +272,8 @@
 	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
 	" Toggle spelling in the current buffer with ,s
 	nnoremap <silent> <Leader>s :setlocal spell!<CR>
-	" Remove trailing space globally with ,ts
-	nnoremap <Leader>ts :call RemoveTrailingSpace()<CR>
+	" Remove trailing space globally with ,T
+	nnoremap <Leader>T :call RemoveTrailingSpace()<CR>
 	" Capitalize words in selected text with ,U (see h gU)
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 	" Toggle search highlighting with ,h

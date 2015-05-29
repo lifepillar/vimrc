@@ -77,7 +77,7 @@ both.
 - Toggle invisibles with `,i`.
 - Toggle spell-checking with `,s`.
 - Select all with `,A`.
-- Remove all trailing spaces with `,ts`.
+- Remove all trailing spaces with `,T`.
 - Hard-wrap paragraphs with `,r`.
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
