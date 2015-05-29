@@ -499,76 +499,57 @@
 				\ "\<C-s>": ['S-BLOCK',  '%#VisualMode#' ],
 				\ 't':      ['TERMINAL', '%#CommandMode#'] }
 
-	" Return a warning if trailing space or mixed indent is detected in the current buffer.
+	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
+	func! UpdateWarnings()
+		let trail = search('\s$', 'nw')
+		let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
+		if trail != 0
+			let b:statusline_warnings = '  trailing space (' . trail . ') '
+			if mix != 0
+				let b:statusline_warnings .= 'mixed indent (' . mix . ') '
+			endif
+		elseif mix != 0
+			let b:statusline_warnings = '  mixed indent (' . mix . ') '
+		endif
+	endfunc
+
+	" Return a (possibly empty) string of warnings for the current buffer.
+	" Warnings are shown only in the active buffer.
+	" nr: active window number
 	func! StatusLineWarnings(nr)
-		if (winnr() != a:nr)
-			return ''
-		endif
-		if !exists('b:statusline_warnings')
-			let b:statusline_warnings = ''
-			let trail = search('\s$', 'nw')
-			let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
-			if trail != 0 || mix != 0
-				let b:statusline_warnings = '  '
-				if trail != 0
-					let b:statusline_warnings .= 'Trailing space (' . trail . ')'
-					if mix != 0 | let b:statusline_warnings .= ' ' | endif
-				endif
-				if mix != 0 | let b:statusline_warnings .= 'Mixed indent (' . mix . ')' | endif
-				let b:statusline_warnings .= ' '
-			endif
-		endif
-		return b:statusline_warnings
+		return (winnr() != a:nr || !exists('b:statusline_warnings') || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? '' : b:statusline_warnings
 	endfunc
 
-	" Alternative status lines (e.g., for help files)
-	func! AltStatusLine(wd, bufnum, active)
-		let stat = []
-		let ft = getbufvar(a:bufnum, '&ft')
-		if ft ==# 'help'
-			if a:active
-				let stat = ['%#NormalMode# HELP %* %<%f ⚔ %=']
-				let stat = ConcatIf(stat, ['%#NormalMode# %5l %2v %3p%%'], 40, a:wd)
-			else
-				let stat = [' HELP  %<%f ⚔']
-				let stat = ConcatIf(stat, ['%= %5l %2v %3p%%'], 40, a:wd)
-			endif
-		elseif ft ==# 'undotree' || ft ==# 'diff'
-			let stat = a:active ? ['%#NormalMode#', ft] : ['', ft]
-		elseif ft ==# 'tagbar'
-			let stat = a:active ? ['%#NormalMode# Tagbar'] : [' Tagbar', tagbar#currenttag('%s','')]
-		endif
-		return stat
-	endfunc
-
+	" Return a string for the current mode.
+	" The mode is shown only in the active buffer.
+	" txt: the text to be shown for the current mode
+	" nr: active window number
 	func! ModePart(txt, nr)
-		return  (winnr() == a:nr) ? '  ' . a:txt . ' ' : ''
+		return (winnr() == a:nr) ? '  ' . a:txt . ' ' : ''
 	endfunc
 
-	func! LeftPart()
+	" Return a string of symbols for modified/read-only/unmodifiable.
+	func! Modified()
 		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : ' ') .
 					\ (getbufvar(winbufnr(winnr()), '&modifiable') ? (getbufvar(winbufnr(winnr()), '&readonly') ? '✗' : '') : '⚔')
 	endfunc
 
-	func! RightPart()
-		let nr = winnr()
-		let bufnum = winbufnr(nr)
-		let ft = getbufvar(bufnum, '&ft')
-		if winwidth(winnr()) < 80
-			return ft . ' '
-		endif
-
-		let enc = getbufvar(bufnum, '&fenc')
-		if enc == '' | let enc = getbufvar(bufnum, '&enc') | endif
-		if getbufvar(bufnum, '&bomb') | let enc .= ',BOM' | endif
-		let ff = getbufvar(bufnum, '&ff')
-		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
-		let tabs = (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(bufnum, '&tabstop')
-
-		return ft . '  ' . enc . ' ' . ff . ' ' . tabs .' '
+	" Return a string with file type, encoding, line endings, tab type and size.
+	" If the window is too narrow, only the file type is shown.
+	func! FileInfo()
+		return getbufvar(winbufnr(winnr()), '&ft') . ((winwidth(winnr()) < 80 || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? ' ' :
+					\ ('  ' . (getbufvar(winbufnr(winnr()), '&fenc') == '' ? getbufvar(winbufnr(winnr()), '&enc') : getbufvar(winbufnr(winnr()), '&fenc')) .
+					\ (getbufvar(winbufnr(winnr()), '&bomb') ? ',BOM' : '') .
+					\ ' ' . (getbufvar(winbufnr(winnr()), '&ff') ==# 'unix' ? '␊ (Unix)'        :
+					\       (getbufvar(winbufnr(winnr()), '&ff') ==# 'mac'  ? '␍ (Classic Mac)' :
+					\       (getbufvar(winbufnr(winnr()), '&ff') ==# 'dos'  ? '␍␊ (Windows)'    : '? (Unknown)'))) .
+					\ ' ' . (getbufvar(winbufnr(winnr()), '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(winbufnr(winnr()), '&tabstop'))) .
+					\ ' '
 	endfunc
 
+	" Return a string with current line, column and percentage through file.
+	" If the window is too narrow, nothing is shown.
 	func! CoordsPart(nr, active)
 		return (winwidth(winnr()) < 60) ? '' :
 					\	(winnr() == a:nr) ? (a:active ? '  ' . line('.') . ' ' . virtcol('.') . ' ' . (100*line('.')/line('$')) .'%' . ' ' : '') :
@@ -578,8 +559,8 @@
 	" Build the status line the way I want - no fat light plugins!
 	" nr: *active* window number
 	func! BuildStatusLine(nr)
-		let md = get(g:mode_map, mode(), ['??????', '%#Warnings#'])
-		return md[1] . '%{ModePart("' . md[0] . '",'. a:nr . ')}%* %<%F %{LeftPart()} %= %{RightPart()}'
+		let md = get(g:mode_map, mode(1), ['??????', '%#Warnings#'])
+		return md[1] . '%{ModePart("' . md[0] . (&paste ? ' PASTE' : '') . '",'. a:nr . ')}%* %<%F %{Modified()} %= %{FileInfo()}'
 					\ . md[1] . '%(%{CoordsPart('.a:nr.',1)}%*%{CoordsPart('.a:nr.',0)}%)%#warnings#%{StatusLineWarnings('.a:nr.')}%*'
 	endfunc
 
@@ -587,7 +568,7 @@
 		let g:default_stl = &statusline
 		augroup status
 			autocmd!
-			autocmd BufWritePost * unlet! b:statusline_warnings
+			autocmd BufWritePost * call UpdateWarnings()
 		augroup END
 		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
 	endfunc!
