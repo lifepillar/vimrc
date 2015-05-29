@@ -481,15 +481,13 @@
 	" These were very helpful resources:
 	" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 	" http://article.gmane.org/gmane.editors.vim/119421/
+	" Although, in the end, I did it my own way :)
 
-	" Global unique window id. We use this to identify each window, instead of
-	" winnr(), because a window number may change (e.g., when windows are
-	" rotated, see `h window-moving`). See SetupLocalStatusLine().
-	let g:window_id = 0
-
+	" See :h mode()
 	let g:mode_map = {
 				\ '__':     ['------',   '%#NormalMode#' ],
 				\ 'n':      ['NORMAL',   '%#NormalMode#' ],
+				\ 'no':     ['PENDING',  '%#CommandMode#'],
 				\ 'i':      ['INSERT',   '%#InsertMode#' ],
 				\ 'R':      ['REPLACE',  '%#ReplaceMode#'],
 				\ 'v':      ['VISUAL',   '%#VisualMode#' ],
@@ -501,43 +499,26 @@
 				\ "\<C-s>": ['S-BLOCK',  '%#VisualMode#' ],
 				\ 't':      ['TERMINAL', '%#CommandMode#'] }
 
-	" Return the text and color to be used for the current mode.
-	func! GetModeInfo()
-		return get(g:mode_map, mode(), ['PENDING', '%#Warnings#'])
-	endfunc
-
-	" Concatenate list l1 and l2 if wd > minwd, otherwise return l1.
-	func! ConcatIf(l1, l2, minwd, wd)
-		if a:minwd >= a:wd | return a:l1 | endif
-		return a:l1 + a:l2
-	endfunc
-
-	" Return the current window number of the window identified by window_id.
-	func! WinNrFromId(window_id)
-		return filter(map(range(1, winnr('$')),
-			\ 'getwinvar(v:val, "&statusline") is# "%!BuildStatusLine(" . getwinvar(v:val, "custom_window_id") . ")" ?
-				\ [v:val, getwinvar(v:val, "custom_window_id")] :
-				\ (getwinvar(v:val, "custom_window_id") is# "") ?
-				\ [setwinvar(v:val, "custom_window_id", extend(s:, {"last_window_id": get(s:, "last_window_id", 0) + 1}).last_window_id),
-				\  setwinvar(v:val, "&statusline", "%!BuildStatusLine(" . s:last_window_id . ")"), v:val, s:last_window_id][-2:] :
-				\ [setwinvar(v:val, "&statusline", "%!BuildStatusLine(" . getwinvar(v:val, "custom_window_id") . ")"),
-				\ v:val, getwinvar(v:val, "custom_window_id")][-2:]'), 'v:val[1] == a:window_id')[0][0]
-	endfunc
-
-	" Return a warning if trailing space or mixed indent is detected in the *current buffer*.
+	" Return a warning if trailing space or mixed indent is detected in the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-	func! StatusLineWarnings()
+	func! StatusLineWarnings(nr)
+		if (winnr() != a:nr)
+			return ''
+		endif
 		if !exists('b:statusline_warnings')
 			let b:statusline_warnings = ''
 			let trail = search('\s$', 'nw')
 			let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
-			if trail != 0
-				let b:statusline_warnings .= 'Trailing space (' . trail . ')'
-				if mix != 0 | let b:statusline_warnings .= ' ' | endif
+			if trail != 0 || mix != 0
+				let b:statusline_warnings = '  '
+				if trail != 0
+					let b:statusline_warnings .= 'Trailing space (' . trail . ')'
+					if mix != 0 | let b:statusline_warnings .= ' ' | endif
+				endif
+				if mix != 0 | let b:statusline_warnings .= 'Mixed indent (' . mix . ')' | endif
 			endif
-			if mix != 0 | let b:statusline_warnings .= 'Mixed indent (' . mix . ')' | endif
 		endif
-		return b:statusline_warnings
+		return b:statusline_warnings . ' ' 
 	endfunc
 
 	" Alternative status lines (e.g., for help files)
@@ -560,58 +541,61 @@
 		return stat
 	endfunc
 
-	let g:nnn = 0
-	" Build the status line the way I want - no fat light plugins!
-	" wid: custom unique window id
-	func! BuildStatusLine(wid)
-		"let g:nnn+=1
-		"echomsg "BuildStatusLine called: " . g:nnn
-		let nr = WinNrFromId(a:wid)
-		let wd = winwidth(nr)
+	func! ModePart(txt, nr)
+		return  (winnr() == a:nr) ? '  ' . a:txt . ' ' : ''
+	endfunc
+
+	func! LeftPart()
+		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : ' ') .
+					\ (getbufvar(winbufnr(winnr()), '&modifiable') ? (getbufvar(winbufnr(winnr()), '&readonly') ? '✗' : '') : '⚔')
+	endfunc
+
+	func! RightPart()
+		let nr = winnr()
 		let bufnum = winbufnr(nr)
-		let active = (nr == winnr())
-		let stat = AltStatusLine(wd, bufnum, active)
-		if stat != [] | return join(stat) . ' %*' | endif
+		let ft = getbufvar(bufnum, '&ft')
+		if winwidth(winnr()) < 80
+			return ft . ' '
+		endif
 
 		let enc = getbufvar(bufnum, '&fenc')
 		if enc == '' | let enc = getbufvar(bufnum, '&enc') | endif
 		if getbufvar(bufnum, '&bomb') | let enc .= ',BOM' | endif
-		let ft = getbufvar(bufnum, '&ft')
 		let ff = getbufvar(bufnum, '&ff')
 		let ff = (ff ==# 'unix') ? '␊ (Unix)' : (ff ==# 'mac') ? '␍ (Classic Mac)' : (ff ==# 'dos') ? '␍␊ (Windows)' : '? (Unknown)'
-		let mod = getbufvar(bufnum, '&modified') ? '◇' : ''  " Symbol for modified file
-		let ro  = getbufvar(bufnum, '&modifiable') ? (getbufvar(bufnum, '&readonly') ? '✗' : '') : '⚔'  " Symbol for read-only/unmodifiable
 		let tabs = (getbufvar(bufnum, '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(bufnum, '&tabstop')
-		if active
-			let modeinfo = GetModeInfo()
-			let warnings = StatusLineWarnings()
-			let currmode = modeinfo[0] . (getbufvar(bufnum, '&paste') ? ' PASTE' : '')
-			let stat = [modeinfo[1], currmode, '%*', '%<%F', mod, ro, '%=', 'wid:'.a:wid, 'nr:'.nr,  ft]
-			let rhs = [modeinfo[1], '%5l %2v %3p%%']
-			if warnings != '' | let rhs += ['%*%#Warnings#', warnings] | endif
-		else
-			let stat = [' %<%F', mod, ro, '%=', 'wid:'.a:wid, 'nr:'.nr, ft]
-			let rhs = ['%5l %2v %3p%%']
-		endif
-		let stat = ConcatIf(stat, ['', enc, ff, tabs], 80, wd)
-		let stat = ConcatIf(stat, rhs, 60, wd)
-		return join(stat) . ' %*'
+
+		return ft . '  ' . enc . ' ' . ff . ' ' . tabs .' '
 	endfunc
 
-	" Define a local status line. This is called once for each new window.
-	func! SetupLocalStatusLine()
-		let g:window_id += 1
-		"call setwinvar(winnr(), "custom_window_id", g:window_id)
-		call setwinvar(winnr(), "custom_window_id", extend(s:, {"last_window_id": get(s:, "last_window_id", 0) + 1}).last_window_id)
-		exec 'setl statusline=%!BuildStatusLine(' . getwinvar(winnr(), "custom_window_id")  . ')'
+	func! CoordsPart(nr, active)
+		return (winwidth(winnr()) < 60) ? '' :
+					\	(winnr() == a:nr) ? (a:active ? '  ' . line('.') . ' ' . virtcol('.') . ' ' . (100*line('.')/line('$')) .'%' . ' ' : '') :
+					\ (a:active ? '' : '  ' . line('.') . ' ' . virtcol('.') . ' ' . (100*line('.')/line('$')) .'%' . ' ')
+	endfunc
+
+	" Build the status line the way I want - no fat light plugins!
+	" nr: *active* window number
+	func! BuildStatusLine(nr)
+		let md = get(g:mode_map, mode(), ['??????', '%#Warnings#'])
+		return md[1] . '%{ModePart("' . md[0] . '",'. a:nr . ')}%* %<%F %{LeftPart()} %= %{RightPart()}'
+					\ . md[1] . '%(%{CoordsPart('.a:nr.',1)}%*%{CoordsPart('.a:nr.',0)}%)%#warnings#%{StatusLineWarnings('.a:nr.')}%*'
 	endfunc
 
 	func! EnableStatusLine()
 		let g:default_stl = &statusline
-		set statusline=%!SetupLocalStatusLine()
+		augroup status
+			autocmd!
+			autocmd BufWritePost * unlet! b:statusline_warnings
+		augroup END
+		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
 	endfunc!
 
 	func! DisableStatusLine()
+		augroup status
+			autocmd!
+		augroup END
+		augroup! status
 		let &statusline = g:default_stl
 	endfunc!
 
@@ -816,4 +800,5 @@
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
+       
 
