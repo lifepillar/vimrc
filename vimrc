@@ -539,7 +539,7 @@
 
 	" Build the status line the way I want - no fat light plugins!
 	func! BuildStatusLine(nr)
-		return '%{ModeColor('.a:nr.')}%#CurrMode#%{ModePart('.a:nr.')}%* %<%F %{Modified()}%=%{FileInfo()}%#CurrMode#%{CoordsPart()}%*%#warnings#%{WarningsPart('.a:nr.')}%*'
+		return '%{ModeColor('.a:nr.')}%#CurrMode#%{ModePart('.a:nr.')}%* %<%F %{Modified()}%=%{FileInfo()}%#CurrMode#%{CoordsPart()}%*%#Warnings#%{WarningsPart('.a:nr.')}%*'
 	endfunc
 
 	func! EnableStatusLine()
