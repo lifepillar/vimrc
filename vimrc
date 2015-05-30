@@ -478,31 +478,14 @@
 	endif
 " }}
 " Status line {{
-	" These were very helpful resources:
-	" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
-	" http://article.gmane.org/gmane.editors.vim/119421/
-	" Although, in the end, I did it my own way :)
-
-	" See :h mode()
+	" See :h mode() (some of these are never used in the status line)
 	let g:mode_map = {
-				\ 'n':      ['NORMAL',   '%#NormalMode#' ],
-				\ 'no':     ['PENDING',  '%#CommandMode#'],
-				\ 'v':      ['VISUAL',   '%#VisualMode#' ],
-				\ 'V':      ['V-LINE',   '%#VisualMode#' ],
-				\ "\<C-v>": ['V-BLOCK',  '%#VisualMode#' ],
-				\ 's':      ['SELECT',   '%#VisualMode#' ],
-				\ 'S':      ['S-LINE',   '%#VisualMode#' ],
-				\ "\<C-s>": ['S-BLOCK',  '%#VisualMode#' ],
-				\ 'i':      ['INSERT',   '%#InsertMode#' ],
-				\ 'R':      ['REPLACE',  '%#ReplaceMode#'],
-				\ 'Rv':     ['REPLACE',  '%#ReplaceMode#'],
-				\ 'c':      ['COMMAND',  '%#CommandMode#'],
-				\ 'cv':     ['COMMAND',  '%#CommandMode#'],
-				\ 'ce':     ['COMMAND',  '%#CommandMode#'],
-				\ 'r':      ['PROMPT',   '%#CommandMode#'],
-				\ 'rm':     ['-MORE-',   '%#CommandMode#'],
-				\ 'r?':     ['CONFIRM',  '%#CommandMode#'],
-				\ '!':      ['SHELL',    '%#CommandMode#'] }
+				\ 'n':  ['NORMAL',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['VISUAL',  'VisualMode' ],
+				\ 'V':  ['V-LINE',  'VisualMode' ], "\<C-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
+				\ 'S':  ['S-LINE',  'VisualMode' ], "\<C-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
+				\ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
+				\ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
+				\ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
 
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
@@ -521,29 +504,20 @@
 		endif
 	endfunc
 
-	" Return a (possibly empty) string of warnings for the current buffer.
-	" Warnings are shown only in the active buffer.
-	" nr: active window number
-	func! StatusLineWarnings(nr)
-		return (winnr() != a:nr || !exists('b:statusline_warnings') || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? '' : b:statusline_warnings
+	func! ModeColor(nr)
+		exec 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
+		return ''
 	endfunc
 
-	" Return a string for the current mode.
-	" The mode is shown only in the active buffer.
-	" txt: the text to be shown for the current mode
-	" nr: active window number
-	func! ModePart(txt, nr)
-		return (winnr() == a:nr) ? '  ' . a:txt . ' ' : ''
+	func! ModePart(nr)
+		return (winnr() == a:nr) ? '  ' . get(g:mode_map, mode(1), ['??????'])[0]  . ' ' : ''
 	endfunc
 
-	" Return a string of symbols for modified/read-only/unmodifiable.
 	func! Modified()
 		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : ' ') .
 					\ (getbufvar(winbufnr(winnr()), '&modifiable') ? (getbufvar(winbufnr(winnr()), '&readonly') ? '✗' : '') : '⚔')
 	endfunc
 
-	" Return a string with file type, encoding, line endings, tab type and size.
-	" If the window is too narrow, only the file type is shown.
 	func! FileInfo()
 		return getbufvar(winbufnr(winnr()), '&ft') . ((winwidth(winnr()) < 80 || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? ' ' :
 					\ ('  ' . (getbufvar(winbufnr(winnr()), '&fenc') == '' ? getbufvar(winbufnr(winnr()), '&enc') : getbufvar(winbufnr(winnr()), '&fenc')) .
@@ -555,20 +529,17 @@
 					\ ' '
 	endfunc
 
-	" Return a string with current line, column and percentage through file.
-	" If the window is too narrow, nothing is shown.
-	func! CoordsPart(nr, active)
-		return (winwidth(winnr()) < 60) ? '' :
-					\	(winnr() == a:nr) ? (a:active ? '  ' . line('.') . ' ' . virtcol('.') . ' ' . (100*line('.')/line('$')) .'%' . ' ' : '') :
-					\ (a:active ? '' : '  ' . line('.') . ' ' . virtcol('.') . ' ' . (100*line('.')/line('$')) .'%' . ' ')
+	func! CoordsPart()
+		return (winwidth(winnr()) < 60) ? '' : '  '.line(".")." ".virtcol(".").' '.(100*line(".")/line("$")).'%'.' '
+	endfunc
+
+	func! WarningsPart(nr)
+		return (winnr() != a:nr || !exists('b:statusline_warnings') || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? '' : b:statusline_warnings
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
-	" nr: *active* window number
 	func! BuildStatusLine(nr)
-		let md = get(g:mode_map, mode(1), ['??????', '%#Warnings#'])
-		return md[1] . '%{ModePart("' . md[0] . (&paste ? ' PASTE' : '') . '",'. a:nr . ')}%* %<%F %{Modified()} %= %{FileInfo()}'
-					\ . md[1] . '%(%{CoordsPart('.a:nr.',1)}%*%{CoordsPart('.a:nr.',0)}%)%#warnings#%{StatusLineWarnings('.a:nr.')}%*'
+		return '%{ModeColor('.a:nr.')}%#CurrMode#%{ModePart('.a:nr.')}%* %<%F %{Modified()}%=%{FileInfo()}%#CurrMode#%{CoordsPart()}%*%#warnings#%{WarningsPart('.a:nr.')}%*'
 	endfunc
 
 	func! EnableStatusLine()
