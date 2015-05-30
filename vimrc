@@ -516,6 +516,8 @@
 			endif
 		elseif mix != 0
 			let b:statusline_warnings = '  mixed indent (' . mix . ') '
+		else
+			unlet! b:statusline_warnings
 		endif
 	endfunc
 
