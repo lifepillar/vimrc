@@ -459,7 +459,8 @@
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			hi StatusLine term=NONE cterm=NONE gui=NONE
-			hi TabLine      ctermbg=255 ctermfg=24  guibg=#4d4d4c guifg=#005f87 term=reverse cterm=reverse gui=reverse
+			hi TabLine      ctermbg=255 ctermfg=24  guibg=#f5f5f5 guifg=#005f87 term=reverse cterm=reverse gui=reverse
+			hi TabLineSel   ctermbg=238 ctermfg=255 guibg=#4d4d4c guifg=#f5f5f5 term=reverse cterm=reverse gui=reverse
 			" Status line
 			hi NormalMode   ctermbg=24  ctermfg=254 guibg=#005f87 guifg=#efefef term=NONE    cterm=NONE    gui=NONE
 			hi InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
