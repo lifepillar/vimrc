@@ -499,8 +499,8 @@
 				\ 'c':      ['COMMAND',  '%#CommandMode#'],
 				\ 'cv':     ['COMMAND',  '%#CommandMode#'],
 				\ 'ce':     ['COMMAND',  '%#CommandMode#'],
-				\ 'r':      ['PROMPT',   '%#CommandMode#'], 
-				\ 'rm':     ['-MORE-',   '%#CommandMode#'], 
+				\ 'r':      ['PROMPT',   '%#CommandMode#'],
+				\ 'rm':     ['-MORE-',   '%#CommandMode#'],
 				\ 'r?':     ['CONFIRM',  '%#CommandMode#'],
 				\ '!':      ['SHELL',    '%#CommandMode#'] }
 
