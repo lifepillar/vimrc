@@ -485,19 +485,24 @@
 
 	" See :h mode()
 	let g:mode_map = {
-				\ '__':     ['------',   '%#NormalMode#' ],
 				\ 'n':      ['NORMAL',   '%#NormalMode#' ],
 				\ 'no':     ['PENDING',  '%#CommandMode#'],
-				\ 'i':      ['INSERT',   '%#InsertMode#' ],
-				\ 'R':      ['REPLACE',  '%#ReplaceMode#'],
 				\ 'v':      ['VISUAL',   '%#VisualMode#' ],
 				\ 'V':      ['V-LINE',   '%#VisualMode#' ],
 				\ "\<C-v>": ['V-BLOCK',  '%#VisualMode#' ],
-				\ 'c':      ['COMMAND',  '%#CommandMode#'],
 				\ 's':      ['SELECT',   '%#VisualMode#' ],
 				\ 'S':      ['S-LINE',   '%#VisualMode#' ],
 				\ "\<C-s>": ['S-BLOCK',  '%#VisualMode#' ],
-				\ 't':      ['TERMINAL', '%#CommandMode#'] }
+				\ 'i':      ['INSERT',   '%#InsertMode#' ],
+				\ 'R':      ['REPLACE',  '%#ReplaceMode#'],
+				\ 'Rv':     ['REPLACE',  '%#ReplaceMode#'],
+				\ 'c':      ['COMMAND',  '%#CommandMode#'],
+				\ 'cv':     ['COMMAND',  '%#CommandMode#'],
+				\ 'ce':     ['COMMAND',  '%#CommandMode#'],
+				\ 'r':      ['PROMPT',   '%#CommandMode#'], 
+				\ 'rm':     ['-MORE-',   '%#CommandMode#'], 
+				\ 'r?':     ['CONFIRM',  '%#CommandMode#'],
+				\ '!':      ['SHELL',    '%#CommandMode#'] }
 
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
