@@ -514,7 +514,7 @@
 	endfunc
 
 	func! Modified()
-		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : ' ') .
+		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : '  ') .
 					\ (getbufvar(winbufnr(winnr()), '&modifiable') ? (getbufvar(winbufnr(winnr()), '&readonly') ? '✗' : '') : '⚔')
 	endfunc
 
