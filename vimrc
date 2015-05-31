@@ -486,14 +486,14 @@
 		let trail = search('\s$', 'nw')
 		let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
 		if trail != 0
-			let b:statusline_warnings = '  trailing space (' . trail . ') '
+			let b:stl_warnings = '  trailing space (' . trail . ') '
 			if mix != 0
-				let b:statusline_warnings .= 'mixed indent (' . mix . ') '
+				let b:stl_warnings .= 'mixed indent (' . mix . ') '
 			endif
 		elseif mix != 0
-			let b:statusline_warnings = '  mixed indent (' . mix . ') '
+			let b:stl_warnings = '  mixed indent (' . mix . ') '
 		else
-			unlet! b:statusline_warnings
+			unlet! b:stl_warnings
 		endif
 	endfunc
 
@@ -502,37 +502,24 @@
 		return ''
 	endfunc
 
-	func! ModePart(nr)
-		return (winnr() == a:nr) ? '  ' . get(g:mode_map, mode(1), ['??????'])[0]  . ' ' : ''
-	endfunc
-
-	func! Modified()
-		return (getbufvar(winbufnr(winnr()), '&modified') ? '◇ ' : '  ') .
-					\ (getbufvar(winbufnr(winnr()), '&modifiable') ? (getbufvar(winbufnr(winnr()), '&readonly') ? '✗' : '') : '⚔')
-	endfunc
-
-	func! FileInfo()
-		return getbufvar(winbufnr(winnr()), '&ft') . ((winwidth(winnr()) < 80 || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? ' ' :
-					\ ('  ' . (getbufvar(winbufnr(winnr()), '&fenc') == '' ? getbufvar(winbufnr(winnr()), '&enc') : getbufvar(winbufnr(winnr()), '&fenc')) .
-					\ (getbufvar(winbufnr(winnr()), '&bomb') ? ',BOM' : '') .
-					\ ' ' . (getbufvar(winbufnr(winnr()), '&ff') ==# 'unix' ? '␊ (Unix)'        :
-					\       (getbufvar(winbufnr(winnr()), '&ff') ==# 'mac'  ? '␍ (Classic Mac)' :
-					\       (getbufvar(winbufnr(winnr()), '&ff') ==# 'dos'  ? '␍␊ (Windows)'    : '? (Unknown)'))) .
-					\ ' ' . (getbufvar(winbufnr(winnr()), '&expandtab') == 'expandtab' ? '⇥ ' : '˽ ') . getbufvar(winbufnr(winnr()), '&tabstop'))) .
-					\ ' '
-	endfunc
-
-	func! CoordsPart()
-		return (winwidth(winnr()) < 60) ? '' : '  '.line(".")." ".virtcol(".").' '.(100*line(".")/line("$")).'%'.' '
-	endfunc
-
-	func! WarningsPart(nr)
-		return (winnr() != a:nr || !exists('b:statusline_warnings') || getbufvar(winbufnr(winnr()), '&ft') =~ 'help') ? '' : b:statusline_warnings
-	endfunc
-
 	" Build the status line the way I want - no fat light plugins!
 	func! BuildStatusLine(nr)
-		return '%{ModeColor('.a:nr.')}%#CurrMode#%{ModePart('.a:nr.')}%* %<%F %{Modified()}%=%{FileInfo()}%#CurrMode#%{CoordsPart()}%*%#Warnings#%{WarningsPart('.a:nr.')}%*'
+		return '%{ModeColor('.a:nr.')}%#CurrMode#
+					\ %{winnr() == '.a:nr.' ? get(g:mode_map,mode(1), ["??????"])[0] : ""}
+					\ %* %<%F
+					\ %{getbufvar(winbufnr(winnr()), "&modified") ? "◇" : " "}
+					\ %{getbufvar(winbufnr(winnr()), "&modifiable") ? (getbufvar(winbufnr(winnr()), "&readonly") ? "✗" : "") : "⚔"}
+					\ %=
+					\ %{getbufvar(winbufnr(winnr()), "&ft")}
+					\ %{winwidth(winnr()) < 80 || getbufvar(winbufnr(winnr()), "&ft") =~ "help" ? "" : " "
+					\ . (getbufvar(winbufnr(winnr()), "&fenc") . (getbufvar(winbufnr(winnr()), "&bomb") ? ",BOM" : "") . " "
+					\ . (getbufvar(winbufnr(winnr()), "&ff") ==# "unix" ? "␊ (Unix)" :
+					\   (getbufvar(winbufnr(winnr()), "&ff") ==# "mac"  ? "␍ (Classic Mac)" :
+					\   (getbufvar(winbufnr(winnr()), "&ff") ==# "dos"  ? "␍␊ (Windows)" : "? (Unknown)"))) . " "
+					\ . (getbufvar(winbufnr(winnr()), "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(winbufnr(winnr()), "&tabstop"))}
+					\ %#CurrMode#%{winwidth(winnr()) < 60 ? "" : " ".line(".")." ".virtcol(".")." ".(100*line(".")/line("$"))."% "}%*
+					\%#Warnings#%{(winnr() != '.a:nr.' || !exists("b:stl_warnings") || getbufvar(winbufnr(winnr()), "&ft") =~ "help") ?
+					\ "" : b:stl_warnings}%*'
 	endfunc
 
 	func! EnableStatusLine()
