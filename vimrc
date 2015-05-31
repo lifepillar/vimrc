@@ -539,7 +539,7 @@
 		let g:default_stl = &statusline
 		augroup status
 			autocmd!
-			autocmd BufWritePost * call UpdateWarnings()
+			autocmd BufReadPost,BufWritePost * call UpdateWarnings()
 		augroup END
 		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
 	endfunc!
