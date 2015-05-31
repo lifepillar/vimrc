@@ -497,29 +497,29 @@
 		endif
 	endfunc
 
-	func! ModeColor(nr)
+	func! SetupStl(nr)
 		exec 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
-		return ''
+		return get(extend(w:, {"bufnr": winbufnr(winnr()), "active": (winnr() == a:nr),
+					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())}), '', '')
 	endfunc
 
 	" Build the status line the way I want - no fat light plugins!
 	func! BuildStatusLine(nr)
-		return '%{ModeColor('.a:nr.')}%#CurrMode#
-					\ %{winnr() == '.a:nr.' ? get(g:mode_map,mode(1), ["??????"])[0] : ""}
+		return '%{SetupStl('.a:nr.')}%#CurrMode#
+					\ %{w:["active"] ? get(g:mode_map,mode(1), ["??????"])[0] : ""}
 					\ %* %<%F
-					\ %{getbufvar(winbufnr(winnr()), "&modified") ? "◇" : " "}
-					\ %{getbufvar(winbufnr(winnr()), "&modifiable") ? (getbufvar(winbufnr(winnr()), "&readonly") ? "✗" : "") : "⚔"}
+					\ %{getbufvar(w:["bufnr"], "&modified") ? "◇" : " "}
+					\ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? "✗" : "") : "⚔"}
 					\ %=
-					\ %{getbufvar(winbufnr(winnr()), "&ft")}
-					\ %{winwidth(winnr()) < 80 || getbufvar(winbufnr(winnr()), "&ft") =~ "help" ? "" : " "
-					\ . (getbufvar(winbufnr(winnr()), "&fenc") . (getbufvar(winbufnr(winnr()), "&bomb") ? ",BOM" : "") . " "
-					\ . (getbufvar(winbufnr(winnr()), "&ff") ==# "unix" ? "␊ (Unix)" :
-					\   (getbufvar(winbufnr(winnr()), "&ff") ==# "mac"  ? "␍ (Classic Mac)" :
-					\   (getbufvar(winbufnr(winnr()), "&ff") ==# "dos"  ? "␍␊ (Windows)" : "? (Unknown)"))) . " "
-					\ . (getbufvar(winbufnr(winnr()), "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(winbufnr(winnr()), "&tabstop"))}
-					\ %#CurrMode#%{winwidth(winnr()) < 60 ? "" : " ".line(".")." ".virtcol(".")." ".(100*line(".")/line("$"))."% "}%*
-					\%#Warnings#%{(winnr() != '.a:nr.' || !exists("b:stl_warnings") || getbufvar(winbufnr(winnr()), "&ft") =~ "help") ?
-					\ "" : b:stl_warnings}%*'
+					\ %{w:["ft"]}
+					\ %{w:["winwd"] < 80 || w:["ft"] =~ "help" ? "" : " "
+					\ . (getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
+					\ . (getbufvar(w:["bufnr"], "&ff") ==# "unix" ? "␊ (Unix)" :
+					\   (getbufvar(w:["bufnr"], "&ff") ==# "mac"  ? "␍ (Classic Mac)" :
+					\   (getbufvar(w:["bufnr"], "&ff") ==# "dos"  ? "␍␊ (Windows)" : "? (Unknown)"))) . " "
+					\ . (getbufvar(w:["bufnr"], "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(w:["bufnr"], "&tabstop"))}
+					\ %#CurrMode#%{w:["winwd"] < 60 ? "" : " ".line(".")." ".virtcol(".")." ".(100*line(".")/line("$"))."% "}%*
+					\%#Warnings#%{(w:["active"] || !exists("b:stl_warnings") || w:["ft"] =~ "help") ? "" : b:stl_warnings}%*'
 	endfunc
 
 	func! EnableStatusLine()
