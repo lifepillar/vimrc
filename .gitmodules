@@ -7,9 +7,6 @@
 [submodule "bundle/jellybeans"]
 	path = bundle/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
-[submodule "bundle/ledger"]
-	path = bundle/ledger
-	url = https://github.com/ledger/vim-ledger.git
 [submodule "bundle/limelight"]
 	path = bundle/limelight
 	url = https://github.com/junegunn/limelight.vim.git
@@ -64,3 +61,6 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
+[submodule "bundle/ledger"]
+	path = bundle/ledger
+	url = git@github.com:lifepillar/vim-ledger.git
