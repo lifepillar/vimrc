@@ -106,14 +106,6 @@
 		endwhile
 	endfunc
 
-	" Move the cursor to the specified column,
-	" filling the line with spaces if necessary.
-	func! GotoCol(pos)
-		exec "normal" a:pos . "|"
-		let diff = a:pos - virtcol('.')
-		if diff > 0 | exec "normal" diff . "a " | endif
-	endfunc
-
 	" Find all occurrences of a pattern in a file.
 	func! FindAll(pattern)
 		exec "noautocmd lvimgrep " . a:pattern . " % | lopen"
@@ -653,82 +645,16 @@
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
 
-		" Enter a new transaction based on the text in the current line.
-		func! LedgerEntry()
-			" enter a new transaction based on the text in the current line.
-			let l = line('.') - 1 " Insert transaction at the current line (i.e., below the line above the current one)
-			let query = getline('.')
-			normal "_dd
-			exec l . 'read !' g:ledger_bin '-f' shellescape(expand('%')) 'entry' shellescape(query)
-		endfunc
-
-		" Align the amount expression after an account name at the decimal point.
-		"
-		" This function moves the amount expression of a posting so that the decimal
-		" separator is aligned at the column specified by g:ledger_align_at.
-		"
-		" For example, after selecting:
-		"
-		"   2015/05/09 Some Payee
-		"     Expenses:Other    $120,23  ; Tags here
-		"     Expenses:Something  $-4,99
-		"     Expenses:More                 ($12,34 + $16,32)
-		"
-		"  :'<,'>call AlignCommodity() produces:
-		"
-		"   2015/05/09 Some Payee
-		"      Expenses:Other                                    $120,23  ; Tags here
-		"      Expenses:Something                                 $-4,99
-		"      Expenses:More                                     ($12,34 + $16,32)
-		"
-		func! AlignCommodity()
-			" Extract the part of the line after the account name (excluding spaces)
-			let rhs = matchstr(getline('.'), '\m^\s\+[^;[:space:]].\{-}\(\t\|  \)\s*\zs.*$')
-			if rhs != ''
-				" Remove everything after the account name (including spaces)
-				.s/\m^\s\+[^[:space:]].\{-}\zs\(\t\|  \).*$//
-				if g:ledger_decimal_sep == ''
-					let pos = matchend(rhs, '\m\d[^[:space:]]*')
-				else
-					" Find the position of the first decimal separator
-					let pos = match(rhs, '\V' . g:ledger_decimal_sep)
-				endif
-				" Go to the column that allows us to align the decimal separator at g:ledger_align_at
-				call GotoCol(g:ledger_align_at - pos - 1)
-				" Append the part of the line that was previously removed
-				exe 'normal a' . rhs
-			endif
-		endfunc!
-
-		command! -range AlignCommodities <line1>,<line2>call AlignCommodity()
-
-		" Align the amount under the cursor and append/prepend the default currency.
-		func! AlignAmountAtCursor()
-			" Select and cut text
-			normal viWd
-			" Find the position of the decimal separator
-			let pos = match(@", g:ledger_decimal_sep) " 0 if g:ledger_decimal_sep is the empty string
-			" Paste text at the correct column and append/prepend default commodity
-			if g:ledger_commodity_before
-				call GotoCol(g:ledger_align_at - (pos > 0 ? pos : len(@"))  - len(g:ledger_default_commodity) - len(g:ledger_commodity_sep) - 1)
-				exe 'normal a' . g:ledger_default_commodity . g:ledger_commodity_sep
-				normal p
-			else
-				call GotoCol(g:ledger_align_at - (pos > 0 ? pos : len(@")) - 1)
-				exe 'normal pa' . g:ledger_commodity_sep . g:ledger_default_commodity
-			endif
-		endfunc!
-
 		" Toggle transaction state with <space>
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
 		" Use tab to autocomplete
 		au FileType ledger inoremap <silent><buffer> <Tab> <C-x><C-o>
 		" Enter a new transaction based on the text in the current line
-		au FileType ledger nnoremap <silent><buffer> <C-t> :call LedgerEntry()<CR>
-		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call LedgerEntry()<CR>
+		au FileType ledger nnoremap <silent><buffer> <C-t> :call ledger#entry()<CR>
+		au FileType ledger inoremap <silent><buffer> <C-t> <Esc>:call ledger#entry()<CR>
 		" Align amounts at the decimal point
-		au FileType ledger vnoremap <silent><buffer> <Leader>a :AlignCommodities<CR>
-		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call AlignAmountAtCursor()<CR>
+		au FileType ledger vnoremap <silent><buffer> <Leader>a :LedgerAlign<CR>
+		au FileType ledger inoremap <silent><buffer> <C-l> <Esc>:call ledger#align_amount_at_cursor()<CR>
 
 		func! BalanceReport()
 			call inputsave()
@@ -761,5 +687,4 @@
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
-
 
