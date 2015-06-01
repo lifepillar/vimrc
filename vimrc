@@ -233,6 +233,7 @@
 	set incsearch " Search as you type.
 	set ignorecase " Case-insensitive search by default.
 	set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
+	set infercase " Smart keyword completion
 	set wildmenu " Show possible matches when autocompleting.
 	set wildignorecase " Ignore case when completing file names and directories.
 	" set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
