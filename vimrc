@@ -809,6 +809,14 @@
 		let g:tagbar_autofocus = 1
 		let g:tagbar_iconchars = ['▸', '▾']
 	" }}
+	" UltiSnips {{
+		let g:UltiSnipsExpandTrigger="<tab>"
+		let g:UltiSnipsJumpForwardTrigger="<c-b>"
+		let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+		" If you want :UltiSnipsEdit to split your window.
+		" let g:UltiSnipsEditSplit="vertical"
+	" }}
 	" Undotree {{
 		let g:undotree_SplitWidth = 40
 		let g:undotree_SetFocusWhenToggle = 1
