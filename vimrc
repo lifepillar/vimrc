@@ -164,6 +164,7 @@
 		let ft = getbufvar("%", '&ft') " Get the file type
 		call Git("show HEAD:./" . shellescape(expand("%:t")), 'r')
 		let &l:filetype = ft
+		file HEAD
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
@@ -178,12 +179,14 @@
 		" Show the version from the current branch on the left
 		call Git("show :2:./" . filename, "l")
 		let &l:filetype = ft
+		file OURS
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
 		" Show version from the other branch on the right
 		call Git("show :3:./" . filename, "r")
 		let &l:filetype = ft
+		file OTHER
 		au BufWinLeave <buffer> diffoff!
 		diffthis
 		wincmd p
@@ -628,6 +631,7 @@
 		" Run an arbitrary ledger command.
 		func! Ledger(args)
 			call RunShellCommand(g:ledger_bin . " -f % " . a:args, "r")
+			file REPORT
 		endfunc
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
