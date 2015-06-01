@@ -2,10 +2,11 @@
   About
   vim: set sw=1 ts=1 sts=0 et nonu nornu nowrap foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
-  Use ,cs (press comma, then c, then s)
-  to open this file in Vim.
+  Use \cs to open this file in Vim.
 
   NOTATION:
+
+  \      Leader.
 
   ⓝ      denotes a (possibly optional)
          number.
@@ -56,7 +57,7 @@
   :qa!         - Quit all without saving
  :mks          - Save session
                  (restore with vim -S)
- ,b            - List open files
+ \b            - List open files
  :ls
  :ⓝ b          - Edit file n
  L             - Edit next file
@@ -116,9 +117,9 @@
  «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
  gv            - Reselect
- ,A            - Select all
+ \A            - Select all
  ggVG
- ,T            - Remove trailing space
+ \T            - Remove trailing space
  J             - Join with next line
  q‹Reg›        - Start recording (press q to stop)
  @‹Reg›        - Run recorded macro
@@ -134,7 +135,7 @@
  gu‹Move›      - Change to lowercase
  gUU           - Change line to uppercase
  guu           - Change line to lowercase
- ,U            - Ⓥ Capitalize words
+ \U            - Ⓥ Capitalize words
  «C-n»         - Ⓘ Autocomplete
  >             - Ⓥ Indent text
  <             - Ⓥ Unindent text
@@ -147,19 +148,19 @@
  =‹Move›       - Reindent up to the move-to point
  ==            - Reindent line
  ggVG=         - Reindent all
- ,j            - Add blank line below
- ,k            - Add blank line above
+ \j            - Add blank line below
+ \k            - Add blank line above
  :set tw=<n>   - Set text width (0 = window width)
  gw            - Ⓥ Hard-wrap at text width
  gw‹Move›      - Wrap up to move-to point
  gww           - Wrap current line
- ,r            - Hard-wrap paragraph
- ,t            - Toggle hard/soft tabs
+ \r            - Hard-wrap paragraph
+ \t            - Toggle hard/soft tabs
  -             - Decrease tab width
  +             - Increase tab width
- :retab        - Detab (needs expandtab on - see ,t)
- :retab!       - Entab (needs expandtab off - see ,t)
- ,s            - Toggle spell checking
+ :retab        - Detab (needs expandtab on - see \t)
+ :retab!       - Entab (needs expandtab off - see \t)
+ \s            - Toggle spell checking
  ]s            - Go to next mispelled word
  [s            - Go to prev mispelled word
  z=            - Suggest corrections
@@ -177,15 +178,15 @@
   zh           - Scroll left
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
- ,N            - Toggle line numbers
- ,M            - Toggle relative line numbers
- ,i            - Toggle invisibles
+ \N            - Toggle line numbers
+ \R            - Toggle relative line numbers
+ \i            - Toggle invisibles
  zo            - Fold
  zc            - Unfold
  zM            - Fold all
  zR            - Unfold all
  «F7»          - Toggle background color
- ,F            - Toggle distraction-free mode
+ \F            - Toggle distraction-free mode
  :set cc=<n>   - Page guide at column n
  :set cc=""    - No page guide
 ---
@@ -196,7 +197,7 @@
  N             - Find prev (opposite direction)
  gn            - Select (up to) next match
  gN            - Select (up to) prev match
- ,h            - Toggle highlighting
+ \h            - Toggle highlighting
  *             - Forward search for word under cursor
  #             - Backward search for word under cursor
  :s/‹P›/‹P›/g  - Ⓥ Find and replace
@@ -214,7 +215,7 @@
   do           - Diff obtain
   :diffget     - Ⓥ Get differences
   :diffput     - Ⓥ Put differences
-  ,C           - Find merge conflict markers
+  \C           - Find merge conflict markers
 ---
  Go
   Basic movement
@@ -307,7 +308,7 @@
  :tabnew       - New tab
  gt            - Next tab
  gT            - Previous tab
- ,ⓝ            - Go to tab ⓝ
+ \ⓝ            - Go to tab ⓝ
  ⓝ gt
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
@@ -316,11 +317,11 @@
  :tabdo ‹Cmd›  - Execute cmd in all tabs
 ---
  Git
- ,gs           - Git status
- ,gd           - Git diff with HEAD
- ,gl           - Git file log
- ,ga           - Git add
- ,gc           - Git commit
+ \gs           - Git status
+ \gd           - Git diff with HEAD
+ \gl           - Git file log
+ \ga           - Git add
+ \gc           - Git commit
  :Conflicts    - Three-way diff
 ---
  Plugins
@@ -335,11 +336,11 @@
   «C-x»«C-o»
   «C-t»        - Ⓘ New transaction from text
   «Space»      - Toggle transaction state
-  ,a           - Ⓥ Align at decimal point
+  \a           - Ⓥ Align at decimal point
   «C-l»        - Ⓘ Align amount just entered
  --
   Show Marks
-  ,m           - Toggle marks
+  \m           - Toggle marks
  --
   Surround
   ysiwⓒ        - Surround word with ⓒ

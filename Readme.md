@@ -65,20 +65,19 @@ both.
 
 ###  Some features
 
-- A **cheat sheet** always at hand with `,cs`.
+- A **cheat sheet** always at hand with `\cs`.
 - Foldable and thoroughly commented `vimrc`.
-- Leader set to `,` (comma).
 - Enter command mode with `;` instead of `:` for convenience.
-- **Distraction-free mode** (toggle with `,F`).
+- **Distraction-free mode** (toggle with `\F`).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, **"plugin-free" status line**.
-- Toggle hard/soft tabs with `,t` (default: soft tabs).
+- Toggle hard/soft tabs with `\t` (default: soft tabs).
 - Increase/decrease tab width with `+` and `-`, respectively.
-- Toggle invisibles with `,i`.
-- Toggle spell-checking with `,s`.
-- Select all with `,A`.
-- Remove all trailing spaces with `,T`.
-- Hard-wrap paragraphs with `,r`.
+- Toggle invisibles with `\i`.
+- Toggle spell-checking with `\s`.
+- Select all with `\A`.
+- Remove all trailing spaces with `\T`.
+- Hard-wrap paragraphs with `\r`.
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
 

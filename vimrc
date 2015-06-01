@@ -248,7 +248,6 @@
 	nnoremap : ;
 	vnoremap ; :
 	vnoremap : ;
-	let mapleader = ","
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
@@ -297,23 +296,23 @@
 	nnoremap <Leader>8 8gt
 	nnoremap <Leader>9 9gt
 	nnoremap <Leader>0 10gt
-	" Toggle absolute line numbers with ,n
+	" Toggle absolute line numbers with \N
 	nnoremap <silent> <Leader>N :set invnumber<CR>:set nornu<CR>
-	" Toggle relative line numbers with ,m
-	nnoremap <silent> <Leader>M :set invnumber<CR>:set rnu<CR>
+	" Toggle relative line numbers with \R
+	nnoremap <silent> <Leader>R :set invnumber<CR>:set rnu<CR>
 	" Toggle background color with F7
 	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
-	" Apply 'git diff' to the current buffer with ,gd
+	" Apply 'git diff' to the current buffer with \gd
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
-	" Show the output of 'git status' with ,gs
+	" Show the output of 'git status' with \gs
 	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
-	" Invoke 'git commit' with ,gc (must be set up on the Git side)
+	" Invoke 'git commit' with \gc (must be set up on the Git side)
 	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
-	" Show the revision history for the current file with ,gl
+	" Show the revision history for the current file with \gl
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
-	" Find merge conflict markers with ,C
+	" Find merge conflict markers with \C
 	nnoremap <leader>C /\v^[<\|=>]{7}<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
 	cnoremap <C-a> <Home>
@@ -585,7 +584,7 @@
 		vmap <Enter> <Plug>(EasyAlign)
 	" }}
 	" Goyo {{
-		" Toggle distraction-free mode with ,F
+		" Toggle distraction-free mode with \F
 		nnoremap <silent> <Leader>F :Goyo<CR>
 		func! s:goyo_enter()
 			call DisableStatusLine()
@@ -664,8 +663,8 @@
 			endif
 		endfunc
 
-		" Toggle marks with ,m
-		nnoremap <silent> ,m :call ToggleShowMarks()<CR>
+		" Toggle marks with \m
+		nnoremap <silent> <Leader>m :call ToggleShowMarks()<CR>
 		nnoremap ` :ShowMarksOnce<CR>`
 	" }}
 	" Tagbar {{
