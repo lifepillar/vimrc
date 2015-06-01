@@ -44,16 +44,16 @@
 ---
  File
   Basic
-  :e ‹Path›      - New/open file
-  :ⓝ bd          - Close file
-  :w             - Save file
-  :w!            - Save read-only file
-  :wq            - Save and quit
-  :wqa           - Save all and quit
-  :q             - Quit
-  :q!            - Quit without saving
-  :qa!           - Quit all without saving
+  :e ‹Path›    - New/open file
   :enew        - New file in current window
+  :ⓝ bd        - Close file
+  :w           - Save file
+  :w!          - Save read-only file
+  :wq          - Save and quit
+  :wqa         - Save all and quit
+  :q           - Quit
+  :q!          - Quit without saving
+  :qa!         - Quit all without saving
  :mks          - Save session
                  (restore with vim -S)
  ,b            - List open files
@@ -205,16 +205,16 @@
  :FindAll ‹P›  - Find all
  :MultiFind ‹P›- Search all open files
   Differences
-  :diffthis     - Use this file for diff
-  :diffoff!     - Exit diff mode
-  :diffupdate   - Re-scan files
-  ]c            - Next difference
-  [c            - Prev difference
-  dp            - Diff put
-  do            - Diff obtain
-  :diffget      - Ⓥ Get differences
-  :diffput      - Ⓥ Put differences
-  ,C            - Find merge conflict markers
+  :diffthis    - Use this file for diff
+  :diffoff!    - Exit diff mode
+  :diffupdate  - Re-scan files
+  ]c           - Next difference
+  [c           - Prev difference
+  dp           - Diff put
+  do           - Diff obtain
+  :diffget     - Ⓥ Get differences
+  :diffput     - Ⓥ Put differences
+  ,C           - Find merge conflict markers
 ---
  Go
   Basic movement
@@ -339,16 +339,16 @@
   «C-l»        - Ⓘ Align amount just entered
  --
   Show Marks
-  ,m          - Toggle marks
+  ,m           - Toggle marks
  --
   Surround
-  ysiwⓒ       - Surround word with ⓒ
-  Sⓒ          - Ⓥ Surround with ⓒ
-  S …         - Ⓥ  (Linewise) Surround with text
-  dsⓒ         - Remove delimiters
-  csⓒ ⓒ       - Change delimiters
-  cstⓒ        - Replace tags with ⓒ
-  dst         - Remove enclosing tags
+  ysiwⓒ        - Surround word with ⓒ
+  Sⓒ           - Ⓥ Surround with ⓒ
+  S …          - Ⓥ  (Linewise) Surround with text
+  dsⓒ          - Remove delimiters
+  csⓒ ⓒ        - Change delimiters
+  cstⓒ         - Replace tags with ⓒ
+  dst          - Remove enclosing tags
  --
   Tagbar
   «F9»         - Toggle Tagbar
