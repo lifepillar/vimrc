@@ -38,7 +38,7 @@
 " }}
 " File-type specific configuration {{
 	autocmd BufNewFile,BufReadPost *.md,*.mmd setlocal filetype=markdown dictionary=/usr/share/dict/words spell spelllang=en
-	autocmd BufNewFile,BufReadPost *.txt setlocal dictionary=/usr/share/dict/words spell spelllang=en
+	autocmd BufNewFile,BufReadPost *.txt,*.tex setlocal dictionary=/usr/share/dict/words spell spelllang=en
 	" Instead of reverting the cursor to the last position in the buffer, we
 	" set it to the first line when editing a git commit message
 	au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
