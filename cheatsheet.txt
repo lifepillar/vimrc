@@ -53,6 +53,7 @@
   :q             - Quit
   :q!            - Quit without saving
   :qa!           - Quit all without saving
+  :enew        - New file in current window
  :mks          - Save session
                  (restore with vim -S)
  ,b            - List open files
