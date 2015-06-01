@@ -246,8 +246,12 @@
  :ⓝ            - Go to line…
  ⓝ G
  ⓝ |           - Go to column…
- ⓝ fⓒ          - Find next (nth) ⓒ  in current line
- ⓝ Fⓒ          - Find prev (nth) ⓒ  in current line
+ ⓝ fⓒ          - Go to next (nth) ⓒ  in current line
+ ⓝ tⓒ          - Go before next (nth) ⓒ  in current line
+ ;             - Repeat fⓒ  or tⓒ
+ ⓝ Fⓒ          - Go to prev (nth) ⓒ  in current line
+ ⓝ Tⓒ          - Go after prev (nth) ⓒ  in current line
+ ,             - Repeat Fⓒ  or Tⓒ
  %             - Jump between matching characters
  «C-o»         - Go to older cursor position
  «C-i»         - Go to newer cursor position
