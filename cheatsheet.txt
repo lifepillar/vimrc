@@ -118,7 +118,7 @@
  gv            - Reselect
  ,A            - Select all
  ggVG
- ,ts           - Remove trailing space
+ ,T            - Remove trailing space
  J             - Join with next line
  q‹Reg›        - Start recording (press q to stop)
  @‹Reg›        - Run recorded macro
@@ -155,8 +155,8 @@
  gww           - Wrap current line
  ,r            - Hard-wrap paragraph
  ,t            - Toggle hard/soft tabs
- ,[            - Decrease tab width
- ,]            - Increase tab width
+ -             - Decrease tab width
+ +             - Increase tab width
  :retab        - Detab (needs expandtab on - see ,t)
  :retab!       - Entab (needs expandtab off - see ,t)
  ,s            - Toggle spell checking
