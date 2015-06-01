@@ -261,19 +261,19 @@
 	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
 	nnoremap <silent> <Leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 	nnoremap <silent> <Leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
-	" Select all with ,A
+	" Select all with \A
 	nnoremap <silent> <Leader>A ggVG
-	" Toggle invisibles in the current buffer with ,i
+	" Toggle invisibles in the current buffer with \i
 	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
-	" Toggle spelling in the current buffer with ,s
+	" Toggle spelling in the current buffer with \s
 	nnoremap <silent> <Leader>s :setlocal spell!<CR>
-	" Remove trailing space globally with ,T
-	nnoremap <Leader>T :call RemoveTrailingSpace()<CR>
-	" Capitalize words in selected text with ,U (see h gU)
+	" Remove trailing space globally with \S
+	nnoremap <Leader>S :call RemoveTrailingSpace()<CR>
+	" Capitalize words in selected text with \U (see h gU)
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
-	" Toggle search highlighting with ,h
+	" Toggle search highlighting with \h
 	nnoremap <silent> <Leader>h :set invhlsearch<CR>
-	" Hard-wrap paragraphs at textwidth with ,r
+	" Hard-wrap paragraphs at textwidth with \r
 	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
 	" Remap H, L, and M to go to previous/next/last used buffer
@@ -285,7 +285,7 @@
 	nnoremap <silent> <C-j> <C-w>j
 	nnoremap <silent> <C-k> <C-w>k
 	nnoremap <silent> <C-l> <C-w>l
-	" ,1 ,2 ,3 : go to tab 1/2/3 etc
+	" \1 \2 \3 : go to tab 1/2/3 etc
 	nnoremap <Leader>1 1gt
 	nnoremap <Leader>2 2gt
 	nnoremap <Leader>3 3gt
@@ -552,9 +552,13 @@
 					\ 'main': 'CtrlP_Main',
 					\ 'prog': 'CtrlP_Progress',
 					\ }
-		let g:ctrlp_extensions = ['funky']
-		" Show the list of buffers with ,b
+		"let g:ctrlp_extensions = ['']
+		" Show the list of buffers with \b
 		nnoremap <Leader>b :CtrlPBuffer<CR>
+		" Show function navigator with \f
+		nnoremap <Leader>f :CtrlPFunky<CR>
+		" Show tags with \t
+		nnoremap <Leader>t :CtrlPTag<CR>
 
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked

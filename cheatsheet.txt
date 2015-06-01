@@ -57,8 +57,7 @@
   :qa!         - Quit all without saving
  :mks          - Save session
                  (restore with vim -S)
- \b            - List open files
- :ls
+ :ls           - List open files
  :ⓝ b          - Edit file n
  L             - Edit next file
  :bn
@@ -119,7 +118,7 @@
  gv            - Reselect
  \A            - Select all
  ggVG
- \T            - Remove trailing space
+ \S            - Remove trailing space
  J             - Join with next line
  q‹Reg›        - Start recording (press q to stop)
  @‹Reg›        - Run recorded macro
@@ -326,7 +325,10 @@
 ---
  Plugins
   CtrlP
-  «C-p»        - Open Ctrlp in MRU mode
+  «C-p»        - Open CtrlP in MRU mode
+  \b           - Find buffers
+  \f           - Open function navigator
+  \t           - Find tags
  --
   Easy Align
   <Enter>      - Ⓥ Trigger Easy Align
