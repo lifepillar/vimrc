@@ -523,7 +523,7 @@
 					\   (getbufvar(w:["bufnr"], "&ff") ==# "mac"  ? "␍ (Classic Mac)" :
 					\   (getbufvar(w:["bufnr"], "&ff") ==# "dos"  ? "␍␊ (Windows)" : "? (Unknown)"))) . " "
 					\ . (getbufvar(w:["bufnr"], "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(w:["bufnr"], "&tabstop"))}
-					\ %#CurrMode#%{w:["winwd"] < 60 ? "" : printf(" %d %3d %3d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}%*
+					\ %#CurrMode#%{w:["winwd"] < 60 ? "" : printf(" %d:%-2d%3d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}%*
 					\%#Warnings#%{(!w:["active"] || !exists("b:stl_warnings") || w:["ft"] =~ "help") ? "" : b:stl_warnings}%*'
 	endfunc
 
