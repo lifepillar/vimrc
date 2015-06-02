@@ -637,7 +637,6 @@
 		" Run an arbitrary ledger command.
 		func! Ledger(args)
 			call RunShellCommand(g:ledger_bin . " -f % " . a:args, "r")
-			file REPORT
 		endfunc
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
