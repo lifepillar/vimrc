@@ -226,6 +226,8 @@
 	" Use soft tabs by default
 	set expandtab
 	call SetGlobalTabWidth(2)
+	" Save file with sudo
+	command W :w !sudo tee % >/dev/null
 " }}
 " Find, replace, and auto-complete {{
 	" set gdefault " Apply substitutions globally by default
