@@ -64,3 +64,4 @@
 [submodule "bundle/ledger"]
 	path = bundle/ledger
 	url = git@github.com:lifepillar/vim-ledger.git
+	branch = lifepillar
