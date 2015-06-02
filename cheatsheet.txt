@@ -330,6 +330,7 @@
  \gl           - Git file log
  \ga           - Git add
  \gc           - Git commit
+ \gp           - Git push
  :Conflicts    - Three-way diff
 ---
  Plugins

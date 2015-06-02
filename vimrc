@@ -312,6 +312,8 @@
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
+	" Git push
+	nnoremap <silent> <Leader>gp :!git -C %:p:h push<CR>
 	" Find merge conflict markers with \C
 	nnoremap <leader>C /\v^[<\|=>]{7}<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
