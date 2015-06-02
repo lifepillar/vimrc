@@ -245,6 +245,7 @@
 " Key mappings (plugins excluded) {{
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
+				\ :setlocal bufhidden=wipe nobuflisted noswapfile nowrap<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> <Leader>t :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer
