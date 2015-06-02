@@ -243,11 +243,6 @@
 	command! -nargs=1 MultiFind call MultiFind(<q-args>)
 " }}
 " Key mappings (plugins excluded) {{
-	" Swap ; and :  Convenient.
-	nnoremap ; :
-	nnoremap : ;
-	vnoremap ; :
-	vnoremap : ;
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer

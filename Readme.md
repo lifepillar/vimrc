@@ -67,7 +67,6 @@ both.
 
 - A **cheat sheet** always at hand with `\cs`.
 - Foldable and thoroughly commented `vimrc`.
-- Enter command mode with `;` instead of `:` for convenience.
 - **Distraction-free mode** (toggle with `\F`).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, **"plugin-free" status line**.
