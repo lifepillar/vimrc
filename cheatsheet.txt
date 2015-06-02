@@ -166,6 +166,9 @@
  [s            - Go to prev mispelled word
  z=            - Suggest corrections
  ga            - Character info for char under cursor
+ «C-r»=        - Ⓘ Insert calculated expression
+ «C-a»         - Increment number under cursor
+ «C-x»         - Decrement number under cursor
 ---
  View
   Scrolling
