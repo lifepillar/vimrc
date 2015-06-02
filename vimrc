@@ -459,7 +459,7 @@
 			hi TabLine      ctermbg=255 ctermfg=24  guibg=#f5f5f5 guifg=#005f87 term=reverse cterm=reverse gui=reverse
 			hi TabLineSel   ctermbg=238 ctermfg=255 guibg=#4d4d4c guifg=#f5f5f5 term=reverse cterm=reverse gui=reverse
 			" Status line
-			hi NormalMode   ctermbg=24  ctermfg=254 guibg=#005f87 guifg=#efefef term=NONE    cterm=NONE    gui=NONE
+			hi NormalMode   ctermbg=254 ctermfg=240 guibg=#e4e4e4 guifg=#585858 term=NONE    cterm=NONE    gui=NONE
 			hi InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
 			hi ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
 			hi VisualMode   ctermbg=25  ctermfg=255 guibg=#4271ae guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
