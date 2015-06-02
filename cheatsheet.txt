@@ -118,6 +118,8 @@
  gv            - Reselect
  \A            - Select all
  ggVG
+ «C-w»         - Ⓘ Delete prev word
+ «C-u»         - Ⓘ Delete line before cursor
  \S            - Remove trailing space
  J             - Join with next line
  q‹Reg›        - Start recording (press q to stop)
