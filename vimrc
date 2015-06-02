@@ -625,7 +625,7 @@
 	" }}
 	" Ledger {{
 		let g:ledger_maxwidth = 63
-		let g:ledger_fillstring = '    ·'
+		let g:ledger_fillstring = ''
 		" let g:ledger_detailed_first = 1
 		" let g:ledger_fold_blanks = 0
 		let g:ledger_decimal_sep = ','
