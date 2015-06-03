@@ -148,7 +148,7 @@
  «C-d»         - Ⓘ Unindent
  =‹Move›       - Reindent up to the move-to point
  ==            - Reindent line
- ggVG=         - Reindent all
+ gg=G          - Reindent all
  \j            - Add blank line below
  \k            - Add blank line above
  :set tw=<n>   - Set text width (0 = window width)
