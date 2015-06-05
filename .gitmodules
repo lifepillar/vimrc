@@ -65,3 +65,6 @@
 	path = bundle/ledger
 	url = git@github.com:lifepillar/vim-ledger.git
 	branch = lifepillar
+[submodule "bundle/speeddating"]
+	path = bundle/speeddating
+	url = https://github.com/tpope/vim-speeddating.git
