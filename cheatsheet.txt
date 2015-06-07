@@ -59,11 +59,10 @@
                  (restore with vim -S)
  :ls           - List open files
  :ⓝ b          - Edit file n
- L             - Edit next file
+ ]b            - Edit next file
  :bn
- H             - Edit prev file
+ [b            - Edit prev file
  :bp
- M             - Edit last used file
  :bufdo ‹Cmd›  - Run ‹Cmd› in all buffers
 ---
  Edit
