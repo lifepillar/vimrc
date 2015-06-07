@@ -218,7 +218,8 @@
   do           - Diff obtain
   :diffget     - Ⓥ Get differences
   :diffput     - Ⓥ Put differences
-  \C           - Find merge conflict markers
+  ]n           - Find next merge conflict markers
+  [n           - Find prev merge conflict markers
 ---
  Go
   Basic movement
