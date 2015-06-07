@@ -148,8 +148,8 @@
  =‹Move›       - Reindent up to the move-to point
  ==            - Reindent line
  gg=G          - Reindent all
- \j            - Add blank line below
- \k            - Add blank line above
+ ]«Space»      - Add blank line below
+ [«Space»      - Add blank line above
  :set tw=<n>   - Set text width (0 = window width)
  gw            - Ⓥ Hard-wrap at text width
  gw‹Move›      - Wrap up to move-to point
