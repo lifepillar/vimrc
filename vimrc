@@ -37,7 +37,7 @@
 	set noswapfile " Do not create swap files.
 " }}
 " File-type specific configuration {{
-	autocmd BufNewFile,BufReadPost *.md,*.mmd setlocal filetype=markdown dictionary=/usr/share/dict/words spell spelllang=en
+	autocmd BufNewFile,BufReadPost *.mmd setlocal filetype=markdown
 	autocmd BufNewFile,BufReadPost *.txt,*.tex setlocal dictionary=/usr/share/dict/words spell spelllang=en
 	autocmd BufNewFile,BufReadPost *.pgsql setlocal filetype=sql
 	" Instead of reverting the cursor to the last position in the buffer, we
