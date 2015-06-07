@@ -260,6 +260,11 @@
 	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
 	nnoremap <silent> ]<Space> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 	nnoremap <silent> [<Space> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+	" Swap lines. See http://vim.wikia.com/wiki/VimTip646 for an explanation.
+	nnoremap <silent> ]e :m .+1<CR>
+	nnoremap <silent> [e :m .-2<CR>
+	vnoremap <silent> ]e :m '>+1<CR>gv
+	vnoremap <silent> [e :m '<-2<CR>gv
 	" Select all with \A
 	nnoremap <silent> <Leader>A ggVG
 	" Toggle invisibles in the current buffer with \i
