@@ -156,11 +156,11 @@
  gw‹Move›      - Wrap up to move-to point
  gww           - Wrap current line
  \r            - Hard-wrap paragraph
- \t            - Toggle hard/soft tabs
+ \T            - Toggle hard/soft tabs
  -             - Decrease tab width
  +             - Increase tab width
- :retab        - Detab (needs expandtab on - see \t)
- :retab!       - Entab (needs expandtab off - see \t)
+ :retab        - Detab (needs expandtab on - see \T)
+ :retab!       - Entab (needs expandtab off - see \T)
  \s            - Toggle spell checking
  ]s            - Go to next mispelled word
  [s            - Go to prev mispelled word
