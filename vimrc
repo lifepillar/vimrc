@@ -195,6 +195,29 @@
 	endfunc
 
 	command! -nargs=0 Conflicts call Git3WayDiff()
+
+	" An outliner in less than 20 lines of code! The format is compatible with
+	" VimOutliner (just in case we decide to use it): lines starting with : are
+	" used for notes (indent one level wrt to the owning node). Promote,
+	" demote, move, (un)fold and reformat with standard commands (plus mappings
+	" defined below). Do not leave blank lines between nodes.
+	func! OutlinerFoldingRule(n)
+		return getline(a:n) =~ '^\s*:' ? 20 : indent(a:n) < indent(a:n+1) ? ('>'.(1+indent(a:n)/&l:tabstop)) : (indent(a:n)/&l:tabstop)
+	endfunc
+
+	func! EnableOutliner()
+		setlocal autoindent
+		setlocal formatoptions=tcqrnjo
+		setlocal comments=fb:*,fb:-,b::
+		setlocal textwidth=80
+		setlocal foldmethod=expr
+		setlocal foldexpr=OutlinerFoldingRule(v:lnum)
+		setlocal foldtext=getline(v:foldstart)
+		setlocal foldlevel=2
+		" Full display with collapsed notes:
+		nnoremap <buffer> <silent> <Leader>n :set foldlevel=19<CR>
+		call SetTabWidth(4)
+	endfunc
 " }}
 " Editing {{
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
@@ -249,6 +272,8 @@
 	" A handy cheat sheet ;)
 	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 				\ :setlocal bufhidden=wipe nobuflisted noswapfile nowrap<CR>
+	" Enable outline mode for the current buffer
+	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> <Leader>T :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer
