@@ -515,7 +515,7 @@
 	" Build the status line the way I want - no fat light plugins!
 	func! BuildStatusLine(nr)
 		return '%{SetupStl('.a:nr.')}%#CurrMode#
-					\ %{w:["active"] ? get(g:mode_map,mode(1), ["??????"])[0] : ""}
+					\ %{w:["active"] ? get(g:mode_map,mode(1), ["??????"])[0] . (&paste ? " PASTE" : "") : ""}
 					\ %* %<%F
 					\ %{getbufvar(w:["bufnr"], "&modified") ? "◇" : " "}
 					\ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? "✗" : "") : "⚔"}
