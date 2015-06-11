@@ -25,8 +25,8 @@ configured to use Solarized, too! The other themes are 256 color themes, which
 should display just fine in MacVim, and use very similar, if not identical,
 colors in the terminal, no matter what colors the terminal is using.
 
-Use `<F7>` to switch between light and dark background for themes that support
-both.
+Use `cob` (for “change option: background”) to switch between light and dark
+background for themes that support both.
 
 ### How it looks like
 
