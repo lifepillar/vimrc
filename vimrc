@@ -616,8 +616,8 @@
 		nmap <Leader>s <Plug>(easymotion-s)
 	" }}
 	" Goyo {{
-		" Toggle distraction-free mode with \F
-		nnoremap <silent> <Leader>F :Goyo<CR>
+		" Toggle distraction-free mode
+		nnoremap <silent> <F7> :Goyo<CR>
 		func! s:goyo_enter()
 			call DisableStatusLine()
 			if has('gui_macvim')

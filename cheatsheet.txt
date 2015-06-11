@@ -347,6 +347,9 @@
   \sⓒ          - Go to ⓒ
   \/           - Search
  --
+  Goyo
+  «F7»         - Toggle distraction-free mode
+ --
   Ledger
   «Tab»        - Ⓘ Autocomplete
   «C-x»«C-o»

@@ -67,7 +67,7 @@ background for themes that support both.
 
 - A **cheat sheet** always at hand with `\?`.
 - Foldable and thoroughly commented `vimrc`.
-- **Distraction-free mode** (toggle with `\F`).
+- **Distraction-free mode** (toggle with `<F7>`).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, **"plugin-free" status line**.
 - Key bindings in command mode similar to those used by the shell.
