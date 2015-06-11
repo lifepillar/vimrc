@@ -275,7 +275,7 @@
 	" Enable outline mode for the current buffer
 	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
-	nnoremap <silent> <Leader>T :setlocal invexpandtab<CR>
+	nnoremap <silent> cot :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer
 	nnoremap <silent> + :call IncreaseTabWidth(+1)<CR>
 	" Decrease tab width by one in the current buffer
@@ -290,16 +290,16 @@
 	nnoremap <silent> [e :m .-2<CR>
 	vnoremap <silent> ]e :m '>+1<CR>gv
 	vnoremap <silent> [e :m '<-2<CR>gv
-	" Toggle invisibles in the current buffer with \i
-	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
-	" Toggle spelling in the current buffer with \s
-	nnoremap <silent> <Leader>s :setlocal spell!<CR>
-	" Remove trailing space globally with \S
+	" Toggle invisibles in the current buffer
+	nnoremap <silent> coi :setlocal nolist!<CR>
+	" Toggle spelling in the current buffer
+	nnoremap <silent> cos :setlocal spell!<CR>
+	" Remove trailing space globally
 	nnoremap <Leader>S :call RemoveTrailingSpace()<CR>
-	" Capitalize words in selected text with \U (see h gU)
+	" Capitalize words in selected text (see h gU)
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
-	" Toggle search highlighting with \h
-	nnoremap <silent> <Leader>h :set invhlsearch<CR>
+	" Toggle search highlighting
+	nnoremap <silent> coh :set invhlsearch<CR>
 	" Mappings to access buffers.
 	" Go to previous/next buffer
 	nnoremap <silent> [b :bp<CR>
@@ -320,12 +320,12 @@
 	nnoremap <Leader>8 8gt
 	nnoremap <Leader>9 9gt
 	nnoremap <Leader>0 10gt
-	" Toggle absolute line numbers with \N
-	nnoremap <silent> <Leader>N :set invnumber<CR>:set nornu<CR>
-	" Toggle relative line numbers with \R
-	nnoremap <silent> <Leader>R :set invnumber<CR>:set rnu<CR>
-	" Toggle background color with F7
-	noremap <silent> <F7> :call ToggleBackgroundColor()<CR>
+	" Toggle absolute line numbers
+	nnoremap <silent> con :set invnumber<CR>:set nornu<CR>
+	" Toggle relative line numbers
+	nnoremap <silent> cor :set invnumber<CR>:set rnu<CR>
+	" Toggle background color
+	noremap <silent> cob :call ToggleBackgroundColor()<CR>
 	" Apply 'git diff' to the current buffer with \gd
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
 	" Show the output of 'git status' with \gs

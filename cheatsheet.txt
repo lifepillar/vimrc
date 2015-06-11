@@ -158,12 +158,12 @@
  gw‹Move›      - Wrap up to move-to point
  gww           - Wrap current line
  gwap          - Hard-wrap paragraph
- \T            - Toggle hard/soft tabs
+ cot           - Toggle hard/soft tabs
  -             - Decrease tab width
  +             - Increase tab width
  :retab        - Detab (needs expandtab on - see \T)
  :retab!       - Entab (needs expandtab off - see \T)
- \s            - Toggle spell checking
+ cos           - Toggle spell checking
  ]s            - Go to next mispelled word
  [s            - Go to prev mispelled word
  z=            - Suggest corrections
@@ -184,14 +184,14 @@
   zh           - Scroll left
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
- \N            - Toggle line numbers
- \R            - Toggle relative line numbers
- \i            - Toggle invisibles
+ con           - Toggle line numbers
+ cor           - Toggle relative line numbers
+ coi           - Toggle invisibles
  zo            - Fold
  zc            - Unfold
  zM            - Fold all
  zR            - Unfold all
- «F7»          - Toggle background color
+ cob           - Toggle background color
  \F            - Toggle distraction-free mode
  :set cc=<n>   - Page guide at column n
  :set cc=""    - No page guide
@@ -203,7 +203,7 @@
  N             - Find prev (opposite direction)
  gn            - Select (up to) next match
  gN            - Select (up to) prev match
- \h            - Toggle highlighting
+ coh           - Toggle highlighting
  *             - Forward search for word under cursor
  #             - Backward search for word under cursor
  :s/‹P›/‹P›/g  - Ⓥ Find and replace
