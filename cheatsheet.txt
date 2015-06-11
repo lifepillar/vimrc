@@ -339,9 +339,6 @@
  Plugins
   CtrlP
   «C-p»        - Open CtrlP in MRU mode
-  \b           - Find buffers
-  \f           - Open function navigator
-  \t           - Find tags
  --
   Easy Align
   <Enter>      - Ⓥ Trigger Easy Align

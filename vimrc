@@ -579,13 +579,7 @@
 					\ 'main': 'CtrlP_Main',
 					\ 'prog': 'CtrlP_Progress',
 					\ }
-		"let g:ctrlp_extensions = ['']
-		" Show the list of buffers with \b
-		nnoremap <Leader>b :CtrlPBuffer<CR>
-		" Show function navigator with \f
-		nnoremap <Leader>f :CtrlPFunky<CR>
-		" Show tags with \t
-		nnoremap <Leader>t :CtrlPTag<CR>
+		let g:ctrlp_extensions = ['funky', 'tag']
 
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
@@ -609,7 +603,7 @@
 			let len = '%#Warnings# ' . a:1 . ' %*'
 			let dir = ' %=%<%#Warnings#' . getcwd() . ' %*'
 			return len . dir
-		endf
+		endfunc
 	" }}
 	" Easy Align {{
 		vmap <Enter> <Plug>(EasyAlign)
