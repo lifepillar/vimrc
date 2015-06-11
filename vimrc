@@ -608,6 +608,13 @@
 	" Easy Align {{
 		vmap <Enter> <Plug>(EasyAlign)
 	" }}
+	" EasyMotion {{
+		let g:EasyMotion_do_mapping = 0
+		let g:EasyMotion_smartcase = 1
+		map  <Leader>/ <Plug>(easymotion-sn)
+		omap <Leader>/ <Plug>(easymotion-tn)
+		nmap <Leader>s <Plug>(easymotion-s)
+	" }}
 	" Goyo {{
 		" Toggle distraction-free mode with \F
 		nnoremap <silent> <Leader>F :Goyo<CR>

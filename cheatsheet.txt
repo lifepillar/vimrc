@@ -343,6 +343,10 @@
   Easy Align
   <Enter>      - Ⓥ Trigger Easy Align
  --
+  EasyMotion
+  \sⓒ          - Go to ⓒ
+  \/           - Search
+ --
   Ledger
   «Tab»        - Ⓘ Autocomplete
   «C-x»«C-o»
