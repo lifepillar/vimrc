@@ -290,8 +290,6 @@
 	nnoremap <silent> [e :m .-2<CR>
 	vnoremap <silent> ]e :m '>+1<CR>gv
 	vnoremap <silent> [e :m '<-2<CR>gv
-	" Select all with \A
-	nnoremap <silent> <Leader>A ggVG
 	" Toggle invisibles in the current buffer with \i
 	nnoremap <silent> <Leader>i :setlocal nolist!<CR>
 	" Toggle spelling in the current buffer with \s
@@ -302,8 +300,6 @@
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 	" Toggle search highlighting with \h
 	nnoremap <silent> <Leader>h :set invhlsearch<CR>
-	" Hard-wrap paragraphs at textwidth with \r
-	nnoremap <silent> <leader>r gwap
 	" Mappings to access buffers.
 	" Go to previous/next buffer
 	nnoremap <silent> [b :bp<CR>

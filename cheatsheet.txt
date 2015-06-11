@@ -115,8 +115,7 @@
  «C-v»‹Move›x  - Delete char in multiple lines
  {v}           - Select paragraph
  gv            - Reselect
- \A            - Select all
- ggVG
+ ggvG          - Select all
  «C-w»         - Ⓘ Delete prev word
  «C-u»         - Ⓘ Delete line before cursor
  \S            - Remove trailing space
@@ -158,7 +157,7 @@
  gw            - Ⓥ Hard-wrap at text width
  gw‹Move›      - Wrap up to move-to point
  gww           - Wrap current line
- \r            - Hard-wrap paragraph
+ gwap          - Hard-wrap paragraph
  \T            - Toggle hard/soft tabs
  -             - Decrease tab width
  +             - Increase tab width
