@@ -2,7 +2,7 @@
   About
   vim: set sw=1 ts=1 sts=0 et nonu nornu nowrap foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
-  Use \cs to open this file in Vim.
+  Use \? to open this file in Vim.
 
   NOTATION:
 

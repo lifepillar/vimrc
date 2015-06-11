@@ -65,7 +65,7 @@ both.
 
 ###  Some features
 
-- A **cheat sheet** always at hand with `\cs`.
+- A **cheat sheet** always at hand with `\?`.
 - Foldable and thoroughly commented `vimrc`.
 - **Distraction-free mode** (toggle with `\F`).
 - Keeps the edited line vertically centered.

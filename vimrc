@@ -270,7 +270,7 @@
 " }}
 " Key mappings (plugins excluded) {{
 	" A handy cheat sheet ;)
-	nnoremap <silent> <Leader>cs :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
+	nnoremap <silent> <Leader>? :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
 				\ :setlocal bufhidden=wipe nobuflisted noswapfile nowrap<CR>
 	" Enable outline mode for the current buffer
 	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
