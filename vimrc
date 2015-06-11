@@ -513,14 +513,15 @@
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
 	func! UpdateWarnings()
 		let trail = search('\s$', 'nw')
-		let mix = search('\v(^ +\t)|(^\t+ )|(^\t.*\n )|(^ .*\n\t)', 'nw')
+		let spaces = search('\v^\s* ', 'nw')
+		let tabs = search('\v^\s*\t', 'nw')
 		if trail != 0
-			let b:stl_warnings = '  trailing space (' . trail . ') '
-			if mix != 0
-				let b:stl_warnings .= 'mixed indent (' . mix . ') '
+			let b:stl_warnings = '  trailing space ('.trail.') '
+			if spaces != 0 && tabs != 0
+				let b:stl_warnings .= 'mixed indent ('.spaces.'/'.tabs.') '
 			endif
-		elseif mix != 0
-			let b:stl_warnings = '  mixed indent (' . mix . ') '
+		elseif spaces != 0 && tabs != 0
+			let b:stl_warnings = '  mixed indent ('.spaces.'/'.tabs.') '
 		else
 			unlet! b:stl_warnings
 		endif
