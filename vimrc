@@ -300,16 +300,15 @@
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 	" Toggle search highlighting
 	nnoremap <silent> coh :set invhlsearch<CR>
-	" Mappings to access buffers.
 	" Go to previous/next buffer
 	nnoremap <silent> [b :bp<CR>
 	nnoremap <silent> ]b :bn<CR>
-	" Move between windows with ctrl-h/j/k/l
+	" Move between windows
 	nnoremap <silent> <C-h> <C-w>h
 	nnoremap <silent> <C-j> <C-w>j
 	nnoremap <silent> <C-k> <C-w>k
 	nnoremap <silent> <C-l> <C-w>l
-	" \1 \2 \3 : go to tab 1/2/3 etc
+	" Go to tab 1/2/3 etc
 	nnoremap <Leader>1 1gt
 	nnoremap <Leader>2 2gt
 	nnoremap <Leader>3 3gt
@@ -326,13 +325,13 @@
 	nnoremap <silent> cor :set invnumber<CR>:set rnu<CR>
 	" Toggle background color
 	noremap <silent> cob :call ToggleBackgroundColor()<CR>
-	" Apply 'git diff' to the current buffer with \gd
+	" Compare buffer with HEAD
 	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
-	" Show the output of 'git status' with \gs
+	" Git status
 	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
-	" Invoke 'git commit' with \gc (must be set up on the Git side)
+	" Git commit
 	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
-	" Show the revision history for the current file with \gl
+	" Show the revision history for the current file
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	" Add files/patches to the index
 	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
@@ -667,9 +666,9 @@
 
 		command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
 
-		" Toggle transaction state with <space>
+		" Toggle transaction state
 		au FileType ledger nnoremap <silent><buffer> <Space> :call ledger#transaction_state_toggle(line('.'), '* !')<CR>
-		" Use tab to autocomplete
+		" Autocomplete
 		au FileType ledger inoremap <silent><buffer> <Tab> <C-x><C-o>
 		" Enter a new transaction based on the text in the current line
 		au FileType ledger nnoremap <silent><buffer> <C-t> :call ledger#entry()<CR>
@@ -694,18 +693,18 @@
 			endif
 		endfunc
 
-		" Toggle marks with \m
+		" Toggle marks
 		nnoremap <silent> <Leader>m :call ToggleShowMarks()<CR>
 		nnoremap ` :ShowMarksOnce<CR>`
 	" }}
 	" Tagbar {{
-		" Use F9 to toggle tag bar:
+		" Toggle tag bar
 		nnoremap <silent> <F9> :TagbarToggle<CR>
 		let g:tagbar_autofocus = 1
 		let g:tagbar_iconchars = ['▸', '▾']
 	" }}
 	" Undotree {{
-		" Use F8 to toggle undo tree
+		" Toggle undo tree
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
 " }}
