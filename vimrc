@@ -24,6 +24,9 @@
 	set autoread " Re-read file if it is changed by an external program.
 	set hidden " Allow buffer switching without saving.
 	set history=1000 " Keep a longer history.
+	" Files and directories to ignore
+	set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.so,*.swp,*.zip
+	let g:netrw_list_hide= '\.DS_Store,Icon\?,\.dmg$,\.git$,\.so$,\.swp$,\.zip$'
 	" Consolidate temporary files in a central spot
 	set backupdir=~/.vim/tmp
 	set directory=~/.vim/tmp
