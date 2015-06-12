@@ -612,6 +612,7 @@
 		map  <Leader>/ <Plug>(easymotion-sn)
 		omap <Leader>/ <Plug>(easymotion-tn)
 		nmap <Leader>s <Plug>(easymotion-s)
+		omap <Leader>s <Plug>(easymotion-s)
 	" }}
 	" Goyo {{
 		" Toggle distraction-free mode
