@@ -509,7 +509,7 @@
 	func! UpdateWarnings()
 		let save_cursor = getcurpos()
 		call cursor(1,1) " Start search from the beginning of the file
-		let trail = search('\s$', 'nw', 0, 500)
+		let trail = search('\s$', 'nw', 1000)
 		let spaces = search('\v^\s* ', 'nw', 0, 500)
 		let tabs = search('\v^\s*\t', 'nw', 0, 500)
 		if trail != 0
