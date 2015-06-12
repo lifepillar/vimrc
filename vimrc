@@ -512,9 +512,11 @@
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
 	func! UpdateWarnings()
-		let trail = search('\s$', 'nw')
-		let spaces = search('\v^\s* ', 'nw')
-		let tabs = search('\v^\s*\t', 'nw')
+		let save_cursor = getcurpos()
+		call cursor(1,1) " Start search from the beginning of the file
+		let trail = search('\s$', 'nw', 0, 500)
+		let spaces = search('\v^\s* ', 'nw', 0, 500)
+		let tabs = search('\v^\s*\t', 'nw', 0, 500)
 		if trail != 0
 			let b:stl_warnings = '  trailing space ('.trail.') '
 			if spaces != 0 && tabs != 0
@@ -525,6 +527,7 @@
 		else
 			unlet! b:stl_warnings
 		endif
+		call setpos('.', save_cursor) " Restore cursor position
 	endfunc
 
 	func! SetupStl(nr)
