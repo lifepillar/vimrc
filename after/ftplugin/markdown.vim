@@ -1,6 +1,6 @@
-set spell
-set spelllang=en
-set dictionary=/usr/share/dict/words
-set ai
-set formatoptions+=a
+setl spell
+setl spelllang=en
+setl dictionary=/usr/share/dict/words
+setl ai
+setl formatoptions+=a
 
