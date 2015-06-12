@@ -39,13 +39,6 @@
 	set nowritebackup " Do not write temporary backup files.
 	set noswapfile " Do not create swap files.
 " }}
-" File-type specific configuration {{
-	autocmd BufNewFile,BufReadPost *.mmd setlocal filetype=markdown
-	autocmd BufNewFile,BufReadPost *.txt,*.tex setlocal dictionary=/usr/share/dict/words
-	" Instead of reverting the cursor to the last position in the buffer, we
-	" set it to the first line when editing a git commit message
-	au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-" }}
 " Helper functions {{
 	" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
 	func! SetTabWidth(w)
