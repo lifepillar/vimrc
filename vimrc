@@ -704,6 +704,9 @@
 		let g:tagbar_iconchars = ['▸', '▾']
 	" }}
 	" Undotree {{
+		let g:undotree_SplitWidth = 40
+		let g:undotree_SetFocusWhenToggle = 1
+		let g:undotree_TreeNodeShape = '◦'
 		" Toggle undo tree
 		nnoremap <silent> <F8> :UndotreeToggle<CR>
 	" }}
