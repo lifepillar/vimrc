@@ -180,8 +180,10 @@
   «C-u»        - Scroll up half a page
   «C-e»        - Scroll down a bit (two lines)
   «C-y»        - Scroll up a bit (two lines)
-  zl           - Scroll right
-  zh           - Scroll left
+  ⓝ zl         - Scroll right
+  ⓝ zh         - Scroll left
+  zL           - Scroll right half a screen
+  zH           - Scroll left half a screen
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
  con           - Toggle line numbers
