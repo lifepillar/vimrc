@@ -159,8 +159,8 @@
  gww           - Wrap current line
  gwap          - Hard-wrap paragraph
  cot           - Toggle hard/soft tabs
- -             - Decrease tab width
- +             - Increase tab width
+ \-            - Decrease tab width
+ \+            - Increase tab width
  :retab        - Detab (needs expandtab on - see \T)
  :retab!       - Entab (needs expandtab off - see \T)
  cos           - Toggle spell checking
