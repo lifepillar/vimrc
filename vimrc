@@ -88,6 +88,21 @@
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endfunc
 
+	" Toggle between hard-wrapped and soft-wrapped text in the current buffer.
+	func! ToggleWrap()
+		if &l:wrap
+			setl nowrap
+			if mapcheck("j") != ""
+				unmap <buffer> j
+				unmap <buffer> k
+			endif
+		else
+			setl wrap
+			map <buffer> j gj
+			map <buffer> k gk
+		endif
+	endfunc
+
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
 	func! SmoothScroll(up)
 		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
@@ -286,6 +301,8 @@
 	nnoremap <silent> coi :setlocal nolist!<CR>
 	" Toggle spelling in the current buffer
 	nnoremap <silent> cos :setlocal spell!<CR>
+	" Toggle between hard-wrap and soft-wrap
+	nnoremap <silent> cow :call ToggleWrap()<CR>
 	" Remove trailing space globally
 	nnoremap <Leader>S :call RemoveTrailingSpace()<CR>
 	" Capitalize words in selected text (see h gU)
