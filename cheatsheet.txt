@@ -194,7 +194,6 @@
  zM            - Fold all
  zR            - Unfold all
  cob           - Toggle background color
- \F            - Toggle distraction-free mode
  :set cc=<n>   - Page guide at column n
  :set cc=""    - No page guide
 ---
