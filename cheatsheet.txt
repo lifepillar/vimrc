@@ -16,11 +16,12 @@
   ‹P›    denotes a pattern (i.e., a
          regular expression).
 
-  ‹Cmd›  denotes a command (e.g., d to
-         delete).
+  ‹Op›   denotes an operator (y, d, c,
+         >, <, ~, =, gq, …).
 
-  ‹Move› denotes an arbitrary move
-         command (e.g., 4jll).
+  ‹Cmd›  denotes an Ex command.
+
+  ‹Move› denotes a motion (e.g., 4jll).
 
   ‹Path› denotes a file path or a
          file name.
@@ -339,6 +340,13 @@
  :Conflicts    - Three-way diff
 ---
  Plugins
+  Commentary
+  gcc          - Toggle comment in current line
+  gc‹Move›     - Toggle comment up to the move point
+  gc           - Ⓥ Toggle comment
+  gcgc         - Uncomment
+  ‹Op›gc       - Apply ‹Op› to comment
+ --
   CtrlP
   «C-p»        - Open CtrlP in MRU mode
  --
