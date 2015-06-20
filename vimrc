@@ -128,6 +128,13 @@
 		exec "noautocmd bufdo vimgrepadd " . a:pattern . " % | copen"
 	endfunc
 
+	func! Cheatsheet()
+		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
+		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
+		nnoremap <silent> <buffer> <Tab> <C-w><C-w>
+		nnoremap <silent> <buffer> q <C-w>c
+	endfunc
+
 	" Run an external command and display its output in a new buffer.
 	" cmdline: the command to be executed;
 	" pos: a letter specifying the position of the output window.
@@ -278,8 +285,7 @@
 " }}
 " Key mappings (plugins excluded) {{
 	" A handy cheat sheet ;)
-	nnoremap <silent> <Leader>? :botright vert 40sview ${HOME}/.vim/cheatsheet.txt<CR>
-				\ :setlocal bufhidden=wipe nobuflisted noswapfile nowrap<CR>
+	nnoremap <silent> <Leader>? :call Cheatsheet()<CR>
 	" Enable outline mode for the current buffer
 	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
