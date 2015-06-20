@@ -71,6 +71,7 @@
 		%s/\s\+$//ge
 		" Restore window state
 		call winrestview(l:winview)
+		echomsg 'Trailing space removed!'
 	endfunc
 
 	func! ToggleBackgroundColor()
@@ -304,7 +305,7 @@
 	" Toggle between hard-wrap and soft-wrap
 	nnoremap <silent> cow :call ToggleWrap()<CR>
 	" Remove trailing space globally
-	nnoremap <Leader>S :call RemoveTrailingSpace()<CR>
+	nnoremap <silent> <Leader>S :call RemoveTrailingSpace()<CR>
 	" Capitalize words in selected text (see h gU)
 	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 	" Toggle search highlighting
