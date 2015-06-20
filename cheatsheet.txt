@@ -1,4 +1,4 @@
----
+Press q to dismiss, <Tab> to lose focus
   About
   vim: set sw=1 ts=1 sts=0 et nonu nornu nowrap tw=40 foldlevel=1 foldmethod=indent foldtext=getline(v\:foldstart) nospell:
 
@@ -39,7 +39,7 @@
   »    Forwards/rightwards
   «    Backwards/leftwards
   WORD Space-delimited word
----
+===
  File
   Basic
   :e ‹Path›    - New/open file
@@ -62,7 +62,7 @@
  :bp           - Edit prev file
  [b          * - Edit prev file
  :bufdo ‹Cmd›  - Run cmd in all buffers
----
+===
  Edit
   Basics
   «Esc»        - Back to normal mode
@@ -197,7 +197,7 @@
  «C-r»=        I Calculate expression
  ‹n›«C-a»      - Increment number
  ‹n›«C-x»      - Decrement number
----
+===
  View
   Scrolling
   «C-f»        - Scroll down a page
@@ -223,7 +223,7 @@
  zR            - Unfold all
  :set cc=‹n›   - Page guide at column n
  :set cc=""    - No page guide
----
+===
  Search
  /‹P›          - Search forward
  ?‹P›          - Search backward
@@ -251,7 +251,7 @@
   :diffput     V Put differences
   ]n         * - To next conflict marks
   [n         * - To prev conflict marks
----
+===
  Go
   Basic movement
   h            M Left
@@ -303,7 +303,7 @@
  «C-p»       * C Prev command
  «Alt-→»     * C Jump to next word ()
  «Alt-←»     * C Jump to prev word ()
----
+===
  Window
  :new          - New window/horiz. split
  «C-w» n
@@ -336,7 +336,7 @@
  «C-w» +       - Increase height
  «C-w» <       - Decrease width
  «C-w» >       - Increase width
----
+===
  Tabs
  :tabs         - List tabs
  :tabnew       - New tab
@@ -349,7 +349,7 @@
  :tabo
  :tab ball     - Open one tab per buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
----
+===
  Git
  \gs         * - Git status
  \gd         * - Git diff with HEAD
@@ -358,7 +358,7 @@
  \gc         * - Git commit
  \gp         * - Git push
  :Conflicts  * - Three-way diff
----
+===
  Plugins
   Commentary
   gc           O Comment operator
@@ -418,7 +418,7 @@
  --
   Wordy
   :Wordy «Tab» - Load a Wordy dictionary
----
+===
  Misc
  :cd ‹Path›    - Change directory
  :echo ‹Var›   - Show the value of ‹Var›
