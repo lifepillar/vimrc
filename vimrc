@@ -89,7 +89,7 @@
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endfunc
 
-	" Toggle between hard-wrapped and soft-wrapped text in the current buffer.
+	" Toggle soft-wrapped text in the current buffer.
 	func! ToggleWrap()
 		if &l:wrap
 			setl nowrap
