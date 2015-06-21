@@ -162,10 +162,6 @@
 		1
 	endfunc
 
-	command! -complete=shellcmd -nargs=+ Shell      call RunShellCommand(<q-args>, "B")
-	command! -complete=shellcmd -nargs=+ ShellRight call RunShellCommand(<q-args>, "R")
-	command! -complete=shellcmd -nargs=+ ShellTop   call RunShellCommand(<q-args>, "T")
-
 	" Execute a non-interactive Git command in the directory containing
 	" the file of the current buffer, and send the output to a new buffer.
 	" args: a string of arguments for the commmand
@@ -173,9 +169,6 @@
 	func! Git(args, pos)
 		call RunShellCommand("git -C %:p:h " . a:args, a:pos)
 	endfunc
-
-	" Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
-	command! -complete=shellcmd -nargs=+ Git call Git(<q-args>, "B")
 
 	" Show a vertical diff (use <C-w> K to arrange horizontally)
 	" between the current buffer and its last committed version.
@@ -212,8 +205,6 @@
 		diffthis
 	endfunc
 
-	command! -nargs=0 Conflicts call Git3WayDiff()
-
 	" An outliner in less than 20 lines of code! The format is compatible with
 	" VimOutliner (just in case we decide to use it): lines starting with : are
 	" used for notes (indent one level wrt to the owning node). Promote,
@@ -236,6 +227,27 @@
 		nnoremap <buffer> <silent> <Leader>n :set foldlevel=19<CR>
 		call SetTabWidth(4)
 	endfunc
+" }}
+" Commands {{
+	" Execute external command and show output in a new buffer
+	command! -complete=shellcmd -nargs=+ Shell      call RunShellCommand(<q-args>, "B")
+	command! -complete=shellcmd -nargs=+ ShellRight call RunShellCommand(<q-args>, "R")
+	command! -complete=shellcmd -nargs=+ ShellTop   call RunShellCommand(<q-args>, "T")
+
+	" Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
+	command! -complete=shellcmd -nargs=+ Git call Git(<q-args>, "B")
+
+	" Three-way diff
+	command! -nargs=0 Conflicts call Git3WayDiff()
+
+	" Save file with sudo
+	command W :w !sudo tee % >/dev/null
+
+	" Find all in current buffer
+	command! -nargs=1 FindAll call FindAll(<q-args>)
+
+	" Find all in all open buffers
+	command! -nargs=1 MultiFind call MultiFind(<q-args>)
 " }}
 " Editing {{
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
@@ -265,8 +277,6 @@
 	" Use soft tabs by default
 	set expandtab
 	call SetGlobalTabWidth(2)
-	" Save file with sudo
-	command W :w !sudo tee % >/dev/null
 " }}
 " Find, replace, and auto-complete {{
 	" set gdefault " Apply substitutions globally by default
@@ -278,10 +288,6 @@
 	set wildmenu " Show possible matches when autocompleting.
 	set wildignorecase " Ignore case when completing file names and directories.
 	" set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
-	" Find all in current buffer
-	command! -nargs=1 FindAll call FindAll(<q-args>)
-	" Find all in all open buffers
-	command! -nargs=1 MultiFind call MultiFind(<q-args>)
 " }}
 " Key mappings (plugins excluded) {{
 	" A handy cheat sheet ;)
