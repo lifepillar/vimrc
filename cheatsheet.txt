@@ -399,6 +399,7 @@ Press q to dismiss, <Tab> to lose focus
   «Spc»      * - Next transaction state
   \a         * V Align at decimal point
   «C-l»      * I Align this amount
+  :Ledger …  * - Run Ledger command
  --
   Show Marks
   \m         * - Toggle marks
