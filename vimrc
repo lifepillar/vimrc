@@ -228,7 +228,7 @@
 		call SetTabWidth(4)
 	endfunc
 " }}
-" Commands {{
+" Commands (plugins excluded) {{
 	" Execute external command and show output in a new buffer
 	command! -complete=shellcmd -nargs=+ Shell      call RunShellCommand(<q-args>, "B")
 	command! -complete=shellcmd -nargs=+ ShellRight call RunShellCommand(<q-args>, "R")
