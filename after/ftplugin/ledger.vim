@@ -20,6 +20,6 @@ func! BalanceReport()
   call inputsave()
   let accounts = input("Accounts: ", "^asset ^liab")
   call inputrestore()
-  call Ledger('cleared --real ' . accounts)
+  call Ledger('cleared --real --strict --explicit --check-payees ' . accounts)
 endfunc
 
