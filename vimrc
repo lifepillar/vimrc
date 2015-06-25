@@ -353,13 +353,13 @@
 	" Git status
 	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
 	" Git commit
-	nnoremap <silent> <Leader>gc :!git -C %:p:h commit<CR>
+	nnoremap <silent> <Leader>gc :!git -C '%:p:h' commit<CR>
 	" Show the revision history for the current file
 	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
 	" Add files/patches to the index
-	nnoremap <silent> <Leader>ga :!git -C %:p:h add -p %<CR>
+	nnoremap <silent> <Leader>ga :!git -C '%:p:h' add -p '%'<CR>
 	" Git push
-	nnoremap <silent> <Leader>gp :!git -C %:p:h push<CR>
+	nnoremap <silent> <Leader>gp :!git -C '%:p:h' push<CR>
 	" Find next/prev merge conflict markers
 	nnoremap <silent> ]n /\v^[<\|=>]{7}<CR>
 	nnoremap <silent> [n ?\v^[<\|=>]{7}<CR>
