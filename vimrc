@@ -2,6 +2,7 @@
 " vim: set sw=3 ts=3 sts=0 noet tw=78 fo-=o foldmarker={{,}} foldlevel=0 foldmethod=marker foldtext=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " Remember to check "Set locale environment variables on startup" in OS X Terminal.app's preferences.
+" (This is needed for UTF-8 symbols, e.g., in the status line, to be displayed correctly.)
 " }}
 " Environment {{
 	set nocompatible " Must be first line.
