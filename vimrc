@@ -597,6 +597,22 @@
 
 	call EnableStatusLine()
 " }}
+" Tabline {{
+	" See :h tabline
+	func! BuildTabLabel(nr)
+		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " ◇ ")
+					\ . (get(extend(t:, {"tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")}), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+	endfunc
+
+	func! BuildTabLine()
+		return join(map(range(1, tabpagenr('$')),
+					\ '((v:val == tabpagenr()) ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'), '')
+					\ . "%#TabLineFill#%T"
+					\ . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
+	endfunc
+
+	set tabline=%!BuildTabLine()
+" }}
 " Plugins {{
 	" CtrlP {{
 		" Open CtrlP in MRU mode by default
