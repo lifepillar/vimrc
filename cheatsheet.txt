@@ -43,6 +43,8 @@ Press q to dismiss, <Tab> to lose focus
  File
   Basic
   :e ‹Path›    - New/open file
+  :e           - Reload file from disk
+  :e!          - Revert to last saved
   :enew        - New file in this window
   :bd          - Close file
   :w           - Save file
