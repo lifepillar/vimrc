@@ -10,7 +10,7 @@ Press q to dismiss, <Tab> to lose focus
   ‹n›    A (possibly optional) number
   ‹c›    A single character
   ‹r›    A register (", *, 0, 1, …)
-  ‹Move› A motion (e.g., 4jll) or a tex
+  ‹Move› A motion (e.g., 4jll) or a text
          object (iw, ap, …)
   ‹P›    A regular expression (pattern)
   ‹Cmd›  An Ex command
