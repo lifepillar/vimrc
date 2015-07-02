@@ -55,6 +55,7 @@ Press q to dismiss, <Tab> to lose focus
   :q           - Quit
   :q!          - Quit without saving
   :qa!         - Quit all without saving
+ «C-g»         - File info
  :mks          - Save session
                  Restore with `vim -S`
  :ls           - List open files
