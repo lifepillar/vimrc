@@ -109,16 +109,14 @@
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
 	func! SmoothScroll(up)
-		let scrollaction = a:up ? "\<C-y>" : "\<C-e>"
-		exec "normal" scrollaction
+		let scrollaction = a:up ? "\<c-y>" : "\<c-e>"
+		exe "normal " . scrollaction
 		redraw
-		let counter = 1
-		while counter < &scroll
-			let counter += 2
+		for counter in range(3, &scroll, 2)
 			sleep 10m
+			exe "normal " . scrollaction
 			redraw
-			exec "normal" scrollaction
-		endwhile
+		endfor
 	endfunc
 
 	" Find all occurrences of a pattern in a file.
@@ -258,8 +256,8 @@
 	set scrolloff=999 " Keep the edited line vertically centered.
 	" set clipboard=unnamed " Use system clipboard by default.
 	" Smooth scrolling that works both in terminal and in MacVim
-	nnoremap <C-U> :call SmoothScroll(1)<Enter>
-	nnoremap <C-D> :call SmoothScroll(0)<Enter>
+	nnoremap <silent> <C-U> :call SmoothScroll(1)<Enter>
+	nnoremap <silent> <C-D> :call SmoothScroll(0)<Enter>
 	" Scroll the viewport faster.
 	nnoremap <C-e> <C-e><C-e>
 	nnoremap <C-y> <C-y><C-y>
