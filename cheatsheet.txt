@@ -397,11 +397,9 @@ Press q to dismiss, <Tab> to lose focus
   i$           T Inside inline formula
  --
   Ledger
-  «Tab»      * I Autocomplete
+  «Tab»      *IV Autocomplete or align
   «C-t»      * I Transaction from text
   «Spc»      * - Next transaction state
-  \a         * V Align at decimal point
-  «C-l»      * I Align this amount
   :Ledger …  * - Run Ledger command
  --
   Show Marks
