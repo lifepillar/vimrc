@@ -1,6 +1,6 @@
 " Run an arbitrary ledger command.
 func! Ledger(args)
-  call RunShellCommand(g:ledger_bin . " -f % " . a:args, "r")
+  call RunShellCommand(g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args, "T")
 endfunc
 
 command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
