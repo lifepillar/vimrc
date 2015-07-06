@@ -1,3 +1,6 @@
+" Do not use YouCompleteMe for Ledger files
+call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
+
 " Run an arbitrary ledger command.
 func! Ledger(args)
   call RunShellCommand(g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args, "T")
