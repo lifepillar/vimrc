@@ -159,7 +159,10 @@
 		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
 		execute '%!'. cmd
 		setlocal nomodifiable
-		"echomsg cmd  " Uncomment this for debugging
+		nnoremap <silent> <buffer> <Tab> <C-w><C-w>
+		nnoremap <silent> <buffer> q <C-w>c
+		" Uncomment the following line for debugging
+		" echomsg cmd
 		1
 	endfunc
 
