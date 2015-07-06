@@ -1,6 +1,8 @@
 " Run an arbitrary ledger command.
 func! Ledger(args)
   call RunShellCommand(g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args, "T")
+  " Color negative numbers
+  syntax match Macro /-\d\+\([,.]\d\+\)*/
 endfunc
 
 command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
