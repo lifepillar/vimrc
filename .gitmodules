@@ -34,9 +34,6 @@
 [submodule "bundle/wordy"]
 	path = bundle/wordy
 	url = https://github.com/reedes/vim-wordy.git
-[submodule "bundle/rust"]
-	path = bundle/rust
-	url = https://github.com/wting/rust.vim.git
 [submodule "bundle/gruvbox"]
 	path = bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
