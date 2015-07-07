@@ -77,3 +77,6 @@
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = git@github.com:tpope/vim-commentary.git
+[submodule "bundle/swift"]
+	path = bundle/swift
+	url = git@github.com:keith/swift.vim.git
