@@ -60,6 +60,7 @@ Press q to dismiss, <Tab> to lose focus
                  Restore with `vim -S`
  :ls           - List open files
  :‹n›b         - Edit file n
+ :b«Spc»«Tab»  - Edit… (autocomplete)
  :bn           - Edit next file
  ]b          * - Edit next file
  :bp           - Edit prev file
