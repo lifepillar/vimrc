@@ -82,4 +82,4 @@
 	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule "bundle/rust"]
 	path = bundle/rust
-	url = git@github.com:wting/rust.vim.git
+	url = git@github.com:rust-lang/rust.vim.git
