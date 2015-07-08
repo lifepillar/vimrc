@@ -557,6 +557,15 @@
 	endfunc
 
 	func! SetupStl(nr)
+		" Setting highlight groups while computing the status line may cause the
+		" startup screen to disappear in MacVim. See:
+		"
+		"     https://github.com/powerline/powerline/issues/250
+		"
+		" I have experienced this issue under two circumstances:
+		" 1) you open a window in MacVim (File > New Window), then you open a
+		"    second window: the startup screen disappears in the first window.
+		" 2) After installing YouCompleteMe, it happens every time.
 		exec 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
 		return get(extend(w:, {"bufnr": winbufnr(winnr()), "active": (winnr() == a:nr),
 					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())}), '', '')
