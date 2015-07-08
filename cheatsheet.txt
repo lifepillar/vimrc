@@ -157,6 +157,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-u»        CI Del. line before cursor
  \S          * - Remove trailing space
  J             - Join with next line
+ gJ            - Ditto, preserve spaces
  q‹r›          - Start recording
                  Press q to stop
  @‹r›          - Run recorded macro
