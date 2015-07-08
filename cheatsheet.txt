@@ -350,7 +350,7 @@ Press q to dismiss, <Tab> to lose focus
  \‹n›        *
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
- :tabo
+ «C-w» T       - Move window to new tab
  :tab ball     - Open one tab per buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
 ===
