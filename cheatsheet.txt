@@ -403,6 +403,20 @@ Press q to dismiss, <Tab> to lose focus
   «C-t»      * I Transaction from text
   «Spc»      * - Next transaction state
   :Ledger …  * - Run Ledger command
+  \la        * - Average expenses report
+  \lb        * - Balance report
+  \lB        * - Budget report
+  \lc        * - Cleared report
+  \ld        * - Debit/credit report
+  \le        * - Expense report
+  \lf        * - Cash flow report
+  \li        * - Income statement
+  \lm        * - Sorted monthly expenses
+  \ln        * - Net worth
+  \lp        * - Pending transactions
+  \lr        * - Register report
+  \ls        * - Savings
+  \lu        * - Uncleared transactions
  --
   Show Marks
   \m         * - Toggle marks
