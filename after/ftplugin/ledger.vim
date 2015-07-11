@@ -43,7 +43,7 @@ nnoremap <buffer> <Leader>lB :<C-u>Ledger budget --real -p 'this year' expenses 
 " Debit/credit report
 nnoremap <buffer> <Leader>ld :<C-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
-nnoremap <buffer> <Leader>le :<C-u>Ledger bal --subtotal --real -p 'this month' expenses
+nnoremap <buffer> <Leader>le :<C-u>Ledger bal --subtotal --effective --real -p 'this month' expenses
 " Income statement
 nnoremap <buffer> <Leader>li :<C-u>Ledger bal --real -p 'this month' income expenses
 " Monthly average
