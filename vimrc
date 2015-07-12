@@ -644,7 +644,7 @@
 			autocmd BufReadPost,BufWritePost * call UpdateWarnings()
 		augroup END
 		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
-	endfunc!
+	endfunc
 
 	func! DisableStatusLine()
 		augroup status
@@ -652,7 +652,7 @@
 		augroup END
 		augroup! status
 		let &statusline = g:default_stl
-	endfunc!
+	endfunc
 
 	call EnableStatusLine()
 " }}
