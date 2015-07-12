@@ -17,6 +17,11 @@ The following themes are supported both in the terminal and in MacVim:
 - [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light/dark)
 - [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
 
+The following themes look fine in MacVim, but may be suboptimal choices in
+Terminal.app:
+
+- [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark)
+
 Solarized is the default theme. To use a different theme, put a file called
 `default-theme.vim` inside `.vim` and load your color scheme there.
 
