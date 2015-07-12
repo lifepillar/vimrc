@@ -17,6 +17,7 @@ The following themes are supported both in the terminal and in MacVim:
 - [Jellybeans](https://github.com/nanotech/jellybeans.vim) (dark)
 - [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light/dark)
 - [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
+- [Tomorrow](https://github.com/chriskempson/vim-tomorrow-theme) (light/dark)
 
 The following themes look fine in MacVim, but may be suboptimal choices in
 Terminal.app:

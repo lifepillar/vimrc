@@ -545,6 +545,25 @@
 			hi! link CommandMode  DiffChange
 		endfunc
 	" }}
+	" Tomorrow {{
+		func! ToggleBackground_Tomorrow()
+			colorscheme Tomorrow-Night-Eighties
+		endfunc
+
+		func! ToggleBackground_Tomorrow_Night_Eighties()
+			colorscheme Tomorrow
+		endfunc
+
+		func! CustomizeTheme_Tomorrow()
+			hi! link NormalMode  PmenuSel
+			hi! link InsertMode  DiffAdd
+			hi! link CommandMode Search
+		endfunc
+
+		func! CustomizeTheme_Tomorrow_Night_Eighties()
+			call CustomizeTheme_Tomorrow()
+		endfunc
+	" }}
 
 	" Default theme
 	if filereadable($HOME . '/.vim/default-theme.vim')
@@ -776,7 +795,6 @@
 		let g:syntastic_auto_loc_list = 1
 		let g:syntastic_check_on_open = 1
 		let g:syntastic_check_on_wq = 0
-		let g:syntastic_javascript_checkers = ['jshint']
 	" }}
 	" Tagbar {{
 		" Toggle tag bar
