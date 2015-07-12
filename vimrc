@@ -472,6 +472,14 @@
 			hi! link NormalMode  Cursor
 		endfunc
 	" }}
+	" Jellybeans {{
+		func! CustomizeTheme_jellybeans()
+			hi! link TabLineSel  Normal
+			hi! link TabLine     StatusLine
+			hi! link TabLineFill TabLine
+			hi! link NormalMode  Pmenu
+		endfunc
+	" }}
 	" PaperColor {{
 		func! ToggleBackground_PaperColor()
 			colorscheme PaperColor-Dark
