@@ -509,18 +509,38 @@
 		endfunc
 	" }}
 	" PaperColor {{
-		func! CustomizeTheme_papercolor()
-			set fillchars=vert:\|,fold:\·
+		func! ToggleBackground_PaperColor()
+			colorscheme PaperColor-Dark
+		endfunc
+
+		func! ToggleBackground_PaperColor_Dark()
+			colorscheme PaperColor
+		endfunc
+
+		func! CustomizeTheme_PaperColor()
 			hi clear Title
-			hi StatusLine term=NONE cterm=NONE gui=NONE
-			hi TabLine      ctermbg=255 ctermfg=24  guibg=#f5f5f5 guifg=#005f87 term=reverse cterm=reverse gui=reverse
-			hi TabLineSel   ctermbg=238 ctermfg=255 guibg=#4d4d4c guifg=#f5f5f5 term=reverse cterm=reverse gui=reverse
+			hi       StatusLine   term=NONE cterm=NONE gui=NONE
+			hi! link TabLine      StatusLine
+			hi! link TabLineSel   Normal
 			" Status line
-			hi InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi VisualMode   ctermbg=25  ctermfg=255 guibg=#4271ae guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi CommandMode  ctermbg=238 ctermfg=255 guibg=#4d4d4c guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi Warnings     ctermbg=161 ctermfg=255 guibg=#d7005f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi! link VisualMode   Visual
+			hi! link CommandMode  Folded
+			hi! link Warnings     ErrorMsg
+		endfunc
+
+		func! CustomizeTheme_PaperColor_Dark()
+			hi clear Title
+			hi       StatusLine   term=NONE cterm=NONE gui=NONE
+			hi! link TabLine      TabLineFill
+			hi! link TabLineSel   Normal
+			" Status line
+			hi! link InsertMode   DiffAdd
+			hi! link ReplaceMode  DiffChange
+			hi! link VisualMode   Visual
+			hi! link CommandMode  Folded
+			hi! link Warnings     ErrorMsg
 		endfunc
 	" }}
 
