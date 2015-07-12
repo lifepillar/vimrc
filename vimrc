@@ -400,10 +400,10 @@
 	func! CustomizeTheme()
 		" Set default values for the highlight groups of the status line
 		hi! link NormalMode  StatusLine
-		hi! link InsertMode  StatusLine
+		hi! link InsertMode  DiffText
 		hi! link VisualMode  Visual
-		hi! link ReplaceMode StatusLine
-		hi! link CommandMode StatusLine
+		hi! link ReplaceMode DiffChange
+		hi! link CommandMode PmenuSel
 		hi! link Warnings    ErrorMsg
 		if exists('g:colors_name')
 			let fn = 'CustomizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
