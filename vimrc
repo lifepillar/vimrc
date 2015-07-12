@@ -77,21 +77,6 @@
 		echomsg 'Trailing space removed!'
 	endfunc
 
-	func! ToggleBackgroundColor()
-		" Seoul256 with custom background colors requires
-		" special treatment to switch between dark and light background:
-		if exists('g:colors_name')
-			if g:colors_name ==# 'seoul256'
-				colorscheme seoul256-light
-				return
-			elseif g:colors_name ==# 'seoul256-light'
-				colorscheme seoul256
-				return
-			endif
-		endif
-		let &background = (&background == 'dark') ? 'light' : 'dark'
-	endfunc
-
 	" Toggle soft-wrapped text in the current buffer.
 	func! ToggleWrap()
 		if &l:wrap
@@ -430,6 +415,20 @@
 
 	autocmd ColorScheme * call CustomizeTheme()
 
+	" For themes that have dark and light variants with different names (e.g.,
+	" PaperColor/PaperColor-Dark), define corresponding
+	" ToggleBackground_<theme_name>() functions that change the color scheme.
+	func! ToggleBackgroundColor()
+		if exists('g:colors_name')
+			let fn = 'ToggleBackground_' . substitute(g:colors_name, '[-]', '_', 'g')
+			if exists('*' . fn)
+				call eval(fn . '()')
+				return
+			endif
+		endif
+		let &background = (&background == 'dark') ? 'light' : 'dark'
+	endfunc
+
 	" Solarized {{
 		let g:solarized_bold = 1
 		let g:solarized_underline = 0
@@ -469,6 +468,14 @@
 	" Seoul256 {{
 		let g:seoul256_background = 236
 		let g:seoul256_light_background = 255
+
+		func! ToggleBackground_seoul256()
+			colorscheme seoul256-light
+		endfunc
+
+		func! ToggleBackground_seoul256_light()
+			colorscheme seoul256
+		endfunc
 
 		func! CustomizeTheme_seoul256()
 			hi VertSplit    ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
