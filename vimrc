@@ -791,10 +791,20 @@
 		nnoremap ` :ShowMarksOnce<CR>`
 	" }}
 	" Syntastic {{
+		let g:syntastic_check_on_open = 0
+		let g:syntastic_check_on_wq = 0
+		let g:syntastic_cursor_columns = 0
+		let g:syntastic_error_symbol = '✗'
+		let g:syntastic_warning_symbol = '»'
+		let g:syntastic_style_error_symbol = '⦿'
+		let g:syntastic_style_warning_symbol = '●'
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
-		let g:syntastic_check_on_open = 1
-		let g:syntastic_check_on_wq = 0
+		let g:syntastic_stl_format = '  %E{Err: %fe}%B{ }%W{Warn: %fw} '
+		" let g:syntastic_debug = 1 + 16 + 32
+		" let g:syntastic_debug_file = '~/.vim/syntastic.log'
+		let g:syntastic_javascript_checkers = ['jshint']
+		let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
 	" }}
 	" Tagbar {{
 		" Toggle tag bar
