@@ -399,12 +399,12 @@
 	" Set up highlight groups for the current theme and background.
 	func! CustomizeTheme()
 		" Set default values for the highlight groups of the status line
-		hi link NormalMode  StatusLine
-		hi link InsertMode  StatusLine
-		hi link VisualMode  StatusLine
-		hi link ReplaceMode StatusLine
-		hi link CommandMode StatusLine
-		hi link Warnings    StatusLine
+		hi! link NormalMode  StatusLine
+		hi! link InsertMode  StatusLine
+		hi! link VisualMode  Visual
+		hi! link ReplaceMode StatusLine
+		hi! link CommandMode StatusLine
+		hi! link Warnings    ErrorMsg
 		if exists('g:colors_name')
 			let fn = 'CustomizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
 			if exists('*' . fn)
@@ -434,19 +434,18 @@
 		let g:solarized_underline = 0
 
 		func! CustomizeTheme_solarized()
-			if &background ==# 'dark'
-				hi VertSplit   ctermbg=0  ctermfg=0  guibg=#073642 guifg=#073642 term=reverse cterm=reverse gui=reverse
-				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
-			else
-				hi VertSplit   ctermbg=7  ctermfg=7  guibg=#eee8d5 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
-				hi TabLineSel  ctermbg=10 ctermfg=15 guibg=#586e75 guifg=#fdf6e3 term=reverse cterm=reverse gui=reverse
-				hi TabLine     ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-				hi TabLineFill ctermbg=7  ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-			endif
 			hi clear Title
 			hi clear Folded
 			hi clear SignColumn
+			hi! link VertSplit   LineNr
+			hi! link TabLineSel  Normal
+			hi! link TabLine     StatusLine
+			hi! link TabLineFill TabLine
+			if &background ==# 'dark'
+				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+			else
+				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+			endif
 
 			" Status line
 			if &background ==# 'dark'
@@ -478,34 +477,26 @@
 		endfunc
 
 		func! CustomizeTheme_seoul256()
-			hi VertSplit    ctermbg=239 ctermfg=239 guibg=#616161 guifg=#616161 term=reverse cterm=reverse gui=reverse
-			hi TabLineSel   ctermbg=236 ctermfg=187 guibg=#3f3f3f guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi TabLine      ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
-			hi TabLineFill  ctermbg=239 ctermfg=249 guibg=#616161 guifg=#bfbfbf term=NONE    cterm=NONE    gui=NONE
+			hi! link VertSplit    StatusLineNC
+			hi! link TabLineSel   Normal
+			hi! link TabLine      DiffChange
+			hi! link TabLineFill  TabLine
 			" Status line
-			hi StatusLineNC ctermbg=187 ctermfg=239 guibg=#dfdebd guifg=#616161 term=reverse cterm=reverse gui=reverse
-			hi StatusLine   ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi InsertMode   ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode  ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
-			hi VisualMode   ctermbg=23  ctermfg=252 guibg=#007173 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-			hi CommandMode  ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi Warnings     ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+			hi! link NormalMode   StatusLineNC
+			hi! link InsertMode   PmenuSbar
+			hi! link ReplaceMode  Search
+			hi! link CommandMode  DiffAdd
 		endfunc
 
 		func! CustomizeTheme_seoul256_light()
-			hi TabLineSel   ctermbg=255 ctermfg=238 guibg=#f0f1f1 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
-			hi TabLine      ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
-			hi TabLineFill  ctermbg=252 ctermfg=243 guibg=#d9d9d9 guifg=#d1d0d1 term=NONE    cterm=NONE    gui=NONE
+			hi! link TabLineSel   Normal
+			hi! link TabLine      LineNr
+			hi! link TabLineFill  TabLine
 			" Status line
-			hi StatusLine   ctermbg=187 ctermfg=95  guibg=#dfdebd guifg=#9a7372 term=reverse cterm=reverse gui=reverse
-			hi StatusLineNC ctermbg=238 ctermfg=251 guibg=#565656 guifg=#d1d0d1 term=reverse cterm=reverse gui=reverse
-			hi NormalMode   ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi InsertMode   ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode  ctermbg=220 ctermfg=238 guibg=#ffdd00 guifg=#565656 term=NONE    cterm=NONE    gui=NONE
-			hi VisualMode   ctermbg=23  ctermfg=252 guibg=#007173 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-			hi CommandMode  ctermbg=52  ctermfg=187 guibg=#730b00 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi Warnings     ctermbg=52  ctermfg=252 guibg=#730b00 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+			hi       NormalMode   ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
+			hi       InsertMode   ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi! link ReplaceMode  WildMenu
+			hi! link CommandMode  DiffChange
 		endfunc
 	" }}
 	" PaperColor {{
@@ -519,28 +510,26 @@
 
 		func! CustomizeTheme_PaperColor()
 			hi clear Title
+			" Default status line is boldface. I don't want that.
 			hi       StatusLine   term=NONE cterm=NONE gui=NONE
 			hi! link TabLine      StatusLine
 			hi! link TabLineSel   Normal
 			" Status line
 			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
 			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi! link VisualMode   Visual
 			hi! link CommandMode  Folded
-			hi! link Warnings     ErrorMsg
 		endfunc
 
 		func! CustomizeTheme_PaperColor_Dark()
 			hi clear Title
+			" Default status line is boldface. I don't want that.
 			hi       StatusLine   term=NONE cterm=NONE gui=NONE
 			hi! link TabLine      TabLineFill
 			hi! link TabLineSel   Normal
 			" Status line
 			hi! link InsertMode   DiffAdd
 			hi! link ReplaceMode  DiffChange
-			hi! link VisualMode   Visual
 			hi! link CommandMode  Folded
-			hi! link Warnings     ErrorMsg
 		endfunc
 	" }}
 
