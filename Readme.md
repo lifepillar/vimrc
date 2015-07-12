@@ -14,7 +14,7 @@ switch between them depending on light conditions, my mood, or file content.
 The following themes are supported both in the terminal and in MacVim:
 
 - [Solarized](https://github.com/altercation/vim-colors-solarized) (light/dark)
-- [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light)
+- [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light/dark)
 - [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
 
 Solarized is the default theme. To use a different theme, put a file called
