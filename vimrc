@@ -474,6 +474,7 @@
 		endfunc
 
 		func! CustomizeTheme_PaperColor()
+			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			" Default status line is boldface. I don't want that.
 			hi       StatusLine   term=NONE cterm=NONE gui=NONE
