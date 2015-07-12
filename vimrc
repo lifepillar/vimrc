@@ -464,6 +464,39 @@
 			hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		endfunc
 	" }}
+	" PaperColor {{
+		func! ToggleBackground_PaperColor()
+			colorscheme PaperColor-Dark
+		endfunc
+
+		func! ToggleBackground_PaperColor_Dark()
+			colorscheme PaperColor
+		endfunc
+
+		func! CustomizeTheme_PaperColor()
+			hi clear Title
+			" Default status line is boldface. I don't want that.
+			hi       StatusLine   term=NONE cterm=NONE gui=NONE
+			hi! link TabLine      StatusLine
+			hi! link TabLineSel   Normal
+			" Status line
+			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
+			hi! link CommandMode  Folded
+		endfunc
+
+		func! CustomizeTheme_PaperColor_Dark()
+			hi clear Title
+			" Default status line is boldface. I don't want that.
+			hi       StatusLine   term=NONE cterm=NONE gui=NONE
+			hi! link TabLine      TabLineFill
+			hi! link TabLineSel   Normal
+			" Status line
+			hi! link InsertMode   DiffAdd
+			hi! link ReplaceMode  DiffChange
+			hi! link CommandMode  Folded
+		endfunc
+	" }}
 	" Seoul256 {{
 		let g:seoul256_background = 236
 		let g:seoul256_light_background = 255
@@ -497,39 +530,6 @@
 			hi       InsertMode   ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 			hi! link ReplaceMode  WildMenu
 			hi! link CommandMode  DiffChange
-		endfunc
-	" }}
-	" PaperColor {{
-		func! ToggleBackground_PaperColor()
-			colorscheme PaperColor-Dark
-		endfunc
-
-		func! ToggleBackground_PaperColor_Dark()
-			colorscheme PaperColor
-		endfunc
-
-		func! CustomizeTheme_PaperColor()
-			hi clear Title
-			" Default status line is boldface. I don't want that.
-			hi       StatusLine   term=NONE cterm=NONE gui=NONE
-			hi! link TabLine      StatusLine
-			hi! link TabLineSel   Normal
-			" Status line
-			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi! link CommandMode  Folded
-		endfunc
-
-		func! CustomizeTheme_PaperColor_Dark()
-			hi clear Title
-			" Default status line is boldface. I don't want that.
-			hi       StatusLine   term=NONE cterm=NONE gui=NONE
-			hi! link TabLine      TabLineFill
-			hi! link TabLineSel   Normal
-			" Status line
-			hi! link InsertMode   DiffAdd
-			hi! link ReplaceMode  DiffChange
-			hi! link CommandMode  Folded
 		endfunc
 	" }}
 
