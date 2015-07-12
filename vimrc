@@ -591,12 +591,12 @@
 		let spaces = search('\v^\s* ', 'nw')
 		let tabs = search('\v^\s*\t', 'nw')
 		if trail != 0
-			let b:stl_warnings = '  trailing space ('.trail.') '
+			let b:stl_warnings = '  Trailing space ('.trail.') '
 			if spaces != 0 && tabs != 0
-				let b:stl_warnings .= 'mixed indent ('.spaces.'/'.tabs.') '
+				let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.tabs.') '
 			endif
 		elseif spaces != 0 && tabs != 0
-			let b:stl_warnings = '  mixed indent ('.spaces.'/'.tabs.') '
+			let b:stl_warnings = '  Mixed indent ('.spaces.'/'.tabs.') '
 		else
 			unlet! b:stl_warnings
 		endif
