@@ -406,7 +406,7 @@
 		hi link CommandMode StatusLine
 		hi link Warnings    StatusLine
 		if exists('g:colors_name')
-			let fn = 'CustomizeTheme_' . substitute(tolower(g:colors_name), '[-]', '_', 'g')
+			let fn = 'CustomizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
 			if exists('*' . fn)
 				call eval(fn . '()')
 			endif
