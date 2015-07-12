@@ -483,19 +483,15 @@
 			" Status line
 			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
 			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi! link CommandMode  Folded
 		endfunc
 
 		func! CustomizeTheme_PaperColor_Dark()
+			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			" Default status line is boldface. I don't want that.
 			hi       StatusLine   term=NONE cterm=NONE gui=NONE
 			hi! link TabLine      TabLineFill
 			hi! link TabLineSel   Normal
-			" Status line
-			hi! link InsertMode   DiffAdd
-			hi! link ReplaceMode  DiffChange
-			hi! link CommandMode  Folded
 		endfunc
 	" }}
 	" Seoul256 {{
