@@ -464,6 +464,14 @@
 			hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		endfunc
 	" }}
+	" Gruvbox {{
+		func! CustomizeTheme_gruvbox()
+			hi! link TabLineSel  Normal
+			hi! link Tabline     StatusLine
+			hi! link TabLineFill TabLine
+			hi! link NormalMode  Cursor
+		endfunc
+	" }}
 	" PaperColor {{
 		func! ToggleBackground_PaperColor()
 			colorscheme PaperColor-Dark
