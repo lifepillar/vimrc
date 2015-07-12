@@ -587,7 +587,7 @@
 					\   (getbufvar(w:["bufnr"], "&ff") ==# "dos"  ? "␍␊ (Windows)" : "? (Unknown)"))) . " "
 					\ . (getbufvar(w:["bufnr"], "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(w:["bufnr"], "&tabstop"))}
 					\ %#CurrMode#%{w:["winwd"] < 60 ? "" : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}%*
-					\%#Warnings#%{(!w:["active"] || !exists("b:stl_warnings") || w:["ft"] =~ "help") ? "" : b:stl_warnings}%*'
+					\%#Warnings#%{SyntasticStatuslineFlag()}%{(!w:["active"] || !exists("b:stl_warnings") || w:["ft"] =~ "help") ? "" : b:stl_warnings}%*'
 	endfunc
 
 	func! EnableStatusLine()
@@ -742,6 +742,13 @@
 		" Toggle marks
 		nnoremap <silent> <Leader>m :call ToggleShowMarks()<CR>
 		nnoremap ` :ShowMarksOnce<CR>`
+	" }}
+	" Syntastic {{
+		let g:syntastic_always_populate_loc_list = 1
+		let g:syntastic_auto_loc_list = 1
+		let g:syntastic_check_on_open = 1
+		let g:syntastic_check_on_wq = 0
+		let g:syntastic_javascript_checkers = ['jshint']
 	" }}
 	" Tagbar {{
 		" Toggle tag bar
