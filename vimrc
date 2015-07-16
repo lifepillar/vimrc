@@ -723,7 +723,6 @@
 		" Toggle distraction-free mode
 		nnoremap <silent> <F7> :Goyo<CR>
 		func! s:goyo_enter()
-			call DisableStatusLine()
 			if has('gui_macvim')
 				"set fullscreen
 				set guifont=Monaco:h14
@@ -745,7 +744,6 @@
 			set nowrap
 			set showcmd
 			Limelight!
-			call EnableStatusLine()
 		endfunc
 
 		autocmd! User GoyoEnter
