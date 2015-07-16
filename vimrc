@@ -441,6 +441,8 @@
 			hi! link TabLineSel  Normal
 			hi! link TabLine     StatusLine
 			hi! link TabLineFill TabLine
+			hi! link Search      VisualMode
+			hi ErrorMsg       ctermbg=1  ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 			if &background ==# 'dark'
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
 			else
@@ -461,7 +463,6 @@
 			hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b16 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 			hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d33682 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 			hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d33682 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi Warnings        ctermbg=1   ctermfg=15  guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 		endfunc
 	" }}
 	" Gruvbox {{
@@ -492,6 +493,7 @@
 		func! CustomizeTheme_PaperColor()
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
+			hi! link Search VisualMode
 			" Default status line is boldface. I don't want that.
 			hi       StatusLine   term=NONE cterm=NONE gui=NONE
 			hi! link TabLine      StatusLine
