@@ -1,0 +1,2 @@
+SpeedDatingFormat %Y/%m/%d
+
