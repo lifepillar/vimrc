@@ -811,8 +811,7 @@
 	" }}
 	" UltiSnips {{
 		let g:UltiSnipsExpandTrigger="<c-j>"
-		" If you want :UltiSnipsEdit to split your window.
-		" let g:UltiSnipsEditSplit="vertical"
+		let g:UltiSnipsEditSplit = "vertical" " Edit snippets in a vertical split
 	" }}
 	" Undotree {{
 		let g:undotree_SplitWidth = 40
