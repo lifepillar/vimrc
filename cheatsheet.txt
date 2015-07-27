@@ -432,6 +432,11 @@ Press q to dismiss, <Tab> to lose focus
   Tagbar
   «F9»       * - Toggle Tagbar
  --
+  UltiSnips
+  «C-j»      * I Trigger snippet
+  «C-j»      * I Go to next placeholder
+  «C-k»      * I Go to prev placeholder
+ --
   Undotree
   «F8»       * - Toggle Undotree
  --
