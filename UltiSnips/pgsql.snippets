@@ -1,0 +1,53 @@
+snippet table "create table" b
+create table ${1} (
+	${2},
+
+	primary key (${3})
+);
+
+endsnippet
+
+snippet dom "create domain" b
+create domain ${1} as ${2}
+	constraint ${3} check (${4});
+
+endsnippet
+
+snippet fun "create function" b
+create or replace function (
+	${1}
+)
+returns ${2}
+language ${3} as
+\$\$
+	${4:-- code}
+\$\$
+
+endsnippet
+
+snippet pl "create PL/pgSQL function" b
+create or replace function (
+	${1}
+)
+returns ${2}
+language plpgsql as
+\$\$
+
+	begin
+	${3:-- code}
+	end;
+
+\$\$
+
+endsnippet
+
+snippet rule "create rule"
+create or replace rule ${1}
+	on ${2}
+	to ${3}
+	where ${4}
+
+	do instead ${5};
+
+endsnippet
+
