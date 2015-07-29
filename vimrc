@@ -751,21 +751,6 @@
 		autocmd! User GoyoEnter nested call <SID>goyo_enter()
 		autocmd! User GoyoLeave nested call <SID>goyo_leave()
 	" }}
-	" LaTeX-Box {{
-		if has('gui_macvim')
-			let g:LatexBox_latexmk_async = 1
-		else
-			let g:LatexBox_latexmk_async = 0
-		endif
-		let g:LatexBox_latexmk_preview_continuously = 0
-		let g:LatexBox_quickfix = 2
-		let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
-		let g:LatexBox_viewer = 'open -a Skim.app'
-		au FileType tex nnoremap <silent> <Leader>ls :silent
-					\ !${HOME}/Applications/Skim.app/Contents/SharedSupport/displayline
-					\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-					\ "%:p" <CR>
-	" }}
 	" Ledger {{
 		let g:ledger_maxwidth = 63
 		let g:ledger_fillstring = ''

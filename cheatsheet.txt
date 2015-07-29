@@ -385,20 +385,6 @@ Press q to dismiss, <Tab> to lose focus
   Goyo
   «F7»       * - Distraction-free mode
  --
-  Latex-Box
-  \ll          - Typeset
-  \lk          - Stop typesetting
-  \lg          - Running status
-  \le          - Show log
-  \lv          - Preview document
-  \lc          - Clean temporary files
-  \lt          - Table of contents
-  \ls        * - Forward SyncTeX search
-  ae           T An environment
-  ie           T Inside environment
-  a$           T An inline formula
-  i$           T Inside inline formula
- --
   Ledger
   «Tab»      *IV Autocomplete or align
   «C-t»      * I Transaction from text
