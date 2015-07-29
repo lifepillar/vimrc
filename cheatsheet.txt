@@ -301,6 +301,7 @@ Press q to dismiss, <Tab> to lose focus
  `‹c›          M Go to mark
  :marks        - View all marks
  :delmarks …   - Remove marks
+ gd            - Go to definition
  gx            - Open URL under cursor
  «C-a»       * C Start of line
  «C-e»       * C End of line
