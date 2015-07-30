@@ -17,7 +17,7 @@ fun! TexForwardSearch()
         \ line('.'),
         \ shellescape(TexPdfPath()),
         \ shellescape(expand('%:p'))
-  ])
+        \ ])
   if !has("gui_running")
     redraw!
   endif
