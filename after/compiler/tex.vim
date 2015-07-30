@@ -1,19 +1,15 @@
-CompilerSet makeprg=latexmk\ -cd\ -pv-\ -quiet\ -lualatex\ -synctex\=1\ \-file\-line\-error\ \-interaction=nonstopmode\ '%:p'
+CompilerSet makeprg=latexmk
 
 " The following error format is adapted from vimtex (https://github.com/lervag/vimtex).
-" FIX: errorformat
-
-" Note: The errorformat assumes we're using the -file-line-error with
-"       [pdf]latex. For more info, see |errorformat-LaTeX|.
-"
 
 " Push file to file stack
 CompilerSet errorformat=%-P**%f
 CompilerSet errorformat+=%-P**\"%f\"
 
 " Match errors
-CompilerSet errorformat+=%E!\ LaTeX\ %trror:\ %m
+CompilerSet errorformat+=%E%f:%l:\ LaTeX\ %trror:\ %m
 CompilerSet errorformat+=%E%f:%l:\ %m
+CompilerSet errorformat+=%E!\ LaTeX\ %trror:\ %m
 CompilerSet errorformat+=%E!\ %m
 
 " More info for undefined control sequences
@@ -22,32 +18,32 @@ CompilerSet errorformat+=%Z<argument>\ %m
 " More info for some errors
 CompilerSet errorformat+=%Cl.%l\ %m
 
-" " Show warnings
-" if exists("g:vimtex_quickfix_ignore_all_warnings")
-"       \ && exists("g:vimtex_quickfix_ignored_warnings")
-"       \ && !g:vimtex_quickfix_ignore_all_warnings
-"   " Ignore some warnings
-"   for w in g:vimtex_quickfix_ignored_warnings
-"     let warning = escape(substitute(w, '[\,]', '%\\\\&', 'g'), ' ')
-"     exe 'CompilerSet errorformat+=%-G%.%#'. warning .'%.%#'
-"   endfor
-"   CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
-"   CompilerSet errorformat+=%+W%.%#\ at\ lines\ %l--%*\\d
-"   CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %m
-"   CompilerSet errorformat+=%+W%.%#%.%#Warning:\ %m
+" Ignore some warnings
+let g:latex_ignored_warnings = [
+      \]
+for w in g:latex_ignored_warnings
+  let warning = escape(substitute(w, '[\,]', '%\\\\&', 'g'), ' ')
+  exe 'CompilerSet errorformat+=%-G%.%#'. warning .'%.%#'
+endfor
 
-"   " Parse biblatex warnings
-"   CompilerSet errorformat+=%-C(biblatex)%.%#in\ t%.%#
-"   CompilerSet errorformat+=%-C(biblatex)%.%#Please\ v%.%#
-"   CompilerSet errorformat+=%-C(biblatex)%.%#LaTeX\ a%.%#
-"   CompilerSet errorformat+=%-Z(biblatex)%m
+" Match warnings
+CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
+CompilerSet errorformat+=%+W%.%#\ at\ lines\ %l--%*\\d
+CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %m
+CompilerSet errorformat+=%+W%.%#%.%#Warning:\ %m
 
-"   " Parse hyperref warnings
-"   CompilerSet errorformat+=%-C(hyperref)%.%#on\ input\ line\ %l.
-" endif
+" Parse biblatex warnings
+CompilerSet errorformat+=%-C(biblatex)%.%#in\ t%.%#
+CompilerSet errorformat+=%-C(biblatex)%.%#Please\ v%.%#
+CompilerSet errorformat+=%-C(biblatex)%.%#LaTeX\ a%.%#
+CompilerSet errorformat+=%-Z(biblatex)%m
+
+" Parse hyperref warnings
+CompilerSet errorformat+=%-C(hyperref)%.%#on\ input\ line\ %l.
 
 " Ignore unmatched lines
 CompilerSet errorformat+=%-G%.%#
+
 " The Dispatch plugin deliberately removes the above catchall format from
 " errorformat. This is somewhat annoying, but we may work around that by adding
 " the catchall format twice. This is the purpose of the following line. Note
