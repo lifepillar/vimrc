@@ -1,5 +1,5 @@
 " FIX: replace with latexmk, add support for ConTeXt
-CompilerSet makeprg=cd\ '%:p:h'\ &&\ pdflatex\ \-synctex\=1\ \-file\-line\-error\ \-interaction=nonstopmode\ '%:t'
+CompilerSet makeprg=latexmk\ -cd\ -pv-\ -quiet\ -pdf\ -pdflatex='lualatex\ -synctex\=1\ \-file\-line\-error\ \-interaction=nonstopmode'\ '%:p'
 
 " The following error format is adapted from vimtex (https://github.com/lervag/vimtex).
 " FIX: errorformat
