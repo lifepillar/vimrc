@@ -23,6 +23,9 @@ fun! TexForwardSearch()
   endif
 endf
 
+" Typeset (uses Dispatch plugin to do it in the background):
+nnoremap <silent><buffer> <Leader>ll :silent Make!<CR>
+
 " Open PDF previewer (Skim):
 nnoremap <silent><buffer> <Leader>lv :<C-U>call TeXPreview()<CR>
 
