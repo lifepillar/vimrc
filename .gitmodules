@@ -89,6 +89,3 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/dispatch"]
-	path = bundle/dispatch
-	url = https://github.com/tpope/vim-dispatch.git
