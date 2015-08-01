@@ -11,11 +11,12 @@ necessary for other systems.
 
 I like to use both dark and light themes, even in the terminal, and I like to
 switch between them depending on light conditions, my mood, or file content.
-The following themes are supported both in the terminal and in MacVim:
+The following themes are supported:
 
 - [Solarized](https://github.com/altercation/vim-colors-solarized) (light/dark)
 - [Jellybeans](https://github.com/nanotech/jellybeans.vim) (dark)
 - [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light/dark)
+- [Pencil](https://github.com/reedes/vim-colors-pencil) (light/dark)
 - [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
 - [Tomorrow](https://github.com/chriskempson/vim-tomorrow-theme) (light/dark)
 
@@ -23,6 +24,7 @@ The following themes look fine in MacVim, but may be suboptimal choices in
 Terminal.app:
 
 - [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark)
+- [Pencil](https://github.com/reedes/vim-colors-pencil) (light/dark)
 
 Solarized is the default theme. To use a different theme, put a file called
 `default-theme.vim` inside `.vim` and load your color scheme there.
