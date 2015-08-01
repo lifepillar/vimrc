@@ -89,3 +89,6 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/pencil"]
+	path = bundle/pencil
+	url = https://github.com/reedes/vim-colors-pencil.git
