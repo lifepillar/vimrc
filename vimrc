@@ -302,6 +302,8 @@
 	vnoremap <silent> [e :m '<-2<CR>gv
 	" Toggle invisibles in the current buffer
 	nnoremap <silent> coi :setlocal nolist!<CR>
+	" Toggle paste mode
+	nnoremap <silent> cop :setlocal paste!<CR>
 	" Toggle spelling in the current buffer
 	nnoremap <silent> cos :setlocal spell!<CR>
 	" Toggle between hard-wrap and soft-wrap
