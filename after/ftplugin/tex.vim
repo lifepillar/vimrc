@@ -51,7 +51,7 @@ fun! TeXTypeset(program)
           \ . 'mvim --remote-send "<C-\><C-N>:call TeXCallback($?)<CR>") &'
   else " Synchronous typesetting
     exec '! ' . TeXTypesetCommand(a:program)
-    call TeXCallback(v:shell_error)
+    silent call TeXCallback(v:shell_error)
   endif
 endf
 
