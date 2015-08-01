@@ -520,6 +520,17 @@
 			hi! link TabLineSel   Normal
 		endfunc
 	" }}
+	" Pencil {{
+	fun CustomizeTheme_pencil()
+		if &background ==# 'dark'
+			hi! link TabLine      StatusLineNC
+			hi! link TabLineSel   CursorLineNr
+			hi! link TabLineFill  TabLine
+		else
+			hi! link TabLineSel   Title
+		endif
+	endf
+	" }}
 	" Seoul256 {{
 		let g:seoul256_background = 236
 		let g:seoul256_light_background = 255
