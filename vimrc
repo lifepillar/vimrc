@@ -352,6 +352,11 @@
 	" Find next/prev merge conflict markers
 	nnoremap <silent> ]n /\v^[<\|=>]{7}<CR>
 	nnoremap <silent> [n ?\v^[<\|=>]{7}<CR>
+	" Go to next/prev error in quickfix and location list
+	nnoremap <silent> ]l :<C-U>lnext<CR>
+	nnoremap <silent> [l :<C-U>lprevious<CR>
+	nnoremap <silent> ]q :<C-U>cnext<CR>
+	nnoremap <silent> [q :<C-U>cprevious<CR>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
 	cnoremap <C-a> <Home>
 	cnoremap <C-e> <End>
