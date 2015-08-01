@@ -367,6 +367,13 @@ Press q to dismiss, <Tab> to lose focus
  :Git …      * - Run Git command
  :Conflicts  * - Three-way diff
 ===
+ TeX
+ \tl         * - Typeset with LuaLaTeX
+ \tp         * - Typeset with pdfLaTeX
+ \tc         * - Clean generated files
+ \tv         * - Open PDF viewer
+ \ts         * - Forward search
+===
  Plugins
   Commentary
   gc           O Comment operator

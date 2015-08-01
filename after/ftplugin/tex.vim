@@ -82,12 +82,12 @@ fun! TeXForwardSearch()
 endf
 
 " Typeset:
-nnoremap <silent><buffer> <Leader>ll :<C-U>call TeXTypeset('lualatex')<CR>
-nnoremap <silent><buffer> <Leader>lp :<C-U>call TeXTypeset('pdflatex')<CR>
+nnoremap <silent><buffer> <Leader>tl :<C-U>call TeXTypeset('lualatex')<CR>
+nnoremap <silent><buffer> <Leader>tp :<C-U>call TeXTypeset('pdflatex')<CR>
 " Clean generated files:
-nnoremap <silent><buffer> <Leader>lc :<C-U>call TeXClean()<CR>
+nnoremap <silent><buffer> <Leader>tc :<C-U>call TeXClean()<CR>
 " Open PDF previewer (Skim):
-nnoremap <silent><buffer> <Leader>lv :<C-U>call TeXPreview()<CR>
+nnoremap <silent><buffer> <Leader>tv :<C-U>call TeXPreview()<CR>
 " Forward search using Skim:
-nnoremap <silent><buffer> <Leader>ls :<C-U>call TeXForwardSearch()<CR>
+nnoremap <silent><buffer> <Leader>ts :<C-U>call TeXForwardSearch()<CR>
 
