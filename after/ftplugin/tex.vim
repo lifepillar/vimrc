@@ -60,6 +60,9 @@ fun! TeXClean()
   if !has('gui_running')
     redraw!
   endif
+  echohl ModeMsg
+  echomsg 'Aux files removed'
+  echohl None
 endf
 
 fun! TeXPreview()
