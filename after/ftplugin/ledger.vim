@@ -5,7 +5,7 @@ call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 func! Ledger(args)
   call RunShellCommand(g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args, "T")
   " Color negative numbers
-  syntax match Macro /-\d\+\([,.]\d\+\)*/
+  syntax match Macro /-\d\+\([,.]\d\+\)\+/
 endfunc
 
 command! -complete=shellcmd -nargs=+ Ledger call Ledger(<q-args>)
@@ -53,8 +53,8 @@ nnoremap <buffer> <Leader>lm :<C-u>Ledger reg --period-sort '(-amount)' --monthl
 " Net worth
 nnoremap <buffer> <Leader>ln :<C-u>Ledger reg -F '\%10(date)\%20(display_total)\n' --collapse --real -d 'd>=[this year]' --monthly assets liab
 " Pending/uncleared transactions
-nnoremap <buffer> <Leader>lp :<C-u>Ledger reg --pending<CR>
-nnoremap <buffer> <Leader>lu :<C-u>Ledger reg --uncleared<CR>
+nnoremap <buffer> <Leader>lp :<C-u>Ledger reg --pending
+nnoremap <buffer> <Leader>lu :<C-u>Ledger reg --uncleared
 " Savings
 nnoremap <buffer> <Leader>ls :<C-u>Ledger bal --collapse --real -p 'last month' income expenses
 
