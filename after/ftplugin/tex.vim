@@ -38,7 +38,7 @@ fun! TeXTypesetCommand(program)
   else
     let opts = " -pdf -pdflatex='pdflatex'"
   endif
-  let opts .= " -g -cd -pv- -synctex=1 -file-line-error -interaction=nonstopmode"
+  let opts .= " -cd -pv- -synctex=1 -file-line-error -interaction=nonstopmode"
   return join([env, cmd, opts, shellescape(expand('%:p'))])
 endf
 
