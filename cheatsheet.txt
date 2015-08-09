@@ -41,24 +41,26 @@ Press q to dismiss, <Tab> to lose focus
   WORD Space-delimited word
 ===
  File
-  Basic
-  :e ‹Path›    - New/open file
-  :e           - Reload file from disk
-  :e!          - Revert to last saved
-  :enew        - New file in this window
-  :bd          - Close file
-  :%bd         - Close all
-  :w           - Save file
-  :w!          - Save read-only file
-  :W         * - Save as root
-  :wq          - Save and quit
-  :wqa         - Save all and quit
-  :q           - Quit
-  :q!          - Quit without saving
-  :qa!         - Quit all without saving
+ :enew        - New file in this window
+ :e ‹Path›    - New/open file or dir
+ :sp ‹Path›   - Open in horizontal split
+ :vs ‹Path›   - Open in vertical split
+ \e         * - Open file browser here
+ :e           - Reload file from disk
+ :e!          - Revert to last saved
+ :bd          - Close file
+ :%bd         - Close all
+ :w           - Save file
+ :w!          - Save read-only file
+ :W         * - Save as root
+ :wq          - Save and quit
+ :wqa         - Save all and quit
+ :q           - Quit
+ :q!          - Quit without saving
+ :qa!         - Quit all without saving
  «C-g»         - File info
  :mks          - Save session
-                 Restore with `vim -S`
+                 (Restore with `vim -S`)
  :ls           - List open files
  :‹n›b         - Edit file n
  :b«Spc»«Tab»  - Edit… (autocomplete)
@@ -67,6 +69,24 @@ Press q to dismiss, <Tab> to lose focus
  :bp           - Edit prev file
  [b          * - Edit prev file
  :bufdo ‹Cmd›  - Run cmd in all buffers
+  Netrw
+  %            - New file here
+  d            - New directory here
+  «Enter»      - Open
+  o            - Open in a horiz. split
+  v            - Open in a vert. split
+  t            - Open in a new tab
+  «Esc»      * - Back to previous buffer
+  mf           - Mark file
+  mr           - Mark by pattern match
+  mu           - Unmark all
+  me           - Edit marked files
+  R            - Rename file(s)
+  D            - Delete file(s)
+  «C-l»        - Refresh file list
+  qf           - File info
+  a            - Toggle hidden files
+  i            - Switch file list format
 ===
  Edit
   Basics
