@@ -302,6 +302,8 @@
 	nnoremap <silent> <Leader>? :call Cheatsheet()<CR>
 	" Enable outline mode for the current buffer
 	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
+	" Open file browser in the directory of the current buffer
+	nnoremap <silent> <Leader>e :Ex<CR>
 	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> cot :setlocal invexpandtab<CR>
 	" Increase tab width by one in the current buffer
