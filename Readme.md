@@ -23,7 +23,9 @@ The following themes are supported:
 The following themes look fine in MacVim, but may be suboptimal choices in
 Terminal.app:
 
-- [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark)
+- [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark): this looks fine in
+  iTerm, however, provided that you run
+  `.vim/bundle/gruvbox/gruvbox_256palette_osx.sh`.
 - [Pencil](https://github.com/reedes/vim-colors-pencil) (light/dark)
 
 Solarized is the default theme. To use a different theme, put a file called
