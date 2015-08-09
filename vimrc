@@ -422,6 +422,7 @@
 
 	" Set up highlight groups for the current theme and background.
 	func! CustomizeTheme()
+		hi! link netrwMarkFile DiffAdd
 		" Set default values for the highlight groups of the status line
 		hi! link NormalMode  StatusLine
 		hi! link InsertMode  DiffText
