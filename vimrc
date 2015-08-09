@@ -36,7 +36,6 @@
 	runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
 	execute pathogen#infect()
 	set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
-	set autochdir " Set current directory to the directory of the current buffer.
 	set autoread " Re-read file if it is changed by an external program.
 	set hidden " Allow buffer switching without saving.
 	set history=1000 " Keep a longer history.
