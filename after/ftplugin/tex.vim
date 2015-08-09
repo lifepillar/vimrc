@@ -10,15 +10,14 @@ endf
 
 fun! TeXCallback(exit_status)
   " The following is adapted from LaTeX-Box
-  " (commented out because we set autochdir in vimrc).
   " set cwd to expand error file correctly
-  " let l:cwd = fnamemodify(getcwd(), ':p')
-  " exec 'lcd ' . fnameescape(expand('%:p:h'))
+  let l:cwd = fnamemodify(getcwd(), ':p')
+  exec 'lcd ' . fnameescape(expand('%:p:h'))
   try
     exec 'cgetfile ' . fnameescape(TeXLogPath())
-    " finally
-    "   " restore cwd
-    "   execute 'lcd ' . fnameescape(l:cwd)
+  finally
+    " restore cwd
+    execute 'lcd ' . fnameescape(l:cwd)
   endtry
   if a:exit_status == 0
     echohl ModeMsg
