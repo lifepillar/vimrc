@@ -96,18 +96,26 @@
 		echomsg 'Trailing space removed!'
 	endfunc
 
+	fun SoftWrap()
+		setl wrap
+		map <buffer> j gj
+		map <buffer> k gk
+	endf
+
+	fun! DontSoftWrap()
+		setl nowrap
+		if mapcheck("j") != ""
+			unmap <buffer> j
+			unmap <buffer> k
+		endif
+	endf
+
 	" Toggle soft-wrapped text in the current buffer.
 	func! ToggleWrap()
 		if &l:wrap
-			setl nowrap
-			if mapcheck("j") != ""
-				unmap <buffer> j
-				unmap <buffer> k
-			endif
+			call DontSoftWrap()
 		else
-			setl wrap
-			map <buffer> j gj
-			map <buffer> k gk
+			call SoftWrap()
 		endif
 	endfunc
 
@@ -777,7 +785,7 @@
 				set linespace=7
 				set guioptions-=r " hide right scrollbar
 			endif
-			set wrap
+			call SoftWrap()
 			set noshowcmd
 			Limelight
 		endfunc
@@ -789,7 +797,7 @@
 				set linespace=0
 				set guioptions+=r
 			endif
-			set nowrap
+			call DontSoftWrap()
 			set showcmd
 			Limelight!
 		endfunc
