@@ -52,10 +52,6 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
-[submodule "bundle/ledger"]
-	path = bundle/ledger
-	url = git@github.com:lifepillar/vim-ledger.git
-	branch = lifepillar
 [submodule "bundle/speeddating"]
 	path = bundle/speeddating
 	url = https://github.com/tpope/vim-speeddating.git
@@ -92,3 +88,6 @@
 [submodule "bundle/pencil"]
 	path = bundle/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
+[submodule "bundle/ledger"]
+	path = bundle/ledger
+	url = https://github.com/ledger/vim-ledger.git
