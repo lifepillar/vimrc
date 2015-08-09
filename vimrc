@@ -1,6 +1,7 @@
 " Modeline and Notes {{
 " vim: set sw=3 ts=3 sts=0 noet tw=78 fo-=o foldmarker={{,}} foldlevel=0 foldmethod=marker foldtext=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
+" ---
 " For UTF-8 symbols to be displayed correctly (e.g., in the status line), you
 " may need to check "Set locale environment variables on startup" in OS X
 " Terminal.app's preferences, or "Set locale variables automatically" in
@@ -17,6 +18,10 @@
 "
 "     export LC_ALL=en_US.UTF-8
 "     export LANG=en_US.UTF-8
+"
+" ---
+" Spell files can be downloaded from ftp://ftp.vim.org/pub/vim/runtime/spell/
+" and put inside .vim/spell.
 " }}
 " Environment {{
 	set nocompatible " Must be first line.
