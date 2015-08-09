@@ -46,7 +46,7 @@
 	set history=1000 " Keep a longer history.
 	" Files and directories to ignore
 	set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.so,*.swp,*.zip
-	let g:netrw_list_hide= '\.DS_Store,Icon\?,\.dmg$,\.git$,\.pyc$,\.so$,\.swp$,\.zip$'
+	let g:netrw_list_hide= '\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.so$,\.swp$,\.zip$'
 	" Tree listing by default
 	let g:netrw_liststyle=3
 	" Consolidate temporary files in a central spot
