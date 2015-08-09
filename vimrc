@@ -482,8 +482,10 @@
 			hi ErrorMsg       ctermbg=1  ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
 			if &background ==# 'dark'
 				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+				let g:limelight_conceal_ctermfg = 10
 			else
 				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+				let g:limelight_conceal_ctermfg = 14
 			endif
 
 			" Status line
