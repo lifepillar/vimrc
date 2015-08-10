@@ -133,12 +133,29 @@
 
 	" Find all occurrences of a pattern in a file.
 	func! FindAll(pattern)
-		exec "noautocmd lvimgrep " . a:pattern . " % | lopen"
+		try
+			silent noautocmd exec "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
+		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
+			echohl Warnings
+			echomsg "No match"
+			echohl None
+		endtry
+		lwindow
 	endfunc
 
 	" Find all occurrences of a pattern in all open files.
 	func! MultiFind(pattern)
-		exec "noautocmd bufdo vimgrepadd " . a:pattern . " % | copen"
+		cexpr [] " Clear Quickfix window
+		" Get the list of open files
+		let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
+		try
+			silent noautocmd exec "vimgrepadd /" . a:pattern . "/gj " . join(l:files)
+		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
+			echohl Warnings
+			echomsg "No match"
+			echohl None
+		endtry
+		cwindow
 	endfunc
 
 	func! Cheatsheet()

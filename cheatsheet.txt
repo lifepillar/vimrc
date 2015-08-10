@@ -264,8 +264,8 @@ Press q to dismiss, <Tab> to lose focus
  :s/‹P›/‹P›/g  V Find and replace
  :s/‹P›/‹P›/gc V Ditto, ask to confirm
  :%s/‹P›/‹P›/g - Find and replace all
- :FindAll ‹P›    * Find all
- :MultiFind ‹P›  * Search all open files
+ :FindAll …    * Find all
+ :MultiFind …  * Search all open files
   Differences
   :diffthis    - Use this file for diff
   :diffoff!    - Exit diff mode
