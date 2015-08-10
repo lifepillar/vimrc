@@ -345,11 +345,6 @@
 	" Go to previous/next buffer
 	nnoremap <silent> [b :bp<CR>
 	nnoremap <silent> ]b :bn<CR>
-	" Move between windows
-	nnoremap <silent> <C-h> <C-w>h
-	nnoremap <silent> <C-j> <C-w>j
-	nnoremap <silent> <C-k> <C-w>k
-	nnoremap <silent> <C-l> <C-w>l
 	" Go to tab 1/2/3 etc
 	nnoremap <Leader>1 1gt
 	nnoremap <Leader>2 2gt

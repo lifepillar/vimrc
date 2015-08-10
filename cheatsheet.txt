@@ -348,13 +348,9 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» w       - Edit next window
  «C-w» «C-w»
  «C-w» h       - Edit left window
- «C-h»       *
  «C-w» j       - Edit window below
- «C-j»       *
  «C-w» k       - Edit window above
- «C-k»       *
  «C-w» l       - Edit right window
- «C-l»       *
  «C-w» t       - Edit top window
  «C-w» b       - Edit bottom window
  «C-w» =       - All windows same size
