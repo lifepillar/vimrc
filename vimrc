@@ -145,11 +145,10 @@
 
 	" Find all occurrences of a pattern in all open files.
 	func! MultiFind(pattern)
-		cexpr [] " Clear Quickfix window
 		" Get the list of open files
 		let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
 		try
-			silent noautocmd exec "vimgrepadd /" . a:pattern . "/gj " . join(l:files)
+			silent noautocmd exec "vimgrep /" . a:pattern . "/gj " . join(l:files)
 		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
 			echohl Warnings
 			echomsg "No match"
