@@ -52,7 +52,7 @@ Press q to dismiss, <Tab> to lose focus
  :%bd         - Close all
  :w           - Save file
  :w!          - Save read-only file
- :W         * - Save as root
+ :WW        * - Save as root
  :wq          - Save and quit
  :wqa         - Save all and quit
  :q           - Quit

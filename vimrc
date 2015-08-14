@@ -271,7 +271,7 @@
 	command! -nargs=0 Conflicts call Git3WayDiff()
 
 	" Save file with sudo
-	command W :w !sudo tee % >/dev/null
+	command WW :w !sudo tee % >/dev/null
 
 	" Find all in current buffer
 	command! -nargs=1 FindAll call FindAll(<q-args>)
