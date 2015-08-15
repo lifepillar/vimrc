@@ -90,6 +90,7 @@
 		setlocal wrap
 		map <buffer> j gj
 		map <buffer> k gk
+		echomsg "Soft wrap enabled"
 	endf
 
 	fun! s:dontSoftWrap()
@@ -98,6 +99,7 @@
 			unmap <buffer> j
 			unmap <buffer> k
 		endif
+		echomsg "Soft wrap disabled"
 	endf
 
 	" Toggle soft-wrapped text in the current buffer.
