@@ -198,7 +198,6 @@
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
 	set splitright " Puts new vsplit windows to the right of the current
 	set splitbelow " Puts new split windows to the bottom of the current
-	set formatoptions-=o " Do not automatically insert comment when opening a line
 	set formatoptions+=j " Remove extra comment when joining lines
 	" Load matchit.vim, but only if the user hasn't installed a newer version.
 	if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
