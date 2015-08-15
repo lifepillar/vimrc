@@ -163,7 +163,9 @@
 	" demote, move, (un)fold and reformat with standard commands (plus mappings
 	" defined below). Do not leave blank lines between nodes.
 	fun! s:outlinerFoldingRule(n)
-		return getline(a:n) =~ '^\s*:' ? 20 : indent(a:n) < indent(a:n+1) ? ('>'.(1+indent(a:n)/&l:tabstop)) : (indent(a:n)/&l:tabstop)
+		return getline(a:n) =~ '^\s*:' ?
+					\ 20 : indent(a:n) < indent(a:n+1) ?
+					\ ('>'.(1+indent(a:n)/&l:tabstop)) : (indent(a:n)/&l:tabstop)
 	endf
 
 	fun! s:enableOutliner()
