@@ -236,10 +236,12 @@
 				\ "L": "to vnew", "l": "abo vnew", "R": "bo vnew", "r": "bel vnew"
 				\ }
 
-	" Run an external command and display its output in a new buffer. cmdline:
-	" the command to be executed; pos: a letter specifying the position of the
-	" output window (see s:winpos_map). See
-	" http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+	" Run an external command and display its output in a new buffer.
+	"
+	" cmdline: the command to be executed;
+	" pos: a letter specifying the position of the output window (see s:winpos_map).
+	"
+	" See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 	" See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
 	fun! s:runShellCommand(cmdline, pos) abort
 		let l:cmd = ""
