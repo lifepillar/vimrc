@@ -665,20 +665,20 @@
 	endf
 
 	fun! s:enableStatusLine()
-		let g:default_stl = &statusline
 		augroup status
 			autocmd!
 			autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
 		augroup END
+		let g:default_stl = &statusline
 		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
 	endf
 
 	fun! s:disableStatusLine()
+		let &statusline = g:default_stl
 		augroup status
 			autocmd!
 		augroup END
 		augroup! status
-		let &statusline = g:default_stl
 	endf
 
 	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
