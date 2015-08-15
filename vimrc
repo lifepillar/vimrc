@@ -356,7 +356,7 @@
 	nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
 	" Git commit
 	nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
-	" Show the revision history for the current file
+	" Show the revision history for the current file (use :Git log for the full log)
 	nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
 	" Add files/patches to the index
 	nnoremap <silent> <leader>ga :!git -C '%:p:h' add -p '%:p'<cr>
