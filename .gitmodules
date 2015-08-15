@@ -91,3 +91,9 @@
 [submodule "bundle/ledger"]
 	path = bundle/ledger
 	url = https://github.com/ledger/vim-ledger.git
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = https://github.com/rking/ag.vim.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
