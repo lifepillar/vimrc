@@ -355,7 +355,6 @@
 	" Git status
 	nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
 	" Git commit
-	" FIXME: this launches another instance of Vim
 	nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
 	" Show the revision history for the current file
 	nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
