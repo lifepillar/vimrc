@@ -623,7 +623,7 @@
 		endf
 
 		fun! s:customizeTheme_Tomorrow_Night_Eighties()
-			call CustomizeTheme_Tomorrow()
+			call s:customizeTheme_Tomorrow()
 		endf
 	" }}
 
