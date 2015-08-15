@@ -65,9 +65,7 @@ Press q to dismiss, <Tab> to lose focus
  :‹n›b         - Edit file n
  :b«Spc»«Tab»  - Edit… (autocomplete)
  :bn           - Edit next file
- ]b            * Edit next file
  :bp           - Edit prev file
- [b            * Edit prev file
  :bufdo ‹Cmd›  - Run cmd in all buffers
   Netrw
   %            - New file here
@@ -203,12 +201,6 @@ Press q to dismiss, <Tab> to lose focus
  «C-d»         I Unindent
  ==            - Reindent line
  gg=G          - Reindent all
- ]«Spc»        * Add blank line below
- [«Spc»        * Add blank line above
- ]e            * Move line down
- [e            * Move line up
- ]e           *V Move down
- [e           *V Move up
  :set tw=‹n›   - Set text width
  gww           - Format current line
  cot           * Toggle hard/soft tabs
@@ -217,7 +209,6 @@ Press q to dismiss, <Tab> to lose focus
  :TabWidth ‹n› * Set tab width in buffer
  :retab        - Detab (needs 'et' on)
  :retab!       - Entab (needs 'et' off)
- cos           * Toggle spell checking
  ]s            - To next misspelled word
  [s            - To prev misspelled word
  z=            - Suggest corrections
@@ -240,11 +231,6 @@ Press q to dismiss, <Tab> to lose focus
   zH           - Scroll « half a screen
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
- cow           * Toggle soft wrapping
- con           * Toggle line numbers
- cor           * Toggle rel line numbers
- coi           * Toggle invisibles
- cob           * Toggle background color
  zo            - Fold
  zc            - Unfold
  zM            - Fold all
@@ -259,7 +245,6 @@ Press q to dismiss, <Tab> to lose focus
  N             M Find prev (reverse dir)
  gn            M Select up to next match
  gN            M Select up to prev match
- coh           * Toggle highlighting
  *             M Search » for this word
  #             M Search « for this word
  :s/‹P›/‹P›/g  V Find and replace
@@ -277,8 +262,6 @@ Press q to dismiss, <Tab> to lose focus
   do           - Diff obtain
   :diffget     V Get differences
   :diffput     V Put differences
-  ]n           * To next conflict marks
-  [n           * To prev conflict marks
 ===
  Go
   Basic movement
@@ -456,6 +439,32 @@ Press q to dismiss, <Tab> to lose focus
  --
   Undotree
   «F8»         * Toggle Undotree
+ --
+  Unimpaired
+  [b           - Edit prev file
+  ]b           - Edit next file
+  [e           - Move line up
+  ]e           - Move line down
+  [e           V Move up
+  ]e           V Move down
+  [l           - Prev in location list
+  ]l           - Next in location list
+  [n           - To prev conflict marks
+  ]n           - To next conflict marks
+  [q           - Prev in quickfix list
+  ]q           - Next in quickfix list
+  [«Spc»       - Add blank line above
+  ]«Spc»       - Add blank line below
+  cob          - Toggle background color
+  coc          - Toggle cursorline
+  cod          - Toggle diff this buffer
+  coh          - Toggle highlighting
+  coi          - Toggle ignore case
+  col          - Toggle invisibles
+  con          - Toggle line numbers
+  cor          - Toggle rel line numbers
+  cos          - Toggle spell checking
+  cow          - Toggle soft wrapping
  --
   Wordy
   :Wordy «Tab» - Load a Wordy dictionary

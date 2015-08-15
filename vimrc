@@ -109,6 +109,8 @@
 		endif
 	endf
 
+	command! -nargs=0 ToggleWrap call <sid>toggleWrap()
+
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
 	fun! s:smoothScroll(up)
 		execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
@@ -331,34 +333,12 @@
 	nnoremap <silent> <leader>+ :call <sid>setLocalTabWidth(&tabstop + 1)<cr>
 	" Decrease tab width by one in the current buffer
 	nnoremap <silent> <leader>- :call <sid>setLocalTabWidth(&tabstop - 1)<cr>
-	" Add blank line below or above the current line, but stay in normal mode
-	" (see http://vim.wikia.com/wiki/Quickly_adding_and_deleting_empty_lines)
-	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
-	nnoremap <silent> ]<space> :set paste<cr>m`o<Esc>``:set nopaste<cr>
-	nnoremap <silent> [<space> :set paste<cr>m`O<Esc>``:set nopaste<cr>
-	" Swap lines. See http://vim.wikia.com/wiki/VimTip646 for an explanation.
-	" FIXME: these do not go well with folding:
-	nnoremap <silent> ]e :m .+1<cr>
-	nnoremap <silent> [e :m .-2<cr>
-	vnoremap <silent> ]e :m '>+1<cr>gv
-	vnoremap <silent> [e :m '<-2<cr>gv
-	" Toggle invisibles in the current buffer
-	nnoremap <silent> coi :setlocal nolist!<cr>
 	" Toggle paste mode
 	nnoremap <silent> cop :setlocal paste!<cr>
-	" Toggle spelling in the current buffer
-	nnoremap <silent> cos :setlocal spell!<cr>
-	" Toggle between hard-wrap and soft-wrap
-	nnoremap <silent> cow :call <sid>toggleWrap()<cr>
 	" Remove trailing space globally
 	nnoremap <silent> <leader>S :call <sid>removeTrailingSpace()<cr>
 	" Capitalize words in selected text (see h gU)
 	vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
-	" Toggle search highlighting
-	nnoremap <silent> coh :set invhlsearch<cr>
-	" Go to previous/next buffer
-	nnoremap <silent> [b :bp<cr>
-	nnoremap <silent> ]b :bn<cr>
 	" Go to tab 1/2/3 etc
 	nnoremap <leader>1 1gt
 	nnoremap <leader>2 2gt
@@ -370,12 +350,6 @@
 	nnoremap <leader>8 8gt
 	nnoremap <leader>9 9gt
 	nnoremap <leader>0 10gt
-	" Toggle absolute line numbers
-	nnoremap <silent> con :set invnumber<cr>:set nornu<cr>
-	" Toggle relative line numbers
-	nnoremap <silent> cor :set invnumber<cr>:set rnu<cr>
-	" Toggle background color
-	noremap <silent> cob :call <sid>toggleBackgroundColor()<cr>
 	" Compare buffer with HEAD
 	nnoremap <silent> <leader>gd :call <sid>gitDiff()<cr>
 	" Git status
@@ -389,14 +363,6 @@
 	nnoremap <silent> <leader>ga :!git -C '%:p:h' add -p '%:p'<cr>
 	" Git push
 	nnoremap <silent> <leader>gp :!git -C '%:p:h' push<cr>
-	" Find next/prev merge conflict markers
-	nnoremap <silent> ]n /\v^[<\|=>]{7}<cr>
-	nnoremap <silent> [n ?\v^[<\|=>]{7}<cr>
-	" Go to next/prev error in quickfix and location list
-	nnoremap <silent> ]l :<c-u>lnext<cr>
-	nnoremap <silent> [l :<c-u>lprevious<cr>
-	nnoremap <silent> ]q :<c-u>cnext<cr>
-	nnoremap <silent> [q :<c-u>cprevious<cr>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
 	cnoremap <c-a> <home>
 	cnoremap <c-e> <end>
@@ -475,6 +441,8 @@
 		endif
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endf
+
+	command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
 
 	" Solarized {{
 		let g:solarized_bold = 1
