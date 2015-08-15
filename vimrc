@@ -217,15 +217,12 @@
 	command! -nargs=0  WW :w !sudo tee % >/dev/null
 " }}
 " Find, replace, and auto-complete {{
-	" set gdefault " Apply substitutions globally by default
-	" set hlsearch " Highlight search terms.
 	set incsearch " Search as you type.
 	set ignorecase " Case-insensitive search by default.
 	set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
 	set infercase " Smart keyword completion
 	set wildmenu " Show possible matches when autocompleting.
 	set wildignorecase " Ignore case when completing file names and directories.
-	" set wildmode=list:longest,full " Command <tab> completion, list matches, then longest common part, then all.
 
 	" Find all in current buffer.
 	command! -nargs=1 FindAll call s:findAll(<q-args>)
