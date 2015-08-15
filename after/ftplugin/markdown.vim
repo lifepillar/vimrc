@@ -1,5 +1,5 @@
-setl spell
-setl spelllang=en
-setl dictionary=/usr/share/dict/words
-setl ai
+setlocal spell
+setlocal spelllang=en
+setlocal dictionary=/usr/share/dict/words
+setlocal autoindent
 

@@ -19,9 +19,9 @@ CompilerSet errorformat+=%Z<argument>\ %m
 " More info for some errors
 CompilerSet errorformat+=%Cl.%l\ %m
 
-for w in g:tex_ignored_warnings
-  let warning = escape(substitute(w, '[\,]', '%\\\\&', 'g'), ' ')
-  exe 'CompilerSet errorformat+=%-G%.%#'. warning .'%.%#'
+for s:w in g:tex_ignored_warnings
+  let s:warning = escape(substitute(s:w, '[\,]', '%\\\\&', 'g'), ' ')
+  execute 'CompilerSet errorformat+=%-G%.%#'. s:warning .'%.%#'
 endfor
 
 " Match warnings

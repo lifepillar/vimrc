@@ -41,23 +41,23 @@ Press q to dismiss, <Tab> to lose focus
   WORD Space-delimited word
 ===
  File
- :enew        - New file in this window
- :e ‹Path›    - New/open file or dir
- :sp ‹Path›   - Open in horizontal split
- :vs ‹Path›   - Open in vertical split
- \e         * - Open file browser here
- :e           - Reload file from disk
- :e!          - Revert to last saved
- :bd          - Close file
- :%bd         - Close all
- :w           - Save file
- :w!          - Save read-only file
- :WW        * - Save as root
- :wq          - Save and quit
- :wqa         - Save all and quit
- :q           - Quit
- :q!          - Quit without saving
- :qa!         - Quit all without saving
+ :enew         - New file in this window
+ :e ‹Path›     - New/open file or dir
+ :sp ‹Path›    - Open in horiz. split
+ :vs ‹Path›    - Open in vertical split
+ \e            * Open file browser here
+ :e            - Reload file from disk
+ :e!           - Revert to last saved
+ :bd           - Close file
+ :%bd          - Close all
+ :w            - Save file
+ :w!           - Save read-only file
+ :WW           * Save as root
+ :wq           - Save and quit
+ :wqa          - Save all and quit
+ :q            - Quit
+ :q!           - Quit without saving
+ :qa!          - Quit all without saving
  «C-g»         - File info
  :mks          - Save session
                  (Restore with `vim -S`)
@@ -65,9 +65,9 @@ Press q to dismiss, <Tab> to lose focus
  :‹n›b         - Edit file n
  :b«Spc»«Tab»  - Edit… (autocomplete)
  :bn           - Edit next file
- ]b          * - Edit next file
+ ]b            * Edit next file
  :bp           - Edit prev file
- [b          * - Edit prev file
+ [b            * Edit prev file
  :bufdo ‹Cmd›  - Run cmd in all buffers
   Netrw
   %            - New file here
@@ -76,7 +76,7 @@ Press q to dismiss, <Tab> to lose focus
   o            - Open in a horiz. split
   v            - Open in a vert. split
   t            - Open in a new tab
-  «Esc»      * - Back to previous buffer
+  «Esc»        * Back to previous buffer
   mf           - Mark file
   mr           - Mark by pattern match
   mu           - Unmark all
@@ -165,7 +165,7 @@ Press q to dismiss, <Tab> to lose focus
  ]p            - Paste below and align
  ]P            - Paste above and align
  «C-r»‹r›      C Paste
- cop         * - Toggle Paste mode
+ cop           * Toggle Paste mode
  cc            - Replace line
  v             - Visual mode (selection)
  V             - Linewise visual mode
@@ -177,7 +177,7 @@ Press q to dismiss, <Tab> to lose focus
  ggvG          - Select all
  «C-w»        CI Delete prev word
  «C-u»        CI Del. line before cursor
- \S          * - Remove trailing space
+ \S            * Remove trailing space
  J             - Join with next line
  gJ            - Ditto, preserve spaces
  q‹r›          - Start recording
@@ -192,7 +192,7 @@ Press q to dismiss, <Tab> to lose focus
  u             V Change to lowercase
  gUU           - Uppercase line
  guu           - Lowercase line
- \U          * V Capitalize words
+ \U           *V Capitalize words
  «C-n»         I Autocomplete
  «C-x»«C-o»    I Omnicomplete
  >%            - Indent block
@@ -203,20 +203,21 @@ Press q to dismiss, <Tab> to lose focus
  «C-d»         I Unindent
  ==            - Reindent line
  gg=G          - Reindent all
- ]«Spc»      * - Add blank line below
- [«Spc»      * - Add blank line above
- ]e          * - Move line down
- [e          * - Move line up
- ]e          * V Move down
- [e          * V Move up
+ ]«Spc»        * Add blank line below
+ [«Spc»        * Add blank line above
+ ]e            * Move line down
+ [e            * Move line up
+ ]e           *V Move down
+ [e           *V Move up
  :set tw=‹n›   - Set text width
  gww           - Format current line
- cot         * - Toggle hard/soft tabs
- \+          * - Increase tab width
- \-          * - Decrease tab width
+ cot           * Toggle hard/soft tabs
+ \+            * Increase tab width
+ \-            * Decrease tab width
+ :TabWidth ‹n› * Set tab width in buffer
  :retab        - Detab (needs 'et' on)
  :retab!       - Entab (needs 'et' off)
- cos         * - Toggle spell checking
+ cos           * Toggle spell checking
  ]s            - To next misspelled word
  [s            - To prev misspelled word
  z=            - Suggest corrections
@@ -239,11 +240,11 @@ Press q to dismiss, <Tab> to lose focus
   zH           - Scroll « half a screen
  :set wrap     - Soft-wrap text
  :set nowrap   - Do not wrap text
- cow         * - Toggle soft wrapping
- con         * - Toggle line numbers
- cor         * - Toggle rel line numbers
- coi         * - Toggle invisibles
- cob         * - Toggle background color
+ cow           * Toggle soft wrapping
+ con           * Toggle line numbers
+ cor           * Toggle rel line numbers
+ coi           * Toggle invisibles
+ cob           * Toggle background color
  zo            - Fold
  zc            - Unfold
  zM            - Fold all
@@ -258,7 +259,7 @@ Press q to dismiss, <Tab> to lose focus
  N             M Find prev (reverse dir)
  gn            M Select up to next match
  gN            M Select up to prev match
- coh         * - Toggle highlighting
+ coh           * Toggle highlighting
  *             M Search » for this word
  #             M Search « for this word
  :s/‹P›/‹P›/g  V Find and replace
@@ -276,8 +277,8 @@ Press q to dismiss, <Tab> to lose focus
   do           - Diff obtain
   :diffget     V Get differences
   :diffput     V Put differences
-  ]n         * - To next conflict marks
-  [n         * - To prev conflict marks
+  ]n           * To next conflict marks
+  [n           * To prev conflict marks
 ===
  Go
   Basic movement
@@ -325,12 +326,12 @@ Press q to dismiss, <Tab> to lose focus
  :delmarks …   - Remove marks
  gd            - Go to definition
  gx            - Open URL under cursor
- «C-a»       * C Start of line
- «C-e»       * C End of line
- «C-n»       * C Next command
- «C-p»       * C Prev command
- «Alt-→»     * C Jump to next word ()
- «Alt-←»     * C Jump to prev word ()
+ «C-a»        *C Start of line
+ «C-e»        *C End of line
+ «C-n»        *C Next command
+ «C-p»        *C Prev command
+ «Alt-→»      *C Jump to next word ()
+ «Alt-←»      *C Jump to prev word ()
 ===
  Window
  :new          - New window/horiz. split
@@ -367,29 +368,33 @@ Press q to dismiss, <Tab> to lose focus
  gt            - Next tab
  gT            - Previous tab
  ‹n›gt         - Go to tab n
- \‹n›        *
+ \‹n›          *
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
  «C-w» T       - Move window to new tab
  :tab ball     - Open one tab per buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
 ===
+ Shell
+ :Shell …      * Run shell command and
+                 show output in buffer
+===
  Git
- \gs         * - Git status
- \gd         * - Git diff with HEAD
- \gl         * - Git file log
- \ga         * - Git add
- \gc         * - Git commit
- \gp         * - Git push
- :Git …      * - Run Git command
- :Conflicts  * - Three-way diff
+ \gs           * Git status
+ \gd           * Git diff with HEAD
+ \gl           * Git file log
+ \ga           * Git add
+ \gc           * Git commit
+ \gp           * Git push
+ :Git …        * Run Git command
+ :Conflicts    * Three-way diff
 ===
  TeX
- \tl         * - Typeset with LuaLaTeX
- \tp         * - Typeset with pdfLaTeX
- \tc         * - Clean generated files
- \tv         * - Open PDF viewer
- \ts         * - Forward search
+ \tl           * Typeset with LuaLaTeX
+ \tp           * Typeset with pdfLaTeX
+ \tc           * Clean generated files
+ \tv           * Open PDF viewer
+ \ts           * Forward search
 ===
  Plugins
   Commentary
@@ -398,40 +403,40 @@ Press q to dismiss, <Tab> to lose focus
   gcgc         - Uncomment
  --
   CtrlP
-  «C-p»      * - Open CtrlP in MRU mode
+  «C-p»        * Open CtrlP in MRU mode
  --
   Easy Align
   <Enter>      V Trigger Easy Align
  --
   EasyMotion
-  \s‹c›      * M Go to char ‹c›
-  \/         * - Search
+  \s‹c›       *M Go to char ‹c›
+  \/           * Search
  --
   Goyo
-  «F7»       * - Distraction-free mode
+  «F7»         * Distraction-free mode
  --
   Ledger
   «Tab»      *IV Autocomplete or align
-  «C-t»      * I Transaction from text
-  «Spc»      * - Next transaction state
-  :Ledger …  * - Run Ledger command
-  \la        * - Average expenses report
-  \lb        * - Balance report
-  \lB        * - Budget report
-  \lc        * - Cleared report
-  \ld        * - Debit/credit report
-  \le        * - Expense report
-  \lf        * - Cash flow report
-  \li        * - Income statement
-  \lm        * - Sorted monthly expenses
-  \ln        * - Net worth
-  \lp        * - Pending transactions
-  \lr        * - Register report
-  \ls        * - Savings
-  \lu        * - Uncleared transactions
+  «C-t»       *I Transaction from text
+  «Spc»        * Next transaction state
+  :Ledger …    * Run Ledger command
+  \la          * Average expenses report
+  \lb          * Balance report
+  \lB          * Budget report
+  \lc          * Cleared report
+  \ld          * Debit/credit report
+  \le          * Expense report
+  \lf          * Cash flow report
+  \li          * Income statement
+  \lm          * Sorted monthly expenses
+  \ln          * Net worth
+  \lp          * Pending transactions
+  \lr          * Register report
+  \ls          * Savings
+  \lu          * Uncleared transactions
  --
   Show Marks
-  \m         * - Toggle marks
+  \m           * Toggle marks
  --
   Surround
   ys‹Move›‹c›  - Surround with ‹c›
@@ -442,15 +447,15 @@ Press q to dismiss, <Tab> to lose focus
   dst          - Remove enclosing tags
  --
   Tagbar
-  «F9»       * - Toggle Tagbar
+  «F9»         * Toggle Tagbar
  --
   UltiSnips
-  «C-j»      * I Trigger snippet
+  «C-j»       *I Trigger snippet
   «C-j»        I Go to next placeholder
   «C-k»        I Go to prev placeholder
  --
   Undotree
-  «F8»       * - Toggle Undotree
+  «F8»         * Toggle Undotree
  --
   Wordy
   :Wordy «Tab» - Load a Wordy dictionary
@@ -464,4 +469,5 @@ Press q to dismiss, <Tab> to lose focus
  :set ‹Var›?   - Show value of an option
  :shell        - Open a shell
  :h hitest.vim - Help on highlight test
+ :scriptnames  - List of loaded plugins
 

@@ -1,20 +1,25 @@
 compiler tex
 
-fun! TeXPDFPath()
+" See :h <SID>
+fun! s:SID()
+  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_SID$')
+endf
+
+fun! s:TeXPDFPath()
   return expand('%:p:r').'.pdf'
 endf
 
-fun! TeXLogPath()
+fun! s:TeXLogPath()
   return expand('%:p:r').'.log'
 endf
 
-fun! TeXCallback(exit_status)
+fun! s:TeXCallback(exit_status)
   " The following is adapted from LaTeX-Box
   " set cwd to expand error file correctly
   let l:cwd = fnamemodify(getcwd(), ':p')
-  exec 'lcd ' . fnameescape(expand('%:p:h'))
+  execute 'lcd ' . fnameescape(expand('%:p:h'))
   try
-    exec 'cgetfile ' . fnameescape(TeXLogPath())
+    execute 'cgetfile ' . fnameescape(s:TeXLogPath())
   finally
     " restore cwd
     execute 'lcd ' . fnameescape(l:cwd)
@@ -29,33 +34,34 @@ fun! TeXCallback(exit_status)
   endif
 endf
 
-fun! TeXTypesetCommand(program)
-  let env = "max_print_line=2000"
-  let cmd = "latexmk"
+fun! s:TeXTypesetCommand(program)
+  let l:env = "max_print_line=2000"
+  let l:cmd = "latexmk"
   if a:program == "lualatex"
-    let opts = "-lualatex"
+    let l:opts = "-lualatex"
   else
-    let opts = " -pdf -pdflatex='pdflatex'"
+    let l:opts = " -pdf -pdflatex='pdflatex'"
   endif
-  let opts .= " -cd -pv- -synctex=1 -file-line-error -interaction=nonstopmode"
-  return join([env, cmd, opts, shellescape(expand('%:p'))])
+  let l:opts .= " -cd -pv- -synctex=1 -file-line-error -interaction=nonstopmode"
+  return join([l:env, l:cmd, l:opts, shellescape(expand('%:p'))])
 endf
 
-fun! TeXTypeset(program)
+fun! s:TeXTypeset(program)
   if has('clientserver') " Typeset in the background
     echohl Statement
     echomsg "Typesetting..."
     echohl None
-    silent exec '! (' . TeXTypesetCommand(a:program) . ' >/dev/null 2>&1;'
-          \ . 'mvim --remote-send "<C-\><C-N>:call TeXCallback($?)<CR>") &'
+    let l:callbackfun = s:SID() . '_TeXCallback'
+    silent execute '! (' . s:TeXTypesetCommand(a:program) . ' >/dev/null 2>&1;'
+          \ . 'mvim --remote-send "<C-\><C-N>:call <SNR>' . l:callbackfun . '($?)<cr>") &'
   else " Synchronous typesetting
-    exec '! ' . TeXTypesetCommand(a:program)
-    silent call TeXCallback(v:shell_error)
+    execute '! ' . s:TeXTypesetCommand(a:program)
+    silent call s:TeXCallback(v:shell_error)
   endif
 endf
 
-fun! TeXClean()
-  silent exec '!latexmk -cd -c -quiet ' . shellescape(expand('%:p')) . '>/dev/null 2>&1 &'
+fun! s:TeXClean()
+  silent execute '!latexmk -cd -c -quiet ' . shellescape(expand('%:p')) . '>/dev/null 2>&1 &'
   if !has('gui_running')
     redraw!
   endif
@@ -64,18 +70,18 @@ fun! TeXClean()
   echohl None
 endf
 
-fun! TeXPreview()
-  silent exec '!open -a Skim.app ' . shellescape(TeXPDFPath()) . ' >&/dev/null 2>&1 &'
+fun! s:TeXPreview()
+  silent execute '!open -a Skim.app ' . shellescape(s:TeXPDFPath()) . ' >&/dev/null 2>&1 &'
   if !has("gui_running")
     redraw!
   endif
 endf
 
-fun! TeXForwardSearch()
-  silent exec join([
+fun! s:TeXForwardSearch()
+  silent execute join([
         \ '!${HOME}/Applications/Skim.app/Contents/SharedSupport/displayline',
         \ line('.'),
-        \ shellescape(TeXPDFPath()),
+        \ shellescape(s:TeXPDFPath()),
         \ shellescape(expand('%:p'))
         \ ])
   if !has("gui_running")
@@ -84,12 +90,12 @@ fun! TeXForwardSearch()
 endf
 
 " Typeset:
-nnoremap <silent><buffer> <Leader>tl :<C-U>call TeXTypeset('lualatex')<CR>
-nnoremap <silent><buffer> <Leader>tp :<C-U>call TeXTypeset('pdflatex')<CR>
+nnoremap <silent><buffer> <leader>tl :<c-u>call <sid>TeXTypeset('lualatex')<cr>
+nnoremap <silent><buffer> <leader>tp :<c-u>call <sid>TeXTypeset('pdflatex')<cr>
 " Clean generated files:
-nnoremap <silent><buffer> <Leader>tc :<C-U>call TeXClean()<CR>
+nnoremap <silent><buffer> <leader>tc :<c-u>call <sid>TeXClean()<cr>
 " Open PDF previewer (Skim):
-nnoremap <silent><buffer> <Leader>tv :<C-U>call TeXPreview()<CR>
+nnoremap <silent><buffer> <leader>tv :<c-u>call <sid>TeXPreview()<cr>
 " Forward search using Skim:
-nnoremap <silent><buffer> <Leader>ts :<C-U>call TeXForwardSearch()<CR>
+nnoremap <silent><buffer> <leader>ts :<c-u>call <sid>TeXForwardSearch()<cr>
 

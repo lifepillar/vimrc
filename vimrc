@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=3 ts=3 sts=0 noet tw=78 fo-=o foldmarker={{,}} foldlevel=0 foldmethod=marker foldtext=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" vim: set sw=3 ts=3 sts=0 noet tw=78 fo-=o fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " ---
 " For UTF-8 symbols to be displayed correctly (e.g., in the status line), you
@@ -11,7 +11,7 @@
 " Vim on a remote machine to which you are connected via SSH), make sure that the
 " following line is *not* commented in the client's /etc/ssh_config:
 "
-"    SendEnv LANG LC_*
+"     SendEnv LANG LC_*
 "
 " As a last resort, you may set LC_ALL and LANG manually on the server; e.g., put
 " these in your remote machine's .bash_profile:
@@ -53,55 +53,47 @@
 	set viminfo+=n~/.vim/viminfo
 	set undofile
 	set undodir=~/.vim/tmp
-	set undolevels=1000         " Maximum number of changes that can be undone.
-	set undoreload=10000        " Maximum number lines to save for undo on a buffer reload.
+	set undolevels=1000 " Maximum number of changes that can be undone.
+	set undoreload=10000 " Maximum number lines to save for undo on a buffer reload.
 	set nobackup " Do not keep a backup copy of a file.
 	set nowritebackup " Do not write temporary backup files.
 	set noswapfile " Do not create swap files.
 " }}
 " Helper functions {{
 	" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
-	func! SetTabWidth(w)
-		let twd=(a:w>0)?(a:w):1 " Disallow non-positive width
+	fun! s:setLocalTabWidth(w)
+		let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
 		" For the following assignment, see :help let-&.
 		" See also http://stackoverflow.com/questions/12170606/how-to-set-numeric-variables-in-vim-functions.
-		let &l:tabstop=twd
-		let &l:shiftwidth=twd
-		let &l:softtabstop=twd
-	endfunc
+		let &l:tabstop=l:twd
+		let &l:shiftwidth=l:twd
+		let &l:softtabstop=l:twd
+	endf
 
 	" Set the tab width globally.
-	func! SetGlobalTabWidth(w)
-		let twd=(a:w>0)?(a:w):1
-		let &tabstop=twd
-		let &shiftwidth=twd
-		let &softtabstop=twd
-	endfunc
-
-	" Alter the tab width in the current buffer.
-	" To decrease the tab width, pass a negative value.
-	func! IncreaseTabWidth(incr)
-		call SetTabWidth(&tabstop + a:incr)
-	endfunc
+	fun! s:setGlobalTabWidth(w)
+		let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
+		let &tabstop=l:twd
+		let &shiftwidth=l:twd
+		let &softtabstop=l:twd
+	endf
 
 	" Delete trailing white space.
-	func! RemoveTrailingSpace()
-		" Save window state
-		let l:winview = winsaveview()
+	fun! s:removeTrailingSpace()
+		let l:winview = winsaveview() " Save window state
 		%s/\s\+$//ge
-		" Restore window state
-		call winrestview(l:winview)
+		call winrestview(l:winview) " Restore window state
 		echomsg 'Trailing space removed!'
-	endfunc
+	endf
 
-	fun SoftWrap()
-		setl wrap
+	fun! s:softWrap()
+		setlocal wrap
 		map <buffer> j gj
 		map <buffer> k gk
 	endf
 
-	fun! DontSoftWrap()
-		setl nowrap
+	fun! s:dontSoftWrap()
+		setlocal nowrap
 		if mapcheck("j") != ""
 			unmap <buffer> j
 			unmap <buffer> k
@@ -109,175 +101,80 @@
 	endf
 
 	" Toggle soft-wrapped text in the current buffer.
-	func! ToggleWrap()
+	fun! s:toggleWrap()
 		if &l:wrap
-			call DontSoftWrap()
+			call s:dontSoftWrap()
 		else
-			call SoftWrap()
+			call s:softWrap()
 		endif
-	endfunc
+	endf
 
 	" See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
-	func! SmoothScroll(up)
-		let scrollaction = a:up ? "\<c-y>" : "\<c-e>"
-		exe "normal " . scrollaction
+	fun! s:smoothScroll(up)
+		execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
 		redraw
-		for counter in range(3, &scroll, 2)
+		for l:count in range(3, &scroll, 2)
 			sleep 10m
-			exe "normal " . scrollaction
+			execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
 			redraw
 		endfor
-	endfunc
+	endf
 
 	" Find all occurrences of a pattern in a file.
-	func! FindAll(pattern)
+	fun! s:findAll(pattern)
 		try
-			silent noautocmd exec "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
+			silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
 		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
 			echohl Warnings
 			echomsg "No match"
 			echohl None
 		endtry
 		lwindow
-	endfunc
+	endf
 
 	" Find all occurrences of a pattern in all open files.
-	func! MultiFind(pattern)
+	fun! s:multiFind(pattern)
 		" Get the list of open files
 		let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
 		try
-			silent noautocmd exec "vimgrep /" . a:pattern . "/gj " . join(l:files)
+			silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
 		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
 			echohl Warnings
 			echomsg "No match"
 			echohl None
 		endtry
 		cwindow
-	endfunc
+	endf
 
-	func! Cheatsheet()
+	fun! s:cheatsheet()
 		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
 		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
-		nnoremap <silent> <buffer> <Tab> <C-w><C-w>
-		nnoremap <silent> <buffer> q <C-w>c
-	endfunc
-
-	" Run an external command and display its output in a new buffer.
-	" cmdline: the command to be executed;
-	" pos: a letter specifying the position of the output window.
-	" See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
-	" See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
-	func! RunShellCommand(cmdline, pos) abort
-		let winpos_map = {
-			\ "T": "to new",  "t": "abo new", "B": "bo new",  "b": "bel new",
-			\ "L": "to vnew", "l": "abo vnew", "R": "bo vnew", "r": "bel vnew"
-			\ }
-		let cmd = ""
-		for part in split(a:cmdline, ' ')
-			if part =~ '\v^[%#<]'
-				let expanded_part = expand(part)
-				let cmd .= ' ' . (expanded_part == "" ? part : shellescape(expanded_part))
-			else
-				let cmd .= ' ' . part
-			endif
-		endfor
-		exec get(winpos_map, a:pos, "bo new")
-		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-		execute '%!'. cmd
-		setlocal nomodifiable
-		nnoremap <silent> <buffer> <Tab> <C-w><C-w>
-		nnoremap <silent> <buffer> q <C-w>c
-		" Uncomment the following line for debugging
-		" echomsg cmd
-		1
-	endfunc
-
-	" Execute a non-interactive Git command in the directory containing
-	" the file of the current buffer, and send the output to a new buffer.
-	" args: a string of arguments for the commmand
-	" pos: a letter specifying the position of the new buffer (see RunShellCommand()).
-	func! Git(args, pos)
-		call RunShellCommand("git -C %:p:h " . a:args, a:pos)
-	endfunc
-
-	" Show a vertical diff (use <C-w> K to arrange horizontally)
-	" between the current buffer and its last committed version.
-	func! GitDiff()
-		let ft = getbufvar("%", '&ft') " Get the file type
-		call Git("show HEAD:./" . shellescape(expand("%:t")), 'r')
-		let &l:filetype = ft
-		file HEAD
-		au BufWinLeave <buffer> diffoff!
-		diffthis
-		wincmd p
-		diffthis
-	endfunc
-
-	" Show a three-way diff. Useful for fixing merge conflicts.
-	" This assumes that the current file is the working copy, of course.
-	func! Git3WayDiff()
-		let filename = shellescape(expand("%:t"))
-		let ft = getbufvar("%", "&ft") " Get the file type
-		" Show the version from the current branch on the left
-		call Git("show :2:./" . filename, "l")
-		let &l:filetype = ft
-		file OURS
-		au BufWinLeave <buffer> diffoff!
-		diffthis
-		wincmd p
-		" Show version from the other branch on the right
-		call Git("show :3:./" . filename, "r")
-		let &l:filetype = ft
-		file OTHER
-		au BufWinLeave <buffer> diffoff!
-		diffthis
-		wincmd p
-		diffthis
-	endfunc
+		nnoremap <silent> <buffer> <tab> <c-w><c-w>
+		nnoremap <silent> <buffer> q <c-w>c
+	endf
 
 	" An outliner in less than 20 lines of code! The format is compatible with
 	" VimOutliner (just in case we decide to use it): lines starting with : are
 	" used for notes (indent one level wrt to the owning node). Promote,
 	" demote, move, (un)fold and reformat with standard commands (plus mappings
 	" defined below). Do not leave blank lines between nodes.
-	func! OutlinerFoldingRule(n)
+	fun! s:outlinerFoldingRule(n)
 		return getline(a:n) =~ '^\s*:' ? 20 : indent(a:n) < indent(a:n+1) ? ('>'.(1+indent(a:n)/&l:tabstop)) : (indent(a:n)/&l:tabstop)
-	endfunc
+	endf
 
-	func! EnableOutliner()
+	fun! s:enableOutliner()
 		setlocal autoindent
 		setlocal formatoptions=tcqrnjo
 		setlocal comments=fb:*,fb:-,b::
 		setlocal textwidth=80
 		setlocal foldmethod=expr
-		setlocal foldexpr=OutlinerFoldingRule(v:lnum)
+		setlocal foldexpr=s:outlinerFoldingRule(v:lnum)
 		setlocal foldtext=getline(v:foldstart)
 		setlocal foldlevel=2
 		" Full display with collapsed notes:
-		nnoremap <buffer> <silent> <Leader>n :set foldlevel=19<CR>
-		call SetTabWidth(4)
-	endfunc
-" }}
-" Commands (plugins excluded) {{
-	" Execute external command and show output in a new buffer
-	command! -complete=shellcmd -nargs=+ Shell      call RunShellCommand(<q-args>, "B")
-	command! -complete=shellcmd -nargs=+ ShellRight call RunShellCommand(<q-args>, "R")
-	command! -complete=shellcmd -nargs=+ ShellTop   call RunShellCommand(<q-args>, "T")
-
-	" Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
-	command! -complete=shellcmd -nargs=+ Git call Git(<q-args>, "B")
-
-	" Three-way diff
-	command! -nargs=0 Conflicts call Git3WayDiff()
-
-	" Save file with sudo
-	command WW :w !sudo tee % >/dev/null
-
-	" Find all in current buffer
-	command! -nargs=1 FindAll call FindAll(<q-args>)
-
-	" Find all in all open buffers
-	command! -nargs=1 MultiFind call MultiFind(<q-args>)
+		nnoremap <buffer> <silent> <leader>n :set foldlevel=19<cr>
+		TabWidth 4
+	endf
 " }}
 " Editing {{
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
@@ -285,11 +182,11 @@
 	set scrolloff=999 " Keep the edited line vertically centered.
 	" set clipboard=unnamed " Use system clipboard by default.
 	" Smooth scrolling that works both in terminal and in MacVim
-	nnoremap <silent> <C-U> :call SmoothScroll(1)<Enter>
-	nnoremap <silent> <C-D> :call SmoothScroll(0)<Enter>
+	nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
+	nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
 	" Scroll the viewport faster.
-	nnoremap <C-e> <C-e><C-e>
-	nnoremap <C-y> <C-y><C-y>
+	nnoremap <c-e> <c-e><c-e>
+	nnoremap <c-y> <c-y><c-y>
 	set showmatch " Show matching brackets/parenthesis
 	set matchtime=2 " show matching bracket for 0.2 seconds
 	set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
@@ -306,7 +203,13 @@
 	vnoremap < <gv
 	" Use soft tabs by default
 	set expandtab
-	call SetGlobalTabWidth(2)
+	call s:setGlobalTabWidth(2)
+
+	" Set the tab width for the current buffer.
+	command! -nargs=1 TabWidth call <sid>setLocalTabWidth(<q-args>)
+
+	" Save file with sudo.
+	command! -nargs=0  WW :w !sudo tee % >/dev/null
 " }}
 " Find, replace, and auto-complete {{
 	" set gdefault " Apply substitutions globally by default
@@ -317,95 +220,203 @@
 	set infercase " Smart keyword completion
 	set wildmenu " Show possible matches when autocompleting.
 	set wildignorecase " Ignore case when completing file names and directories.
-	" set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+	" set wildmode=list:longest,full " Command <tab> completion, list matches, then longest common part, then all.
+
+	" Find all in current buffer.
+	command! -nargs=1 FindAll call s:findAll(<q-args>)
+
+	" Find all in all open buffers.
+	command! -nargs=1 MultiFind call s:multiFind(<q-args>)
+" }}
+" Shell {{
+	let s:winpos_map = {
+				\ "T": "to new",  "t": "abo new", "B": "bo new",  "b": "bel new",
+				\ "L": "to vnew", "l": "abo vnew", "R": "bo vnew", "r": "bel vnew"
+				\ }
+
+	" Run an external command and display its output in a new buffer. cmdline:
+	" the command to be executed; pos: a letter specifying the position of the
+	" output window (see s:winpos_map). See
+	" http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+	" See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
+	fun! s:runShellCommand(cmdline, pos) abort
+		let l:cmd = ""
+		for l:part in split(a:cmdline, ' ')
+			if l:part =~ '\v^[%#<]'
+				let l:expanded_part = expand(l:part)
+				let l:cmd .= ' ' . (l:expanded_part == "" ? l:part : shellescape(l:expanded_part))
+			else
+				let l:cmd .= ' ' . l:part
+			endif
+		endfor
+		execute get(s:winpos_map, a:pos, "bo new")
+		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+		execute '%!'. l:cmd
+		setlocal nomodifiable
+		nnoremap <silent> <buffer> <tab> <c-w><c-w>
+		nnoremap <silent> <buffer> q <c-w>c
+		" Uncomment the following line for debugging
+		" echomsg cmd
+		1
+	endf
+
+	" Execute an external command and show the output in a new buffer.
+	command! -complete=shellcmd -nargs=+ Shell call s:runShellCommand(<q-args>, "B")
+	command! -complete=shellcmd -nargs=+ ShellBot call s:runShellCommand(<q-args>, "B")
+	command! -complete=shellcmd -nargs=+ ShellRight call s:runShellCommand(<q-args>, "R")
+	command! -complete=shellcmd -nargs=+ ShellLeft call s:runShellCommand(<q-args>, "L")
+	command! -complete=shellcmd -nargs=+ ShellTop call s:runShellCommand(<q-args>, "T")
+
+" }}
+" Git {{
+	" Execute a non-interactive Git command in the directory containing
+	" the file of the current buffer, and send the output to a new buffer.
+	" args: a string of arguments for the commmand
+	" pos: a letter specifying the position of the new buffer (see s:runShellCommand()).
+	fun! s:git(args, pos)
+		call s:runShellCommand("git -C %:p:h " . a:args, a:pos)
+	endf
+
+	" Show a vertical diff (use <c-w> K to arrange horizontally)
+	" between the current buffer and its last committed version.
+	fun! s:gitDiff()
+		let l:ft = getbufvar("%", '&ft') " Get the file type
+		call s:git("show HEAD:./" . shellescape(expand("%:t")), 'r')
+		let &l:filetype = l:ft
+		file HEAD
+		autocmd BufWinLeave <buffer> diffoff!
+		diffthis
+		wincmd p
+		diffthis
+	endf
+
+	" Show a three-way diff. Useful for fixing merge conflicts.
+	" This assumes that the current file is the working copy, of course.
+	fun! s:git3WayDiff()
+		let l:filename = shellescape(expand("%:t"))
+		let l:ft = getbufvar("%", "&ft") " Get the file type
+		" Show the version from the current branch on the left
+		call s:git("show :2:./" . l:filename, "l")
+		let &l:filetype = l:ft
+		file OURS
+		autocmd BufWinLeave <buffer> diffoff!
+		diffthis
+		wincmd p
+		" Show version from the other branch on the right
+		call s:git("show :3:./" . l:filename, "r")
+		let &l:filetype = l:ft
+		file OTHER
+		autocmd BufWinLeave <buffer> diffoff!
+		diffthis
+		wincmd p
+		diffthis
+	endf
+
+	" Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
+	command! -complete=shellcmd -nargs=+ Git call <sid>git(<q-args>, "B")
+
+	" Three-way diff.
+	command! -nargs=0 Conflicts call <sid>git3WayDiff()
 " }}
 " Key mappings (plugins excluded) {{
 	" A handy cheat sheet ;)
-	nnoremap <silent> <Leader>? :call Cheatsheet()<CR>
+	nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
 	" Enable outline mode for the current buffer
-	nnoremap <silent> <Leader>O :call EnableOutliner()<CR>
+	nnoremap <silent> <leader>O :call <sid>enableOutliner()<cr>
 	" Open file browser in the directory of the current buffer
-	nnoremap <silent> <Leader>e :Ex<CR>
+	nnoremap <silent> <leader>e :Ex<cr>
 	" Toggle between hard tabs and soft tabs in the current buffer
-	nnoremap <silent> cot :setlocal invexpandtab<CR>
+	nnoremap <silent> cot :setlocal invexpandtab<cr>
 	" Increase tab width by one in the current buffer
-	nnoremap <silent> <Leader>+ :call IncreaseTabWidth(+1)<CR>
+	nnoremap <silent> <leader>+ :call <sid>setLocalTabWidth(&tabstop + 1)<cr>
 	" Decrease tab width by one in the current buffer
-	nnoremap <silent> <Leader>- :call IncreaseTabWidth(-1)<CR>
+	nnoremap <silent> <leader>- :call <sid>setLocalTabWidth(&tabstop - 1)<cr>
 	" Add blank line below or above the current line, but stay in normal mode
 	" (see http://vim.wikia.com/wiki/Quickly_adding_and_deleting_empty_lines)
 	" (see also http://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter)
-	nnoremap <silent> ]<Space> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-	nnoremap <silent> [<Space> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+	nnoremap <silent> ]<space> :set paste<cr>m`o<Esc>``:set nopaste<cr>
+	nnoremap <silent> [<space> :set paste<cr>m`O<Esc>``:set nopaste<cr>
 	" Swap lines. See http://vim.wikia.com/wiki/VimTip646 for an explanation.
-	nnoremap <silent> ]e :m .+1<CR>
-	nnoremap <silent> [e :m .-2<CR>
-	vnoremap <silent> ]e :m '>+1<CR>gv
-	vnoremap <silent> [e :m '<-2<CR>gv
+	" FIXME: these do not go well with folding:
+	nnoremap <silent> ]e :m .+1<cr>
+	nnoremap <silent> [e :m .-2<cr>
+	vnoremap <silent> ]e :m '>+1<cr>gv
+	vnoremap <silent> [e :m '<-2<cr>gv
 	" Toggle invisibles in the current buffer
-	nnoremap <silent> coi :setlocal nolist!<CR>
+	nnoremap <silent> coi :setlocal nolist!<cr>
 	" Toggle paste mode
-	nnoremap <silent> cop :setlocal paste!<CR>
+	nnoremap <silent> cop :setlocal paste!<cr>
 	" Toggle spelling in the current buffer
-	nnoremap <silent> cos :setlocal spell!<CR>
+	nnoremap <silent> cos :setlocal spell!<cr>
 	" Toggle between hard-wrap and soft-wrap
-	nnoremap <silent> cow :call ToggleWrap()<CR>
+	nnoremap <silent> cow :call <sid>toggleWrap()<cr>
 	" Remove trailing space globally
-	nnoremap <silent> <Leader>S :call RemoveTrailingSpace()<CR>
+	nnoremap <silent> <leader>S :call <sid>removeTrailingSpace()<cr>
 	" Capitalize words in selected text (see h gU)
-	vnoremap <silent> <Leader>U :s/\v<(.)(\w*)/\u\1\L\2/g<CR>
+	vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
 	" Toggle search highlighting
-	nnoremap <silent> coh :set invhlsearch<CR>
+	nnoremap <silent> coh :set invhlsearch<cr>
 	" Go to previous/next buffer
-	nnoremap <silent> [b :bp<CR>
-	nnoremap <silent> ]b :bn<CR>
+	nnoremap <silent> [b :bp<cr>
+	nnoremap <silent> ]b :bn<cr>
 	" Go to tab 1/2/3 etc
-	nnoremap <Leader>1 1gt
-	nnoremap <Leader>2 2gt
-	nnoremap <Leader>3 3gt
-	nnoremap <Leader>4 4gt
-	nnoremap <Leader>5 5gt
-	nnoremap <Leader>6 6gt
-	nnoremap <Leader>7 7gt
-	nnoremap <Leader>8 8gt
-	nnoremap <Leader>9 9gt
-	nnoremap <Leader>0 10gt
+	nnoremap <leader>1 1gt
+	nnoremap <leader>2 2gt
+	nnoremap <leader>3 3gt
+	nnoremap <leader>4 4gt
+	nnoremap <leader>5 5gt
+	nnoremap <leader>6 6gt
+	nnoremap <leader>7 7gt
+	nnoremap <leader>8 8gt
+	nnoremap <leader>9 9gt
+	nnoremap <leader>0 10gt
 	" Toggle absolute line numbers
-	nnoremap <silent> con :set invnumber<CR>:set nornu<CR>
+	nnoremap <silent> con :set invnumber<cr>:set nornu<cr>
 	" Toggle relative line numbers
-	nnoremap <silent> cor :set invnumber<CR>:set rnu<CR>
+	nnoremap <silent> cor :set invnumber<cr>:set rnu<cr>
 	" Toggle background color
-	noremap <silent> cob :call ToggleBackgroundColor()<CR>
+	noremap <silent> cob :call <sid>toggleBackgroundColor()<cr>
 	" Compare buffer with HEAD
-	nnoremap <silent> <Leader>gd :call GitDiff()<CR>
+	nnoremap <silent> <leader>gd :call <sid>gitDiff()<cr>
 	" Git status
-	nnoremap <silent> <Leader>gs :Git status<CR>:setlocal ft=gitcommit<CR>
+	nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
 	" Git commit
-	nnoremap <silent> <Leader>gc :!git -C '%:p:h' commit<CR>
+	" FIXME: this launches another instance of Vim
+	nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
 	" Show the revision history for the current file
-	nnoremap <silent> <Leader>gl :Git log --oneline -- %<CR>
+	nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
 	" Add files/patches to the index
-	nnoremap <silent> <Leader>ga :!git -C '%:p:h' add -p '%:p'<CR>
+	nnoremap <silent> <leader>ga :!git -C '%:p:h' add -p '%:p'<cr>
 	" Git push
-	nnoremap <silent> <Leader>gp :!git -C '%:p:h' push<CR>
+	nnoremap <silent> <leader>gp :!git -C '%:p:h' push<cr>
 	" Find next/prev merge conflict markers
-	nnoremap <silent> ]n /\v^[<\|=>]{7}<CR>
-	nnoremap <silent> [n ?\v^[<\|=>]{7}<CR>
+	nnoremap <silent> ]n /\v^[<\|=>]{7}<cr>
+	nnoremap <silent> [n ?\v^[<\|=>]{7}<cr>
 	" Go to next/prev error in quickfix and location list
-	nnoremap <silent> ]l :<C-U>lnext<CR>
-	nnoremap <silent> [l :<C-U>lprevious<CR>
-	nnoremap <silent> ]q :<C-U>cnext<CR>
-	nnoremap <silent> [q :<C-U>cprevious<CR>
+	nnoremap <silent> ]l :<c-u>lnext<cr>
+	nnoremap <silent> [l :<c-u>lprevious<cr>
+	nnoremap <silent> ]q :<c-u>cnext<cr>
+	nnoremap <silent> [q :<c-u>cprevious<cr>
 	" Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
-	cnoremap <C-a> <Home>
-	cnoremap <C-e> <End>
-	cnoremap <C-p> <Up>
-	cnoremap <C-n> <Down>
-	" cnoremap <C-b> <Left>
-	" cnoremap <C-f> <Right>
+	cnoremap <c-a> <home>
+	cnoremap <c-e> <end>
+	cnoremap <c-p> <up>
+	cnoremap <c-n> <down>
+	" cnoremap <c-b> <left>
+	" cnoremap <c-f> <right>
 	" Allow using alt-arrows to jump over words in OS X, as in Terminal.app
-	cnoremap <Esc>b <S-Left>
-	cnoremap <Esc>f <S-Right>
+	cnoremap <esc>b <s-left>
+	cnoremap <esc>f <s-right>
+" }}
+" MacVim {{
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions-=aP " Do not use system clipboard by default
+		set guioptions-=T  " No toolbar
+		set guioptions-=lL " No left scrollbar
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+	endif
 " }}
 " Appearance {{
 	set title " Set the terminal title.
@@ -422,160 +433,150 @@
 	set diffopt+=vertical " Diff in vertical mode
 	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 " }}
-" MacVim {{
-	if has('gui_macvim')
-		set guifont=Monaco:h14
-		set guioptions-=aP " Do not use system clipboard by default
-		set guioptions-=T  " No toolbar
-		set guioptions-=lL " No left scrollbar
-		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-		set transparency=4
-	endif
-" }}
 " Themes {{
 	" To add support for a new theme, define a function called
-	" CustomizeTheme_<theme_name>. That function will be automatically called
-	" after the color scheme is activated. The function should at least
-	" define the hightlight groups for the status line, but it can also
-	" be used to override the theme's settings and highlight groups.
+	" s:customizeTheme_<theme_name>. That function will be automatically called
+	" after the color scheme is activated. The function should at least define
+	" the hightlight groups for the status line, but it can also be used to
+	" override the theme's settings and highlight groups.
 
 	" Set up highlight groups for the current theme and background.
-	func! CustomizeTheme()
+	fun! s:customizeTheme()
 		hi! link netrwMarkFile DiffAdd
 		" Set default values for the highlight groups of the status line
-		hi! link NormalMode  StatusLine
-		hi! link InsertMode  DiffText
-		hi! link VisualMode  Visual
+		hi! link NormalMode StatusLine
+		hi! link InsertMode DiffText
+		hi! link VisualMode Visual
 		hi! link ReplaceMode DiffChange
 		hi! link CommandMode PmenuSel
-		hi! link Warnings    ErrorMsg
+		hi! link Warnings ErrorMsg
 		" Set defaults for vertical separator and fold separator
 		set fillchars=vert:\ ,fold:\·
 		if exists('g:colors_name')
-			let fn = 'CustomizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
-			if exists('*' . fn)
-				call eval(fn . '()')
+			let l:fn = 's:customizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
+			if exists('*' . l:fn)
+				call eval(l:fn . '()')
 			endif
 		endif
-	endfunc
+	endf
 
-	autocmd ColorScheme * call CustomizeTheme()
+	autocmd ColorScheme * call <sid>customizeTheme()
 
 	" For themes that have dark and light variants with different names (e.g.,
 	" PaperColor/PaperColor-Dark), define corresponding
 	" ToggleBackground_<theme_name>() functions that change the color scheme.
-	func! ToggleBackgroundColor()
+	fun! s:toggleBackgroundColor()
 		if exists('g:colors_name')
-			let fn = 'ToggleBackground_' . substitute(g:colors_name, '[-]', '_', 'g')
-			if exists('*' . fn)
-				call eval(fn . '()')
+			let l:fn = 's:toggleBackground_' . substitute(g:colors_name, '[-]', '_', 'g')
+			if exists('*' . l:fn)
+				call eval(l:fn . '()')
 				return
 			endif
 		endif
 		let &background = (&background == 'dark') ? 'light' : 'dark'
-	endfunc
+	endf
 
 	" Solarized {{
 		let g:solarized_bold = 1
 		let g:solarized_underline = 0
 
-		func! CustomizeTheme_solarized()
+		fun! s:customizeTheme_solarized()
 			hi clear Title
 			hi clear Folded
 			hi clear SignColumn
-			hi! link VertSplit   LineNr
-			hi! link TabLineSel  Normal
-			hi! link TabLine     StatusLine
+			hi! link VertSplit LineNr
+			hi! link TabLineSel Normal
+			hi! link TabLine StatusLine
 			hi! link TabLineFill TabLine
-			hi! link Search      VisualMode
-			hi ErrorMsg       ctermbg=1  ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+			hi! link Search VisualMode
+			hi ErrorMsg ctermbg=1 ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
 			if &background ==# 'dark'
-				hi MatchParen  ctermbg=0  ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold    cterm=bold    gui=bold
+				hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold cterm=bold gui=bold
 				let g:limelight_conceal_ctermfg = 10
 			else
-				hi MatchParen  ctermbg=7  ctermfg=0  guibg=#eee8d5 guifg=#073642 term=bold    cterm=bold    gui=bold
+				hi MatchParen ctermbg=7 ctermfg=0 guibg=#eee8d5 guifg=#073642 term=bold cterm=bold gui=bold
 				let g:limelight_conceal_ctermfg = 14
 			endif
 
 			" Status line
 			if &background ==# 'dark'
-				hi StatusLine   ctermbg=7   ctermfg=10  guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
-				hi StatusLineNC ctermbg=10  ctermfg=0   guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
-				hi NormalMode   ctermbg=14  ctermfg=15  guibg=#93a1a1 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+				hi StatusLine ctermbg=7 ctermfg=10 guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
+				hi StatusLineNC ctermbg=10 ctermfg=0 guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
+				hi NormalMode ctermbg=14 ctermfg=15 guibg=#93a1a1 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
 			else
-				hi StatusLine   ctermbg=7   ctermfg=14  guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-				hi StatusLineNC ctermbg=14  ctermfg=7   guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-				hi NormalMode   ctermbg=10  ctermfg=15  guibg=#586e75 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
+				hi StatusLine ctermbg=7 ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
+				hi StatusLineNC ctermbg=14 ctermfg=7 guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
+				hi NormalMode ctermbg=10 ctermfg=15 guibg=#586e75 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
 			endif
-			hi InsertMode      ctermbg=6   ctermfg=15  guibg=#2aa198 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode     ctermbg=9   ctermfg=15  guibg=#cb4b16 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi VisualMode      ctermbg=5   ctermfg=15  guibg=#d33682 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi CommandMode     ctermbg=5   ctermfg=15  guibg=#d33682 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-		endfunc
-	" }}
+			hi InsertMode ctermbg=6 ctermfg=15 guibg=#2aa198 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+			hi ReplaceMode ctermbg=9 ctermfg=15 guibg=#cb4b16 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+			hi VisualMode ctermbg=5 ctermfg=15 guibg=#d33682 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+			hi CommandMode ctermbg=5 ctermfg=15 guibg=#d33682 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+		endf
+		" }}
 	" Gruvbox {{
-		func! CustomizeTheme_gruvbox()
-			hi! link TabLineSel  Normal
-			hi! link Tabline     StatusLine
+		fun! s:customizeTheme_gruvbox()
+			hi! link TabLineSel Normal
+			hi! link Tabline StatusLine
 			hi! link TabLineFill TabLine
-			hi! link NormalMode  Cursor
-		endfunc
+			hi! link NormalMode Cursor
+		endf
 	" }}
 	" Jellybeans {{
-		func! CustomizeTheme_jellybeans()
-			hi! link TabLineSel  Normal
-			hi! link TabLine     StatusLine
+		fun! s:customizeTheme_jellybeans()
+			hi! link TabLineSel Normal
+			hi! link TabLine StatusLine
 			hi! link TabLineFill TabLine
-			hi! link NormalMode  Pmenu
-		endfunc
+			hi! link NormalMode Pmenu
+		endf
 	" }}
 	" PaperColor {{
-		func! ToggleBackground_PaperColor()
+		fun! s:toggleBackground_PaperColor()
 			colorscheme PaperColor-Dark
-		endfunc
+		endf
 
-		func! ToggleBackground_PaperColor_Dark()
+		fun! s:toggleBackground_PaperColor_Dark()
 			colorscheme PaperColor
-		endfunc
+		endf
 
-		func! CustomizeTheme_PaperColor()
+		fun! s:customizeTheme_PaperColor()
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			hi! link Search VisualMode
 			" Default status line is boldface. I don't want that.
-			hi       StatusLine   term=NONE cterm=NONE gui=NONE
-			hi! link TabLine      StatusLine
-			hi! link TabLineSel   Normal
+			hi StatusLine term=NONE cterm=NONE gui=NONE
+			hi! link TabLine StatusLine
+			hi! link TabLineSel Normal
 			" Status line
-			hi       InsertMode   ctermbg=31  ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-			hi       ReplaceMode  ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE    cterm=NONE    gui=NONE
-		endfunc
+			hi InsertMode ctermbg=31 ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
+			hi ReplaceMode ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
+		endf
 
-		func! CustomizeTheme_PaperColor_Dark()
+		fun! s:customizeTheme_PaperColor_Dark()
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
 			" Default status line is boldface. I don't want that.
-			hi       StatusLine   term=NONE cterm=NONE gui=NONE
-			hi! link TabLine      TabLineFill
-			hi! link TabLineSel   Normal
-		endfunc
+			hi StatusLine term=NONE cterm=NONE gui=NONE
+			hi! link TabLine TabLineFill
+			hi! link TabLineSel Normal
+		endf
 	" }}
 	" Pencil {{
-	fun CustomizeTheme_pencil()
+	fun! s:customizeTheme_pencil()
 		if &background ==# 'dark'
-			hi! link TabLine      StatusLineNC
-			hi! link TabLineSel   CursorLineNr
-			hi! link TabLineFill  TabLine
-			hi NormalMode   ctermbg=245 ctermfg=7   guibg=#636363 guifg=#c6c6c6 term=NONE    cterm=NONE    gui=NONE
-			hi InsertMode   ctermbg=24  ctermfg=7   guibg=#005f87 guifg=#c6c6c6 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode  ctermbg=166 ctermfg=7   guibg=#d75f5f guifg=#c6c6c6 term=NONE    cterm=NONE    gui=NONE
-			hi Warnings     ctermbg=160 ctermfg=7   guibg=#c30771 guifg=#c6c6c6 term=NONE    cterm=NONE    gui=NONE
+			hi! link TabLine StatusLineNC
+			hi! link TabLineSel CursorLineNr
+			hi! link TabLineFill TabLine
+			hi NormalMode ctermbg=245 ctermfg=7 guibg=#636363 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
+			hi InsertMode ctermbg=24 ctermfg=7 guibg=#005f87 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
+			hi ReplaceMode ctermbg=166 ctermfg=7 guibg=#d75f5f guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
+			hi Warnings ctermbg=160 ctermfg=7 guibg=#c30771 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
 		else
-			hi! link TabLineSel   Title
-			hi NormalMode   ctermbg=241 ctermfg=254 guibg=#545454 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-			hi InsertMode   ctermbg=24  ctermfg=254 guibg=#005f87 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-			hi ReplaceMode  ctermbg=166 ctermfg=254 guibg=#d75f5f guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
-			hi Warnings     ctermbg=160 ctermfg=254 guibg=#c30771 guifg=#d9d9d9 term=NONE    cterm=NONE    gui=NONE
+			hi! link TabLineSel Title
+			hi NormalMode ctermbg=241 ctermfg=254 guibg=#545454 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
+			hi InsertMode ctermbg=24 ctermfg=254 guibg=#005f87 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
+			hi ReplaceMode ctermbg=166 ctermfg=254 guibg=#d75f5f guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
+			hi Warnings ctermbg=160 ctermfg=254 guibg=#c30771 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
 		endif
 	endf
 	" }}
@@ -583,60 +584,60 @@
 		let g:seoul256_background = 236
 		let g:seoul256_light_background = 255
 
-		func! ToggleBackground_seoul256()
+		fun! s:toggleBackground_seoul256()
 			colorscheme seoul256-light
-		endfunc
+		endf
 
-		func! ToggleBackground_seoul256_light()
+		fun! s:toggleBackground_seoul256_light()
 			colorscheme seoul256
-		endfunc
+		endf
 
-		func! CustomizeTheme_seoul256()
-			hi! link VertSplit    StatusLineNC
-			hi! link TabLineSel   Normal
-			hi! link TabLine      DiffChange
-			hi! link TabLineFill  TabLine
+		fun! s:customizeTheme_seoul256()
+			hi! link VertSplit StatusLineNC
+			hi! link TabLineSel Normal
+			hi! link TabLine DiffChange
+			hi! link TabLineFill TabLine
 			" Status line
-			hi! link NormalMode   StatusLineNC
-			hi! link InsertMode   PmenuSbar
-			hi! link ReplaceMode  Search
-			hi! link CommandMode  DiffAdd
-		endfunc
+			hi! link NormalMode StatusLineNC
+			hi! link InsertMode PmenuSbar
+			hi! link ReplaceMode Search
+			hi! link CommandMode DiffAdd
+		endf
 
-		func! CustomizeTheme_seoul256_light()
-			hi! link TabLineSel   Normal
-			hi! link TabLine      LineNr
-			hi! link TabLineFill  TabLine
+		fun! s:customizeTheme_seoul256_light()
+			hi! link TabLineSel Normal
+			hi! link TabLine LineNr
+			hi! link TabLineFill TabLine
 			" Status line
-			hi       NormalMode   ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE    cterm=NONE    gui=NONE
-			hi       InsertMode   ctermbg=65  ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE    cterm=NONE    gui=NONE
-			hi! link ReplaceMode  WildMenu
-			hi! link CommandMode  DiffChange
-		endfunc
+			hi NormalMode ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE cterm=NONE gui=NONE
+			hi InsertMode ctermbg=65 ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+			hi! link ReplaceMode WildMenu
+			hi! link CommandMode DiffChange
+		endf
 	" }}
 	" Tomorrow {{
-		func! ToggleBackground_Tomorrow()
+		fun! s:toggleBackground_Tomorrow()
 			colorscheme Tomorrow-Night-Eighties
-		endfunc
+		endf
 
-		func! ToggleBackground_Tomorrow_Night_Eighties()
+		fun! s:toggleBackground_Tomorrow_Night_Eighties()
 			colorscheme Tomorrow
-		endfunc
+		endf
 
-		func! CustomizeTheme_Tomorrow()
-			hi! link NormalMode  PmenuSel
-			hi! link InsertMode  DiffAdd
+		fun! s:customizeTheme_Tomorrow()
+			hi! link NormalMode PmenuSel
+			hi! link InsertMode DiffAdd
 			hi! link CommandMode Search
-		endfunc
+		endf
 
-		func! CustomizeTheme_Tomorrow_Night_Eighties()
+		fun! s:customizeTheme_Tomorrow_Night_Eighties()
 			call CustomizeTheme_Tomorrow()
-		endfunc
+		endf
 	" }}
 
 	" Default theme
 	if filereadable($HOME . '/.vim/default-theme.vim')
-		exec 'source' $HOME . '/.vim/default-theme.vim'
+		execute 'source' $HOME . '/.vim/default-theme.vim'
 	else
 		colorscheme solarized
 	endif
@@ -645,34 +646,34 @@
 	" See :h mode() (some of these are never used in the status line)
 	let g:mode_map = {
 				\ 'n':  ['NORMAL',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['VISUAL',  'VisualMode' ],
-				\ 'V':  ['V-LINE',  'VisualMode' ], "\<C-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
-				\ 'S':  ['S-LINE',  'VisualMode' ], "\<C-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
+				\ 'V':  ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
+				\ 'S':  ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
 				\ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
 				\ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
 				\ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
 
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-	func! UpdateWarnings()
-		let save_cursor = getcurpos()
+	fun! s:updateWarnings()
+		let l:save_cursor = getcurpos()
 		call cursor(1,1) " Start search from the beginning of the file
-		let trail = search('\s$', 'nw')
-		let spaces = search('\v^\s* ', 'nw')
-		let tabs = search('\v^\s*\t', 'nw')
-		if trail != 0
+		let l:trail = search('\s$', 'nw')
+		let l:spaces = search('\v^\s* ', 'nw')
+		let l:tabs = search('\v^\s*\t', 'nw')
+		if l:trail != 0
 			let b:stl_warnings = '  Trailing space ('.trail.') '
-			if spaces != 0 && tabs != 0
-				let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.tabs.') '
+			if l:spaces != 0 && l:tabs != 0
+				let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
 			endif
-		elseif spaces != 0 && tabs != 0
-			let b:stl_warnings = '  Mixed indent ('.spaces.'/'.tabs.') '
+		elseif l:spaces != 0 && l:tabs != 0
+			let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
 		else
 			unlet! b:stl_warnings
 		endif
-		call setpos('.', save_cursor) " Restore cursor position
-	endfunc
+		call setpos('.', l:save_cursor) " Restore cursor position
+	endf
 
-	func! SetupStl(nr)
+	fun! SetupStl(nr)
 		" Setting highlight groups while computing the status line may cause the
 		" startup screen to disappear in MacVim. See:
 		"
@@ -682,13 +683,13 @@
 		" 1) you open a window in MacVim (File > New Window), then you open a
 		"    second window: the startup screen disappears in the first window.
 		" 2) After installing YouCompleteMe, it happens every time.
-		exec 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
+		execute 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
 		return get(extend(w:, {"bufnr": winbufnr(winnr()), "active": (winnr() == a:nr),
 					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())}), '', '')
-	endfunc
+	endf
 
 	" Build the status line the way I want - no fat light plugins!
-	func! BuildStatusLine(nr)
+	fun! BuildStatusLine(nr)
 		return '%{SetupStl('.a:nr.')}%#CurrMode#
 					\ %{w:["active"] ? get(g:mode_map,mode(1), ["??????"])[0] . (&paste ? " PASTE" : "") : " "}
 					\ %* %<%F
@@ -704,40 +705,43 @@
 					\ . (getbufvar(w:["bufnr"], "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(w:["bufnr"], "&tabstop"))}
 					\ %#CurrMode#%{w:["winwd"] < 60 ? "" : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}%*
 					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings") || w:["ft"] =~ "help") ? "" : b:stl_warnings}%*'
-	endfunc
+	endf
 
-	func! EnableStatusLine()
+	fun! s:enableStatusLine()
 		let g:default_stl = &statusline
 		augroup status
 			autocmd!
-			autocmd BufReadPost,BufWritePost * call UpdateWarnings()
+			autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
 		augroup END
 		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
-	endfunc
+	endf
 
-	func! DisableStatusLine()
+	fun! s:disableStatusLine()
 		augroup status
 			autocmd!
 		augroup END
 		augroup! status
 		let &statusline = g:default_stl
-	endfunc
+	endf
 
-	call EnableStatusLine()
+	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
+	command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
+
+	EnableStatusLine
 " }}
 " Tabline {{
 	" See :h tabline
-	func! BuildTabLabel(nr)
+	fun! BuildTabLabel(nr)
 		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " ◇ ")
 					\ . (get(extend(t:, {"tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")}), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
-	endfunc
+	endf
 
-	func! BuildTabLine()
+	fun! BuildTabLine()
 		return join(map(range(1, tabpagenr('$')),
 					\ '((v:val == tabpagenr()) ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'), '')
 					\ . "%#TabLineFill#%T"
 					\ . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
-	endfunc
+	endf
 
 	set tabline=%!BuildTabLine()
 " }}
@@ -754,69 +758,69 @@
 		" See https://gist.github.com/kien/1610859
 		" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
 		"            a:1    a:2      a:3       a:4  a:5   a:6  a:7
-		func! CtrlP_Main(...)
+		fun! CtrlP_Main(...)
 			if a:1 ==# 'prt'
-				let color = '%#InsertMode#'
-				let rhs = color . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
+				let l:color = '%#InsertMode#'
+				let l:rhs = color . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
 			else
-				let color = '%#VisualMode#'
-				let rhs = color . ' select %*'
+				let l:color = '%#VisualMode#'
+				let l:rhs = color . ' select %*'
 			endif
-			let item = color . ' ' . a:5 . ' %*'
-			let dir = ' ' . getcwd()
-			return item . dir . '%=' . rhs
-		endfunc
+			let l:item = color . ' ' . a:5 . ' %*'
+			let l:dir = ' ' . getcwd()
+			return l:item . dir . '%=' . l:rhs
+		endf
 
 		" Argument: len
 		"           a:1
-		func! CtrlP_Progress(...)
-			let len = '%#Warnings# ' . a:1 . ' %*'
-			let dir = ' %=%<%#Warnings#' . getcwd() . ' %*'
-			return len . dir
-		endfunc
+		fun! CtrlP_Progress(...)
+			let l:len = '%#Warnings# ' . a:1 . ' %*'
+			let l:dir = ' %=%<%#Warnings#' . getcwd() . ' %*'
+			return l:len . l:dir
+		endf
 	" }}
 	" Easy Align {{
-		vmap <Enter> <Plug>(EasyAlign)
+		vmap <enter> <plug>(EasyAlign)
 	" }}
 	" EasyMotion {{
 		let g:EasyMotion_do_mapping = 0
 		let g:EasyMotion_smartcase = 1
-		map  <Leader>/ <Plug>(easymotion-sn)
-		omap <Leader>/ <Plug>(easymotion-tn)
-		nmap <Leader>s <Plug>(easymotion-s)
-		omap <Leader>s <Plug>(easymotion-s)
+		map  <leader>/ <plug>(easymotion-sn)
+		omap <leader>/ <plug>(easymotion-tn)
+		nmap <leader>s <plug>(easymotion-s)
+		omap <leader>s <plug>(easymotion-s)
 	" }}
 	" Goyo {{
 		" Toggle distraction-free mode
-		nnoremap <silent> <F7> :Goyo<CR>
-		func! s:goyo_enter()
+		nnoremap <silent> <f7> :Goyo<cr>
+		fun! s:goyoEnter()
 			if has('gui_macvim')
 				"set fullscreen
 				set guifont=Monaco:h14
 				set linespace=7
 				set guioptions-=r " hide right scrollbar
 			endif
-			call SoftWrap()
+			call s:softWrap()
 			set noshowcmd
 			Limelight
-		endfunc
+		endf
 
-		func! s:goyo_leave()
+		fun! s:goyoLeave()
 			if has('gui_macvim')
 				"set nofullscreen
 				set guifont=Monaco:h14
 				set linespace=0
 				set guioptions+=r
 			endif
-			call DontSoftWrap()
+			call s:dontSoftWrap()
 			set showcmd
 			Limelight!
-		endfunc
+		endf
 
 		autocmd! User GoyoEnter
 		autocmd! User GoyoLeave
-		autocmd! User GoyoEnter nested call <SID>goyo_enter()
-		autocmd! User GoyoLeave nested call <SID>goyo_leave()
+		autocmd! User GoyoEnter nested call <sid>goyoEnter()
+		autocmd! User GoyoLeave nested call <sid>goyoLeave()
 	" }}
 	" Ledger {{
 		let g:ledger_maxwidth = 63
@@ -830,17 +834,17 @@
 		let g:ledger_commodity_sep = ' '
 	" }}
 	" Show Marks {{
-		func! ToggleShowMarks()
+		fun! s:toggleShowMarks()
 			if exists('b:showmarks')
 				NoShowMarks
 			else
 				DoShowMarks
 			endif
-		endfunc
+		endf
 
 		" Toggle marks
-		nnoremap <silent> <Leader>m :call ToggleShowMarks()<CR>
-		nnoremap ` :ShowMarksOnce<CR>`
+		nnoremap <silent> <leader>m :call <sid>toggleShowMarks()<cr>
+		nnoremap ` :ShowMarksOnce<cr>`
 	" }}
 	" Syntastic {{
 		let g:syntastic_check_on_open = 0
@@ -858,7 +862,7 @@
 	" }}
 	" Tagbar {{
 		" Toggle tag bar
-		nnoremap <silent> <F9> :TagbarToggle<CR>
+		nnoremap <silent> <f9> :TagbarToggle<cr>
 		let g:tagbar_autofocus = 1
 		let g:tagbar_iconchars = ['▸', '▾']
 	" }}
@@ -871,7 +875,7 @@
 		let g:undotree_SetFocusWhenToggle = 1
 		let g:undotree_TreeNodeShape = '◦'
 		" Toggle undo tree
-		nnoremap <silent> <F8> :UndotreeToggle<CR>
+		nnoremap <silent> <f8> :UndotreeToggle<cr>
 	" }}
 	" YouCompleteMe {{
 		let g:ycm_autoclose_preview_window_after_completion = 1
