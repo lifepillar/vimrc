@@ -463,8 +463,8 @@
 	autocmd ColorScheme * call <sid>customizeTheme()
 
 	" For themes that have dark and light variants with different names (e.g.,
-	" PaperColor/PaperColor-Dark), define corresponding
-	" ToggleBackground_<theme_name>() functions that change the color scheme.
+	" seoul256/seoul256_light), define corresponding
+	" s:toggleBackground_<theme_name>() functions that change the color scheme.
 	fun! s:toggleBackgroundColor()
 		if exists('g:colors_name')
 			let l:fn = 's:toggleBackground_' . substitute(g:colors_name, '[-]', '_', 'g')
@@ -531,14 +531,6 @@
 		endf
 	" }}
 	" PaperColor {{
-		fun! s:toggleBackground_PaperColor()
-			colorscheme PaperColor-Dark
-		endf
-
-		fun! s:toggleBackground_PaperColor_Dark()
-			colorscheme PaperColor
-		endf
-
 		fun! s:customizeTheme_PaperColor()
 			set fillchars=vert:\|,fold:\·
 			hi clear Title
