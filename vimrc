@@ -662,8 +662,13 @@
 		call setpos('.', l:save_cursor) " Restore cursor position
 	endf
 
-	" Caches the last seen mode to avoid redefining highlight groups unnecessarily.
-	let s:cached_mode = ""
+	fun! s:updateSepMode()
+		execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
+					\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
+					\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
+					\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
+		return mode()
+	endf
 
 	fun! SetupStl(nr)
 		" Setting highlight groups while computing the status line may cause the
@@ -679,15 +684,12 @@
 		" In a %{} context, winnr() always refers to the window to which the
 		" status line being drawn belongs.
 		execute 'hi! link CurrMode ' ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
-		if winnr() == a:nr && mode() !=# s:cached_mode
-			let s:cached_mode = mode()
-			execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
-						\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
-						\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
-						\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
-		endif
-		return get(extend(w:, {"bufnr": winbufnr(winnr()), "active": (winnr() == a:nr),
-					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())}), '', '')
+		return get(extend(w:, {
+					\ "bufnr": winbufnr(winnr()),
+					\ "active": (winnr() == a:nr),
+					\ "mode": (winnr() == a:nr && mode() !=# get(w:, "mode", "")) ? s:updateSepMode() : mode(),
+					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())
+					\ }), "", "")
 	endf
 
 	" Build the status line the way I want - no fat light plugins!
