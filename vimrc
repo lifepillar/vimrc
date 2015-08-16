@@ -183,6 +183,7 @@
 	endf
 " }}
 " Editing {{
+	set cindent " Indent according to C rules
 	set backspace=indent,eol,start " Intuitive backspacing in insert mode.
 	set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
 	set scrolloff=999 " Keep the edited line vertically centered.
