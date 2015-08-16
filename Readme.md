@@ -84,3 +84,13 @@ background for themes that support both.
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
 
+### Useful resources
+
+Apart from the obvious ones (e.g., [vim.wikia.com](http://vim.wikia.com)), I
+have found the following interesting:
+
+- [usevim](http://usevim.com/)
+- [VimGolf](http://vimgolf.com)
+- [VimAwesome](http://vimawesome.com)
+- [vimrcfu](http://vimrcfu.com)
+
