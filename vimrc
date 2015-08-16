@@ -624,6 +624,7 @@
 		let g:mod_sym = "◇"
 		let g:linecol_sym = "\ue0a1"
 		let g:branch_sym = "\ue0a0"
+		let g:pad = " "
 	endf
 
 	fun! s:disablePatchedFont()
@@ -636,6 +637,7 @@
 		let g:mod_sym = "◇"
 		let g:linecol_sym = ""
 		let g:branch_sym = ""
+		let g:pad = ""
 	endf
 
 	command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
@@ -707,7 +709,7 @@
 					\ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
 					\ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
 					\ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
-					\%#CurrMode#%{w:["winwd"] < 60 ? "" : printf("  %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
+					\%#CurrMode#%{w:["winwd"] < 60 ? "" : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
 					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings")) ? "" : b:stl_warnings}%*'
 	endf
 
