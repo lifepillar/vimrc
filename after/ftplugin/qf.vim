@@ -1,11 +1,10 @@
-fun! SetupQfStl(nr)
-    exec 'hi! link CurrMode ' . ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
-    return get(extend(w:, {"winwd": winwidth(winnr())}), '', '')
-endf
-
 fun! BuildQuickfixStatusLine(nr)
-  return '%{SetupQfStl('.a:nr.')}%#CurrMode# %q %* %<%{get(w:, "quickfix_title", "")}%=
-        \ %#CurrMode#%{w:["winwd"] < 60 ? "" : printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ")}%*'
+  return '%{SetupStl('.a:nr.')}
+        \%#CurrMode# %q %#SepMode#%{w:["active"] ? g:left_sep_sym : ""}%*
+        \ %<%{get(w:, "quickfix_title", "")}
+        \ %=
+        \ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
+        \%#CurrMode#%{w:["winwd"] < 60 ? "" : g:pad . printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ")}%*'
 endf
 
 setlocal statusline=%!BuildQuickfixStatusLine(winnr())
