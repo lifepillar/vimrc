@@ -418,6 +418,7 @@
 		hi! link ReplaceMode DiffChange
 		hi! link CommandMode PmenuSel
 		hi! link Warnings ErrorMsg
+		let s:cached_mode = ""  " Force updating status line highlight groups
 		" Set defaults for vertical separator and fold separator
 		set fillchars=vert:\ ,fold:\·
 		if exists('g:colors_name')
@@ -441,6 +442,7 @@
 				return
 			endif
 		endif
+		let s:cached_mode = ""  " Force updating status line highlight groups
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endf
 
@@ -660,6 +662,9 @@
 		call setpos('.', l:save_cursor) " Restore cursor position
 	endf
 
+	" Caches the last seen mode to avoid redefining highlight groups unnecessarily.
+	let s:cached_mode = ""
+
 	fun! SetupStl(nr)
 		" Setting highlight groups while computing the status line may cause the
 		" startup screen to disappear in MacVim. See:
@@ -674,10 +679,13 @@
 		" In a %{} context, winnr() always refers to the window to which the
 		" status line being drawn belongs.
 		execute 'hi! link CurrMode ' ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
-		execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
-					\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
-					\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
-					\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
+		if winnr() == a:nr && mode() !=# s:cached_mode
+			let s:cached_mode = mode()
+			execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
+						\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
+						\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
+						\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
+		endif
 		return get(extend(w:, {"bufnr": winbufnr(winnr()), "active": (winnr() == a:nr),
 					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())}), '', '')
 	endf
