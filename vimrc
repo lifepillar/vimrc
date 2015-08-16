@@ -624,7 +624,7 @@
 		let g:branch_sym = "\ue0a0"
 	endf
 
-	fun s:disablePatchedFont()
+	fun! s:disablePatchedFont()
 		let g:left_sep_sym = ""
 		let g:right_sep_sym = ""
 		let g:lalt_sep_sym = ""
