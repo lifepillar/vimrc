@@ -703,7 +703,7 @@
 					\ %{w:["winwd"] < 80 ? "" : " "
 					\ . getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
 					\ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
-					\ . (getbufvar(w:["bufnr"], "&expandtab") ==# "expandtab" ? "⇥ " : "˽ ") . getbufvar(w:["bufnr"], "&tabstop")}
+					\ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
 					\ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
 					\%#CurrMode#%{w:["winwd"] < 60 ? "" : printf("  %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
 					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings")) ? "" : b:stl_warnings}%*'
