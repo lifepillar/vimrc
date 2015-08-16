@@ -45,8 +45,8 @@
 	set hidden " Allow buffer switching without saving.
 	set history=1000 " Keep a longer history.
 	" Files and directories to ignore
-	set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.so,*.swp,*.zip
-	let g:netrw_list_hide= '\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.so$,\.swp$,\.zip$'
+	set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
+	let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
 	" Consolidate temporary files in a central spot
 	set backupdir=~/.vim/tmp
 	set directory=~/.vim/tmp
