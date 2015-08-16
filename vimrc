@@ -610,6 +610,7 @@
 				\ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
 				\ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
 
+	let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
 	fun! s:updateWarnings()
