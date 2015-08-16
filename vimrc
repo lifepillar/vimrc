@@ -150,6 +150,16 @@
 		cwindow
 	endf
 
+	" Return the cterm value of the given attribute for the given highlight group.
+	fun! s:synTermAttr(hlGroup, attr)
+		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "cterm")
+	endf
+
+	" Return the gui value of the given attribute for the given highlight group.
+	fun! s:synGuiAttr(hlGroup, attr)
+		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "gui")
+	endf
+
 	fun! s:cheatsheet()
 		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
 		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
