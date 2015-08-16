@@ -386,16 +386,6 @@
 	cnoremap <esc>b <s-left>
 	cnoremap <esc>f <s-right>
 " }}
-" MacVim {{
-	if has('gui_macvim')
-		set guifont=Monaco:h14
-		set guioptions-=aP " Do not use system clipboard by default
-		set guioptions-=T  " No toolbar
-		set guioptions-=lL " No left scrollbar
-		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-		set transparency=4
-	endif
-" }}
 " Appearance {{
 	set title " Set the terminal title.
 	set number " Turn line numbering on.
@@ -712,6 +702,16 @@
 	endf
 
 	set tabline=%!BuildTabLine()
+" }}
+" MacVim {{
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions-=aP " Do not use system clipboard by default
+		set guioptions-=T  " No toolbar
+		set guioptions-=lL " No left scrollbar
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+	endif
 " }}
 " Plugins {{
 	" CtrlP {{
