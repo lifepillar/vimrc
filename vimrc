@@ -781,15 +781,20 @@
 		"            a:1    a:2      a:3       a:4  a:5   a:6  a:7
 		fun! CtrlP_Main(...)
 			if a:1 ==# 'prt'
+				execute "hi! link CurrMode InsertMode"
+				call s:updateSepMode()
 				let l:color = '%#InsertMode#'
 				let l:rhs = color . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
 			else
+				execute "hi! link CurrMode VisualMode"
+				call s:updateSepMode()
 				let l:color = '%#VisualMode#'
 				let l:rhs = color . ' select %*'
 			endif
-			let l:item = color . ' ' . a:5 . ' %*'
+			let l:item = color . ' ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%*'
 			let l:dir = ' ' . getcwd()
-			return l:item . dir . '%=' . l:rhs
+			let g:cached_mode = ""  " Invalidate cached mode (force update of SepMode when exiting CtrlP)
+			return l:item . dir . '%= %#SepMode#%{g:right_sep_sym}%*' . l:rhs
 		endf
 
 		" Argument: len
