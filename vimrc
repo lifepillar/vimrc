@@ -343,9 +343,9 @@
 	" Toggle between hard tabs and soft tabs in the current buffer
 	nnoremap <silent> cot :setlocal invexpandtab<cr>
 	" Increase tab width by one in the current buffer
-	nnoremap <silent> <leader>+ :call <sid>setLocalTabWidth(&tabstop + 1)<cr>
+	nnoremap <silent> <leader>] :call <sid>setLocalTabWidth(&tabstop + 1)<cr>
 	" Decrease tab width by one in the current buffer
-	nnoremap <silent> <leader>- :call <sid>setLocalTabWidth(&tabstop - 1)<cr>
+	nnoremap <silent> <leader>[ :call <sid>setLocalTabWidth(&tabstop - 1)<cr>
 	" Toggle paste mode
 	nnoremap <silent> cop :setlocal paste!<cr>
 	" Remove trailing space globally

@@ -204,8 +204,8 @@ Press q to dismiss, <Tab> to lose focus
  :set tw=‹n›   - Set text width
  gww           - Format current line
  cot           * Toggle hard/soft tabs
- \+            * Increase tab width
- \-            * Decrease tab width
+ \]            * Increase tab width
+ \[            * Decrease tab width
  :TabWidth ‹n› * Set tab width in buffer
  :retab        - Detab (needs 'et' on)
  :retab!       - Entab (needs 'et' off)
