@@ -401,6 +401,16 @@
 	set diffopt+=vertical " Diff in vertical mode
 	set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 " }}
+" MacVim {{
+	if has('gui_macvim')
+		set guifont=Monaco:h14
+		set guioptions-=aP " Do not use system clipboard by default
+		set guioptions-=T  " No toolbar
+		set guioptions-=lL " No left scrollbar
+		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+		set transparency=4
+	endif
+" }}
 " Status line {{
 	" See :h mode() (some of these are never used in the status line)
 	let g:mode_map = {
@@ -753,17 +763,6 @@
 		execute 'source' $HOME . '/.vim/default-theme.vim'
 	else
 		colorscheme solarized
-	endif
-" }}
-" MacVim {{
-	if has('gui_macvim')
-		set guifont=Monaco:h14
-		set guioptions-=aP " Do not use system clipboard by default
-		set guioptions-=T  " No toolbar
-		set guioptions-=lL " No left scrollbar
-		set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-		set transparency=4
-		DisablePatchedFont
 	endif
 " }}
 " Plugins {{
