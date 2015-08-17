@@ -791,7 +791,7 @@
 				execute "hi! link CurrMode VisualMode"
 				call s:updateSepMode()
 				let g:cached_mode = ""  " Ditto
-				return '%#VisualMode#' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
+				return '%#VisualMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
 							\ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#VisualMode# select %*'
 			endif
 		endf
