@@ -783,18 +783,17 @@
 			if a:1 ==# 'prt'
 				execute "hi! link CurrMode InsertMode"
 				call s:updateSepMode()
-				let l:color = '%#InsertMode#'
-				let l:rhs = color . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
+				let g:cached_mode = ""  " Force update of SepMode when leaving CtrlP
+				return '%#InsertMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
+							\ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#InsertMode#'
+							\ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
 			else
 				execute "hi! link CurrMode VisualMode"
 				call s:updateSepMode()
-				let l:color = '%#VisualMode#'
-				let l:rhs = color . ' select %*'
+				let g:cached_mode = ""  " Ditto
+				return '%#VisualMode#' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
+							\ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#VisualMode# select %*'
 			endif
-			let l:item = color . ' ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%*'
-			let l:dir = ' ' . getcwd()
-			let g:cached_mode = ""  " Invalidate cached mode (force update of SepMode when exiting CtrlP)
-			return l:item . dir . '%= %#SepMode#%{g:right_sep_sym}%*' . l:rhs
 		endf
 
 		" Argument: len
