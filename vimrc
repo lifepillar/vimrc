@@ -124,32 +124,6 @@
 		endfor
 	endf
 
-	" Find all occurrences of a pattern in a file.
-	fun! s:findAll(pattern)
-		try
-			silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
-		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-			echohl Warnings
-			echomsg "No match"
-			echohl None
-		endtry
-		lwindow
-	endf
-
-	" Find all occurrences of a pattern in all open files.
-	fun! s:multiFind(pattern)
-		" Get the list of open files
-		let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
-		try
-			silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
-		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-			echohl Warnings
-			echomsg "No match"
-			echohl None
-		endtry
-		cwindow
-	endf
-
 	" Return the cterm value of the given attribute for the given highlight group.
 	fun! s:synTermAttr(hlGroup, attr)
 		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "cterm")
@@ -234,6 +208,32 @@
 	set infercase " Smart keyword completion
 	set wildmenu " Show possible matches when autocompleting.
 	set wildignorecase " Ignore case when completing file names and directories.
+
+	" Find all occurrences of a pattern in a file.
+	fun! s:findAll(pattern)
+		try
+			silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
+		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
+			echohl Warnings
+			echomsg "No match"
+			echohl None
+		endtry
+		lwindow
+	endf
+
+	" Find all occurrences of a pattern in all open files.
+	fun! s:multiFind(pattern)
+		" Get the list of open files
+		let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
+		try
+			silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
+		catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
+			echohl Warnings
+			echomsg "No match"
+			echohl None
+		endtry
+		cwindow
+	endf
 
 	" Find all in current buffer.
 	command! -nargs=1 FindAll call s:findAll(<q-args>)
