@@ -83,11 +83,37 @@ background for themes that support both.
     [Limelight](https://github.com/junegunn/limelight.vim)).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**.
-  And yes, it supports
-  [Powerline](https://github.com/Lokaltog/vim-powerline/blob/develop/fontpatcher/README.rst)
-  fonts (enable with `:EnablePatchedFont`)!
+  And yes, it supports Powerline fonts!
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
+
+
+### Using patched fonts
+
+You may enable or disable the use of fancy symbols at any time with
+`:EnablePatchedFont` and `:DisablePatchedFont`, respectively. To make the
+change permanent, put the following line in `~/.vim/vimrc_extra.vim`:
+
+    EnablePatchedFont
+
+To create a patched version of any of your fonts, you may use this [font
+patcher](https://github.com/powerline/fontpatcher). Just make a backup copy of
+the font, and then:
+
+    fontforge -script ./scripts/powerline-fontpatcher MyFont.ttf
+
+Note that in some cases you may need to adjust the line spacing to have the
+symbols (especially the arrows) properly aligned. If you use OS X Terminal,
+this can be done in Preferences > Text > Change…
+
+**Important:** not all patched fonts are born equal! Some define the special
+glyphs only in the range `U+2B60`–`U+2BFF`: *these will not work*. The special
+glyphs must be stored in `U+E0B0`–`U+E0BF` (this is also the range that [Vim
+Airline](https://github.com/bling/vim-airline) uses). To test whether your
+patched font is compatible, you may type some of those Unicode codes in Vim:
+for example, type `i«C-v»ue0b0` (`«C-v»` is Control-V, the
+rest is typed literally). If you see a triangle, you're good to go!
+
 
 ### Useful resources
 
