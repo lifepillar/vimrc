@@ -879,10 +879,21 @@
 		let g:syntastic_stl_format = '  %E{Err: %fe}%B{ }%W{Warn: %fw} '
 	" }}
 	" Tagbar {{
+		fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
+			if a:current
+				return '%#NormalMode# Tagbar %#SepMode#%{g:left_sep_sym}%* ' . a:fname . ' %= '
+							\ . '%#SepMode#%{g:tagbar_sort ? g:right_sep_sym : ""}%#NormalMode#'
+							\ . (g:tagbar_sort ? ' By name ') . '%*'
+			else
+				return '%#StatusLineNC# Tagbar ' . a:fname
+			endif
+		endf
+
 		" Toggle tag bar
 		nnoremap <silent> <f9> :TagbarToggle<cr>
 		let g:tagbar_autofocus = 1
 		let g:tagbar_iconchars = ['▸', '▾']
+		let g:tagbar_status_func = 'TagbarStatusLine'
 	" }}
 	" UltiSnips {{
 		let g:UltiSnipsExpandTrigger="<c-j>"
