@@ -545,7 +545,7 @@
 	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
 	command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
-	EnablePatchedFont
+	DisablePatchedFont " Override in vimrc_extra.vim (see below)
 	EnableStatusLine
 " }}
 " Tabline {{
@@ -758,9 +758,10 @@
 		endf
 	" }}
 
-	" Default theme
-	if filereadable($HOME . '/.vim/default-theme.vim')
-		execute 'source' $HOME . '/.vim/default-theme.vim'
+	" Extra settings.
+	" If this file exists, it should at least define the color scheme.
+	if filereadable($HOME . '/.vim/vimrc_extra.vim')
+		execute 'source' $HOME . '/.vim/vimrc_extra.vim'
 	else
 		colorscheme solarized
 	endif
