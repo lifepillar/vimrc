@@ -799,9 +799,10 @@
 		" Argument: len
 		"           a:1
 		fun! CtrlP_Progress(...)
-			let l:len = '%#Warnings# ' . a:1 . ' %*'
-			let l:dir = ' %=%<%#Warnings#' . getcwd() . ' %*'
-			return l:len . l:dir
+			execute "hi! link CurrMode Warnings"
+			call s:updateSepMode()
+			let g:cached_mode = ""  " Force update of SepMode when leaving CtrlP
+			return '%#Warnings# ' . a:1 . ' %#SepMode#%{g:left_sep_sym}%* %= %#SepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
 		endf
 	" }}
 	" Easy Align {{
