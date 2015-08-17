@@ -811,7 +811,7 @@
 	" }}
 	" Goyo {{
 		" Toggle distraction-free mode
-		nnoremap <silent> <f7> :Goyo<cr>
+		nnoremap <silent> <leader>f :Goyo<cr>
 		fun! s:goyoEnter()
 			if has('gui_macvim')
 				"set fullscreen
@@ -891,7 +891,7 @@
 		endf
 
 		" Toggle tag bar
-		nnoremap <silent> <f9> :TagbarToggle<cr>
+		nnoremap <silent> <leader>t :TagbarToggle<cr>
 		let g:tagbar_autofocus = 1
 		let g:tagbar_iconchars = ['▸', '▾']
 		let g:tagbar_status_func = 'TagbarStatusLine'
@@ -905,7 +905,7 @@
 		let g:undotree_SetFocusWhenToggle = 1
 		let g:undotree_TreeNodeShape = '◦'
 		" Toggle undo tree
-		nnoremap <silent> <f8> :UndotreeToggle<cr>
+		nnoremap <silent> <leader>u :UndotreeToggle<cr>
 	" }}
 	" YouCompleteMe {{
 		let g:ycm_autoclose_preview_window_after_completion = 1

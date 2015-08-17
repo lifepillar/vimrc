@@ -396,7 +396,7 @@ Press q to dismiss, <Tab> to lose focus
   \/           * Search
  --
   Goyo
-  «F7»         * Distraction-free mode
+  \f           * Distraction-free mode
  --
   Ledger
   «Tab»      *IV Autocomplete or align
@@ -430,7 +430,7 @@ Press q to dismiss, <Tab> to lose focus
   dst          - Remove enclosing tags
  --
   Tagbar
-  «F9»         * Toggle Tagbar
+  \t           * Toggle Tagbar
  --
   UltiSnips
   «C-j»       *I Trigger snippet
@@ -438,7 +438,7 @@ Press q to dismiss, <Tab> to lose focus
   «C-k»        I Go to prev placeholder
  --
   Undotree
-  «F8»         * Toggle Undotree
+  \u           * Toggle Undotree
  --
   Unimpaired
   [b           - Edit prev file
