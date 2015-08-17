@@ -669,7 +669,7 @@
 					\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
 					\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
 					\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
-		return mode()
+		return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
 	endf
 
 	fun! SetupStl(nr)
@@ -685,12 +685,13 @@
 		"
 		" In a %{} context, winnr() always refers to the window to which the
 		" status line being drawn belongs.
-		execute 'hi! link CurrMode ' ((winnr() == a:nr) ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
+		execute 'hi! link CurrMode' (winnr() == a:nr ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
 		return get(extend(w:, {
+					\ "active": winnr() == a:nr,
+					\ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateSepMode() : mode(),
 					\ "bufnr": winbufnr(winnr()),
-					\ "active": (winnr() == a:nr),
-					\ "mode": (winnr() == a:nr && mode() !=# get(w:, "mode", "")) ? s:updateSepMode() : mode(),
-					\ "ft": getbufvar(winbufnr(winnr()), "&ft"), "winwd": winwidth(winnr())
+					\ "ft": getbufvar(winbufnr(winnr()), "&ft"),
+					\ "winwd": winwidth(winnr())
 					\ }), "", "")
 	endf
 
