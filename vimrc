@@ -664,6 +664,8 @@
 		call setpos('.', l:save_cursor) " Restore cursor position
 	endf
 
+	" Updates the highlight group for the symbols that separate the different
+	" parts of the status line.
 	fun! s:updateSepMode()
 		execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
 					\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
