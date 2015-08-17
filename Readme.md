@@ -29,7 +29,7 @@ Terminal.app:
 - [Pencil](https://github.com/reedes/vim-colors-pencil) (light/dark)
 
 Solarized is the default theme. To use a different theme, put a file called
-`default-theme.vim` inside `.vim` and load your color scheme there.
+`vimrc_extra.vim` inside `.vim` and load your color scheme there.
 
 The 16 color version of Solarized is used, so your terminal **must** be
 configured to use Solarized, too! The other themes are 256 color themes, which
@@ -78,9 +78,14 @@ background for themes that support both.
 
 - A **cheat sheet** always at hand with `\?`.
 - Foldable and thoroughly commented `vimrc`.
-- **Distraction-free mode** (toggle with `<F7>`).
+- **Distraction-free mode** (courtesy of
+    [Goyo](https://github.com/junegunn/goyo.vim) and
+    [Limelight](https://github.com/junegunn/limelight.vim)).
 - Keeps the edited line vertically centered.
-- Handcrafted, collapsible, **"plugin-free" status line**.
+- Handcrafted, collapsible, fully customizable, **"plugin-free" status line**.
+  And yes, it supports
+  [Powerline](https://github.com/Lokaltog/vim-powerline/blob/develop/fontpatcher/README.rst)
+  fonts (enable with `:EnablePatchedFont`)!
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
 
