@@ -483,10 +483,11 @@
 	" Updates the highlight group for the symbols that separate the different
 	" parts of the status line.
 	fun! s:updateSepMode()
-		execute 'hi! SepMode ctermfg=' . s:synTermAttr("CurrMode", s:synTermAttr("CurrMode", "reverse") ? "fg" : "bg")
-					\ 'ctermbg=' . s:synTermAttr("StatusLine", s:synTermAttr("StatusLine", "reverse") ? "fg" : "bg")
-					\ 'guifg=' . s:synGuiAttr("CurrMode", s:synGuiAttr("CurrMode", "reverse") ? "fg" : "bg")
-					\ 'guibg=' . s:synGuiAttr("StatusLine", s:synGuiAttr("StatusLine", "reverse") ? "fg" : "bg")
+		execute 'hi! SepMode'
+					\ 'ctermfg=' . s:getTermBackground("CurrMode")
+					\ 'ctermbg=' . s:getTermBackground("StatusLine")
+					\ 'guifg=' . s:getGuiBackground("CurrMode")
+					\ 'guibg=' . s:getGuiBackground("StatusLine")
 		return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
 	endf
 
