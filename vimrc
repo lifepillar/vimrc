@@ -553,7 +553,6 @@
 	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
 	command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
-	DisablePatchedFont " Override in vimrc_extra.vim (see below)
 	EnableStatusLine
 " }}
 " Tabline {{
@@ -773,6 +772,8 @@
 			call s:customizeTheme_Tomorrow()
 		endf
 	" }}
+
+	DisablePatchedFont " Override in vimrc_extra.vim (see below)
 
 	" Extra settings.
 	" If this file exists, it should at least define the color scheme.
