@@ -144,6 +144,32 @@
 		return s:synGuiAttr(a:hl, s:synGuiAttr(a:hl, "reverse") ? "fg" : "bg")
 	endf
 
+	fun! s:enablePatchedFont()
+		let g:left_sep_sym = "\ue0b0"
+		let g:right_sep_sym = "\ue0b2"
+		let g:lalt_sep_sym = "\ue0b1"
+		let g:ralt_sep_sym = "\ue0b3"
+		let g:ro_sym = "\ue0a2"
+		let g:ma_sym = "⚔"
+		let g:mod_sym = "◇"
+		let g:linecol_sym = "\ue0a1"
+		let g:branch_sym = "\ue0a0"
+		let g:pad = " "
+	endf
+
+	fun! s:disablePatchedFont()
+		let g:left_sep_sym = ""
+		let g:right_sep_sym = ""
+		let g:lalt_sep_sym = ""
+		let g:ralt_sep_sym = ""
+		let g:ro_sym = "✗"
+		let g:ma_sym = "⚔"
+		let g:mod_sym = "◇"
+		let g:linecol_sym = ""
+		let g:branch_sym = ""
+		let g:pad = ""
+	endf
+
 	fun! s:cheatsheet()
 		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
 		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
@@ -433,35 +459,6 @@
 
 	let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
 
-	fun! s:enablePatchedFont()
-		let g:left_sep_sym = "\ue0b0"
-		let g:right_sep_sym = "\ue0b2"
-		let g:lalt_sep_sym = "\ue0b1"
-		let g:ralt_sep_sym = "\ue0b3"
-		let g:ro_sym = "\ue0a2"
-		let g:ma_sym = "⚔"
-		let g:mod_sym = "◇"
-		let g:linecol_sym = "\ue0a1"
-		let g:branch_sym = "\ue0a0"
-		let g:pad = " "
-	endf
-
-	fun! s:disablePatchedFont()
-		let g:left_sep_sym = ""
-		let g:right_sep_sym = ""
-		let g:lalt_sep_sym = ""
-		let g:ralt_sep_sym = ""
-		let g:ro_sym = "✗"
-		let g:ma_sym = "⚔"
-		let g:mod_sym = "◇"
-		let g:linecol_sym = ""
-		let g:branch_sym = ""
-		let g:pad = ""
-	endf
-
-	command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
-	command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
-
 	" Update trailing space and mixed indent warnings for the current buffer.
 	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
 	fun! s:updateWarnings()
@@ -620,6 +617,8 @@
 	endf
 
 	command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
+	command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
+	command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
 
 	" Solarized {{
 		let g:solarized_bold = 1
