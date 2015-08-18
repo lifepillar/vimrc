@@ -134,6 +134,16 @@
 		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "gui")
 	endf
 
+	" Return the real background color of the given highlight group
+	fun! s:getTermBackground(hl)
+		return s:synTermAttr(a:hl, s:synTermAttr(a:hl, "reverse") ? "fg" : "bg")
+	endf
+
+	" Ditto, for GUI.
+	fun! s:getGuiBackground(hl)
+		return s:synGuiAttr(a:hl, s:synGuiAttr(a:hl, "reverse") ? "fg" : "bg")
+	endf
+
 	fun! s:cheatsheet()
 		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
 		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
