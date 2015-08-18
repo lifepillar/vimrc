@@ -616,13 +616,11 @@
 		let g:solarized_underline = 0
 
 		fun! s:customizeTheme_solarized()
-			hi clear Title
 			hi clear Folded
 			hi clear SignColumn
+			hi clear VertSplit
+			hi clear Search
 			hi! link VertSplit LineNr
-			hi! link TabLineSel Normal
-			hi! link TabLine StatusLine
-			hi! link TabLineFill TabLine
 			hi! link Search VisualMode
 			hi ErrorMsg ctermbg=1 ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
 			if &background ==# 'dark'
@@ -633,7 +631,6 @@
 				let g:limelight_conceal_ctermfg = 14
 			endif
 
-			" Status line
 			if &background ==# 'dark'
 				hi StatusLine ctermbg=7 ctermfg=10 guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
 				hi StatusLineNC ctermbg=10 ctermfg=0 guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
@@ -651,51 +648,30 @@
 		" }}
 	" Gruvbox {{
 		fun! s:customizeTheme_gruvbox()
-			hi! link TabLineSel Normal
-			hi! link Tabline StatusLine
-			hi! link TabLineFill TabLine
-			hi! link NormalMode Cursor
 		endf
 	" }}
 	" Jellybeans {{
 		fun! s:customizeTheme_jellybeans()
-			hi! link TabLineSel Normal
-			hi! link TabLine StatusLine
-			hi! link TabLineFill TabLine
-			hi! link NormalMode Pmenu
 		endf
 	" }}
 	" PaperColor {{
 		fun! s:customizeTheme_PaperColor()
 			set fillchars=vert:\|,fold:\·
-			hi clear Title
 			hi! link Search VisualMode
-			" Default status line is boldface. I don't want that.
-			hi StatusLine term=NONE cterm=NONE gui=NONE
 			if &background ==# 'light'
-				hi! link TabLine StatusLine
-				hi! link TabLineSel Normal
-				" Status line
 				hi InsertMode ctermbg=31 ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
 				hi ReplaceMode ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
-			else
-				hi! link TabLine TabLineFill
-				hi! link TabLineSel Normal
 			endif
 		endf
 	" }}
 	" Pencil {{
 	fun! s:customizeTheme_pencil()
 		if &background ==# 'dark'
-			hi! link TabLine StatusLineNC
-			hi! link TabLineSel CursorLineNr
-			hi! link TabLineFill TabLine
 			hi NormalMode ctermbg=245 ctermfg=7 guibg=#636363 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
 			hi InsertMode ctermbg=24 ctermfg=7 guibg=#005f87 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
 			hi ReplaceMode ctermbg=166 ctermfg=7 guibg=#d75f5f guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
 			hi Warnings ctermbg=160 ctermfg=7 guibg=#c30771 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
 		else
-			hi! link TabLineSel Title
 			hi NormalMode ctermbg=241 ctermfg=254 guibg=#545454 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
 			hi InsertMode ctermbg=24 ctermfg=254 guibg=#005f87 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
 			hi ReplaceMode ctermbg=166 ctermfg=254 guibg=#d75f5f guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
@@ -717,10 +693,6 @@
 
 		fun! s:customizeTheme_seoul256()
 			hi! link VertSplit StatusLineNC
-			hi! link TabLineSel Normal
-			hi! link TabLine DiffChange
-			hi! link TabLineFill TabLine
-			" Status line
 			hi! link NormalMode StatusLineNC
 			hi! link InsertMode PmenuSbar
 			hi! link ReplaceMode Search
@@ -728,10 +700,6 @@
 		endf
 
 		fun! s:customizeTheme_seoul256_light()
-			hi! link TabLineSel Normal
-			hi! link TabLine LineNr
-			hi! link TabLineFill TabLine
-			" Status line
 			hi NormalMode ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE cterm=NONE gui=NONE
 			hi InsertMode ctermbg=65 ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
 			hi! link ReplaceMode WildMenu
