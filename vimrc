@@ -558,16 +558,52 @@
 " }}
 " Tabline {{
 	" See :h tabline
+
+	" Define the highlight groups for the separator symbols in the tabline.
+	fun! s:setTabLineSepGroups()
+		execute 'hi! TabSepPreSel'
+					\ 'ctermfg=' . s:getTermBackground("TabLine")
+					\ 'ctermbg=' . s:getTermBackground("TabLineSel")
+		execute 'hi! TabSepSel'
+					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
+					\ 'ctermbg=' . s:getTermBackground("TabLine")
+		execute 'hi! TabSepFill'
+				\ 'ctermfg=' . s:getTermBackground("TabLine")
+				\ 'ctermbg=' . s:getTermBackground("TabLineFill")
+		execute 'hi! TabSepSelFill'
+					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
+					\ 'ctermbg=' . s:getTermBackground("TabLineFill")
+		return s:getTermBackground("TabLine") == s:getTermBackground("TabLineFill")
+	endf
+
 	fun! BuildTabLabel(nr)
 		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
-					\ . (get(extend(t:, {"tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")}), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+					\ . (get(extend(t:, {
+					\ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
+					\ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+	endf
+
+	fun! s:tabLineSeparator(n)
+		return (a:n + 1 == tabpagenr() ?
+				\ "%#TabSepPreSel#" . g:left_sep_sym :
+				\ (a:n == tabpagenr() ?
+					\ (a:n == tabpagenr('$') ?
+					\ "%#TabSepSelFill#" . g:left_sep_sym :
+					\ "%#TabSepSel#" . g:left_sep_sym
+					\ ) :
+					\ (a:n != tabpagenr('$') || s:two_color_tabline ?
+						\ "%#TabSepSel#" . g:lalt_sep_sym :
+						\ "%#TabSepFill#" . g:left_sep_sym
+					\ )
+				\ )
+			\ )
 	endf
 
 	fun! BuildTabLine()
-		return join(map(range(1, tabpagenr('$')),
-					\ '((v:val == tabpagenr()) ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'), '')
-					\ . "%#TabLineFill#%T"
-					\ . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
+		return join(map(
+					\ range(1, tabpagenr('$')),
+					\ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}" . s:tabLineSeparator(v:val)'
+					\), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
 	endf
 
 	set tabline=%!BuildTabLine()
@@ -589,6 +625,7 @@
 		hi! link ReplaceMode DiffChange
 		hi! link CommandMode PmenuSel
 		hi! link Warnings ErrorMsg
+		let s:two_color_tabline = s:setTabLineSepGroups()
 		let s:cached_mode = ""  " Force updating status line highlight groups
 		" Set defaults for vertical separator and fold separator
 		set fillchars=vert:\ ,fold:\·
@@ -633,6 +670,7 @@
 			hi! link VertSplit LineNr
 			hi! link Search VisualMode
 			hi ErrorMsg ctermbg=1 ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
+			call s:setTabLineSepGroups()
 			if &background ==# 'dark'
 				hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold cterm=bold gui=bold
 				let g:limelight_conceal_ctermfg = 10
