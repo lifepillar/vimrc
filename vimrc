@@ -170,6 +170,27 @@
 		let g:pad = ""
 	endf
 
+	" Update trailing space and mixed indent warnings for the current buffer.
+	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
+	fun! s:updateWarnings()
+		let l:save_cursor = getcurpos()
+		call cursor(1,1) " Start search from the beginning of the file
+		let l:trail = search('\s$', 'nw')
+		let l:spaces = search('\v^\s* ', 'nw')
+		let l:tabs = search('\v^\s*\t', 'nw')
+		if l:trail != 0
+			let b:stl_warnings = '  Trailing space ('.trail.') '
+			if l:spaces != 0 && l:tabs != 0
+				let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
+			endif
+		elseif l:spaces != 0 && l:tabs != 0
+			let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
+		else
+			unlet! b:stl_warnings
+		endif
+		call setpos('.', l:save_cursor) " Restore cursor position
+	endf
+
 	fun! s:cheatsheet()
 		botright vert 40sview ${HOME}/.vim/cheatsheet.txt
 		setlocal bufhidden=wipe nobuflisted noswapfile nowrap
@@ -447,185 +468,23 @@
 		set transparency=4
 	endif
 " }}
-" Status line {{
-	" See :h mode() (some of these are never used in the status line)
-	let g:mode_map = {
-				\ 'n':  ['NORMAL',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['VISUAL',  'VisualMode' ],
-				\ 'V':  ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
-				\ 'S':  ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
-				\ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
-				\ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
-				\ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
-
-	let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
-
-	" Update trailing space and mixed indent warnings for the current buffer.
-	" See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-	fun! s:updateWarnings()
-		let l:save_cursor = getcurpos()
-		call cursor(1,1) " Start search from the beginning of the file
-		let l:trail = search('\s$', 'nw')
-		let l:spaces = search('\v^\s* ', 'nw')
-		let l:tabs = search('\v^\s*\t', 'nw')
-		if l:trail != 0
-			let b:stl_warnings = '  Trailing space ('.trail.') '
-			if l:spaces != 0 && l:tabs != 0
-				let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
-			endif
-		elseif l:spaces != 0 && l:tabs != 0
-			let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
-		else
-			unlet! b:stl_warnings
-		endif
-		call setpos('.', l:save_cursor) " Restore cursor position
-	endf
-
-	" Updates the highlight group for the symbols that separate the different
-	" parts of the status line.
-	fun! s:updateSepMode()
-		execute 'hi! SepMode'
-					\ 'ctermfg=' . s:getTermBackground("CurrMode")
-					\ 'ctermbg=' . s:getTermBackground("StatusLine")
-					\ 'guifg=' . s:getGuiBackground("CurrMode")
-					\ 'guibg=' . s:getGuiBackground("StatusLine")
-		return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
-	endf
-
-	fun! SetupStl(nr)
-		" Setting highlight groups while computing the status line may cause the
-		" startup screen to disappear in MacVim. See:
-		"
-		"     https://github.com/powerline/powerline/issues/250
-		"
-		" I have experienced this issue under two circumstances:
-		" 1) you open a window in MacVim (File > New Window), then you open a
-		"    second window: the startup screen disappears in the first window.
-		" 2) After installing YouCompleteMe, it happens every time.
-		"
-		" In a %{} context, winnr() always refers to the window to which the
-		" status line being drawn belongs.
-		execute 'hi! link CurrMode' (winnr() == a:nr ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
-		return get(extend(w:, {
-					\ "active": winnr() == a:nr,
-					\ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateSepMode() : mode(),
-					\ "bufnr": winbufnr(winnr()),
-					\ "ft": getbufvar(winbufnr(winnr()), "&ft"),
-					\ "winwd": winwidth(winnr())
-					\ }), "", "")
-	endf
-
-	" Build the status line the way I want - no fat light plugins!
-	fun! BuildStatusLine(nr)
-		return '%{SetupStl('.a:nr.')}
-					\%#CurrMode# %{w:["active"] ? get(g:mode_map, mode(1), ["??????"])[0] . (&paste ? " PASTE" : "") : " "}
-					\ %#SepMode#%{w:["active"] ? g:left_sep_sym : ""}%*
-					\ %<%F
-					\ %{getbufvar(w:["bufnr"], "&modified") ? g:mod_sym : " "}
-					\ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
-					\ %=
-					\ %{w:["ft"]}
-					\ %{w:["winwd"] < 80 ? "" : " "
-					\ . getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
-					\ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
-					\ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
-					\ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
-					\%#CurrMode#%{w:["winwd"] < 60 ? "" : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
-					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings")) ? "" : b:stl_warnings}%*'
-	endf
-
-	fun! s:enableStatusLine()
-		augroup status
-			autocmd!
-			autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
-		augroup END
-		let g:default_stl = &statusline
-		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
-	endf
-
-	fun! s:disableStatusLine()
-		let &statusline = g:default_stl
-		augroup status
-			autocmd!
-		augroup END
-		augroup! status
-	endf
-
-	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
-	command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
-
-	EnableStatusLine
-" }}
-" Tabline {{
-	" See :h tabline
-
-	" Define the highlight groups for the separator symbols in the tabline.
-	fun! s:setTabLineSepGroups()
-		execute 'hi! TabSepPreSel'
-					\ 'ctermfg=' . s:getTermBackground("TabLine")
-					\ 'ctermbg=' . s:getTermBackground("TabLineSel")
-		execute 'hi! TabSepSel'
-					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
-					\ 'ctermbg=' . s:getTermBackground("TabLine")
-		execute 'hi! TabSepFill'
-				\ 'ctermfg=' . s:getTermBackground("TabLine")
-				\ 'ctermbg=' . s:getTermBackground("TabLineFill")
-		execute 'hi! TabSepSelFill'
-					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
-					\ 'ctermbg=' . s:getTermBackground("TabLineFill")
-		return s:getTermBackground("TabLine") == s:getTermBackground("TabLineFill")
-	endf
-
-	fun! BuildTabLabel(nr)
-		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
-					\ . (get(extend(t:, {
-					\ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
-					\ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
-	endf
-
-	fun! s:tabLineSeparator(n)
-		return (a:n + 1 == tabpagenr() ?
-				\ "%#TabSepPreSel#" . g:left_sep_sym :
-				\ (a:n == tabpagenr() ?
-					\ (a:n == tabpagenr('$') ?
-					\ "%#TabSepSelFill#" . g:left_sep_sym :
-					\ "%#TabSepSel#" . g:left_sep_sym
-					\ ) :
-					\ (a:n != tabpagenr('$') || s:two_color_tabline ?
-						\ "%#TabSepSel#" . g:lalt_sep_sym :
-						\ "%#TabSepFill#" . g:left_sep_sym
-					\ )
-				\ )
-			\ )
-	endf
-
-	fun! BuildTabLine()
-		return join(map(
-					\ range(1, tabpagenr('$')),
-					\ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}" . s:tabLineSeparator(v:val)'
-					\), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
-	endf
-
-	set tabline=%!BuildTabLine()
-" }}
 " Themes {{
-	" To add support for a new theme, define a function called
-	" s:customizeTheme_<theme_name>. That function will be automatically called
-	" after the color scheme is activated. The function should at least define
-	" the hightlight groups for the status line, but it can also be used to
-	" override the theme's settings and highlight groups.
+	" To override the settings of a theme, define a function called
+	" s:customizeTheme_<theme_name>. Such function will be automatically called
+	" after the color scheme is activated.
 
-	" Set up highlight groups for the current theme and background.
 	fun! s:customizeTheme()
 		hi! link netrwMarkFile DiffAdd
-		" Set default values for the highlight groups of the status line
+		" Set the default values of our highlight groups for the status line
 		hi! link NormalMode StatusLine
 		hi! link InsertMode DiffText
 		hi! link VisualMode Visual
 		hi! link ReplaceMode DiffChange
 		hi! link CommandMode PmenuSel
 		hi! link Warnings ErrorMsg
+		" Define our highlight groups for the tab line
 		let s:two_color_tabline = s:setTabLineSepGroups()
-		let s:cached_mode = ""  " Force updating status line highlight groups
+		let s:cached_mode = ""  " Force updating SepMode
 		" Set defaults for vertical separator and fold separator
 		set fillchars=vert:\ ,fold:\·
 		if exists('g:colors_name')
@@ -654,6 +513,7 @@
 	endf
 
 	command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
+
 	command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
 	command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
 
@@ -772,16 +632,143 @@
 			call s:customizeTheme_Tomorrow()
 		endf
 	" }}
+" }}
+" Status line {{
+	" See :h mode() (some of these are never used in the status line)
+	let g:mode_map = {
+				\ 'n':  ['NORMAL',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['VISUAL',  'VisualMode' ],
+				\ 'V':  ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
+				\ 'S':  ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
+				\ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
+				\ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
+				\ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
 
-	DisablePatchedFont " Override in vimrc_extra.vim (see below)
+	let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
 
-	" Extra settings.
-	" If this file exists, it should at least define the color scheme.
-	if filereadable($HOME . '/.vim/vimrc_extra.vim')
-		execute 'source' $HOME . '/.vim/vimrc_extra.vim'
-	else
-		colorscheme solarized
-	endif
+	" Updates the highlight group for the symbols that separate the different
+	" parts of the status line.
+	fun! s:updateSepMode()
+		execute 'hi! SepMode'
+					\ 'ctermfg=' . s:getTermBackground("CurrMode")
+					\ 'ctermbg=' . s:getTermBackground("StatusLine")
+					\ 'guifg=' . s:getGuiBackground("CurrMode")
+					\ 'guibg=' . s:getGuiBackground("StatusLine")
+		return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
+	endf
+
+	fun! SetupStl(nr)
+		" Setting highlight groups while computing the status line may cause the
+		" startup screen to disappear in MacVim. See:
+		"
+		"     https://github.com/powerline/powerline/issues/250
+		"
+		" I have experienced this issue under two circumstances:
+		" 1) you open a window in MacVim (File > New Window), then you open a
+		"    second window: the startup screen disappears in the first window.
+		" 2) After installing YouCompleteMe, it happens every time.
+		"
+		" In a %{} context, winnr() always refers to the window to which the
+		" status line being drawn belongs.
+		execute 'hi! link CurrMode' (winnr() == a:nr ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
+		return get(extend(w:, {
+					\ "active": winnr() == a:nr,
+					\ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateSepMode() : mode(),
+					\ "bufnr": winbufnr(winnr()),
+					\ "ft": getbufvar(winbufnr(winnr()), "&ft"),
+					\ "winwd": winwidth(winnr())
+					\ }), "", "")
+	endf
+
+	" Build the status line the way I want - no fat light plugins!
+	fun! BuildStatusLine(nr)
+		return '%{SetupStl('.a:nr.')}
+					\%#CurrMode# %{w:["active"] ? get(g:mode_map, mode(1), ["??????"])[0] . (&paste ? " PASTE" : "") : " "}
+					\ %#SepMode#%{w:["active"] ? g:left_sep_sym : ""}%*
+					\ %<%F
+					\ %{getbufvar(w:["bufnr"], "&modified") ? g:mod_sym : " "}
+					\ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
+					\ %=
+					\ %{w:["ft"]}
+					\ %{w:["winwd"] < 80 ? "" : " "
+					\ . getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
+					\ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
+					\ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
+					\ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
+					\%#CurrMode#%{w:["winwd"] < 60 ? "" : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
+					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings")) ? "" : b:stl_warnings}%*'
+	endf
+
+	fun! s:enableStatusLine()
+		augroup status
+			autocmd!
+			autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
+		augroup END
+		let g:default_stl = &statusline
+		set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
+	endf
+
+	fun! s:disableStatusLine()
+		let &statusline = g:default_stl
+		augroup status
+			autocmd!
+		augroup END
+		augroup! status
+	endf
+
+	command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
+	command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
+" }}
+" Tabline {{
+	" See :h tabline
+
+	" Define the highlight groups for the separator symbols in the tabline.
+	fun! s:setTabLineSepGroups()
+		execute 'hi! TabSepPreSel'
+					\ 'ctermfg=' . s:getTermBackground("TabLine")
+					\ 'ctermbg=' . s:getTermBackground("TabLineSel")
+		execute 'hi! TabSepSel'
+					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
+					\ 'ctermbg=' . s:getTermBackground("TabLine")
+		execute 'hi! TabSepFill'
+				\ 'ctermfg=' . s:getTermBackground("TabLine")
+				\ 'ctermbg=' . s:getTermBackground("TabLineFill")
+		execute 'hi! TabSepSelFill'
+					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
+					\ 'ctermbg=' . s:getTermBackground("TabLineFill")
+		return s:getTermBackground("TabLine") == s:getTermBackground("TabLineFill")
+	endf
+
+	fun! BuildTabLabel(nr)
+		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
+					\ . (get(extend(t:, {
+					\ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
+					\ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+	endf
+
+	fun! s:tabLineSeparator(n)
+		return (a:n + 1 == tabpagenr() ?
+				\ "%#TabSepPreSel#" . g:left_sep_sym :
+				\ (a:n == tabpagenr() ?
+					\ (a:n == tabpagenr('$') ?
+					\ "%#TabSepSelFill#" . g:left_sep_sym :
+					\ "%#TabSepSel#" . g:left_sep_sym
+					\ ) :
+					\ (a:n != tabpagenr('$') || s:two_color_tabline ?
+						\ "%#TabSepSel#" . g:lalt_sep_sym :
+						\ "%#TabSepFill#" . g:left_sep_sym
+					\ )
+				\ )
+			\ )
+	endf
+
+	fun! BuildTabLine()
+		return join(map(
+					\ range(1, tabpagenr('$')),
+					\ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}" . s:tabLineSeparator(v:val)'
+					\), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
+	endf
+
+	set tabline=%!BuildTabLine()
 " }}
 " Plugins {{
 	" CtrlP {{
@@ -937,5 +924,18 @@
 	" YouCompleteMe {{
 		let g:ycm_autoclose_preview_window_after_completion = 1
 	" }}
+" }}
+" Init {{
+
+	DisablePatchedFont
+	EnableStatusLine
+
+	" Extra settings.
+	" If this file exists, it should at least define the color scheme.
+	if filereadable($HOME . '/.vim/vimrc_extra.vim')
+		execute 'source' $HOME . '/.vim/vimrc_extra.vim'
+	else
+		colorscheme solarized
+	endif
 " }}
 
