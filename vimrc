@@ -674,31 +674,31 @@
     " In a %{} context, winnr() always refers to the window to which the
     " status line being drawn belongs.
     return get(extend(w:, {
-          \ "active": winnr() == a:nr,
-          \ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateHighlightGroups() : mode(),
-          \ "bufnr": winbufnr(winnr()),
-          \ "winwd": winwidth(winnr())
+          \ "lf_active": winnr() == a:nr,
+          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateHighlightGroups() : mode(),
+          \ "lf_bufnr": winbufnr(winnr()),
+          \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
   endf
 
   " Build the status line the way I want - no fat light plugins!
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
-          \%#CurrMode#%{w:["active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
-          \%#SepMode#%{w:["active"] ? g:left_sep_sym . " " : ""}%*
-          \%{w:["active"] ? ""  : "     "} %<%F
-          \ %{getbufvar(w:["bufnr"], "&modified") ? g:mod_sym : " "}
-          \ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
+          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
+          \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym . " " : ""}%*
+          \%{w:["lf_active"] ? ""  : "     "} %<%F
+          \ %{getbufvar(w:["lf_bufnr"], "&modified") ? g:mod_sym : " "}
+          \ %{getbufvar(w:["lf_bufnr"], "&modifiable") ? (getbufvar(w:["lf_bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
           \ %=
-          \ %{getbufvar(w:["bufnr"], "&ft")}
-          \ %{w:["winwd"] < 80 ? "" : " "
-          \ . getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
-          \ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
-          \ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
-          \ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
-          \%#CurrMode#%{w:["active"] ? (w:["winwd"] < 60 ? ""
+          \ %{getbufvar(w:["lf_bufnr"], "&ft")}
+          \ %{w:["lf_winwd"] < 80 ? "" : " "
+          \ . getbufvar(w:["lf_bufnr"], "&fenc") . (getbufvar(w:["lf_bufnr"], "&bomb") ? ",BOM" : "") . " "
+          \ . get(g:ff_map, getbufvar(w:["lf_bufnr"], "&ff"), "? (Unknown)") . " "
+          \ . (getbufvar(w:["lf_bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["lf_bufnr"], "&tabstop")}
+          \ %#SepMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:right_sep_sym : ""}
+          \%#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
-          \%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
+          \%#Warnings#%{w:["lf_active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
   endf
 
   fun! s:enableStatusLine()
