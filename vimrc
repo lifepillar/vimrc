@@ -765,7 +765,7 @@
 		return join(map(
 					\ range(1, tabpagenr('$')),
 					\ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}" . s:tabLineSeparator(v:val)'
-					\), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%#TabLine#%999X✕ " : "")
+					\), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%999X✕ " : "")
 	endf
 
 	set tabline=%!BuildTabLine()
