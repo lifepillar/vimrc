@@ -787,7 +787,7 @@
 			if a:1 ==# 'prt'
 				execute "hi! link CurrMode InsertMode"
 				call s:updateSepMode()
-				let g:cached_mode = ""  " Force update of SepMode when leaving CtrlP
+				let g:cached_mode = ""  " Force update of highlight groups when leaving CtrlP
 				return '%#InsertMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
 							\ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#InsertMode#'
 							\ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
@@ -805,7 +805,7 @@
 		fun! CtrlP_Progress(...)
 			execute "hi! link CurrMode Warnings"
 			call s:updateSepMode()
-			let g:cached_mode = ""  " Force update of SepMode when leaving CtrlP
+			let g:cached_mode = ""  " Ditto
 			return '%#Warnings# ' . a:1 . ' %#SepMode#%{g:left_sep_sym}%* %= %#SepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
 		endf
 	" }}
