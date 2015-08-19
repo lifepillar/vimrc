@@ -125,14 +125,13 @@
 	endf
 
 	" Return the value of the given attribute for the given highlight group.
-	" Mode is either "cterm" or "gui".
-	fun! s:synAttr(hl, attr, mode)
-		return synIDattr(synIDtrans(hlID(a:hl)), a:attr, a:mode)
+	fun! s:synAttr(hl, attr)
+		return synIDattr(synIDtrans(hlID(a:hl)), a:attr)
 	endf
 
 	" Return the real background color of the given highlight group.
-	fun! s:getBackground(hl, mode)
-		return s:synAttr(a:hl, s:synAttr(a:hl, "reverse", a:mode) ? "fg" : "bg", a:mode)
+	fun! s:getBackground(hl)
+		return s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg")
 	endf
 
 	" Define or overwrite a highlight group hl using the following rule: the
@@ -142,8 +141,8 @@
 	" in the tab line.
 	fun! s:setTransitionGroup(hl,fgHl, bgHl)
 		execute 'hi! '. a:hl . (has("gui_macvim") ?
-					\ ' guifg=' . s:getBackground(a:fgHl, "gui") . ' guibg=' . s:getBackground(a:bgHl, "gui") :
-					\ ' ctermfg=' . s:getBackground(a:fgHl, "cterm") . ' ctermbg=' . s:getBackground(a:bgHl, "cterm"))
+					\ ' guifg=' . s:getBackground(a:fgHl) . ' guibg=' . s:getBackground(a:bgHl) :
+					\ ' ctermfg=' . s:getBackground(a:fgHl) . ' ctermbg=' . s:getBackground(a:bgHl))
 	endf
 
 	fun! s:enablePatchedFont()
@@ -730,8 +729,7 @@
 		call s:setTransitionGroup("TabSepSel", "TabLineSel", "TabLine")
 		call s:setTransitionGroup("TabSepFill", "TabLine", "TabLineFill")
 		call s:setTransitionGroup("TabSepSelFill", "TabLineSel", "TabLineFill")
-		" We assume that if this holds true for cterm, it holds true for gui, too:
-		return s:getBackground("TabLine", "cterm") == s:getBackground("TabLineFill", "cterm")
+		return s:getBackground("TabLine") == s:getBackground("TabLineFill")
 	endf
 
 	fun! BuildTabLabel(nr)
