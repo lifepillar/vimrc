@@ -484,7 +484,7 @@
 		hi! link Warnings ErrorMsg
 		" Define our highlight groups for the tab line
 		let s:two_color_tabline = s:setTabLineSepGroups()
-		let s:cached_mode = ""  " Force updating SepMode
+		let g:cached_mode = ""  " Force updating SepMode
 		" Set defaults for vertical separator and fold separator
 		set fillchars=vert:\ ,fold:\·
 		if exists('g:colors_name')
@@ -508,7 +508,7 @@
 				return
 			endif
 		endif
-		let s:cached_mode = ""  " Force updating status line highlight groups
+		let g:cached_mode = ""  " Force updating status line highlight groups
 		let &background = (&background == 'dark') ? 'light' : 'dark'
 	endf
 
