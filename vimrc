@@ -726,19 +726,12 @@
 
 	" Define the highlight groups for the separator symbols in the tabline.
 	fun! s:setTabLineSepGroups()
-		execute 'hi! TabSepPreSel'
-					\ 'ctermfg=' . s:getTermBackground("TabLine")
-					\ 'ctermbg=' . s:getTermBackground("TabLineSel")
-		execute 'hi! TabSepSel'
-					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
-					\ 'ctermbg=' . s:getTermBackground("TabLine")
-		execute 'hi! TabSepFill'
-				\ 'ctermfg=' . s:getTermBackground("TabLine")
-				\ 'ctermbg=' . s:getTermBackground("TabLineFill")
-		execute 'hi! TabSepSelFill'
-					\ 'ctermfg=' . s:getTermBackground("TabLineSel")
-					\ 'ctermbg=' . s:getTermBackground("TabLineFill")
-		return s:getTermBackground("TabLine") == s:getTermBackground("TabLineFill")
+		call s:setTransitionGroup("TabSepPreSel", "TabLine", "TabLineSel")
+		call s:setTransitionGroup("TabSepSel", "TabLineSel", "TabLine")
+		call s:setTransitionGroup("TabSepFill", "TabLine", "TabLineFill")
+		call s:setTransitionGroup("TabSepSelFill", "TabLineSel", "TabLineFill")
+		" We assume that if this holds true for cterm, it holds true for gui, too:
+		return s:getBackground("TabLine", "cterm") == s:getBackground("TabLineFill", "cterm")
 	endf
 
 	fun! BuildTabLabel(nr)
