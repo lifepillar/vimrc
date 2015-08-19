@@ -650,12 +650,13 @@
 	" Updates the highlight group for the symbols that separate the different
 	" parts of the status line.
 	fun! s:updateSepMode()
-		execute 'hi! SepMode'
-					\ 'ctermfg=' . s:getTermBackground("CurrMode")
-					\ 'ctermbg=' . s:getTermBackground("StatusLine")
-					\ 'guifg=' . s:getGuiBackground("CurrMode")
-					\ 'guibg=' . s:getGuiBackground("StatusLine")
+		call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
 		return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
+	endf
+
+	fun! s:updateHighlightGroups()
+		execute 'hi! link CurrMode' get(g:mode_map, mode(1), ['','Warnings'])[1]
+		return s:updateSepMode()
 	endf
 
 	fun! SetupStl(nr)
@@ -671,10 +672,9 @@
 		"
 		" In a %{} context, winnr() always refers to the window to which the
 		" status line being drawn belongs.
-		execute 'hi! link CurrMode' (winnr() == a:nr ? get(g:mode_map, mode(1), ['','Warnings'])[1] : 'StatusLineNC')
 		return get(extend(w:, {
 					\ "active": winnr() == a:nr,
-					\ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateSepMode() : mode(),
+					\ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateHighlightGroups() : mode(),
 					\ "bufnr": winbufnr(winnr()),
 					\ "ft": getbufvar(winbufnr(winnr()), "&ft"),
 					\ "winwd": winwidth(winnr())
@@ -684,9 +684,9 @@
 	" Build the status line the way I want - no fat light plugins!
 	fun! BuildStatusLine(nr)
 		return '%{SetupStl('.a:nr.')}
-					\%#CurrMode# %{w:["active"] ? get(g:mode_map, mode(1), ["??????"])[0] . (&paste ? " PASTE" : "") : " "}
-					\ %#SepMode#%{w:["active"] ? g:left_sep_sym : ""}%*
-					\ %<%F
+					\%#CurrMode#%{w:["active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
+					\%#SepMode#%{w:["active"] ? g:left_sep_sym . " " : ""}%*
+					\%{w:["active"] ? ""  : "     "} %<%F
 					\ %{getbufvar(w:["bufnr"], "&modified") ? g:mod_sym : " "}
 					\ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
 					\ %=
@@ -696,8 +696,9 @@
 					\ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
 					\ . (getbufvar(w:["bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["bufnr"], "&tabstop")}
 					\ %#SepMode#%{w:["active"] && w:["winwd"] >= 60 ? g:right_sep_sym : ""}
-					\%#CurrMode#%{w:["winwd"] < 60 ? "" : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))}
-					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() : ""}%{(!w:["active"] || !exists("b:stl_warnings")) ? "" : b:stl_warnings}%*'
+					\%#CurrMode#%{w:["active"] ? (w:["winwd"] < 60 ? ""
+					\ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
+					\%#Warnings#%{w:["active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
 	endf
 
 	fun! s:enableStatusLine()
