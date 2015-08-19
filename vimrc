@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=3 ts=3 sts=0 noet tw=78 fo-=o fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " ---
 " For UTF-8 symbols to be displayed correctly (e.g., in the status line), you
