@@ -648,16 +648,10 @@
 
   let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
 
-  " Updates the highlight group for the symbols that separate the different
-  " parts of the status line.
-  fun! s:updateSepMode()
+  fun! s:updateHighlightGroups(newMode)
+    execute 'hi! link CurrMode' a:newMode
     call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
     return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
-  endf
-
-  fun! s:updateHighlightGroups()
-    execute 'hi! link CurrMode' get(g:mode_map, mode(1), ['','Warnings'])[1]
-    return s:updateSepMode()
   endf
 
   fun! SetupStl(nr)
@@ -675,7 +669,8 @@
     " status line being drawn belongs.
     return get(extend(w:, {
           \ "lf_active": winnr() == a:nr,
-          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateHighlightGroups() : mode(),
+          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ?
+          \            s:updateHighlightGroups(get(g:mode_map, mode(1), ['','Warnings'])[1]) : mode(),
           \ "lf_bufnr": winbufnr(winnr()),
           \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
@@ -781,15 +776,13 @@
     "            a:1    a:2      a:3       a:4  a:5   a:6  a:7
     fun! CtrlP_Main(...)
       if a:1 ==# 'prt'
-        execute "hi! link CurrMode InsertMode"
-        call s:updateSepMode()
+        call s:updateHighlightGroups("InsertMode")
         let g:cached_mode = ""  " Force update of highlight groups when leaving CtrlP
         return '%#InsertMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
               \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#InsertMode#'
               \ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
       else
-        execute "hi! link CurrMode VisualMode"
-        call s:updateSepMode()
+        call s:updateHighlightGroups("VisualMode")
         let g:cached_mode = ""  " Ditto
         return '%#VisualMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
               \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#VisualMode# select %*'
@@ -799,8 +792,7 @@
     " Argument: len
     "           a:1
     fun! CtrlP_Progress(...)
-      execute "hi! link CurrMode Warnings"
-      call s:updateSepMode()
+      call s:updateHighlightGroups("Warnings")
       let g:cached_mode = ""  " Ditto
       return '%#Warnings# ' . a:1 . ' %#SepMode#%{g:left_sep_sym}%* %= %#SepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
     endf
