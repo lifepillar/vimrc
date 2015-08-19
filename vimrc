@@ -702,7 +702,7 @@
 	endf
 
 	fun! s:enableStatusLine()
-		augroup status
+		augroup warnings
 			autocmd!
 			autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
 		augroup END
@@ -712,7 +712,7 @@
 
 	fun! s:disableStatusLine()
 		let &statusline = g:default_stl
-		augroup status
+		augroup warnings
 			autocmd!
 		augroup END
 		augroup! status
