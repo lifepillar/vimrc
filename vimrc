@@ -124,24 +124,26 @@
 		endfor
 	endf
 
-	" Return the cterm value of the given attribute for the given highlight group.
-	fun! s:synTermAttr(hlGroup, attr)
-		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "cterm")
+	" Return the value of the given attribute for the given highlight group.
+	" Mode is either "cterm" or "gui".
+	fun! s:synAttr(hl, attr, mode)
+		return synIDattr(synIDtrans(hlID(a:hl)), a:attr, a:mode)
 	endf
 
-	" Return the gui value of the given attribute for the given highlight group.
-	fun! s:synGuiAttr(hlGroup, attr)
-		return synIDattr(synIDtrans(hlID(a:hlGroup)), a:attr, "gui")
+	" Return the real background color of the given highlight group.
+	fun! s:getBackground(hl, mode)
+		return s:synAttr(a:hl, s:synAttr(a:hl, "reverse", a:mode) ? "fg" : "bg", a:mode)
 	endf
 
-	" Return the real background color of the given highlight group
-	fun! s:getTermBackground(hl)
-		return s:synTermAttr(a:hl, s:synTermAttr(a:hl, "reverse") ? "fg" : "bg")
-	endf
-
-	" Ditto, for GUI.
-	fun! s:getGuiBackground(hl)
-		return s:synGuiAttr(a:hl, s:synGuiAttr(a:hl, "reverse") ? "fg" : "bg")
+	" Define or overwrite a highlight group hl using the following rule: the
+	" foreground of hl is set equal to the background of fgHl; the background of
+	" hl is set equal to the background of bgHl. Highlight groups defined in
+	" this way are used as transition groups (separators) in the status line and
+	" in the tab line.
+	fun! s:setTransitionGroup(hl,fgHl, bgHl)
+		execute 'hi! '. a:hl . (has("gui_macvim") ?
+					\ ' guifg=' . s:getBackground(a:fgHl, "gui") . ' guibg=' . s:getBackground(a:bgHl, "gui") :
+					\ ' ctermfg=' . s:getBackground(a:fgHl, "cterm") . ' ctermbg=' . s:getBackground(a:bgHl, "cterm"))
 	endf
 
 	fun! s:enablePatchedFont()
