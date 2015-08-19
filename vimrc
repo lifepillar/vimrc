@@ -735,7 +735,8 @@
 	endf
 
 	fun! BuildTabLabel(nr)
-		return " " . a:nr . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
+		return " " . a:nr
+					\ . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
 					\ . (get(extend(t:, {
 					\ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
 					\ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
