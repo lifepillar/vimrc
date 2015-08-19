@@ -677,7 +677,6 @@
           \ "active": winnr() == a:nr,
           \ "mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ? s:updateHighlightGroups() : mode(),
           \ "bufnr": winbufnr(winnr()),
-          \ "ft": getbufvar(winbufnr(winnr()), "&ft"),
           \ "winwd": winwidth(winnr())
           \ }), "", "")
   endf
@@ -691,7 +690,7 @@
           \ %{getbufvar(w:["bufnr"], "&modified") ? g:mod_sym : " "}
           \ %{getbufvar(w:["bufnr"], "&modifiable") ? (getbufvar(w:["bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
           \ %=
-          \ %{w:["ft"]}
+          \ %{getbufvar(w:["bufnr"], "&ft")}
           \ %{w:["winwd"] < 80 ? "" : " "
           \ . getbufvar(w:["bufnr"], "&fenc") . (getbufvar(w:["bufnr"], "&bomb") ? ",BOM" : "") . " "
           \ . get(g:ff_map, getbufvar(w:["bufnr"], "&ff"), "? (Unknown)") . " "
