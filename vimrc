@@ -134,7 +134,6 @@
     return index(["-1",""], s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg")) < 0 ?
           \ s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg") :
           \ s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg")  " Fallback
-
   endf
 
   " Define or overwrite a highlight group hl using the following rule: the
