@@ -481,4 +481,5 @@ Press q to dismiss, <Tab> to lose focus
  :shell        - Open a shell
  :h hitest.vim - Help on highlight test
  :scriptnames  - List of loaded plugins
+ :autocmd      - List of autocommands
 
