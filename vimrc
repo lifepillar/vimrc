@@ -151,7 +151,7 @@
   " this way are used as transition groups (separators) in the status line and
   " in the tab line.
   fun! s:setTransitionGroup(hl,fgHl, bgHl)
-    execute 'hi! '. a:hl . (has("gui_macvim") ?
+    execute 'hi! '. a:hl . (has("gui_running") || (has("termtruecolor") && guicolors == 1) ?
           \ ' guifg=' . s:getBackground(a:fgHl) . ' guibg=' . s:getBackground(a:bgHl) :
           \ ' ctermfg=' . s:getBackground(a:fgHl) . ' ctermbg=' . s:getBackground(a:bgHl))
   endf
