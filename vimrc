@@ -887,13 +887,12 @@
   " }}
   " Tagbar {{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
-      if a:current
-        return '%#NormalMode# Tagbar %#SepMode#%{g:left_sep_sym}%* ' . a:fname . ' %= '
+      return a:current ?
+            \ '%#NormalMode# Tagbar %#SepMode#%{g:left_sep_sym}%* ' . a:fname . ' %= '
               \ . '%#SepMode#%{g:tagbar_sort ? g:right_sep_sym : ""}%#NormalMode#'
               \ . (g:tagbar_sort ? ' By name ' : '') . '%*'
-      else
-        return '%#StatusLineNC# Tagbar ' . a:fname
-      endif
+            \ :
+            \ '%#StatusLineNC# Tagbar ' . a:fname
     endf
 
     " Toggle tag bar
