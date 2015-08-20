@@ -1,6 +1,8 @@
 	fun! BuildHelpStatusLine(nr)
 		return '%{SetupStl('.a:nr.')}
-					\%#CurrMode# HELP %#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
+          \%#CurrMode#%{w:["lf_active"] ? "  HELP " : ""}
+          \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
+          \%{w:["lf_active"] ? "" : "  HELP"}
 					\ %<%f
 					\ %{getbufvar(w:["lf_bufnr"], "&modified") ? g:mod_sym : " "}
 					\ %{getbufvar(w:["lf_bufnr"], "&modifiable") ? (getbufvar(w:["lf_bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
