@@ -139,7 +139,10 @@
   fun! s:getBackground(hl)
     return index(["-1",""], s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg")) < 0 ?
           \ s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg") :
-          \ s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg")  " Fallback
+          \ (index(["-1",""], s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg")) < 0 ?
+          \ s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg") :
+          \ ((has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? '#FFFFFF' : 1)
+          \ )
   endf
 
   " Define or overwrite a highlight group hl using the following rule: the
