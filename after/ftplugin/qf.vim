@@ -1,7 +1,8 @@
 fun! BuildQuickfixStatusLine(nr)
   return '%{SetupStl('.a:nr.')}
-        \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
+        \%#CurrMode#%{w:["lf_active"] ? "  QUICKFIX " : ""}
         \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
+        \%{w:["lf_active"] ? "" : "  QUICKFIX"}
         \ %<%{get(w:, "quickfix_title", "")}
         \ %=
         \ %q
