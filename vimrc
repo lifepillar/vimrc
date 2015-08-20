@@ -277,6 +277,10 @@
 
   " Find all occurrences of a pattern in a file.
   fun! s:findAll(pattern)
+    if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
+      call s:warningMsg("Cannot search the quickfix window")
+      return
+    endif
     try
       silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
     catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
