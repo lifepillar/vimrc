@@ -60,6 +60,12 @@
   set noswapfile " Do not create swap files.
 " }}
 " Helper functions {{
+  fun! s:warningMsg(msg)
+    echohl ErrorMsg
+    echomsg a:msg
+    echohl NONE
+  endf
+
   " Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
   fun! s:setLocalTabWidth(w)
     let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
@@ -274,9 +280,7 @@
     try
       silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
     catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      echohl Warnings
-      echomsg "No match"
-      echohl None
+      call s:warningMsg("No match")
     endtry
     lwindow
   endf
@@ -288,9 +292,7 @@
     try
       silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
     catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      echohl Warnings
-      echomsg "No match"
-      echohl None
+      call s:warningMsg("No match")
     endtry
     cwindow
   endf
