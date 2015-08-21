@@ -131,19 +131,16 @@
     endfor
   endf
 
-  " Return the value of the given attribute for the given highlight group.
-  fun! s:synAttr(hl, attr)
-    return synIDattr(synIDtrans(hlID(a:hl)), a:attr)
-  endf
-
   " Return the real background color of the given highlight group.
   fun! s:getBackground(hl)
-    return index(["-1",""], s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg")) < 0 ?
-          \ s:synAttr(a:hl, s:synAttr(a:hl, "reverse") ? "fg" : "bg") :
-          \ (index(["-1",""], s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg")) < 0 ?
-          \ s:synAttr("Normal", s:synAttr(a:hl, "reverse") ? "fg" : "bg") :
-          \ ((has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? '#FFFFFF' : 1)
-          \ )
+    let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
+    if l:col == -1 || empty(l:col)  " First fallback
+      let l:col = synIDattr(synIDtrans(hlID("Normal")), synIDattr(synIDtrans(hlID("Normal")), "reverse") ? "fg" : "bg")
+      if l:col == -1 || empty(l:col) " Second fallback
+        return (has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? "#FFFFFF" : "1"
+      endif
+    endif
+    return l:col
   endf
 
   " Define or overwrite a highlight group hl using the following rule: the
