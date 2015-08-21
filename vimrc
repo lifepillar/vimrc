@@ -494,7 +494,7 @@
     hi! link Warnings ErrorMsg
     " Define our highlight groups for the tab line
     let s:two_color_tabline = s:setTabLineSepGroups()
-    let g:cached_mode = ""  " Force updating highlight groups
+    let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
     set fillchars=vert:\ ,fold:\·
     if exists('g:colors_name')
@@ -518,7 +518,7 @@
         return
       endif
     endif
-    let g:cached_mode = ""  " Force updating status line highlight groups
+    let g:lf_cached_mode = ""  " Force updating status line highlight groups
     let &background = (&background == 'dark') ? 'light' : 'dark'
   endf
 
@@ -658,7 +658,7 @@
   fun! s:updateHighlightGroups(newMode)
     execute 'hi! link CurrMode' a:newMode
     call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
-    return get(extend(g:, { "cached_mode": mode() }), "cached_mode")
+    return get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode")
   endf
 
   fun! SetupStl(nr)
@@ -676,7 +676,7 @@
     " status line being drawn belongs.
     return get(extend(w:, {
           \ "lf_active": winnr() == a:nr,
-          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "cached_mode", "")) ?
+          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "lf_cached_mode", "")) ?
           \            s:updateHighlightGroups(get(g:mode_map, mode(1), ['','Warnings'])[1]) : mode(),
           \ "lf_bufnr": winbufnr(winnr()),
           \ "lf_winwd": winwidth(winnr())
@@ -784,13 +784,13 @@
     fun! CtrlP_Main(...)
       if a:1 ==# 'prt'
         call s:updateHighlightGroups("InsertMode")
-        let g:cached_mode = ""  " Force update of highlight groups when leaving CtrlP
+        let g:lf_cached_mode = ""  " Force update of highlight groups when leaving CtrlP
         return '%#InsertMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
               \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#InsertMode#'
               \ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
       else
         call s:updateHighlightGroups("VisualMode")
-        let g:cached_mode = ""  " Ditto
+        let g:lf_cached_mode = ""  " Ditto
         return '%#VisualMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
               \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#VisualMode# select %*'
       endif
@@ -800,7 +800,7 @@
     "           a:1
     fun! CtrlP_Progress(...)
       call s:updateHighlightGroups("Warnings")
-      let g:cached_mode = ""  " Ditto
+      let g:lf_cached_mode = ""  " Ditto
       return '%#Warnings# ' . a:1 . ' %#SepMode#%{g:left_sep_sym}%* %= %#SepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
     endf
   " }}
@@ -840,7 +840,7 @@
       call s:dontSoftWrap()
       set showcmd
       Limelight!
-      let g:cached_mode = ""
+      let g:lf_cached_mode = ""
     endf
 
     autocmd! User GoyoEnter
