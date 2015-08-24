@@ -10,6 +10,8 @@ fun! s:ledger(args)
   execute 'ShellTop ' . g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args
   " Color negative numbers
   syntax match Macro /-\d\+\([,.]\d\+\)\+/
+  " Color improper percentages
+  syntax match Macro /\d\d\d\+%/
 endf
 
 command! -complete=shellcmd -nargs=+ Ledger call <sid>ledger(<q-args>)
