@@ -326,8 +326,10 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» v       - Split vertically
  «C-w» x       - Exchange windows
  «C-w» «C-x»
- «C-w» K       - Arrange horizontally
- «C-w» H       - Arrange vertically
+ «C-w» K       - Move to the very top
+ «C-w» J       - Move to the very bottom
+ «C-w» L       - Move to the far right
+ «C-w» H       - Move to the far left
  :ball         - One window per file
  «C-w» w       - Edit next window
  «C-w» «C-w»
