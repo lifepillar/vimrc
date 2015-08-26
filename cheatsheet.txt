@@ -26,7 +26,7 @@ Press q to dismiss, <Tab> to lose focus
 
   Notation used in the comments:
 
-  C    Type in Command (Ex) mode
+  C    Type in Command mode
   I    Type in Insert mode
   V    Type in Visual mode
   M    Motion (may be used with an
@@ -53,10 +53,12 @@ Press q to dismiss, <Tab> to lose focus
  :w            - Save file
  :w!           - Save read-only file
  :WW           * Save as root
- :wq           - Save and quit
- :wqa          - Save all and quit
+ :x            - Save and quit
+ ZZ            - Ditto
+ :xa           - Save all and exit Vim
  :q            - Quit
  :q!           - Quit without saving
+ ZQ            - Ditto
  :qa!          - Quit all without saving
  «C-g»         - File info
  :mks          - Save session
@@ -66,6 +68,7 @@ Press q to dismiss, <Tab> to lose focus
  :b«Spc»«Tab»  - Edit… (autocomplete)
  :bn           - Edit next file
  :bp           - Edit prev file
+ «C-^»         - Edit last edited file
  :bufdo ‹Cmd›  - Run cmd in all buffers
   Netrw
   %            - New file here
@@ -474,6 +477,8 @@ Press q to dismiss, <Tab> to lose focus
   :Wordy «Tab» - Load a Wordy dictionary
 ===
  Misc
+ q:            - Vim motions in Cmd mode
+ «C-f»         C Use Vim motions
  :cd ‹Path›    - Change directory
  :echo ‹Var›   - Show the value of ‹Var›
  :map          - View all mappings
