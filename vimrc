@@ -61,7 +61,7 @@
   set noswapfile " Do not create swap files.
 " }}
 " Helper functions {{
-  fun! WarningMessage(msg)
+  fun! s:warningMessage(msg)
     echohl ErrorMsg
     echomsg a:msg
     echohl NONE
@@ -279,13 +279,13 @@
   " Find all occurrences of a pattern in a file.
   fun! s:findAll(pattern)
     if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
-      call WarningMessage("Cannot search the quickfix window")
+      call s:warningMessage("Cannot search the quickfix window")
       return
     endif
     try
       silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
     catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      call WarningMessage("No match")
+      call s:warningmessage("no match")
     endtry
     lwindow
   endf
@@ -297,7 +297,7 @@
     try
       silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
     catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      call WarningMessage("No match")
+      call s:warningmessage("no match")
     endtry
     cwindow
   endf

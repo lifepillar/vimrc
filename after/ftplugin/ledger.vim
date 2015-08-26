@@ -4,8 +4,9 @@ call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 " Run an arbitrary ledger command.
 fun! s:ledger(args)
   if getbufvar(winbufnr(winnr()), "&ft") !=# "ledger"
-    call WarningMessage("Please switch to a Ledger buffer first.")
-    return
+    echohl Error
+    echomsg "Please switch to a Ledger buffer first."
+    echohl None
   endif
   execute 'ShellTop ' . g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args
   " Color negative numbers
