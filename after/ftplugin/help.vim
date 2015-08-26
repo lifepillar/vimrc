@@ -13,3 +13,6 @@
 
 setlocal statusline=%!BuildHelpStatusLine(winnr())
 
+nnoremap <silent> <buffer> <tab> <c-w><c-w>
+nnoremap <silent> <buffer> q <c-w>c
+
