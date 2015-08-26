@@ -48,7 +48,8 @@ background for themes that support both.
 ### Requirements
 
 - A fairly recent Vim (7.4 or later) (`brew install vim` recommended on OS X).
-- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher).
+- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher)
+  (`brew install the_silver_searcher` on OS X).
 - [Exuberant ctags](http://ctags.sourceforge.net) to use Tagbar (`brew install ctags` on OS X).
 
 ### Installation
