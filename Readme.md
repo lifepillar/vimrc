@@ -47,7 +47,8 @@ background for themes that support both.
 
 ### Requirements
 
-- A fairly recent Vim (7.3 or later) (`brew install vim` recommended on OS X).
+- A fairly recent Vim (7.4 or later) (`brew install vim` recommended on OS X).
+- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher).
 - [Exuberant ctags](http://ctags.sourceforge.net) to use Tagbar (`brew install ctags` on OS X).
 
 ### Installation
@@ -65,6 +66,8 @@ background for themes that support both.
     cd ~/.vim
     git checkout master
     git pull origin master
+    git submodule sync
+    git submodule update --recursive
     git checkout local
     git rebase master
 
@@ -72,7 +75,7 @@ background for themes that support both.
 
 ### Update plugins
 
-    git submodule update --remote
+    git submodule update --remote --recursive
 
 ###  Some features
 
@@ -82,8 +85,10 @@ background for themes that support both.
     [Goyo](https://github.com/junegunn/goyo.vim) and
     [Limelight](https://github.com/junegunn/limelight.vim)).
 - Keeps the edited line vertically centered.
-- Handcrafted, collapsible, fully customizable, **"plugin-free" status line**.
-  And yes, it supports Powerline fonts!
+- Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
+  (let Vim spend a few tens of microseconds on updating the status line, rather
+  than the several milliseconds that plugins “as light as air” need). And yes,
+  it supports Powerline fonts!
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
 
