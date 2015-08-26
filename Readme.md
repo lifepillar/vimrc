@@ -67,7 +67,7 @@ background for themes that support both.
     git checkout master
     git pull origin master
     git submodule sync
-    git submodule update --recursive
+    git submodule update --init --recursive
     git checkout local
     git rebase master
 
@@ -75,7 +75,14 @@ background for themes that support both.
 
 ### Update plugins
 
-    git submodule update --remote --recursive
+    git submodule update --remote
+    git commit -a
+    git submodule update --recursive
+
+Explanation: the first command retrieves the latest commit of each submodule;
+the second command updates the references to the submodules; finally, the
+last command ensures that plugins's submodules, if any, are synchronized with
+the corresponding plugin (see, for example, YouCompleteMe).
 
 ###  Some features
 
