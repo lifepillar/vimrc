@@ -49,13 +49,13 @@ background for themes that support both.
 
 - A fairly recent Vim (7.4 or later) (`brew install vim` recommended on OS X).
 - [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher)
-  (`brew install the_silver_searcher` on OS X).
+  (`brew install ag` on OS X).
 - [Exuberant ctags](http://ctags.sourceforge.net) to use Tagbar (`brew install ctags` on OS X).
 
 ### Installation
 
     cd
-    git clone --recursive https://github.com/lifepillar/lifepillar-vim-config.git .vim
+    git clone --recursive https://github.com/lifepillar/vim-config.git .vim
     cd .vim
     mkdir tmp
     git checkout -b local
