@@ -183,7 +183,7 @@
   " Update trailing space and mixed indent warnings for the current buffer.
   " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
   fun! s:updateWarnings()
-    let l:save_cursor = getcurpos()
+    let l:winview = winsaveview() " Save window state
     call cursor(1,1) " Start search from the beginning of the file
     let l:trail = search('\s$', 'nw')
     let l:spaces = search('\v^\s* ', 'nw')
@@ -198,7 +198,7 @@
     else
       unlet! b:stl_warnings
     endif
-    call setpos('.', l:save_cursor) " Restore cursor position
+    call winrestview(l:winview) " Restore window state
   endf
 
   fun! s:cheatsheet()
