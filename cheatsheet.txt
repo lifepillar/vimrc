@@ -45,12 +45,12 @@ Press q to dismiss, <Tab> to lose focus
  :e ‹Path›     - New/open file or dir
  :sp ‹Path›    - Open in horiz. split
  :vs ‹Path›    - Open in vertical split
- \e            * Open file browser here
+ \e            * Open file browser
  :e            - Reload file from disk
  :e!           - Revert to last saved
  :bd           - Close file
  :%bd          - Close all
- :w            - Save file
+ :w            - Save
  :sav …        - Save as…
  :w!           - Save read-only file
  :WW           * Save as root
