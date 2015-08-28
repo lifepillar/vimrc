@@ -719,7 +719,7 @@
     augroup warnings
       autocmd!
     augroup END
-    augroup! status
+    augroup! warnings
   endf
 
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
