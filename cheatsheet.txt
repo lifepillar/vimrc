@@ -51,6 +51,7 @@ Press q to dismiss, <Tab> to lose focus
  :bd           - Close file
  :%bd          - Close all
  :w            - Save file
+ :sav …        - Save as…
  :w!           - Save read-only file
  :WW           * Save as root
  :x            - Save and quit
@@ -196,6 +197,7 @@ Press q to dismiss, <Tab> to lose focus
  \U           *V Capitalize words
  «C-n»         I Autocomplete
  «C-x»«C-o»    I Omnicomplete
+ «C-x»«C-l»    I Line autocomplete
  >%            - Indent block
  <%            - Unindent block
  >>            - Indent line
