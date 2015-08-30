@@ -657,10 +657,11 @@
 
   let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
 
-  fun! s:updateHighlightGroups(newMode)
-    execute 'hi! link CurrMode' a:newMode
+  " newMode may be a value as returned by mode(1) or the name of a highlight group.
+  fun! s:updateStatusLineHighlight(newMode)
+    execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
     call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
-    return get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode")
+    return 1
   endf
 
   fun! SetupStl(nr)
@@ -677,9 +678,12 @@
     " In a %{} context, winnr() always refers to the window to which the
     " status line being drawn belongs.
     return get(extend(w:, {
-          \ "lf_active": winnr() == a:nr,
-          \ "lf_mode": (winnr() == a:nr && mode() !=# get(g:, "lf_cached_mode", "")) ?
-          \            s:updateHighlightGroups(get(g:mode_map, mode(1), ['','Warnings'])[1]) : mode(),
+          \ "lf_active": winnr() != a:nr ? 0 : (
+          \                mode(1) ==# get(g:, "lf_cached_mode", "") ? 1 :
+          \                  s:updateStatusLineHighlight(
+          \                    get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode")
+          \                  )
+          \                ),
           \ "lf_bufnr": winbufnr(winnr()),
           \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
