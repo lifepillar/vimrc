@@ -541,7 +541,6 @@
       hi! link VertSplit LineNr
       hi! link Search VisualMode
       hi ErrorMsg ctermbg=1 ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      call s:setTabLineSepGroups()
       if &background ==# 'dark'
         hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold cterm=bold gui=bold
         let g:limelight_conceal_ctermfg = 10
