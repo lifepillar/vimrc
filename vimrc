@@ -132,7 +132,7 @@
   endf
 
   " Return the real background color of the given highlight group.
-  fun! s:getBackground(hl)
+  fun! s:getRealBackground(hl)
     let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
     if l:col == -1 || empty(l:col)  " First fallback
       let l:col = synIDattr(synIDtrans(hlID("Normal")), synIDattr(synIDtrans(hlID("Normal")), "reverse") ? "fg" : "bg")
@@ -150,8 +150,8 @@
   " in the tab line.
   fun! s:setTransitionGroup(hl,fgHl, bgHl)
     execute 'hi! '. a:hl . (has("gui_running") || (has("termtruecolor") && guicolors == 1) ?
-          \ ' guifg='   . s:getBackground(a:fgHl) . ' guibg='   . s:getBackground(a:bgHl) :
-          \ ' ctermfg=' . s:getBackground(a:fgHl) . ' ctermbg=' . s:getBackground(a:bgHl))
+          \ ' guifg='   . s:getRealBackground(a:fgHl) . ' guibg='   . s:getRealBackground(a:bgHl) :
+          \ ' ctermfg=' . s:getRealBackground(a:fgHl) . ' ctermbg=' . s:getRealBackground(a:bgHl))
   endf
 
   fun! s:enablePatchedFont()
@@ -737,7 +737,7 @@
     call s:setTransitionGroup("TabSepSel", "TabLineSel", "TabLine")
     call s:setTransitionGroup("TabSepFill", "TabLine", "TabLineFill")
     call s:setTransitionGroup("TabSepSelFill", "TabLineSel", "TabLineFill")
-    return s:getBackground("TabLine") == s:getBackground("TabLineFill")
+    return s:getRealBackground("TabLine") == s:getRealBackground("TabLineFill")
   endf
 
   fun! BuildTabLabel(nr)
