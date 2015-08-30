@@ -787,7 +787,7 @@
     let s:ctrlp_section_map = {
           \ "mru files": "recent",
           \ "funky": "functions"
-    }
+          \  }
 
     " See https://gist.github.com/kien/1610859
     " Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
