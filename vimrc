@@ -784,30 +784,34 @@
           \ }
     let g:ctrlp_extensions = ['funky', 'tag']
 
+    " Override some default names
+    let s:ctrlp_section_map = {
+          \ "mru files": "recent",
+          \ "funky": "functions"
+    }
+
     " See https://gist.github.com/kien/1610859
     " Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
     "            a:1    a:2      a:3       a:4  a:5   a:6  a:7
     fun! CtrlP_Main(...)
+      let l:section = get(s:ctrlp_section_map, a:5, a:5)
       if a:1 ==# 'prt'
-        call s:updateHighlightGroups("InsertMode")
-        let g:lf_cached_mode = ""  " Force update of highlight groups when leaving CtrlP
-        return '%#InsertMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
-              \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#InsertMode#'
+        call s:setTransitionGroup("CtrlPSepMode", "InsertMode", "StatusLine")
+        return '%#InsertMode# ' . l:section . ' %#CtrlPSepMode#%{g:left_sep_sym}%* '
+              \ . getcwd() . ' %= %#CtrlPSepMode#%{g:right_sep_sym}%#InsertMode#'
               \ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
       else
-        call s:updateHighlightGroups("VisualMode")
-        let g:lf_cached_mode = ""  " Ditto
-        return '%#VisualMode# ' . a:5 . ' %#SepMode#%{g:left_sep_sym}%* '
-              \ . getcwd() . ' %= %#SepMode#%{g:right_sep_sym}%#VisualMode# select %*'
+        call s:setTransitionGroup("CtrlPSepMode", "VisualMode", "StatusLine")
+        return '%#VisualMode# ' . l:section . ' %#CtrlPSepMode#%{g:left_sep_sym}%* '
+              \ . getcwd() . ' %= %#CtrlPSepMode#%{g:right_sep_sym}%#VisualMode# select %*'
       endif
     endf
 
     " Argument: len
     "           a:1
     fun! CtrlP_Progress(...)
-      call s:updateHighlightGroups("Warnings")
-      let g:lf_cached_mode = ""  " Ditto
-      return '%#Warnings# ' . a:1 . ' %#SepMode#%{g:left_sep_sym}%* %= %#SepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
+      call s:setTransitionGroup("CtrlPSepMode", "Warnings", "StatusLine")
+      return '%#Warnings# ' . a:1 . ' %#CtrlPSepMode#%{g:left_sep_sym}%* %= %#CtrlPSepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
     endf
   " }}
   " Easy Align {{
