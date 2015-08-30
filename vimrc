@@ -846,7 +846,6 @@
       call s:dontSoftWrap()
       set showcmd
       Limelight!
-      let g:lf_cached_mode = ""
     endf
 
     autocmd! User GoyoEnter
