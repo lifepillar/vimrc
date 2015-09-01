@@ -14,15 +14,20 @@ Press q to dismiss, <Tab> to lose focus
          object (iw, ap, …)
   ‹P›    A regular expression (pattern)
   ‹Cmd›  An Ex command
-  ‹Path› A file path or a file name
   ‹Var›  A variable or option name
   «C-…»  Press ctrl and … together
   «Spc»  Press space bar
+  «CR»   Press Enter
+  …      Any text (e.g., a path)
 
   Similarly, other special keys are
   written between « and ». All other
   characters are meant to be typed
   literally.
+
+  Note that spaces are made explicit
+  only when it is not obvious that a
+  space must be used (e.g., \«Spc»)
 
   Notation used in the comments:
 
@@ -42,9 +47,9 @@ Press q to dismiss, <Tab> to lose focus
 ===
  File
  :enew         - New file in this window
- :e ‹Path›     - New/open file or dir
- :sp ‹Path›    - Open in horiz. split
- :vs ‹Path›    - Open in vertical split
+ :e …          - New/open file or dir
+ :sp …         - Open in horiz. split
+ :vs …         - Open in vertical split
  \e            * Open file browser
  :e            - Reload file from disk
  :e!           - Revert to last saved
@@ -66,7 +71,7 @@ Press q to dismiss, <Tab> to lose focus
                  (Restore with `vim -S`)
  :ls           - List open files
  :‹n›b         - Edit file n
- :b«Spc»«Tab»  - Edit… (autocomplete)
+ :b «Tab»      - Edit… (autocomplete)
  :bn           - Edit next file
  :bp           - Edit prev file
  «C-^»         - Edit last edited file
@@ -74,7 +79,7 @@ Press q to dismiss, <Tab> to lose focus
   Netrw
   %            - New file here
   d            - New directory here
-  «Enter»      - Open
+  «CR»         - Open
   o            - Open in a horiz. split
   v            - Open in a vert. split
   t            - Open in a new tab
@@ -93,7 +98,7 @@ Press q to dismiss, <Tab> to lose focus
  Edit
   Basics
   «Esc»        - Back to normal mode
-  «C-[»
+  «C-[»        - Ditto
   i            - Insert at cursor
   a            - Append after the cursor
   I            - Insert at start of line
@@ -396,7 +401,7 @@ Press q to dismiss, <Tab> to lose focus
   «C-p»        * Open CtrlP in MRU mode
  --
   Easy Align
-  <Enter>      V Trigger Easy Align
+  «CR»         V Trigger Easy Align
  --
   EasyMotion
   \s‹c›       *M Go to char ‹c›
@@ -480,8 +485,10 @@ Press q to dismiss, <Tab> to lose focus
 ===
  Misc
  q:            - Vim motions in Cmd mode
+                 Use «C-c» do dismiss
  «C-f»         C Use Vim motions
- :cd ‹Path›    - Change directory
+                 Use «C-c» do dismiss
+ :cd …         - Change directory
  :echo ‹Var›   - Show the value of ‹Var›
  :map          - View all mappings
  :pwd          - Current directory
