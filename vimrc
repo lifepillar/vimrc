@@ -453,7 +453,7 @@
   cnoremap <esc>f <s-right>
 " }}
 " Appearance {{
-  set title " Set the terminal title.
+  set notitle " Do not set the terminal title.
   set number " Turn line numbering on.
   set relativenumber " Display line numbers relative to the line with the cursor.
   set nowrap " Don't wrap lines by default.
