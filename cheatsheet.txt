@@ -187,6 +187,7 @@ Press q to dismiss, <Tab> to lose focus
  \S            * Remove trailing space
  J             - Join with next line
  gJ            - Ditto, preserve spaces
+ :sort         V Sort selected lines
  q‹r›          - Start recording
                  Press q to stop
  @‹r›          - Run recorded macro
