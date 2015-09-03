@@ -14,6 +14,7 @@ switch between them depending on light conditions, my mood, or file content.
 The following themes are supported:
 
 - [Solarized](https://github.com/altercation/vim-colors-solarized) (light/dark)
+- [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark)
 - [Jellybeans](https://github.com/nanotech/jellybeans.vim) (dark)
 - [PaperColor](https://github.com/NLKNguyen/papercolor-theme) (light/dark)
 - [Pencil](https://github.com/reedes/vim-colors-pencil) (light/dark)
@@ -87,14 +88,14 @@ the corresponding plugin (see, for example, YouCompleteMe).
 
 ###  Some features
 
-- A **cheat sheet** always at hand with `\?`.
+- A 40-column **cheat sheet** always at hand with `\?`.
 - Foldable and thoroughly commented `vimrc`.
 - **Distraction-free mode** (courtesy of
     [Goyo](https://github.com/junegunn/goyo.vim) and
     [Limelight](https://github.com/junegunn/limelight.vim)).
 - Keeps the edited line vertically centered.
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
-  (let Vim spend a few tens of microseconds on updating the status line, rather
+  (let Vim spend a few tens of microseconds on updating the status line rather
   than the several milliseconds that plugins “as light as air” need). And yes,
   it supports Powerline fonts!
 - Key bindings in command mode similar to those used by the shell.
