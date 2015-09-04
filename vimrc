@@ -469,6 +469,14 @@
   " Resize windows when the terminal window size changes
   " (from http://vimrcfu.com/snippet/186):
   autocmd VimResized * :wincmd =
+  " Solarized {{
+    let g:solarized_bold = 1
+    let g:solarized_underline = 0
+    " }}
+  " Seoul256 {{
+    let g:seoul256_background = 236
+    let g:seoul256_light_background = 255
+  " }}
 
   " To override the settings of a colorscheme, create a file after/colors/<theme name>.vim
   " It will be automatically loaded after the color scheme is activated.
@@ -511,26 +519,6 @@
 
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
   command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
-" }}
-" Colorschemes {{
-  " Solarized {{
-    let g:solarized_bold = 1
-    let g:solarized_underline = 0
-    " }}
-  " Gruvbox {{
-  " }}
-  " Jellybeans {{
-  " }}
-  " PaperColor {{
-  " }}
-  " Pencil {{
-  " }}
-  " Seoul256 {{
-    let g:seoul256_background = 236
-    let g:seoul256_light_background = 255
-  " }}
-  " Tomorrow {{
-  " }}
 " }}
 " MacVim {{
   if has('gui_macvim')
