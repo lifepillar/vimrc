@@ -476,8 +476,9 @@
     set guioptions-=aP " Do not use system clipboard by default
     set guioptions-=T  " No toolbar
     set guioptions-=lL " No left scrollbar
+    set guioptions-=e  " Use Vim tabline
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    set transparency=4
+    set transparency=1
   endif
 " }}
 " Themes {{
