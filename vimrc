@@ -469,23 +469,9 @@
   " Resize windows when the terminal window size changes
   " (from http://vimrcfu.com/snippet/186):
   autocmd VimResized * :wincmd =
-" }}
-" MacVim {{
-  if has('gui_macvim')
-    set guifont=Monaco:h14
-    set guioptions-=aP " Do not use system clipboard by default
-    set guioptions-=T  " No toolbar
-    set guioptions-=lL " No left scrollbar
-    set guioptions-=e  " Use Vim tabline
-    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    set transparency=1
-  endif
-" }}
-" Themes {{
-  " To override the settings of a theme, define a function called
-  " s:customizeTheme_<theme_name>. Such function will be automatically called
-  " after the color scheme is activated.
 
+  " To override the settings of a colorscheme, create a file after/colors/<theme name>.vim
+  " It will be automatically loaded after the color scheme is activated.
   fun! s:customizeTheme()
     hi! link netrwMarkFile DiffAdd
     " Set the default values of our highlight groups for the status line
@@ -500,22 +486,18 @@
     let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
     set fillchars=vert:\ ,fold:\·
-    if exists('g:colors_name')
-      let l:fn = 's:customizeTheme_' . substitute(g:colors_name, '[-]', '_', 'g')
-      if exists('*' . l:fn)
-        call eval(l:fn . '()')
-      endif
+    if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
+      execute "runtime! after/colors/" . g:colors_name . ".vim"
     endif
   endf
 
   autocmd ColorScheme * call <sid>customizeTheme()
 
-  " For themes that have dark and light variants with different names (e.g.,
-  " seoul256/seoul256_light), define corresponding
-  " s:toggleBackground_<theme_name>() functions that change the color scheme.
+  " To switch the colorscheme when the background changes, define a
+  " BackgroundToggle_<theme_name>() function that changes the color scheme.
   fun! s:toggleBackgroundColor()
     if exists('g:colors_name')
-      let l:fn = 's:toggleBackground_' . substitute(g:colors_name, '[-]', '_', 'g')
+      let l:fn = 'BackgroundToggle_' . substitute(g:colors_name, '[-]', '_', 'g')
       if exists('*' . l:fn)
         call eval(l:fn . '()')
         return
@@ -529,121 +511,37 @@
 
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
   command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
-
+" }}
+" Colorschemes {{
   " Solarized {{
     let g:solarized_bold = 1
     let g:solarized_underline = 0
-
-    fun! s:customizeTheme_solarized()
-      hi clear Folded
-      hi clear SignColumn
-      hi clear VertSplit
-      hi clear Search
-      hi! link VertSplit LineNr
-      hi! link Search VisualMode
-      hi ErrorMsg ctermbg=1 ctermfg=15 guibg=#dc322f guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      if &background ==# 'dark'
-        hi MatchParen ctermbg=0 ctermfg=14 guibg=#073642 guifg=#93a1a1 term=bold cterm=bold gui=bold
-        let g:limelight_conceal_ctermfg = 10
-      else
-        hi MatchParen ctermbg=7 ctermfg=0 guibg=#eee8d5 guifg=#073642 term=bold cterm=bold gui=bold
-        let g:limelight_conceal_ctermfg = 14
-      endif
-
-      if &background ==# 'dark'
-        hi StatusLine ctermbg=7 ctermfg=10 guibg=#eee8d5 guifg=#586e75 term=reverse cterm=reverse gui=reverse
-        hi StatusLineNC ctermbg=10 ctermfg=0 guibg=#586e75 guifg=#073642 term=reverse cterm=reverse gui=reverse
-        hi NormalMode ctermbg=14 ctermfg=15 guibg=#93a1a1 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      else
-        hi StatusLine ctermbg=7 ctermfg=14 guibg=#eee8d5 guifg=#93a1a1 term=reverse cterm=reverse gui=reverse
-        hi StatusLineNC ctermbg=14 ctermfg=7 guibg=#93a1a1 guifg=#eee8d5 term=reverse cterm=reverse gui=reverse
-        hi NormalMode ctermbg=10 ctermfg=15 guibg=#586e75 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      endif
-      hi InsertMode ctermbg=6 ctermfg=15 guibg=#2aa198 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      hi ReplaceMode ctermbg=9 ctermfg=15 guibg=#cb4b16 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      hi VisualMode ctermbg=5 ctermfg=15 guibg=#d33682 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      hi CommandMode ctermbg=5 ctermfg=15 guibg=#d33682 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-    endf
     " }}
   " Gruvbox {{
-    fun! s:customizeTheme_gruvbox()
-    endf
   " }}
   " Jellybeans {{
-    fun! s:customizeTheme_jellybeans()
-    endf
   " }}
   " PaperColor {{
-    fun! s:customizeTheme_PaperColor()
-      set fillchars=vert:\|,fold:\·
-      hi! link Search VisualMode
-      if &background ==# 'light'
-        hi InsertMode ctermbg=31 ctermfg=255 guibg=#3e999f guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
-        hi ReplaceMode ctermbg=166 ctermfg=255 guibg=#d75f00 guifg=#f5f5f5 term=NONE cterm=NONE gui=NONE
-      endif
-    endf
   " }}
   " Pencil {{
-  fun! s:customizeTheme_pencil()
-    if &background ==# 'dark'
-      hi NormalMode ctermbg=245 ctermfg=7 guibg=#636363 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
-      hi InsertMode ctermbg=24 ctermfg=7 guibg=#005f87 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
-      hi ReplaceMode ctermbg=166 ctermfg=7 guibg=#d75f5f guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
-      hi Warnings ctermbg=160 ctermfg=7 guibg=#c30771 guifg=#c6c6c6 term=NONE cterm=NONE gui=NONE
-    else
-      hi NormalMode ctermbg=241 ctermfg=254 guibg=#545454 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
-      hi InsertMode ctermbg=24 ctermfg=254 guibg=#005f87 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
-      hi ReplaceMode ctermbg=166 ctermfg=254 guibg=#d75f5f guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
-      hi Warnings ctermbg=160 ctermfg=254 guibg=#c30771 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
-    endif
-  endf
   " }}
   " Seoul256 {{
     let g:seoul256_background = 236
     let g:seoul256_light_background = 255
-
-    fun! s:toggleBackground_seoul256()
-      colorscheme seoul256-light
-    endf
-
-    fun! s:toggleBackground_seoul256_light()
-      colorscheme seoul256
-    endf
-
-    fun! s:customizeTheme_seoul256()
-      hi! link VertSplit StatusLineNC
-      hi! link NormalMode StatusLineNC
-      hi! link InsertMode PmenuSbar
-      hi! link ReplaceMode Search
-      hi! link CommandMode DiffAdd
-    endf
-
-    fun! s:customizeTheme_seoul256_light()
-      hi NormalMode ctermbg=239 ctermfg=187 guibg=#616161 guifg=#dfdebd term=NONE cterm=NONE gui=NONE
-      hi InsertMode ctermbg=65 ctermfg=187 guibg=#719872 guifg=#fdf6e3 term=NONE cterm=NONE gui=NONE
-      hi! link ReplaceMode WildMenu
-      hi! link CommandMode DiffChange
-    endf
   " }}
   " Tomorrow {{
-    fun! s:toggleBackground_Tomorrow()
-      colorscheme Tomorrow-Night-Eighties
-    endf
-
-    fun! s:toggleBackground_Tomorrow_Night_Eighties()
-      colorscheme Tomorrow
-    endf
-
-    fun! s:customizeTheme_Tomorrow()
-      hi! link NormalMode PmenuSel
-      hi! link InsertMode DiffAdd
-      hi! link CommandMode Search
-    endf
-
-    fun! s:customizeTheme_Tomorrow_Night_Eighties()
-      call s:customizeTheme_Tomorrow()
-    endf
   " }}
+" }}
+" MacVim {{
+  if has('gui_macvim')
+    set guifont=Monaco:h14
+    set guioptions-=aP " Do not use system clipboard by default
+    set guioptions-=T  " No toolbar
+    set guioptions-=lL " No left scrollbar
+    set guioptions-=e  " Use Vim tabline
+    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+    set transparency=1
+  endif
 " }}
 " Status line {{
   " See :h mode() (some of these are never used in the status line)
