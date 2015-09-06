@@ -481,7 +481,6 @@
   " To override the settings of a colorscheme, create a file after/colors/<theme name>.vim
   " It will be automatically loaded after the color scheme is activated.
   fun! s:customizeTheme()
-    hi! link netrwMarkFile DiffAdd
     " Set the default values of our highlight groups for the status line
     hi! link NormalMode StatusLine
     hi! link InsertMode DiffText
