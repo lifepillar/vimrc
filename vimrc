@@ -494,7 +494,7 @@
     " Set defaults for vertical separator and fold separator
     set fillchars=vert:\ ,fold:\·
     if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
-      execute "runtime! after/colors/" . g:colors_name . ".vim"
+      execute "runtime after/colors/" . g:colors_name . ".vim"
     endif
   endf
 
