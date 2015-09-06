@@ -61,6 +61,7 @@ if &background ==# 'dark'
   if g:solarized_contrast == "lifepillar"
     execute "hi VertSplit"    s:bg.s:base02  s:fg.s:base02 s:vmode."=NONE"
     execute "hi StatusLineNC" s:bg.s:base02  s:fg.s:base1  s:vmode."=NONE"
+    execute "hi CursorLine"   s:bg.s:base03                s:vmode."=underline"
   else
     execute "hi VertSplit"    s:bg.s:base01  s:fg.s:base01 s:vmode."=NONE"
     execute "hi StatusLineNC" s:bg.s:base01  s:fg.s:base1  s:vmode."=NONE"
@@ -81,6 +82,7 @@ else
   if g:solarized_contrast == "lifepillar"
     execute "hi VertSplit"    s:bg.s:base2   s:fg.s:base2  s:vmode."=NONE"
     execute "hi StatusLineNC" s:bg.s:base2   s:fg.s:base1  s:vmode."=NONE"
+    execute "hi CursorLine"   s:bg.s:base3                 s:vmode."=underline"
   else
     execute "hi VertSplit"    s:bg.s:base1   s:fg.s:base1  s:vmode."=NONE"
     execute "hi StatusLineNC" s:bg.s:base1   s:fg.s:base2  s:vmode."=NONE"
