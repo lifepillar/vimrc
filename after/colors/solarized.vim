@@ -43,30 +43,55 @@ let s:bg = s:vmode . "bg="
 let s:fg = s:vmode . "fg="
 
 " Override some settings and define the colors for the status line
-hi clear Folded
 hi clear SignColumn
-hi clear VertSplit
 hi clear Search
-hi! link VertSplit LineNr
 hi! link Search VisualMode
 
-execute   "hi ErrorMsg"     s:bg.s:base3   s:fg.s:red     s:vmode."=reverse"
-execute   "hi InsertMode"   s:bg.s:cyan    s:fg.s:base3   s:vmode."=NONE"
-execute   "hi ReplaceMode"  s:bg.s:orange  s:fg.s:base3   s:vmode."=NONE"
-execute   "hi VisualMode"   s:bg.s:magenta s:fg.s:base3   s:vmode."=NONE"
-execute   "hi CommandMode"  s:bg.s:magenta s:fg.s:base3   s:vmode."=NONE"
 
 if &background ==# 'dark'
-  execute "hi MatchParen"   s:bg.s:base02  s:fg.s:base1   s:vmode."=bold"
-  execute "hi StatusLine"   s:bg.s:base2   s:fg.s:base01  s:vmode."=reverse"
-  execute "hi StatusLineNC" s:bg.s:base01  s:fg.s:base02  s:vmode."=reverse"
-  execute "hi NormalMode"   s:bg.s:base1   s:fg.s:base3   s:vmode."=NONE"
+  if g:solarized_contrast == "high"
+    let s:base01      = s:base00
+    let s:base00      = s:base0
+    let s:base0       = s:base1
+    let s:base1       = s:base2
+    let s:base2       = s:base3
+  endif
+  " Fix ErrorMsg in Dark Solarized, which is black on red by default (pesky)
+  execute "hi ErrorMsg"       s:bg.s:red     s:fg.s:base3  s:vmode."=NONE"
+  if g:solarized_contrast == "lifepillar"
+    execute "hi VertSplit"    s:bg.s:base02  s:fg.s:base02 s:vmode."=NONE"
+    execute "hi StatusLineNC" s:bg.s:base02  s:fg.s:base1  s:vmode."=NONE"
+  else
+    execute "hi VertSplit"    s:bg.s:base01  s:fg.s:base01 s:vmode."=NONE"
+    execute "hi StatusLineNC" s:bg.s:base01  s:fg.s:base1  s:vmode."=NONE"
+  endif
+  execute   "hi StatusLine"   s:bg.s:base01  s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi NormalMode"   s:bg.s:base0   s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi InsertMode"   s:bg.s:cyan    s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi ReplaceMode"  s:bg.s:orange  s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi VisualMode"   s:bg.s:magenta s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi CommandMode"  s:bg.s:magenta s:fg.s:base2  s:vmode."=NONE"
+  execute   "hi MatchParen"   s:bg.s:base02  s:fg.s:base1  s:vmode."=bold"
   let g:limelight_conceal_ctermfg = s:base01
 else
-  execute "hi MatchParen"   s:bg.s:base2   s:fg.s:base02  s:vmode."=bold"
-  execute "hi StatusLine"   s:bg.s:base2   s:fg.s:base1   s:vmode."=reverse"
-  execute "hi StatusLineNC" s:bg.s:base1   s:fg.s:base2   s:vmode."=reverse"
-  execute "hi NormalMode"   s:bg.s:base01  s:fg.s:base3   s:vmode."=NONE"
+  if g:solarized_contrast == "high"
+    let s:base01      = s:base02
+    let s:base1       = s:base0
+  endif
+  if g:solarized_contrast == "lifepillar"
+    execute "hi VertSplit"    s:bg.s:base2   s:fg.s:base2  s:vmode."=NONE"
+    execute "hi StatusLineNC" s:bg.s:base2   s:fg.s:base1  s:vmode."=NONE"
+  else
+    execute "hi VertSplit"    s:bg.s:base1   s:fg.s:base1  s:vmode."=NONE"
+    execute "hi StatusLineNC" s:bg.s:base1   s:fg.s:base2  s:vmode."=NONE"
+  endif
+  execute   "hi StatusLine"   s:bg.s:base1   s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi NormalMode"   s:bg.s:base01  s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi InsertMode"   s:bg.s:cyan    s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi ReplaceMode"  s:bg.s:orange  s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi VisualMode"   s:bg.s:magenta s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi CommandMode"  s:bg.s:magenta s:fg.s:base3  s:vmode."=NONE"
+  execute   "hi MatchParen"   s:bg.s:base2   s:fg.s:base02 s:vmode."=bold"
   let g:limelight_conceal_ctermfg = s:base1
 endif
 

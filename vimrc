@@ -468,10 +468,26 @@
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186):
   autocmd VimResized * :wincmd =
+
   " Solarized {{
     let g:solarized_bold = 1
     let g:solarized_underline = 0
-    " }}
+
+    let s:solarized_next_contrast_map = {
+          \ "low": "high",
+          \ "high": "normal",
+          \ "normal": "lifepillar",
+          \ "lifepillar": "low"
+          \ }
+
+    fun! s:solarized_next_contrast()
+      let g:solarized_contrast = get(s:solarized_next_contrast_map, g:solarized_contrast, "normal")
+      colorscheme solarized
+    endf
+
+    " Rotate among different contrast levels
+    nnoremap <silent> <leader>- :call <sid>solarized_next_contrast()<cr>
+  " }}
   " Seoul256 {{
     let g:seoul256_background = 236
     let g:seoul256_light_background = 255
