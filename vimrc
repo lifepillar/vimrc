@@ -399,7 +399,7 @@
   " Three-way diff.
   command! -nargs=0 Conflicts call <sid>git3WayDiff()
 " }}
-" Key mappings (plugins excluded) {{
+" Key mappings (plugins and color schemes excluded) {{
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
   " Enable outline mode for the current buffer
@@ -463,11 +463,11 @@
   set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
   set shortmess-=r " Don't use abbreviations for 'readonly'
   set showcmd " Show (partial) command in the last line of the screen.
-  set noshowmode " Do not show current mode because it is already shown in status line
+  set noshowmode " Do not show the current mode because it is displayed in status line
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
-  " Resize windows when the terminal window size changes
-  " (from http://vimrcfu.com/snippet/186):
+
+  " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186):
   autocmd VimResized * :wincmd =
   " Solarized {{
     let g:solarized_bold = 1
