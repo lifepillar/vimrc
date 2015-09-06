@@ -248,7 +248,8 @@ Press q to dismiss, <Tab> to lose focus
  zR            - Unfold all
  :set cc=‹n›   - Page guide at column n
  :set cc=""    - No page guide
- \-            - Vary Solarized contrast
+ \-            * Reduce contrast
+ \+            * Increase contrast
 ===
  Search
  /‹P›          - Search forward

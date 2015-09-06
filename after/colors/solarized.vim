@@ -97,3 +97,15 @@ else
   let g:limelight_conceal_ctermfg = s:base1
 endif
 
+let s:contrast_levels = ["low", "lifepillar", "normal", "high"]
+
+command! IncreaseContrast
+      \ let g:solarized_contrast =
+      \ get(s:contrast_levels, (1 + index(s:contrast_levels, g:solarized_contrast)) % 4) |
+      \ colorscheme solarized
+
+command! ReduceContrast
+      \ let g:solarized_contrast =
+      \ get(s:contrast_levels, (3 + index(s:contrast_levels, g:solarized_contrast)) % 4) |
+      \ colorscheme solarized
+

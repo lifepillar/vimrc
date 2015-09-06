@@ -398,11 +398,16 @@
   " Three-way diff.
   command! -nargs=0 Conflicts call <sid>git3WayDiff()
 " }}
-" Key mappings (plugins and color schemes excluded) {{
+" Key mappings (plugins excluded) {{
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
   " Enable outline mode for the current buffer
   nnoremap <silent> <leader>O :call <sid>enableOutliner()<cr>
+  " Change the contrast level, for themes that support such feature (Solarized
+  " and Seoul256). It is assumed that ReduceContrast and IncreaseContrast are
+  " defined by the color scheme.
+  nmap <silent> <leader>- :ReduceContrast<cr>
+  nmap <silent> <leader>+ :IncreaseContrast<cr>
   " Open file browser in the directory of the current buffer
   nnoremap <silent> <leader>e :Ex<cr>
   " Toggle between hard tabs and soft tabs in the current buffer
@@ -472,21 +477,6 @@
   " Solarized {{
     let g:solarized_bold = 1
     let g:solarized_underline = 0
-
-    let s:solarized_next_contrast_map = {
-          \ "low": "high",
-          \ "high": "normal",
-          \ "normal": "lifepillar",
-          \ "lifepillar": "low"
-          \ }
-
-    fun! s:solarized_next_contrast()
-      let g:solarized_contrast = get(s:solarized_next_contrast_map, g:solarized_contrast, "normal")
-      colorscheme solarized
-    endf
-
-    " Rotate among different contrast levels
-    nnoremap <silent> <leader>- :call <sid>solarized_next_contrast()<cr>
   " }}
   " Seoul256 {{
     let g:seoul256_background = 236
