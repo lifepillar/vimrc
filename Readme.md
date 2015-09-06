@@ -93,7 +93,6 @@ the corresponding plugin (see, for example, YouCompleteMe).
 - **Distraction-free mode** (courtesy of
     [Goyo](https://github.com/junegunn/goyo.vim) and
     [Limelight](https://github.com/junegunn/limelight.vim)).
-- Keeps the edited line vertically centered.
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
   (let Vim spend a few tens of microseconds on updating the status line rather
   than the several milliseconds that plugins “as light as air” need). And yes,

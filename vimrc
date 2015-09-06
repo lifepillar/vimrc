@@ -234,9 +234,9 @@
   endf
 " }}
 " Editing {{
+  set scrolloff=2 " Keep some context when scrolling
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
-  set scrolloff=999 " Keep the edited line vertically centered.
   " set clipboard=unnamed " Use system clipboard by default.
   " Smooth scrolling that works both in terminal and in MacVim
   nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
@@ -736,6 +736,7 @@
         set linespace=7
         set guioptions-=r " hide right scrollbar
       endif
+      set scrolloff=999 " Keep the edited line vertically centered.
       call s:softWrap()
       set noshowcmd
       Limelight
@@ -748,8 +749,9 @@
         set linespace=0
         set guioptions+=r
       endif
-      call s:dontSoftWrap()
       set showcmd
+      call s:dontSoftWrap()
+      set scrolloff=2
       Limelight!
     endf
 
