@@ -347,7 +347,6 @@
   command! -complete=shellcmd -nargs=+ ShellRight call s:runShellCommand(<q-args>, "R")
   command! -complete=shellcmd -nargs=+ ShellLeft call s:runShellCommand(<q-args>, "L")
   command! -complete=shellcmd -nargs=+ ShellTop call s:runShellCommand(<q-args>, "T")
-
 " }}
 " Git {{
   " Execute a non-interactive Git command in the directory containing
