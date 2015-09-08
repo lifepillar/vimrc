@@ -25,8 +25,8 @@ endif
 let s:i    = !has("gui_running")
 let s:c    = index(s:contrast_levels, g:gruvbox_contrast)
 let s:mode = ["gui", "cterm"]
-let s:bg   = s:mode[0] . "bg="
-let s:fg   = s:mode[0] . "fg="
+let s:bg   = s:mode[s:i] . "bg="
+let s:fg   = s:mode[s:i] . "fg="
 
 execute "hi NormalMode"  s:bg.s:fg_color[s:c][s:i] s:fg.s:bg_color[s:c][s:i] s:mode[s:i]."=NONE"
 execute "hi InsertMode"  s:bg.s:blue[s:c][s:i]     s:fg.s:bg_color[s:c][s:i] s:mode[s:i]."=NONE"
