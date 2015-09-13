@@ -7,6 +7,7 @@ fun! s:ledger(args)
     echohl Error
     echomsg "Please switch to a Ledger buffer first."
     echohl None
+    return
   endif
   execute 'ShellTop ' . g:ledger_bin . " -f % --check-payees --explicit --strict --wide " . a:args
   " Color negative numbers
