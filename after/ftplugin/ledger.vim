@@ -47,22 +47,22 @@ nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real -
 " Journal
 nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --effective -p 'this month'
 " Budget
-nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
+nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real --effective -p 'this year' expenses payable
 " Debit/credit report
 nnoremap <buffer> <leader>ld :<c-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
 nnoremap <buffer> <leader>le :<c-u>Ledger bal --subtotal --effective --real -p 'this month' expenses
 " Income statement
-nnoremap <buffer> <leader>li :<c-u>Ledger bal --real -p 'this month' income expenses
+nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --effective -p 'this month' income expenses
 " Monthly average
-nnoremap <buffer> <leader>la :<c-u>Ledger reg --collapse -A -O --real --monthly -p 'this year' expenses
+nnoremap <buffer> <leader>la :<c-u>Ledger reg --collapse -A -O --real --effective --monthly -p 'this year' expenses
 " Monthly expenses
 nnoremap <buffer> <leader>lm :<c-u>Ledger reg --period-sort '(-amount)' --monthly --effective --real -p 'this month' expenses
 " Net worth
-nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '\%10(date)\%20(display_total)\n' --collapse --real -d 'd>=[this year]' --monthly assets liab
+nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '\%10(date)\%20(display_total)\n' --collapse --real --effective -d 'd>=[this year]' --monthly assets liab
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Ledger reg --pending
 nnoremap <buffer> <leader>lu :<c-u>Ledger reg --uncleared
 " Savings
-nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real -p 'last month' income expenses
+nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real --effective -p 'last month' income expenses
 
