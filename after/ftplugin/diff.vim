@@ -6,5 +6,7 @@ fun! BuildDiffStatusLine(nr)
         \ %<%{t:diffpanel.GetStatusLine()} %*'
 endf
 
-setlocal statusline=%!BuildDiffStatusLine(winnr())
+if exists("t:diffpanel")
+  setlocal statusline=%!BuildDiffStatusLine(winnr())
+endif
 
