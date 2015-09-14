@@ -214,6 +214,7 @@ Press q to dismiss, <Tab> to lose focus
  gg=G          - Reindent all
  :set tw=‹n›   - Set text width
  gww           - Format current line
+ cok           * Vertically centred text
  cot           * Toggle hard/soft tabs
  \]            * Increase tab width
  \[            * Decrease tab width

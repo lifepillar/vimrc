@@ -410,6 +410,8 @@
   nmap <silent> <leader>+ :IncreaseContrast<cr>
   " Open file browser in the directory of the current buffer
   nnoremap <silent> <leader>e :Ex<cr>
+  " Toggle vertically centered line
+  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? 2 : 999<cr>
   " Toggle between hard tabs and soft tabs in the current buffer
   nnoremap <silent> cot :setlocal invexpandtab<cr>
   " Increase tab width by one in the current buffer
