@@ -22,8 +22,9 @@ else
   let s:orange         = [[130, '#af3a03'], [130, '#af3a03'], [166, '#d65d0e']]
 endif
 
+let s:gruvbox_contrast = (&background == 'dark') ? g:gruvbox_contrast_dark : g:gruvbox_contrast_light
 let s:i    = has("gui_running")
-let s:c    = index(s:contrast_levels, g:gruvbox_contrast)
+let s:c    = index(s:contrast_levels, s:gruvbox_contrast)
 let s:mode = ["cterm", "gui"]
 let s:bg   = s:mode[s:i] . "bg="
 let s:fg   = s:mode[s:i] . "fg="
@@ -36,12 +37,12 @@ execute "hi CommandMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:purple[s:c][s:i]   s:m
 execute "hi Warnings"    s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i]."=reverse"
 
 command! IncreaseContrast
-      \ let g:gruvbox_contrast =
-      \ get(s:contrast_levels, (2 + index(s:contrast_levels, g:gruvbox_contrast)) % 3) |
+      \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
+      \ 'get(s:contrast_levels, (2 + index(s:contrast_levels, s:gruvbox_contrast)) % 3)' |
       \ colorscheme gruvbox
 
 command! ReduceContrast
-      \ let g:gruvbox_contrast =
-      \ get(s:contrast_levels, (1 + index(s:contrast_levels, g:gruvbox_contrast)) % 3) |
+      \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
+      \ 'get(s:contrast_levels, (1 + index(s:contrast_levels, s:gruvbox_contrast)) % 3)' |
       \ colorscheme gruvbox
 
