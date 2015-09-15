@@ -239,6 +239,9 @@ Press q to dismiss, <Tab> to lose focus
   «C-y»        - Scroll up a bit
   ‹n›zl        - Scroll right
   ‹n›zh        - Scroll left
+  zt           - Scroll line to the top
+  zb           - Scroll to the bottom 
+  zz           - Scroll to the center
   zL           - Scroll » half a screen
   zH           - Scroll « half a screen
  :set wrap     - Soft-wrap text
