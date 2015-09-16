@@ -499,10 +499,10 @@ Press q to dismiss, <Tab> to lose focus
  :echo ‹Var›   - Show the value of ‹Var›
  :map          - View all mappings
  :pwd          - Current directory
- :reg          - View registers
+ :di           - View registers
  :set ‹Var›?   - Show value of an option
  :shell        - Open a shell
  :h hitest.vim - Help on highlight test
- :scriptnames  - List of loaded plugins
- :autocmd      - List of autocommands
+ :scr          - List of loaded plugins
+ :au           - List of autocommands
 
