@@ -469,7 +469,6 @@
   set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
   set shortmess-=r " Don't use abbreviations for 'readonly'
   set showcmd " Show (partial) command in the last line of the screen.
-  set noshowmode " Do not show the current mode because it is displayed in status line
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
 
@@ -608,10 +607,14 @@
     augroup END
     let g:default_stl = &statusline
     set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
+    set noshowmode " Do not show the current mode because it is displayed in status line
+    set noruler
   endf
 
   fun! s:disableStatusLine()
     let &statusline = g:default_stl
+    set showmode
+    set ruler
     augroup warnings
       autocmd!
     augroup END
