@@ -425,8 +425,8 @@
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
   " Enable outline mode for the current buffer
   nnoremap <silent> <leader>O :call <sid>enableOutliner()<cr>
-  " Change the contrast level, for themes that support such feature (Solarized
-  " and Seoul256). It is assumed that ReduceContrast and IncreaseContrast are
+  " Change the contrast level, for themes that support such feature (e.g., Solarized,
+  " Seoul256, Gruvbox). It is assumed that ReduceContrast and IncreaseContrast are
   " defined by the color scheme.
   nmap <silent> <leader>- :ReduceContrast<cr>
   nmap <silent> <leader>+ :IncreaseContrast<cr>
