@@ -40,6 +40,7 @@
   filetype plugin on " Enable loading the plugin files for specific file types.
   filetype indent on " Load indent files for specific file types.
   runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
+  let g:pathogen_blacklist = ['youcompleteme']
   execute pathogen#infect()
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
   set autoread " Re-read file if it is changed by an external program.
@@ -66,6 +67,22 @@
     echomsg a:msg
     echohl NONE
   endf
+
+  " Enable a blacklisted plugin.
+  fun! s:loadPlugin(plugin_name)
+    " Remove the plugin from Pathogen's blacklist
+    call filter(g:pathogen_blacklist, "v:val !=? '" . a:plugin_name ."'")
+    " Update runtimepath
+    call pathogen#surround($HOME . "/.vim/bundle/" . tolower(a:plugin_name))
+    " Load the plugin
+    runtime plugin/**/*.vim
+    " Plugin-specific activation
+    if tolower(a:plugin_name) == 'youcompleteme'
+      call youcompleteme#Enable()
+    endif
+  endf
+
+  command! -nargs=1 LoadPlugin call <sid>loadPlugin(<q-args>)
 
   " Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
   fun! s:setLocalTabWidth(w)
