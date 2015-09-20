@@ -799,7 +799,7 @@
       endif
     endf
 
-    " Toggle marks
+  " Toggle marks
     nnoremap <silent> <leader>m :call <sid>toggleShowMarks()<cr>
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
