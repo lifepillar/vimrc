@@ -432,6 +432,8 @@
   nmap <silent> <leader>+ :IncreaseContrast<cr>
   " Open file browser in the directory of the current buffer
   nnoremap <silent> <leader>e :Ex<cr>
+  " Change to the directory of the current file
+  nnoremap <silent> cd :cd %:h \| pwd<cr>
   " Toggle vertically centered line
   nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? 2 : 999<cr>
   " Toggle between hard tabs and soft tabs in the current buffer

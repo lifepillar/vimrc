@@ -67,6 +67,7 @@ Press q to dismiss, <Tab> to lose focus
  ZQ            - Ditto
  :qa!          - Quit all without saving
  «C-g»         - File info
+ cd            * Cd to current path
  :mks          - Save session
                  (Restore with `vim -S`)
  :ls           - List open files
