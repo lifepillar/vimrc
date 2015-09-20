@@ -82,7 +82,12 @@
     endif
   endf
 
-  command! -nargs=1 LoadPlugin call <sid>loadPlugin(<q-args>)
+  " See h :command
+  fun! s:loadPluginCompletion(argLead, cmdLine, cursorPos)
+    return filter(g:pathogen_blacklist, "v:val =~? '^" . a:argLead . "'")
+  endf
+
+  command! -nargs=1 -complete=customlist,s:loadPluginCompletion LoadPlugin call <sid>loadPlugin(<q-args>)
 
   " Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
   fun! s:setLocalTabWidth(w)
