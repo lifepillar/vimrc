@@ -833,6 +833,15 @@
           \ ],
           \ 'sort': 1
           \ }
+    let g:tagbar_type_markdown = {
+          \ 'ctagstype': 'markdown',
+          \ 'kinds': [
+          \ 's:sections',
+          \ 'l:links',
+          \ 'i:images'
+          \ ],
+          \ 'sort': 0
+          \ }
   " }}
   " UltiSnips {{
     let g:UltiSnipsExpandTrigger="<c-j>"
