@@ -471,6 +471,8 @@
   nnoremap <silent> <leader>ga :!git -C '%:p:h' add -p '%:p'<cr>
   " Git push
   nnoremap <silent> <leader>gp :!git -C '%:p:h' push<cr>
+  " Generate/update tags file
+  nnoremap <leader>T :cd %:h \| !ctags -R --exclude=*.html
   " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
   cnoremap <c-a> <home>
   cnoremap <c-e> <end>
