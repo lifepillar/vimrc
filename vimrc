@@ -818,6 +818,21 @@
     let g:tagbar_autoclose = 1
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
+
+    let g:tagbar_type_pgsql = {
+          \ 'ctagstype': 'sql',
+          \ 'kinds': [
+          \ 't:tables',
+          \ 'v:views',
+          \ 'i:indexes',
+          \ 'f:functions',
+          \ 'r:triggers',
+          \ 'd:types',
+          \ 'q:sequences',
+          \ 'o:other'
+          \ ],
+          \ 'sort': 1
+          \ }
   " }}
   " UltiSnips {{
     let g:UltiSnipsExpandTrigger="<c-j>"
