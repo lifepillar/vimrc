@@ -807,8 +807,7 @@
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
       return a:current ?
             \ '%#NormalMode# Tagbar %#SepMode#%{g:left_sep_sym}%* ' . a:fname . ' %= '
-              \ . '%#SepMode#%{g:tagbar_sort ? g:right_sep_sym : ""}%#NormalMode#'
-              \ . (g:tagbar_sort ? ' By name ' : '') . '%*'
+              \ . '%#SepMode#%{g:right_sep_sym}%#NormalMode# ' . a:sort . ' %*'
             \ :
             \ '%#StatusLineNC# Tagbar ' . a:fname
     endf
