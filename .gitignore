@@ -1,10 +1,7 @@
-/*
-!/.gitignore
-!/vimrc
-!/after
-!/bundle
-!/screenshots
-!/cheatsheet.txt
-!/Readme.md
-!/UltiSnips
+.DS_Store
+.netrw*
+/spell
+/tmp
+viminfo
+vimrc_extra.vim
 
