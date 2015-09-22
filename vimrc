@@ -75,7 +75,10 @@
     " Update runtimepath
     call pathogen#surround($HOME . "/.vim/bundle/" . tolower(a:plugin_name))
     " Load the plugin
-    runtime plugin/**/*.vim
+    " Note that this loads only one file (which is usually fine):
+    runtime plugin/*.vim
+    " Note that this uses the plugin name as typed by the user:
+    execute 'runtime! after/plugin/**/' . a:plugin_name . '.vim'
     " Plugin-specific activation
     if tolower(a:plugin_name) == 'youcompleteme'
       call youcompleteme#Enable()
