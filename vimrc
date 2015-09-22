@@ -40,7 +40,7 @@
   filetype plugin on " Enable loading the plugin files for specific file types.
   filetype indent on " Load indent files for specific file types.
   runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
-  let g:pathogen_blacklist = ['youcompleteme']
+  let g:pathogen_blacklist = ['syntastic', 'youcompleteme']
   execute pathogen#infect()
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
   set autoread " Re-read file if it is changed by an external program.
@@ -627,7 +627,7 @@
           \ %#SepMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:right_sep_sym : ""}
           \%#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
-          \%#Warnings#%{w:["lf_active"] && exists("b:stl_warnings") ? b:stl_warnings : ""}%*'
+          \%#Warnings#%{w:["lf_active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
   endf
 
   fun! s:enableStatusLine()
@@ -808,6 +808,24 @@
   " Toggle marks
     nnoremap <silent> <leader>m :call <sid>toggleShowMarks()<cr>
     nnoremap ` :ShowMarksOnce<cr>`
+  " }}
+  " Syntastic {{
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_cursor_columns = 0
+    let g:syntastic_error_symbol = '⦿'
+    let g:syntastic_warning_symbol = '●'
+    let g:syntastic_style_error_symbol = '»'
+    let g:syntastic_style_warning_symbol = '»'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_loc_list_height = 5
+    let g:syntastic_aggregate_errors = 1
+    let g:syntastic_stl_format = '  %E{Err: %fe}%B{ }%W{Warn: %fw} '
+    " We need to define this for the status line, because we load Syntastic on demand.
+    fun! SyntasticStatuslineFlag() abort
+      return ''
+    endf
   " }}
   " Tagbar {{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
