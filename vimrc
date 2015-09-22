@@ -256,7 +256,8 @@
   endf
 " }}
 " Editing {{
-  set scrolloff=2 " Keep some context when scrolling
+  let g:default_scrolloff = 2
+  let &scrolloff=g:default_scrolloff " Keep some context when scrolling
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
   " set clipboard=unnamed " Use system clipboard by default.
@@ -435,7 +436,7 @@
   " Change to the directory of the current file
   nnoremap <silent> cd :cd %:h \| pwd<cr>
   " Toggle vertically centered line
-  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? 2 : 999<cr>
+  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
   " Toggle between hard tabs and soft tabs in the current buffer
   nnoremap <silent> cot :setlocal invexpandtab<cr>
   " Increase tab width by one in the current buffer
@@ -772,7 +773,7 @@
       endif
       set showcmd
       call s:dontSoftWrap()
-      set scrolloff=2
+      let &scrolloff=g:default_scrolloff
       Limelight!
     endf
 
