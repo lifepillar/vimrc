@@ -115,6 +115,7 @@
     let l:winview = winsaveview() " Save window state
     %s/\s\+$//ge
     call winrestview(l:winview) " Restore window state
+    call s:updateWarnings()
     echomsg 'Trailing space removed!'
   endf
 
