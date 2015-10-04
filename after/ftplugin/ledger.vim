@@ -1,5 +1,7 @@
 " Do not use YouCompleteMe for Ledger files
-call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
+if exists('g:ycm_filetype_blacklist')
+  call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
+endif
 
 " Run an arbitrary ledger command.
 fun! s:ledger(args)
