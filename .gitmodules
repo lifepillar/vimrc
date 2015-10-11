@@ -58,9 +58,6 @@
 [submodule "bundle/vim-easymotion"]
 	path = bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
-[submodule "bundle/pgsql"]
-	path = bundle/pgsql
-	url = https://github.com/exu/pgsql.vim.git
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
