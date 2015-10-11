@@ -32,6 +32,33 @@ fun! s:ledgerAutocomplete()
   return "\<c-x>\<c-o>"
 endf
 
+set errorformat+=%f:%l\ %m
+
+let g:ledger_reconcile_list_size = 10
+let g:ledger_vertical_reconcile_list = 0
+let g:ledger_reconcile_list_show_file = 0
+let g:ledger_reconcile_list_options = ['--effective', '--wide']
+
+fun! s:ledgerReconcile(account)
+  lexpr system(g:ledger_bin . " -f " . shellescape(expand('%')) . " register " . a:account . " " . join(g:ledger_reconcile_list_options) . " --uncleared --prepend-format '\%(filename):\%(beg_line) \%(pending ? \"P\" : \"U\") '")
+  if len(getloclist(winnr())) > 0
+    execute (g:ledger_vertical_reconcile_list ? 'vert' : '') 'lopen' g:ledger_reconcile_list_size
+    " Note that the following settings do not persist (e.g., when you close and re-open the quickfix window).
+    " See: http://superuser.com/questions/356912/how-do-i-change-the-quickix-title-status-bar-in-vim
+    let w:quickfix_title = 'Reconcile ' . a:account
+    if !g:ledger_reconcile_list_show_file " Hide file name in quickfix window
+      set conceallevel=2
+      set concealcursor=nc
+      syntax match qfFile /^[^|]*/ transparent conceal
+    endif
+  else
+    lclose
+    echomsg "Nothing to reconcile."
+  endif
+endf
+
+command! -nargs=1 Reconcile call <sid>ledgerReconcile(<q-args>)
+
 " Toggle transaction state
 nnoremap <silent><buffer> <space> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Autocomplete payees/accounts or align amounts at the decimal point
