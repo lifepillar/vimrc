@@ -34,6 +34,7 @@
   set timeoutlen=2000 " How long to wait to recognize multikey input (ms)
   set ttimeoutlen=0 " Faster feedback in status line when returning to normal mode
   set ttyfast
+  set mouse=a
   set updatetime=1000 " Trigger CursorHold event after one second
   syntax enable
   filetype on " Enable file type detection.
