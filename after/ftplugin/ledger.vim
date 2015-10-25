@@ -16,7 +16,7 @@ inoremap <silent><buffer> <c-t> <Esc>:call ledger#entry()<cr>
 nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --effective assets liab
 nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --effective assets liab
 " Cash flow
-nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --effective -p 'this month' cash
+nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --effective --cleared -p 'last 30 days'
 " Journal
 nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --effective -p 'this month'
 " Budget
