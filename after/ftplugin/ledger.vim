@@ -3,6 +3,9 @@ if exists('g:ycm_filetype_blacklist')
   call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 endif
 
+hi! link ledgerTransactionDate Typedef
+hi! link ledgerMetadata Statement
+
 " Toggle transaction state
 nnoremap <silent><buffer> <space> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Set today's date as auxiliary date
