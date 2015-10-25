@@ -5,6 +5,8 @@ endif
 
 " Toggle transaction state
 nnoremap <silent><buffer> <space> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
+" Set today's date as auxiliary date
+nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocomplete payees/accounts or align amounts at the decimal point
 inoremap <silent><buffer> <tab> <c-r>=ledger#autocomplete_and_align()<cr>
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
