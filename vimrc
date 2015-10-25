@@ -617,7 +617,7 @@
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
           \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
-          \%{w:["lf_active"] ? ""  : "     "} %<%F
+          \ %<%F
           \ %{getbufvar(w:["lf_bufnr"], "&modified") ? g:mod_sym : " "}
           \ %{getbufvar(w:["lf_bufnr"], "&modifiable") ? (getbufvar(w:["lf_bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
           \ %=
