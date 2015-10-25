@@ -422,10 +422,14 @@ Press q to dismiss, <Tab> to lose focus
   \f           * Distraction-free mode
  --
   Ledger
+  :Ledger …    - Run Ledger command
+  :Register …  - Quickfix report
+  :Balance …   - Show account balance
+  :Reconcile … - Reconcile an account
   «Tab»      *IV Autocomplete or align
   «C-t»       *I Transaction from text
   «Spc»        * Next transaction state
-  :Ledger …    * Run Ledger command
+  \d           * Add auxiliary date
   \la          * Average expenses report
   \lb          * Balance report
   \lB          * Budget report
