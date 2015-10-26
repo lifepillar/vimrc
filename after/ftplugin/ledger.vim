@@ -5,6 +5,8 @@ endif
 
 hi! link ledgerTransactionDate Typedef
 hi! link ledgerMetadata Statement
+hi! link LedgerNegativeNumber Typedef
+hi! link LedgerImproperPerc PreProc
 
 " Toggle transaction state
 nnoremap <silent><buffer> <space> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
