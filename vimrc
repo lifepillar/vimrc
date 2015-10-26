@@ -706,6 +706,7 @@
     " Open CtrlP in MRU mode by default
     let g:ctrlp_cmd = 'CtrlPMRU'
     let g:ctrlp_switch_buffer = 0
+    let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
     let g:ctrlp_status_func = {
           \ 'main': 'CtrlP_Main',
           \ 'prog': 'CtrlP_Progress',
