@@ -850,11 +850,11 @@
           \ 'ctagstype': 'sql',
           \ 'kinds': [
           \ 't:tables',
-          \ 'v:views',
+          \ 'V:views',
           \ 'i:indexes',
           \ 'f:functions',
-          \ 'r:triggers',
-          \ 'd:types',
+          \ 'T:triggers',
+          \ 'D:types',
           \ 'q:sequences',
           \ 'o:other'
           \ ],
