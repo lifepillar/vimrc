@@ -789,7 +789,7 @@
     autocmd! User GoyoLeave nested call <sid>goyoLeave()
   " }}
   " Ledger {{
-    let g:ledger_bin = 'ledger --check-payees --explicit --pedantic --wide'
+    let g:ledger_extra_options = '--check-payees --explicit --pedantic --wide'
     let g:ledger_maxwidth = 63
     let g:ledger_fillstring = ''
     " let g:ledger_detailed_first = 1
