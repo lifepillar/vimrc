@@ -21,6 +21,12 @@ inoremap <silent><buffer> <c-t> <Esc>:call ledger#entry()<cr>
 
 " Monthly average
 nnoremap <buffer> <leader>la :<c-u>Ledger reg --collapse -A -O --real --effective --monthly -p 'this year' expenses
+" Annualized budget
+nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year' --real --effective --now "
+      \ . strftime('%Y', localtime()) . "/12/31 expenses payable income
+      \ -F '%(justify((get_at(display_total, 1) ? -scrub(get_at(display_total, 1)) : 0.0), 16, -1, true, color))
+      \ %(!options.flat ? depth_spacer : \"\") %-(ansify_if(partial_account(options.flat), blue if color))\\n%/%$1 %$2 %$3\\n
+      \%/%(prepend_width ? \" \" * int(prepend_width) : \"\")  --------------------------\\n'"<cr>
 " Balance report
 nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --effective assets liab
 " Budget
