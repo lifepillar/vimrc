@@ -405,6 +405,7 @@
     let l:ft = getbufvar("%", "&ft") " Get the file type
     " Show the version from the current branch on the left
     call s:git("show :2:./" . l:filename, "l")
+    setlocal buflisted
     let &l:filetype = l:ft
     file OURS
     autocmd BufWinLeave <buffer> diffoff!
@@ -412,6 +413,7 @@
     wincmd p
     " Show version from the other branch on the right
     call s:git("show :3:./" . l:filename, "r")
+    setlocal buflisted
     let &l:filetype = l:ft
     file OTHER
     autocmd BufWinLeave <buffer> diffoff!
