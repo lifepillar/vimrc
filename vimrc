@@ -762,7 +762,6 @@
     fun! s:goyoEnter()
       if has('gui_macvim')
         "set fullscreen
-        set guifont=Monaco:h14
         set linespace=7
         set guioptions-=r " hide right scrollbar
       endif
@@ -775,7 +774,6 @@
     fun! s:goyoLeave()
       if has('gui_macvim')
         "set nofullscreen
-        set guifont=Monaco:h14
         set linespace=0
         set guioptions+=r
       endif
