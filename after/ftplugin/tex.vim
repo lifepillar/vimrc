@@ -90,8 +90,8 @@ fun! s:TeXForwardSearch()
 endf
 
 " Typeset:
-nnoremap <silent><buffer> <leader>tl :<c-u>call <sid>TeXTypeset('lualatex')<cr>
-nnoremap <silent><buffer> <leader>tp :<c-u>call <sid>TeXTypeset('pdflatex')<cr>
+nnoremap <silent><buffer> <leader>tl :<c-u>w<cr>:call <sid>TeXTypeset('lualatex')<cr>
+nnoremap <silent><buffer> <leader>tp :<c-u>w<cr>:call <sid>TeXTypeset('pdflatex')<cr>
 " Clean generated files:
 nnoremap <silent><buffer> <leader>tc :<c-u>call <sid>TeXClean()<cr>
 " Open PDF previewer (Skim):
