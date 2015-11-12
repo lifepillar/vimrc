@@ -99,3 +99,7 @@ nnoremap <silent><buffer> <leader>tv :<c-u>call <sid>TeXPreview()<cr>
 " Forward search using Skim:
 nnoremap <silent><buffer> <leader>ts :<c-u>call <sid>TeXForwardSearch()<cr>
 
+" Reflow paragraph with gqlp ("gq LaTeX paragraph")
+" See http://vim.wikia.com/wiki/Formatting_paragraphs_in_LaTeX:_an_%22environment-aware_gqap%22
+omap lp ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\)?1<cr>//-1<cr>.<cr>
+
