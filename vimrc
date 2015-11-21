@@ -376,58 +376,6 @@
   command! -complete=shellcmd -nargs=+ ShellLeft call s:runShellCommand(<q-args>, "L")
   command! -complete=shellcmd -nargs=+ ShellTop call s:runShellCommand(<q-args>, "T")
 " }}
-" Git {{
-  " Execute a non-interactive Git command in the directory containing
-  " the file of the current buffer, and send the output to a new buffer.
-  " args: a string of arguments for the commmand
-  " pos: a letter specifying the position of the new buffer (see s:runShellCommand()).
-  fun! s:git(args, pos)
-    call s:runShellCommand("git -C %:p:h " . a:args, a:pos)
-  endf
-
-  " Show a vertical diff (use <c-w> K to arrange horizontally)
-  " between the current buffer and its last committed version.
-  fun! s:gitDiff()
-    let l:ft = getbufvar("%", '&ft') " Get the file type
-    call s:git("show HEAD:./" . shellescape(expand("%:t")), 'r')
-    let &l:filetype = l:ft
-    file HEAD
-    autocmd BufWinLeave <buffer> diffoff!
-    diffthis
-    wincmd p
-    diffthis
-  endf
-
-  " Show a three-way diff. Useful for fixing merge conflicts.
-  " This assumes that the current file is the working copy, of course.
-  fun! s:git3WayDiff()
-    let l:filename = shellescape(expand("%:t"))
-    let l:ft = getbufvar("%", "&ft") " Get the file type
-    " Show the version from the current branch on the left
-    call s:git("show :2:./" . l:filename, "l")
-    setlocal buflisted
-    let &l:filetype = l:ft
-    file OURS
-    autocmd BufWinLeave <buffer> diffoff!
-    diffthis
-    wincmd p
-    " Show version from the other branch on the right
-    call s:git("show :3:./" . l:filename, "r")
-    setlocal buflisted
-    let &l:filetype = l:ft
-    file OTHER
-    autocmd BufWinLeave <buffer> diffoff!
-    diffthis
-    wincmd p
-    diffthis
-  endf
-
-  " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
-  command! -complete=shellcmd -nargs=+ Git call <sid>git(<q-args>, "B")
-
-  " Three-way diff.
-  command! -nargs=0 Conflicts call <sid>git3WayDiff()
-" }}
 " Key mappings (plugins excluded) {{
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
@@ -467,18 +415,6 @@
   nnoremap <leader>8 8gt
   nnoremap <leader>9 9gt
   nnoremap <leader>0 10gt
-  " Compare buffer with HEAD
-  nnoremap <silent> <leader>gd :call <sid>gitDiff()<cr>
-  " Git status
-  nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
-  " Git commit
-  nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
-  " Show the revision history for the current file (use :Git log for the full log)
-  nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
-  " Add files/patches to the index
-  nnoremap <silent> <leader>ga :!git -C '%:p:h' add -p '%:p'<cr>
-  " Git push
-  nnoremap <silent> <leader>gp :!git -C '%:p:h' push<cr>
   " Generate/update tags file
   nnoremap <leader>T :cd %:h \| !ctags -R --exclude=*.html
   " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
@@ -755,6 +691,14 @@
     omap <leader>/ <plug>(easymotion-tn)
     nmap <leader>s <plug>(easymotion-s)
     omap <leader>s <plug>(easymotion-s)
+  " }}
+  " Fugitive {{
+    nnoremap <silent> <leader>gc :Gcommit<cr>
+    nnoremap <silent> <leader>gd :Gdiff<cr>
+    nnoremap <silent> <leader>gs :Gstatus<cr>
+    nnoremap <silent> <leader>gl :Glog<cr>
+    nnoremap <silent> <leader>gp :Gpush<cr>
+
   " }}
   " Goyo {{
     " Toggle distraction-free mode
