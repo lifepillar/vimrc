@@ -385,16 +385,6 @@ Press q to dismiss, <Tab> to lose focus
  :Shell …      * Run shell command and
                  show output in buffer
 ===
- Git
- \gs           * Git status
- \gd           * Git diff with HEAD
- \gl           * Git file log
- \ga           * Git add
- \gc           * Git commit
- \gp           * Git push
- :Git …        * Run Git command
- :Conflicts    * Three-way diff
-===
  TeX
  \tl           * Typeset with LuaLaTeX
  \tp           * Typeset with pdfLaTeX
@@ -417,6 +407,13 @@ Press q to dismiss, <Tab> to lose focus
   EasyMotion
   \s‹c›       *M Go to char ‹c›
   \/           * Search
+ --
+  Fugitive
+  \gs           * Git status
+  \gd           * Git diff
+  \gl           * Git file log
+  \gc           * Git commit
+  \gp           * Git push
  --
   Goyo
   \f           * Distraction-free mode
