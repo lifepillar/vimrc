@@ -100,3 +100,6 @@
 [submodule "bundle/ledger"]
 	path = bundle/ledger
 	url = git@github.com:lifepillar/vim-ledger.git
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
