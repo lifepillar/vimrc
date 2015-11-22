@@ -417,7 +417,7 @@
   nnoremap <leader>9 9gt
   nnoremap <leader>0 10gt
   " Generate/update tags file
-  nnoremap <leader>T :cd %:h \| !ctags -R --exclude=*.html
+  nnoremap <leader>T :cd %:h \| !ctags -R --extra=+f --exclude=*.html
   " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
   cnoremap <c-a> <home>
   cnoremap <c-e> <end>
