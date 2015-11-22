@@ -117,6 +117,7 @@
     %s/\s\+$//ge
     call winrestview(l:winview) " Restore window state
     call s:updateWarnings()
+    redraw  " See :h :echo-redraw
     echomsg 'Trailing space removed!'
   endf
 
