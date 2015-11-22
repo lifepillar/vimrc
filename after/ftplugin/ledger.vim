@@ -30,7 +30,7 @@ nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year'
 " Balance report
 nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --effective assets liab
 " Budget
-nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real --effective -p 'this year' expenses payable
+nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
 " Cleared report
 nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --effective assets liab
 " Debit/credit report
