@@ -62,6 +62,7 @@ Press q to dismiss, <Tab> to lose focus
  :x            - Save and quit
  ZZ            - Ditto
  :xa           - Save all and exit Vim
+ :hardcopy     - Print document
  :q            - Quit
  :q!           - Quit without saving
  ZQ            - Ditto
