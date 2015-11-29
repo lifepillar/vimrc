@@ -44,7 +44,7 @@ nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' 
 " Monthly expenses
 nnoremap <buffer> <leader>lm :<c-u>Ledger reg --period-sort '(-amount)' --monthly --aux-date --real -p 'this month' expenses
 " Net worth
-nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '\%10(date)\%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly assets liab
+nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly assets liab
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Ledger reg --pending
 " Register
