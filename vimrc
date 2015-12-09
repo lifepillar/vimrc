@@ -707,7 +707,7 @@
     fun! s:goyoEnter()
       if has('gui_macvim')
         "set fullscreen
-        set linespace=7
+        set linespace=5
         set guioptions-=r " hide right scrollbar
       endif
       set scrolloff=999 " Keep the edited line vertically centered.
