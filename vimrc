@@ -517,7 +517,7 @@
         \ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
         \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
 
-  let g:ff_map = { "unix": "␊ (Unix)", "mac": "␍ (Classic Mac)", "dos": "␍␊ (Windows)" }
+  let g:ff_map = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
   " newMode may be a value as returned by mode(1) or the name of a highlight group.
   fun! s:updateStatusLineHighlight(newMode)
