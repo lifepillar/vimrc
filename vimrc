@@ -708,6 +708,7 @@
       if has('gui_macvim')
         "set fullscreen
         set linespace=5
+        set guicursor=n-v-c:ver10
         set guioptions-=r " hide right scrollbar
       endif
       set scrolloff=999 " Keep the edited line vertically centered.
@@ -720,6 +721,7 @@
       if has('gui_macvim')
         "set nofullscreen
         set linespace=0
+        set guicursor=n-v-c:ver20
         set guioptions+=r
       endif
       set showcmd
