@@ -137,4 +137,5 @@ have found the following interesting:
 - [VimGolf](http://vimgolf.com)
 - [VimAwesome](http://vimawesome.com)
 - [vimrcfu](http://vimrcfu.com)
+- [vimcolors](http://vimcolors.com)
 
