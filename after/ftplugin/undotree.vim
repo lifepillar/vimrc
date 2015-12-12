@@ -6,5 +6,7 @@ fun! BuildUndotreeStatusLine(nr)
         \ %<%{t:undotree.GetStatusLine()} %*'
 endf
 
-setlocal statusline=%!BuildUndotreeStatusLine(winnr())
+if exists("g:default_stl")
+  setlocal statusline=%!BuildUndotreeStatusLine(winnr())
+endif
 
