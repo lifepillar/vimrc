@@ -584,6 +584,7 @@
 
   fun! s:disableStatusLine()
     let &statusline = g:default_stl
+    unlet g:default_stl
     set showmode
     set ruler
     augroup warnings

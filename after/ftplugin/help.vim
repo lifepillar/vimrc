@@ -9,7 +9,9 @@
           \%#CurrMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$")) : ""}%*'
   endf
 
-setlocal statusline=%!BuildHelpStatusLine(winnr())
+if exists("g:default_stl")
+  setlocal statusline=%!BuildHelpStatusLine(winnr())
+endif
 
 nnoremap <silent> <buffer> <tab> <c-w><c-w>
 nnoremap <silent> <buffer> q <c-w>c
