@@ -46,14 +46,17 @@
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
   set autoread " Re-read file if it is changed by an external program.
   set hidden " Allow buffer switching without saving.
-  set history=1000 " Keep a longer history.
+  set history=10000 " Keep a longer history (10000 is the maximum).
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp
   set directory=~/.vim/tmp
-  set viminfo+=n~/.vim/viminfo
+  set viminfo^=!
+  if !has('nvim')
+    set viminfo+=n~/.vim/viminfo
+  endif
   set undofile
   set undodir=~/.vim/tmp
   set undolevels=1000 " Maximum number of changes that can be undone.
@@ -264,6 +267,7 @@
 " Editing {{
   let g:default_scrolloff = 2
   let &scrolloff=g:default_scrolloff " Keep some context when scrolling
+  set autoindent " Use indentation of the first-line when reflowing a paragraph.
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
   " set clipboard=unnamed " Use system clipboard by default.
@@ -273,6 +277,7 @@
   " Scroll the viewport faster.
   nnoremap <c-e> <c-e><c-e>
   nnoremap <c-y> <c-y><c-y>
+  set nrformats=hex
   set showmatch " Show matching brackets/parenthesis
   set matchtime=2 " show matching bracket for 0.2 seconds
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
@@ -287,6 +292,7 @@
   vnoremap > >gv
   vnoremap < <gv
   " Use soft tabs by default
+  set nosmarttab
   set expandtab
   call s:setGlobalTabWidth(2)
 
@@ -297,10 +303,12 @@
   command! -nargs=0  WW :w !sudo tee % >/dev/null
 " }}
 " Find, replace, and auto-complete {{
+  set nohlsearch " Do not highlight search results.
   set incsearch " Search as you type.
   set ignorecase " Case-insensitive search by default.
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
   set infercase " Smart keyword completion
+  set tags=./tags;,tags " Search upwards for tags by default
   set wildmenu " Show possible matches when autocompleting.
   set wildignorecase " Ignore case when completing file names and directories.
 
@@ -378,6 +386,7 @@
   command! -complete=shellcmd -nargs=+ ShellTop call s:runShellCommand(<q-args>, "T")
 " }}
 " Key mappings (plugins excluded) {{
+  set langnoremap
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
   " Enable outline mode for the current buffer
@@ -430,6 +439,7 @@
   cnoremap <esc>f <s-right>
 " }}
 " Appearance {{
+  set display=lastline
   set notitle " Do not set the terminal title.
   set number " Turn line numbering on.
   set relativenumber " Display line numbers relative to the line with the cursor.
@@ -442,6 +452,7 @@
   set showcmd " Show (partial) command in the last line of the screen.
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
+  set tabpagemax=50
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186):
   autocmd VimResized * :wincmd =
@@ -837,6 +848,7 @@
 " }}
 " NeoVim {{
   if has('nvim')
+    set complete+=i
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
 " }}
