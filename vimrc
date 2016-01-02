@@ -509,7 +509,7 @@
 " }}
 " MacVim {{
   if has('gui_macvim')
-    set guifont=Monaco:h12
+    set guifont=Monaco:h11
     set guioptions-=aP " Do not use system clipboard by default
     set guioptions-=T  " No toolbar
     set guioptions-=lL " No left scrollbar
