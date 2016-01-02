@@ -508,14 +508,15 @@
   endif
 " }}
 " Status line {{
-  " See :h mode() (some of these are never used in the status line)
+  " See :h mode() (some of these are never used in the status line; 't' is from NeoVim)
   let g:mode_map = {
         \ 'n':  ['NORMAL',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['VISUAL',  'VisualMode' ],
         \ 'V':  ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ], 's': ['SELECT',  'VisualMode' ],
         \ 'S':  ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['INSERT',  'InsertMode' ],
         \ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
         \ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
-        \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'] }
+        \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'],
+        \ 't':  ['TERMINAL', 'CommandMode']}
 
   let g:ff_map = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
@@ -554,7 +555,7 @@
   " Build the status line the way I want - no fat light plugins!
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
-          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), ["?"])[0] . (&paste ? " PASTE " : " ") : ""}
+          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}
           \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
           \ %<%F
           \ %{getbufvar(w:["lf_bufnr"], "&modified") ? g:mod_sym : " "}
