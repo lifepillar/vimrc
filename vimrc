@@ -269,6 +269,7 @@
 " Editing {{
   let g:default_scrolloff = 2
   let &scrolloff=g:default_scrolloff " Keep some context when scrolling
+  set sidescrolloff=5 " Ditto, bu for horizontal scrolling
   set autoindent " Use indentation of the first-line when reflowing a paragraph.
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
