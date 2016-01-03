@@ -57,7 +57,7 @@
 	url = https://github.com/tpope/vim-speeddating.git
 [submodule "bundle/vim-easymotion"]
 	path = bundle/easymotion
-	url = https://github.com/Lokaltog/vim-easymotion.git
+	url = https://github.com/easymotion/vim-easymotion.git
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
