@@ -776,6 +776,10 @@
     nnoremap <silent> <leader>m :call <sid>toggleShowMarks()<cr>
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
+  " Slimux {{
+    nnoremap <silent> <C-c><C-c> :SlimuxREPLSendLine<cr>
+    vnoremap <silent> <C-c><C-c> :SlimuxREPLSendSelection<cr>
+  " }}
   " Syntastic {{
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
