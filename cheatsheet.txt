@@ -186,6 +186,7 @@ Press q to dismiss, <Tab> to lose focus
  ggvG          - Select all
  «C-w»        CI Delete prev word
  «C-u»        CI Del. line before cursor
+ «C-g»s‹c›     I Insert surrounding ‹c›
  \S            * Remove trailing space
  J             - Join with next line
  gJ            - Ditto, preserve spaces
