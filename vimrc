@@ -295,7 +295,7 @@
   vnoremap > >gv
   vnoremap < <gv
   " Use soft tabs by default
-  set nosmarttab
+  set smarttab
   set expandtab
   call s:setGlobalTabWidth(2)
 
