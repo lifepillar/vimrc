@@ -106,3 +106,6 @@
 [submodule "bundle/onedark"]
 	path = bundle/onedark
 	url = https://github.com/joshdick/onedark.vim
+[submodule "bundle/slimux"]
+	path = bundle/slimux
+	url = https://github.com/epeli/slimux.git
