@@ -37,8 +37,12 @@
   set ttyfast
   set lazyredraw
   set mouse=a
-  if !has('nvim') && $TERM =~# '^\%(screen\|tmux\)'
-    set ttymouse=xterm2 " tmux knows the extended mouse mode
+  if !has('nvim')
+    if has('mouse_sgr')
+      set ttymouse=sgr " See :h sgr-mouse
+    elseif $TERM =~# '^\%(screen\|tmux\)'
+      set ttymouse=xterm2
+    endif
   endif
   set updatetime=1000 " Trigger CursorHold event after one second
   syntax enable
