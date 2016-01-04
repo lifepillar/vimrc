@@ -37,6 +37,9 @@
   set ttyfast
   set lazyredraw
   set mouse=a
+  if !has('nvim') && $TERM =~# '^\%(screen\|tmux\)'
+    set ttymouse=xterm2 " tmux knows the extended mouse mode
+  endif
   set updatetime=1000 " Trigger CursorHold event after one second
   syntax enable
   filetype on " Enable file type detection.
