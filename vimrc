@@ -864,7 +864,46 @@
   if has('nvim')
     set complete+=i
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+    " Exit terminal mode with Esc
+    tnoremap <Esc> <C-\><C-n>
+
+    " Open a new terminal buffer and bind it to the current buffer
+    fun! s:openTerminal()
+      below new
+      terminal
+      let l:term_id = b:terminal_job_id
+      call feedkeys("\<c-\>\<c-n>") " Otherwise `wincmd p` causes the buffer to enter Insert mode (why?)
+      wincmd p
+      let b:lifepillar_bound_terminal = l:term_id
+    endf
+
+    fun! s:REPLSend(...)
+      if !exists('b:lifepillar_bound_terminal')
+        call s:warningMessage('This window is not bound to a terminal')
+        return
+      endif
+      if a:0 == 0
+        let lines = [ getline('.')]
+      elseif getpos("'>") != [0, 0, 0, 0]
+        let [lnum1, col1] = getpos("'<")[1:2]
+        let [lnum2, col2] = getpos("'>")[1:2]
+        call setpos("'>", [0, 0, 0, 0])
+        call setpos("'<", [0, 0, 0, 0])
+
+        let lines = getline(lnum1, lnum2)
+        let lines[-1] = lines[-1][:col2 - 1]
+        let lines[0] = lines[0][col1 - 1:]
+      else
+        let lines = getline(a:1, a:2)
+      end
+      call jobsend(b:lifepillar_bound_terminal, add(lines, ''))
+    endf
   endif
+
+  command! BindTerminal call <sid>openTerminal()
+  command! REPLSendLine call <sid>REPLSend()
+  command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
 " }}
 " Init {{
 
