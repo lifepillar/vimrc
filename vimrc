@@ -880,8 +880,7 @@
 
     fun! s:REPLSend(...)
       if !exists('b:lifepillar_bound_terminal')
-        call s:warningMessage('This window is not bound to a terminal')
-        return
+        let b:lifepillar_bound_terminal = input('Terminal ID: ')
       endif
       if a:0 == 0
         let lines = [ getline('.')]
