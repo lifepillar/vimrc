@@ -903,6 +903,9 @@
   command! BindTerminal call <sid>openTerminal()
   command! REPLSendLine call <sid>REPLSend()
   command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
+
+  nnoremap <silent> <c-c><c-c> :REPLSendLine<cr>
+  vnoremap <silent> <c-c><c-c> :REPLSendSelection<cr>
 " }}
 " Init {{
 
