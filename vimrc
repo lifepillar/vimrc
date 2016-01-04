@@ -883,7 +883,7 @@
         let b:lifepillar_bound_terminal = input('Terminal ID: ')
       endif
       if a:0 == 0
-        let lines = [ getline('.')]
+        let lines = [getline('.')]
       elseif getpos("'>") != [0, 0, 0, 0]
         let [lnum1, col1] = getpos("'<")[1:2]
         let [lnum2, col2] = getpos("'>")[1:2]
