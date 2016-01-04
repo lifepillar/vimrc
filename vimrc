@@ -26,7 +26,7 @@
 " Environment {{
   set nocompatible " Must be first line.
   " See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
-  set encoding=utf-8
+  if !&encoding ==# 'utf-8' | set encoding=utf-8 | endif
   scriptencoding utf-8
   set termencoding=utf-8
   set nobomb
