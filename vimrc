@@ -873,7 +873,7 @@
       below new
       terminal
       let l:term_id = b:terminal_job_id
-      call feedkeys("\<c-\>\<c-n>") " Otherwise `wincmd p` causes the buffer to enter Insert mode (why?)
+      call feedkeys("\<c-\>\<c-n>") " Exit Terminal (Insert) mode
       wincmd p
       let b:lifepillar_bound_terminal = l:term_id
     endf
