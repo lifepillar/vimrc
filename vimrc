@@ -868,9 +868,6 @@
     set complete+=i
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-    " Exit terminal mode with Esc
-    tnoremap <Esc> <C-\><C-n>
-
     " Open a new terminal buffer and bind it to the current buffer
     fun! s:openTerminal()
       below new
