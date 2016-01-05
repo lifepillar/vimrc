@@ -28,7 +28,6 @@
   " See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
   if !&encoding ==# 'utf-8' | set encoding=utf-8 | endif
   scriptencoding utf-8
-  set termencoding=utf-8
   set nobomb
   set fileformats=unix,mac,dos
   set ttimeout
