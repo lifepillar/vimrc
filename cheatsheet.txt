@@ -407,8 +407,12 @@ Press q to dismiss, <Tab> to lose focus
   «CR»         V Trigger Easy Align
  --
   EasyMotion
-  \s‹c›       *M Go to char ‹c›
+  «Spc»‹c›    *M Go to char ‹c›
   \/           * Search
+  \l           * Move right in this line
+  \h           * Move left in this line
+  \j           * Move downwards
+  \k           * Move upwards
  --
   Fugitive
   \gs           * Git status
