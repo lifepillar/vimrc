@@ -787,8 +787,8 @@
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
   " Slimux {{
-    nnoremap <silent> <c-c><c-c> :SlimuxREPLSendLine<cr>
-    vnoremap <silent> <c-c><c-c> :SlimuxREPLSendSelection<cr>
+    nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
+    vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
   " }}
   " Syntastic {{
     let g:syntastic_check_on_open = 1
@@ -904,8 +904,8 @@
   command! REPLSendLine call <sid>REPLSend()
   command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
 
-  nnoremap <silent> <c-c><c-c> :REPLSendLine<cr>
-  vnoremap <silent> <c-c><c-c> :REPLSendSelection<cr>
+  nnoremap <silent> <leader>x :REPLSendLine<cr>
+  vnoremap <silent> <leader>x :REPLSendSelection<cr>
 " }}
 " Init {{
 
