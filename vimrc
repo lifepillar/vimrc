@@ -911,6 +911,8 @@
   DisablePatchedFont
   EnableStatusLine
 
+  let g:sql_type_default = 'pgsql'
+
   " Extra settings.
   " If this file exists, it should at least define the color scheme.
   if filereadable($HOME . '/.vim/vimrc_extra.vim')
