@@ -191,6 +191,7 @@ Press q to dismiss, <Tab> to lose focus
  J             - Join with next line
  gJ            - Ditto, preserve spaces
  :sort         V Sort selected lines
+ :sort u       V Sort+remove duplicates
  q‹r›          - Start recording
                  Press q to stop
  @‹r›          - Run recorded macro
