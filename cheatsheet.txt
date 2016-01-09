@@ -452,6 +452,9 @@ Press q to dismiss, <Tab> to lose focus
   Show Marks
   \m           * Toggle marks
  --
+  Slimux
+  \x           * Send command
+ --
   Surround
   ys‹Move›‹c›  - Surround with ‹c›
   S‹c›         V Surround with ‹c›
