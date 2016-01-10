@@ -21,8 +21,8 @@ The following themes are supported:
 - [Seoul256](https://github.com/junegunn/seoul256.vim) (light/dark)
 - [Tomorrow](https://github.com/chriskempson/vim-tomorrow-theme) (light/dark)
 
-The following themes look fine in MacVim, but may be suboptimal choices in
-Terminal.app:
+The following themes look fine in GUI Vim (e.g., MacVim), but may be suboptimal
+choices in Terminal.app:
 
 - [Gruvbox](https://github.com/morhetz/gruvbox) (light/dark): this looks fine in
   iTerm, however, provided that you run
@@ -34,7 +34,7 @@ Solarized is the default theme. To use a different theme, put a file called
 
 The 16 color version of Solarized is used, so your terminal **must** be
 configured to use Solarized, too! The other themes are 256 color themes, which
-should display just fine in MacVim, and use very similar, if not identical,
+should display just fine in GUI Vim, and use very similar, if not identical,
 colors in the terminal, no matter what colors the terminal is using.
 
 Use `cob` (for “change option: background”) to switch between light and dark

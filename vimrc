@@ -279,7 +279,7 @@
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
   " set clipboard=unnamed " Use system clipboard by default.
-  " Smooth scrolling that works both in terminal and in MacVim
+  " Smooth scrolling that works both in terminal and in GUI Vim
   nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
   nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
   " Scroll the viewport faster.
@@ -515,15 +515,15 @@
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
   command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
 " }}
-" MacVim {{
-  if has('gui_macvim')
+" GUI {{
+  if has('gui_running')
     set guifont=Monaco:h11
     set guioptions-=aP " Do not use system clipboard by default
     set guioptions-=T  " No toolbar
     set guioptions-=lL " No left scrollbar
     set guioptions-=e  " Use Vim tabline
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    set transparency=1
+    set transparency=0
   endif
 " }}
 " Status line {{
@@ -730,7 +730,7 @@
     " Toggle distraction-free mode
     nnoremap <silent> <leader>f :Goyo<cr>
     fun! s:goyoEnter()
-      if has('gui_macvim')
+      if has('gui_running')
         "set fullscreen
         set linespace=5
         set guicursor=n-v-c:ver10
@@ -743,7 +743,7 @@
     endf
 
     fun! s:goyoLeave()
-      if has('gui_macvim')
+      if has('gui_running')
         "set nofullscreen
         set linespace=0
         set guicursor=n-v-c:ver20
