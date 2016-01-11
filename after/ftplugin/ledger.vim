@@ -8,12 +8,25 @@ hi! link ledgerMetadata Statement
 hi! link LedgerNegativeNumber Typedef
 hi! link LedgerImproperPerc PreProc
 
+" Waiting for https://github.com/ledger/vim-ledger/pull/27 to be merged.
+fun! s:autocomplete_and_align()
+  if pumvisible()
+    return "\<c-n>"
+    " See http://stackoverflow.com/questions/23323747/vim-vimscript-get-exact-character-under-the-cursor
+  elseif matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\d'
+    norm h
+    call ledger#align_amount_at_cursor()
+    return "\<c-o>A"
+  endif
+  return "\<c-x>\<c-o>"
+endf
+
 " Toggle transaction state
 nnoremap <silent><buffer> <space> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Set today's date as auxiliary date
 nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocomplete payees/accounts or align amounts at the decimal point
-inoremap <silent><buffer> <tab> <c-r>=ledger#autocomplete_and_align()<cr>
+inoremap <silent><buffer> <tab> <c-r>=<sid>autocomplete_and_align()<cr>
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
 " Enter a new transaction based on the text in the current line
 nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>
