@@ -897,14 +897,14 @@
       end
       call jobsend(b:lifepillar_bound_terminal, add(lines, ''))
     endf
+
+    command! BindTerminal call <sid>openTerminal()
+    command! REPLSendLine call <sid>REPLSend()
+    command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
+
+    nnoremap <silent> <leader>x :REPLSendLine<cr>
+    vnoremap <silent> <leader>x :REPLSendSelection<cr>
   endif
-
-  command! BindTerminal call <sid>openTerminal()
-  command! REPLSendLine call <sid>REPLSend()
-  command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
-
-  nnoremap <silent> <leader>x :REPLSendLine<cr>
-  vnoremap <silent> <leader>x :REPLSendSelection<cr>
 " }}
 " Init {{
 
