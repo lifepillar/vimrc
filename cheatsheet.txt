@@ -432,7 +432,7 @@ Press q to dismiss, <Tab> to lose focus
   :Reconcile … - Reconcile an account
   «Tab»      *IV Autocomplete or align
   «C-t»       *I Transaction from text
-  «Spc»        * Next transaction state
+  «Enter»      * Next transaction state
   \d           * Add auxiliary date
   \la          * Average expenses report
   \lA          * Annualized budget
