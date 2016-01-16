@@ -569,7 +569,6 @@
           \                    get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode")
           \                  )
           \                ),
-          \ "lf_bufnr": winbufnr(winnr()),
           \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
   endf
@@ -579,15 +578,12 @@
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}
           \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
-          \ %<%F
-          \ %{getbufvar(w:["lf_bufnr"], "&modified") ? g:mod_sym : " "}
-          \ %{getbufvar(w:["lf_bufnr"], "&modifiable") ? (getbufvar(w:["lf_bufnr"], "&readonly") ? g:ro_sym : "") : g:ma_sym}
+          \ %t
+          \ %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
+          \ %<%{expand("%:p:h")}
           \ %=
-          \ %{getbufvar(w:["lf_bufnr"], "&ft")}
-          \ %{w:["lf_winwd"] < 80 ? "" : " "
-          \ . getbufvar(w:["lf_bufnr"], "&fenc") . (getbufvar(w:["lf_bufnr"], "&bomb") ? ",BOM" : "") . " "
-          \ . get(g:ff_map, getbufvar(w:["lf_bufnr"], "&ff"), "? (Unknown)") . " "
-          \ . (getbufvar(w:["lf_bufnr"], "&expandtab") ? "˽ " : "⇥ ") . getbufvar(w:["lf_bufnr"], "&tabstop")}
+          \ %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
+          \ . get(g:ff_map, &ff, "?") . (&expandtab ? " ˽ " : " ⇥ ") . &tabstop}
           \ %#SepMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:right_sep_sym : ""}
           \%#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
