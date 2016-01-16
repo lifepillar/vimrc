@@ -316,6 +316,8 @@
   set ignorecase " Case-insensitive search by default.
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
   set infercase " Smart keyword completion
+  set complete+=kspell " Use spell dictionary for completion, if available
+  set completeopt+=longest,menuone
   set omnifunc=syntaxcomplete#Complete " See :h ft-syntax-omni
   set tags=./tags;,tags " Search upwards for tags by default
   set wildmenu " Show possible matches when autocompleting.
