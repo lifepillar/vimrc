@@ -408,6 +408,7 @@ Press q to dismiss, <Tab> to lose focus
   «CR»         V Trigger Easy Align
  --
   EasyMotion
+  \s‹c›        * Go to char ‹c›
   «Spc»‹c›    *M Go to char ‹c›
   \/           * Search
   \l           * Move right in this line

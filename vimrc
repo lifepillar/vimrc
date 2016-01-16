@@ -398,6 +398,7 @@
 " }}
 " Key mappings (plugins excluded) {{
   set langnoremap
+  map <space> <leader>
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
   " Enable outline mode for the current buffer
@@ -710,7 +711,7 @@
     let g:EasyMotion_smartcase = 1
     map  <leader>/ <plug>(easymotion-sn)
     omap <leader>/ <plug>(easymotion-tn)
-    nmap <space>   <plug>(easymotion-s)
+    nmap <leader>s <plug>(easymotion-s)
     omap <space>   <plug>(easymotion-s)
     map  <leader>l <plug>(easymotion-lineforward)
     map  <leader>j <plug>(easymotion-j)
