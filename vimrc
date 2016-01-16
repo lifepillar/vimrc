@@ -210,7 +210,7 @@
     let g:right_sep_sym = ""
     let g:lalt_sep_sym = ""
     let g:ralt_sep_sym = ""
-    let g:ro_sym = "ⓡ"
+    let g:ro_sym = "RO"
     let g:ma_sym = "✗"
     let g:mod_sym = "◇"
     let g:linecol_sym = ""
