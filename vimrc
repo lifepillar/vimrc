@@ -259,7 +259,7 @@
 
   fun! s:enableOutliner()
     setlocal autoindent
-    setlocal formatoptions=tcqrnjo
+    setlocal formatoptions=tcqrn1jo
     setlocal comments=fb:*,fb:-,b::
     setlocal textwidth=80
     setlocal foldmethod=expr
@@ -291,7 +291,7 @@
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
   set splitright " Puts new vsplit windows to the right of the current
   set splitbelow " Puts new split windows to the bottom of the current
-  set formatoptions+=j " Remove extra comment when joining lines
+  set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
   " Load matchit.vim, but only if the user hasn't installed a newer version.
   if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
     runtime! macros/matchit.vim " Enable % to go to matching keyword/tag.
