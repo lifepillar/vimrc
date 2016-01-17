@@ -401,7 +401,8 @@
 " }}
 " Commands (plugins excluded) {{
   " Generate/update tags file
-  " command! -nargs=* -complete=shell Ctags cd %:h \bar !ctags -R --extra=+f --exclude=*.html
+  command! -nargs=* -complete=shellcmd Ctags cd %:h |
+        \ !ctags -R --extra=+f --exclude=*.html
 
   " Fancy fonts
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
