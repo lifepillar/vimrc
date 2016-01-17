@@ -53,7 +53,7 @@
   filetype plugin on " Enable loading the plugin files for specific file types
   filetype indent on " Load indent files for specific file types
   runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen
-  let g:pathogen_blacklist = ['syntastic', 'youcompleteme']
+  let g:pathogen_blacklist = ['slimux', 'syntastic', 'youcompleteme']
   execute pathogen#infect()
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
   set autoread " Re-read file if it is changed by an external program
