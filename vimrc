@@ -29,7 +29,7 @@
 "
 " }}
 " Environment {{
-  set nocompatible " Must be first line.
+  set nocompatible " Must be first line
   " See http://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
   if !&encoding ==# 'utf-8' | set encoding=utf-8 | endif
   scriptencoding utf-8
@@ -49,16 +49,16 @@
   endif
   set updatetime=1000 " Trigger CursorHold event after one second
   syntax enable
-  filetype on " Enable file type detection.
-  filetype plugin on " Enable loading the plugin files for specific file types.
-  filetype indent on " Load indent files for specific file types.
-  runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen.
+  filetype on " Enable file type detection
+  filetype plugin on " Enable loading the plugin files for specific file types
+  filetype indent on " Load indent files for specific file types
+  runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen
   let g:pathogen_blacklist = ['syntastic', 'youcompleteme']
   execute pathogen#infect()
-  set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen.
-  set autoread " Re-read file if it is changed by an external program.
-  set hidden " Allow buffer switching without saving.
-  set history=10000 " Keep a longer history (10000 is the maximum).
+  set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
+  set autoread " Re-read file if it is changed by an external program
+  set hidden " Allow buffer switching without saving
+  set history=10000 " Keep a longer history (10000 is the maximum)
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   " Consolidate temporary files in a central spot
@@ -70,24 +70,23 @@
   endif
   set undofile
   set undodir=~/.vim/tmp
-  set undolevels=1000 " Maximum number of changes that can be undone.
-  set undoreload=10000 " Maximum number lines to save for undo on a buffer reload.
-  set nobackup " Do not keep a backup copy of a file.
-  set nowritebackup " Do not write temporary backup files.
-  set noswapfile " Do not create swap files.
+  set undolevels=1000 " Maximum number of changes that can be undone
+  set undoreload=10000 " Maximum number lines to save for undo on a buffer reload
+  set nobackup " Do not keep a backup copy of a file
+  set nowritebackup " Do not write temporary backup files
+  set noswapfile " Do not create swap files
 " }}
 " Editing {{
   let g:default_scrolloff = 2
   let &scrolloff=g:default_scrolloff " Keep some context when scrolling
   set sidescrolloff=5 " Ditto, but for horizontal scrolling
-  set autoindent " Use indentation of the first-line when reflowing a paragraph.
-  set backspace=indent,eol,start " Intuitive backspacing in insert mode.
-  set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
-  " set clipboard=unnamed " Use system clipboard by default.
+  set autoindent " Use indentation of the first-line when reflowing a paragraph
+  set backspace=indent,eol,start " Intuitive backspacing in insert mode
+  set whichwrap+=<,>,[,],h,l " More intuitive arrow movements
   " Smooth scrolling that works both in terminal and in GUI Vim
   nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
   nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
-  " Scroll the viewport faster.
+  " Scroll the viewport faster
   nnoremap <c-e> <c-e><c-e>
   nnoremap <c-y> <c-y><c-y>
   set nrformats=hex
@@ -97,9 +96,9 @@
   set splitright " Puts new vsplit windows to the right of the current
   set splitbelow " Puts new split windows to the bottom of the current
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
-  " Load matchit.vim, but only if the user hasn't installed a newer version.
+  " Load matchit.vim, but only if the user hasn't installed a newer version
   if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-    runtime! macros/matchit.vim " Enable % to go to matching keyword/tag.
+    runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
   endif
   " Shift left/right repeatedly
   vnoremap > >gv
@@ -112,31 +111,31 @@
   set softtabstop=2
 " }}
 " Find, replace, and completion {{
-  set nohlsearch " Do not highlight search results.
-  set incsearch " Search as you type.
-  set ignorecase " Case-insensitive search by default.
-  set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
+  set nohlsearch " Do not highlight search results
+  set incsearch " Search as you type
+  set ignorecase " Case-insensitive search by default
+  set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   set infercase " Smart keyword completion
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone
   set tags=./tags;,tags " Search upwards for tags by default
-  set wildmenu " Show possible matches when autocompleting.
-  set wildignorecase " Ignore case when completing file names and directories.
+  set wildmenu " Show possible matches when autocompleting
+  set wildignorecase " Ignore case when completing file names and directories
 " }}
 " Appearance {{
   set display=lastline
-  set notitle " Do not set the terminal title.
-  set number " Turn line numbering on.
-  set relativenumber " Display line numbers relative to the line with the cursor.
-  set nowrap " Don't wrap lines by default.
-  set linebreak " If wrapping is enabled, wrap at word boundaries.
-  " set colorcolumn=80 " Show page guide at column 80.
-  set laststatus=2 " Always show status line.
+  set notitle " Do not set the terminal title
+  set number " Turn line numbering on
+  set relativenumber " Display line numbers relative to the line with the cursor
+  set nowrap " Don't wrap lines by default
+  set linebreak " If wrapping is enabled, wrap at word boundaries
+  " set colorcolumn=80 " Show page guide at column 80
+  set laststatus=2 " Always show status line
   set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
   set shortmess-=r " Don't use abbreviations for 'readonly'
-  set showcmd " Show (partial) command in the last line of the screen.
+  set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
-  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters.
+  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters
   set tabpagemax=50
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
@@ -157,7 +156,7 @@
 
   let g:ff_map = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
-  " newMode may be a value as returned by mode(1) or the name of a highlight group.
+  " newMode may be a value as returned by mode(1) or the name of a highlight group
   fun! s:updateStatusLineHighlight(newMode)
     execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
     call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
@@ -206,7 +205,7 @@
   endf
 " }}
 " Tabline {{
-  " Define the highlight groups for the separator symbols in the tabline.
+  " Define the highlight groups for the separator symbols in the tabline
   fun! s:setTabLineSepGroups()
     call s:setTransitionGroup("TabSepPreSel", "TabLine", "TabLineSel")
     call s:setTransitionGroup("TabSepSel", "TabLineSel", "TabLine")
@@ -270,7 +269,7 @@
     endfor
   endf
 
-  " Return the real background color of the given highlight group.
+  " Return the real background color of the given highlight group
   fun! s:getRealBackground(hl)
     let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
     if l:col == -1 || empty(l:col)  " First fallback
@@ -331,7 +330,7 @@
     set noruler
     let g:default_stl = &statusline
     let g:default_tal = &tabline
-    set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
+    set statusline=%!BuildStatusLine(winnr()) " winnr() is always the number of the *active* window
     set tabline=%!BuildTabLine()
   endf
 
@@ -377,7 +376,8 @@
   " Update trailing space and mixed indent warnings for the current buffer.
   " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
   fun! s:updateWarnings()
-    if getfsize(bufname('%')) >= g:LargeFile
+    let l:sz = getfsize(bufname('%'))
+    if l:sz >= g:LargeFile || l:sz == -2
       let b:stl_warnings = '  Large file '
       return
     endif
@@ -411,23 +411,23 @@
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
   command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
-  " Find all in current buffer.
+  " Find all in current buffer
   command! -nargs=1 FindAll call lf_find#buffer(<q-args>)
 
-  " Find all in all open buffers.
+  " Find all in all open buffers
   command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
 
   " Load a blacklisted plugin
   command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>)
 
-  " Execute an external command and show the output in a new buffer.
+  " Execute an external command and show the output in a new buffer
   command! -complete=shellcmd -nargs=+ Shell      call lf_shell#run(<q-args>, "B")
   command! -complete=shellcmd -nargs=+ ShellBot   call lf_shell#run(<q-args>, "B")
   command! -complete=shellcmd -nargs=+ ShellRight call lf_shell#run(<q-args>, "R")
   command! -complete=shellcmd -nargs=+ ShellLeft  call lf_shell#run(<q-args>, "L")
   command! -complete=shellcmd -nargs=+ ShellTop   call lf_shell#run(<q-args>, "T")
 
-  " Set the tab width for the current buffer.
+  " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
   command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
@@ -435,7 +435,7 @@
   " Toggle soft wrap
   command! -nargs=0 ToggleWrap call lf_text#toggleWrap()
 
-  " Save file with sudo.
+  " Save file with sudo
   command! -nargs=0  WW :w !sudo tee % >/dev/null
 " }}
 " Key mappings (plugins excluded) {{
@@ -500,7 +500,7 @@
             \ )
           \ : "\<tab>"
           \ )
-  " Move up in pop-up menu or unindent in Insert mode.
+  " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
 " }}
 " Plugins {{
@@ -578,7 +578,7 @@
         set guicursor=n-v-c:ver10
         set guioptions-=r " hide right scrollbar
       endif
-      set scrolloff=999 " Keep the edited line vertically centered.
+      set scrolloff=999 " Keep the edited line vertically centered
       call s:softWrap()
       set noshowcmd
       Limelight
@@ -606,7 +606,6 @@
     let g:ledger_extra_options = '--check-payees --explicit --pedantic --wide'
     let g:ledger_maxwidth = 63
     let g:ledger_fillstring = ''
-    " let g:ledger_detailed_first = 1
     let g:ledger_fold_blanks = 1
     let g:ledger_decimal_sep = ','
     let g:ledger_align_at = 60
@@ -658,7 +657,7 @@
     let g:syntastic_loc_list_height = 5
     let g:syntastic_aggregate_errors = 1
     let g:syntastic_stl_format = '  %E{Err: %fe}%B{ }%W{Warn: %fw} '
-    " We need to define this for the status line, because we load Syntastic on demand.
+    " We need to define this for the status line, because we load Syntastic on demand
     fun! SyntasticStatuslineFlag() abort
       return ''
     endf
@@ -737,8 +736,8 @@
   DisablePatchedFont
   EnableStatusLine
 
-  " Extra settings.
-  " If this file exists, it should at least define the color scheme.
+  " Extra settings
+  " If this file exists, it should at least define the color scheme
   if filereadable('~/.vim/vimrc_extra.vim')
     execute 'source ~/.vim/vimrc_extra.vim'
   else
