@@ -1,27 +1,32 @@
 " Modeline and Notes {{
 " vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
-" ---
-" For UTF-8 symbols to be displayed correctly (e.g., in the status line), you
-" may need to check "Set locale environment variables on startup" in OS X
-" Terminal.app's preferences, or "Set locale variables automatically" in
-" iTerm's Terminal settings.
+" - To override the settings of a color scheme, create a file
+"   after/colors/<theme name>.vim It will be automatically loaded after the
+"   color scheme is activated.
 "
-" If UTF-8 symbols are not displayed in remote sessions (that is, when you run
-" Vim on a remote machine to which you are connected via SSH), make sure that the
-" following line is *not* commented in the client's /etc/ssh_config:
+" - To switch the color scheme when the background changes, define
+"   a BackgroundToggle_<theme_name>() function that changes the color scheme.
 "
-"     SendEnv LANG LC_*
+" - For UTF-8 symbols to be displayed correctly (e.g., in the status line),
+"   you may need to check "Set locale environment variables on startup" in OS
+"   X Terminal.app's preferences, or "Set locale variables automatically" in
+"   iTerm's Terminal settings. If UTF-8 symbols are not displayed in remote
+"   sessions (that is, when you run Vim on a remote machine to which you are
+"   connected via SSH), make sure that the following line is *not* commented
+"   in the client's /etc/ssh_config:
 "
-" As a last resort, you may set LC_ALL and LANG manually on the server; e.g., put
-" these in your remote machine's .bash_profile:
+"       SendEnv LANG LC_*
 "
-"     export LC_ALL=en_US.UTF-8
-"     export LANG=en_US.UTF-8
+"   As a last resort, you may set LC_ALL and LANG manually on the server; e.g.,
+"   put these in your remote machine's .bash_profile:
 "
-" ---
-" Spell files can be downloaded from ftp://ftp.vim.org/pub/vim/runtime/spell/
-" and put inside .vim/spell.
+"       export LC_ALL=en_US.UTF-8
+"       export LANG=en_US.UTF-8
+"
+" - Spell files can be downloaded from
+"   ftp://ftp.vim.org/pub/vim/runtime/spell/ and put inside .vim/spell.
+"
 " }}
 " Environment {{
   set nocompatible " Must be first line.
@@ -56,7 +61,6 @@
   set history=10000 " Keep a longer history (10000 is the maximum).
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
-  let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp
   set directory=~/.vim/tmp
@@ -72,209 +76,10 @@
   set nowritebackup " Do not write temporary backup files.
   set noswapfile " Do not create swap files.
 " }}
-" Helper functions {{
-  fun! s:warningMessage(msg)
-    echohl ErrorMsg
-    echomsg a:msg
-    echohl NONE
-  endf
-
-  " Enable a blacklisted plugin.
-  fun! s:loadPlugin(plugin_name)
-    " Remove the plugin from Pathogen's blacklist
-    call filter(g:pathogen_blacklist, "v:val !=? '" . a:plugin_name ."'")
-    " Update runtimepath
-    call pathogen#surround($HOME . "/.vim/bundle/" . tolower(a:plugin_name))
-    " Load the plugin
-    " Note that this loads only one file (which is usually fine):
-    runtime plugin/*.vim
-    " Note that this uses the plugin name as typed by the user:
-    execute 'runtime! after/plugin/**/' . a:plugin_name . '.vim'
-    " Plugin-specific activation
-    if tolower(a:plugin_name) == 'youcompleteme'
-      call youcompleteme#Enable()
-    endif
-  endf
-
-  " See h :command
-  fun! s:loadPluginCompletion(argLead, cmdLine, cursorPos)
-    return filter(g:pathogen_blacklist, "v:val =~? '^" . a:argLead . "'")
-  endf
-
-  command! -nargs=1 -complete=customlist,s:loadPluginCompletion LoadPlugin call <sid>loadPlugin(<q-args>)
-
-  " Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
-  fun! s:setLocalTabWidth(w)
-    let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
-    " For the following assignment, see :help let-&.
-    " See also http://stackoverflow.com/questions/12170606/how-to-set-numeric-variables-in-vim-functions.
-    let &l:tabstop=l:twd
-    let &l:shiftwidth=l:twd
-    let &l:softtabstop=l:twd
-  endf
-
-  " Set the tab width globally.
-  fun! s:setGlobalTabWidth(w)
-    let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
-    let &tabstop=l:twd
-    let &shiftwidth=l:twd
-    let &softtabstop=l:twd
-  endf
-
-  " Delete trailing white space.
-  fun! s:removeTrailingSpace()
-    let l:winview = winsaveview() " Save window state
-    %s/\s\+$//ge
-    call winrestview(l:winview) " Restore window state
-    call s:updateWarnings()
-    redraw  " See :h :echo-redraw
-    echomsg 'Trailing space removed!'
-  endf
-
-  fun! s:softWrap()
-    setlocal wrap
-    map <buffer> j gj
-    map <buffer> k gk
-    echomsg "Soft wrap enabled"
-  endf
-
-  fun! s:dontSoftWrap()
-    setlocal nowrap
-    if mapcheck("j") != ""
-      unmap <buffer> j
-      unmap <buffer> k
-    endif
-    echomsg "Soft wrap disabled"
-  endf
-
-  " Toggle soft-wrapped text in the current buffer.
-  fun! s:toggleWrap()
-    if &l:wrap
-      call s:dontSoftWrap()
-    else
-      call s:softWrap()
-    endif
-  endf
-
-  command! -nargs=0 ToggleWrap call <sid>toggleWrap()
-
-  " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
-  fun! s:smoothScroll(up)
-    execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
-    redraw
-    for l:count in range(3, &scroll, 2)
-      sleep 10m
-      execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
-      redraw
-    endfor
-  endf
-
-  " Return the real background color of the given highlight group.
-  fun! s:getRealBackground(hl)
-    let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
-    if l:col == -1 || empty(l:col)  " First fallback
-      let l:col = synIDattr(synIDtrans(hlID("Normal")), synIDattr(synIDtrans(hlID("Normal")), "reverse") ? "fg" : "bg")
-      if l:col == -1 || empty(l:col) " Second fallback
-        return (has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? "#FFFFFF" : "1"
-      endif
-    endif
-    return l:col
-  endf
-
-  " Define or overwrite a highlight group hl using the following rule: the
-  " foreground of hl is set equal to the background of fgHl; the background of
-  " hl is set equal to the background of bgHl. Highlight groups defined in
-  " this way are used as transition groups (separators) in the status line and
-  " in the tab line.
-  fun! s:setTransitionGroup(hl,fgHl, bgHl)
-    execute 'hi! '. a:hl . (has("gui_running") || (has("termtruecolor") && guicolors == 1) ?
-          \ ' guifg='   . s:getRealBackground(a:fgHl) . ' guibg='   . s:getRealBackground(a:bgHl) :
-          \ ' ctermfg=' . s:getRealBackground(a:fgHl) . ' ctermbg=' . s:getRealBackground(a:bgHl))
-  endf
-
-  fun! s:enablePatchedFont()
-    let g:left_sep_sym = "\ue0b0"
-    let g:right_sep_sym = "\ue0b2"
-    let g:lalt_sep_sym = "\ue0b1"
-    let g:ralt_sep_sym = "\ue0b3"
-    let g:ro_sym = "\ue0a2"
-    let g:ma_sym = "✗"
-    let g:mod_sym = "◇"
-    let g:linecol_sym = "\ue0a1"
-    let g:branch_sym = "\ue0a0"
-    let g:pad = " "
-  endf
-
-  fun! s:disablePatchedFont()
-    let g:left_sep_sym = ""
-    let g:right_sep_sym = ""
-    let g:lalt_sep_sym = ""
-    let g:ralt_sep_sym = ""
-    let g:ro_sym = "RO"
-    let g:ma_sym = "✗"
-    let g:mod_sym = "◇"
-    let g:linecol_sym = ""
-    let g:branch_sym = ""
-    let g:pad = ""
-  endf
-
-  " Update trailing space and mixed indent warnings for the current buffer.
-  " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-  fun! s:updateWarnings()
-    let l:winview = winsaveview() " Save window state
-    call cursor(1,1) " Start search from the beginning of the file
-    let l:trail = search('\s$', 'nw')
-    let l:spaces = search('\v^\s* ', 'nw')
-    let l:tabs = search('\v^\s*\t', 'nw')
-    if l:trail != 0
-      let b:stl_warnings = '  Trailing space ('.trail.') '
-      if l:spaces != 0 && l:tabs != 0
-        let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
-      endif
-    elseif l:spaces != 0 && l:tabs != 0
-      let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
-    else
-      unlet! b:stl_warnings
-    endif
-    call winrestview(l:winview) " Restore window state
-  endf
-
-  fun! s:cheatsheet()
-    botright vert 40sview ${HOME}/.vim/cheatsheet.txt
-    setlocal bufhidden=wipe nobuflisted noswapfile nowrap
-    nnoremap <silent> <buffer> <tab> <c-w><c-w>
-    nnoremap <silent> <buffer> q <c-w>c
-  endf
-
-  " An outliner in less than 20 lines of code! The format is compatible with
-  " VimOutliner (just in case we decide to use it): lines starting with : are
-  " used for notes (indent one level wrt to the owning node). Promote,
-  " demote, move, (un)fold and reformat with standard commands (plus mappings
-  " defined below). Do not leave blank lines between nodes.
-  fun! s:outlinerFoldingRule(n)
-    return getline(a:n) =~ '^\s*:' ?
-          \ 20 : indent(a:n) < indent(a:n+1) ?
-          \ ('>'.(1+indent(a:n)/&l:tabstop)) : (indent(a:n)/&l:tabstop)
-  endf
-
-  fun! s:enableOutliner()
-    setlocal autoindent
-    setlocal formatoptions=tcqrn1jo
-    setlocal comments=fb:*,fb:-,b::
-    setlocal textwidth=80
-    setlocal foldmethod=expr
-    setlocal foldexpr=s:outlinerFoldingRule(v:lnum)
-    setlocal foldtext=getline(v:foldstart)
-    setlocal foldlevel=2
-    " Full display with collapsed notes:
-    nnoremap <buffer> <silent> <leader>n :set foldlevel=19<cr>
-    TabWidth 4
-  endf
-" }}
 " Editing {{
   let g:default_scrolloff = 2
   let &scrolloff=g:default_scrolloff " Keep some context when scrolling
-  set sidescrolloff=5 " Ditto, bu for horizontal scrolling
+  set sidescrolloff=5 " Ditto, but for horizontal scrolling
   set autoindent " Use indentation of the first-line when reflowing a paragraph.
   set backspace=indent,eol,start " Intuitive backspacing in insert mode.
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements.
@@ -299,18 +104,14 @@
   " Shift left/right repeatedly
   vnoremap > >gv
   vnoremap < <gv
-  " Use soft tabs by default
   set smarttab
-  set expandtab
-  call s:setGlobalTabWidth(2)
-
-  " Set the tab width for the current buffer.
-  command! -nargs=1 TabWidth call <sid>setLocalTabWidth(<q-args>)
-
-  " Save file with sudo.
-  command! -nargs=0  WW :w !sudo tee % >/dev/null
+  set expandtab " Use soft tabs by default
+  " Use two spaces for tab by default
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
 " }}
-" Find, replace, and auto-complete {{
+" Find, replace, and completion {{
   set nohlsearch " Do not highlight search results.
   set incsearch " Search as you type.
   set ignorecase " Case-insensitive search by default.
@@ -321,147 +122,6 @@
   set tags=./tags;,tags " Search upwards for tags by default
   set wildmenu " Show possible matches when autocompleting.
   set wildignorecase " Ignore case when completing file names and directories.
-
-  " Find all occurrences of a pattern in a file.
-  fun! s:findAll(pattern)
-    if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
-      call s:warningMessage("Cannot search the quickfix window")
-      return
-    endif
-    try
-      silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
-    catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      call s:warningmessage("no match")
-    endtry
-    lwindow
-  endf
-
-  " Find all occurrences of a pattern in all open files.
-  fun! s:multiFind(pattern)
-    " Get the list of open files
-    let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
-    try
-      silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
-    catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-      call s:warningmessage("no match")
-    endtry
-    cwindow
-  endf
-
-  " Find all in current buffer.
-  command! -nargs=1 FindAll call s:findAll(<q-args>)
-
-  " Find all in all open buffers.
-  command! -nargs=1 MultiFind call s:multiFind(<q-args>)
-" }}
-" Shell {{
-  let s:winpos_map = {
-        \ "T": "to new",  "t": "abo new", "B": "bo new",  "b": "bel new",
-        \ "L": "to vnew", "l": "abo vnew", "R": "bo vnew", "r": "bel vnew"
-        \ }
-
-  " Run an external command and display its output in a new buffer.
-  "
-  " cmdline: the command to be executed;
-  " pos: a letter specifying the position of the output window (see s:winpos_map).
-  "
-  " See http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
-  " See also https://groups.google.com/forum/#!topic/vim_use/4ZejMpt7TeU
-  fun! s:runShellCommand(cmdline, pos) abort
-    let l:cmd = ""
-    for l:part in split(a:cmdline, ' ')
-      if l:part =~ '\v^[%#<]'
-        let l:expanded_part = expand(l:part)
-        let l:cmd .= ' ' . (l:expanded_part == "" ? l:part : shellescape(l:expanded_part))
-      else
-        let l:cmd .= ' ' . l:part
-      endif
-    endfor
-    execute get(s:winpos_map, a:pos, "bo new")
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-    execute '%!'. l:cmd
-    setlocal nomodifiable
-    nnoremap <silent> <buffer> <tab> <c-w><c-w>
-    nnoremap <silent> <buffer> q <c-w>c
-    " Uncomment the following line for debugging
-    " echomsg cmd
-    1
-  endf
-
-  " Execute an external command and show the output in a new buffer.
-  command! -complete=shellcmd -nargs=+ Shell call s:runShellCommand(<q-args>, "B")
-  command! -complete=shellcmd -nargs=+ ShellBot call s:runShellCommand(<q-args>, "B")
-  command! -complete=shellcmd -nargs=+ ShellRight call s:runShellCommand(<q-args>, "R")
-  command! -complete=shellcmd -nargs=+ ShellLeft call s:runShellCommand(<q-args>, "L")
-  command! -complete=shellcmd -nargs=+ ShellTop call s:runShellCommand(<q-args>, "T")
-" }}
-" Key mappings (plugins excluded) {{
-  set langnoremap
-  map <space> <leader>
-  " A handy cheat sheet ;)
-  nnoremap <silent> <leader>? :call <sid>cheatsheet()<cr>
-  " Enable outline mode for the current buffer
-  nnoremap <silent> <leader>O :call <sid>enableOutliner()<cr>
-  " Change the contrast level, for themes that support such feature (e.g., Solarized,
-  " Seoul256, Gruvbox). It is assumed that ReduceContrast and IncreaseContrast are
-  " defined by the color scheme.
-  nmap <silent> <leader>- :ReduceContrast<cr>
-  nmap <silent> <leader>+ :IncreaseContrast<cr>
-  " Open file browser in the directory of the current buffer
-  nnoremap <silent> <leader>e :Ex<cr>
-  " Change to the directory of the current file
-  nnoremap <silent> cd :cd %:h \| pwd<cr>
-  " Toggle vertically centered line
-  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
-  " Toggle between hard tabs and soft tabs in the current buffer
-  nnoremap <silent> cot :setlocal invexpandtab<cr>
-  " Increase tab width by one in the current buffer
-  nnoremap <silent> <leader>] :call <sid>setLocalTabWidth(&tabstop + 1)<cr>
-  " Decrease tab width by one in the current buffer
-  nnoremap <silent> <leader>[ :call <sid>setLocalTabWidth(&tabstop - 1)<cr>
-  " Toggle paste mode
-  nnoremap <silent> cop :setlocal paste!<cr>
-  " Remove trailing space globally
-  nnoremap <silent> <leader>S :call <sid>removeTrailingSpace()<cr>
-  " Capitalize words in selected text (see h gU)
-  vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
-  " Go to tab 1/2/3 etc
-  nnoremap <leader>1 1gt
-  nnoremap <leader>2 2gt
-  nnoremap <leader>3 3gt
-  nnoremap <leader>4 4gt
-  nnoremap <leader>5 5gt
-  nnoremap <leader>6 6gt
-  nnoremap <leader>7 7gt
-  nnoremap <leader>8 8gt
-  nnoremap <leader>9 9gt
-  nnoremap <leader>0 10gt
-  " Generate/update tags file
-  nnoremap <leader>T :cd %:h \| !ctags -R --extra=+f --exclude=*.html
-  " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
-  cnoremap <c-a> <home>
-  cnoremap <c-e> <end>
-  cnoremap <c-p> <up>
-  cnoremap <c-n> <down>
-  " cnoremap <c-b> <left>
-  " cnoremap <c-f> <right>
-  " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
-  cnoremap <esc>b <s-left>
-  cnoremap <esc>f <s-right>
-  " Move down in pop-up menu, or complete word (with omnifunc if available,
-  " otherwise with ctrl-n), or just use tab. Define b:lf_tab_complete to
-  " override the default mapping for completion.
-  imap <expr><silent> <tab> pumvisible()
-        \ ? "\<c-n>"
-        \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
-          \ ? (exists('b:lf_tab_complete')
-            \ ? b:lf_tab_complete
-            \ : (&omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
-            \ )
-          \ : "\<tab>"
-          \ )
-  " Move up in pop-up menu or unindent in Insert mode.
-  inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
 " }}
 " Appearance {{
   set display=lastline
@@ -476,72 +136,13 @@
   set shortmess-=r " Don't use abbreviations for 'readonly'
   set showcmd " Show (partial) command in the last line of the screen.
   set diffopt+=vertical " Diff in vertical mode
-  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters (see also http://stackoverflow.com/questions/20962204/vimrc-getting-e474-invalid-argument-listchars-tab-no-matter-what-i-do).
+  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters.
   set tabpagemax=50
 
-  " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186):
+  " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
   autocmd VimResized * :wincmd =
-
-  " Solarized {{
-    let g:solarized_bold = 1
-    let g:solarized_underline = 0
-  " }}
-  " Seoul256 {{
-    let g:seoul256_background = 236
-    let g:seoul256_light_background = 255
-  " }}
-
-  " To override the settings of a colorscheme, create a file after/colors/<theme name>.vim
-  " It will be automatically loaded after the color scheme is activated.
-  fun! s:customizeTheme()
-    " Set the default values of our highlight groups for the status line
-    hi! link NormalMode StatusLine
-    hi! link InsertMode DiffText
-    hi! link VisualMode Visual
-    hi! link ReplaceMode DiffChange
-    hi! link CommandMode PmenuSel
-    hi! link Warnings ErrorMsg
-    " Define our highlight groups for the tab line
-    let s:two_color_tabline = s:setTabLineSepGroups()
-    let g:lf_cached_mode = ""  " Force updating highlight groups
-    " Set defaults for vertical separator and fold separator
-    set fillchars=vert:\ ,fold:\·
-    if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
-      execute "runtime after/colors/" . g:colors_name . ".vim"
-    endif
-  endf
-
+  " Hook for overriding a theme's default
   autocmd ColorScheme * call <sid>customizeTheme()
-
-  " To switch the colorscheme when the background changes, define a
-  " BackgroundToggle_<theme_name>() function that changes the color scheme.
-  fun! s:toggleBackgroundColor()
-    if exists('g:colors_name')
-      let l:fn = 'BackgroundToggle_' . substitute(g:colors_name, '[-]', '_', 'g')
-      if exists('*' . l:fn)
-        call eval(l:fn . '()')
-        return
-      endif
-    endif
-    let g:lf_cached_mode = ""  " Force updating status line highlight groups
-    let &background = (&background == 'dark') ? 'light' : 'dark'
-  endf
-
-  command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
-
-  command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
-  command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
-" }}
-" GUI {{
-  if has('gui_running')
-    set guifont=Monaco:h11
-    set guioptions-=aP " Do not use system clipboard by default
-    set guioptions-=T  " No toolbar
-    set guioptions-=lL " No left scrollbar
-    set guioptions-=e  " Use Vim tabline
-    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    set transparency=0
-  endif
 " }}
 " Status line {{
   " See :h mode() (some of these are never used in the status line; 't' is from NeoVim)
@@ -577,12 +178,12 @@
     " In a %{} context, winnr() always refers to the window to which the
     " status line being drawn belongs.
     return get(extend(w:, {
-          \ "lf_active": winnr() != a:nr ? 0 : (
-          \                mode(1) ==# get(g:, "lf_cached_mode", "") ? 1 :
-          \                  s:updateStatusLineHighlight(
-          \                    get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode")
-          \                  )
-          \                ),
+          \ "lf_active": winnr() != a:nr
+            \ ? 0
+            \ : (mode(1) ==# get(g:, "lf_cached_mode", "")
+              \ ? 1
+              \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode"))
+              \ ),
           \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
   endf
@@ -603,35 +204,8 @@
           \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
           \%#Warnings#%{w:["lf_active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
   endf
-
-  fun! s:enableStatusLine()
-    augroup warnings
-      autocmd!
-      autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
-    augroup END
-    let g:default_stl = &statusline
-    set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
-    set noshowmode " Do not show the current mode because it is displayed in status line
-    set noruler
-  endf
-
-  fun! s:disableStatusLine()
-    let &statusline = g:default_stl
-    unlet g:default_stl
-    set showmode
-    set ruler
-    augroup warnings
-      autocmd!
-    augroup END
-    augroup! warnings
-  endf
-
-  command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
-  command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 " }}
 " Tabline {{
-  " See :h tabline
-
   " Define the highlight groups for the separator symbols in the tabline.
   fun! s:setTabLineSepGroups()
     call s:setTransitionGroup("TabSepPreSel", "TabLine", "TabLineSel")
@@ -639,6 +213,22 @@
     call s:setTransitionGroup("TabSepFill", "TabLine", "TabLineFill")
     call s:setTransitionGroup("TabSepSelFill", "TabLineSel", "TabLineFill")
     return s:getRealBackground("TabLine") == s:getRealBackground("TabLineFill")
+  endf
+
+  fun! s:tabLineSeparator(n)
+    return (a:n + 1 == tabpagenr()
+          \ ? "%#TabSepPreSel#" . g:left_sep_sym
+          \ : (a:n == tabpagenr()
+            \ ? (a:n == tabpagenr('$')
+              \ ? "%#TabSepSelFill#" . g:left_sep_sym
+              \ : "%#TabSepSel#" . g:left_sep_sym
+              \ )
+            \ : (a:n != tabpagenr('$') || s:two_color_tabline
+              \ ? "%#TabSepSel#" . g:lalt_sep_sym
+              \ : "%#TabSepFill#" . g:left_sep_sym
+              \ )
+            \ )
+        \ )
   endf
 
   fun! BuildTabLabel(nr)
@@ -649,22 +239,6 @@
           \ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
   endf
 
-  fun! s:tabLineSeparator(n)
-    return (a:n + 1 == tabpagenr() ?
-        \ "%#TabSepPreSel#" . g:left_sep_sym :
-        \ (a:n == tabpagenr() ?
-          \ (a:n == tabpagenr('$') ?
-          \ "%#TabSepSelFill#" . g:left_sep_sym :
-          \ "%#TabSepSel#" . g:left_sep_sym
-          \ ) :
-          \ (a:n != tabpagenr('$') || s:two_color_tabline ?
-            \ "%#TabSepSel#" . g:lalt_sep_sym :
-            \ "%#TabSepFill#" . g:left_sep_sym
-          \ )
-        \ )
-      \ )
-  endf
-
   fun! BuildTabLine()
     return join(map(
           \ range(1, tabpagenr('$')),
@@ -672,7 +246,262 @@
           \), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%999X✕ " : "")
   endf
 
-  set tabline=%!BuildTabLine()
+" }}
+" GUI {{
+  if has('gui_running')
+    set guifont=Monaco:h11
+    set guioptions-=aP " Do not use system clipboard by default
+    set guioptions-=T  " No toolbar
+    set guioptions-=lL " No left scrollbar
+    set guioptions-=e  " Use Vim tabline
+    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+    set transparency=0
+  endif
+" }}
+" Helper functions {{
+  " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
+  fun! s:smoothScroll(up)
+    execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+    redraw
+    for l:count in range(3, &scroll, 2)
+      sleep 10m
+      execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+      redraw
+    endfor
+  endf
+
+  " Return the real background color of the given highlight group.
+  fun! s:getRealBackground(hl)
+    let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
+    if l:col == -1 || empty(l:col)  " First fallback
+      let l:col = synIDattr(synIDtrans(hlID("Normal")), synIDattr(synIDtrans(hlID("Normal")), "reverse") ? "fg" : "bg")
+      if l:col == -1 || empty(l:col) " Second fallback
+        return (has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? "#FFFFFF" : "1"
+      endif
+    endif
+    return l:col
+  endf
+
+  " Define or overwrite a highlight group hl using the following rule: the
+  " foreground of hl is set equal to the background of fgHl; the background of
+  " hl is set equal to the background of bgHl. Highlight groups defined in
+  " this way are used as transition groups (separators) in the status line and
+  " in the tab line.
+  fun! s:setTransitionGroup(hl,fgHl, bgHl)
+    execute 'hi! '. a:hl . (has("gui_running") || (has("termtruecolor") && guicolors == 1) ?
+          \ ' guifg='   . s:getRealBackground(a:fgHl) . ' guibg='   . s:getRealBackground(a:bgHl) :
+          \ ' ctermfg=' . s:getRealBackground(a:fgHl) . ' ctermbg=' . s:getRealBackground(a:bgHl))
+  endf
+
+  fun! s:toggleBackgroundColor()
+    if exists('g:colors_name')
+      try
+        call BackgroundToggle_{substitute(g:colors_name, '[-]', '_', 'g')}()
+      catch /.*/
+        let g:lf_cached_mode = ""  " Force updating status line highlight groups
+        let &background = (&background == 'dark') ? 'light' : 'dark'
+      endtry
+    endif
+  endf
+
+  fun! s:customizeTheme()
+    " Set the default values of our highlight groups for the status line
+    hi! link NormalMode StatusLine
+    hi! link InsertMode DiffText
+    hi! link VisualMode Visual
+    hi! link ReplaceMode DiffChange
+    hi! link CommandMode PmenuSel
+    hi! link Warnings ErrorMsg
+    " Define our highlight groups for the tab line
+    let s:two_color_tabline = s:setTabLineSepGroups()
+    let g:lf_cached_mode = ""  " Force updating highlight groups
+    " Set defaults for vertical separator and fold separator
+    set fillchars=vert:\ ,fold:\·
+    if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
+      execute "runtime after/colors/" . g:colors_name . ".vim"
+    endif
+  endf
+
+  fun! s:enableStatusLine()
+    augroup warnings
+      autocmd!
+      autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
+    augroup END
+    set noshowmode " Do not show the current mode because it is displayed in status line
+    set noruler
+    let g:default_stl = &statusline
+    let g:default_tal = &tabline
+    set statusline=%!BuildStatusLine(winnr()) " In this context, winnr() is always the window number of the *active* window
+    set tabline=%!BuildTabLine()
+  endf
+
+  fun! s:disableStatusLine()
+    let &tabline = g:default_tal
+    let &statusline = g:default_stl
+    unlet g:default_tal
+    unlet g:default_stl
+    set ruler
+    set showmode
+    augroup warnings
+      autocmd!
+    augroup END
+    augroup! warnings
+  endf
+
+  fun! s:enablePatchedFont()
+    let g:left_sep_sym = "\ue0b0"
+    let g:right_sep_sym = "\ue0b2"
+    let g:lalt_sep_sym = "\ue0b1"
+    let g:ralt_sep_sym = "\ue0b3"
+    let g:ro_sym = "\ue0a2"
+    let g:ma_sym = "✗"
+    let g:mod_sym = "◇"
+    let g:linecol_sym = "\ue0a1"
+    let g:branch_sym = "\ue0a0"
+    let g:pad = " "
+  endf
+
+  fun! s:disablePatchedFont()
+    let g:left_sep_sym = ""
+    let g:right_sep_sym = ""
+    let g:lalt_sep_sym = ""
+    let g:ralt_sep_sym = ""
+    let g:ro_sym = "RO"
+    let g:ma_sym = "✗"
+    let g:mod_sym = "◇"
+    let g:linecol_sym = ""
+    let g:branch_sym = ""
+    let g:pad = ""
+  endf
+
+  " Update trailing space and mixed indent warnings for the current buffer.
+  " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
+  fun! s:updateWarnings()
+    if getfsize(bufname('%')) >= g:LargeFile
+      let b:stl_warnings = '  Large file '
+      return
+    endif
+    let l:winview = winsaveview() " Save window state
+    call cursor(1,1) " Start search from the beginning of the file
+    let l:trail = search('\s$', 'nw')
+    let l:spaces = search('\v^\s* ', 'nw')
+    let l:tabs = search('\v^\s*\t', 'nw')
+    if l:trail != 0
+      let b:stl_warnings = '  Trailing space ('.trail.') '
+      if l:spaces != 0 && l:tabs != 0
+        let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
+      endif
+    elseif l:spaces != 0 && l:tabs != 0
+      let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
+    else
+      unlet! b:stl_warnings
+    endif
+    call winrestview(l:winview) " Restore window state
+  endf
+" }}
+" Commands (plugins excluded) {{
+  " Generate/update tags file
+  " command! -nargs=* -complete=shell Ctags cd %:h \bar !ctags -R --extra=+f --exclude=*.html
+
+  " Fancy fonts
+  command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
+  command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
+
+  " Custom status line
+  command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
+  command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
+
+  " Find all in current buffer.
+  command! -nargs=1 FindAll call lf_find#buffer(<q-args>)
+
+  " Find all in all open buffers.
+  command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
+
+  " Load a blacklisted plugin
+  command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>)
+
+  " Execute an external command and show the output in a new buffer.
+  command! -complete=shellcmd -nargs=+ Shell      call lf_shell#run(<q-args>, "B")
+  command! -complete=shellcmd -nargs=+ ShellBot   call lf_shell#run(<q-args>, "B")
+  command! -complete=shellcmd -nargs=+ ShellRight call lf_shell#run(<q-args>, "R")
+  command! -complete=shellcmd -nargs=+ ShellLeft  call lf_shell#run(<q-args>, "L")
+  command! -complete=shellcmd -nargs=+ ShellTop   call lf_shell#run(<q-args>, "T")
+
+  " Set the tab width for the current buffer.
+  command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
+
+  command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
+
+  " Toggle soft wrap
+  command! -nargs=0 ToggleWrap call lf_text#toggleWrap()
+
+  " Save file with sudo.
+  command! -nargs=0  WW :w !sudo tee % >/dev/null
+" }}
+" Key mappings (plugins excluded) {{
+  set langnoremap
+  " Use space as alternative leader
+  map <space> <leader>
+  " A handy cheat sheet ;)
+  nnoremap <silent> <leader>? :call lf_cheatsheet#open()<cr>
+  " Enable outline mode for the current buffer
+  nnoremap <silent> <leader>O :call lf_outliner#enable()<cr>
+  " Change the contrast level for themes that support such feature (e.g.,
+  " Solarized, Seoul256, Gruvbox). ReduceContrast and IncreaseContrast must be
+  " defined in after/colors/<theme>.vim
+  nmap <silent> <leader>- :ReduceContrast<cr>
+  nmap <silent> <leader>+ :IncreaseContrast<cr>
+  " Open file browser in the directory of the current buffer
+  nnoremap <silent> <leader>e :Ex<cr>
+  " Change to the directory of the current file
+  nnoremap <silent> cd :cd %:h \| pwd<cr>
+  " Toggle vertically centered line
+  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
+  " Toggle between hard tabs and soft tabs in the current buffer
+  nnoremap <silent> cot :setlocal invexpandtab<cr>
+  " Increase tab width in the current buffer
+  nnoremap <silent> <leader>] :call lf_text#set_tab_width(&tabstop + 1)<cr>
+  " Decrease tab width in the current buffer
+  nnoremap <silent> <leader>[ :call lf_text#set_tab_width(&tabstop - 1)<cr>
+  " Toggle paste mode
+  nnoremap <silent> cop :setlocal paste!<cr>
+  " Remove trailing space globally
+  nnoremap <silent> <leader>S :call lf_text#removeTrailingSpace()<cr>
+  " Capitalize words in selected text (see h gU)
+  vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
+  " Go to tab 1/2/3 etc
+  nnoremap <leader>1 1gt
+  nnoremap <leader>2 2gt
+  nnoremap <leader>3 3gt
+  nnoremap <leader>4 4gt
+  nnoremap <leader>5 5gt
+  nnoremap <leader>6 6gt
+  nnoremap <leader>7 7gt
+  nnoremap <leader>8 8gt
+  nnoremap <leader>9 9gt
+  nnoremap <leader>0 10gt
+  " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
+  cnoremap <c-a> <home>
+  cnoremap <c-e> <end>
+  cnoremap <c-p> <up>
+  cnoremap <c-n> <down>
+  " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
+  cnoremap <esc>b <s-left>
+  cnoremap <esc>f <s-right>
+  " Move down in pop-up menu, or complete word (with omnifunc if available,
+  " otherwise with ctrl-n), or just use tab. Define b:lf_tab_complete to
+  " override the default mapping for completion.
+  imap <expr><silent> <tab> pumvisible()
+        \ ? "\<c-n>"
+        \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
+          \ ? (exists('b:lf_tab_complete')
+            \ ? b:lf_tab_complete
+            \ : (&omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
+            \ )
+          \ : "\<tab>"
+          \ )
+  " Move up in pop-up menu or unindent in Insert mode.
+  inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
 " }}
 " Plugins {{
   " CtrlP {{
@@ -785,6 +614,13 @@
     let g:ledger_commodity_before = 0
     let g:ledger_commodity_sep = ' '
   " }}
+  " Netrw (Vim) {{
+    let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
+  " }}
+  " Seoul256 {{
+    let g:seoul256_background = 236
+    let g:seoul256_light_background = 255
+  " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
       if exists('b:showmarks')
@@ -801,6 +637,13 @@
   " Slimux {{
     nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
     vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
+  " }}
+  " Solarized {{
+    let g:solarized_bold = 1
+    let g:solarized_underline = 0
+  " }}
+  " SQL (Vim) {{
+    let g:sql_type_default = 'pgsql'
   " }}
   " Syntastic {{
     let g:syntastic_check_on_open = 1
@@ -880,56 +723,24 @@
     set complete+=i
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-    " Open a new terminal buffer and bind it to the current buffer
-    fun! s:openTerminal()
-      below new
-      terminal
-      let l:term_id = b:terminal_job_id
-      call feedkeys("\<c-\>\<c-n>") " Exit Terminal (Insert) mode
-      wincmd p
-      let b:lifepillar_bound_terminal = l:term_id
-    endf
-
-    fun! s:REPLSend(...)
-      if !exists('b:lifepillar_bound_terminal')
-        let b:lifepillar_bound_terminal = input('Terminal ID: ')
-      endif
-      if a:0 == 0
-        let lines = [getline('.')]
-      elseif getpos("'>") != [0, 0, 0, 0]
-        let [lnum1, col1] = getpos("'<")[1:2]
-        let [lnum2, col2] = getpos("'>")[1:2]
-        call setpos("'>", [0, 0, 0, 0])
-        call setpos("'<", [0, 0, 0, 0])
-
-        let lines = getline(lnum1, lnum2)
-        let lines[-1] = lines[-1][:col2 - 1]
-        let lines[0] = lines[0][col1 - 1:]
-      else
-        let lines = getline(a:1, a:2)
-      end
-      call jobsend(b:lifepillar_bound_terminal, add(lines, ''))
-    endf
-
-    command! BindTerminal call <sid>openTerminal()
-    command! REPLSendLine call <sid>REPLSend()
-    command! -range=% REPLSendSelection call <sid>REPLSend(<line1>,<line2>)
+    command! BindTerminal call lf_nvim_terminal#open()
+    command! REPLSendLine call lf_nvim_terminal#send()
+    command! -range=% REPLSendSelection call lf_nvim_terminal#send(<line1>,<line2>)
 
     nnoremap <silent> <leader>x :REPLSendLine<cr>
     vnoremap <silent> <leader>x :REPLSendSelection<cr>
   endif
 " }}
 " Init {{
+  let g:LargeFile = 20*1024*1024
 
   DisablePatchedFont
   EnableStatusLine
 
-  let g:sql_type_default = 'pgsql'
-
   " Extra settings.
   " If this file exists, it should at least define the color scheme.
-  if filereadable($HOME . '/.vim/vimrc_extra.vim')
-    execute 'source' $HOME . '/.vim/vimrc_extra.vim'
+  if filereadable('~/.vim/vimrc_extra.vim')
+    execute 'source ~/.vim/vimrc_extra.vim'
   else
     colorscheme solarized
   endif
