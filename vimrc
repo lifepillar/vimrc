@@ -317,8 +317,7 @@
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression.
   set infercase " Smart keyword completion
   set complete+=kspell " Use spell dictionary for completion, if available
-  set completeopt+=longest,menuone
-  set omnifunc=syntaxcomplete#Complete " See :h ft-syntax-omni
+  set completeopt+=menuone
   set tags=./tags;,tags " Search upwards for tags by default
   set wildmenu " Show possible matches when autocompleting.
   set wildignorecase " Ignore case when completing file names and directories.
@@ -449,6 +448,20 @@
   " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
+  " Move down in pop-up menu, or complete word (with omnifunc if available,
+  " otherwise with ctrl-n), or just use tab. Define b:lf_tab_complete to
+  " override the default mapping for completion.
+  imap <expr><silent> <tab> pumvisible()
+        \ ? "\<c-n>"
+        \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
+          \ ? (exists('b:lf_tab_complete')
+            \ ? b:lf_tab_complete
+            \ : (&omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
+            \ )
+          \ : "\<tab>"
+          \ )
+  " Move up in pop-up menu or unindent in Insert mode.
+  inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
 " }}
 " Appearance {{
   set display=lastline

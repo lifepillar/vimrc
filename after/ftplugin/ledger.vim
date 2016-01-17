@@ -28,7 +28,6 @@ nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxi
 " Autocompletion and alignment
 inoremap <silent><buffer> <tab> <c-r>=<sid>AutocompleteOrAlign()<cr>
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
-inoremap <silent><buffer><expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " Enter a new transaction based on the text in the current line
 nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>
 inoremap <silent><buffer> <c-t> <Esc>:call ledger#entry()<cr>
