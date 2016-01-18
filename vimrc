@@ -562,6 +562,7 @@
     map  <leader>h <plug>(easymotion-linebackward)
   " }}
   " Fugitive {{
+    nnoremap <silent> <leader>gb :Gblame<cr>
     nnoremap <silent> <leader>gc :Gcommit<cr>
     nnoremap <silent> <leader>gd :Gdiff<cr>
     nnoremap <silent> <leader>gs :Gstatus<cr>

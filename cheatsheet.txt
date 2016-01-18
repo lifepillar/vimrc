@@ -416,112 +416,113 @@ Press q to dismiss, <Tab> to lose focus
   \j           * Move downwards
   \k           * Move upwards
  --
-  Fugitive
-  \gs           * Git status
-  \gd           * Git diff
-  \gl           * Git file log
-  \gc           * Git commit
-  \gp           * Git push
- --
-  Goyo
-  \f           * Distraction-free mode
- --
-  Ledger
-  :Ledger …    - Run Ledger command
-  :Register …  - Quickfix report
-  :Balance …   - Show account balance
-  :Reconcile … - Reconcile an account
-  «Tab»      *IV Autocomplete or align
-  «C-t»       *I Transaction from text
-  «Enter»      * Next transaction state
-  \d           * Add auxiliary date
-  \la          * Average expenses report
-  \lA          * Annualized budget
-  \lb          * Balance report
-  \lB          * Budget report
-  \lc          * Cleared report
-  \ld          * Debit/credit report
-  \le          * Expense report
-  \lf          * Cash flow report
-  \li          * Income statement
-  \lm          * Sorted monthly expenses
-  \ln          * Net worth
-  \lp          * Pending transactions
-  \lr          * Register report
-  \ls          * Savings
-  \lu          * Uncleared transactions
- --
-  Show Marks
-  \m           * Toggle marks
- --
-  Slimux
-  \x           * Send command
- --
-  Surround
-  ys‹Move›‹c›  - Surround with ‹c›
-  S‹c›         V Surround with ‹c›
-  cs‹c›…       - Replace ‹c› delimiters
-  cst…         - Replace tags
-  ds‹c›        - Remove ‹c› delimiters
-  dst          - Remove enclosing tags
- --
-  Tagbar
-  \t           * Toggle Tagbar
- --
-  UltiSnips
-  «C-j»       *I Trigger snippet
-  «C-j»        I Go to next placeholder
-  «C-k»        I Go to prev placeholder
- --
-  Undotree
-  \u           * Toggle Undotree
- --
-  Unimpaired
-  [b           - Edit prev file
-  ]b           - Edit next file
-  [e           - Move line up
-  ]e           - Move line down
-  [e           V Move up
-  ]e           V Move down
-  [l           - Prev in location list
-  ]l           - Next in location list
-  [n           - To prev conflict marks
-  ]n           - To next conflict marks
-  [q           - Prev in quickfix list
-  ]q           - Next in quickfix list
-  ]t           - Jump to next tag (:tn)
-  [t           - Jump to prev tag (:tp)
-  [«Spc»       - Add blank line above
-  ]«Spc»       - Add blank line below
-  cob          - Toggle background color
-  coc          - Toggle cursorline
-  cod          - Toggle diff this buffer
-  coh          - Toggle highlighting
-  coi          - Toggle ignore case
-  col          - Toggle invisibles
-  con          - Toggle line numbers
-  cor          - Toggle rel line numbers
-  cos          - Toggle spell checking
-  cow          - Toggle soft wrapping
-  yo           - Like o, in paste mode
-  yO           - Like O, in paste mode
- --
-  Wordy
-  :Wordy «Tab» - Load a Wordy dictionary
-===
- Misc
- q:            - Vim motions in Cmd mode
-                 Use «C-c» do dismiss
- «C-f»         C Use Vim motions
-                 Use «C-c» do dismiss
- :cd …         - Change directory
- :echo ‹Var›   - Show the value of ‹Var›
- :map          - View all mappings
- :pwd          - Current directory
- :di           - View registers
- :set ‹Var›?   - Show value of an option
- :shell        - Open a shell
- :h hitest.vim - Help on highlight test
- :scr          - List of loaded plugins
- :au           - List of autocommands
+   Fugitive
+   \gs           * Git status
+   \gd           * Git diff
+   \gb           * Git blame
+   \gl           * Git file log
+   \gc           * Git commit
+   \gp           * Git push
+  --
+   Goyo
+   \f           * Distraction-free mode
+  --
+   Ledger
+   :Ledger …    - Run Ledger command
+   :Register …  - Quickfix report
+   :Balance …   - Show account balance
+   :Reconcile … - Reconcile an account
+   «Tab»      *IV Autocomplete or align
+   «C-t»       *I Transaction from text
+   «Enter»      * Next transaction state
+   \d           * Add auxiliary date
+   \la          * Average expenses report
+   \lA          * Annualized budget
+   \lb          * Balance report
+   \lB          * Budget report
+   \lc          * Cleared report
+   \ld          * Debit/credit report
+   \le          * Expense report
+   \lf          * Cash flow report
+   \li          * Income statement
+   \lm          * Sorted monthly expenses
+   \ln          * Net worth
+   \lp          * Pending transactions
+   \lr          * Register report
+   \ls          * Savings
+   \lu          * Uncleared transactions
+  --
+   Show Marks
+   \m           * Toggle marks
+  --
+   Slimux
+   \x           * Send command
+  --
+   Surround
+   ys‹Move›‹c›  - Surround with ‹c›
+   S‹c›         V Surround with ‹c›
+   cs‹c›…       - Replace ‹c› delimiters
+   cst…         - Replace tags
+   ds‹c›        - Remove ‹c› delimiters
+   dst          - Remove enclosing tags
+  --
+   Tagbar
+   \t           * Toggle Tagbar
+  --
+   UltiSnips
+   «C-j»       *I Trigger snippet
+   «C-j»        I Go to next placeholder
+   «C-k»        I Go to prev placeholder
+  --
+   Undotree
+   \u           * Toggle Undotree
+  --
+   Unimpaired
+   [b           - Edit prev file
+   ]b           - Edit next file
+   [e           - Move line up
+   ]e           - Move line down
+   [e           V Move up
+   ]e           V Move down
+   [l           - Prev in location list
+   ]l           - Next in location list
+   [n           - To prev conflict marks
+   ]n           - To next conflict marks
+   [q           - Prev in quickfix list
+   ]q           - Next in quickfix list
+   ]t           - Jump to next tag (:tn)
+   [t           - Jump to prev tag (:tp)
+   [«Spc»       - Add blank line above
+   ]«Spc»       - Add blank line below
+   cob          - Toggle background color
+   coc          - Toggle cursorline
+   cod          - Toggle diff this buffer
+   coh          - Toggle highlighting
+   coi          - Toggle ignore case
+   col          - Toggle invisibles
+   con          - Toggle line numbers
+   cor          - Toggle rel line numbers
+   cos          - Toggle spell checking
+   cow          - Toggle soft wrapping
+   yo           - Like o, in paste mode
+   yO           - Like O, in paste mode
+  --
+   Wordy
+   :Wordy «Tab» - Load a Wordy dictionary
+ ===
+  Misc
+  q:            - Vim motions in Cmd mode
+                  Use «C-c» do dismiss
+  «C-f»         C Use Vim motions
+                  Use «C-c» do dismiss
+  :cd …         - Change directory
+  :echo ‹Var›   - Show the value of ‹Var›
+  :map          - View all mappings
+  :pwd          - Current directory
+  :di           - View registers
+  :set ‹Var›?   - Show value of an option
+  :shell        - Open a shell
+  :h hitest.vim - Help on highlight test
+  :scr          - List of loaded plugins
+  :au           - List of autocommands
 
