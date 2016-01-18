@@ -581,7 +581,7 @@
         set guioptions-=r " hide right scrollbar
       endif
       set scrolloff=999 " Keep the edited line vertically centered
-      call s:softWrap()
+      call lf_text#enableSoftWrap()
       set noshowcmd
       Limelight
     endf
@@ -594,7 +594,7 @@
         set guioptions+=r
       endif
       set showcmd
-      call s:dontSoftWrap()
+      call lf_text#disableSoftWrap()
       let &scrolloff=g:default_scrolloff
       Limelight!
     endf
