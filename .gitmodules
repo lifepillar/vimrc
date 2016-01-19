@@ -82,12 +82,6 @@
 [submodule "bundle/pencil"]
 	path = bundle/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
-[submodule "bundle/ag"]
-	path = bundle/ag
-	url = https://github.com/rking/ag.vim.git
-[submodule "bundle/ack"]
-	path = bundle/ack
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
