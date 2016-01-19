@@ -545,7 +545,6 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Git
-  nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
   nnoremap <silent> <leader>gd :GitDiff<cr>
   nnoremap <silent> <leader>gp :Git push
   nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
@@ -553,9 +552,11 @@
   nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
   " Tig
   if !has('nvim')
-    nnoremap <silent> <leader>gt :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig<cr>:silent redraw!<cr>
-    nnoremap <silent> <leader>gb :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig blame
-          \ <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>:silent redraw!<cr>
+    nnoremap <silent> <leader>gs :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+          \ tig status<cr>:silent redraw!<cr>
+    nnoremap <silent> <leader>gb :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+          \ tig blame <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>
+          \ :silent redraw!<cr>
   endif
 " }}
 " Plugins {{
@@ -777,9 +778,10 @@
     nnoremap <silent> <leader>x :REPLSendLine<cr>
     vnoremap <silent> <leader>x :REPLSendSelection<cr>
     " Tig
-    nnoremap <silent> <leader>gt :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>&&tig<cr>
-    nnoremap <silent> <leader>gb :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>&&tig
-          \ blame\ <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
+    nnoremap <silent> <leader>gs :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
+          \ && tig status<cr>
+    nnoremap <silent> <leader>gb :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
+          \ && tig blame <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
 " Init {{
