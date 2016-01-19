@@ -530,7 +530,7 @@
   " Git
   nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
   nnoremap <silent> <leader>gd :GitDiff<cr>
-  nnoremap <silent> <leader>gp :Git push<cr>
+  nnoremap <silent> <leader>gp :Git push
   nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
