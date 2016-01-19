@@ -398,7 +398,18 @@
     endif
     call winrestview(l:winview) " Restore window state
   endf
-" }}
+
+  " Delete trailing white space.
+  fun! s:removeTrailingSpace()
+    let l:winview = winsaveview() " Save window state
+    %s/\s\+$//ge
+    call winrestview(l:winview) " Restore window state
+    call s:updateWarnings()
+    redraw  " See :h :echo-redraw
+    echomsg 'Trailing space removed!'
+  endf
+
+  " }}
 " Commands (plugins excluded) {{
   " Generate/update tags file
   command! -nargs=* -complete=shellcmd Ctags cd %:h |
@@ -467,7 +478,7 @@
   " Toggle paste mode
   nnoremap <silent> cop :setlocal paste!<cr>
   " Remove trailing space globally
-  nnoremap <silent> <leader>S :call lf_text#removeTrailingSpace()<cr>
+  nnoremap <silent> <leader>S :call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
   vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Go to tab 1/2/3 etc
