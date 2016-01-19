@@ -530,6 +530,9 @@
   nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
+  " Tig
+  nnoremap <silent> <leader>gt :silent !tig<CR>:silent redraw!<CR>
+  nnoremap <silent> <leader>gb :silent !tig blame % +<C-r>=expand(line('.'))<CR><CR>:silent redraw!<CR>
 " }}
 " Plugins {{
   " CtrlP {{
