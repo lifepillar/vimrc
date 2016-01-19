@@ -35,6 +35,7 @@
   scriptencoding utf-8
   set nobomb
   set fileformats=unix,mac,dos
+  if exists("+langmap") | set langnoremap | endif
   set ttimeout
   set ttimeoutlen=0 " Faster feedback in status line when returning to normal mode
   set ttyfast
@@ -464,7 +465,6 @@
   command! -nargs=0  WW :w !sudo tee % >/dev/null
 " }}
 " Key mappings (plugins excluded) {{
-  set langnoremap
   " Use space as alternative leader
   map <space> <leader>
   " A handy cheat sheet ;)
