@@ -563,8 +563,8 @@
 " }}
 " Plugins {{
   " CtrlP {{
-    " Open CtrlP in MRU mode by default
-    let g:ctrlp_cmd = 'CtrlPMRU'
+    " Open CtrlP in find buffer mode by default
+    let g:ctrlp_cmd = 'CtrlPBuffer'
     let g:ctrlp_switch_buffer = 0
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
     let g:ctrlp_status_func = {
