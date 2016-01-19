@@ -538,7 +538,7 @@
   if !has('nvim')
     nnoremap <silent> <leader>gt :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig<cr>:silent redraw!<cr>
     nnoremap <silent> <leader>gb :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig blame
-          \ <c-r>=shellescape(expand('%:p')) +<c-r>=expand(line('.'))<cr><cr>:silent redraw!<cr>
+          \ <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>:silent redraw!<cr>
   endif
 " }}
 " Plugins {{
