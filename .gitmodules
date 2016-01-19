@@ -100,9 +100,6 @@
 [submodule "bundle/ledger"]
 	path = bundle/ledger
 	url = https://github.com/ledger/vim-ledger.git
-[submodule "bundle/fugitive"]
-	path = bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/onedark"]
 	path = bundle/onedark
 	url = https://github.com/joshdick/onedark.vim
