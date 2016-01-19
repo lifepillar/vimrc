@@ -665,6 +665,7 @@
   " }}
   " Netrw (Vim) {{
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
+    let g:netrw_home='~/.vim/tmp'
   " }}
   " Seoul256 {{
     let g:seoul256_background = 236
