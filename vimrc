@@ -480,18 +480,35 @@
   nnoremap <silent> <leader>e :Ex<cr>
   " Change to the directory of the current file
   nnoremap <silent> cd :cd %:h \| pwd<cr>
-  " Toggle vertically centered line
-  nnoremap <silent> cok :let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
-  " Toggle between hard tabs and soft tabs in the current buffer
-  nnoremap <silent> cot :setlocal invexpandtab<cr>
-  " Increase tab width in the current buffer
-  nnoremap <silent> <leader>] :call lf_text#set_tab_width(&tabstop + 1)<cr>
-  " Decrease tab width in the current buffer
-  nnoremap <silent> <leader>[ :call lf_text#set_tab_width(&tabstop - 1)<cr>
-  " Toggle paste mode
-  nnoremap <silent> cop :setlocal paste!<cr>
+  nnoremap <silent> ]a :<c-u>prev<cr>
+  nnoremap <silent> [a :<c-u>next<cr>
+  nnoremap <silent> ]b :<c-u>bn<cr>
+  nnoremap <silent> [b :<c-u>bp<cr>
+  nnoremap <silent> ]l :<c-u>lnext<cr>
+  nnoremap <silent> [l :<c-u>lprevious<cr>
+  nnoremap <silent> ]n :<c-u>/\v^[<\|=>]{7}<cr>
+  nnoremap <silent> [n :<c-u>?\v^[<\|=>]{7}<cr>
+  nnoremap <silent> ]q :<c-u>cnext<cr>
+  nnoremap <silent> [q :<c-u>cprevious<cr>
+  nnoremap <silent> ]t :<c-u>tn<cr>
+  nnoremap <silent> [t :<c-u>tp<cr>
+  nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + 1)<cr>
+  nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - 1)<cr>
+  nnoremap <silent> cob :<c-u>ToggleBackgroundColor<cr>
+  nnoremap <silent> coc :<c-u>setlocal cursorline!<cr>
+  nnoremap          cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+  nnoremap <silent> coh :<c-u>set hlsearch! \| set hlsearch?<cr>
+  nnoremap <silent> coi :<c-u>set ignorecase! \| set ignorecase?<cr>
+  nnoremap <silent> cok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
+  nnoremap <silent> col :<c-u>setlocal list!<cr>
+  nnoremap <silent> con :<c-u>setlocal number!<cr>
+  nnoremap <silent> cop :<c-u>setlocal paste!<cr>
+  nnoremap <silent> cor :<c-u>setlocal relativenumber!<cr>
+  nnoremap <silent> cos :<c-u>setlocal spell! \| set spell?<cr>
+  nnoremap <silent> cot :<c-u>setlocal expandtab!<cr>
+  nnoremap <silent> cow :<c-u>ToggleWrap<cr>
   " Remove trailing space globally
-  nnoremap <silent> <leader>S :call <sid>removeTrailingSpace()<cr>
+  nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
   vnoremap <silent> <leader>U :<c-u>s/\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Go to tab 1/2/3 etc
