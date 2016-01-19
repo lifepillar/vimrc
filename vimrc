@@ -429,6 +429,15 @@
   " Find all in all open buffers
   command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
 
+  " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
+  command! -complete=shellcmd -nargs=+ Git call lf_git#exec(<q-args>, "B")
+
+  " Git diff
+  command! -nargs=0 GitDiff call lf_git#diff()
+
+  " Three-way diff.
+  command! -nargs=0 Conflicts call lf_git#three_way_diff()
+
   " Load a blacklisted plugin
   command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>)
 
@@ -514,6 +523,13 @@
           \ )
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
+  " Git
+  nnoremap <silent> <leader>gs :Git status<cr>:setlocal ft=gitcommit<cr>
+  nnoremap <silent> <leader>gd :GitDiff<cr>
+  nnoremap <silent> <leader>gp :Git push<cr>
+  nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
+  " Show the revision history for the current file (use :Git log for the full log)
+  nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
 " }}
 " Plugins {{
   " CtrlP {{
@@ -571,15 +587,6 @@
     map  <leader>j <plug>(easymotion-j)
     map  <leader>k <plug>(easymotion-k)
     map  <leader>h <plug>(easymotion-linebackward)
-  " }}
-  " Fugitive {{
-    nnoremap <silent> <leader>gb :Gblame<cr>
-    nnoremap <silent> <leader>gc :Gcommit<cr>
-    nnoremap <silent> <leader>gd :Gdiff<cr>
-    nnoremap <silent> <leader>gs :Gstatus<cr>
-    nnoremap <silent> <leader>gl :Glog \| copen<cr>
-    nnoremap <silent> <leader>gp :Gpush<cr>
-
   " }}
   " Goyo {{
     " Toggle distraction-free mode
