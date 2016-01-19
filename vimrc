@@ -535,8 +535,11 @@
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
   " Tig
-  nnoremap <silent> <leader>gt :silent !tig<CR>:silent redraw!<CR>
-  nnoremap <silent> <leader>gb :silent !tig blame % +<C-r>=expand(line('.'))<CR><CR>:silent redraw!<CR>
+  if !has('nvim')
+    nnoremap <silent> <leader>gt :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig<cr>:silent redraw!<cr>
+    nnoremap <silent> <leader>gb :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&tig blame
+          \ <c-r>=shellescape(expand('%:p')) +<c-r>=expand(line('.'))<cr><cr>:silent redraw!<cr>
+  endif
 " }}
 " Plugins {{
   " CtrlP {{
@@ -756,6 +759,10 @@
 
     nnoremap <silent> <leader>x :REPLSendLine<cr>
     vnoremap <silent> <leader>x :REPLSendSelection<cr>
+    " Tig
+    nnoremap <silent> <leader>gt :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>&&tig<cr>
+    nnoremap <silent> <leader>gb :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>&&tig
+          \ blame\ <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
 " Init {{
