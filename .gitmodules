@@ -5,16 +5,16 @@
 	path = bundle/goyo
 	url = https://github.com/junegunn/goyo.vim.git
 [submodule "bundle/jellybeans"]
-	path = bundle/jellybeans
+	path = themes/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
 [submodule "bundle/limelight"]
 	path = bundle/limelight
 	url = https://github.com/junegunn/limelight.vim.git
 [submodule "bundle/seoul256"]
-	path = bundle/seoul256
+	path = themes/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
 [submodule "bundle/solarized"]
-	path = bundle/solarized
+	path = themes/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
@@ -23,7 +23,7 @@
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/tomorrow"]
-	path = bundle/tomorrow
+	path = themes/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "bundle/undotree"]
 	path = bundle/undotree
@@ -32,7 +32,7 @@
 	path = bundle/wordy
 	url = https://github.com/reedes/vim-wordy.git
 [submodule "bundle/gruvbox"]
-	path = bundle/gruvbox
+	path = themes/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
 [submodule "bundle/ctrlp-funky"]
 	path = bundle/ctrlp-funky
@@ -47,7 +47,7 @@
 	path = bundle/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "bundle/papercolor"]
-	path = bundle/papercolor
+	path = themes/papercolor
 	url = https://github.com/NLKNguyen/papercolor-theme.git
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
@@ -80,7 +80,7 @@
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "bundle/pencil"]
-	path = bundle/pencil
+	path = themes/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
@@ -95,11 +95,11 @@
 	path = bundle/ledger
 	url = https://github.com/ledger/vim-ledger.git
 [submodule "bundle/onedark"]
-	path = bundle/onedark
+	path = themes/onedark
 	url = https://github.com/joshdick/onedark.vim
 [submodule "bundle/slimux"]
 	path = bundle/slimux
 	url = https://github.com/epeli/slimux.git
 [submodule "bundle/duotones"]
-	path = bundle/duotones
+	path = themes/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git
