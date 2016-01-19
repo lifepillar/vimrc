@@ -681,8 +681,10 @@
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
   " Slimux {{
-    nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
-    vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
+    if !has('nvim')
+      nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
+      vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
+    endif
   " }}
   " SQL (Vim) {{
     let g:sql_type_default = 'pgsql'
