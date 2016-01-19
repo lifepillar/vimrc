@@ -546,7 +546,7 @@
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Git
   nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
-  nnoremap <silent> <leader>gp :<c-u>Git push
+  nnoremap          <leader>gp :<c-u>Git push
   nnoremap <silent> <leader>gc :<c-u>!git -C '%:p:h' commit<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
