@@ -545,16 +545,16 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Git
-  nnoremap <silent> <leader>gd :GitDiff<cr>
-  nnoremap <silent> <leader>gp :Git push
-  nnoremap <silent> <leader>gc :!git -C '%:p:h' commit<cr>
+  nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
+  nnoremap <silent> <leader>gp :<c-u>Git push
+  nnoremap <silent> <leader>gc :<c-u>!git -C '%:p:h' commit<cr>
   " Show the revision history for the current file (use :Git log for the full log)
-  nnoremap <silent> <leader>gl :Git log --oneline -- %<cr>
+  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
   " Tig
   if !has('nvim')
-    nnoremap <silent> <leader>gs :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+    nnoremap <silent> <leader>gs :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
           \ tig status<cr>:silent redraw!<cr>
-    nnoremap <silent> <leader>gb :silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+    nnoremap <silent> <leader>gb :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
           \ tig blame <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>
           \ :silent redraw!<cr>
   endif
@@ -775,12 +775,12 @@
     command! REPLSendLine call lf_nvim_terminal#send()
     command! -range=% REPLSendSelection call lf_nvim_terminal#send(<line1>,<line2>)
 
-    nnoremap <silent> <leader>x :REPLSendLine<cr>
-    vnoremap <silent> <leader>x :REPLSendSelection<cr>
+    nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
+    vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
     " Tig
-    nnoremap <silent> <leader>gs :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
+    nnoremap <silent> <leader>gs :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
           \&&tig\ status<cr>
-    nnoremap <silent> <leader>gb :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
+    nnoremap <silent> <leader>gb :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
           \&&tig\ blame\ <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
