@@ -667,10 +667,6 @@
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
     let g:netrw_home='~/.vim/tmp'
   " }}
-  " Seoul256 {{
-    let g:seoul256_background = 236
-    let g:seoul256_light_background = 255
-  " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
       if exists('b:showmarks')
@@ -687,10 +683,6 @@
   " Slimux {{
     nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
     vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
-  " }}
-  " Solarized {{
-    let g:solarized_bold = 1
-    let g:solarized_underline = 0
   " }}
   " SQL (Vim) {{
     let g:sql_type_default = 'pgsql'
@@ -766,6 +758,16 @@
   " }}
   " YouCompleteMe {{
     let g:ycm_autoclose_preview_window_after_completion = 1
+  " }}
+" }}
+" Themes {{
+  " Seoul256 {{
+    let g:seoul256_background = 236
+    let g:seoul256_light_background = 255
+  " }}
+  " Solarized {{
+    let g:solarized_bold = 1
+    let g:solarized_underline = 0
   " }}
 " }}
 " NeoVim {{
