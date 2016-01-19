@@ -116,6 +116,7 @@
   set ignorecase " Case-insensitive search by default
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   set infercase " Smart keyword completion
+  set grepprg=ag\ --vimgrep grepformat^=%f:%l:%c:%m
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone
   set tags=./tags;,tags " Search upwards for tags by default
@@ -411,6 +412,9 @@
 
   " }}
 " Commands (plugins excluded) {{
+  " Grep search
+  command! -nargs=* -complete=shellcmd Ag grep <args><bar>cwindow<bar>redraw!
+
   " Generate/update tags file
   command! -nargs=* -complete=shellcmd Ctags cd %:h |
         \ !ctags -R --extra=+f --exclude=*.html
