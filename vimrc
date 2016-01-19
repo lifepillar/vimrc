@@ -779,9 +779,9 @@
     vnoremap <silent> <leader>x :REPLSendSelection<cr>
     " Tig
     nnoremap <silent> <leader>gs :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
-          \ && tig status<cr>
+          \&&tig\ status<cr>
     nnoremap <silent> <leader>gb :split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
-          \ && tig blame <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
+          \&&tig\ blame\ <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
 " Init {{
