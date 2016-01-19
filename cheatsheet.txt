@@ -218,6 +218,8 @@ Press q to dismiss, <Tab> to lose focus
  «C-d»         I Unindent
  ==            - Reindent line
  gg=G          - Reindent all
+ ]«Spc»        * Add blank line below
+ [«Spc»        * Add blank line above
  :set tw=‹n›   - Set text width
  gww           - Format current line
  cok           * Vertically centred text
