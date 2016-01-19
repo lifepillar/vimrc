@@ -416,7 +416,7 @@
   command! -nargs=* -complete=shellcmd Ag grep <args><bar>cwindow<bar>redraw!
 
   " Generate/update tags file
-  command! -nargs=* -complete=shellcmd Ctags cd %:h |
+  command! -nargs=* -complete=shellcmd Ctags cd %:h <bar>
         \ !ctags -R --extra=+f --exclude=*.html
 
   " Fancy fonts
