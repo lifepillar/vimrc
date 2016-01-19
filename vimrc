@@ -35,7 +35,7 @@
   scriptencoding utf-8
   set nobomb
   set fileformats=unix,mac,dos
-  if exists("+langmap") | set langnoremap | endif
+  if exists('+langnoremap') | set langnoremap | endif
   set ttimeout
   set ttimeoutlen=0 " Faster feedback in status line when returning to normal mode
   set ttyfast
@@ -54,7 +54,7 @@
   filetype plugin on " Enable loading the plugin files for specific file types
   filetype indent on " Load indent files for specific file types
   runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen
-  let g:pathogen_blacklist = ['slimux', 'syntastic', 'youcompleteme']
+  let g:pathogen_blacklist = ['slimux', 'syntastic', 'tabular', 'youcompleteme']
   execute pathogen#infect()
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
   set autoread " Re-read file if it is changed by an external program
