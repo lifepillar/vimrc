@@ -606,18 +606,6 @@
   " Easy Align {{
     vmap <enter> <plug>(EasyAlign)
   " }}
-  " EasyMotion {{
-    let g:EasyMotion_do_mapping = 0
-    let g:EasyMotion_smartcase = 1
-    map  <leader>/ <plug>(easymotion-sn)
-    omap <leader>/ <plug>(easymotion-tn)
-    nmap <leader>s <plug>(easymotion-s)
-    omap <space>   <plug>(easymotion-s)
-    map  <leader>l <plug>(easymotion-lineforward)
-    map  <leader>j <plug>(easymotion-j)
-    map  <leader>k <plug>(easymotion-k)
-    map  <leader>h <plug>(easymotion-linebackward)
-  " }}
   " Goyo {{
     " Toggle distraction-free mode
     nnoremap <silent> <leader>f :Goyo<cr>
