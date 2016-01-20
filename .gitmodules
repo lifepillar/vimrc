@@ -97,3 +97,6 @@
 [submodule "bundle/duotones"]
 	path = themes/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git
+[submodule "bundle/sneak"]
+	path = bundle/sneak
+	url = https://github.com/justinmk/vim-sneak.git

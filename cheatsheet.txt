@@ -476,6 +476,12 @@ Press q to dismiss, <Tab> to lose focus
   Slimux
   \x           * Send command
  --
+  Sneak
+  s‹c›‹c›     V- Jump forward
+  S‹c›‹c›      - Jump backward
+  z‹c›‹c›      M Jump forward
+  Z‹c›‹c›     VM Jump backward
+ --
   Surround
   ys‹Move›‹c›  - Surround with ‹c›
   S‹c›         V Surround with ‹c›

@@ -674,6 +674,10 @@
       vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
     endif
   " }}
+  " Sneak {{
+    let g:sneak#streak = 1
+    hi link SneakStreakStatusLine StatusLine
+  " }}
   " SQL (Vim) {{
     let g:sql_type_default = 'pgsql'
   " }}
