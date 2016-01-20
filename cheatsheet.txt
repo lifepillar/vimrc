@@ -31,6 +31,7 @@ Press q to dismiss, <Tab> to lose focus
 
   Notation used in the comments:
 
+  -    Type in Normal mode
   C    Type in Command mode
   I    Type in Insert mode
   V    Type in Visual mode
