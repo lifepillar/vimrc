@@ -1,5 +1,7 @@
 ## My Vim setup
 
+![Solarized Light](screenshot.png)
+
 This repository contains my own Vim setup, which includes a `vimrc` file and a
 few plugins (as Git submodules). This configuration is mostly built from other
 people's code and ideas, but I haven't kept track of my many sources of
@@ -39,12 +41,6 @@ colors in the terminal, no matter what colors the terminal is using.
 
 Use `cob` (for “change option: background”) to switch between light and dark
 background for themes that support both.
-
-### How it looks like
-
-![Solarized Dark](screenshots/solarized_dark.png)
-
-![Solarized Light](screenshots/solarized_light.png)
 
 ### Requirements
 
