@@ -58,6 +58,8 @@ if &background ==# 'dark'
   endif
   " Fix ErrorMsg in Dark Solarized, which is black on red by default (pesky)
   execute "hi ErrorMsg"       s:bg.s:red     s:fg.s:base3  s:vmode."=NONE"
+  " I don't like red on blue, not even the Solarised flavor
+  hi! link Special PreProc
   if g:solarized_contrast == "lifepillar"
     execute "hi VertSplit"    s:bg.s:base02  s:fg.s:base02 s:vmode."=NONE"
     execute "hi StatusLineNC" s:bg.s:base02  s:fg.s:base1  s:vmode."=NONE"
