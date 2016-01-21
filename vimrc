@@ -417,8 +417,8 @@
   command! -nargs=* -complete=shellcmd Ag grep <args><bar>cwindow<bar>redraw!
 
   " Generate/update tags file
-  command! -nargs=* -complete=shellcmd Ctags cd %:h <bar>
-        \ !ctags -R --extra=+f --exclude=*.html
+  command! -nargs=* -complete=shellcmd Ctags cd %:p:h <bar>
+        \ !ctags -R --extra=+f --exclude=*.html <args> %:t
 
   " Fancy fonts
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
