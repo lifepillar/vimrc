@@ -656,6 +656,7 @@
     let g:ledger_commodity_sep = ' '
   " }}
   " Netrw (Vim) {{
+    let g:netrw_dirhistmax = 0
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
     let g:netrw_home='~/.vim/tmp'
   " }}
