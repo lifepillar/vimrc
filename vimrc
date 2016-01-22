@@ -547,18 +547,20 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Git
-  nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
-  nnoremap          <leader>gp :<c-u>Git push
-  nnoremap <silent> <leader>gc :<c-u>!git -C '%:p:h' commit<cr>
-  " Show the revision history for the current file (use :Git log for the full log)
-  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
-  " Tig
-  if !has('nvim')
-    nnoremap <silent> <leader>gs :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
-          \ tig status<cr>:silent redraw!<cr>
-    nnoremap <silent> <leader>gb :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
-          \ tig blame <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>
-          \ :silent redraw!<cr>
+  if !has("gui_running")
+    nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
+    nnoremap          <leader>gp :<c-u>Git push
+    nnoremap <silent> <leader>gc :<c-u>!git -C '%:p:h' commit<cr>
+    " Show the revision history for the current file (use :Git log for the full log)
+    nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
+    " Tig
+    if !has('nvim')
+      nnoremap <silent> <leader>gs :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+            \ tig status<cr>:silent redraw!<cr>
+      nnoremap <silent> <leader>gb :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
+            \ tig blame <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>
+            \ :silent redraw!<cr>
+    endif
   endif
 " }}
 " Plugins {{
