@@ -558,7 +558,7 @@
       nnoremap <silent> <leader>gs :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
             \ tig status<cr>:silent redraw!<cr>
       nnoremap <silent> <leader>gb :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
-            \ tig blame <c-r>=shellescape(expand('%:p'))<cr> +<c-r>=expand(line('.'))<cr><cr>
+            \ tig blame <c-r>=shellescape(expand('%:t'))<cr> +<c-r>=expand(line('.'))<cr><cr>
             \ :silent redraw!<cr>
     endif
   endif
@@ -783,7 +783,7 @@
     nnoremap <silent> <leader>gs :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
           \&&tig\ status<cr>
     nnoremap <silent> <leader>gb :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
-          \&&tig\ blame\ <c-r>=shellescape(expand('%:p'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
+          \&&tig\ blame\ <c-r>=shellescape(expand('%:t'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
 " Init {{
