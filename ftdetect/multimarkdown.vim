@@ -1,2 +1,2 @@
-autocmd BufNewFile,BufReadPost *.mmd setfiletype=markdown
+autocmd BufNewFile,BufReadPost *.mmd setfiletype markdown
 
