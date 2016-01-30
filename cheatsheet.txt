@@ -57,6 +57,7 @@ Press q to dismiss, <Tab> to lose focus
  :bd           - Close file
  :%bd          - Close all
  :w            - Save
+ \w            * Save (only if modified)
  :sav …        - Save as…
  :w!           - Save read-only file
  :WW           * Save as root
