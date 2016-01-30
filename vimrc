@@ -486,12 +486,12 @@
   nnoremap <silent> [a :<c-u>next<cr>
   nnoremap <silent> ]b :<c-u>bn<cr>
   nnoremap <silent> [b :<c-u>bp<cr>
-  nnoremap <silent> ]l :<c-u>lnext<cr>
-  nnoremap <silent> [l :<c-u>lprevious<cr>
+  nnoremap <silent> ]l :<c-u>lnext<cr>zz
+  nnoremap <silent> [l :<c-u>lprevious<cr>zz
   nnoremap <silent> ]n :<c-u>/\v^[<\|=>]{7}<cr>
   nnoremap <silent> [n :<c-u>?\v^[<\|=>]{7}<cr>
-  nnoremap <silent> ]q :<c-u>cnext<cr>
-  nnoremap <silent> [q :<c-u>cprevious<cr>
+  nnoremap <silent> ]q :<c-u>cnext<cr>zz
+  nnoremap <silent> [q :<c-u>cprevious<cr>zz
   nnoremap <silent> ]t :<c-u>tn<cr>
   nnoremap <silent> [t :<c-u>tp<cr>
   nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + 1)<cr>
