@@ -532,6 +532,9 @@
   " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
+  " Use tab and shift-tab to cycle through windows
+  nnoremap <tab> <c-w>w
+  nnoremap <s-tab> <c-w>W
   " Move down in pop-up menu, or complete word (with omnifunc if available,
   " otherwise with ctrl-n), or just use tab. Define b:lf_tab_complete to
   " override the default mapping for completion.
