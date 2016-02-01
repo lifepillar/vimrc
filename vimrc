@@ -661,6 +661,9 @@
     let g:ledger_commodity_before = 0
     let g:ledger_commodity_sep = ' '
   " }}
+  " Markdown (Vim) {{
+    let g:markdown_fenced_languages = ['pgsql', 'sql']
+  " }}
   " Netrw (Vim) {{
     let g:netrw_dirhistmax = 0
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
