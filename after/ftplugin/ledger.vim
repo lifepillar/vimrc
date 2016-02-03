@@ -3,6 +3,69 @@ if exists('g:ycm_filetype_blacklist')
   call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 endif
 
+let g:ledger_report_sep = ';'
+
+let g:ledger_reports = {
+      \ 'register': {
+        \ 'fields': [
+        \   '%(format_date(date,"' . join(['%Y-%m-%d', '%Y', '%b', '%m', '%a', '%u', '%W', '%d'], g:ledger_report_sep) . '"))',
+        \   '%(quantity(scrub(display_amount)))',
+        \   '%(quantity(scrub(display_total)))',
+        \   '%(payee)',
+        \   '%(display_account)\n'
+        \ ],
+        \ 'names': ["date", "year", "month", "month_num", "wday", "wday_num", "week", "mday", "amount", "total", "payee", "account"],
+        \ 'classes': ['Date', 'integer', 'factor', 'factor', 'factor', 'factor', 'integer', 'integer', 'numeric', 'numeric', 'factor', 'factor']
+        \ },
+      \ 'balance': {
+        \ 'fields': [
+        \   '%(quantity(scrub(get_at(display_total, 0))))',
+        \   '%(quantity(scrub(get_at(display_total, 1))))',
+        \   '%(account)',
+        \   '%(partial_account)\n%/'
+        \ ],
+        \ 'names': ["balance", "uncleared_balance", "account", "partial_account"],
+        \ 'classes': ['numeric', 'numeric', 'factor', 'factor']
+        \ },
+      \ 'budget': {
+        \ 'fields': [
+        \   '%(quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))))',
+        \   '%(quantity(-scrub(get_at(display_total, 1))))',
+        \   '%(quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))))',
+        \   '%(quantity(get_at(display_total, 1) ? (100% * scrub(get_at(display_total, 0))) / -scrub(get_at(display_total, 1)) : "na"))',
+        \   '%(account)',
+        \   '%(partial_account)\n%/'
+        \ ],
+        \ 'names': ["actual", "budgeted", "remaining", "used", "account", "partial_account"],
+        \ 'classes': ['numeric', 'numeric', 'numeric', 'numeric', 'factor', 'factor']
+        \ }
+      \ }
+
+fun! Statistics(file, report_type, args, script)
+  " Generate report data in a format suitable for parsing by R
+  try
+    let l:data = ledger#exec(a:file,
+          \ a:report_type
+          \ . " --format '" . join(g:ledger_reports[a:report_type].fields, g:ledger_report_sep) . "' "
+          \ . a:args)
+  catch /.*/
+    return
+  endtry
+  " Prepare R script
+  let l:r_script = [
+        \ "ledger_data <- read.csv(stdin(), header=F, sep='" . g:ledger_report_sep . "', "
+        \ . "colClasses=c(" . join(map(g:ledger_reports[a:report_type].classes, '"''".v:val."''"'), ",") . "))"
+        \ ] + l:data + [
+        \ '',
+        \ 'names(ledger_data) <- c(' . join(map(g:ledger_reports[a:report_type].names, '"''".v:val."''"'), ",") . ')'
+        \ ]
+  let l:res = system("r --vanilla --slave --no-readline --encoding=UTF-8", l:r_script + a:script)
+  bo new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  put =l:res
+  setlocal nomodifiable
+endf
+
 hi! link ledgerTransactionDate Typedef
 hi! link ledgerMetadata Statement
 hi! link LedgerNegativeNumber Typedef
