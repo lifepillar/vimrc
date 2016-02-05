@@ -791,7 +791,9 @@
   if has('nvim')
     set complete+=i
     let g:terminal_scrollback_buffer_size = 10000
-    " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    if $TERM_PROGRAM ==# 'iTerm.app'
+      let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
 
     command! BindTerminal call lf_nvim_terminal#open()
     command! REPLSendLine call lf_nvim_terminal#send()
