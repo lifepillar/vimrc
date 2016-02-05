@@ -32,14 +32,15 @@ let s:c    = index(s:contrast_levels, s:gruvbox_contrast)
 let s:mode = ["cterm", "gui"]
 let s:bg   = s:mode[s:i] . "bg="
 let s:fg   = s:mode[s:i] . "fg="
+let s:attr = g:gruvbox_bold ? "=reverse,bold" : "=reverse"
 
-execute "hi NormalMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:fg_color[s:c][s:i] s:mode[s:i]."=reverse"
-execute "hi InsertMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:blue[s:c][s:i]     s:mode[s:i]."=reverse"
-execute "hi ReplaceMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:aqua[s:c][s:i]     s:mode[s:i]."=reverse"
-execute "hi VisualMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i]."=reverse"
-execute "hi CommandMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:purple[s:c][s:i]   s:mode[s:i]."=reverse"
-execute "hi Warnings"    s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i]."=reverse"
 execute "hi StatusLine"  s:bg.s:stl_fg[s:c][s:i]   s:fg.s:stl_bg[s:c][s:i]
+execute "hi NormalMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:fg_color[s:c][s:i] s:mode[s:i].s:attr
+execute "hi InsertMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:blue[s:c][s:i]     s:mode[s:i].s:attr
+execute "hi ReplaceMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:aqua[s:c][s:i]     s:mode[s:i].s:attr
+execute "hi VisualMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i].s:attr
+execute "hi CommandMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:purple[s:c][s:i]   s:mode[s:i].s:attr
+execute "hi Warnings"    s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i].s:attr
 
 command! IncreaseContrast
       \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
