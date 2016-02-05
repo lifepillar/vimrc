@@ -3,6 +3,8 @@ let s:contrast_levels =  [ "hard",           "medium",         "soft"         ]
 if &background ==# "dark"
   let s:bg_color       = [[234, '#1d2021'], [235, '#282828'], [236, '#32302f']]
   let s:fg_color       = [[248, '#bdae93'], [246, '#a89984'], [245, '#928374']]
+  let s:stl_bg         = [[237, '#3c3836'], [239, '#504945'], [241, '#665c54']]
+  let s:stl_fg         = [[229, '#fbf1c7'], [223, '#ebdbb2'], [250, '#d5c4a1']]
   let s:red            = [[167, '#fb4934'], [167, '#fb4934'], [124, '#cc241d']]
   let s:green          = [[142, '#b8bb26'], [142, '#b8bb26'], [106, '#98971a']]
   let s:yellow         = [[214, '#fabd2f'], [214, '#fabd2f'], [172, '#d79921']]
@@ -13,6 +15,8 @@ if &background ==# "dark"
 else
   let s:bg_color       = [[230, '#f9f5d7'], [229, '#fdf4c1'], [228, '#f2e5bc']]
   let s:fg_color       = [[241, '#665c54'], [243, '#7c6f64'], [244, '#928374']]
+  let s:stl_bg         = [[223, '#ebdbb2'], [250, '#d5c4a1'], [248, '#bdae93']]
+  let s:stl_fg         = [[239, '#504945'], [241, '#665c54'], [243, '#7c6f64']]
   let s:red            = [[ 88, '#9d0006'], [ 88, '#9d0006'], [124, '#cc241d']]
   let s:green          = [[100, '#79740e'], [100, '#79740e'], [106, '#98971a']]
   let s:yellow         = [[136, '#b57614'], [136, '#b57614'], [172, '#d79921']]
@@ -35,6 +39,7 @@ execute "hi ReplaceMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:aqua[s:c][s:i]     s:m
 execute "hi VisualMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i]."=reverse"
 execute "hi CommandMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:purple[s:c][s:i]   s:mode[s:i]."=reverse"
 execute "hi Warnings"    s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i]."=reverse"
+execute "hi StatusLine"  s:bg.s:stl_fg[s:c][s:i]   s:fg.s:stl_bg[s:c][s:i]
 
 command! IncreaseContrast
       \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
