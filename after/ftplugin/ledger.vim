@@ -3,73 +3,61 @@ if exists('g:ycm_filetype_blacklist')
   call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 endif
 
-let g:ledger_report_sep = ';'
+hi! link ledgerTransactionDate Typedef
+hi! link ledgerMetadata Statement
+hi! link LedgerNegativeNumber Typedef
+hi! link LedgerImproperPerc PreProc
 
-let g:ledger_reports = {
-      \ 'register': {
+let g:ledger_table_sep = "\t"
+
+let g:ledger_tables = {
+      \ 'register':  {
+        \ 'names': ['date', 'week_day', 'amount', 'total', 'payee', 'account'],
         \ 'fields': [
-        \   '%(format_date(date,"' . join(['%Y-%m-%d', '%Y', '%b', '%m', '%a', '%u', '%W', '%d'], g:ledger_report_sep) . '"))',
+        \   '%(format_date(date,"' . join(['%Y-%m-%d', '%a'], g:ledger_table_sep) . '"))',
         \   '%(quantity(scrub(display_amount)))',
         \   '%(quantity(scrub(display_total)))',
         \   '%(payee)',
         \   '%(display_account)\n'
-        \ ],
-        \ 'names': ["date", "year", "month", "month_num", "wday", "wday_num", "week", "mday", "amount", "total", "payee", "account"],
-        \ 'classes': ['Date', 'integer', 'factor', 'factor', 'factor', 'factor', 'integer', 'integer', 'numeric', 'numeric', 'factor', 'factor']
+        \   ]
         \ },
-      \ 'balance': {
+      \ 'cleared': {
+        \ 'names': ['balance', 'uncleared', 'account', 'partial_account'],
         \ 'fields': [
         \   '%(quantity(scrub(get_at(display_total, 0))))',
         \   '%(quantity(scrub(get_at(display_total, 1))))',
         \   '%(account)',
         \   '%(partial_account)\n%/'
-        \ ],
-        \ 'names': ["balance", "uncleared_balance", "account", "partial_account"],
-        \ 'classes': ['numeric', 'numeric', 'factor', 'factor']
+        \   ]
         \ },
       \ 'budget': {
+        \ 'names': ['actual', 'budgeted', 'remaining', 'used', 'account', 'partial_account'],
         \ 'fields': [
-        \   '%(quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))))',
-        \   '%(quantity(-scrub(get_at(display_total, 1))))',
-        \   '%(quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))))',
-        \   '%(quantity(get_at(display_total, 1) ? (100% * scrub(get_at(display_total, 0))) / -scrub(get_at(display_total, 1)) : "na"))',
+        \   '%(quantity(scrub(get_at(display_total, 0))))',
+        \   '%(get_at(display_total, 1) ? quantity(-scrub(get_at(display_total, 1))) : 0.0)',
+        \   '%(get_at(display_total, 1) ? (get_at(display_total, 0) ? quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))) : quantity(-scrub(get_at(display_total, 1)))) : quantity(-scrub(get_at(display_total, 0))))',
+        \   '%(get_at(display_total, 1) ? quantity(100% * (get_at(display_total, 0) ? scrub(get_at(display_total, 0)) : 0.0) / -scrub(get_at(display_total, 1))) : "na")',
         \   '%(account)',
         \   '%(partial_account)\n%/'
-        \ ],
-        \ 'names': ["actual", "budgeted", "remaining", "used", "account", "partial_account"],
-        \ 'classes': ['numeric', 'numeric', 'numeric', 'numeric', 'factor', 'factor']
+        \   ]
         \ }
       \ }
 
-fun! Statistics(file, report_type, args, script)
-  " Generate report data in a format suitable for parsing by R
-  try
-    let l:data = ledger#exec(a:file,
-          \ a:report_type
-          \ . " --format '" . join(g:ledger_reports[a:report_type].fields, g:ledger_report_sep) . "' "
-          \ . a:args)
-  catch /.*/
+fun! s:ledgerTable(type, args)
+  let l:format = join(g:ledger_tables[a:type].fields, g:ledger_table_sep)
+  execute "Ledger" a:type a:args "-F '" l:format "'"
+  if v:shell_error
     return
-  endtry
-  " Prepare R script
-  let l:r_script = [
-        \ "ledger_data <- read.csv(stdin(), header=F, sep='" . g:ledger_report_sep . "', "
-        \ . "colClasses=c(" . join(map(g:ledger_reports[a:report_type].classes, '"''".v:val."''"'), ",") . "))"
-        \ ] + l:data + [
-        \ '',
-        \ 'names(ledger_data) <- c(' . join(map(g:ledger_reports[a:report_type].names, '"''".v:val."''"'), ",") . ')'
-        \ ]
-  let l:res = system("r --vanilla --slave --no-readline --encoding=UTF-8", l:r_script + a:script)
-  bo new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  put =l:res
-  setlocal nomodifiable
+  endif
+  set modifiable
+  call setline(1, join(g:ledger_tables[a:type].names, "\t")) " Add header
+  setlocal filetype=csv
+  set nomodifiable
 endf
 
-hi! link ledgerTransactionDate Typedef
-hi! link ledgerMetadata Statement
-hi! link LedgerNegativeNumber Typedef
-hi! link LedgerImproperPerc PreProc
+command! -buffer -nargs=+ LedgerTable        call <sid>ledgerTable('register', <q-args>)
+command! -buffer -nargs=+ LedgerTableBalance call <sid>ledgerTable('cleared', <q-args>)
+command! -buffer -nargs=+ LedgerTableBudget  call <sid>ledgerTable('budget', <q-args>)
 
 " Waiting for https://github.com/ledger/vim-ledger/pull/27 to be merged.
 fun! s:AutocompleteOrAlign()
