@@ -778,6 +778,9 @@
   " }}
 " }}
 " Themes {{
+  " Gruvbox {{
+    let g:gruvbox_bold = 0
+  " }}
   " Seoul256 {{
     let g:seoul256_background = 236
     let g:seoul256_light_background = 255
