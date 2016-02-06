@@ -794,7 +794,7 @@
   if has('nvim')
     set complete+=i
     let g:terminal_scrollback_buffer_size = 10000
-    if $TERM_PROGRAM ==# 'iTerm.app'
+    if $TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX')
       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     endif
 
