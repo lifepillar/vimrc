@@ -5,6 +5,7 @@ setlocal dictionary=/usr/share/dict/words
 setlocal omnifunc=
 setlocal spell
 setlocal spelllang=en
+setlocal textwidth=80
 
 " Better syntax highlighting
 syn clear markdownItalic
