@@ -43,3 +43,11 @@ CompilerSet errorformat+=%-C(hyperref)%.%#on\ input\ line\ %l.
 " Ignore unmatched lines
 CompilerSet errorformat+=%-G%.%#
 
+let s:latexmk = 'max_print_line=2000\ latexmk\ -lualatex\ -cd\ -pv-\ -synctex=1\ -file-line-error\ -interaction=nonstopmode\ %:p:S'
+
+if has('clientserver') " With MacVim, typeset in the background
+  execute 'CompilerSet makeprg=('.s:latexmk.'\ >/dev/null\ 2>&1;mvim\ --remote-expr\ \"lf_tex\\#callback($?)\")&'
+else
+  execute 'CompilerSet makeprg='.s:latexmk
+endif
+
