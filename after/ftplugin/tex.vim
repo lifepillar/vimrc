@@ -9,5 +9,5 @@ nnoremap <expr><silent><buffer> <leader>ts lf_tex#forward_search()
 
 " Reflow paragraph with gqtp ("gq TeX paragraph")
 " See http://vim.wikia.com/wiki/Formatting_paragraphs_in_LaTeX:_an_%22environment-aware_gqap%22
-omap tp ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\)?1<cr>//-1<cr>.<cr>
+omap <buffer> tp ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\)?1<cr>//-1<cr>.<cr>
 
