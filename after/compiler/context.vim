@@ -12,5 +12,11 @@ CompilerSet errorformat=
       \%GOutput\ written\ on\ %m,
       \%GTeXExec\ \|\ run%m
 
-CompilerSet makeprg=cd\ '%:p:h'\ &&\ context\ --nonstopmode\ --synctex=1\ %:t:S
+let s:context = 'cd\ ''%:p:h''\ &&\ context\ --nonstopmode\ --synctex=1\ %:t:S'
+
+if has('clientserver') " With MacVim, typeset in the background
+  execute 'CompilerSet makeprg=('.s:context.'\ >/dev/null\ 2>&1;mvim\ --remote-expr\ \"lf_tex\\#callback($?)\")&'
+else
+  execute 'CompilerSet makeprg='.s:context
+endif
 
