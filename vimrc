@@ -553,7 +553,7 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Make
-  nnoremap <silent><buffer> <leader>m :<c-u>update<cr>:echomsg 'Running make...'<cr>
+  nnoremap <silent> <leader>m :<c-u>update<cr>:echomsg 'Running make...'<cr>
         \:silent make <bar> redraw! <bar> cwindow<cr>
   " Git
   if !has("gui_running")
