@@ -420,9 +420,10 @@ Press q to dismiss, <Tab> to lose focus
  \gp           * Git push…
  \gl           * Git log for this file
 ===
- Shell
+ Shell & Make
  :Shell …      * Run shell command and
                  show output in buffer
+ \m            * Run :make
 ===
  TeX
  \tl           * Typeset with LuaLaTeX
@@ -473,7 +474,7 @@ Press q to dismiss, <Tab> to lose focus
   \lu          * Uncleared transactions
  --
   Show Marks
-  \m           * Toggle marks
+  \M           * Toggle marks
  --
   Slimux
   \x           * Send command

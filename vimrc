@@ -553,11 +553,8 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Make
-  if has('clientserver')
-    nnoremap <silent><buffer> <leader>c :<c-u>update<cr>:silent make<cr>
-  else
-    nnoremap <silent><buffer> <leader>c :<c-u>update<cr>:silent make <bar> redraw! <bar> cwindow<cr>
-  endif
+  nnoremap <silent><buffer> <leader>m :<c-u>update<cr>:echomsg 'Running make...'<cr>
+        \:silent make <bar> redraw! <bar> cwindow<cr>
   " Git
   if !has("gui_running")
     nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
@@ -685,7 +682,7 @@
     endf
 
   " Toggle marks
-    nnoremap <silent> <leader>m :call <sid>toggleShowMarks()<cr>
+    nnoremap <silent> <leader>M :call <sid>toggleShowMarks()<cr>
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
   " Slimux {{
