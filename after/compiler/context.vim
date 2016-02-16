@@ -1,16 +1,16 @@
 let current_compiler = 'context'
 
-CompilerSet errorformat=
-      \%E%>%f:%l:\ %m,
-      \%Cl.%l\ %m,
-      \%+C\ \ %m.,
-      \%+C%.%#-%.%#,
-      \%+C%.%#[]%.%#,
-      \%+C[]%.%#,
-      \%+C%.%#%[{}\\]%.%#,
-      \%+C<%.%#>%.%#,
-      \%GOutput\ written\ on\ %m,
-      \%GTeXExec\ \|\ run%m
+CompilerSet errorformat=%Etex\ %trror\ %#>\ error\ on\ line\ %l\ in\ file\ %f:\ %m
+      " \%E%>%f:%l:\ %m,
+      " \%Cl.%l\ %m,
+      " \%+C\ \ %m.,
+      " \%+C%.%#-%.%#,
+      " \%+C%.%#[]%.%#,
+      " \%+C[]%.%#,
+      " \%+C%.%#%[{}\\]%.%#,
+      " \%+C<%.%#>%.%#
+" Skip remaining lines (FIXME: change + into -)
+CompilerSet errorformat+=%+G%.%#
 
 let s:context = 'cd\ ''%:p:h''\ &&\ context\ --nonstopmode\ --synctex=1\ %:t:S'
 
