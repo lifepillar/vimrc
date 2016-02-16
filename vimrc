@@ -552,6 +552,12 @@
           \ )
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
+  " Make
+  if has('clientserver')
+    nnoremap <silent><buffer> <leader>c :<c-u>update<cr>:silent make<cr>
+  else
+    nnoremap <silent><buffer> <leader>c :<c-u>update<cr>:silent make <bar> redraw! <bar> cwindow<cr>
+  endif
   " Git
   if !has("gui_running")
     nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
