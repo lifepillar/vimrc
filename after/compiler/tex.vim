@@ -11,6 +11,7 @@ CompilerSet errorformat+=%-P**\"%f\"
 CompilerSet errorformat+=%E%f:%l:\ LaTeX\ %trror:\ %m
 CompilerSet errorformat+=%E%f:%l:\ %m
 CompilerSet errorformat+=%E!\ LaTeX\ %trror:\ %m
+CompilerSet errorformat+=%E!LuaTeX\ %trror:\ %m
 CompilerSet errorformat+=%E!\ %m
 
 " More info for undefined control sequences
