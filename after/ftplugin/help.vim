@@ -13,6 +13,5 @@ if exists("g:default_stl")
   setlocal statusline=%!BuildHelpStatusLine(winnr())
 endif
 
-nnoremap <silent> <buffer> <tab> <c-w><c-w>
 nnoremap <silent> <buffer> q <c-w>c
 
