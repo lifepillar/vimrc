@@ -1,5 +1,8 @@
 compiler tex
 
+" Better auto-completion for things like '\label{fig:...'
+set iskeyword+=:
+
 " Typeset with LuaLaTeX
 nnoremap <silent> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
 " Clean generated files:
