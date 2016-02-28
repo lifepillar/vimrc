@@ -30,9 +30,7 @@ fun! lf_tex#clean()
   for ff in l:files
     call delete(ff)
   endfor
-  echohl ModeMsg
-  echomsg 'Aux files removed'
-  echohl None
+  call lf_msg#notice("Aux files removed")
 endf
 
 " Callback function used when a document is typeset asynchronously in MacVim
@@ -47,10 +45,8 @@ fun! lf_tex#callback(exit_status)
     " restore cwd
     execute 'lcd ' . fnameescape(l:cwd)
   endtry
-  if a:exit_status == 0
-    echohl ModeMsg
-    echomsg 'Success!'
-    echohl None
+  if self.status == 0
+    call lf_msg#notice("Success!")
     cclose
   else
     copen
