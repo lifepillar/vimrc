@@ -54,6 +54,9 @@ if has("gui_running") && has("clientserver") " MacVim
 elseif has("nvim") " NeoVim
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
+    " Without calling it explicitly before invoking jobstart(),
+    " NeoVim may not find a callback function defined in autoload:
+    execute 'call' l:callback . "(0,0,'load')"
     call jobstart(a:cmd, {"on_exit": l:callback})
   endf
 elseif exists("*job_start") " Vim

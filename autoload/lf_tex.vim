@@ -33,8 +33,8 @@ fun! lf_tex#clean()
   call lf_msg#notice("Aux files removed")
 endf
 
-" Callback function used when a document is typeset asynchronously in MacVim
-fun! lf_tex#callback(exit_status)
+" Callback function used when a document is typeset asynchronously
+fun! s:callback(job, status)
   " The following is adapted from LaTeX-Box
   " set cwd to expand error file correctly
   let l:cwd = fnamemodify(getcwd(), ':p')
@@ -45,11 +45,30 @@ fun! lf_tex#callback(exit_status)
     " restore cwd
     execute 'lcd ' . fnameescape(l:cwd)
   endtry
-  if self.status == 0
-    call lf_msg#notice("Success!")
+  if a:status == 0
     cclose
+    call lf_msg#notice("Success!")
   else
     copen
   endif
 endf
+
+if has("nvim")
+  fun! lf_tex#callback(job_id, data, event)
+    " Apparently, NeoVim does not autoload the callback function passed to
+    " jobstart(). So, the function must be explicitly called once in order to
+    " load it, before calling jobstart(). This is the reason why we define
+    " this dummy 'load' event.
+    if a:event == 'load' | return | endif
+    if a:event == 'exit'
+      call s:callback(a:job_id, a:data)
+    else
+      call lf_msg#err('Unexpected event')
+    endif
+  endf
+else
+  fun! lf_tex#callback(job, status)
+    call s:callback(a:job, a:status)
+  endf
+endif
 
