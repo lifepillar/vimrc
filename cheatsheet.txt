@@ -426,8 +426,7 @@ Press q to dismiss, <Tab> to lose focus
  \m            * Run :make
 ===
  TeX
- \tl           * Typeset with LuaLaTeX
- \tp           * Typeset with pdfLaTeX
+ \tt           * Typeset
  \tc           * Clean generated files
  \tv           * Open PDF viewer
  \ts           * Forward search
