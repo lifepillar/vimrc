@@ -46,8 +46,9 @@ if has("gui_running") && has("clientserver") " MacVim
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
     let l:callback = substitute(l:callback, '#', '\\#', 'g')
-    let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
-    let l:cmd .= ' >/dev/null 2>&1;mvim --remote-expr "' . l:callback . '(''MacVim job'',$?)"&'
+    let l:cmd = '('
+    let l:cmd .= type(a:cmd) == type([]) ? join(map(a:cmd, 'shellescape(v:val)')) : a:cmd
+    let l:cmd .= ' >/dev/null 2>&1;mvim --remote-expr "' . l:callback . '(''MacVim job'',$?)")&'
     silent exec '!' . l:cmd
   endf
 elseif has("nvim") " NeoVim
