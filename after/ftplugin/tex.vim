@@ -4,7 +4,7 @@ compiler tex
 set iskeyword+=:
 
 " Typeset with LuaLaTeX
-nnoremap <silent> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
+nnoremap       <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
 " Clean generated files:
 nnoremap <expr><silent><buffer> <leader>tc lf_tex#clean()
 " Open PDF previewer (Skim):
