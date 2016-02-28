@@ -24,7 +24,7 @@ endf
 fun! lf_tex#clean()
   let l:files = map([
         \ 'aux', 'bbl', 'blg', 'fdb_latexmk', 'fls', 'log',
-        \ 'toc', 'synctex.gz', 'synctex.gz(busy)', 'tuc'
+        \ 'out', 'toc', 'synctex.gz', 'synctex.gz(busy)', 'tuc'
         \ ],
         \ 'lf_tex#file(v:val)')
   for ff in l:files
