@@ -783,6 +783,11 @@
   " YouCompleteMe {{
     let g:ycm_autoclose_preview_window_after_completion = 1
   " }}
+  " 2HTML (Vim) {{
+    let g:html_pre_wrap=1
+    let g:html_use_encoding="UTF-8"
+    let g:html_font=["Consolas", "Menlo"]
+  " }}
 " }}
 " Themes {{
   " Gruvbox {{
