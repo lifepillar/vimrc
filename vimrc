@@ -258,6 +258,14 @@
     set transparency=0
   endif
 " }}
+" OS X {{
+  if has('mac')
+    set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
+    set printoptions=syntax:n,number:y
+    " Font is ignored; only the size is set
+    set printfont=Courier:h9
+  endif
+" }}
 " Helper functions {{
   " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
   fun! s:smoothScroll(up)
