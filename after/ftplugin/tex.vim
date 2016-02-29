@@ -2,6 +2,8 @@ compiler tex
 
 " Better auto-completion for things like '\label{fig:...'
 set iskeyword+=:
+" See :h tex-conceal
+setlocal conceallevel=2
 
 " Typeset with LuaLaTeX
 nnoremap       <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
