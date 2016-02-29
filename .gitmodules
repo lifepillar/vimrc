@@ -52,9 +52,6 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
-[submodule "bundle/speeddating"]
-	path = bundle/speeddating
-	url = https://github.com/tpope/vim-speeddating.git
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
