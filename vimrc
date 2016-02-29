@@ -99,10 +99,7 @@
   set splitright " Puts new vsplit windows to the right of the current
   set splitbelow " Puts new split windows to the bottom of the current
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
-  " Load matchit.vim, but only if the user hasn't installed a newer version
-  if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-    runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
-  endif
+  runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
   " Shift left/right repeatedly
   vnoremap > >gv
   vnoremap < <gv
