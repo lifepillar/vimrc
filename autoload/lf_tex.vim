@@ -22,14 +22,24 @@ fun! lf_tex#forward_search()
 endf
 
 fun! lf_tex#clean()
-  let l:files = map([
+  let l:currdir = expand("%:p:h")
+  let l:tmpdirs = ['out']
+  let l:suffixes = [
         \ 'aux', 'bbl', 'blg', 'fdb_latexmk', 'fls', 'log',
         \ 'out', 'tmp', 'toc', 'synctex.gz', 'synctex.gz(busy)',
-        \ 'tuc'
-        \ ],
-        \ 'lf_tex#file(v:val)')
-  for ff in l:files
+        \ 'tuc', 'vimout'
+        \ ]
+  for ff in glob(l:currdir . '/*.{' . join(l:suffixes, ',') . '}', 1, 1)
     call delete(ff)
+  endfor
+  for dd in l:tmpdirs
+    let l:subdir = l:currdir . '/' . dd
+    if isdirectory(l:subdir)
+      for ff in glob(l:subdir . '/*.{' . join(l:suffixes, ',') . '}', 1, 1)
+        call delete(ff)
+      endfor
+    endif
+    call delete(l:subdir) " delete directory (only if empty)
   endfor
   call lf_msg#notice("Aux files removed")
 endf
