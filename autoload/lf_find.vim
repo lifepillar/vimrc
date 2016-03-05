@@ -7,7 +7,7 @@ fun! lf_find#buffer(pattern)
   try
     silent noautocmd execute "lvimgrep /" . a:pattern . "/gj " . fnameescape(expand("%"))
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-    call s:warningmessage("no match")
+    call lf_msg#warn("No match")
   endtry
   lwindow
 endf
@@ -19,7 +19,7 @@ fun! lf_find#all_buffers(pattern)
   try
     silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-    call s:warningmessage("no match")
+    call lf_msg#warn("No match")
   endtry
   cwindow
 endf
