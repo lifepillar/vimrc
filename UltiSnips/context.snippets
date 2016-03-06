@@ -1,0 +1,24 @@
+snippet "s(tart)?" "start / stop" br
+\start${1:something}[$2]
+	${0:${VISUAL}}
+\stop$1
+endsnippet
+
+snippet enum "Enumerate" b
+\startitemize[n]
+	\item ${0:${VISUAL}}
+\stopitemize
+endsnippet
+
+snippet item "Itemize" b
+\startitemize
+	\item
+	${0:${VISUAL}}
+\stopitemize
+endsnippet
+
+snippet it "Individual item" b
+\item
+$0
+endsnippet
+
