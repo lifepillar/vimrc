@@ -45,6 +45,9 @@ background for themes that support both.
 ### Requirements
 
 - A fairly recent Vim (7.4 or later) (`brew install vim` recommended on OS X).
+
+Recommended:
+
 - [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher)
   (`brew install ag` on OS X).
 - [Exuberant ctags](http://ctags.sourceforge.net) to use Tagbar (`brew install ctags` on OS X).
@@ -52,7 +55,7 @@ background for themes that support both.
 ### Installation
 
     cd
-    git clone --recursive https://github.com/lifepillar/vim-config.git .vim
+    git clone --recursive https://github.com/lifepillar/vimrc.git .vim
     cd .vim
     mkdir tmp
     git checkout -b local
