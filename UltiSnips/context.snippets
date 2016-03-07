@@ -1,6 +1,6 @@
 snippet "s(tart)?" "start / stop" br
-\start${1:something}[$2]
-	${0:${VISUAL}}
+\start${1:something}$2
+	${3:${VISUAL}}
 \stop$1
 endsnippet
 
@@ -19,6 +19,6 @@ endsnippet
 
 snippet it "Individual item" b
 \item
-$0
+${0:${VISUAL}}
 endsnippet
 
