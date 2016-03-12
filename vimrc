@@ -506,7 +506,7 @@
   nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - 1)<cr>
   nnoremap <silent> cob :<c-u>ToggleBackgroundColor<cr>
   nnoremap <silent> coc :<c-u>setlocal cursorline!<cr>
-  nnoremap          cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+  nnoremap          cod :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
   nnoremap <silent> coh :<c-u>set hlsearch! \| set hlsearch?<cr>
   nnoremap <silent> coi :<c-u>set ignorecase! \| set ignorecase?<cr>
   nnoremap <silent> cok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
