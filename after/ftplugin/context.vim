@@ -2,6 +2,8 @@ compiler context
 
 " Better auto-completion for things like '\in{...}[fig:...]'
 set iskeyword+=:
+" See :h tex-conceal
+setlocal conceallevel=2
 
 " Typeset with ConTeXt MKIV
 nnoremap       <silent><buffer> <leader>tt :<c-u>update<cr>:ConTeXt<cr>
