@@ -44,9 +44,6 @@ let s:fg = s:vmode . "fg="
 
 " Override some settings and define the colors for the status line
 hi clear SignColumn
-hi clear Search
-hi! link Search VisualMode
-
 
 if &background ==# 'dark'
   if g:solarized_contrast == "high"
