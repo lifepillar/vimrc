@@ -190,7 +190,6 @@ Press q to dismiss, <Tab> to lose focus
  ggVG          - Select all
  «C-w»        CI Delete prev word
  «C-u»        CI Del. line before cursor
- «C-g»s‹c›     I Insert surrounding ‹c›
  \S            * Remove trailing space
  J             - Join with next line
  gJ            - Ditto, preserve spaces
@@ -490,6 +489,7 @@ Press q to dismiss, <Tab> to lose focus
   Z‹c›‹c›     VM Jump backward
  --
   Surround
+  «C-g»s‹c›    I Insert surrounding ‹c›
   ys‹Move›‹c›  - Surround with ‹c›
   S‹c›         V Surround with ‹c›
   cs‹c›…       - Replace ‹c› delimiters
