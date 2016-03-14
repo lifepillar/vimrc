@@ -187,7 +187,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-v»‹Move›A  - Append to chosen lines
  «C-v»‹Move›x  - Delete char in lines
  gv            - Reselect
- ggvG          - Select all
+ ggVG          - Select all
  «C-w»        CI Delete prev word
  «C-u»        CI Del. line before cursor
  «C-g»s‹c›     I Insert surrounding ‹c›
@@ -211,9 +211,10 @@ Press q to dismiss, <Tab> to lose focus
  \U           *V Capitalize words
  «C-n»         I Autocomplete
  «C-x»«C-o»    I Omnicomplete
+ «Tab»        *I
  «C-x»«C-l»    I Line autocomplete
- >%            - Indent block
- <%            - Unindent block
+ >‹Move›       - Indent
+ <‹Move›       - Unindent
  >>            - Indent line
  <<            - Unindent line
  «C-t»         I Indent
@@ -381,8 +382,9 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» L       - Move to the far right
  «C-w» H       - Move to the far left
  :ball         - One window per file
- «C-w» w       - Edit next window
+ «C-w» w       - Cycle through windows
  «C-w» «C-w»
+ «Tab»         *
  «C-w» h       - Edit left window
  «C-w» j       - Edit window below
  «C-w» k       - Edit window above
@@ -430,6 +432,9 @@ Press q to dismiss, <Tab> to lose focus
  \tc           * Clean generated files
  \tv           * Open PDF viewer
  \ts           * Forward search
+ i$           *T Inside $…$
+ a$           *T Between $…$
+ tp           *T TeX paragraph
 ===
  Plugins
  --
