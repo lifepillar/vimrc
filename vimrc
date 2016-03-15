@@ -100,9 +100,6 @@
   set splitbelow " Puts new split windows to the bottom of the current
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
   runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
-  " Shift left/right repeatedly
-  vnoremap > >gv
-  vnoremap < <gv
   set smarttab
   set expandtab " Use soft tabs by default
   " Use two spaces for tab by default

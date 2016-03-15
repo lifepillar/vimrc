@@ -212,8 +212,8 @@ Press q to dismiss, <Tab> to lose focus
  «C-x»«C-o»    I Omnicomplete
  «Tab»        *I
  «C-x»«C-l»    I Line autocomplete
- >‹Move›       - Indent
- <‹Move›       - Unindent
+ >‹Move›       - Indent   (. to repeat)
+ <‹Move›       - Unindent (. to repeat)
  >>            - Indent line
  <<            - Unindent line
  «C-t»         I Indent
