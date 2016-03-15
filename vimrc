@@ -566,21 +566,13 @@
   nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
   vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
   " Git
-  if !has("gui_running")
-    nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
-    nnoremap          <leader>gp :<c-u>Git push
-    nnoremap <silent> <leader>gc :<c-u>!git -C '%:p:h' commit<cr>
-    " Show the revision history for the current file (use :Git log for the full log)
-    nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
-    " Tig
-    if !has('nvim')
-      nnoremap <silent> <leader>gs :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
-            \ tig status<cr>:silent redraw!<cr>
-      nnoremap <silent> <leader>gb :<c-u>silent !cd <c-r>=shellescape(expand('%:p:h'))<cr>&&
-            \ tig blame <c-r>=shellescape(expand('%:t'))<cr> +<c-r>=expand(line('.'))<cr><cr>
-            \ :silent redraw!<cr>
-    endif
-  endif
+  nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
+  nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
+  nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
+  nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
+  nnoremap          <leader>gp :<c-u>Git push
+  " Show the revision history for the current file (use :Git log for the full log)
+  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
 " }}
 " Plugins {{
   " CtrlP {{
@@ -809,16 +801,6 @@
     if $TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX')
       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     endif
-
-    command! BindTerminal call lf_terminal#open()
-    command! REPLSendLine call lf_terminal#send([getline('.')])
-    command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
-
-    " Tig
-    nnoremap <silent> <leader>gs :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
-          \&&tig\ status<cr>
-    nnoremap <silent> <leader>gb :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
-          \&&tig\ blame\ <c-r>=shellescape(expand('%:t'))<cr>\ +<c-r>=expand(line('.'))<cr><cr>
   endif
 " }}
 " Init {{
