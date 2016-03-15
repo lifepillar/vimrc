@@ -43,3 +43,51 @@ fun! lf_git#three_way_diff()
   diffthis
 endf
 
+if has('nvim')
+
+  fun! lf_git#blame()
+    execute 'split +terminal\ cd\ '.shellescape(expand('%:p:h')).'&&tig\ blame\ '
+          \ .shellescape(expand('%:t')).'\ +'.expand(line('.'))
+  endf
+
+  fun! lf_git#commit()
+    execute "!git -C '%:p:h' commit"
+  endf
+
+  fun! lf_git#status()
+    execute 'split +terminal\ cd\ '.shellescape(expand('%:p:h')).'&&tig\ status'
+  endf
+
+elseif has('gui_running')
+
+  fun! lf_git#blame()
+    call lf_msg#warn("Not implemented yet")
+  endf
+
+  fun! lf_git#commit()
+    call lf_msg#warn("Not implemented yet")
+  endf
+
+  fun! lf_git#status()
+    call lf_git#exec("status", "B")
+  endf
+
+else
+
+  fun! lf_git#blame()
+    silent execute '!cd '.shellescape(expand('%:p:h')).'&&tig blame '
+          \ .shellescape(expand('%:t')).' +'.expand(line('.'))
+    redraw!
+  endf
+
+  fun! lf_git#commit()
+    execute "!git -C '%:p:h' commit"
+  endf
+
+  fun! lf_git#status()
+    silent execute '!cd '.shellescape(expand('%:p:h')).'&& tig status'
+    redraw!
+  endf
+
+endif
+
