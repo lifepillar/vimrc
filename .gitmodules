@@ -88,9 +88,6 @@
 [submodule "themes/onedark"]
 	path = themes/onedark
 	url = https://github.com/joshdick/onedark.vim
-[submodule "bundle/slimux"]
-	path = bundle/slimux
-	url = https://github.com/epeli/slimux.git
 [submodule "themes/duotones"]
 	path = themes/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git

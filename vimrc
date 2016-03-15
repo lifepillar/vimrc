@@ -698,12 +698,6 @@
     nnoremap <silent> <leader>M :call <sid>toggleShowMarks()<cr>
     nnoremap ` :ShowMarksOnce<cr>`
   " }}
-  " Slimux {{
-    if !has('nvim')
-      nnoremap <silent> <leader>x :SlimuxREPLSendLine<cr>
-      vnoremap <silent> <leader>x :SlimuxREPLSendSelection<cr>
-    endif
-  " }}
   " Sneak {{
     let g:sneak#streak = 1
     hi link SneakStreakStatusLine StatusLine
