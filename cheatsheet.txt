@@ -128,33 +128,33 @@ Press q to dismiss, <Tab> to lose focus
   gw           O Hard-wrap, cursor stays
  --
   Text objects
-  aw           T A word
+  aw           T Around word
   iw           T Inside word
-  aW           T A WORD
+  aW           T Around WORD
   iW           T Inside WORD
-  as           T A sentence
+  as           T Around sentence
   is           T Inside sentence
-  ap           T A paragraph
+  ap           T Around paragraph
   ip           T Inside paragraph
-  a(           T Between parentheses
+  a(           T Around parentheses
   ab
   i(           T Inside parentheses
   ib
-  a[           T Between brackets
+  a[           T Around brackets
   i[           T Inside brackets
-  a{           T Between braces
+  a{           T Around braces
   aB
   i{           T Inside braces
   iB
-  at           T Between tags
-  it           T Inside tags
-  a<           T Between < and >
+  at           T Around (XML) tags
+  it           T Inside (XML) tags
+  a<           T Around < and >
   i<           T Inside < and >
-  a"           T Between double quotes
+  a"           T Around double quotes
   i"           T Inside double quotes
-  a'           T Between simple quotes
+  a'           T Around simple quotes
   i'           T Inside simple quotes
-  a`           T Between ticks
+  a`           T Around ticks
   i`           T Inside ticks
  --
  u             - Undo
@@ -431,8 +431,8 @@ Press q to dismiss, <Tab> to lose focus
  \tc           * Clean generated files
  \tv           * Open PDF viewer
  \ts           * Forward search
+ a$           *T Around $…$
  i$           *T Inside $…$
- a$           *T Between $…$
  tp           *T TeX paragraph
 ===
  Plugins
