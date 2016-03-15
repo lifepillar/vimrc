@@ -72,7 +72,7 @@
   set undofile
   set undodir=~/.vim/tmp
   set undolevels=1000 " Maximum number of changes that can be undone
-  set undoreload=10000 " Maximum number lines to save for undo on a buffer reload
+  set undoreload=10000 " Maximum number of lines to save for undo on a buffer reload
   set nobackup " Do not keep a backup copy of a file
   set nowritebackup " Do not write temporary backup files
   set noswapfile " Do not create swap files
