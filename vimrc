@@ -457,11 +457,10 @@
   command! -complete=shellcmd -nargs=+ ShellLeft  call lf_shell#run(<q-args>, "L")
   command! -complete=shellcmd -nargs=+ ShellTop   call lf_shell#run(<q-args>, "T")
 
-  " Send text to a tmux pane
-  if !has('nvim') && $TMUX != ""
-    command! REPLSendLine call lf_terminal#send([getline('.')])
-    command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
-  endif
+  " Send text to a terminal
+  command! BindTerminal call lf_terminal#open()
+  command! REPLSendLine call lf_terminal#send([getline('.')])
+  command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
 
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)

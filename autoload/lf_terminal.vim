@@ -20,6 +20,10 @@ if has('nvim')
 
 elseif $TMUX != ""
 
+  fun! lf_terminal#open()
+    call lf_msg#warn("Not implemented yet")
+  endf
+
   " Send the given text to a tmux pane
   fun! lf_terminal#send(lines)
     if !exists('b:lf_bound_terminal')
@@ -32,6 +36,16 @@ elseif $TMUX != ""
     else
       call system('tmux send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(join(add(a:lines,''), "\r")))
     endif
+  endf
+
+else
+
+  fun! lf_terminal#open()
+    call lf_msg#warn("Not implemented yet")
+  endf
+
+  fun! lf_terminal#send(lines)
+    call lf_msg#warn("Not implemented yet")
   endf
 
 endif
