@@ -460,6 +460,12 @@
   command! -complete=shellcmd -nargs=+ ShellLeft  call lf_shell#run(<q-args>, "L")
   command! -complete=shellcmd -nargs=+ ShellTop   call lf_shell#run(<q-args>, "T")
 
+  " Send text to a tmux pane
+  if !has('nvim') && $TMUX != ""
+    command! REPLSendLine call lf_terminal#send([getline('.')])
+    command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
+  endif
+
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
@@ -559,6 +565,9 @@
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>cwindow<cr>
+  " Terminal
+  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
+  vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
   " Git
   if !has("gui_running")
     nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
@@ -810,12 +819,10 @@
       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     endif
 
-    command! BindTerminal call lf_nvim_terminal#open()
-    command! REPLSendLine call lf_nvim_terminal#send()
-    command! -range=% REPLSendSelection call lf_nvim_terminal#send(<line1>,<line2>)
+    command! BindTerminal call lf_terminal#open()
+    command! REPLSendLine call lf_terminal#send([getline('.')])
+    command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
 
-    nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
-    vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
     " Tig
     nnoremap <silent> <leader>gs :<c-u>split +terminal\ cd\ <c-r>=shellescape(expand('%:p:h'))<cr>
           \&&tig\ status<cr>
