@@ -494,8 +494,8 @@
   " Change to the directory of the current file
   nnoremap <silent> cd :cd %:h \| pwd<cr>
   nnoremap <silent> <leader>w :<c-u>update<cr>
-  nnoremap <silent> [<space> :put!=nr2char(10)<cr>']+1
-  nnoremap <silent> ]<space> :put=nr2char(10)<cr>'[-1
+  nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>'[
+  nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>
   nnoremap <silent> ]a :<c-u>prev<cr>
   nnoremap <silent> [a :<c-u>next<cr>
   nnoremap <silent> ]b :<c-u>bn<cr>
