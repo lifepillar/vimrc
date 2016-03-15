@@ -33,3 +33,19 @@ fun! lf_text#set_tab_width(w)
   let &l:softtabstop=l:twd
 endf
 
+" Return a List of selected lines.
+" If there is an active selection, returns the selected text (the arguments
+" are ignored); otherwise, returns the text in the given range.
+fun! lf_text#selection(ln1, ln2)
+  if getpos("'>") != [0, 0, 0, 0]
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let l:lines = getline(lnum1, lnum2)
+    let l:lines[-1] = l:lines[-1][:col2 - 1]
+    let l:lines[0] = l:lines[0][col1 - 1:]
+    return l:lines
+  else
+    return getline(a:ln1, a:ln2)
+  end
+endf
+
