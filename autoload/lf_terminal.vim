@@ -12,7 +12,7 @@ if has('nvim')
 
   " Send the given text to a terminal window
   fun! lf_terminal#send(lines)
-    if !exists('b:lf_bound_terminal')
+    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
       let b:lf_bound_terminal = input('Terminal ID: ')
     endif
     call jobsend(b:lf_bound_terminal, add(a:lines, ''))
@@ -26,7 +26,7 @@ elseif $TMUX != ""
 
   " Send the given text to a tmux pane
   fun! lf_terminal#send(lines)
-    if !exists('b:lf_bound_terminal')
+    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
       let b:lf_bound_terminal = input('Tmux pane number: ')
     endif
     if len(a:lines) > 10
