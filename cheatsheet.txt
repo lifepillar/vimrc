@@ -345,6 +345,8 @@ Press q to dismiss, <Tab> to lose focus
  T‹c›          M Just after prev ‹c›
  ;             M » repeat f/t/F/T
  ,             M « repeat f/t/F/T
+ g;            - Next pos in change list
+ g,            - Prev pos in change list
  %             M To matching character
  «C-o»         - To prev cursor position
  «C-i»         - To next cursor position
