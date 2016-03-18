@@ -15,8 +15,8 @@ nnoremap <expr><silent><buffer> <leader>tv lf_tex#preview()
 nnoremap <expr><silent><buffer> <leader>ts lf_tex#forward_search()
 " Reflow paragraph with gqtp ("gq TeX paragraph")
 " See http://vim.wikia.com/wiki/Formatting_paragraphs_in_LaTeX:_an_%22environment-aware_gqap%22
-omap     <silent><buffer> tp      ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\)?1<cr>//-1<cr>.<cr>
-vnoremap <silent><buffer> tp <esc>?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\)?1<cr>V//-1<cr>
+omap     <silent><buffer> tp      ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\\|\(small\\|med\\|big\)skip\)?1<cr>//-1<cr>.<cr>
+vnoremap <silent><buffer> tp <esc>?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\\|\(small\\|med\\|big\)skip\)?1<cr>V//-1<cr>
 " $...$ text object
 onoremap <silent><buffer> i$ :<c-u>normal! T$vt$<cr>
 onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
