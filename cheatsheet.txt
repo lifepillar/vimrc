@@ -75,12 +75,13 @@ Press q to dismiss, <Tab> to lose focus
                  (Restore with `vim -S`)
  :ls           - List open files
  :‹n›b         - Edit file n
+ ‹n›«C-^»      - Ditto
+ «C-^»         - Edit last edited file
  :b «Tab»      - Edit… (autocomplete)
  [a            * Edir prev in arg list
  ]a            * Edir next in arg list
  [b            * Edit next file (:bn)
  ]b            * Edit prev file (:bp)
- «C-^»         - Edit last edited file
  :bufdo ‹Cmd›  - Run cmd in all buffers
   Netrw
   %            - New file here
