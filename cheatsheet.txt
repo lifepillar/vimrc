@@ -7,18 +7,25 @@ Press q to dismiss, <Tab> to lose focus
   NOTATION:
 
   \      Leader
+         See `:h <Leader>`
+  ‹r›    A register (", *, 0, 1, …)
+         See `:h registers`
+  ‹Move› Motion or text object
+         See `:h motion.txt`
+         See `:h text-objects`
+  ‹P›    A regular expression (pattern)
+         See `:h pattern.txt`
+  ‹Cmd›  An Ex command (e.g., `norm 9k`)
+         See `:h cmdline.txt`
+  ‹Var›  A variable or option name
+         See `:h variables`
+         See `:h options.txt`
   ‹n›    A (possibly optional) number
   ‹c›    A single character
-  ‹r›    A register (", *, 0, 1, …)
-  ‹Move› A motion (e.g., 4jll) or a text
-         object (iw, ap, …)
-  ‹P›    A regular expression (pattern)
-  ‹Cmd›  An Ex command
-  ‹Var›  A variable or option name
+  …      Any text (e.g., a path)
   «C-…»  Press ctrl and … together
   «Spc»  Press space bar
   «CR»   Press Enter
-  …      Any text (e.g., a path)
 
   Similarly, other special keys are
   written between « and ». All other
@@ -27,7 +34,8 @@ Press q to dismiss, <Tab> to lose focus
 
   Note that spaces are made explicit
   only when it is not obvious that a
-  space must be used (e.g., \«Spc»)
+  space must be used (e.g., \«Spc», that
+  is, leader followed by space).
 
   Notation used in the comments:
 
@@ -35,8 +43,8 @@ Press q to dismiss, <Tab> to lose focus
   C    Type in Command mode
   I    Type in Insert mode
   V    Type in Visual mode
-  M    Motion (may be used with an
-       operator)
+  M    Motion (may be used by itself or
+       after an operator)
   O    Operator (use in Visual mode, or
        before a motion or a text object)
   T    Text object (use in Visual mode
@@ -47,60 +55,32 @@ Press q to dismiss, <Tab> to lose focus
   WORD Space-delimited word
 ===
  File
- :enew         - New file in this window
+ :enew         - New untitled document
  :e …          - New/open file or dir
- :sp …         - Open in horiz. split
- :vs …         - Open in vertical split
- \e            * Open file browser
- :e            - Reload file from disk
- :e!           - Revert to last saved
+ :sp …         - Split open (horizontal)
+ :vs …         - Split open (vertical)
  :bd           - Close file
  :%bd          - Close all
  :w            - Save
- \w            * Save (only if modified)
+ :up           - Save (only if modified)
+ \w            * Ditto
  :sav …        - Save as…
+ :wa           - Save all
+ :xa           - Save all and exit Vim
  :w!           - Save read-only file
  :WW           * Save as root
- :x            - Save and quit
- ZZ            - Ditto
- :xa           - Save all and exit Vim
- :hardcopy     - Print document
- :q            - Quit
- :q!           - Quit without saving
- ZQ            - Ditto
- :qa!          - Quit all without saving
- «C-g»         - File info
- cd            * Cd to current path
  :mks          - Save session
                  (Restore with `vim -S`)
- :ls           - List open files
- :‹n›b         - Edit file n
- ‹n›«C-^»      - Ditto
- «C-^»         - Edit last edited file
- :b «Tab»      - Edit… (autocomplete)
- [a            * Edir prev in arg list
- ]a            * Edir next in arg list
- [b            * Edit next file (:bn)
- ]b            * Edit prev file (:bp)
- :bufdo ‹Cmd›  - Run cmd in all buffers
-  Netrw
-  %            - New file here
-  d            - New directory here
-  «CR»         - Open
-  o            - Open in a horiz. split
-  v            - Open in a vert. split
-  t            - Open in a new tab
-  «Esc»        * Back to previous buffer
-  mf           - Mark file
-  mr           - Mark by pattern match
-  mu           - Unmark all
-  me           - Edit marked files
-  R            - Rename file(s)
-  D            - Delete file(s)
-  «C-l»        - Refresh file list
-  qf           - File info
-  a            - Toggle hidden files
-  i            - Switch file list format
+ :e            - Reload file from disk
+ :e!           - Revert to last saved
+ :hardcopy     - Print document
+ :q            - Quit (window)
+ :q!           - Quit without saving
+ ZQ            - Ditto
+ :x            - Save and quit
+ ZZ            - Ditto
+ :qa!          - Quit all without saving
+ cd            * Cd to current path
 ===
  Edit
   Basics
@@ -114,21 +94,55 @@ Press q to dismiss, <Tab> to lose focus
   O            - Open new line above
   r‹c›         - Replace char
   R            - Replace mode/overwrite
+  c            O Change
+  cc           - Replace line
   .            - Repeat last command
  --
-  Operators
-  d            O Cut
-  y            O Copy
-  c            O Change
-  gU           O Change to uppercase
-  gu           O Change to lowercase
-  >            O Indent
-  <            O Unindent
-  =            O Reindent
-  gq           O Hard-wrap, cursor moves
-  gw           O Hard-wrap, cursor stays
- --
-  Text objects
+ u             - Undo
+ «C-r»         - Redo
+ g+            - Next change
+ g-            - Prev change
+ d             O Cut
+ "‹r›d         O Cut into register ‹r›
+ "*d           O Cut into OS clipboard
+ ‹n›dd         - Cut (n) line(s)
+ D             - Cut until the EOL
+ ‹n›x          - Cut char(s)
+ ‹n›X          - Cut prev char(s)
+ y             O Copy
+ "‹r›y         O Copy into register ‹r›
+ "*y           O Copy into OS clipboard
+ yy            - Copy line
+ Y             * Copy until the EOL
+ ‹n›p          - Paste after cursor
+ ‹n›P          - Paste before cursor
+ "‹r›p         - Paste from register ‹r›
+ "*p           - Paste from OS clipboard
+ ]p            - Paste after and align
+ ]P            - Paste before and align
+ «C-r»‹r›      C Paste
+ cop           * Toggle Paste mode
+ [«Spc»        * Add blank line above
+ ]«Spc»        * Add blank line below
+ v             - Visual mode (selection)
+ V             - Linewise visual mode
+ «C-v»         - Block visual mode
+ «C-v»‹Move›I  - Insert in chosen lines
+ «C-v»‹Move›A  - Append to chosen lines
+ «C-v»‹Move›c  - Replace selection
+ «C-v»‹Move›x  - Delete char in lines
+ gv            - Reselect
+ ggVG          - Select all
+ «C-w»        CI Delete previous word
+ «C-u»        CI Del. line before cursor
+ q‹r›          - Start recording macro
+                 Press q to stop
+ @‹r›          - Run recorded macro
+ @@            - Repeat last macro
+ :bufdo ‹Cmd›  - Run cmd in all buffers
+===
+ Text
+  Objects
   aw           T Around word
   iw           T Inside word
   aW           T Around WORD
@@ -158,85 +172,45 @@ Press q to dismiss, <Tab> to lose focus
   a`           T Around ticks
   i`           T Inside ticks
  --
- u             - Undo
- «C-r»         - Redo
- g+            - Next change
- g-            - Prev change
- "‹r›d         - Cut into register ‹r›
- "*d           - Cut into OS clipboard
- ‹n›dd         - Cut line(s)
- 0D            - Clear line
- ‹n›x          - Cut char(s)
- ‹n›X          - Cut prev char(s)
- "‹r›y         - Copy into register ‹r›
- "*y           - Copy into OS clipboard
- yy            - Copy line
- ‹n›p          - Paste after cursor
- ‹n›P          - Paste before cursor
- "‹r›p         - Paste from register ‹r›
- "*p           - Paste from OS clipboard
- "‹r›P         - Paste from register ‹r›
- ]p            - Paste below and align
- ]P            - Paste above and align
- «C-r»‹r›      C Paste
- cop           * Toggle Paste mode
- cc            - Replace line
- v             - Visual mode (selection)
- V             - Linewise visual mode
- «C-v»         - Visual block mode
- «C-v»‹Move›I  - Insert in chosen lines
- «C-v»‹Move›A  - Append to chosen lines
- «C-v»‹Move›x  - Delete char in lines
- gv            - Reselect
- ggVG          - Select all
- «C-w»        CI Delete prev word
- «C-u»        CI Del. line before cursor
- \S            * Remove trailing space
- J             - Join with next line
- gJ            - Ditto, preserve spaces
- :sort         V Sort selected lines
- :sort u       V Sort+remove duplicates
- q‹r›          - Start recording
-                 Press q to stop
- @‹r›          - Run recorded macro
- @@            - Repeat last macro
- :norm @‹r›    V Run macro for each line
- :g/‹P›/‹Cmd›  - Run cmd on lines =~ ‹P›
- ~             - Change character case
- ~             V Change case
- U             V Change to uppercase
- u             V Change to lowercase
+ gU            O Change to uppercase
+ gu            O Change to lowercase
  gUU           - Uppercase line
  guu           - Lowercase line
+ U             V Change to uppercase
+ u             V Change to lowercase
+ ~             - Toggle character case
+ ~             V Toggle case
  \U           *V Capitalize words
- «C-n»         I Autocomplete
- «C-x»«C-o»    I Omnicomplete
- «Tab»        *I
- «C-x»«C-l»    I Line autocomplete
- >‹Move›       - Indent   (. to repeat)
- <‹Move›       - Unindent (. to repeat)
+ >             O Indent   (. to repeat)
+ <             O Unindent (. to repeat)
+ =             O Reindent
  >>            - Indent line
  <<            - Unindent line
+ ==            - Reindent line
  «C-t»         I Indent
  «C-d»         I Unindent
- ==            - Reindent line
- gg=G          - Reindent all
- ]«Spc»        * Add blank line below
- [«Spc»        * Add blank line above
- :set tw=‹n›   - Set text width
+ gq            O Hard-wrap, cursor moves
+ gw            O Hard-wrap, cursor stays
  gww           - Format current line
- cok           * Vertically centred text
+ J             - Join with next line
+ gJ            - Ditto, preserve spaces
+ \S            * Remove trailing space
  cot           * Toggle hard/soft tabs
- \]            * Increase tab width
- \[            * Decrease tab width
- :TabWidth ‹n› * Set tab width in buffer
  :retab        - Detab (needs 'et' on)
  :retab!       - Entab (needs 'et' off)
  cos           * Toggle spell checking
  ]s            - To next misspelled word
  [s            - To prev misspelled word
  z=            - Suggest corrections
- ga            - Character info
+ :set tw=‹n›   - Set text width
+ :sort         V Sort selected lines
+ :sort u       V Sort+remove duplicates
+ :norm @‹r›    V Run macro for each line
+ :g/‹P›/‹Cmd›  - Run cmd on lines =~ ‹P›
+ «C-n»         I Autocomplete
+ «C-x»«C-o»    I Omnicomplete
+ «Tab»        *I Ditto
+ «C-x»«C-l»    I Line autocomplete
  «C-r»=        I Calculate expression
  ‹n›«C-a»      - Increment number
  ‹n›«C-x»      - Decrement number
@@ -257,31 +231,45 @@ Press q to dismiss, <Tab> to lose focus
   zL           - Scroll » half a screen
   zH           - Scroll « half a screen
  :set wrap     - Soft-wrap text
- :set nowrap   - Do not wrap text
- \[            * Decrease tab width
- \]            * Increase tab width
- zo            - Fold
- zc            - Unfold
- zM            - Fold all
- zR            - Unfold all
+ :set nowrap   - Disable soft-wrapping
+ cow           * Toggle soft wrapping
  :set cc=‹n›   - Page guide at column n
- :set cc=""    - No page guide
- \-            * Reduce contrast
- \+            * Increase contrast
- cob           * Toggle background color
- coc           * Toggle cursorline
- coh           * Toggle highlighting
- col           * Toggle invisibles
+ :set cc=      - No page guide
  con           * Toggle line numbers
  cor           * Toggle rel line numbers
- cow           * Toggle soft wrapping
+ col           * Toggle invisibles
+ zo            - Fold
+ zc            - Unfold
+ za            - Toggle fold
+ zM            - Fold all
+ zR            - Unfold all
+ :TabWidth ‹n› * Set tab width
+ \[            * Decrease tab width
+ \]            * Increase tab width
+ :ls           - Show files
+ :b «Tab»      - Edit… (autocomplete)
+ :b‹n›         - Edit file n
+ ‹n›«C-^»      - Ditto
+ «C-^»         - Edit last edited file
+ [b            * Edit next file (:bn)
+ ]b            * Edit prev file (:bp)
+ [a            * Edir prev in arg list
+ ]a            * Edir next in arg list
+ «C-g»         - Get file info
+ ga            - Character info
+ cob           * Toggle background color
+ coc           * Toggle cursorline
+ coh           * Toggle search highlight
+ cok           * Centre text vertically
+ \-            * Reduce contrast
+ \+            * Increase contrast
 ===
  Search
  coi           * Toggle ignore case
  /‹P›          - Search forward
  ?‹P›          - Search backward
- n             M Find next (same dir)
- N             M Find prev (reverse dir)
+ n             M Jump » to match
+ N             M Jump « to match
  gn            M Select up to next match
  gN            M Select up to prev match
  *             M Search » for this word
@@ -292,14 +280,12 @@ Press q to dismiss, <Tab> to lose focus
  ]q            * Next in quickfix list
  [n            * To prev conflict marks
  ]n            * To next conflict marks
- ]t            * Jump to next tag (:tn)
- [t            * Jump to prev tag (:tp)
  :s/‹P›/‹P›/g  V Find and replace
  :s/‹P›/‹P›/gc V Ditto, ask to confirm
  :%s/‹P›/‹P›/g - Find and replace all
  :FindAll …    * Find all
  :MultiFind …  * Search all open files
- :tag …«Tab»   - Find tag (autocomplete)
+ :Ag …         * Grep (uses ag)
   Differences
   :diffthis    - Use this file for diff
   :diffoff!    - Exit diff mode
@@ -333,60 +319,72 @@ Press q to dismiss, <Tab> to lose focus
   ^            M This line 1st non-blank
   +            M Next line 1st non-blank
   -            M Prev line 1st non-blank
-  }            M Next blank line
-  {            M Prev blank line
   gg           M First line
   G            M Last line
- :‹n›          M Line ‹n›
- ‹n›G
- ‹n›|          M Column ‹n›
  f‹c›          M Next ‹c› in this line
  t‹c›          M Just before next ‹c›
  F‹c›          M Prev ‹c› in this line
  T‹c›          M Just after prev ‹c›
- ;             M » repeat f/t/F/T
- ,             M « repeat f/t/F/T
+ ;             M Repeat » f/t/F/T
+ ,             M Repeat « f/t/F/T
  g;            - Next pos in change list
  g,            - Prev pos in change list
- %             M To matching character
- «C-o»         - To prev cursor position
- «C-i»         - To next cursor position
+ :‹n›          M Go to line ‹n›
+ ‹n›|          M Go to column ‹n›
+ ‹n›G          M Jump to line ‹n›
+ }             M Jump to next blank line
+ {             M Jump to prev blank line
+ )             M Jump to end of sentence
+ (             M Jump to beg of sentence
+ ]]            M Jump to end of section
+ [[            M Jump to beg of section
+ H             M Jump to top of window
+ M             M Jump to middle
+ L             M Jump to bottom
+ %             M Jump to matching delim
+ :tag …        - Jump to specified tag
+ «C-t»         - Jump to older tag
  «C-]»         - Jump to tag definition
  g]            - Ditto, but show choices
  g«C-]»        - Jump or show choices
- «C-t»         - Jump back
+ :tn           - To next matching tag
+ ]t            * Ditto
+ :tp           - To prev matching tag
+ [t            * Ditto
+ :Ctags        * Generate/update tags
  m‹c›          - Set mark
                  Global if ‹c› uppercase
- `‹c›          M Go to mark
+ `‹c›          M Jump to mark
  :marks        - View all marks
  :delmarks …   - Remove marks
- gd            - Go to definition
+ gd            - Jump to definition
+ «C-o»         - To prev jump position
+ «C-i»         - To next jump position
  gx            - Open URL under cursor
  «C-a»        *C Start of line
  «C-e»        *C End of line
  «C-n»        *C Next command
  «C-p»        *C Prev command
- «Alt-→»      *C Jump to next word ()
- «Alt-←»      *C Jump to prev word ()
+ «Alt-→»      *C Next word ()
+ «Alt-←»      *C Prev word ()
 ===
  Window
- :new          - New window/horiz. split
- «C-w» n
- :vnew         - New window/vert. split
+ :new          - New horiz. split window
+ «C-w» n       - Ditto
+ :vnew         - New vert. split window
  «C-w» c       - Close window
  «C-w» o       - Close inactive windows
  «C-w» s       - Split horizontally
  «C-w» v       - Split vertically
  «C-w» x       - Exchange windows
- «C-w» «C-x»
+ «C-w» «C-x»   - Ditto
  «C-w» K       - Move to the very top
  «C-w» J       - Move to the very bottom
  «C-w» L       - Move to the far right
  «C-w» H       - Move to the far left
  :ball         - One window per file
  «C-w» w       - Cycle through windows
- «C-w» «C-w»
- «Tab»         *
+ «C-w» «C-w»   - Ditto
  «C-w» h       - Edit left window
  «C-w» j       - Edit window below
  «C-w» k       - Edit window above
@@ -402,14 +400,15 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» >       - Increase width
 ===
  Tabs
- :tabs         - List tabs
- :tabnew       - New tab
+ :tabnew       - New untitled tab
+ :tabe …       - New/open file in tab
  gt            - Next tab
  gT            - Previous tab
  ‹n›gt         - Go to tab n
- \‹n›          *
+ \‹n›          * Ditto
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
+ :tabs         - List tabs
  «C-w» T       - Move window to new tab
  :tab ball     - Open one tab per buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
@@ -417,26 +416,26 @@ Press q to dismiss, <Tab> to lose focus
  Git
  :Git …        * Run Git command
  :Conflicts    * Three-way diff
- \gs           * Git status (uses Tig)
- \gb           * Git blame (uses Tig)
- \gd           * Git diff
- \gc           * Git commit…
- \gp           * Git push…
- \gl           * Git log for this file
+ \gs           * Status (uses Tig)
+ \gb           * Blame (uses Tig)
+ \gd           * Diff with HEAD
+ \gc           * Commit
+ \gp           * Push
+ \gl           * Log for this file
 ===
  Shell & Make
- :Shell …      * Run shell command and
-                 show output in buffer
- \m            * Run :make
+ :Shell …      * :! …, output to buffer
+ \x          V-* Send text to terminal
+ \m            * :make, open qf list
 ===
  TeX
  \tt           * Typeset
  \tc           * Clean generated files
  \tv           * Open PDF viewer
  \ts           * Forward search
- a$           *T Around $…$
- i$           *T Inside $…$
- tp           *T TeX paragraph
+ a$           T* Around $…$
+ i$           T* Inside $…$
+ tp           T* TeX paragraph
 ===
  Plugins
  --
@@ -479,11 +478,28 @@ Press q to dismiss, <Tab> to lose focus
   \ls          * Savings
   \lu          * Uncleared transactions
  --
+  Netrw
+  \e           * Open file browser
+  %            - New file here
+  d            - New directory here
+  «CR»         - Open
+  o            - Open in a horiz. split
+  v            - Open in a vert. split
+  t            - Open in a new tab
+  «Esc»        * Back to previous buffer
+  mf           - Mark file
+  mr           - Mark by pattern match
+  mu           - Unmark all
+  me           - Edit marked files
+  R            - Rename file(s)
+  D            - Delete file(s)
+  «C-l»        - Refresh file list
+  qf           - File info
+  a            - Toggle hidden files
+  i            - Switch file list format
+ --
   Show Marks
   \M           * Toggle marks
- --
-  Slimux
-  \x           * Send command
  --
   Sneak
   s‹c›‹c›     V- Jump forward
@@ -519,12 +535,12 @@ Press q to dismiss, <Tab> to lose focus
                  Use «C-c» do dismiss
  «C-f»         C Use Vim motions
                  Use «C-c» do dismiss
+ :pwd          - Current directory
  :cd …         - Change directory
  :echo ‹Var›   - Show the value of ‹Var›
- :map          - View all mappings
- :pwd          - Current directory
- :di           - View registers
  :set ‹Var›?   - Show value of an option
+ :map          - View all mappings
+ :di           - View registers
  :shell        - Open a shell
  :h hitest.vim - Help on highlight test
  :scr          - List of loaded plugins
