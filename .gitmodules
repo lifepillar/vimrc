@@ -28,9 +28,6 @@
 [submodule "bundle/undotree"]
 	path = bundle/undotree
 	url = https://github.com/mbbill/undotree.git
-[submodule "bundle/wordy"]
-	path = bundle/wordy
-	url = https://github.com/reedes/vim-wordy.git
 [submodule "themes/gruvbox"]
 	path = themes/gruvbox
 	url = https://github.com/morhetz/gruvbox.git

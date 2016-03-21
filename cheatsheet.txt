@@ -526,9 +526,6 @@ Press q to dismiss, <Tab> to lose focus
  --
   Undotree
   \u           * Toggle Undotree
- --
-  Wordy
-  :Wordy «Tab» - Load a Wordy dictionary
 ===
  Misc
  q:            - Vim motions in Cmd mode
