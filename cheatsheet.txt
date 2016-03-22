@@ -53,7 +53,7 @@ Press q to dismiss, <Tab> to lose focus
   »    Forwards/rightwards
   «    Backwards/leftwards
   WORD Space-delimited word
-===
+========================================
  File
  :enew         - New untitled document
  :e …          - New/open file or dir
@@ -81,7 +81,7 @@ Press q to dismiss, <Tab> to lose focus
  ZZ            - Ditto
  :qa!          - Quit all without saving
  cd            * Cd to current path
-===
+========================================
  Edit
   Basics
   «Esc»        - Back to normal mode
@@ -97,7 +97,7 @@ Press q to dismiss, <Tab> to lose focus
   c            O Change
   cc           - Replace line
   .            - Repeat last command
- --
+  -------------------------------------
  u             - Undo
  «C-r»         - Redo
  g+            - Next change
@@ -140,7 +140,7 @@ Press q to dismiss, <Tab> to lose focus
  @‹r›          - Run recorded macro
  @@            - Repeat last macro
  :bufdo ‹Cmd›  - Run cmd in all buffers
-===
+========================================
  Text
   Objects
   aw           T Around word
@@ -171,7 +171,7 @@ Press q to dismiss, <Tab> to lose focus
   i'           T Inside simple quotes
   a`           T Around ticks
   i`           T Inside ticks
- --
+  -------------------------------------
  gU            O Change to uppercase
  gu            O Change to lowercase
  gUU           - Uppercase line
@@ -214,7 +214,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-r»=        I Calculate expression
  ‹n›«C-a»      - Increment number
  ‹n›«C-x»      - Decrement number
-===
+========================================
  View
   Scrolling
   «C-f»        - Scroll down a page
@@ -230,11 +230,12 @@ Press q to dismiss, <Tab> to lose focus
   zz           - Scroll to the center
   zL           - Scroll » half a screen
   zH           - Scroll « half a screen
+  -------------------------------------
  :set wrap     - Soft-wrap text
  :set nowrap   - Disable soft-wrapping
  cow           * Toggle soft wrapping
- :set cc=‹n›   - Page guide at column n
- :set cc=      - No page guide
+ :setl cc=‹n›  - Page guide at column n
+ :setl cc=     - No page guide
  con           * Toggle line numbers
  cor           * Toggle rel line numbers
  col           * Toggle invisibles
@@ -263,7 +264,7 @@ Press q to dismiss, <Tab> to lose focus
  cok           * Centre text vertically
  \-            * Reduce contrast
  \+            * Increase contrast
-===
+========================================
  Search
  coi           * Toggle ignore case
  /‹P›          - Search forward
@@ -297,7 +298,7 @@ Press q to dismiss, <Tab> to lose focus
   do           - Diff obtain
   :diffget     V Get differences
   :diffput     V Put differences
-===
+========================================
  Go
   Basic movement
   h            M Left
@@ -321,6 +322,7 @@ Press q to dismiss, <Tab> to lose focus
   -            M Prev line 1st non-blank
   gg           M First line
   G            M Last line
+  -------------------------------------
  f‹c›          M Next ‹c› in this line
  t‹c›          M Just before next ‹c›
  F‹c›          M Prev ‹c› in this line
@@ -353,7 +355,6 @@ Press q to dismiss, <Tab> to lose focus
  [t            * Ditto
  :Ctags        * Generate/update tags
  m‹c›          - Set mark
-                 Global if ‹c› uppercase
  `‹c›          M Jump to mark
  :marks        - View all marks
  :delmarks …   - Remove marks
@@ -367,7 +368,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-p»        *C Prev command
  «Alt-→»      *C Next word ()
  «Alt-←»      *C Prev word ()
-===
+========================================
  Window
  :new          - New horiz. split window
  «C-w» n       - Ditto
@@ -398,7 +399,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» +       - Increase height
  «C-w» <       - Decrease width
  «C-w» >       - Increase width
-===
+========================================
  Tabs
  :tabnew       - New untitled tab
  :tabe …       - New/open file in tab
@@ -412,7 +413,7 @@ Press q to dismiss, <Tab> to lose focus
  «C-w» T       - Move window to new tab
  :tab ball     - Open one tab per buffer
  :tabdo ‹Cmd›  - Execute cmd in all tabs
-===
+========================================
  Git
  :Git …        * Run Git command
  :Conflicts    * Three-way diff
@@ -422,39 +423,40 @@ Press q to dismiss, <Tab> to lose focus
  \gc           * Commit
  \gp           * Push
  \gl           * Log for this file
-===
+========================================
  Shell & Make
  :Shell …      * :! …, output to buffer
- \x          V-* Send text to terminal
+ \x           *V Send text to terminal
  \m            * :make, open qf list
-===
+========================================
  TeX
  \tt           * Typeset
  \tc           * Clean generated files
  \tv           * Open PDF viewer
  \ts           * Forward search
- a$           T* Around $…$
- i$           T* Inside $…$
- tp           T* TeX paragraph
-===
+ a$           *T Around $…$
+ i$           *T Inside $…$
+ tp           *T TeX paragraph
+========================================
  Plugins
- --
   Commentary
   gc           O Comment operator
   gcc          - Toggle line comment
   gcgc         - Uncomment
- --
+ --------------------------------------
   CtrlP
-  «C-p»        * Open CtrlP in MRU mode
- --
+  «C-n»        * Open CtrlP in MRU mode
+  «C-p»        * Switch buffer
+ --------------------------------------
   Easy Align
   «CR»         V Trigger Easy Align
- --
+ --------------------------------------
   Goyo
   \f           * Distraction-free mode
- --
+ --------------------------------------
   Ledger
   :Ledger …    - Run Ledger command
+  :LedgerTable * Ditto, CSV output
   :Register …  - Quickfix report
   :Balance …   - Show account balance
   :Reconcile … - Reconcile an account
@@ -477,7 +479,7 @@ Press q to dismiss, <Tab> to lose focus
   \lr          * Register report
   \ls          * Savings
   \lu          * Uncleared transactions
- --
+ --------------------------------------
   Netrw
   \e           * Open file browser
   %            - New file here
@@ -497,36 +499,36 @@ Press q to dismiss, <Tab> to lose focus
   qf           - File info
   a            - Toggle hidden files
   i            - Switch file list format
- --
+ --------------------------------------
   Show Marks
   \M           * Toggle marks
- --
+ --------------------------------------
   Sneak
   s‹c›‹c›     V- Jump forward
   S‹c›‹c›      - Jump backward
   z‹c›‹c›      M Jump forward
   Z‹c›‹c›     VM Jump backward
- --
+ --------------------------------------
   Surround
   «C-g»s‹c›    I Insert surrounding ‹c›
   ys‹Move›‹c›  - Surround with ‹c›
   S‹c›         V Surround with ‹c›
-  cs‹c›…       - Replace ‹c› delimiters
-  cst…         - Replace tags
+  cs‹c›‹c›     - Replace delimiters
+  cst‹c›       - Replace tags
   ds‹c›        - Remove ‹c› delimiters
   dst          - Remove enclosing tags
- --
+ --------------------------------------
   Tagbar
   \t           * Toggle Tagbar
- --
+ --------------------------------------
   UltiSnips
   «C-j»       *I Trigger snippet
   «C-j»        I Go to next placeholder
   «C-k»        I Go to prev placeholder
- --
+ --------------------------------------
   Undotree
   \u           * Toggle Undotree
-===
+========================================
  Misc
  q:            - Vim motions in Cmd mode
                  Use «C-c» do dismiss
