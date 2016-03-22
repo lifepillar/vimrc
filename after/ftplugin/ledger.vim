@@ -55,9 +55,9 @@ fun! s:ledgerTable(type, args)
   set nomodifiable
 endf
 
-command! -buffer -nargs=+ LedgerTable        call <sid>ledgerTable('register', <q-args>)
-command! -buffer -nargs=+ LedgerTableBalance call <sid>ledgerTable('cleared', <q-args>)
-command! -buffer -nargs=+ LedgerTableBudget  call <sid>ledgerTable('budget', <q-args>)
+command! -buffer -nargs=+ LedgerTable  call <sid>ledgerTable('register', <q-args>)
+command! -buffer -nargs=+ BalanceTable call <sid>ledgerTable('cleared', <q-args>)
+command! -buffer -nargs=+ BudgetTable  call <sid>ledgerTable('budget', <q-args>)
 
 " Waiting for https://github.com/ledger/vim-ledger/pull/27 to be merged.
 fun! s:AutocompleteOrAlign()
