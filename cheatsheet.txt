@@ -15,14 +15,14 @@ Press q to dismiss, <Tab> to lose focus
          See `:h text-objects`
   ‹P›    A regular expression (pattern)
          See `:h pattern.txt`
-  ‹Cmd›  An Ex command (e.g., `norm 9k`)
+  ‹Cmd›  An Ex command
          See `:h cmdline.txt`
   ‹Var›  A variable or option name
          See `:h variables`
          See `:h options.txt`
   ‹n›    A (possibly optional) number
   ‹c›    A single character
-  …      Any text (e.g., a path)
+  …      Any text
   «C-…»  Press ctrl and … together
   «Spc»  Press space bar
   «CR»   Press Enter
@@ -45,10 +45,10 @@ Press q to dismiss, <Tab> to lose focus
   V    Type in Visual mode
   M    Motion (may be used by itself or
        after an operator)
-  O    Operator (use in Visual mode, or
-       before a motion or a text object)
   T    Text object (use in Visual mode
        or after an operator)
+  O    Operator (use in Visual mode, or
+       before a motion or a text object)
   *    User-defined mapping
   »    Forwards/rightwards
   «    Backwards/leftwards
@@ -63,12 +63,12 @@ Press q to dismiss, <Tab> to lose focus
  :%bd          - Close all
  :w            - Save
  :up           - Save (only if modified)
- \w            * Ditto
+ \w           *- Ditto
  :sav …        - Save as…
  :wa           - Save all
  :xa           - Save all and exit Vim
  :w!           - Save read-only file
- :WW           * Save as root
+ :WW          *- Save as root
  :mks          - Save session
                  (Restore with `vim -S`)
  :e            - Reload file from disk
@@ -80,7 +80,7 @@ Press q to dismiss, <Tab> to lose focus
  :x            - Save and quit
  ZZ            - Ditto
  :qa!          - Quit all without saving
- cd            * Cd to current path
+ cd           *- Cd to current path
 ========================================
  Edit
   Basics
@@ -113,7 +113,7 @@ Press q to dismiss, <Tab> to lose focus
  "‹r›y         O Copy into register ‹r›
  "*y           O Copy into OS clipboard
  yy            - Copy line
- Y             * Copy until the EOL
+ Y            *- Copy until the EOL
  ‹n›p          - Paste after cursor
  ‹n›P          - Paste before cursor
  "‹r›p         - Paste from register ‹r›
@@ -121,9 +121,9 @@ Press q to dismiss, <Tab> to lose focus
  ]p            - Paste after and align
  ]P            - Paste before and align
  «C-r»‹r›      C Paste
- cop           * Toggle Paste mode
- [«Spc»        * Add blank line above
- ]«Spc»        * Add blank line below
+ cop          *- Toggle Paste mode
+ [«Spc»       *- Add blank line above
+ ]«Spc»       *- Add blank line below
  v             - Visual mode (selection)
  V             - Linewise visual mode
  «C-v»         - Block visual mode
@@ -194,11 +194,11 @@ Press q to dismiss, <Tab> to lose focus
  gww           - Format current line
  J             - Join with next line
  gJ            - Ditto, preserve spaces
- \S            * Remove trailing space
- cot           * Toggle hard/soft tabs
+ \S           *- Remove trailing space
+ cot          *- Toggle hard/soft tabs
  :retab        - Detab (needs 'et' on)
  :retab!       - Entab (needs 'et' off)
- cos           * Toggle spell checking
+ cos          *- Toggle spell checking
  ]s            - To next misspelled word
  [s            - To prev misspelled word
  z=            - Suggest corrections
@@ -233,40 +233,40 @@ Press q to dismiss, <Tab> to lose focus
   -------------------------------------
  :set wrap     - Soft-wrap text
  :set nowrap   - Disable soft-wrapping
- cow           * Toggle soft wrapping
+ cow          *- Toggle soft wrapping
  :setl cc=‹n›  - Page guide at column n
  :setl cc=     - No page guide
- con           * Toggle line numbers
- cor           * Toggle rel line numbers
- col           * Toggle invisibles
+ con          *- Toggle line numbers
+ cor          *- Toggle rel line numbers
+ col          *- Toggle invisibles
  zo            - Fold
  zc            - Unfold
  za            - Toggle fold
  zM            - Fold all
  zR            - Unfold all
- :TabWidth ‹n› * Set tab width
- \[            * Decrease tab width
- \]            * Increase tab width
+ :TabWid ‹n›  *- Set tab width
+ \[           *- Decrease tab width
+ \]           *- Increase tab width
  :ls           - Show files
  :b «Tab»      - Edit… (autocomplete)
  :b‹n›         - Edit file n
  ‹n›«C-^»      - Ditto
  «C-^»         - Edit last edited file
- [b            * Edit next file (:bn)
- ]b            * Edit prev file (:bp)
- [a            * Edir prev in arg list
- ]a            * Edir next in arg list
+ [b           *- Edit next file (:bn)
+ ]b           *- Edit prev file (:bp)
+ [a           *- Edir prev in arg list
+ ]a           *- Edir next in arg list
  «C-g»         - Get file info
  ga            - Character info
- cob           * Toggle background color
- coc           * Toggle cursorline
- coh           * Toggle search highlight
- cok           * Centre text vertically
- \-            * Reduce contrast
- \+            * Increase contrast
+ cob          *- Toggle background color
+ coc          *- Toggle cursorline
+ coh          *- Toggle search highlight
+ cok          *- Centre text vertically
+ \-           *- Reduce contrast
+ \+           *- Increase contrast
 ========================================
  Search
- coi           * Toggle ignore case
+ coi          *- Toggle ignore case
  /‹P›          - Search forward
  ?‹P›          - Search backward
  n             M Jump » to match
@@ -275,23 +275,23 @@ Press q to dismiss, <Tab> to lose focus
  gN            M Select up to prev match
  *             M Search » for this word
  #             M Search « for this word
- [l            * Prev in location list
- ]l            * Next in location list
- [q            * Prev in quickfix list
- ]q            * Next in quickfix list
- [n            * To prev conflict marks
- ]n            * To next conflict marks
+ [l           *- Prev in location list
+ ]l           *- Next in location list
+ [q           *- Prev in quickfix list
+ ]q           *- Next in quickfix list
+ [n           *- To prev conflict marks
+ ]n           *- To next conflict marks
  :s/‹P›/‹P›/g  V Find and replace
  :s/‹P›/‹P›/gc V Ditto, ask to confirm
  :%s/‹P›/‹P›/g - Find and replace all
- :FindAll …    * Find all
- :MultiFind …  * Search all open files
- :Ag …         * Grep (uses ag)
+ :FindAll …   *- Find all
+ :MultiFind … *- Search all open files
+ :Ag …        *- Grep (uses ag)
   Differences
   :diffthis    - Use this file for diff
   :diffoff!    - Exit diff mode
   :diffupdate  - Re-scan files
-  cod          * Toggle diff in buffer
+  cod         *- Toggle diff in buffer
   ]c           - Next difference
   [c           - Prev difference
   dp           - Diff put
@@ -350,10 +350,10 @@ Press q to dismiss, <Tab> to lose focus
  g]            - Ditto, but show choices
  g«C-]»        - Jump or show choices
  :tn           - To next matching tag
- ]t            * Ditto
+ ]t           *- Ditto
  :tp           - To prev matching tag
- [t            * Ditto
- :Ctags        * Generate/update tags
+ [t           *- Ditto
+ :Ctags       *- Generate/update tags
  m‹c›          - Set mark
  `‹c›          M Jump to mark
  :marks        - View all marks
@@ -406,7 +406,7 @@ Press q to dismiss, <Tab> to lose focus
  gt            - Next tab
  gT            - Previous tab
  ‹n›gt         - Go to tab n
- \‹n›          * Ditto
+ \‹n›         *- Ditto
  :tabclose     - Close tab
  :tabonly      - Close all other tabs
  :tabs         - List tabs
@@ -415,25 +415,25 @@ Press q to dismiss, <Tab> to lose focus
  :tabdo ‹Cmd›  - Execute cmd in all tabs
 ========================================
  Git
- :Git …        * Run Git command
- :Conflicts    * Three-way diff
- \gs           * Status (uses Tig)
- \gb           * Blame (uses Tig)
- \gd           * Diff with HEAD
- \gc           * Commit
- \gp           * Push
- \gl           * Log for this file
+ :Git …       *- Run Git command
+ :Conflicts   *- Three-way diff
+ \gs          *- Status (uses Tig)
+ \gb          *- Blame (uses Tig)
+ \gd          *- Diff with HEAD
+ \gc          *- Commit
+ \gp          *- Push
+ \gl          *- Log for this file
 ========================================
  Shell & Make
- :Shell …      * :! …, output to buffer
+ :Shell …     *- :! …, output to buffer
  \x           *V Send text to terminal
- \m            * :make, open qf list
+ \m           *- :make, open qf list
 ========================================
  TeX
- \tt           * Typeset
- \tc           * Clean generated files
- \tv           * Open PDF viewer
- \ts           * Forward search
+ \tt          *- Typeset
+ \tc          *- Clean generated files
+ \tv          *- Open PDF viewer
+ \ts          *- Forward search
  a$           *T Around $…$
  i$           *T Inside $…$
  tp           *T TeX paragraph
@@ -445,50 +445,50 @@ Press q to dismiss, <Tab> to lose focus
   gcgc         - Uncomment
  --------------------------------------
   CtrlP
-  «C-n»        * Open CtrlP in MRU mode
-  «C-p»        * Switch buffer
+  «C-n»       *- Open CtrlP in MRU mode
+  «C-p»       *- Switch buffer
  --------------------------------------
   Easy Align
   «CR»         V Trigger Easy Align
  --------------------------------------
   Goyo
-  \f           * Distraction-free mode
+  \f          *- Distraction-free mode
  --------------------------------------
   Ledger
   :Ledger …    - Run Ledger command
-  :LedgerTable * Ditto, CSV output
+  :LedgerTab  *- Ditto, CSV output
   :Register …  - Quickfix report
   :Balance …   - Show account balance
   :Reconcile … - Reconcile an account
   «Tab»      *IV Autocomplete or align
   «C-t»       *I Transaction from text
-  «Enter»      * Next transaction state
-  \d           * Add auxiliary date
-  \la          * Average expenses report
-  \lA          * Annualized budget
-  \lb          * Balance report
-  \lB          * Budget report
-  \lc          * Cleared report
-  \ld          * Debit/credit report
-  \le          * Expense report
-  \lf          * Cash flow report
-  \li          * Income statement
-  \lm          * Sorted monthly expenses
-  \ln          * Net worth
-  \lp          * Pending transactions
-  \lr          * Register report
-  \ls          * Savings
-  \lu          * Uncleared transactions
+  «Enter»     *- Next transaction state
+  \d          *- Add auxiliary date
+  \la         *- Average expenses report
+  \lA         *- Annualized budget
+  \lb         *- Balance report
+  \lB         *- Budget report
+  \lc         *- Cleared report
+  \ld         *- Debit/credit report
+  \le         *- Expense report
+  \lf         *- Cash flow report
+  \li         *- Income statement
+  \lm         *- Sorted monthly expenses
+  \ln         *- Net worth
+  \lp         *- Pending transactions
+  \lr         *- Register report
+  \ls         *- Savings
+  \lu         *- Uncleared transactions
  --------------------------------------
   Netrw
-  \e           * Open file browser
+  \e          *- Open file browser
   %            - New file here
   d            - New directory here
   «CR»         - Open
   o            - Open in a horiz. split
   v            - Open in a vert. split
   t            - Open in a new tab
-  «Esc»        * Back to previous buffer
+  «Esc»       *- Back to previous buffer
   mf           - Mark file
   mr           - Mark by pattern match
   mu           - Unmark all
@@ -501,7 +501,7 @@ Press q to dismiss, <Tab> to lose focus
   i            - Switch file list format
  --------------------------------------
   Show Marks
-  \M           * Toggle marks
+  \M          *- Toggle marks
  --------------------------------------
   Sneak
   s‹c›‹c›     V- Jump forward
@@ -519,7 +519,7 @@ Press q to dismiss, <Tab> to lose focus
   dst          - Remove enclosing tags
  --------------------------------------
   Tagbar
-  \t           * Toggle Tagbar
+  \t          *- Toggle Tagbar
  --------------------------------------
   UltiSnips
   «C-j»       *I Trigger snippet
@@ -527,7 +527,7 @@ Press q to dismiss, <Tab> to lose focus
   «C-k»        I Go to prev placeholder
  --------------------------------------
   Undotree
-  \u           * Toggle Undotree
+  \u          *- Toggle Undotree
 ========================================
  Misc
  q:            - Vim motions in Cmd mode
