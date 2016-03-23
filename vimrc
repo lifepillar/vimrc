@@ -121,7 +121,6 @@
   set relativenumber " Display line numbers relative to the line with the cursor
   set nowrap " Don't wrap lines by default
   set linebreak " If wrapping is enabled, wrap at word boundaries
-  " set colorcolumn=80 " Show page guide at column 80
   set laststatus=2 " Always show status line
   set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
   set shortmess-=r " Don't use abbreviations for 'readonly'
