@@ -2,4 +2,5 @@ set nocompatible
 filetype on " Enable file type detection.
 filetype plugin on " Enable loading the plugin files for specific file types.
 filetype indent on " Load indent files for specific file types.
+let g:netrw_home=~/.vim
 

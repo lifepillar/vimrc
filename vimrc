@@ -665,7 +665,7 @@
     let g:markdown_fenced_languages = ['pgsql', 'sql']
   " }}
   " Netrw (Vim) {{
-    let g:netrw_dirhistmax = 0
+    let g:netrw_home=~/.vim
     let g:netrw_banner=0
     let g:netrw_bufsettings='noma nomod nu rnu nowrap ro nobl'
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
