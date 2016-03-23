@@ -1,7 +1,6 @@
 .DS_Store
 /.netrw*
 /spell
-/tmp
 /viminfo
 /vimrc_extra.vim
 

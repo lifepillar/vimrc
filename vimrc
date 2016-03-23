@@ -63,19 +63,16 @@
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   " Consolidate temporary files in a central spot
-  set backupdir=~/.vim/tmp
-  set directory=~/.vim/tmp
+  set backupdir=~/.vim/tmp/backup
+  set directory=~/.vim/tmp/swap
   set viminfo^=!
   if !has('nvim')
     set viminfo+=n~/.vim/viminfo
   endif
-  set undofile
-  set undodir=~/.vim/tmp
+  set undofile " Enable persistent undo
+  set undodir=~/.vim/tmp/undo
   set undolevels=1000 " Maximum number of changes that can be undone
   set undoreload=10000 " Maximum number of lines to save for undo on a buffer reload
-  set nobackup " Do not keep a backup copy of a file
-  set nowritebackup " Do not write temporary backup files
-  set noswapfile " Do not create swap files
 " }}
 " Editing {{
   let g:default_scrolloff = 2
