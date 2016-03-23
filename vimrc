@@ -60,8 +60,6 @@
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
   set history=10000 " Keep a longer history (10000 is the maximum)
-  " Files and directories to ignore
-  set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp/backup
   set directory=~/.vim/tmp/swap
@@ -113,6 +111,8 @@
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone
   set tags=./tags;,tags " Search upwards for tags by default
+  " Files and directories to ignore
+  set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   set wildmenu " Show possible matches when autocompleting
   set wildignorecase " Ignore case when completing file names and directories
 " }}
