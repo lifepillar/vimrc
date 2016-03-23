@@ -91,8 +91,6 @@
   set showmatch " Show matching brackets/parenthesis
   set matchtime=2 " show matching bracket for 0.2 seconds
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
-  set splitright " Puts new vsplit windows to the right of the current
-  set splitbelow " Puts new split windows to the bottom of the current
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
   runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
   set smarttab
