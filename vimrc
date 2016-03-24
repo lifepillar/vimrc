@@ -106,6 +106,7 @@
   set ignorecase " Case-insensitive search by default
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   set grepprg=ag\ --vimgrep grepformat^=%f:%l:%c:%m
+  set complete-=i " Do not search included files
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone
   set tags=./tags;,tags " Search upwards for tags by default
@@ -788,7 +789,6 @@
 " }}
 " NeoVim {{
   if has('nvim')
-    set complete+=i
     let g:terminal_scrollback_buffer_size = 10000
     if $TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX')
       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
