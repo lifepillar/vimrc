@@ -136,5 +136,6 @@ have found the following interesting:
 - [VimGolf](http://vimgolf.com)
 - [VimAwesome](http://vimawesome.com)
 - [vimrcfu](http://vimrcfu.com)
+- [vim-galore](https://github.com/mhinz/vim-galore)
 - [vimcolors](http://vimcolors.com)
 
