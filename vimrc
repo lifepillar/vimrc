@@ -284,7 +284,7 @@
   " this way are used as transition groups (separators) in the status line and
   " in the tab line.
   fun! s:setTransitionGroup(hl,fgHl, bgHl)
-    execute 'hi! '. a:hl . (has("gui_running") || (has("termtruecolor") && guicolors == 1) ?
+    execute 'hi! '. a:hl . (has('nvim') || has("gui_running") ?
           \ ' guifg='   . s:getRealBackground(a:fgHl) . ' guibg='   . s:getRealBackground(a:bgHl) :
           \ ' ctermfg=' . s:getRealBackground(a:fgHl) . ' ctermbg=' . s:getRealBackground(a:bgHl))
   endf
