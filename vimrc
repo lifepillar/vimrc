@@ -606,7 +606,8 @@
     endf
   " }}
   " Easy Align {{
-    vmap <enter> <plug>(EasyAlign)
+    xmap <leader>a <plug>(EasyAlign)
+    nmap <leader>a <plug>(EasyAlign)
   " }}
   " Goyo {{
     " Toggle distraction-free mode
