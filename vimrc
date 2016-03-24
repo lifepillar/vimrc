@@ -127,6 +127,7 @@
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters
+  let &showbreak='↪ '
   set tabpagemax=50
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
