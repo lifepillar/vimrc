@@ -23,10 +23,6 @@
 "
 "       export LC_ALL=en_US.UTF-8
 "       export LANG=en_US.UTF-8
-"
-" - Spell files can be downloaded from
-"   ftp://ftp.vim.org/pub/vim/runtime/spell/ and put inside .vim/spell.
-"
 " }}
 " Environment {{
   set nocompatible " Must be first line
