@@ -3,6 +3,9 @@ if exists('g:ycm_filetype_blacklist')
   call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
 endif
 
+" Search include files when auto-completing with <c-n>
+setlocal complete+=i
+
 hi! link ledgerTransactionDate Typedef
 hi! link ledgerMetadata Statement
 hi! link LedgerNegativeNumber Typedef
