@@ -315,7 +315,7 @@
     let s:two_color_tabline = s:setTabLineSepGroups()
     let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
-    set fillchars=vert:\ ,fold:\·
+    let &fillchars='vert: ,fold: '
     if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
       execute "runtime after/colors/" . g:colors_name . ".vim"
     endif
