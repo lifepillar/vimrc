@@ -17,6 +17,6 @@ endf
 
 " See h :command
 fun! lf_loader#complete(argLead, cmdLine, cursorPos)
-  return filter(g:pathogen_blacklist, "v:val =~? '^" . a:argLead . "'")
+  return filter(copy(g:pathogen_blacklist), "v:val =~? '^" . a:argLead . "'")
 endf
 
