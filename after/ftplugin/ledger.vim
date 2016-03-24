@@ -45,14 +45,12 @@ let g:ledger_tables = {
 
 fun! s:ledgerTable(type, args)
   let l:format = join(g:ledger_tables[a:type].fields, g:ledger_table_sep)
-  execute "Ledger" a:type a:args "-F '" l:format "'"
-  if v:shell_error
-    return
+  if ledger#output(ledger#report(g:ledger_main, join([a:type, a:args, "-F '".l:format."'"])))
+    set modifiable
+    call setline(1, join(g:ledger_tables[a:type].names, "\t")) " Add header
+    setlocal filetype=csv
+    set nomodifiable
   endif
-  set modifiable
-  call setline(1, join(g:ledger_tables[a:type].names, "\t")) " Add header
-  setlocal filetype=csv
-  set nomodifiable
 endf
 
 command! -buffer -nargs=+ LedgerTable  call <sid>ledgerTable('register', <q-args>)
