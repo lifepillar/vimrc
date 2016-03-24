@@ -664,6 +664,7 @@
     let g:netrw_banner=0
     let g:netrw_bufsettings='noma nomod nu rnu nowrap ro nobl'
     let g:netrw_list_hide= ',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
+    let g:netrw_sort_options='i'
   " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
