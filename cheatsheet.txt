@@ -87,6 +87,7 @@ Press q to dismiss, <Tab> to lose focus
   Basics
   «Esc»        - Back to normal mode
   «C-[»        - Ditto
+  «C-c»        C Cancel command
   i            - Insert at cursor
   a            - Append after the cursor
   I            - Insert at start of line
@@ -426,7 +427,7 @@ Press q to dismiss, <Tab> to lose focus
 ========================================
  Shell & Make
  :Shell …     x- :! …, output to buffer
- \x           xV Send text to terminal
+ \x          xV- Send text to terminal
  \m           x- :make, open qf list
 ========================================
  TeX
@@ -483,7 +484,7 @@ Press q to dismiss, <Tab> to lose focus
   Netrw
   gx          *- Open with external app
   x           *- Ditto, in file explorer
-  \e          x- Open file browser
+  \e          x- Open file explorer
   %            - New file here
   d            - New directory here
   «CR»        *- Open
@@ -503,7 +504,7 @@ Press q to dismiss, <Tab> to lose focus
   i            - Switch file list format
  --------------------------------------
   Show Marks
-  \M          x- Toggle marks
+  \M          x- Toggle show marks
  --------------------------------------
   Sneak
   s‹c›‹c›     V- Jump forward
