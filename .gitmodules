@@ -16,9 +16,6 @@
 [submodule "themes/solarized"]
 	path = themes/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/tabular"]
-	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
