@@ -409,7 +409,7 @@
   " }}
 " Commands (plugins excluded) {{
   " Grep search
-  command! -nargs=* -complete=shellcmd Ag grep <args><bar>cwindow<bar>redraw!
+  command! -nargs=* -complete=shellcmd Ag silent grep <args><bar>cwindow<bar>redraw!
 
   " Generate/update tags file
   command! -nargs=* -complete=shellcmd Ctags cd %:p:h <bar>
