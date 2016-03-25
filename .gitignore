@@ -1,4 +1,5 @@
 .DS_Store
+/init.vim
 /spell
 /viminfo
 /vimrc_extra.vim
