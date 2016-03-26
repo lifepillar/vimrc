@@ -88,3 +88,6 @@
 [submodule "pack/bundle/opt/youcompleteme"]
 	path = pack/bundle/opt/youcompleteme
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "pack/bundle/opt/csapprox"]
+	path = pack/bundle/opt/csapprox
+	url = https://github.com/godlygeek/csapprox.git
