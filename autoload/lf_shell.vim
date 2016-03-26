@@ -62,7 +62,7 @@ elseif has("nvim") " NeoVim
 elseif exists("*job_start") " Vim
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
-    call job_start(a:cmd, {"exit-cb": l:callback})
+    call job_start(a:cmd, {"exit_cb": l:callback})
   endf
 else " Vim (old version)
   fun! lf_shell#async_run(cmd, ...)
