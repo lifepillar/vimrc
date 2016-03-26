@@ -311,7 +311,7 @@
     " Set defaults for vertical separator and fold separator
     let &fillchars='vert: ,fold: '
     if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
-      execute "runtime after/colors/" . g:colors_name . ".vim"
+      execute "runtime after/themes/" . g:colors_name . ".vim"
     endif
   endf
 
@@ -799,7 +799,7 @@
   DisablePatchedFont
   EnableStatusLine
 
-  execute pathogen#infect('bundle/{}', 'themes/{}')
+  execute pathogen#infect('bundle/{}', 'pack/themes/opt/{}')
 
   " Local settings
   " If this file exists, it should at least define the color scheme

@@ -5,28 +5,28 @@
 	path = bundle/goyo
 	url = https://github.com/junegunn/goyo.vim.git
 [submodule "themes/jellybeans"]
-	path = themes/jellybeans
+	path = pack/themes/opt/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
 [submodule "bundle/limelight"]
 	path = bundle/limelight
 	url = https://github.com/junegunn/limelight.vim.git
 [submodule "themes/seoul256"]
-	path = themes/seoul256
+	path = pack/themes/opt/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
 [submodule "themes/solarized"]
-	path = themes/solarized
+	path = pack/themes/opt/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule "themes/tomorrow"]
-	path = themes/tomorrow
+	path = pack/themes/opt/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "bundle/undotree"]
 	path = bundle/undotree
 	url = https://github.com/mbbill/undotree.git
 [submodule "themes/gruvbox"]
-	path = themes/gruvbox
+	path = pack/themes/opt/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
 [submodule "bundle/ctrlp-funky"]
 	path = bundle/ctrlp-funky
@@ -41,7 +41,7 @@
 	path = bundle/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "themes/papercolor"]
-	path = themes/papercolor
+	path = pack/themes/opt/papercolor
 	url = https://github.com/NLKNguyen/papercolor-theme.git
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
@@ -68,7 +68,7 @@
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "themes/pencil"]
-	path = themes/pencil
+	path = pack/themes/opt/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
@@ -80,10 +80,10 @@
 	path = bundle/ledger
 	url = https://github.com/lifepillar/vim-ledger.git
 [submodule "themes/onedark"]
-	path = themes/onedark
+	path = pack/themes/opt/onedark
 	url = https://github.com/joshdick/onedark.vim
 [submodule "themes/duotones"]
-	path = themes/duotones
+	path = pack/themes/opt/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git
 [submodule "bundle/sneak"]
 	path = bundle/sneak
