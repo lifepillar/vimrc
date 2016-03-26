@@ -798,10 +798,10 @@
   DisablePatchedFont
   EnableStatusLine
 
-  " Extra settings
+  " Local settings
   " If this file exists, it should at least define the color scheme
-  if filereadable($HOME . '/.vim/vimrc_extra.vim')
-    execute 'source' $HOME . '/.vim/vimrc_extra.vim'
+  if filereadable($HOME . '/.vim/vimrc_local.vim')
+    execute 'source' $HOME . '/.vim/vimrc_local.vim'
   else
     colorscheme solarized
   endif
