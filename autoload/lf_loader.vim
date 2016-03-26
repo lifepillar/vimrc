@@ -3,7 +3,7 @@ fun! lf_loader#loadPlugin(plugin_name)
   " Remove the plugin from Pathogen's blacklist
   call filter(g:pathogen_blacklist, "v:val !=? '" . a:plugin_name ."'")
   " Update runtimepath
-  call pathogen#surround($HOME . "/.vim/bundle/" . tolower(a:plugin_name))
+  call pathogen#surround($HOME . "/.vim/pack/bundle/opt/" . tolower(a:plugin_name))
   " Load the plugin
   " Note that this loads only one file (which is usually fine):
   runtime plugin/*.vim
