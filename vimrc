@@ -49,9 +49,6 @@
   filetype on " Enable file type detection
   filetype plugin on " Enable loading the plugin files for specific file types
   filetype indent on " Load indent files for specific file types
-  runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen
-  let g:pathogen_blacklist = ['syntastic', 'tagbar', 'undotree', 'youcompleteme']
-  execute pathogen#infect('bundle/{}', 'themes/{}')
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
@@ -664,6 +661,10 @@
     let g:netrw_list_hide=',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
     let g:netrw_sort_options='i'
   " }}
+  " Pathogen {{
+    runtime bundle/pathogen/autoload/pathogen.vim " Load Pathogen
+    let g:pathogen_blacklist = ['syntastic', 'tagbar', 'undotree', 'youcompleteme']
+  " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
       if exists('b:showmarks')
@@ -797,6 +798,8 @@
 
   DisablePatchedFont
   EnableStatusLine
+
+  execute pathogen#infect('bundle/{}', 'themes/{}')
 
   " Local settings
   " If this file exists, it should at least define the color scheme
