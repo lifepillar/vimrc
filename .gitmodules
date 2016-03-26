@@ -1,14 +1,14 @@
 [submodule "bundle/pathogen"]
-	path = bundle/pathogen
+	path = pack/bundle/opt/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "bundle/goyo"]
-	path = bundle/goyo
+	path = pack/bundle/start/goyo
 	url = https://github.com/junegunn/goyo.vim.git
 [submodule "themes/jellybeans"]
 	path = pack/themes/opt/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
 [submodule "bundle/limelight"]
-	path = bundle/limelight
+	path = pack/bundle/start/limelight
 	url = https://github.com/junegunn/limelight.vim.git
 [submodule "themes/seoul256"]
 	path = pack/themes/opt/seoul256
@@ -17,67 +17,64 @@
 	path = pack/themes/opt/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/tagbar"]
-	path = bundle/tagbar
+	path = pack/bundle/opt/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule "themes/tomorrow"]
 	path = pack/themes/opt/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "bundle/undotree"]
-	path = bundle/undotree
+	path = pack/bundle/opt/undotree
 	url = https://github.com/mbbill/undotree.git
 [submodule "themes/gruvbox"]
 	path = pack/themes/opt/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
 [submodule "bundle/ctrlp-funky"]
-	path = bundle/ctrlp-funky
+	path = pack/bundle/start/ctrlp-funky
 	url = https://github.com/tacahiroy/ctrlp-funky.git
 [submodule "bundle/ctrlp"]
-	path = bundle/ctrlp
+	path = pack/bundle/start/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
 [submodule "bundle/surround"]
-	path = bundle/surround
+	path = pack/bundle/start/surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/easy-align"]
-	path = bundle/easy-align
+	path = pack/bundle/start/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "themes/papercolor"]
 	path = pack/themes/opt/papercolor
 	url = https://github.com/NLKNguyen/papercolor-theme.git
 [submodule "bundle/showmarks"]
-	path = bundle/showmarks
+	path = pack/bundle/start/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
 [submodule "bundle/commentary"]
-	path = bundle/commentary
+	path = pack/bundle/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "bundle/swift"]
-	path = bundle/swift
+	path = pack/bundle/start/swift
 	url = https://github.com/keith/swift.vim.git
-[submodule "bundle/youcompleteme"]
-	path = bundle/youcompleteme
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule "bundle/rust"]
-	path = bundle/rust
+	path = pack/bundle/start/rust
 	url = https://github.com/rust-lang/rust.vim.git
 [submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
+	path = pack/bundle/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/snippets"]
-	path = bundle/snippets
+	path = pack/bundle/start/snippets
 	url = https://github.com/honza/vim-snippets.git
 [submodule "bundle/repeat"]
-	path = bundle/repeat
+	path = pack/bundle/start/repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "themes/pencil"]
 	path = pack/themes/opt/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
 [submodule "bundle/syntastic"]
-	path = bundle/syntastic
+	path = pack/bundle/opt/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/pgsql"]
-	path = bundle/pgsql
+	path = pack/bundle/start/pgsql
 	url = https://github.com/lifepillar/pgsql.vim.git
 [submodule "bundle/ledger"]
-	path = bundle/ledger
+	path = pack/bundle/start/ledger
 	url = https://github.com/lifepillar/vim-ledger.git
 [submodule "themes/onedark"]
 	path = pack/themes/opt/onedark
@@ -86,5 +83,8 @@
 	path = pack/themes/opt/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git
 [submodule "bundle/sneak"]
-	path = bundle/sneak
+	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
+[submodule "pack/bundle/opt/youcompleteme"]
+	path = pack/bundle/opt/youcompleteme
+	url = https://github.com/Valloric/YouCompleteMe.git
