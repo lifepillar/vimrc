@@ -439,8 +439,12 @@
   " Three-way diff.
   command! -nargs=0 Conflicts call lf_git#three_way_diff()
 
-  " Load a blacklisted plugin
-  command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>)
+  if has('packages') " We may use :packadd, but YCM needs special treatment
+    command! -nargs=0 LoadYCM call lf_loader#loadYCM()
+  else
+    " Load a blacklisted plugin
+    command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>)
+  endif
 
   " Execute an external command and show the output in a new buffer
   command! -complete=shellcmd -nargs=+ Shell      call lf_shell#run(<q-args>, "B")
