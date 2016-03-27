@@ -805,7 +805,7 @@
 
   if !has('packages') " Use Pathogen as a fallback
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
-    let g:pathogen_blacklist = ['syntastic', 'tagbar', 'undotree', 'youcompleteme']
+    let g:pathogen_blacklist = ['csapprox', 'syntastic', 'tagbar', 'undotree', 'youcompleteme']
     execute pathogen#infect('pack/bundle/start/{}', 'pack/bundle/opt/{}', 'pack/themes/opt/{}')
   endif
 
