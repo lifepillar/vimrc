@@ -6,13 +6,13 @@ set iskeyword+=:
 setlocal conceallevel=2
 
 " Typeset with LuaLaTeX
-nnoremap       <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
+nnoremap <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
 " Clean generated files:
-nnoremap <expr><silent><buffer> <leader>tc lf_tex#clean()
+nnoremap <silent><buffer> <leader>tc :<c-u>lf_tex#clean()<cr>
 " Open PDF previewer (Skim):
-nnoremap <expr><silent><buffer> <leader>tv lf_tex#preview()
+nnoremap <silent><buffer> <leader>tv :<c-u>lf_tex#preview()<cr>
 " Forward search using Skim:
-nnoremap <expr><silent><buffer> <leader>ts lf_tex#forward_search()
+nnoremap <silent><buffer> <leader>ts :<c-u>lf_tex#forward_search()<cr>
 " Reflow paragraph with gqtp ("gq TeX paragraph")
 " See http://vim.wikia.com/wiki/Formatting_paragraphs_in_LaTeX:_an_%22environment-aware_gqap%22
 omap     <silent><buffer> tp      ?^$\\|^\s*\(\\item\\|\\begin\\|\\end\\|\\label\\|\(small\\|med\\|big\)skip\)?1<cr>//-1<cr>.<cr>
