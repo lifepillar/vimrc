@@ -43,6 +43,7 @@ endf
 " Note that Vim and NeoVim use different calling conventions for the callback
 " function. See `:h job_start()` and `:h jobstart()`, respectively.
 if has("gui_running") && has("clientserver") " MacVim
+
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
     let l:callback = substitute(l:callback, '#', '\\#', 'g')
@@ -51,7 +52,9 @@ if has("gui_running") && has("clientserver") " MacVim
     let l:cmd .= ' >/dev/null 2>&1;mvim --remote-expr "' . l:callback . '(''MacVim job'',$?)")&'
     silent exec '!' . l:cmd
   endf
+
 elseif has("nvim") " NeoVim
+
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
     " Without calling it explicitly before invoking jobstart(),
@@ -59,21 +62,27 @@ elseif has("nvim") " NeoVim
     execute 'call' l:callback . "(0,0,'load')"
     call jobstart(a:cmd, {"on_exit": l:callback})
   endf
+
 elseif exists("*job_start") " Vim
+
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
     call job_start(a:cmd, {"exit_cb": l:callback})
   endf
+
 else " Vim (old version)
+
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
     let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
     execute "!" . l:cmd
     execute 'call '.l:callback.'("Synchronous job",'.v:shell_error.')'
   endf
+
 endif
 
 if has("nvim")
+
   fun! lf_shell#callback(job_id, data, event)
     if a:event == 'exit'
       if a:data == 0 " 2nd arg is exit status when event is 'exit'
@@ -83,7 +92,9 @@ if has("nvim")
       endif
     endif
   endf
+
 else
+
   fun! lf_shell#callback(job, status)
     if a:status == 0
       call lf_msg#notice("Success!")
@@ -91,5 +102,6 @@ else
       call lf_msg#err("Job failed.")
     endif
   endf
+
 endif
 
