@@ -312,7 +312,7 @@
     let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
     let &fillchars='vert: ,fold: '
-    if exists('g:colors_name') && strlen(g:colors_name) " Inspired by AfterColors plugin
+    if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
       execute "runtime after/themes/" . g:colors_name . ".vim"
     endif
   endf
