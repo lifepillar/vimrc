@@ -472,18 +472,18 @@
   " Use space as alternative leader
   map <space> <leader>
   " A handy cheat sheet ;)
-  nnoremap <silent> <leader>? :call lf_cheatsheet#open()<cr>
+  nnoremap <silent> <leader>? :<c-u>call lf_cheatsheet#open()<cr>
   " Enable outline mode for the current buffer
-  nnoremap <silent> <leader>O :call lf_outliner#enable()<cr>
+  nnoremap <silent> <leader>O :<c-u>call lf_outliner#enable()<cr>
   " Change the contrast level for themes that support such feature (e.g.,
   " Solarized, Seoul256, Gruvbox). ReduceContrast and IncreaseContrast must be
   " defined in after/colors/<theme>.vim
-  nmap <silent> <leader>- :ReduceContrast<cr>
-  nmap <silent> <leader>+ :IncreaseContrast<cr>
+  nmap <silent> <leader>- :<c-u>ReduceContrast<cr>
+  nmap <silent> <leader>+ :<c-u>IncreaseContrast<cr>
   " Open file browser in the directory of the current buffer
-  nnoremap <silent> <leader>e :Ex<cr>
+  nnoremap <silent> <leader>e :<c-u>Ex<cr>
   " Change to the directory of the current file
-  nnoremap <silent> cd :cd %:h \| pwd<cr>
+  nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
   nnoremap <silent> <leader>w :<c-u>update<cr>
   nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>'[
   nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>
@@ -517,7 +517,7 @@
   " Remove trailing space globally
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
-  vnoremap <silent> <leader>U :s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
+  vnoremap <silent> <leader>U :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Go to tab 1/2/3 etc
   nnoremap <leader>1 1gt
   nnoremap <leader>2 2gt
