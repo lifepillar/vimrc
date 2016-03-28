@@ -355,7 +355,7 @@ Press q to dismiss, <Tab> to lose focus
  ]t           x- Ditto
  :tp           - To prev matching tag
  [t           x- Ditto
- :Ctags       x- Generate/update tags
+ :Ctags …     x- Generate/update tags
  m‹c›          - Set mark
  `‹c›          M Jump to mark
  :marks        - View all marks
@@ -365,8 +365,8 @@ Press q to dismiss, <Tab> to lose focus
  «C-i»         - To next jump position
  «C-a»        xC Start of line
  «C-e»        xC End of line
- «C-n»        xC Next command
- «C-p»        xC Prev command
+ «C-n»         C Next command
+ «C-p»         C Prev command
  «Alt-→»      xC Next word ()
  «Alt-←»      xC Prev word ()
 ========================================
