@@ -772,15 +772,11 @@
   " }}
 " }}
 " Themes {{
-  " Gruvbox {{
-    let g:gruvbox_bold = 0
-  " }}
   " Seoul256 {{
     let g:seoul256_background = 236
     let g:seoul256_light_background = 255
   " }}
   " Solarized {{
-    let g:solarized_bold = 1
     let g:solarized_underline = 0
   " }}
 " }}
