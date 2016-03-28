@@ -197,7 +197,7 @@
           \ %#SepMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:right_sep_sym : ""}
           \%#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
-          \%#Warnings#%{w:["lf_active"] ? SyntasticStatuslineFlag() . (exists("b:stl_warnings") ? b:stl_warnings : "") : ""}%*'
+          \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
   endf
 " }}
 " Tabline {{
@@ -374,23 +374,23 @@
   fun! s:updateWarnings()
     let l:sz = getfsize(bufname('%'))
     if l:sz >= g:LargeFile || l:sz == -2
-      let b:stl_warnings = '  Large file '
+      let b:lf_stl_warnings = '  Large file '
       return
     endif
     let l:winview = winsaveview() " Save window state
     call cursor(1,1) " Start search from the beginning of the file
-    let l:trail = search('\s$', 'nw')
-    let l:spaces = search('\v^\s* ', 'nw')
-    let l:tabs = search('\v^\s*\t', 'nw')
+    let l:trail = search('\s$', 'cnw')
+    let l:spaces = search('\v^\s* ', 'cnw')
+    let l:tabs = search('\v^\s*\t', 'cnw')
     if l:trail != 0
-      let b:stl_warnings = '  Trailing space ('.trail.') '
+      let b:lf_stl_warnings = '  Trailing space ('.trail.') '
       if l:spaces != 0 && l:tabs != 0
-        let b:stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
+        let b:lf_stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
       endif
     elseif l:spaces != 0 && l:tabs != 0
-      let b:stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
+      let b:lf_stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
     else
-      unlet! b:stl_warnings
+      unlet! b:lf_stl_warnings
     endif
     call winrestview(l:winview) " Restore window state
   endf
@@ -700,11 +700,6 @@
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_loc_list_height = 5
     let g:syntastic_aggregate_errors = 1
-    let g:syntastic_stl_format = '  %E{Err: %fe}%B{ }%W{Warn: %fw} '
-    " We need to define this for the status line, because we load Syntastic on demand
-    fun! SyntasticStatuslineFlag() abort
-      return ''
-    endf
   " }}
   " Tagbar {{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
