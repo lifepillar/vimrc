@@ -413,7 +413,7 @@
 
   " Generate/update tags file (use :Ctags . to index the current directory)
   command! -nargs=* -complete=shellcmd Ctags execute 'cd ' fnameescape(expand('%:p:h')) <bar>
-        \ !ctags -R --extra=+f --exclude=*.html <args> %:t:S
+        \ !ctags -R --extra=+f --exclude=cache --exclude=tmp --exclude=*.html <args> %:t:S
 
   " Fancy fonts
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
