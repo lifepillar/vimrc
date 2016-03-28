@@ -127,6 +127,12 @@
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:• " Symbols to use for invisible characters
   let &showbreak='↪ '
   set tabpagemax=50
+  " Printing
+  if has('mac')
+    set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
+  endif
+  set printoptions=syntax:n,number:y
+  set printfont=Courier:h9 " Font is ignored; only the size is set
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
   autocmd VimResized * :wincmd =
@@ -245,14 +251,6 @@
     set guioptions-=e  " Use Vim tabline
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
     set transparency=0
-  endif
-" }}
-" OS X {{
-  if has('mac')
-    set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
-    set printoptions=syntax:n,number:y
-    " Font is ignored; only the size is set
-    set printfont=Courier:h9
   endif
 " }}
 " Helper functions {{
