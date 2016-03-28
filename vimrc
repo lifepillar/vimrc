@@ -191,7 +191,7 @@
           \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
           \ %t
           \ %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
-          \ %<%{w:["lf_winwd"] < 60 ? "" : expand("%:p:h")}
+          \ %<%{w:["lf_winwd"] < 80 ? expand("%:p:h:t") : expand("%:p:h")}
           \ %=
           \ %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
           \ . get(g:ff_map, &ff, "?") . (&expandtab ? " ˽ " : " ⇥ ") . &tabstop}
