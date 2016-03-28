@@ -57,7 +57,6 @@ Recommended:
     cd
     git clone --recursive https://github.com/lifepillar/vimrc.git .vim
     cd .vim
-    mkdir tmp
     git checkout -b local
 
 …and tweak to your taste!
@@ -75,6 +74,8 @@ Recommended:
 …and fix conflicts.
 
 ### Update plugins
+
+Make sure the repo is in a clean state.
 
     git submodule update --remote
     git commit -a
