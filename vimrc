@@ -411,9 +411,9 @@
   " Grep search
   command! -nargs=* -complete=shellcmd Ag silent grep <args><bar>cwindow<bar>redraw!
 
-  " Generate/update tags file
-  command! -nargs=* -complete=shellcmd Ctags cd %:p:h <bar>
-        \ !ctags -R --extra=+f --exclude=*.html <args> %:t
+  " Generate/update tags file (use :Ctags . to index the current directory)
+  command! -nargs=* -complete=shellcmd Ctags execute 'cd ' fnameescape(expand('%:p:h')) <bar>
+        \ !ctags -R --extra=+f --exclude=*.html <args> %:t:S
 
   " Fancy fonts
   command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
