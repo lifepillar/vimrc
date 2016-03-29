@@ -86,6 +86,23 @@ the second command updates the references to the submodules; finally, the
 last command ensures that plugins's submodules, if any, are synchronized with
 the corresponding plugin (see, for example, YouCompleteMe).
 
+
+### How to add a new plugin or colorscheme
+
+To add a plugin `Foo` from `https://repo/foo`:
+
+    git submodule add --name foo https://repo/foo pack/bundle/start/foo
+
+To add `Foo` as an optional plugin, changes `start` with `opt` (it works if Vim
+has packages, otherwise you also have to add the plugin to
+`g:pathogen_blacklist`).
+
+To add a colorscheme, change `bundle/start` with `themes/opt`.
+
+You may use `--depth 1` to create a shallow clone, but [beware of shallow
+submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submodules-in-git-how-to-use-pointed-commits-and-not-latest).
+
+
 ###  Some features
 
 - A 40-column **cheat sheet** always at hand with `\?`.
