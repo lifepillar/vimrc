@@ -85,7 +85,7 @@
   set matchtime=2 " show matching bracket for 0.2 seconds
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
-  if has('packages')
+  if has('patch1648')
     packadd! matchit
   else
     runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
