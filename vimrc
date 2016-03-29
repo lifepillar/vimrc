@@ -399,7 +399,7 @@
   " Delete trailing white space.
   fun! s:removeTrailingSpace()
     let l:winview = winsaveview() " Save window state
-    %s/\s\+$//ge
+    keeppatterns %s/\s\+$//e
     call winrestview(l:winview) " Restore window state
     call s:updateWarnings()
     redraw  " See :h :echo-redraw
