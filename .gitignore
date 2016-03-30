@@ -1,4 +1,6 @@
 .DS_Store
+/.netrwbook
+/.netrwhist
 /init.vim
 /spell
 /tags
