@@ -93,7 +93,7 @@ To add a plugin `Foo` from `https://repo/foo`:
 
     git submodule add --name foo https://repo/foo pack/bundle/start/foo
 
-To add `Foo` as an optional plugin, changes `start` with `opt` (it works if Vim
+To add `Foo` as an optional plugin, change `start` with `opt` (it works if Vim
 has packages, otherwise you also have to add the plugin to
 `g:pathogen_blacklist`).
 
