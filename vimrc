@@ -764,6 +764,7 @@
   " }}
   " YouCompleteMe {{
     let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_key_list_select_completion = ['<down>']
   " }}
   " 2HTML (Vim) {{
     let g:html_pre_wrap=1
