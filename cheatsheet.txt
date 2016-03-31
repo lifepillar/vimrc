@@ -205,6 +205,7 @@ Press q to dismiss, <Tab> to lose focus
  ]s            - To next misspelled word
  [s            - To prev misspelled word
  z=           *- Suggest corrections
+ «C-x»s        I Ditto (in pop-up menu)
  :set tw=‹n›   - Set text width
  :sort         V Sort selected lines
  :sort u       V Sort+remove duplicates
