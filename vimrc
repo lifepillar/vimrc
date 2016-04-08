@@ -373,6 +373,10 @@
   " Update trailing space and mixed indent warnings for the current buffer.
   " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
   fun! s:updateWarnings()
+    if exists('b:lf_no_warnings')
+      unlet! b:lf_stl_warnings
+      return
+    endif
     let l:sz = getfsize(bufname('%'))
     if l:sz >= g:LargeFile || l:sz == -2
       let b:lf_stl_warnings = '  Large file '
