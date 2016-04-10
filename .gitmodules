@@ -71,7 +71,7 @@
 	path = pack/bundle/opt/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "pgsql"]
-	path = pack/bundle/start/pgsql
+	path = pack/my/start/pgsql
 	url = https://github.com/lifepillar/pgsql.vim.git
 [submodule "ledger"]
 	path = pack/bundle/start/ledger
