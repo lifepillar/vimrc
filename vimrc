@@ -808,8 +808,8 @@
 
   " Local settings
   " If this file exists, it should at least define the color scheme
-  if filereadable($HOME . '/.vim/vimrc_local.vim')
-    execute 'source' $HOME . '/.vim/vimrc_local.vim'
+  if filereadable($HOME . '/.vim/vimrc_local')
+    execute 'source' $HOME . '/.vim/vimrc_local'
   else
     colorscheme solarized
   endif
