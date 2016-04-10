@@ -84,6 +84,8 @@
   set showmatch " Show matching brackets/parenthesis
   set matchtime=2 " show matching bracket for 0.2 seconds
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
+  set splitright " When splitting vertically, focus goes the right window
+  set splitbelow " When splitting horizontally, focus goes to the bottom window
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
   if has('patch1648')
     packadd! matchit
