@@ -91,3 +91,6 @@
 [submodule "csapprox"]
 	path = pack/themes/opt/csapprox
 	url = https://github.com/godlygeek/csapprox.git
+[submodule "outlaw"]
+	path = pack/my/start/outlaw
+	url = https://github.com/lifepillar/vim-outlaw.git
