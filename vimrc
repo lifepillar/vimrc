@@ -480,8 +480,6 @@
   map <space> <leader>
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :<c-u>call lf_cheatsheet#open()<cr>
-  " Enable outline mode for the current buffer
-  nnoremap <silent> <leader>O :<c-u>call lf_outliner#enable()<cr>
   " Change the contrast level for themes that support such feature (e.g.,
   " Solarized, Seoul256, Gruvbox). ReduceContrast and IncreaseContrast must be
   " defined in after/colors/<theme>.vim
