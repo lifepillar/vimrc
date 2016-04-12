@@ -70,6 +70,7 @@
   let &scrolloff=g:default_scrolloff " Keep some context when scrolling
   set sidescrolloff=5 " Ditto, but for horizontal scrolling
   set autoindent " Use indentation of the first-line when reflowing a paragraph
+  set shiftround " Round indent to multiple of shiftwidth (applies to < and >)
   set backspace=indent,eol,start " Intuitive backspacing in insert mode
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements
   " Make Y behave like other capitals (use yy to yank the whole line)
