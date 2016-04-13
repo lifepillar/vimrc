@@ -121,6 +121,7 @@
   set notitle " Do not set the terminal title
   set number " Turn line numbering on
   set relativenumber " Display line numbers relative to the line with the cursor
+  set report=0 " Always show # number yanked/deleted lines
   set nowrap " Don't wrap lines by default
   set linebreak " If wrapping is enabled, wrap at word boundaries
   set laststatus=2 " Always show status line
