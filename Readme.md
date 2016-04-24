@@ -81,7 +81,7 @@ submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submo
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
   (let Vim spend a few tens of microseconds on updating the status line rather
   than the several milliseconds that plugins “as light as air” need). It used to
-  support Powerline fonts up to commit 76500eae, when I decided that simple is
+  support Powerline fonts up to commit #76500eae, when I decided that simple is
   better (and Powerline fonts are an ugly hack anyway).
 - Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
