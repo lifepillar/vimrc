@@ -82,7 +82,7 @@ submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submo
   (let Vim spend a few tens of microseconds on updating the status line rather
   than the several milliseconds that plugins “as light as air” need). It used to
   support Powerline fonts up to commit
-  [76500eae](https://github.com/lifepillar/vimrc/commit/76500eae409a816ffed836faf4781a44c662f10e),
+  [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
   when I decided that simple is better (and Powerline fonts are an ugly hack
   anyway).
 - Key bindings in command mode similar to those used by the shell.
