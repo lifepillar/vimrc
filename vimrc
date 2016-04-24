@@ -365,10 +365,6 @@
 
   " Execute an external command and show the output in a new buffer
   command! -complete=shellcmd -nargs=+ Shell      call lf_shell#run(<q-args>, "B")
-  command! -complete=shellcmd -nargs=+ ShellBot   call lf_shell#run(<q-args>, "B")
-  command! -complete=shellcmd -nargs=+ ShellRight call lf_shell#run(<q-args>, "R")
-  command! -complete=shellcmd -nargs=+ ShellLeft  call lf_shell#run(<q-args>, "L")
-  command! -complete=shellcmd -nargs=+ ShellTop   call lf_shell#run(<q-args>, "T")
 
   " Send text to a terminal
   command! BindTerminal call lf_terminal#open()
