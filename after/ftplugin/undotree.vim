@@ -1,7 +1,6 @@
 fun! BuildUndotreeStatusLine(nr)
   return '%{SetupStl('.a:nr.')}
-        \%#CurrMode#%{w:["lf_active"] ? "  Undotree " : ""}
-        \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
+        \%#CurrMode#%{w:["lf_active"] ? "  Undotree " : ""}%*
         \%{w:["lf_active"] ? "" : "  Undotree"}
         \ %<%{t:undotree.GetStatusLine()} %*'
 endf

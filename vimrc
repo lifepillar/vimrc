@@ -155,28 +155,21 @@
         \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'],
         \ 't':  ['TERMINAL', 'CommandMode']}
 
-  let g:ff_map = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
+  let g:ro_sym  = "RO"
+  let g:ma_sym  = "✗"
+  let g:mod_sym = "◇"
+  let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
   " newMode may be a value as returned by mode(1) or the name of a highlight group
   fun! s:updateStatusLineHighlight(newMode)
     execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
-    call s:setTransitionGroup("SepMode", "CurrMode", "StatusLine")
     return 1
   endf
 
+  " Setting highlight groups while computing the status line may cause the
+  " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
   fun! SetupStl(nr)
-    " Setting highlight groups while computing the status line may cause the
-    " startup screen to disappear in MacVim. See:
-    "
-    "     https://github.com/powerline/powerline/issues/250
-    "
-    " I have experienced this issue under two circumstances:
-    " 1) you open a window in MacVim (File > New Window), then you open a
-    "    second window: the startup screen disappears in the first window.
-    " 2) After installing YouCompleteMe, it happens every time.
-    "
-    " In a %{} context, winnr() always refers to the window to which the
-    " status line being drawn belongs.
+    " In a %{} context, winnr() always refers to the window to which the status line being drawn belongs.
     return get(extend(w:, {
           \ "lf_active": winnr() != a:nr
             \ ? 0
@@ -191,46 +184,18 @@
   " Build the status line the way I want - no fat light plugins!
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
-          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}
-          \%#SepMode#%{w:["lf_active"] ? g:left_sep_sym : ""}%*
-          \ %t
-          \ %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
+          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
+          \ %t %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
           \ %<%{w:["lf_winwd"] < 80 ? expand("%:p:h:t") : expand("%:p:h")}
           \ %=
           \ %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
           \ . get(g:ff_map, &ff, "?") . (&expandtab ? " ˽ " : " ⇥ ") . &tabstop}
-          \ %#SepMode#%{w:["lf_active"] && w:["lf_winwd"] >= 60 ? g:right_sep_sym : ""}
-          \%#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
-          \ : g:pad . printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
+          \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
+          \ : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
           \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
   endf
 " }}
 " Tabline {{
-  " Define the highlight groups for the separator symbols in the tabline
-  fun! s:setTabLineSepGroups()
-    call s:setTransitionGroup("TabSepPreSel", "TabLine", "TabLineSel")
-    call s:setTransitionGroup("TabSepSel", "TabLineSel", "TabLine")
-    call s:setTransitionGroup("TabSepFill", "TabLine", "TabLineFill")
-    call s:setTransitionGroup("TabSepSelFill", "TabLineSel", "TabLineFill")
-    return s:getRealBackground("TabLine") == s:getRealBackground("TabLineFill")
-  endf
-
-  fun! s:tabLineSeparator(n)
-    return (a:n + 1 == tabpagenr()
-          \ ? "%#TabSepPreSel#" . g:left_sep_sym
-          \ : (a:n == tabpagenr()
-            \ ? (a:n == tabpagenr('$')
-              \ ? "%#TabSepSelFill#" . g:left_sep_sym
-              \ : "%#TabSepSel#" . g:left_sep_sym
-              \ )
-            \ : (a:n != tabpagenr('$') || s:two_color_tabline
-              \ ? "%#TabSepSel#" . g:lalt_sep_sym
-              \ : "%#TabSepFill#" . g:left_sep_sym
-              \ )
-            \ )
-        \ )
-  endf
-
   fun! BuildTabLabel(nr)
     return " " . a:nr
           \ . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
@@ -242,7 +207,7 @@
   fun! BuildTabLine()
     return join(map(
           \ range(1, tabpagenr('$')),
-          \ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}" . s:tabLineSeparator(v:val)'
+          \ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
           \), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%999X✕ " : "")
   endf
 
@@ -270,29 +235,6 @@
     endfor
   endf
 
-  " Return the real background color of the given highlight group
-  fun! s:getRealBackground(hl)
-    let l:col = synIDattr(synIDtrans(hlID(a:hl)), synIDattr(synIDtrans(hlID(a:hl)), "reverse") ? "fg" : "bg")
-    if l:col == -1 || empty(l:col)  " First fallback
-      let l:col = synIDattr(synIDtrans(hlID("Normal")), synIDattr(synIDtrans(hlID("Normal")), "reverse") ? "fg" : "bg")
-      if l:col == -1 || empty(l:col) " Second fallback
-        return (has("gui_running") || (has("termtruecolor") && &guicolors == 1)) ? "#FFFFFF" : "1"
-      endif
-    endif
-    return l:col
-  endf
-
-  " Define or overwrite a highlight group hl using the following rule: the
-  " foreground of hl is set equal to the background of fgHl; the background of
-  " hl is set equal to the background of bgHl. Highlight groups defined in
-  " this way are used as transition groups (separators) in the status line and
-  " in the tab line.
-  fun! s:setTransitionGroup(hl,fgHl, bgHl)
-    execute 'hi! '. a:hl . (has('nvim') || has("gui_running") ?
-          \ ' guifg='   . s:getRealBackground(a:fgHl) . ' guibg='   . s:getRealBackground(a:bgHl) :
-          \ ' ctermfg=' . s:getRealBackground(a:fgHl) . ' ctermbg=' . s:getRealBackground(a:bgHl))
-  endf
-
   fun! s:toggleBackgroundColor()
     if exists('g:colors_name')
       try
@@ -312,8 +254,6 @@
     hi! link ReplaceMode DiffChange
     hi! link CommandMode PmenuSel
     hi! link Warnings ErrorMsg
-    " Define our highlight groups for the tab line
-    let s:two_color_tabline = s:setTabLineSepGroups()
     let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
     let &fillchars='vert: ,fold: '
@@ -346,32 +286,6 @@
       autocmd!
     augroup END
     augroup! warnings
-  endf
-
-  fun! s:enablePatchedFont()
-    let g:left_sep_sym = "\ue0b0"
-    let g:right_sep_sym = "\ue0b2"
-    let g:lalt_sep_sym = "\ue0b1"
-    let g:ralt_sep_sym = "\ue0b3"
-    let g:ro_sym = "\ue0a2"
-    let g:ma_sym = "✗"
-    let g:mod_sym = "◇"
-    let g:linecol_sym = "\ue0a1"
-    let g:branch_sym = "\ue0a0"
-    let g:pad = " "
-  endf
-
-  fun! s:disablePatchedFont()
-    let g:left_sep_sym = ""
-    let g:right_sep_sym = ""
-    let g:lalt_sep_sym = ""
-    let g:ralt_sep_sym = ""
-    let g:ro_sym = "RO"
-    let g:ma_sym = "✗"
-    let g:mod_sym = "◇"
-    let g:linecol_sym = ""
-    let g:branch_sym = ""
-    let g:pad = ""
   endf
 
   " Update trailing space and mixed indent warnings for the current buffer.
@@ -422,10 +336,6 @@
   " Generate/update tags file (use :Ctags . to index the current directory)
   command! -nargs=* -complete=shellcmd Ctags execute 'cd ' fnameescape(expand('%:p:h')) <bar>
         \ !ctags -R --extra=+f --exclude=cache --exclude=tmp --exclude=*.html <args> %:t:S
-
-  " Fancy fonts
-  command! -nargs=0 EnablePatchedFont call <sid>enablePatchedFont()
-  command! -nargs=0 DisablePatchedFont call <sid>disablePatchedFont()
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
@@ -591,28 +501,15 @@
           \ "funky": "functions"
           \  }
 
-    " See https://gist.github.com/kien/1610859
-    " Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
-    "            a:1    a:2      a:3       a:4  a:5   a:6  a:7
-    fun! CtrlP_Main(...)
+    fun! CtrlP_Main(...) " See :h ctrlp_status_func
       let l:section = get(s:ctrlp_section_map, a:5, a:5)
-      if a:1 ==# 'prt'
-        call s:setTransitionGroup("CtrlPSepMode", "InsertMode", "StatusLine")
-        return '%#InsertMode# ' . l:section . ' %#CtrlPSepMode#%{g:left_sep_sym}%* '
-              \ . getcwd() . ' %= %#CtrlPSepMode#%{g:right_sep_sym}%#InsertMode#'
-              \ . (a:3 ? ' regex ' : ' match ') . a:2 . ' %*'
-      else
-        call s:setTransitionGroup("CtrlPSepMode", "VisualMode", "StatusLine")
-        return '%#VisualMode# ' . l:section . ' %#CtrlPSepMode#%{g:left_sep_sym}%* '
-              \ . getcwd() . ' %= %#CtrlPSepMode#%{g:right_sep_sym}%#VisualMode# select %*'
-      endif
+      return a:1 ==# 'prt'
+            \ ? '%#InsertMode# '.l:section.' %* '.getcwd().' %= %#InsertMode#'.(a:3?' regex ':' match ').a:2.' %*'
+            \ : '%#VisualMode# '.l:section.' %* '.getcwd().' %= %#VisualMode# select %*'
     endf
 
-    " Argument: len
-    "           a:1
     fun! CtrlP_Progress(...)
-      call s:setTransitionGroup("CtrlPSepMode", "Warnings", "StatusLine")
-      return '%#Warnings# ' . a:1 . ' %#CtrlPSepMode#%{g:left_sep_sym}%* %= %#CtrlPSepMode#%{g:right_sep_sym}%<%#Warnings# ' . getcwd() . ' %*'
+      return '%#Warnings# '.a:1.' %* %= %<%#Warnings# '.getcwd().' %*'
     endf
   " }}
   " Easy Align {{
@@ -710,9 +607,7 @@
   " }}
   " Tagbar {{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
-      return a:current
-            \ ? '%#NormalMode# Tagbar %#SepMode#%{g:left_sep_sym}%* ' . a:fname
-            \ : '%#StatusLineNC# Tagbar ' . a:fname
+      return (a:current ? '%#NormalMode# Tagbar %* ' : '%#StatusLineNC# Tagbar ') . a:fname
     endf
 
     " Toggle tag bar
@@ -799,7 +694,6 @@
 " Init {{
   let g:LargeFile = 20*1024*1024
 
-  DisablePatchedFont
   EnableStatusLine
 
   if !has('packages') " Use Pathogen as a fallback
