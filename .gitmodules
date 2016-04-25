@@ -94,3 +94,6 @@
 [submodule "outlaw"]
 	path = pack/my/start/outlaw
 	url = https://github.com/lifepillar/vim-outlaw.git
+[submodule "wwdc16"]
+	path = pack/my/opt/wwdc16
+	url = https://github.com/lifepillar/vim-wwdc16-theme.git
