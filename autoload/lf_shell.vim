@@ -24,8 +24,8 @@ fun! lf_shell#run(cmdline, pos) abort
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. l:cmd
   setlocal nomodifiable
-  nnoremap <silent> <buffer> <tab> <c-w><c-w>
-  nnoremap <silent> <buffer> q <c-w>c
+  nnoremap <silent> <buffer> <tab> <c-w><c-p>
+  nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
   " Uncomment the following line for debugging
   " echomsg cmd
   1
