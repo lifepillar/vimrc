@@ -534,6 +534,11 @@ Press q to dismiss, <Tab> to lose focus
   Undotree
   \u          x- Toggle Undotree
 ========================================
+Help
+ :h …          - Help about …
+ :helpgrep …   - Search help
+ :h hitest.vim - Help on highlight test
+========================================
  Misc
  @:            - Repeat last Ex command
  q:            - Vim motions in Cmd mode
@@ -547,7 +552,6 @@ Press q to dismiss, <Tab> to lose focus
  :map          - View all mappings
  :di           - View registers
  :shell        - Open a shell
- :h hitest.vim - Help on highlight test
  :scr          - List of loaded plugins
  :au           - List of autocommands
 
