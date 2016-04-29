@@ -350,6 +350,9 @@
   " Find all in all open buffers
   command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
 
+  " See :h :DiffOrig
+  command! -nargs=0 DiffOrig call lf_text#diff_orig()
+
   " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
   command! -complete=shellcmd -nargs=+ Git call lf_git#exec(<q-args>, "B")
 

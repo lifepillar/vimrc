@@ -49,3 +49,15 @@ fun! lf_text#selection(ln1, ln2)
   end
 endf
 
+fun! lf_text#diff_orig()
+  vert new
+  setl buftype=nofile bufhidden=wipe nobuflisted noswapfile
+  silent read ++edit #
+  norm 0d_
+  autocmd BufWinLeave <buffer> diffoff!
+  silent file [ORIGINAL]
+  diffthis
+  wincmd p
+  diffthis
+endf
+
