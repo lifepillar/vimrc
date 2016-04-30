@@ -296,6 +296,7 @@ Press q to dismiss, <Tab> to lose focus
   :diffoff!    - Exit diff mode
   :diffupdate  - Re-scan files
   cod         x- Toggle diff in buffer
+  :DiffOrig   x- Diff with last saved
   ]c           - Next difference
   [c           - Prev difference
   dp           - Diff put
