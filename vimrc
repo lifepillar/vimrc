@@ -495,7 +495,7 @@
           \ 'main': 'CtrlP_Main',
           \ 'prog': 'CtrlP_Progress',
           \ }
-    let g:ctrlp_extensions = ['funky', 'tag']
+    let g:ctrlp_extensions = ['buffertag', 'funky']
 
     " Override some default names
     let s:ctrlp_section_map = {
