@@ -535,24 +535,25 @@ Press q to dismiss, <Tab> to lose focus
   Undotree
   \u          x- Toggle Undotree
 ========================================
-Help
+ Help
  :h …          - Help about …
  :helpgrep …   - Search help
  :h hitest.vim - Help on highlight test
+ :map …        - View mappings
+ :di           - View registers
+ :scr          - List of loaded plugins
 ========================================
  Misc
  @:            - Repeat last Ex command
- q:            - Vim motions in Cmd mode
+ q:            - Browse command history
                  Use «C-c» do dismiss
- «C-f»         C Use Vim motions
+ «C-f»         C Browse command history
                  Use «C-c» do dismiss
+ q/            - Browse search patterns
+ q?            - Ditto (to search «)
  :pwd          - Current directory
  :cd …         - Change directory
  :echo ‹Var›   - Show the value of ‹Var›
  :set ‹Var›?   - Show value of an option
- :map          - View all mappings
- :di           - View registers
  :shell        - Open a shell
- :scr          - List of loaded plugins
- :au           - List of autocommands
 
