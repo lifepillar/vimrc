@@ -651,6 +651,16 @@
           \ ],
           \ 'sort': 0
           \ }
+    let g:tagbar_type_context = {
+          \ 'ctagstype': 'context',
+          \ 'kinds': [
+          \ 'p:parts',
+          \ 'c:chapters',
+          \ 's:sections',
+          \ 'S:slides'
+          \ ],
+          \ 'sort': 0
+          \ }
   " }}
   " UltiSnips {{
     let g:UltiSnipsExpandTrigger="<c-j>"
