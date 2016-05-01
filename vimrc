@@ -486,6 +486,11 @@
   " CtrlP {{
     let g:ctrlp_cmd = 'CtrlPMRUFiles'
     nnoremap <silent> <c-n> :<c-u>CtrlPBuffer<cr>
+    let g:ctrlp_buftag_types = {
+          \ 'context':  '--language-force=context',
+          \ 'markdown': '--language-force=markdown',
+          \ 'tex':      '--language-force=latex'
+          \ }
     let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_switch_buffer = 0
