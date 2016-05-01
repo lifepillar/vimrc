@@ -493,18 +493,10 @@
           \ }
     let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
     let g:ctrlp_open_multiple_files = '2vjr'
-    let g:ctrlp_switch_buffer = 0
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-    let g:ctrlp_status_func = {
-          \ 'main': 'CtrlP_Main',
-          \ 'prog': 'CtrlP_Progress',
-          \ }
-
-    " Override some default names
-    let s:ctrlp_section_map = {
-          \ "mru files": "recent",
-          \ "funky": "functions"
-          \  }
+    let s:ctrlp_section_map = {"mru files": "recent", "funky": "functions"}
+    let g:ctrlp_status_func = {'main': 'CtrlP_Main', 'prog': 'CtrlP_Progress'}
+    let g:ctrlp_switch_buffer = 0
 
     fun! CtrlP_Main(...) " See :h ctrlp_status_func
       let l:section = get(s:ctrlp_section_map, a:5, a:5)
