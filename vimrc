@@ -488,6 +488,7 @@
     let g:ctrlp_cmd = 'CtrlPBuffer'
     " Get recently opened files with Ctrl-N
     nnoremap <silent> <c-n> :<c-u>CtrlPMRUFiles<cr>
+    let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_switch_buffer = 0
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
@@ -495,7 +496,6 @@
           \ 'main': 'CtrlP_Main',
           \ 'prog': 'CtrlP_Progress',
           \ }
-    let g:ctrlp_extensions = ['buffertag', 'funky']
 
     " Override some default names
     let s:ctrlp_section_map = {
