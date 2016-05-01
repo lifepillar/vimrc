@@ -336,9 +336,8 @@
   " Grep search
   command! -nargs=* -complete=shellcmd Ag silent grep <args><bar>cwindow<bar>redraw!
 
-  " Generate/update tags file (use :Ctags . to index the current directory)
-  command! -nargs=* -complete=shellcmd Ctags execute 'cd ' fnameescape(expand('%:p:h')) <bar>
-        \ !ctags -R --extra=+f --exclude=cache --exclude=tmp --exclude=*.html <args> %:t:S
+  " Generate tags in the directory of the current buffer
+  command! -nargs=* -complete=shellcmd Ctags call lf_text#ctags(<q-args>)
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
