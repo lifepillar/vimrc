@@ -612,20 +612,6 @@
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
 
-    let g:tagbar_type_pgsql = {
-          \ 'ctagstype': 'sql',
-          \ 'kinds': [
-          \ 't:tables',
-          \ 'V:views',
-          \ 'i:indexes',
-          \ 'f:functions',
-          \ 'T:triggers',
-          \ 'D:types',
-          \ 'q:sequences',
-          \ 'o:other'
-          \ ],
-          \ 'sort': 1
-          \ }
     let g:tagbar_type_markdown = {
           \ 'ctagstype': 'markdown',
           \ 'kinds': [
