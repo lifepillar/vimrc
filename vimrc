@@ -484,10 +484,8 @@
 " }}
 " Plugins {{
   " CtrlP {{
-    " Open CtrlP in find buffer mode by default
-    let g:ctrlp_cmd = 'CtrlPBuffer'
-    " Get recently opened files with Ctrl-N
-    nnoremap <silent> <c-n> :<c-u>CtrlPMRUFiles<cr>
+    let g:ctrlp_cmd = 'CtrlPMRUFiles'
+    nnoremap <silent> <c-n> :<c-u>CtrlPBuffer<cr>
     let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_switch_buffer = 0
