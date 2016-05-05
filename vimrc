@@ -117,7 +117,7 @@
   set wildignorecase " Ignore case when completing file names and directories
 " }}
 " Appearance {{
-  if has('patch1799') && $TERM_PROGRAM ==# 'iTerm.app'
+  if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
     set termguicolors
   endif
   set display=lastline
