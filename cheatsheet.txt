@@ -544,6 +544,7 @@ Press q to dismiss, <Tab> to lose focus
  :map …        - View mappings
  :di           - View registers
  :scr          - List of loaded plugins
+ :digraphs     - List of digraphs
 ========================================
  Misc
  @:            - Repeat last Ex command
