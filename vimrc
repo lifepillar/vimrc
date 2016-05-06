@@ -501,8 +501,8 @@
     fun! CtrlP_Main(...) " See :h ctrlp_status_func
       let l:section = get(s:ctrlp_section_map, a:5, a:5)
       return a:1 ==# 'prt'
-            \ ? '%#InsertMode# '.l:section.' %* '.getcwd().' %= %#InsertMode#'.(a:3?' regex ':' match ').a:2.' %*'
-            \ : '%#VisualMode# '.l:section.' %* '.getcwd().' %= %#VisualMode# select %*'
+            \ ? '%#InsertMode# '.l:section.' %* %<'.getcwd().' %= %#InsertMode#'.(a:3?' regex ':' match ').a:2.' %*'
+            \ : '%#VisualMode# '.l:section.' %* %<'.getcwd().' %= %#VisualMode# select %*'
     endf
 
     fun! CtrlP_Progress(...)
