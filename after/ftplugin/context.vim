@@ -37,5 +37,5 @@ let g:context_mkiv = split('mtxrun --script context --nonstopmode --synctex=1')
 
 command! -nargs=0 ConTeXt execute 'lcd' fnameescape(expand('%:p:h'))<bar>
       \ call lf_msg#notice('Typesetting...')<bar>
-      \ call lf_shell#async_run(g:context_mkiv+[expand('%:t')], 'lf_tex#callback')
+      \ call lf_shell#async_run(add(g:context_mkiv, expand('%:t')), 'lf_tex#callback')
 
