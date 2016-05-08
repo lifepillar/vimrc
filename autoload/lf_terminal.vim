@@ -29,7 +29,7 @@ elseif $TMUX != ""
     if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
       let b:lf_bound_terminal = input('Tmux pane number: ')
     endif
-    if len(a:lines) > 10
+    if len(join(a:lines)) > 1000
       let temp = tempname()
       call writefile(a:lines, temp, 'b')
       call system('tmux load-buffer '.temp.' \; paste-buffer -d -t '.b:lf_bound_terminal)
