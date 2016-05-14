@@ -462,10 +462,7 @@
   imap <expr><silent> <tab> pumvisible()
         \ ? "\<c-n>"
         \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
-          \ ? (exists('b:lf_tab_complete')
-            \ ? b:lf_tab_complete
-            \ : (&omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
-            \ )
+          \ ? get(b:, 'lf_tab_complete', &omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
           \ : "\<tab>"
           \ )
   " Move up in pop-up menu or unindent in Insert mode
