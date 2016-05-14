@@ -123,7 +123,7 @@ Press q to dismiss, <Tab> to lose focus
  "*p           - Paste from OS clipboard
  ]p            - Paste after and align
  ]P            - Paste before and align
- «C-r»‹r›      C Paste
+ «C-r»‹r›     CI Paste
  cop          x- Toggle Paste mode
  [«Spc»       x- Add blank line above
  ]«Spc»       x- Add blank line below
