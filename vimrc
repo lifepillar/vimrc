@@ -140,7 +140,7 @@
     set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
   endif
   set printoptions=syntax:n,number:y
-  set printfont=Courier:h9 " Font is ignored; only the size is set
+  set printfont=:h9
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
   autocmd VimResized * :wincmd =
