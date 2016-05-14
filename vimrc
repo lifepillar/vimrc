@@ -376,6 +376,8 @@
   command! REPLSendLine call lf_terminal#send([getline('.')])
   command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
 
+  command! Scratch vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile
+
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
