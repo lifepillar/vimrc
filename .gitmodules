@@ -97,3 +97,6 @@
 [submodule "wwdc16"]
 	path = pack/my/opt/wwdc16
 	url = https://github.com/lifepillar/vim-wwdc16-theme.git
+[submodule "solarized8"]
+	path = pack/my/opt/solarized8
+	url = https://github.com/lifepillar/vim-solarized8
