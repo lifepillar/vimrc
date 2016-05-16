@@ -5,9 +5,6 @@
 "   after/colors/<theme name>.vim It will be automatically loaded after the
 "   color scheme is activated.
 "
-" - To switch the color scheme when the background changes, define
-"   a BackgroundToggle_<theme_name>() function that changes the color scheme.
-"
 " - For UTF-8 symbols to be displayed correctly (e.g., in the status line),
 "   you may need to check "Set locale environment variables on startup" in OS
 "   X Terminal.app's preferences, or "Set locale variables automatically" in
@@ -238,17 +235,6 @@
     endfor
   endf
 
-  fun! s:toggleBackgroundColor()
-    if exists('g:colors_name')
-      try
-        call BackgroundToggle_{substitute(g:colors_name, '[-]', '_', 'g')}()
-      catch /.*/
-        let g:lf_cached_mode = ""  " Force updating status line highlight groups
-        let &background = (&background == 'dark') ? 'light' : 'dark'
-      endtry
-    endif
-  endf
-
   fun! s:customizeTheme()
     if get(g:, "colors_name", "") !~# "^solarized8"
       " Set the default values of our highlight groups for the status line
@@ -383,7 +369,7 @@
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
-  command! -nargs=0 ToggleBackgroundColor call <sid>toggleBackgroundColor()
+  command! -nargs=0 ToggleBackgroundColor call lf_theme#toggle_bg_color()
 
   " Toggle soft wrap
   command! -nargs=0 ToggleWrap call lf_text#toggleWrap()

@@ -29,3 +29,22 @@ fun! lf_theme#contrast(delta)
   endif
 endf
 
+fun! lf_theme#toggle_bg_color()
+  if g:colors_name =~# "^seoul256-light"
+    colorscheme seoul256
+  elseif g:colors_name =~# "^seoul256"
+    colorscheme seoul256-light
+  elseif g:colors_name =~# "^Tomorrow-Night"
+    colorscheme Tomorrow
+  elseif g:colors_name =~# "^Tomorrow"
+    colorscheme Tomorrow-Night-Eighties
+  elseif g:colors_name =~# "dark"
+    execute "colorscheme" substitute(g:colors_name, 'dark', 'light', '')
+  elseif g:colors_name =~# "light"
+    execute "colorscheme" substitute(g:colors_name, 'light', 'dark', '')
+  else
+    let g:lf_cached_mode = ""  " Force updating status line highlight groups
+    let &background = (&background == 'dark') ? 'light' : 'dark'
+  endif
+endf
+

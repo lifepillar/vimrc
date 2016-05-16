@@ -9,7 +9,3 @@ hi TabLineSel  cterm=NONE gui=NONE
 " Remove underline in tabline
 hi TabLine cterm=NONE gui=NONE
 
-fun! BackgroundToggle_seoul256()
-  colorscheme seoul256-light
-endf
-
