@@ -99,7 +99,7 @@ nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date assets liab
 " Budget
 nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
 " Cleared report
-nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date --current assets liab
+nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date assets liab
 " Debit/credit report
 nnoremap <buffer> <leader>ld :<c-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
