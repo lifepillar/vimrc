@@ -250,13 +250,15 @@
   endf
 
   fun! s:customizeTheme()
-    " Set the default values of our highlight groups for the status line
-    hi! link NormalMode StatusLine
-    hi! link InsertMode DiffText
-    hi! link VisualMode Visual
-    hi! link ReplaceMode DiffChange
-    hi! link CommandMode PmenuSel
-    hi! link Warnings ErrorMsg
+    if get(g:, "colors_name", "") !~# "^solarized8"
+      " Set the default values of our highlight groups for the status line
+      hi! link NormalMode StatusLine
+      hi! link InsertMode DiffText
+      hi! link VisualMode Visual
+      hi! link ReplaceMode DiffChange
+      hi! link CommandMode PmenuSel
+      hi! link Warnings ErrorMsg
+    endif
     let g:lf_cached_mode = ""  " Force updating highlight groups
     " Set defaults for vertical separator and fold separator
     let &fillchars='vert: ,fold: '
@@ -670,8 +672,8 @@
     let g:seoul256_background = 236
     let g:seoul256_light_background = 255
   " }}
-  " Solarized {{
-    let g:solarized_underline = 0
+  " Solarized 8 {{
+    let g:solarized_statusline = 'low'
   " }}
 " }}
 " NeoVim {{
@@ -698,7 +700,7 @@
   if filereadable($HOME . '/.vim/vimrc_local')
     execute 'source' $HOME . '/.vim/vimrc_local'
   else
-    colorscheme solarized
+    colorscheme solarized8_light
   endif
 " }}
 
