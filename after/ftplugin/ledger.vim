@@ -25,25 +25,25 @@ let g:ledger_tables = {
         \   ]
         \ },
       \ 'cleared': {
-        \ 'names': ['latest', 'latest_cleared', 'balance', 'uncleared', 'account', 'partial_account'],
+        \ 'names': ['latest', 'latest_cleared', 'balance', 'uncleared',  'partial_account', 'account'],
         \ 'fields': [
         \   '%(latest ? format_date(latest) : "         ")',
         \   '%(latest_cleared ? format_date(latest_cleared) : "         ")',
         \   '%(quantity(scrub(get_at(display_total, 0))))',
         \   '%(quantity(scrub(get_at(display_total, 1))))',
-        \   '%(account)',
-        \   '%(partial_account)\n%/'
+        \   '%(partial_account)',
+        \   '%(account)\n%/'
         \   ]
         \ },
       \ 'budget': {
-        \ 'names': ['actual', 'budgeted', 'remaining', 'used', 'account', 'partial_account'],
+        \ 'names': ['actual', 'budgeted', 'remaining', 'used',  'partial_account', 'account'],
         \ 'fields': [
         \   '%(quantity(scrub(get_at(display_total, 0))))',
         \   '%(get_at(display_total, 1) ? quantity(-scrub(get_at(display_total, 1))) : 0.0)',
         \   '%(get_at(display_total, 1) ? (get_at(display_total, 0) ? quantity(-scrub(get_at(display_total, 1) + get_at(display_total, 0))) : quantity(-scrub(get_at(display_total, 1)))) : quantity(-scrub(get_at(display_total, 0))))',
         \   '%(get_at(display_total, 1) ? quantity(100% * (get_at(display_total, 0) ? scrub(get_at(display_total, 0)) : 0.0) / -scrub(get_at(display_total, 1))) : "na")',
-        \   '%(account)',
-        \   '%(partial_account)\n%/'
+        \   '%(partial_account)',
+        \   '%(account)\n%/'
         \   ]
         \ }
       \ }
