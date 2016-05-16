@@ -25,8 +25,10 @@ let g:ledger_tables = {
         \   ]
         \ },
       \ 'cleared': {
-        \ 'names': ['balance', 'uncleared', 'account', 'partial_account'],
+        \ 'names': ['latest', 'latest_cleared', 'balance', 'uncleared', 'account', 'partial_account'],
         \ 'fields': [
+        \   '%(latest ? format_date(latest) : "         ")',
+        \   '%(latest_cleared ? format_date(latest_cleared) : "         ")',
         \   '%(quantity(scrub(get_at(display_total, 0))))',
         \   '%(quantity(scrub(get_at(display_total, 1))))',
         \   '%(account)',
