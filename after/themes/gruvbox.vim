@@ -27,7 +27,7 @@ else
 endif
 
 let s:gruvbox_contrast = (&background == 'dark') ? g:gruvbox_contrast_dark : g:gruvbox_contrast_light
-let s:i    = has('gui_running') || (has('nvim') && $TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX'))
+let s:i    = has('gui_running') || ($TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX'))
 let s:c    = index(s:contrast_levels, s:gruvbox_contrast)
 let s:mode = ["cterm", "gui"]
 let s:bg   = s:mode[s:i] . "bg="
