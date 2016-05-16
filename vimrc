@@ -396,11 +396,9 @@
   map <space> <leader>
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :<c-u>call lf_cheatsheet#open()<cr>
-  " Change the contrast level for themes that support such feature (e.g.,
-  " Solarized, Seoul256, Gruvbox). ReduceContrast and IncreaseContrast must be
-  " defined in after/colors/<theme>.vim
-  nmap <silent> <leader>- :<c-u>ReduceContrast<cr>
-  nmap <silent> <leader>+ :<c-u>IncreaseContrast<cr>
+  " Change the contrast level for themes that support it.
+  nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-1)<cr>
+  nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(1)<cr>
   " Open file browser in the directory of the current buffer
   nnoremap <silent> <leader>e :<c-u>Ex<cr>
   " Change to the directory of the current file
