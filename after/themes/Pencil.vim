@@ -10,11 +10,3 @@ else
   hi Warnings    ctermbg=160 ctermfg=254 guibg=#c30771 guifg=#d9d9d9 term=NONE cterm=NONE gui=NONE
 endif
 
-command! IncreaseContrast
-      \ let g:pencil_higher_contrast_ui = 1 - g:pencil_higher_contrast_ui |
-      \ colorscheme Pencil
-
-command! ReduceContrast
-      \ let g:pencil_higher_contrast_ui = 1 - g:pencil_higher_contrast_ui |
-      \ colorscheme Pencil
-

@@ -42,13 +42,3 @@ execute "hi VisualMode"  s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:m
 execute "hi CommandMode" s:bg.s:bg_color[s:c][s:i] s:fg.s:purple[s:c][s:i]   s:mode[s:i].s:attr
 execute "hi Warnings"    s:bg.s:bg_color[s:c][s:i] s:fg.s:orange[s:c][s:i]   s:mode[s:i].s:attr
 
-command! IncreaseContrast
-      \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
-      \ 'get(s:contrast_levels, (2 + index(s:contrast_levels, s:gruvbox_contrast)) % 3)' |
-      \ colorscheme gruvbox
-
-command! ReduceContrast
-      \ execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
-      \ 'get(s:contrast_levels, (1 + index(s:contrast_levels, s:gruvbox_contrast)) % 3)' |
-      \ colorscheme gruvbox
-
