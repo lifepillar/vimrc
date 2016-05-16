@@ -95,7 +95,7 @@ nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year'
       \ %(!options.flat ? depth_spacer : \"\") %-(ansify_if(partial_account(options.flat), blue if color))\\n%/%$1 %$2 %$3\\n
       \%/%(prepend_width ? \" \" * int(prepend_width) : \"\")  --------------------------\\n'"<cr>
 " Balance report
-nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date --current assets liab
+nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date assets liab
 " Budget
 nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
 " Cleared report
