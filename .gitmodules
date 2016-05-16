@@ -13,9 +13,6 @@
 [submodule "seoul256"]
 	path = pack/themes/opt/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
-[submodule "solarized"]
-	path = pack/themes/opt/solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "tagbar"]
 	path = pack/bundle/opt/tagbar
 	url = https://github.com/majutsushi/tagbar.git
