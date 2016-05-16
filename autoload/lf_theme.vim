@@ -1,4 +1,5 @@
 fun! lf_theme#contrast(delta)
+  if !exists("g:colors_name") | return | endif
   if g:colors_name =~# "^solarized8"
     let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
     execute "colorscheme" l:schemes[(a:delta+index(l:schemes, g:colors_name)) % 4]
@@ -30,17 +31,18 @@ fun! lf_theme#contrast(delta)
 endf
 
 fun! lf_theme#toggle_bg_color()
-  if g:colors_name =~# "^seoul256-light"
+  let l:theme = get(g:, "colors_name", "")
+  if l:theme =~# "^seoul256-light"
     colorscheme seoul256
-  elseif g:colors_name =~# "^seoul256"
+  elseif l:theme =~# "^seoul256"
     colorscheme seoul256-light
-  elseif g:colors_name =~# "^Tomorrow-Night"
+  elseif l:theme =~# "^Tomorrow-Night"
     colorscheme Tomorrow
-  elseif g:colors_name =~# "^Tomorrow"
+  elseif l:theme =~# "^Tomorrow"
     colorscheme Tomorrow-Night-Eighties
-  elseif g:colors_name =~# "dark"
+  elseif l:theme =~# "dark"
     execute "colorscheme" substitute(g:colors_name, 'dark', 'light', '')
-  elseif g:colors_name =~# "light"
+  elseif l:theme =~# "light"
     execute "colorscheme" substitute(g:colors_name, 'light', 'dark', '')
   else
     let g:lf_cached_mode = ""  " Force updating status line highlight groups
