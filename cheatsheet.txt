@@ -475,6 +475,7 @@ Press q to dismiss, <Tab> to lose focus
   \lb         x- Balance report
   \lB         x- Budget report
   \lc         x- Cleared report
+  \lC         x- Current cleared report
   \ld         x- Debit/credit report
   \le         x- Expense report
   \lf         x- Cash flow report
