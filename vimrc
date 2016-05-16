@@ -236,6 +236,9 @@
   endf
 
   fun! s:customizeTheme()
+    let g:lf_cached_mode = ""  " Force updating highlight groups
+    " Set defaults for vertical separator and fold separator
+    let &fillchars='vert: ,fold: '
     if get(g:, "colors_name", "") !~# "^solarized8"
       " Set the default values of our highlight groups for the status line
       hi! link NormalMode StatusLine
@@ -244,12 +247,9 @@
       hi! link ReplaceMode DiffChange
       hi! link CommandMode PmenuSel
       hi! link Warnings ErrorMsg
-    endif
-    let g:lf_cached_mode = ""  " Force updating highlight groups
-    " Set defaults for vertical separator and fold separator
-    let &fillchars='vert: ,fold: '
-    if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
-      execute "runtime after/themes/" . g:colors_name . ".vim"
+      if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
+        execute "runtime after/themes/" . g:colors_name . ".vim"
+      endif
     endif
   endf
 
