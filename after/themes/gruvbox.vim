@@ -13,7 +13,7 @@ if &background ==# "dark"
   let s:aqua           = [[108, '#8ec07c'], [108, '#8ec07c'], [ 72, '#689d6a']]
   let s:orange         = [[208, '#fe8019'], [208, '#fe8019'], [166, '#d65d0e']]
 else
-  let s:bg_color       = [[230, '#f9f5d7'], [229, '#fdf4c1'], [228, '#f2e5bc']]
+  let s:bg_color       = [[230, '#f9f5d7'], [229, '#fbf1c7'], [228, '#f2e5bc']]
   let s:fg_color       = [[241, '#665c54'], [243, '#7c6f64'], [244, '#928374']]
   let s:stl_bg         = [[223, '#ebdbb2'], [250, '#d5c4a1'], [248, '#bdae93']]
   let s:stl_fg         = [[239, '#504945'], [241, '#665c54'], [243, '#7c6f64']]
