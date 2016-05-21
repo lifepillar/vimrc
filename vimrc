@@ -252,6 +252,7 @@
   endf
 
   fun! s:enableStatusLine()
+    if exists("g:default_stl") | return | endif
     augroup warnings
       autocmd!
       autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
@@ -265,6 +266,7 @@
   endf
 
   fun! s:disableStatusLine()
+    if !exists("g:default_stl") | return | endif
     let &tabline = g:default_tal
     let &statusline = g:default_stl
     unlet g:default_tal
