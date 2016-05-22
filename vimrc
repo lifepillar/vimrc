@@ -220,6 +220,7 @@
     set guioptions-=lL " No left scrollbar
     set guioptions-=e  " Use Vim tabline
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+    set linespace=1
     set transparency=0
   endif
 " }}
