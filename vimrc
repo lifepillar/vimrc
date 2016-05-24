@@ -129,7 +129,7 @@
   set shortmess-=r " Don't use abbreviations for 'readonly'
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
-  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:•,precedes:⇇,extends:⇉  " Symbols to use for invisible characters
+  set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:•,precedes:←,extends:→  " Symbols to use for invisible characters
   let &showbreak='↪ '
   set tabpagemax=50
   " Printing
