@@ -381,6 +381,7 @@
 " Key mappings (plugins excluded) {{
   " Use space as alternative leader
   map <space> <leader>
+  set pastetoggle=<f9>
   " A handy cheat sheet ;)
   nnoremap <silent> <leader>? :<c-u>call lf_cheatsheet#open()<cr>
   " Change the contrast level for themes that support it.
@@ -415,7 +416,6 @@
   nnoremap <silent> cok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
   nnoremap <silent> col :<c-u>setlocal list!<cr>
   nnoremap <silent> con :<c-u>setlocal number!<cr>
-  nnoremap <silent> cop :<c-u>setlocal paste!<cr>
   nnoremap <silent> cor :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> cos :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> cot :<c-u>setlocal expandtab!<cr>
