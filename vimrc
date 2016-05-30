@@ -510,7 +510,7 @@
         set linespace=5
         set guicursor=n-v-c:ver10
         set guioptions-=r " hide right scrollbar
-      elseif !has('gui_running') && g:colors_name =~# '^solarized8'
+      elseif g:colors_name =~# '^solarized8'
         let g:limelight_conceal_ctermfg = (&background ==# 'dark') ? '10' : '14'
       endif
       set scrolloff=999 " Keep the edited line vertically centered
