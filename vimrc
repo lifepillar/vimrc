@@ -532,8 +532,6 @@
       Limelight!
     endf
 
-    autocmd! User GoyoEnter
-    autocmd! User GoyoLeave
     autocmd! User GoyoEnter nested call <sid>goyoEnter()
     autocmd! User GoyoLeave nested call <sid>goyoLeave()
   " }}
