@@ -214,13 +214,14 @@
 " }}
 " GUI {{
   if has('gui_running')
+    let s:linespace = 1
     set guifont=Menlo:h11
     set guioptions-=aP " Do not use system clipboard by default
     set guioptions-=T  " No toolbar
     set guioptions-=lL " No left scrollbar
     set guioptions-=e  " Use Vim tabline
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    set linespace=1
+    let &linespace=s:linespace
     set transparency=0
   endif
 " }}
@@ -518,7 +519,7 @@
     fun! s:goyoLeave()
       if has('gui_running')
         "set nofullscreen
-        set linespace=0
+        let &linespace=s:linespace
         set guicursor=n-v-c:ver20
         set guioptions+=r
       endif
