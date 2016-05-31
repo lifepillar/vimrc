@@ -255,7 +255,7 @@
 
   fun! s:enableStatusLine()
     if exists("g:default_stl") | return | endif
-    augroup warnings
+    augroup lf_warnings
       autocmd!
       autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
     augroup END
@@ -275,10 +275,8 @@
     unlet g:default_stl
     set ruler
     set showmode
-    augroup warnings
-      autocmd!
-    augroup END
-    augroup! warnings
+    autocmd! lf_warnings
+    augroup! lf_warnings
   endf
 
   " Update trailing space and mixed indent warnings for the current buffer.
