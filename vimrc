@@ -140,9 +140,12 @@
   set printfont=:h9
 
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
-  autocmd VimResized * :wincmd =
-  " Hook for overriding a theme's default
-  autocmd ColorScheme * call <sid>customizeTheme()
+  augroup lf_appearance
+    autocmd!
+    autocmd VimResized * :wincmd =
+    " Hook for overriding a theme's default
+    autocmd ColorScheme * call <sid>customizeTheme()
+  augroup END
 " }}
 " Status line {{
   " See :h mode() (some of these are never used in the status line; 't' is from NeoVim)
