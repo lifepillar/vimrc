@@ -334,8 +334,8 @@ Press q to dismiss, <Tab> to lose focus
  T‹c›          M Just after prev ‹c›
  ;             M Repeat » f/t/F/T
  ,             M Repeat « f/t/F/T
- g;            - Next pos in change list
- g,            - Prev pos in change list
+ g;            - Prev pos in change list
+ g,            - Next pos in change list
  :‹n›          M Go to line ‹n›
  ‹n›|          M Go to column ‹n›
  ‹n›G          M Jump to line ‹n›
