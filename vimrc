@@ -471,6 +471,12 @@
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
 " }}
 " Plugins {{
+  " Disabled Vim Plugins {{
+    let g:loaded_gzip = 1
+    let g:loaded_tarPlugin = 1
+    let g:loaded_zipPlugin = 1
+    let g:loaded_vimballPlugin = 1
+  " }}
   " CtrlP {{
     let g:ctrlp_cmd = 'CtrlPMRUFiles'
     nnoremap <silent> <c-n> :<c-u>CtrlPBuffer<cr>
