@@ -384,8 +384,6 @@
   " Use space as alternative leader
   map <space> <leader>
   set pastetoggle=<f9>
-  " A handy cheat sheet ;)
-  nnoremap <silent> <leader>? :<c-u>call lf_cheatsheet#open()<cr>
   " Change the contrast level for themes that support it.
   nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>

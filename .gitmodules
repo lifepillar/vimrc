@@ -97,3 +97,6 @@
 [submodule "solarized8"]
 	path = pack/my/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8
+[submodule "cheat40"]
+	path = pack/my/start/cheat40
+	url = https://github.com/lifepillar/vim-cheat40.git

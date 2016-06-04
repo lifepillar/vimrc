@@ -1,0 +1,134 @@
+Plugins {{{1
+Commentary {{{2
+Comment operator          gc           O
+Toggle line comment       gcc          N
+Uncomment block           gcgc         N
+CtrlP {{{2
+Open CtrlP in MRU mode    «C-n»        N
+Switch buffer             «C-p»        N
+Easy Align {{{2
+Trigger Easy Align        \a          VO
+Goyo {{{2
+Distraction-free mode     \f           N
+Ledger {{{2
+Run Ledger command        :Ledger …    N
+Ditto, CSV output         :LedgerTab   N
+Quickfix report           :Register …  N
+Show account balance      :Balance …   N
+Reconcile an account      :Reconcile … N
+Autocomplete or align     «Tab»       IV
+Transaction from text     «C-t»        I
+Next transaction state    «Enter»      N
+Add auxiliary date        \d           N
+Average expenses report   \la          N
+Annualized budget         \lA          N
+Balance report            \lb          N
+Budget report             \lB          N
+Cleared report            \lc          N
+Current cleared report    \lC          N
+Debit/credit report       \ld          N
+Expense report            \le          N
+Cash flow report          \lf          N
+Income statement          \li          N
+Sorted monthly expenses   \lm          N
+Net worth                 \ln          N
+Pending transactions      \lp          N
+Register report           \lr          N
+Savings                   \ls          N
+Uncleared transactions    \lu          N
+Show Marks {{{2
+Toggle show marks         \M           N
+Sneak {{{2
+Jump forward              s‹c›‹c›     VN
+Jump backward             S‹c›‹c›      N
+Jump forward              z‹c›‹c›      M
+Jump backward             Z‹c›‹c›     VM
+Surround {{{2
+Insert surrounding ‹c›    «C-g»s‹c›    I
+Surround with ‹c›         ys‹Move›‹c›  N
+Surround with ‹c›         S‹c›         V
+Replace delimiters        cs‹c›‹c›     N
+Replace tags              cst‹c›       N
+Remove ‹c› delimiters     ds‹c›        N
+Remove enclosing tags     dst          N
+Tagbar {{{2
+Toggle Tagbar             \t           N
+UltiSnips {{{2
+Trigger snippet           «C-j»        I
+Go to next placeholder    «C-j»        I
+Go to prev placeholder    «C-k»        I
+Undotree {{{2
+Toggle Undotree           \u           N
+Git {{{1
+Run Git command          :Git …        N
+Three-way diff           :Conflicts    N
+Status (uses Tig)        \gs           N
+Blame (uses Tig)         \gb           N
+Diff with HEAD           \gd           N
+Commit                   \gc           N
+Push                     \gp           N
+Log for this file        \gl           N
+Shell & Make {{{1
+:! …, output to buffer   :Shell …      N
+Send text to terminal    \x           VN
+:make, open qf list      \m            N
+TeX {{{1
+Typeset                  \tt           N
+Clean generated files    \tc           N
+Open PDF viewer          \tv           N
+Forward search           \ts           N
+Around $…$               a$            T
+Inside $…$               i$            T
+TeX paragraph            tp            T
+Vimrc {{{1
+Save (only if modified)  \w            N
+Save as root             :WW           N
+Cd to current path       cd            N
+Copy until the EOL       Y             N
+Toggle Paste mode        «f9»          N
+Add blank line above     [«Spc»        N
+Add blank line below     ]«Spc»        N
+Capitalize words         \U            V
+Remove trailing space    \S            N
+Toggle hard/soft tabs    cot           N
+Toggle spell checking    cos           N
+Omnicomplete             «Tab»         I
+Toggle soft wrapping     cow           N
+Toggle line numbers      con           N
+Toggle rel line numbers  cor           N
+Toggle invisibles        col           N
+Set tab width            :TabWid ‹n›   N
+Decrease tab width       \[            N
+Increase tab width       \]            N
+Edit next file (:bn)     [b            N
+Edit prev file (:bp)     ]b            N
+Edir prev in arg list    [a            N
+Edir next in arg list    ]a            N
+Toggle background color  cob           N
+Toggle cursorline        coc           N
+Toggle search highlight  coh           N
+Centre text vertically   cok           N
+Reduce contrast          \-            N
+Increase contrast        \+            N
+Toggle ignore case       coi           N
+Prev in location list    [l            N
+Next in location list    ]l            N
+Prev in quickfix list    [q            N
+Next in quickfix list    ]q            N
+To prev conflict marks   [n            N
+To next conflict marks   ]n            N
+To prev conflict marks   [n            N
+To next conflict marks   ]n            N
+Find all                 :FindAll …    N
+Search all open files    :MultiFind …  N
+Toggle diff in buffer     cod          N
+Diff with last saved      :DiffOrig    N
+To next matching tag     ]t            N
+To prev matching tag     [t            N
+Generate/update tags     :Ctags …      N
+Start of line            «C-a»         C
+End of line              «C-e»         C
+Next word ()            «Alt-→»       C
+Prev word ()            «Alt-←»       C
+Go to tab n              \‹n›          N
+Open file explorer        \e           N
