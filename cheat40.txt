@@ -102,8 +102,8 @@ Decrease tab width       \[            N
 Increase tab width       \]            N
 Edit next file (:bn)     [b            N
 Edit prev file (:bp)     ]b            N
-Edir prev in arg list    [a            N
-Edir next in arg list    ]a            N
+Edit prev in arg list    [a            N
+Edit next in arg list    ]a            N
 Toggle background color  cob           N
 Toggle cursorline        coc           N
 Toggle search highlight  coh           N
