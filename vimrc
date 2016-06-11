@@ -671,7 +671,7 @@
 " NeoVim {{
   if has('nvim')
     let g:terminal_scrollback_buffer_size = 10000
-    if $TERM_PROGRAM ==# 'iTerm.app' && !exists('$TMUX')
+    if $TERM_PROGRAM ==# 'iTerm.app'
       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     endif
   endif
