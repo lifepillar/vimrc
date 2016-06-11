@@ -1,3 +1,14 @@
+" Return the background color of the given highlight group, as a two-element
+" array containing the cterm and the gui entry.
+fun! lf_theme#bg(hl)
+  return [synIDattr(synIDtrans(hlID(a:hl)), "bg", "cterm"), synIDattr(synIDtrans(hlID(a:hl)), "bg", "gui")]
+endf
+
+" Ditto, for the foreground color.
+fun! lf_theme#fg(hl)
+  return [synIDattr(synIDtrans(hlID(a:hl)), "fg", "cterm"), synIDattr(synIDtrans(hlID(a:hl)), "fg", "gui")]
+endf
+
 fun! lf_theme#contrast(delta)
   if !exists("g:colors_name") | return | endif
   if g:colors_name =~# "^solarized8"
