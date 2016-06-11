@@ -1,4 +1,4 @@
-Plugins {{{1
+Other Plugins {{{1
 Commentary {{{2
 Comment operator         gc            O
 Toggle line comment      gcc           N
