@@ -33,7 +33,7 @@ onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
 vnoremap <buffer> i$ T$ot$
 vnoremap <buffer> a$ F$of$
 
-let g:context_mkiv = split('mtxrun --script context --nonstopmode --synctex=1')
+let g:context_mkiv = split('mtxrun --script context --autogenerate --nonstopmode --synctex=1')
 
 command! -nargs=0 ConTeXt execute 'lcd' fnameescape(expand('%:p:h'))<bar>
       \ call lf_msg#notice('Typesetting...')<bar>
