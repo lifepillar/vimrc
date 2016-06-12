@@ -33,9 +33,9 @@ onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
 vnoremap <buffer> i$ T$ot$
 vnoremap <buffer> a$ F$of$
 
-let g:context_mkiv = split('mtxrun --script context --autogenerate --nonstopmode --synctex=1')
-
 command! -nargs=0 ConTeXt execute 'lcd' fnameescape(expand('%:p:h'))<bar>
       \ call lf_msg#notice('Typesetting...')<bar>
-      \ call lf_shell#async_run(g:context_mkiv+[expand('%:t')], 'lf_tex#callback')
+      \ call lf_shell#async_run([
+      \ "/bin/sh", "-c", "PATH=$HOME/Applications/ConTeXt-Beta/tex/texmf-osx-64/bin:$PATH mtxrun --script context --autogenerate --nonstopmode --synctex=1 ".expand('%:t')
+      \ ], 'lf_tex#callback')
 
