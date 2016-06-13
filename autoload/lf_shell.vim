@@ -31,29 +31,13 @@ fun! lf_shell#run(cmdline, pos) abort
   1
 endf
 
-" Run a command in the background (if possible), invoking a callback function
-" when the job is over. The command is executed from the current directory.
+" Thin wrapper over Vim and NeoVim asynchronous job functions.
 " The first argument should be a List. The second (optional) argument is
 " a callback function.
 "
-" The program executable should be the first element of the list, followed by
-" zero or more arguments (things like '&&', setting environment variables,
-" etc..., are not allowed).
-"
 " Note that Vim and NeoVim use different calling conventions for the callback
 " function. See `:h job_start()` and `:h jobstart()`, respectively.
-if has("gui_running") && has("clientserver") " MacVim
-
-  fun! lf_shell#async_run(cmd, ...)
-    let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
-    let l:callback = substitute(l:callback, '#', '\\#', 'g')
-    let l:cmd = '('
-    let l:cmd .= type(a:cmd) == type([]) ? join(map(a:cmd, 'shellescape(v:val)')) : a:cmd
-    let l:cmd .= ' >/dev/null 2>&1;mvim --remote-expr "' . l:callback . '(''MacVim job'',$?)")&'
-    silent exec '!' . l:cmd
-  endf
-
-elseif has("nvim") " NeoVim
+if has("nvim") " NeoVim
 
   fun! lf_shell#async_run(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
