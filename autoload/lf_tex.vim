@@ -10,8 +10,10 @@ fun! lf_tex#preview()
 endf
 
 fun! lf_tex#forward_search()
+  " The command assumes Skim.app installed with Homebrew Cask (which symlinks
+  " displayline in /usr/local/bin)
   silent execute join([
-        \ '!${HOME}/Applications/Skim.app/Contents/SharedSupport/displayline',
+        \ '!displayline',
         \ line('.'),
         \ shellescape(lf_tex#file('pdf')),
         \ shellescape(expand('%:p'))
