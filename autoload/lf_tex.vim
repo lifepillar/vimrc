@@ -62,7 +62,7 @@ fun! s:callback(job, status)
     cclose
     call lf_msg#notice("Success!")
   else
-    copen
+    botright copen
   endif
 endf
 
