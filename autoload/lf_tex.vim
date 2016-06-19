@@ -47,22 +47,20 @@ fun! lf_tex#clean()
 endf
 
 " Callback function used when a document is typeset asynchronously
-fun! s:callback(job, status)
-  " The following is adapted from LaTeX-Box
-  " set cwd to expand error file correctly
-  let l:cwd = fnamemodify(getcwd(), ':p')
-  execute 'lcd ' . fnameescape(expand('%:p:h'))
-  try
-    execute 'cgetfile ' . fnameescape(lf_tex#file('log'))
-  finally
-    " restore cwd
-    execute 'lcd ' . fnameescape(l:cwd)
-  endtry
+" Note: this function updates the local working directory of the TeX document
+" as a side effect.
+fun! s:callback(bufnr, job, status)
+  " Make sure the window of the given buffer is active
+  execute bufwinnr(a:bufnr) "wincmd" "w"
+  " Set cwd to expand error file correctly
+  execute 'lcd' fnameescape(fnamemodify(bufname(bufnr(a:bufnr)), ':p:h'))
+  execute 'cgetfile' fnameescape(fnamemodify(bufname(bufnr(a:bufnr)), ':p:r').'.log')
   if a:status == 0
     cclose
     call lf_msg#notice("Success!")
   else
     botright copen
+    call lf_msg#err("There are errors.")
   endif
 endf
 
@@ -74,14 +72,14 @@ if has("nvim")
     " this dummy 'load' event.
     if a:event == 'load' | return | endif
     if a:event == 'exit'
-      call s:callback(a:job_id, a:data)
+      call s:callback('FIXME', a:job_id, a:data)
     else
       call lf_msg#err('Unexpected event')
     endif
   endf
 else
-  fun! lf_tex#callback(job, status)
-    call s:callback(a:job, a:status)
+  fun! lf_tex#callback(bufnr, job, status)
+    call s:callback(a:bufnr, a:job, a:status)
   endf
 endif
 
