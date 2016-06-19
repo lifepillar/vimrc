@@ -50,8 +50,8 @@ if has("nvim") " NeoVim
 elseif exists("*job_start") " Vim
 
   fun! lf_shell#async_run(cmd, ...)
-          \ "exit_cb": get(a:000, 0, "lf_shell#callback"),
     let l:job = job_start(a:cmd, {
+          \ "exit_cb": function(get(a:000, 0, "lf_shell#callback"), [expand('%:p')]),
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
           \ })
     call ch_setoptions(l:job, {"close_cb": function('lf_shell#close_cb', [l:job])})
@@ -86,7 +86,7 @@ else
     call job_status(a:job) " Trigger exit_cb's callback
   endf
 
-  fun! lf_shell#callback(job, status)
+  fun! lf_shell#callback(bufpath, job, status)
     if a:status == 0
       call lf_msg#notice("Success!")
     else
