@@ -72,7 +72,7 @@ if has("nvim")
     " this dummy 'load' event.
     if a:event == 'load' | return | endif
     if a:event == 'exit'
-      call s:callback('FIXME', a:job_id, a:data)
+      call s:callback(bufnr('%'), a:job_id, a:data)
     else
       call lf_msg#err('Unexpected event')
     endif
