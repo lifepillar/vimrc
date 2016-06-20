@@ -6,7 +6,7 @@ let s:winpos_map = {
 " Run a shell command and send its output to a new buffer.
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
-fun! lf_job#to_buffer(cmdline, ...) abort
+fun! lf_job#to_buffer(cmdline, ...)
   execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. join(map(split(a:cmdline), 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
