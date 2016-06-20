@@ -3,7 +3,7 @@
 " args: a string of arguments for the commmand
 " pos: a letter specifying the position of the new buffer (see s:runShellCommand()).
 fun! lf_git#exec(args, pos)
-  call lf_shell#run("git -C %:p:h " . a:args, a:pos)
+  call lf_job#to_buffer("git -C %:p:h " . a:args, a:pos)
 endf
 
 " Show a vertical diff (use <c-w> K to arrange horizontally)
