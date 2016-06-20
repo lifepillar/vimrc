@@ -35,7 +35,7 @@ vnoremap <buffer> a$ F$of$
 
 command! -nargs=0 ConTeXt execute 'lcd' fnameescape(expand('%:p:h'))<bar>
       \ call lf_msg#notice('Typesetting...')<bar>
-      \ call lf_shell#async_run([
+      \ call lf_job#start([
       \ "/bin/sh", "-c", "PATH=$HOME/Applications/ConTeXt-Beta/tex/texmf-osx-64/bin:$PATH mtxrun --script context --autogenerate --nonstopmode --synctex=1 ".expand('%:t')
       \ ], 'lf_tex#callback')
 

@@ -6,7 +6,7 @@ let s:winpos_map = {
 " Run a shell command and send its output to a new buffer.
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
-fun! lf_job#run(cmdline, ...) abort
+fun! lf_job#to_buffer(cmdline, ...) abort
   execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. join(map(split(a:cmdline), 'v:val !~# "\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
@@ -18,9 +18,9 @@ endf
 " Asynchronously run a shell command and send its output to a buffer.
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
-fun! lf_job#buffer(cmdline, ...) abort
-  let l:job = lf_job#async_run(
         \ map(split(a:cmdline), 'v:val !~# "\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))')
+fun! lf_job#to_buffer_async(cmdline, ...)
+  let l:job = lf_job#start(
         \ )
   if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
     execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
@@ -39,7 +39,7 @@ endf
 " function. See `:h job_start()` and `:h jobstart()`, respectively.
 if has("nvim") " NeoVim
 
-  fun! lf_job#async_run(cmd, ...)
+  fun! lf_job#start(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
     " Without calling it explicitly before invoking jobstart(),
     " NeoVim may not find a callback function defined in autoload:
@@ -49,7 +49,7 @@ if has("nvim") " NeoVim
 
 elseif exists("*job_start") " Vim
 
-  fun! lf_job#async_run(cmd, ...)
+  fun! lf_job#start(cmd, ...)
     silent! bwipeout! STDOUT
     silent! bwipeout! STDERR
     let l:job = job_start(a:cmd, {
@@ -62,7 +62,7 @@ elseif exists("*job_start") " Vim
 
 else " Vim (old version)
 
-  fun! lf_job#async_run(cmd, ...)
+  fun! lf_job#start(cmd, ...)
     let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
     let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
     execute "!" . l:cmd
