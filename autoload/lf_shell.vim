@@ -34,6 +34,8 @@ if has("nvim") " NeoVim
 elseif exists("*job_start") " Vim
 
   fun! lf_shell#async_run(cmd, ...)
+    silent! bwipeout! STDOUT
+    silent! bwipeout! STDERR
     let l:job = job_start(a:cmd, {
           \ "exit_cb": function(get(a:000, 0, "lf_shell#callback"), [bufnr('%')]),
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
