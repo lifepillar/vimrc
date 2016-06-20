@@ -7,9 +7,10 @@ let s:winpos_map = {
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
 fun! lf_job#to_buffer(cmdline, ...)
+  let l:cmd = join(map(split(a:cmdline), 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
   execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  execute '%!'. join(map(split(a:cmdline), 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
+  execute '%!'. l:cmd
   setlocal nomodifiable
   nnoremap <silent> <buffer> <tab> <c-w><c-p>
   nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
