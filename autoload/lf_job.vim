@@ -52,12 +52,11 @@ elseif exists("*job_start") " Vim
   fun! lf_job#start(cmd, ...)
     silent! bwipeout! STDOUT
     silent! bwipeout! STDERR
-    let l:job = job_start(a:cmd, {
+    return job_start(a:cmd, {
+          \ "close_cb": "lf_job#close_cb",
           \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), [bufnr('%')]),
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
           \ })
-    call ch_setoptions(l:job, {"close_cb": function('lf_job#close_cb', [l:job])})
-    return l:job
   endf
 
 else " Vim (old version)
@@ -85,8 +84,8 @@ if has("nvim")
 
 else
 
-  fun! lf_job#close_cb(job, channel)
-    call job_status(a:job) " Trigger exit_cb's callback
+  fun! lf_job#close_cb(channel)
+    call job_status(ch_getjob(a:channel)) " Trigger exit_cb's callback
   endf
 
   fun! lf_job#callback(bufnr, job, status)
