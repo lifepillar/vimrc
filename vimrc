@@ -468,7 +468,7 @@
   nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:Git push<cr>
   " Show the revision history for the current file (use :Git log for the full log)
-  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %<cr>
+  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
 " }}
 " Plugins {{
   " Disabled Vim Plugins {{
