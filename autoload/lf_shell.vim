@@ -41,6 +41,7 @@ elseif exists("*job_start") " Vim
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
           \ })
     call ch_setoptions(l:job, {"close_cb": function('lf_shell#close_cb', [l:job])})
+    return l:job
   endf
 
 else " Vim (old version)
