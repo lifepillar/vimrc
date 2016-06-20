@@ -362,7 +362,7 @@
   endif
 
   " Execute an external command and show the output in a new buffer
-  command! -complete=shellcmd -nargs=+ Shell      call lf_shell#run(<q-args>, "B")
+  command! -complete=shellcmd -nargs=+ Shell call lf_job#to_buffer(<q-args>, "B")
 
   " Send text to a terminal
   command! BindTerminal call lf_terminal#open()
