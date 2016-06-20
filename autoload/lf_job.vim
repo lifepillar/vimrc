@@ -6,7 +6,7 @@ let s:winpos_map = {
 " Run a shell command and send its output to a new buffer.
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
-fun! lf_shell#run(cmdline, ...) abort
+fun! lf_job#run(cmdline, ...) abort
   execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. join(map(split(a:cmdline), 'v:val !~# "\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
@@ -18,8 +18,8 @@ endf
 " Asynchronously run a shell command and send its output to a buffer.
 " cmdline: the command to be executed (String);
 " ...    : the position of the output window (see s:winpos_map).
-fun! lf_shell#buffer(cmdline, ...) abort
-  let l:job = lf_shell#async_run(
+fun! lf_job#buffer(cmdline, ...) abort
+  let l:job = lf_job#async_run(
         \ map(split(a:cmdline), 'v:val !~# "\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))')
         \ )
   if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
@@ -39,8 +39,8 @@ endf
 " function. See `:h job_start()` and `:h jobstart()`, respectively.
 if has("nvim") " NeoVim
 
-  fun! lf_shell#async_run(cmd, ...)
-    let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
+  fun! lf_job#async_run(cmd, ...)
+    let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
     " Without calling it explicitly before invoking jobstart(),
     " NeoVim may not find a callback function defined in autoload:
     execute 'call' l:callback . "(0,0,'load')"
@@ -49,21 +49,21 @@ if has("nvim") " NeoVim
 
 elseif exists("*job_start") " Vim
 
-  fun! lf_shell#async_run(cmd, ...)
+  fun! lf_job#async_run(cmd, ...)
     silent! bwipeout! STDOUT
     silent! bwipeout! STDERR
     let l:job = job_start(a:cmd, {
-          \ "exit_cb": function(get(a:000, 0, "lf_shell#callback"), [bufnr('%')]),
+          \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), [bufnr('%')]),
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
           \ })
-    call ch_setoptions(l:job, {"close_cb": function('lf_shell#close_cb', [l:job])})
+    call ch_setoptions(l:job, {"close_cb": function('lf_job#close_cb', [l:job])})
     return l:job
   endf
 
 else " Vim (old version)
 
-  fun! lf_shell#async_run(cmd, ...)
-    let l:callback = a:0 > 0 ? a:1 : 'lf_shell#callback'
+  fun! lf_job#async_run(cmd, ...)
+    let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
     let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
     execute "!" . l:cmd
     execute 'call '.l:callback.'("Synchronous job",'.v:shell_error.')'
@@ -73,7 +73,7 @@ endif
 
 if has("nvim")
 
-  fun! lf_shell#callback(job_id, data, event)
+  fun! lf_job#callback(job_id, data, event)
     if a:event == 'exit'
       if a:data == 0 " 2nd arg is exit status when event is 'exit'
         call lf_msg#notice("Success!")
@@ -85,11 +85,11 @@ if has("nvim")
 
 else
 
-  fun! lf_shell#close_cb(job, channel)
+  fun! lf_job#close_cb(job, channel)
     call job_status(a:job) " Trigger exit_cb's callback
   endf
 
-  fun! lf_shell#callback(bufnr, job, status)
+  fun! lf_job#callback(bufnr, job, status)
     if a:status == 0
       call lf_msg#notice("Success!")
     else
