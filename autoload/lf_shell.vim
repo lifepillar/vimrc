@@ -15,6 +15,22 @@ fun! lf_shell#run(cmdline, ...) abort
   nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
 endf
 
+" Asynchronously run a shell command and send its output to a buffer.
+" cmdline: the command to be executed (String);
+" ...    : the position of the output window (see s:winpos_map).
+fun! lf_shell#buffer(cmdline, ...) abort
+  let l:job = lf_shell#async_run(
+        \ map(split(a:cmdline), 'v:val !~# "\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))')
+        \ )
+  if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
+    execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
+  else " Jump to the output window
+    execute bufwinnr(ch_getbufnr(l:job, "out")) "wincmd" "w"
+  endif
+  nnoremap <silent> <buffer> <tab> <c-w><c-p>
+  nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
+endf
+
 " Thin wrapper over Vim and NeoVim asynchronous job functions.
 " The first argument should be a List. The second (optional) argument is
 " a callback function.
