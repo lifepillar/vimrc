@@ -91,3 +91,17 @@ else
 
 endif
 
+if has('nvim')
+
+  fun! lf_git#push()
+    call lf_git#exec('push')
+  endf
+
+else
+
+  fun! lf_git#push()
+    call lf_job#to_buffer_async(["/bin/sh", "-c", "git -C ".shellescape(expand("%:p:h"))." push 2>&1"])
+  endf
+
+endif
+

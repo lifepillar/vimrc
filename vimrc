@@ -466,7 +466,7 @@
   nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
-  nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:Git push<cr>
+  nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
 " }}
