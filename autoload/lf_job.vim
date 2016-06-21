@@ -4,10 +4,10 @@ let s:winpos_map = {
       \ }
 
 " Run a shell command and send its output to a new buffer.
-" cmdline: the command to be executed (String);
+" cmdline: the command to be executed (String or List);
 " ...    : the position of the output window (see s:winpos_map).
 fun! lf_job#to_buffer(cmdline, ...)
-  let l:cmd = join(map(split(a:cmdline), 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
+  let l:cmd = join(map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
   execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. l:cmd
@@ -17,11 +17,11 @@ fun! lf_job#to_buffer(cmdline, ...)
 endf
 
 " Asynchronously run a shell command and send its output to a buffer.
-" cmdline: the command to be executed (String);
+" cmdline: the command to be executed (String or List);
 " ...    : the position of the output window (see s:winpos_map).
 fun! lf_job#to_buffer_async(cmdline, ...)
   let l:job = lf_job#start(
-        \ map(split(a:cmdline), 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)')
+        \ map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)')
         \ )
   if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
     execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
