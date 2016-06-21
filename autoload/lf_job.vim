@@ -45,7 +45,7 @@ if has("nvim") " NeoVim
     " Without calling it explicitly before invoking jobstart(),
     " NeoVim may not find a callback function defined in autoload:
     execute 'call' l:callback . "(0,0,'load')"
-    call jobstart(a:cmd, {"on_exit": l:callback})
+    return jobstart(a:cmd, {"on_exit": l:callback})
   endf
 
 elseif exists("*job_start") " Vim
