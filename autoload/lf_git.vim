@@ -1,9 +1,9 @@
 " Execute a non-interactive Git command in the directory containing
 " the file of the current buffer, and send the output to a new buffer.
 " args: a string of arguments for the commmand
-" pos: a letter specifying the position of the new buffer (see s:runShellCommand()).
-fun! lf_git#exec(args, pos)
-  call lf_job#to_buffer("git -C %:p:h " . a:args, a:pos)
+" ... : a letter specifying the position of the new buffer (see s:runShellCommand()).
+fun! lf_git#exec(args, ...)
+  call lf_job#to_buffer("git -C %:p:h " . a:args, get(a:000, 0, "B"))
 endf
 
 " Show a vertical diff (use <c-w> K to arrange horizontally)
