@@ -699,7 +699,7 @@
   if filereadable($HOME . '/.vim/vimrc_local')
     execute 'source' $HOME . '/.vim/vimrc_local'
   else
-    colorscheme solarized8_light
+    colorscheme solarized8_light_flat
   endif
 " }}
 
