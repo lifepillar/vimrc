@@ -12,8 +12,7 @@ fun! lf_job#to_buffer(cmdline, ...)
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   execute '%!'. l:cmd
   setlocal nomodifiable
-  nnoremap <silent> <buffer> <tab> <c-w><c-p>
-  nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
+  wincmd p
 endf
 
 " Asynchronously run a shell command and send its output to a buffer.
@@ -25,11 +24,8 @@ fun! lf_job#to_buffer_async(cmdline, ...)
         \ )
   if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
     execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
-  else " Jump to the output window
-    execute bufwinnr(ch_getbufnr(l:job, "out")) "wincmd" "w"
+    wincmd p
   endif
-  nnoremap <silent> <buffer> <tab> <c-w><c-p>
-  nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
 endf
 
 " Thin wrapper over Vim and NeoVim asynchronous job functions.
