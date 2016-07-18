@@ -73,7 +73,7 @@ submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submo
 ###  Some features
 
 - A 40-column **cheat sheet** always at hand with `\?` (courtesy of
-  [Cheat40](https://github.com/lifepillar/vim-cheat40).
+  [Cheat40](https://github.com/lifepillar/vim-cheat40)).
 - Foldable and thoroughly commented `vimrc`.
 - **Distraction-free mode** (courtesy of
   [Goyo](https://github.com/junegunn/goyo.vim) and
