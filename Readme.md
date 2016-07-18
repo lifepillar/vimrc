@@ -5,11 +5,10 @@
 This repository contains my own Vim setup, which includes a `vimrc` file and
 a few plugins (as Git submodules).
 
-Solarized is the default theme. To use a different theme, put a file called
-`vimrc_local` inside `.vim` and load your color scheme there.
+The default theme is [Solarized
+8](https://github.com/lifepillar/vim-solarized8). To use a different theme, put
+a file called `vimrc_local` inside `.vim` and load your color scheme there.
 
-The 16 color version of Solarized is used, so your terminal **must** be
-configured to use Solarized, too!
 
 ### Requirements
 
@@ -73,7 +72,8 @@ submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submo
 
 ###  Some features
 
-- A 40-column **cheat sheet** always at hand with `\?`.
+- A 40-column **cheat sheet** always at hand with `\?` (courtesy of
+  [Cheat40](https://github.com/lifepillar/vim-cheat40).
 - Foldable and thoroughly commented `vimrc`.
 - **Distraction-free mode** (courtesy of
   [Goyo](https://github.com/junegunn/goyo.vim) and
