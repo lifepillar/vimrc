@@ -68,7 +68,7 @@ fun! lf_text#ctags(args)
   if v:shell_error
     call lf_msg#err("Error: " . s:res)
   else
-    call lf_msg#notice('Tags created!')
+    call lf_msg#notice("Tags created in " . getcwd())
   endif
 endf
 
