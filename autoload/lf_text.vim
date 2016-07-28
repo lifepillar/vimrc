@@ -62,13 +62,17 @@ fun! lf_text#diff_orig()
 endf
 
 fun! lf_text#ctags(args)
-  call lf_msg#notice('Creating tags…')
   lcd %:p:h
-  let s:res = system('ctags -R --sort=foldcase --extra=+fq --fields=+iaS --c++-kinds=+p --exclude=cache --exclude=third_party --exclude=tmp --exclude=*.html ' . a:args)
-  if v:shell_error
-    call lf_msg#err("Error: " . s:res)
-  else
-    call lf_msg#notice("Tags created in " . getcwd())
-  endif
+  call lf_msg#notice('Creating tags in ' . getcwd())
+  let s:res = lf_job#start(['ctags',
+        \ '-R',
+        \ '--sort=foldcase',
+        \ '--extra=+fq',
+        \ '--fields=+iaS',
+        \ '--c++-kinds=+p',
+        \ '--exclude=cache',
+        \ '--exclude=third_party',
+        \ '--exclude=tmp',
+        \ '--exclude=*.html'] + split(a:args))
 endf
 
