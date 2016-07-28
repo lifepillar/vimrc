@@ -64,7 +64,7 @@ endf
 fun! lf_text#ctags(args)
   call lf_msg#notice('Creating tags…')
   lcd %:p:h
-  let s:res = system('ctags -R --extra=+f --exclude=cache --exclude=third_party --exclude=tmp --exclude=*.html ' . a:args)
+  let s:res = system('ctags -R --extra=+fq --exclude=cache --exclude=third_party --exclude=tmp --exclude=*.html ' . a:args)
   if v:shell_error
     call lf_msg#err("Error: " . s:res)
   else
