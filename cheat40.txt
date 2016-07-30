@@ -112,6 +112,17 @@ To next conflict marks   ]n            N
 To next matching tag     ]t            N
 To prev matching tag     [t            N
 }}}
+Cscope {{{2
+Find assignments         cza          *N
+Find calling functions   czc          *N
+Find called functions    czd          *N
+Find this egrep pattern  cze          *N
+Find this file           czf          *N
+Find this definition     czg          *N
+Find #includes           czi          *N
+Find this symbol         czs          *N
+Find this text string    czt          *N
+}}}
 Save (only if modified)  \w            N
 Save as root             :WW           N
 Cd to current path       cd            N
