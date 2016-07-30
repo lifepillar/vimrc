@@ -112,6 +112,9 @@
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   set wildmenu " Show possible matches when autocompleting
   set wildignorecase " Ignore case when completing file names and directories
+  " Cscope
+  set cscoperelative
+  set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 " }}
 " Appearance {{
   if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
@@ -415,6 +418,16 @@
   nnoremap <silent> cos :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> cot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> cow :<c-u>ToggleWrap<cr>
+  " Cscope
+  nnoremap <silent> cza :<c-u>cs find a <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> czc :<c-u>cs find c <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> czd :<c-u>cs find d <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> cze :<c-u>cs find e <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> czf :<c-u>cs find f <c-r>=expand("<cfile>")<cr><cr>
+  nnoremap <silent> czg :<c-u>cs find g <c-r>=expand("<cword>")<cr><cr>
+  nnoremap <silent> czi :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> czs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> czt :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
   " Remove trailing space globally
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
