@@ -62,8 +62,24 @@ fun! lf_text#diff_orig()
 endf
 
 fun! lf_text#ctags(args)
-  lcd %:p:h
-  call lf_msg#notice('Creating tags in ' . getcwd())
+  if empty(tagfiles()) " New tags file
+    let l:idx = inputlist(["Choose which directory to process:", "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
+    let l:tagdir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
+  elseif len(tagfiles()) == 1
+    let l:tagdir = fnamemodify(tagfiles()[0], ':h')
+  else
+    let l:idx = inputlist(map(copy(tagfiles()), {k,v -> k.'. '.v}))
+    let l:tagdir = (empty(l:idx) || l:idx < 0 || l:idx >= len(tagfiles()) ? "" : fnamemodify(tagfiles()[l:idx], ':h'))
+  endif
+  if empty(l:tagdir) 
+    call lf_msg#notice("Cancelled.")
+    return
+  elseif !isdirectory(l:tagdir)
+    call lf_msg#warn("Directory does not exist.") 
+    return 
+  endif
+  let l:tagfile = l:tagdir."/tags"
+  call lf_msg#notice('Updating ' . l:tagfile)
   let s:res = lf_job#start(['ctags',
         \ '-R',
         \ '--sort=foldcase',
@@ -73,6 +89,8 @@ fun! lf_text#ctags(args)
         \ '--exclude=cache',
         \ '--exclude=third_party',
         \ '--exclude=tmp',
-        \ '--exclude=*.html'] + split(a:args))
+        \ '--exclude=*.html',
+        \ '-o',
+        \ l:tagfile] + split(a:args) + [l:tagdir])
 endf
 
