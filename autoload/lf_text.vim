@@ -65,9 +65,9 @@ fun! lf_text#ctags(args)
   if empty(tagfiles()) " New tags file
     let l:idx = inputlist(["Choose which directory to process:", "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
     let l:tagdir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
-  elseif len(tagfiles()) == 1
+  elseif len(tagfiles()) == 1 " Update unique tags file
     let l:tagdir = fnamemodify(tagfiles()[0], ':h')
-  else
+  else " Choose among several tags files
     let l:idx = inputlist(map(copy(tagfiles()), {k,v -> k.'. '.v}))
     let l:tagdir = (empty(l:idx) || l:idx < 0 || l:idx >= len(tagfiles()) ? "" : fnamemodify(tagfiles()[l:idx], ':h'))
   endif
