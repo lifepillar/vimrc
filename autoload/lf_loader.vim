@@ -9,10 +9,7 @@ fun! lf_loader#loadPlugin(plugin_name)
   runtime plugin/*.vim
   " Note that this uses the plugin name exactly as typed by the user:
   execute 'runtime! after/plugin/**/' . a:plugin_name . '.vim'
-  " Plugin-specific activation
-  if tolower(a:plugin_name) == 'youcompleteme'
-    call youcompleteme#Enable()
-  endif
+  " Plugin-specific activation goes here
 endf
 
 " See h :command
