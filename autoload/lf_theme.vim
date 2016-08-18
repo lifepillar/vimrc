@@ -38,13 +38,13 @@ endf
 fun! lf_theme#toggle_hi_info()
   if exists("#LF_HI_INFO")
     augroup LF_HI_INFO
-      au!
+      autocmd!
     augroup END
     augroup! LF_HI_INFO
   else
     augroup LF_HI_INFO
-      au!
-      au CursorMoved * call lf_theme#hi_info()
+      autocmd!
+      autocmd CursorMoved * call lf_theme#hi_info()
     augroup END
   endif
 endf
