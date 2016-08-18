@@ -12,12 +12,13 @@ endf
 " Print information about the highlight group at the cursor position.
 " See: http://vim.wikia.com/wiki/VimTip99 and hilinks.vim script.
 fun! lf_theme#hi_info()
+  let trans = synIDattr(synID(line("."), col("."), v:false), "name")
   let synid = synID(line("."), col("."), v:true)
   let higrp = synIDattr(synid, "name")
-  let logrp = synIDattr(synIDtrans(synid), "name")
-  let trans = synIDattr(synID(line("."), col("."), v:false), "name")
-  let fgcol = [synIDattr(synIDtrans(synid), "fg", "cterm"), synIDattr(synIDtrans(synid), "fg", "gui")]
-  let bgcol = [synIDattr(synIDtrans(synid), "bg", "cterm"), synIDattr(synIDtrans(synid), "bg", "gui")]
+  let synid = synIDtrans(synid)
+  let logrp = synIDattr(synid, "name")
+  let fgcol = [synIDattr(synid, "fg", "cterm"), synIDattr(synid, "fg", "gui")]
+  let bgcol = [synIDattr(synid, "bg", "cterm"), synIDattr(synid, "bg", "gui")]
   try " The following may raise an error, e.g., if CtrlP is opened while this is active
     execute "hi!" "LFHiInfoFg" "ctermbg=".(empty(fgcol[0])?"NONE":fgcol[0]) "guibg=".(empty(fgcol[1])?"NONE":fgcol[1])
     execute "hi!" "LFHiInfoBg" "ctermbg=".(empty(bgcol[0])?"NONE":bgcol[0]) "guibg=".(empty(bgcol[1])?"NONE":bgcol[1])
