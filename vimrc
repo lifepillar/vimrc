@@ -115,6 +115,13 @@
   " Cscope
   set cscoperelative
   set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+  " Keep search matches vertically centered
+  nnoremap n nzzzv
+  nnoremap N Nzzzv
+  nnoremap * *zzzv
+  nnoremap # #zzzv
+  nnoremap g* g*zzzv
+  nnoremap g# g#zzzv
 " }}
 " Appearance {{
   if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
