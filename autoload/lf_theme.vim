@@ -9,6 +9,45 @@ fun! lf_theme#fg(hl)
   return [synIDattr(synIDtrans(hlID(a:hl)), "fg", "cterm"), synIDattr(synIDtrans(hlID(a:hl)), "fg", "gui")]
 endf
 
+" Print information about the highlight group at the cursor position.
+" See: http://vim.wikia.com/wiki/VimTip99 and hilinks.vim script.
+fun! lf_theme#hi_info()
+  let synid = synID(line("."), col("."), v:true)
+  let higrp = synIDattr(synid, "name")
+  let logrp = synIDattr(synIDtrans(synid), "name")
+  let trans = synIDattr(synID(line("."), col("."), v:false), "name")
+  let fgcol = [synIDattr(synIDtrans(synid), "fg", "cterm"), synIDattr(synIDtrans(synid), "fg", "gui")]
+  let bgcol = [synIDattr(synIDtrans(synid), "bg", "cterm"), synIDattr(synIDtrans(synid), "bg", "gui")]
+  try " The following may raise an error, e.g., if CtrlP is opened while this is active
+    execute "hi!" "LFHiInfoFg" "ctermbg=".(empty(fgcol[0])?"NONE":fgcol[0]) "guibg=".(empty(fgcol[1])?"NONE":fgcol[1])
+    execute "hi!" "LFHiInfoBg" "ctermbg=".(empty(bgcol[0])?"NONE":bgcol[0]) "guibg=".(empty(bgcol[1])?"NONE":bgcol[1])
+  catch /^Vim\%((\a\+)\)\=:E254/ " Cannot allocate color
+    hi clear LFHiInfoFg
+    hi clear LFHiInfoBg
+  endtry
+  echo join(map(reverse(synstack(line("."), col("."))), {i,v -> synIDattr(v, "name")}), " ⊂ ")
+  execute "echohl" logrp | echon " xxx " | echohl None
+  echon (higrp != trans ? "T:".trans." → ".higrp : higrp) . (higrp != logrp ? " → ".logrp : "")." "
+  echohl LFHiInfoFg | echon "  " | echohl None
+  echon " fg=".join(fgcol, "/")." "
+  echohl LFHiInfoBg | echon "  " | echohl None
+  echon " bg=".join(bgcol, "/")
+endf
+
+fun! lf_theme#toggle_hi_info()
+  if exists("#LF_HI_INFO")
+    augroup LF_HI_INFO
+      au!
+    augroup END
+    augroup! LF_HI_INFO
+  else
+    augroup LF_HI_INFO
+      au!
+      au CursorMoved * call lf_theme#hi_info()
+    augroup END
+  endif
+endf
+
 fun! lf_theme#contrast(delta)
   if !exists("g:colors_name") | return | endif
   if g:colors_name =~# "^solarized8"
