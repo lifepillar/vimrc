@@ -95,6 +95,7 @@ Toggle rel line numbers  cor           N
 Toggle search highlight  coh           N
 Toggle soft wrapping     cow           N
 Toggle spell checking    cos           N
+Debug highlight groups   coH           N
 }}}
 Unimpared-like {{{2
 Add blank line above     [«Spc»        N
