@@ -100,3 +100,6 @@
 [submodule "cheat40"]
 	path = pack/my/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
+[submodule "lucario"]
+	path = pack/themes/opt/lucario
+	url = https://github.com/raphamorim/lucario.git
