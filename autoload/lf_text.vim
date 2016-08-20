@@ -53,7 +53,7 @@ fun! lf_text#diff_orig()
   vert new
   setl buftype=nofile bufhidden=wipe nobuflisted noswapfile
   silent read ++edit #
-  norm 0d_
+  norm ggd_
   autocmd BufWinLeave <buffer> diffoff!
   silent file [ORIGINAL]
   diffthis
