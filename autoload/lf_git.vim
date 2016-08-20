@@ -11,12 +11,13 @@ endf
 fun! lf_git#diff()
   let l:ft = getbufvar("%", '&ft') " Get the file type
   call lf_git#exec("show HEAD:./" . shellescape(expand("%:t")), 'r')
+  diffthis
+  wincmd p
   let &l:filetype = l:ft
-  file HEAD
+  silent file [HEAD]
   autocmd BufWinLeave <buffer> diffoff!
   diffthis
   wincmd p
-  diffthis
 endf
 
 " Show a three-way diff. Useful for fixing merge conflicts.
