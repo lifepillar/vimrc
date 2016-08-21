@@ -30,7 +30,7 @@
   set fileformats=unix,mac,dos
   if exists('+langnoremap') | set langnoremap | endif
   set ttimeout
-  set ttimeoutlen=0 " Faster feedback in status line when returning to normal mode
+  set ttimeoutlen=100
   set ttyfast
   set lazyredraw
   set mouse=a
