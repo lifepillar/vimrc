@@ -136,6 +136,7 @@ Find all in this buffer  :FindAll …    N
 Find in all open buffers :MultiFind …  N
 Diff with last saved     :DiffOrig     N
 Generate or update tags  :Ctags …      N
+Header ⇄ Implementation  \h            N
 Decrease tab width       \[            N
 Increase tab width       \]            N
 Reduce contrast          \-            N
