@@ -8,7 +8,8 @@ fun! lf_tags#alt_file()
         \ 'c':   ['h'],
         \ 'cpp': ['h','hpp'],
         \ 'h':   ['c','cpp'],
-        \ 'hpp': ['cpp']
+        \ 'hpp': ['cpp'],
+        \ 'vim': ['vim']
         \ },
         \  expand("%:e"), ['UNKNOWN EXTENSION']), '\\|') . '\)$'
 endf
