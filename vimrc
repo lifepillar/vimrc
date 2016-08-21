@@ -485,6 +485,7 @@
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
+  " }}
 " Plugins {{
   " Disabled Vim Plugins {{
     let g:loaded_gzip = 1
