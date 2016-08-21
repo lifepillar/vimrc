@@ -340,7 +340,7 @@
   command! -nargs=* -complete=shellcmd Ag silent grep <args><bar>bo cwindow<bar>redraw!
 
   " Generate tags in the directory of the current buffer
-  command! -nargs=* -complete=shellcmd Ctags call lf_text#ctags(<q-args>)
+  command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
