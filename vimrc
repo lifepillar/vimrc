@@ -436,6 +436,8 @@
   nnoremap <silent> czi :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
   nnoremap <silent> czs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
   nnoremap <silent> czt :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  " Switch between header and implementation files
+  nnoremap <leader>h :<c-u>call lf_tags#alt_file()<cr>
   " Remove trailing space globally
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
@@ -483,7 +485,6 @@
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
   " Show the revision history for the current file (use :Git log for the full log)
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
-" }}
 " Plugins {{
   " Disabled Vim Plugins {{
     let g:loaded_gzip = 1
