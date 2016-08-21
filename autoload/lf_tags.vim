@@ -1,7 +1,10 @@
-" Switch between header and implementation files.
-" A tags file must have been previously created with `ctags --extra=+f`.
-" The dictionary maps the suffix of the current file to a list of candidate
-" suffixes for alternate files.
+" Jump from the current file to related files based on file suffixes (e.g.,
+" from Foo.cpp to Foo.hpp and vice versa).
+"
+" Note: Requires a `tags` file created by `ctags` with the option `--extra=+f`.
+"
+" The dictionary below maps the suffix of the current file to a list of
+" candidate suffixes for alternate files.
 fun! lf_tags#alt_file()
   execute "tjump" '/^'.expand("%:t:r").'\.\('.join(get(
         \ {
