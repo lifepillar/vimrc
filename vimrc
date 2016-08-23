@@ -399,8 +399,8 @@
   nnoremap <silent> <leader>w :<c-u>update<cr>
   nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
   nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
-  nnoremap <silent> ]a :<c-u>prev<cr>
-  nnoremap <silent> [a :<c-u>next<cr>
+  nnoremap <silent> ]a :<c-u>next<cr>
+  nnoremap <silent> [a :<c-u>prev<cr>
   nnoremap <silent> ]b :<c-u>bn<cr>
   nnoremap <silent> [b :<c-u>bp<cr>
   nnoremap <silent> ]l :<c-u>lnext<cr>zz
