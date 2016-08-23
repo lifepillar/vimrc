@@ -392,8 +392,6 @@
   " Change the contrast level for themes that support it.
   nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
-  " Open file browser in the directory of the current buffer
-  nnoremap <silent> <leader>e :<c-u>Ex<cr>
   " Change to the directory of the current file
   nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
   nnoremap <silent> <leader>w :<c-u>update<cr>
@@ -577,6 +575,8 @@
     let g:netrw_bufsettings='noma nomod nu rnu nowrap ro nobl'
     let g:netrw_list_hide=',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
     let g:netrw_sort_options='i'
+    " Open file browser in the directory of the current buffer
+    nnoremap <silent> <leader>e :<c-u>Ex<cr>
   " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
