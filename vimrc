@@ -397,18 +397,18 @@
   nnoremap <silent> <leader>w :<c-u>update<cr>
   nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
   nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
-  nnoremap <silent> ]a :<c-u>next<cr>
-  nnoremap <silent> [a :<c-u>prev<cr>
-  nnoremap <silent> ]b :<c-u>bn<cr>
-  nnoremap <silent> [b :<c-u>bp<cr>
-  nnoremap <silent> ]l :<c-u>lnext<cr>zz
-  nnoremap <silent> [l :<c-u>lprevious<cr>zz
+  nnoremap <silent> ]a :<c-u><c-r>=v:count1<cr>next<cr>
+  nnoremap <silent> [a :<c-u><c-r>=v:count1<cr>prev<cr>
+  nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
+  nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
+  nnoremap <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
+  nnoremap <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
   nnoremap <silent> ]n :<c-u>/\v^[<\|=>]{7}<cr>
   nnoremap <silent> [n :<c-u>?\v^[<\|=>]{7}<cr>
-  nnoremap <silent> ]q :<c-u>cnext<cr>zz
-  nnoremap <silent> [q :<c-u>cprevious<cr>zz
-  nnoremap <silent> ]t :<c-u>tn<cr>
-  nnoremap <silent> [t :<c-u>tp<cr>
+  nnoremap <silent> ]q :<c-u><c-r>=v:count1<cr>cnext<cr>zz
+  nnoremap <silent> [q :<c-u><c-r>=v:count1<cr>cprevious<cr>zz
+  nnoremap <silent> ]t :<c-u><c-r>=v:count1<cr>tn<cr>
+  nnoremap <silent> [t :<c-u><c-r>=v:count1<cr>tp<cr>
   nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
   nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
   nnoremap <silent> cob :<c-u>ToggleBackgroundColor<cr>
