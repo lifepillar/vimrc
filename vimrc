@@ -440,6 +440,8 @@
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
   vnoremap <silent> <leader>U :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
+  " <c-^> is a bit too uncomfortable to type (it's ctrl-shift-6 in my keyboard)
+  nnoremap <c-h> <c-^>
   " Go to tab 1/2/3 etc
   nnoremap <leader>1 1gt
   nnoremap <leader>2 2gt
