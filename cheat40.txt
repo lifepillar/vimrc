@@ -52,7 +52,7 @@ Replace tags             cst‹c›        N
 Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
 Tagbar {{{2
-Toggle Tagbar            \t            N
+Toggle Tagbar            \s            N
 UltiSnips {{{2
 Trigger snippet          «C-j»         I
 Go to next placeholder   «C-j»         I
@@ -147,3 +147,7 @@ Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C
 Go to tab n              \‹n›          N
 Open file explorer       \e            N
+Browse oldfiles          \r            N
+Choose buffer            \b            N
+Switch buffers (≡ «c-^») ‹n›«c-h»      N
+
