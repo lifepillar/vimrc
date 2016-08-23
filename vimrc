@@ -620,7 +620,7 @@
     endf
 
     " Toggle tag bar
-    nnoremap <silent> <leader>t :TagbarToggle<cr>
+    nnoremap <silent> <leader>s :TagbarToggle<cr>
     let g:tagbar_autofocus = 1
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
