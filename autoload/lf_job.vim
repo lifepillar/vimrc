@@ -15,18 +15,29 @@ fun! lf_job#to_buffer(cmdline, ...)
   wincmd p
 endf
 
-" Asynchronously run a shell command and send its output to a buffer.
-" cmdline: the command to be executed (String or List);
-" ...    : the position of the output window (see s:winpos_map).
-fun! lf_job#to_buffer_async(cmdline, ...)
-  let l:job = lf_job#start(
-        \ map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)')
-        \ )
-  if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
-    execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
-    wincmd p
-  endif
-endf
+if has("*job_start")
+
+  " Asynchronously run a shell command and send its output to a buffer.
+  " cmdline: the command to be executed (String or List);
+  " ...    : the position of the output window (see s:winpos_map).
+  fun! lf_job#to_buffer_async(cmdline, ...)
+    let l:job = lf_job#start(
+          \ map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)')
+          \ )
+    if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
+      execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
+      wincmd p
+    endif
+
+  endf
+
+else
+
+  fun! lf_job#to_buffer_async(cmdline, ...)
+    call lf_job#to_buffer(a:cmdline, a:0)
+  endf
+
+endif
 
 " Thin wrapper over Vim and NeoVim asynchronous job functions.
 " The first argument should be a List. The second (optional) argument is
