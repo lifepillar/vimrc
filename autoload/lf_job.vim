@@ -62,7 +62,7 @@ else " Vim (old version)
     let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
     let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
     execute "!" . l:cmd
-    execute 'call '.l:callback.'("Synchronous job",'.v:shell_error.')'
+    execute 'call '.l:callback.'(bufnr("%"), "Synchronous job",'.v:shell_error.')'
   endf
 
 endif
