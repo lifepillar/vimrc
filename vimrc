@@ -435,7 +435,7 @@
   nnoremap <silent> czs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
   nnoremap <silent> czt :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
   " Switch between header and implementation files
-  nnoremap <leader>h :<c-u>call lf_tags#alt_file()<cr>
+  nnoremap <silent> <leader>h :<c-u>call lf_tags#alt_file()<cr>
   " Remove trailing space globally
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
   " Capitalize words in selected text (see h gU)
