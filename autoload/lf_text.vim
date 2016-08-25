@@ -41,7 +41,7 @@ fun! lf_text#selection(ln1, ln2)
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
     let l:lines = getline(lnum1, lnum2)
-    let l:lines[-1] = l:lines[-1][:col2 - 1]
+    let l:lines[-1] = lines[-1][:col2 - (&selection == 'inclusive' ? 1 : 2)]
     let l:lines[0] = l:lines[0][col1 - 1:]
     return l:lines
   else
