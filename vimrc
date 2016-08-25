@@ -403,8 +403,8 @@
   nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
   nnoremap <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
   nnoremap <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
-  nnoremap <silent> ]n :<c-u>/\v^[<\|=>]{7}<cr>
-  nnoremap <silent> [n :<c-u>?\v^[<\|=>]{7}<cr>
+  nnoremap <silent> ]n :<c-u><c-r>=v:count1<cr>/\v^[<\|=>]{7}<cr>
+  nnoremap <silent> [n :<c-u><c-r>=v:count1<cr>?\v^[<\|=>]{7}<cr>
   nnoremap <silent> ]q :<c-u><c-r>=v:count1<cr>cnext<cr>zz
   nnoremap <silent> [q :<c-u><c-r>=v:count1<cr>cprevious<cr>zz
   nnoremap <silent> ]t :<c-u><c-r>=v:count1<cr>tn<cr>
