@@ -477,7 +477,7 @@
   " Move up in pop-up menu or unindent in Insert mode
   inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
   " Make
-  nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>cwindow<cr>
+  nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
   nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
   vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
