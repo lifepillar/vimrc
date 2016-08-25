@@ -103,3 +103,6 @@
 [submodule "lucario"]
 	path = pack/themes/opt/lucario
 	url = https://github.com/raphamorim/lucario.git
+[submodule "alduin"]
+	path = pack/themes/opt/alduin
+	url = https://github.com/AlessandroYorba/Alduin.git
