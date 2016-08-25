@@ -9,7 +9,7 @@ fun! lf_find#buffer(pattern)
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
     call lf_msg#warn("No match")
   endtry
-  lwindow
+  bo lwindow
 endf
 
 " Find all occurrences of a pattern in all open files.
@@ -21,7 +21,7 @@ fun! lf_find#all_buffers(pattern)
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
     call lf_msg#warn("No match")
   endtry
-  cwindow
+  bo cwindow
 endf
 
 
