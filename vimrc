@@ -669,8 +669,7 @@
     let g:undotree_SplitWidth = 40
     let g:undotree_SetFocusWhenToggle = 1
     let g:undotree_TreeNodeShape = '◦'
-    " Toggle undo tree
-    nnoremap <silent> <leader>u :UndotreeToggle<cr>
+    nnoremap <silent> <leader>u :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
   " YouCompleteMe {{
     let g:ycm_autoclose_preview_window_after_completion = 1
