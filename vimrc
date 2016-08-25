@@ -628,7 +628,6 @@
     let g:tagbar_autofocus = 1
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
-    let g:tagbar_left = 1
 
     let g:tagbar_type_markdown = {
           \ 'ctagstype': 'markdown',
