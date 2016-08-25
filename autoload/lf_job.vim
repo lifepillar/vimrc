@@ -15,7 +15,7 @@ fun! lf_job#to_buffer(cmdline, ...)
   wincmd p
 endf
 
-if has("*job_start")
+if exists("*job_start")
 
   " Asynchronously run a shell command and send its output to a buffer.
   " cmdline: the command to be executed (String or List);
