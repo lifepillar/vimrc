@@ -541,7 +541,7 @@
         let g:limelight_conceal_ctermfg = (&background ==# 'dark') ? '10' : '14'
       endif
       set scrolloff=999 " Keep the edited line vertically centered
-      call lf_text#enableSoftWrap()
+      silent call lf_text#enableSoftWrap()
       set noshowcmd
       Limelight
     endf
@@ -554,7 +554,7 @@
         set guioptions+=r
       endif
       set showcmd
-      call lf_text#disableSoftWrap()
+      silent call lf_text#disableSoftWrap()
       let &scrolloff=g:default_scrolloff
       Limelight!
     endf
