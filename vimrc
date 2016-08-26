@@ -102,7 +102,8 @@
   set incsearch " Search as you type
   set ignorecase " Case-insensitive search by default
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
-  set grepprg=ag\ --vimgrep grepformat^=%f:%l:%c:%m
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat^=%f:%l:%c:%m
   set keywordprg=:help " Get help for word under cursor by pressing K
   set complete-=i " Do not search included files
   set complete+=kspell " Use spell dictionary for completion, if available
