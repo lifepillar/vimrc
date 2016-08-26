@@ -506,6 +506,7 @@
           \ 'markdown': '--language-force=markdown',
           \ 'tex':      '--language-force=latex'
           \ }
+    let g:ctrlp_types = ['buf', 'mru']
     let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
