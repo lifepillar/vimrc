@@ -85,7 +85,6 @@ submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submo
   [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
   when I decided that simple is better (and Powerline fonts are an ugly hack
   anyway).
-- Key bindings in command mode similar to those used by the shell.
 - Etc... (read the cheat sheet and the source!)
 
 ### Useful resources

@@ -141,8 +141,6 @@ Decrease tab width       \[            N
 Increase tab width       \]            N
 Reduce contrast          \-            N
 Increase contrast        \+            N
-Start of line            «C-a»         C
-End of line              «C-e»         C
 Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C
 Go to tab n              \‹n›          N

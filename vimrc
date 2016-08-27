@@ -466,11 +466,6 @@
   nnoremap <leader>8 8gt
   nnoremap <leader>9 9gt
   nnoremap <leader>0 10gt
-  " Use bindings in command mode similar to those used by the shell (see also :h cmdline-editing)
-  cnoremap <c-a> <home>
-  cnoremap <c-e> <end>
-  cnoremap <c-p> <up>
-  cnoremap <c-n> <down>
   " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
