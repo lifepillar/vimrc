@@ -510,7 +510,7 @@
           \ 'tex':      '--language-force=latex'
           \ }
     let g:ctrlp_types = ['buf', 'mru']
-    let g:ctrlp_extensions = ['buffertag', 'tag']
+    let g:ctrlp_extensions = ['buffertag', 'tag', 'quickfix', 'dir']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
     let s:ctrlp_section_map = {"mru files": "recent"}
