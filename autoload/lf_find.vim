@@ -56,4 +56,12 @@ fun! lf_find#arglist(input_cmd)
   execute "args" join(map(l:arglist, { i,v -> fnameescape(v) }))
 endf
 
+fun! lf_find#colorscheme()
+  let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
+  let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
+  let l:colorscheme = lf_find#fuzzy(l:colors)
+  if !empty(l:colorscheme)
+    execute "colorscheme" l:colorscheme[0]
+  endif
+endf
 
