@@ -452,7 +452,7 @@
   " Browse recent files (requires Vim 7.4p2231 to accept a pattern)
   nnoremap <leader>r :<c-u>browse oldfiles<space>
   " Browse files in the working directory
-  nnoremap <c-n> :<c-u>FuzzyFind<cr>
+  nnoremap <leader>n :<c-u>FuzzyFind<cr>
   " Switch between buffers
   nnoremap <leader>b :<c-u>ls<cr>:b<space>
   " <c-^> is a bit too uncomfortable to type (it's ctrl-shift-6 in my keyboard)

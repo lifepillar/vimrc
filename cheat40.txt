@@ -134,7 +134,7 @@ Set tab width            :TabWid ‹n›   N
 Find all in this buffer  :FindAll …    N
 Find in all open buffers :MultiFind …  N
 Fuzzy find file in dir   :FuzzyFind …  N
-Find file in wokring dir <c-n>         N
+Find file in working dir \n            N
 Spotlight search ()     :Spotlight …  N
 Diff with last saved     :DiffOrig     N
 Generate or update tags  :Ctags        N
