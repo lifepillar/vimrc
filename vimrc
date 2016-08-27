@@ -515,10 +515,10 @@
           \ 'tex':      '--language-force=latex'
           \ }
     let g:ctrlp_types = ['buf', 'mru']
-    let g:ctrlp_extensions = ['buffertag', 'tag', 'funky']
+    let g:ctrlp_extensions = ['buffertag', 'tag']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-    let s:ctrlp_section_map = {"mru files": "recent", "funky": "functions"}
+    let s:ctrlp_section_map = {"mru files": "recent"}
     let g:ctrlp_status_func = {'main': 'CtrlP_Main', 'prog': 'CtrlP_Progress'}
     let g:ctrlp_switch_buffer = 0
 
