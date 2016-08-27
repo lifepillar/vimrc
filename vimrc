@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " - To override the settings of a color scheme, create a file
 "   after/colors/<theme name>.vim It will be automatically loaded after the
@@ -477,7 +477,7 @@
   imap <expr><silent> <tab> pumvisible()
         \ ? "\<c-n>"
         \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
-          \ ? get(b:, 'lf_tab_complete', &omnifunc != '' ? "\<c-x>\<c-o>" : &completefunc != '' ? "\<c-x><c-u>" : "\<c-n>")
+          \ ? get(b:, 'lf_tab_complete', &omnifunc != '' ? "\<c-x>\<c-o>" : "\<c-n>")
           \ : "\<tab>"
           \ )
   " Move up in pop-up menu or unindent in Insert mode
