@@ -4,8 +4,7 @@ Comment operator         gc            O
 Toggle line comment      gcc           N
 Uncomment block          gcgc          N
 CtrlP {{{2
-Open CtrlP in MRU mode   «C-n»         N
-Switch buffer            «C-p»         N
+Open in buffer mode      «C-p»         N
 Easy Align {{{2
 Trigger Easy Align       \a            O
 Goyo {{{2
@@ -134,8 +133,11 @@ Omnicomplete             «Tab»         I
 Set tab width            :TabWid ‹n›   N
 Find all in this buffer  :FindAll …    N
 Find in all open buffers :MultiFind …  N
+Fuzzy find file in dir   :FuzzyFind …  N
+Find file in wokring dir <c-n>         N
+Spotlight search ()     :Spotlight …  N
 Diff with last saved     :DiffOrig     N
-Generate or update tags  :Ctags …      N
+Generate or update tags  :Ctags        N
 Header ⇄ Implementation  \h            N
 Decrease tab width       \[            N
 Increase tab width       \]            N
@@ -147,5 +149,5 @@ Go to tab n              \‹n›          N
 Open file explorer       \e            N
 Browse oldfiles          \r            N
 Choose buffer            \b            N
-Switch buffers (≡ «c-^») ‹n›«c-h»      N
+Switch buffers (≡ «c-^») ‹n›«c-j»      N
 
