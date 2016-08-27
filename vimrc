@@ -353,6 +353,12 @@
   " Find all in all open buffers
   command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
 
+  " Fuzzy search for files inside a directory (default: working dir). Requires fzf.
+  command! -nargs=? -complete=dir FuzzyFind call lf_find#arglist('ag -g "" '.<q-args>)
+
+  " Spotlight search (macOS only)
+  command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
+
   " See :h :DiffOrig
   command! -nargs=0 DiffOrig call lf_text#diff_orig()
 

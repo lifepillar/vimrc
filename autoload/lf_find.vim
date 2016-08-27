@@ -49,4 +49,11 @@ fun! lf_find#fuzzy(input)
   endtry
 endf
 
+" Filter a list of paths and populate the arglist with the selected items.
+fun! lf_find#arglist(input_cmd)
+  let l:arglist = lf_find#fuzzy(a:input_cmd)
+  if empty(l:arglist) | return | endif
+  execute "args" join(map(l:arglist, { i,v -> fnameescape(v) }))
+endf
+
 
