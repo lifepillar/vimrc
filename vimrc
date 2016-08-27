@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdl=0 fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
 "
 " - To override the settings of a color scheme, create a file
 "   after/colors/<theme name>.vim It will be automatically loaded after the
