@@ -53,10 +53,7 @@
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp/backup
   set directory=~/.vim/tmp/swap
-  set viminfo^=!
-  if !has('nvim')
-    set viminfo+=n~/.vim/viminfo
-  endif
+  set viminfo=!,'1000,<50,s10,h,n~/.vim/viminfo
   set undofile " Enable persistent undo
   set undodir=~/.vim/tmp/undo
   set undolevels=1000 " Maximum number of changes that can be undone
@@ -706,6 +703,7 @@
 " NeoVim {{
   if has('nvim')
     let g:terminal_scrollback_buffer_size = 10000
+    set shada=!,'1000,<50,s10,h  " Override viminfo setting
   endif
 " }}
 " Init {{
