@@ -28,7 +28,7 @@
   scriptencoding utf-8
   set nobomb
   set fileformats=unix,mac,dos
-  if exists('+langnoremap') | set langnoremap | endif
+  if has('langmap') && exists('+langremap') | set nolangremap | endif
   set ttimeout
   set ttimeoutlen=100
   set ttyfast
