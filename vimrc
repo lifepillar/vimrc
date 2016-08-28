@@ -721,9 +721,9 @@
   endif
 
   " Local settings
-  " If this file exists, it should at least define the color scheme
-  if filereadable($HOME . '/.vim/vimrc_local')
-    execute 'source' $HOME . '/.vim/vimrc_local'
+  let s:vimrc_local = fnamemodify(resolve(expand('<sfile>:p')), ':h').'/vimrc_local'
+  if filereadable(s:vimrc_local)
+    execute 'source' s:vimrc_local
   else
     colorscheme solarized8_light_flat
   endif
