@@ -450,7 +450,7 @@
   " Capitalize words in selected text (see h gU)
   vnoremap <silent> <leader>U :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Browse recent files (:filter requires Vim 7.4.2244)
-  nnoremap <leader>r :<c-u>filter // browse oldfiles<c-f>3gE<c-c>
+  nnoremap <leader>r :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
   " Browse files in the working directory
   nnoremap <leader>n :<c-u>FuzzyFind<cr>
   " Switch between buffers
