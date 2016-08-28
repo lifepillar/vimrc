@@ -356,6 +356,9 @@
   " Spotlight search (macOS only)
   command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
 
+  " Fuzzy search recently opened files
+  command! -nargs=0 Recent call lf_find#arglist(v:oldfiles)
+
   " See :h :DiffOrig
   command! -nargs=0 DiffOrig call lf_text#diff_orig()
 
