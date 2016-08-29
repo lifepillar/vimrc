@@ -155,6 +155,11 @@
     autocmd VimResized * :wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
+    " When editing a file, always jump to the last known cursor position.
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
   augroup END
 " }}
 " Status line {{
