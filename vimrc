@@ -112,7 +112,8 @@
   set wildignorecase " Ignore case when completing file names and directories
   " Cscope
   set cscoperelative
-  set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+  set cscopequickfix=s-,c-,d-,i-,t-,e-
+  if has('patch2033') | set cscopequickfix+=a- | endif
   " Keep search matches vertically centered
   nnoremap n nzzzv
   nnoremap N Nzzzv
