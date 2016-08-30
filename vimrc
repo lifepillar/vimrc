@@ -460,8 +460,6 @@
   nnoremap <leader>n :<c-u>FuzzyFind<cr>
   " Switch between buffers
   nnoremap <leader>b :<c-u>ls<cr>:b<space>
-  " <c-^> is a bit too uncomfortable to type (it's ctrl-shift-6 in my keyboard)
-  nnoremap <c-j> <c-^>
   " Go to tab 1/2/3 etc
   nnoremap <leader>1 1gt
   nnoremap <leader>2 2gt
