@@ -1,6 +1,6 @@
 ## My Vim setup
 
-![Solarized Light](screenshot.png)
+![Solarized Light](https://raw.github.com/lifepillar/Resources/master/vimrc/screenshot.png)
 
 This repository contains my own Vim setup, which includes a `vimrc` file and
 a few plugins (as Git submodules).
