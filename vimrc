@@ -258,7 +258,6 @@
 
   fun! s:customizeTheme()
     let g:lf_cached_mode = ""  " Force updating highlight groups
-    let &fillchars='vert: ,fold: '
     hi! link Warnings ErrorMsg
     if get(g:, "colors_name", "") =~# "^solarized8" | return | endif
     " Set the default values of our highlight groups for the status line
