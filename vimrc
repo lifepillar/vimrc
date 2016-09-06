@@ -697,6 +697,9 @@
     let g:solarized_statusline = 'low'
     let g:solarized_term_italics = 1
   " }}
+  " WWDC16 {{
+    let g:wwdc16_term_italics = 1
+  " }}
 " }}
 " NeoVim {{
   if has('nvim')
