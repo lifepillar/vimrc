@@ -76,8 +76,6 @@
   nnoremap <c-e> <c-e><c-e>
   nnoremap <c-y> <c-y><c-y>
   set nrformats=hex
-  set showmatch " Show matching brackets/parenthesis
-  set matchtime=2 " show matching bracket for 0.2 seconds
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
   set splitright " When splitting vertically, focus goes the right window
   set splitbelow " When splitting horizontally, focus goes to the bottom window
