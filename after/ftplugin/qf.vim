@@ -1,7 +1,7 @@
 fun! BuildQuickfixStatusLine(nr)
   return '%{SetupStl('.a:nr.')}
         \%#CurrMode#%{w:["lf_active"] ? "  QUICKFIX " : ""}%*
-        \%{w:["lf_active"] ? "" : "  QUICKFIX"}
+        \%{w:["lf_active"] ? "" : "  QUICKFIX "}
         \ %<%{get(w:, "quickfix_title", "")}
         \ %=
         \ %q
