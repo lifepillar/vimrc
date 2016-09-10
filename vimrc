@@ -722,7 +722,7 @@
   if filereadable(s:vimrc_local)
     execute 'source' s:vimrc_local
   else
-    colorscheme solarized8_light_flat
+    colorscheme wwdc16
   endif
 " }}
 
