@@ -1,13 +1,24 @@
 ## My Vim setup
 
-![Solarized Light](https://raw.github.com/lifepillar/Resources/master/vimrc/screenshot.png)
+![WWDC16](https://raw.github.com/lifepillar/Resources/master/vimrc/screenshot.png)
 
-This repository contains my own Vim setup, which includes a `vimrc` file and
-a few plugins (as Git submodules).
+My own Vim configuration. Some features:
 
-The default theme is [Solarized
-8](https://github.com/lifepillar/vim-solarized8). To use a different theme, put
-a file called `vimrc_local` inside `.vim` and load your color scheme there.
+- Foldable and thoroughly commented `vimrc`.
+- Put your customizations into `.vimrc_local`.
+- 40-column **cheat sheet** always two keys away (courtesy of
+  [Cheat40](https://github.com/lifepillar/vim-cheat40)).
+- Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
+  (let Vim spend a few tens of microseconds on updating the status line rather
+  than the several milliseconds that plugins “as light as air” need). It used to
+  support Powerline fonts up to commit
+  [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
+  when I decided that simple is better (and Powerline fonts are an ugly hack
+  anyway).
+- **Distraction-free mode** (courtesy of
+  [Goyo](https://github.com/junegunn/goyo.vim) and
+  [Limelight](https://github.com/junegunn/limelight.vim)).
+- Etc... (read the cheat sheet and the source!)
 
 
 ### Requirements
@@ -17,18 +28,19 @@ a file called `vimrc_local` inside `.vim` and load your color scheme there.
 Recommended:
 
 - Vim 8.
-- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher)
-  (`brew install ag` on OS X).
-- [Exuberant ctags](http://ctags.sourceforge.net) to use Tagbar (`brew install ctags` on OS X).
+- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher);
+- [Exuberant ctags](http://ctags.sourceforge.net);
+- [fzf](https://github.com/junegunn/fzf).
+
 
 ### Installation
 
 ```sh
     cd ~
-    git clone https://github.com/lifepillar/vimrc.git .vim
+    git clone --depth 1 https://github.com/lifepillar/vimrc.git .vim
     cd .vim
     git checkout -b local
-    # We use shallow submodules; make sure we are able to checkout:
+    # We use shallow submodules; make sure we are able to check them out:
     git submodule update --init --remote --recursive
     # Commit changes (needed only if there are changes):
     git commit -a -m "Git submodule update --remote."
@@ -39,6 +51,7 @@ Recommended:
 
 ### Update
 
+```sh
     cd ~/.vim
     git checkout master
     git pull origin master
@@ -46,27 +59,37 @@ Recommended:
     git submodule update --init --recursive
     git checkout local
     git rebase master
+```
 
 …and fix conflicts.
 
-### Update plugins
+
+### Update plugins and colorschemes
 
 Make sure the repo is in a clean state.
 
+```sh
     git submodule update --remote
     git commit -a
     git submodule update --recursive
+```
 
 Explanation: the first command retrieves the latest commit of each submodule;
 the second command updates the references to the submodules; finally, the
 last command ensures that plugins's submodules, if any, are synchronized with
 the corresponding plugin (see, for example, YouCompleteMe).
 
+
 ### How to add a new plugin or colorscheme
 
-To add a plugin `Foo` from `https://repo/foo`:
+To add a plugin `Foo` from `https://repo/foo.git`:
 
-    git submodule add --name foo https://repo/foo pack/bundle/start/foo
+```sh
+    git submodule add --name foo --depth 1 https://repo/foo.git pack/bundle/start/foo
+    git config -f .gitmodules submodule.foo.shallow true
+    git add .gitmodules
+    git commit
+```
 
 To add `Foo` as an optional plugin, change `start` with `opt` (it works if Vim
 has packages, otherwise you also have to add the plugin to
@@ -74,30 +97,8 @@ has packages, otherwise you also have to add the plugin to
 
 To add a colorscheme, change `bundle/start` with `themes/opt`.
 
-You may use `--depth 1` to create a shallow clone, but [beware of shallow
-submodules](http://stackoverflow.com/questions/27188899/shallow-clone-with-submodules-in-git-how-to-use-pointed-commits-and-not-latest).
-
-###  Some features
-
-- A 40-column **cheat sheet** always at hand with `\?` (courtesy of
-  [Cheat40](https://github.com/lifepillar/vim-cheat40)).
-- Foldable and thoroughly commented `vimrc`.
-- **Distraction-free mode** (courtesy of
-  [Goyo](https://github.com/junegunn/goyo.vim) and
-  [Limelight](https://github.com/junegunn/limelight.vim)).
-- Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
-  (let Vim spend a few tens of microseconds on updating the status line rather
-  than the several milliseconds that plugins “as light as air” need). It used to
-  support Powerline fonts up to commit
-  [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
-  when I decided that simple is better (and Powerline fonts are an ugly hack
-  anyway).
-- Etc... (read the cheat sheet and the source!)
 
 ### Useful resources
-
-Apart from the obvious ones (e.g., [vim.wikia.com](http://vim.wikia.com)), I
-have found the following (in)valuable:
 
 - [usevim](http://usevim.com/)
 - [VimGolf](http://vimgolf.com)
