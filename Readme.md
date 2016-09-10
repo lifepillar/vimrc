@@ -23,12 +23,19 @@ Recommended:
 
 ### Installation
 
-    cd
-    git clone --recursive https://github.com/lifepillar/vimrc.git .vim
+```sh
+    cd ~
+    git clone https://github.com/lifepillar/vimrc.git .vim
     cd .vim
     git checkout -b local
+    # We use shallow submodules; make sure we are able to checkout:
+    git submodule update --init --remote --recursive
+    # Commit changes (needed only if there are changes):
+    git commit -a -m "Git submodule update --remote."
+    # Synchronize plugins's submodules, if any:
+    git submodule update --recursive
+```
 
-…and tweak to your taste!
 
 ### Update
 
