@@ -1,105 +1,140 @@
 [submodule "pathogen"]
 	path = pack/bundle/opt/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+	shallow = true
 [submodule "goyo"]
 	path = pack/bundle/start/goyo
 	url = https://github.com/junegunn/goyo.vim.git
+	shallow = true
 [submodule "jellybeans"]
 	path = pack/themes/opt/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
+	shallow = true
 [submodule "limelight"]
 	path = pack/bundle/start/limelight
 	url = https://github.com/junegunn/limelight.vim.git
+	shallow = true
 [submodule "seoul256"]
 	path = pack/themes/opt/seoul256
 	url = https://github.com/junegunn/seoul256.vim.git
+	shallow = true
 [submodule "tagbar"]
 	path = pack/bundle/opt/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+	shallow = true
 [submodule "tomorrow"]
 	path = pack/themes/opt/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
+	shallow = true
 [submodule "undotree"]
 	path = pack/bundle/opt/undotree
 	url = https://github.com/mbbill/undotree.git
+	shallow = true
 [submodule "gruvbox"]
 	path = pack/themes/opt/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
+	shallow = true
 [submodule "ctrlp"]
 	path = pack/bundle/start/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
+	shallow = true
 [submodule "surround"]
 	path = pack/bundle/start/surround
 	url = https://github.com/tpope/vim-surround.git
+	shallow = true
 [submodule "easy-align"]
 	path = pack/bundle/start/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+	shallow = true
 [submodule "papercolor"]
 	path = pack/themes/opt/papercolor
 	url = https://github.com/NLKNguyen/papercolor-theme.git
+	shallow = true
 [submodule "showmarks"]
 	path = pack/bundle/start/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
+	shallow = true
 [submodule "commentary"]
 	path = pack/bundle/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
+	shallow = true
 [submodule "swift"]
 	path = pack/bundle/start/swift
 	url = https://github.com/keith/swift.vim.git
+	shallow = true
 [submodule "rust"]
 	path = pack/bundle/start/rust
 	url = https://github.com/rust-lang/rust.vim.git
+	shallow = true
 [submodule "ultisnips"]
 	path = pack/bundle/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+	shallow = true
 [submodule "snippets"]
 	path = pack/bundle/start/snippets
 	url = https://github.com/honza/vim-snippets.git
+	shallow = true
 [submodule "repeat"]
 	path = pack/bundle/start/repeat
 	url = https://github.com/tpope/vim-repeat.git
+	shallow = true
 [submodule "pencil"]
 	path = pack/themes/opt/pencil
 	url = https://github.com/reedes/vim-colors-pencil.git
+	shallow = true
 [submodule "syntastic"]
 	path = pack/bundle/opt/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+	shallow = true
 [submodule "pgsql"]
 	path = pack/my/start/pgsql
 	url = https://github.com/lifepillar/pgsql.vim.git
+	shallow = true
 [submodule "ledger"]
 	path = pack/my/start/ledger
 	url = https://github.com/lifepillar/vim-ledger.git
+	shallow = true
 [submodule "onedark"]
 	path = pack/themes/opt/onedark
 	url = https://github.com/joshdick/onedark.vim
+	shallow = true
 [submodule "duotones"]
 	path = pack/themes/opt/duotones
 	url = https://github.com/atelierbram/vim-colors_duotones.git
+	shallow = true
 [submodule "sneak"]
 	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
+	shallow = true
 [submodule "youcompleteme"]
 	path = pack/bundle/opt/youcompleteme
 	url = https://github.com/Valloric/YouCompleteMe.git
+	shallow = true
 [submodule "csapprox"]
 	path = pack/themes/opt/csapprox
 	url = https://github.com/godlygeek/csapprox.git
+	shallow = true
 [submodule "outlaw"]
 	path = pack/my/start/outlaw
 	url = https://github.com/lifepillar/vim-outlaw.git
+	shallow = true
 [submodule "wwdc16"]
 	path = pack/my/opt/wwdc16
 	url = https://github.com/lifepillar/vim-wwdc16-theme.git
+	shallow = true
 [submodule "solarized8"]
 	path = pack/my/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8
+	shallow = true
 [submodule "cheat40"]
 	path = pack/my/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
+	shallow = true
 [submodule "lucario"]
 	path = pack/themes/opt/lucario
 	url = https://github.com/raphamorim/lucario.git
+	shallow = true
 [submodule "alduin"]
 	path = pack/themes/opt/alduin
 	url = https://github.com/AlessandroYorba/Alduin.git
+	shallow = true
