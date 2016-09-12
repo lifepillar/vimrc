@@ -40,12 +40,10 @@ Recommended:
     git clone --depth 1 https://github.com/lifepillar/vimrc.git .vim
     cd .vim
     git checkout -b local
-    # We use shallow submodules; make sure we are able to check them out:
-    git submodule update --init --remote --recursive
+    # We use shallow submodules; --remote makes sure we are able to check them out:
+    git submodule update --init --remote
     # Commit changes (needed only if there are changes):
     git commit -a -m "Git submodule update --remote."
-    # Synchronize plugins's submodules, if any:
-    git submodule update --recursive
 ```
 
 
