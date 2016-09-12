@@ -103,6 +103,7 @@
   set complete-=i " Do not search included files
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone
+  set omnifunc=syntaxcomplete#Complete " See :h ft-syntax-omni
   set tags=./tags;,tags " Search upwards for tags by default
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
@@ -725,4 +726,3 @@
     colorscheme wwdc16
   endif
 " }}
-
