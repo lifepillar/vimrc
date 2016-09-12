@@ -389,6 +389,9 @@
 
   " Save file with sudo
   command! -nargs=0  WW :w !sudo tee % >/dev/null
+
+  " Clean up old undo files
+  command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d -delete
 " }}
 " Key mappings (plugins excluded) {{
   " Use space as alternative leader
