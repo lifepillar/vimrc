@@ -69,13 +69,8 @@ Make sure the repo is in a clean state.
 ```sh
     git submodule update --remote
     git commit -a
-    git submodule update --recursive
+    git submodule update --recursive # Optional, only if there are plugins with submodules
 ```
-
-Explanation: the first command retrieves the latest commit of each submodule;
-the second command updates the references to the submodules; finally, the
-last command ensures that plugins's submodules, if any, are synchronized with
-the corresponding plugin (see, for example, YouCompleteMe).
 
 
 ### How to add a new plugin or colorscheme
