@@ -1,8 +1,3 @@
-" Do not use YouCompleteMe for Ledger files
-if exists('g:ycm_filetype_blacklist')
-  call extend(g:ycm_filetype_blacklist, { 'ledger': 1 })
-endif
-
 " Search include files when auto-completing with <c-n>
 setlocal complete+=i
 

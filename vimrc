@@ -671,12 +671,6 @@
     let g:undotree_TreeNodeShape = '◦'
     nnoremap <silent> <leader>u :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
-  " YouCompleteMe {{
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_key_list_select_completion = ['<down>']
-    let g:ycm_seed_identifiers_with_syntax = 1
-    let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
-  " }}
   " 2HTML (Vim) {{
     let g:html_pre_wrap=1
     let g:html_use_encoding="UTF-8"
@@ -721,7 +715,7 @@
 
   if !has('packages') " Use Pathogen as a fallback
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
-    let g:pathogen_blacklist = ['csapprox', 'syntastic', 'tagbar', 'undotree', 'youcompleteme']
+    let g:pathogen_blacklist = ['csapprox', 'syntastic', 'tagbar', 'undotree']
     execute pathogen#infect('pack/bundle/start/{}', 'pack/my/start/{}', 'pack/my/opt/{}', 'pack/bundle/opt/{}', 'pack/themes/opt/{}')
     command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>) " Load a blacklisted plugin
   endif
