@@ -106,10 +106,6 @@
 	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
 	shallow = true
-[submodule "youcompleteme"]
-	path = pack/bundle/opt/youcompleteme
-	url = https://github.com/Valloric/YouCompleteMe.git
-	shallow = true
 [submodule "csapprox"]
 	path = pack/themes/opt/csapprox
 	url = https://github.com/godlygeek/csapprox.git
