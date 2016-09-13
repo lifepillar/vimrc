@@ -505,7 +505,9 @@
     let g:ctrlp_buftag_types = {
           \ 'context':  '--language-force=context',
           \ 'markdown': '--language-force=markdown',
-          \ 'tex':      '--language-force=latex'
+          \ 'tex':      '--language-force=latex',
+          \ 'mp':       '--language-force=metapost',
+          \ 'mf':       '--language-force=metapost'
           \ }
     let g:ctrlp_types = ['buf', 'mru']
     let g:ctrlp_extensions = ['buffertag', 'tag', 'quickfix']
@@ -662,6 +664,19 @@
           \ ],
           \ 'sort': 0
           \ }
+    let g:tagbar_type_mp = {
+          \ 'ctagstype': 'metapost',
+          \ 'kinds': [
+          \ 'f:figures',
+          \ 'v:vardef',
+          \ 'd:def',
+          \ 'p:primarydef',
+          \ 's:secondarydef',
+          \ 't:tertiarydef'
+          \ ],
+          \ 'sort': 0
+          \ }
+    let g:tagbar_type_mf = g:tagbar_type_mp
   " }}
   " UltiSnips {{
     let g:UltiSnipsExpandTrigger="<c-j>"
