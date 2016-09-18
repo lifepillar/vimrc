@@ -29,6 +29,3 @@ end
 if exists("g:default_stl")
   setlocal statusline=%!BuildQuickfixStatusLine(winnr())
 endif
-
-nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
-
