@@ -82,6 +82,8 @@ nnoremap <buffer> <leader>lC :<c-u>Ledger cleared --real --aux-date --current as
 nnoremap <buffer> <leader>ld :<c-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
 nnoremap <buffer> <leader>le :<c-u>Ledger bal --subtotal --aux-date --real -p 'this month' expenses
+" Earnings report (see commits ce8b535f and 0ee28dd4 in my personal journal repository)
+nnoremap <buffer> <leader>lE :<c-u>Ledger bal --aux-date tag earnings -p 'this month'
 " Cash flow
 nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --aux-date --cleared -p 'last 30 days'
 " Income statement

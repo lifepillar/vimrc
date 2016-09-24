@@ -26,6 +26,7 @@ Budget report            \lB           N
 Cleared report           \lc           N
 Current cleared report   \lC           N
 Debit/credit report      \ld           N
+Earnings report          \lE           N
 Expense report           \le           N
 Cash flow report         \lf           N
 Income statement         \li           N
