@@ -1,7 +1,7 @@
 compiler context
 
 " Better auto-completion for things like '\in{...}[fig:...]'
-set iskeyword+=:
+setlocal iskeyword+=:
 " See :h tex-conceal
 setlocal conceallevel=2
 
