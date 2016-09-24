@@ -1,11 +1,6 @@
 " Search include files when auto-completing with <c-n>
 setlocal complete+=i
 
-hi! link ledgerTransactionDate Typedef
-hi! link ledgerMetadata Statement
-hi! link LedgerNegativeNumber Typedef
-hi! link LedgerImproperPerc PreProc
-
 let g:ledger_table_sep = "\t"
 
 let g:ledger_tables = {
