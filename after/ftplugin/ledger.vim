@@ -52,25 +52,12 @@ command! -buffer -nargs=+ LedgerTable  call <sid>ledgerTable('register', <q-args
 command! -buffer -nargs=+ BalanceTable call <sid>ledgerTable('cleared', <q-args>)
 command! -buffer -nargs=+ BudgetTable  call <sid>ledgerTable('budget', <q-args>)
 
-" Waiting for https://github.com/ledger/vim-ledger/pull/27 to be merged.
-fun! s:AutocompleteOrAlign()
-  if pumvisible()
-    return "\<c-n>"
-    " See http://stackoverflow.com/questions/23323747/vim-vimscript-get-exact-character-under-the-cursor
-  elseif matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\d'
-    norm h
-    call ledger#align_amount_at_cursor()
-    return "\<c-o>A"
-  endif
-  return "\<c-x>\<c-o>"
-endf
-
 " Toggle transaction state
 nnoremap <silent><buffer> <enter> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Set today's date as auxiliary date
 nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocompletion and alignment
-inoremap <silent><buffer> <tab> <c-r>=<sid>AutocompleteOrAlign()<cr>
+inoremap <silent><buffer> <tab> <c-r>=ledger#autocomplete_and_align()<cr>
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
 " Enter a new transaction based on the text in the current line
 nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>
