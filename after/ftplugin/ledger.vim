@@ -85,7 +85,7 @@ nnoremap <buffer> <leader>le :<c-u>Ledger bal --subtotal --aux-date --real -p 't
 " Earnings report (see commits ce8b535f and 0ee28dd4 in my personal journal repository)
 nnoremap <buffer> <leader>lE :<c-u>Ledger bal --aux-date tag earnings -p 'this month'
 " Cash flow
-nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --aux-date --cleared -p 'last 30 days'
+nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --aux-date --cleared -p 'last 30 days'<space>
 " Income statement
 nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' income expenses
 " Monthly expenses
@@ -95,8 +95,8 @@ nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n'
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Register --pending
 " Register
-nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --sort '(aux_date)' --aux-date -p 'this month'
+nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --aux-date -p 'this month'<space>
 " Savings
 nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real --aux-date -p 'last month' income expenses
 " Uncleared transactions
-nnoremap <buffer> <leader>lu :<c-u>Register--uncleared
+nnoremap <buffer> <leader>lu :<c-u>Register --uncleared
