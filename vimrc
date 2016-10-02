@@ -323,7 +323,7 @@
   " }}
 " Commands (plugins excluded) {{
   " Grep search
-  command! -nargs=* -complete=file Ag silent grep <args><bar>bo cwindow<bar>redraw!
+  command! -nargs=* -complete=file Ag silent grep! <args><bar>bo cwindow<bar>redraw!
 
   " Generate tags in the directory of the current buffer
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
