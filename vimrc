@@ -659,12 +659,15 @@
     let g:tagbar_type_mp = {
           \ 'ctagstype': 'metapost',
           \ 'kinds': [
+          \ 'c:characters',
           \ 'f:figures',
           \ 'v:vardef',
           \ 'd:def',
           \ 'p:primarydef',
           \ 's:secondarydef',
-          \ 't:tertiarydef'
+          \ 't:tertiarydef',
+          \ 'C:testcases',
+          \ 'T:tests'
           \ ],
           \ 'sort': 0
           \ }
