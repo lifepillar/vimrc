@@ -112,7 +112,6 @@
   set cscoperelative
   set cscopequickfix=s-,c-,d-,i-,t-,e-
   if has('patch2033') | set cscopequickfix+=a- | endif
-  " Keep search matches vertically centered
 " }}
 " Appearance {{
   if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
