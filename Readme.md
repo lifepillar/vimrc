@@ -67,7 +67,7 @@ Recommended:
 Make sure the repo is in a clean state.
 
 ```sh
-    git submodule update --remote
+    git submodule update --remote --depth 1
     git commit -a
     git submodule update --recursive # Optional, only if there are plugins with submodules
 ```
