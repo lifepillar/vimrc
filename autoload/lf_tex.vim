@@ -113,7 +113,7 @@ fun! s:callback(bufnr, path, job, status)
   if a:status == 0
     call lf_msg#notice('Success!')
   else
-    call lf_msg#err('There are errors. ')
+    call lf_msg#err('There are errors.')
   endif
 endf
 
