@@ -119,11 +119,6 @@ endf
 
 if has("nvim")
   fun! lf_tex#callback(job_id, data, event)
-    " Apparently, NeoVim does not autoload the callback function passed to
-    " jobstart(). So, the function must be explicitly called once in order to
-    " load it, before calling jobstart(). This is the reason why we define
-    " this dummy 'load' event.
-    if a:event == 'load' | return | endif
     if a:event == 'exit'
       call s:callback(self.lf_data[0], self.lf_data[1], a:job_id, a:data)
     else

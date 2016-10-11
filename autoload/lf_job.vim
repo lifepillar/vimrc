@@ -50,9 +50,6 @@ if has("nvim") " NeoVim
 
   fun! lf_job#start(cmd, ...)
     let l:callback = get(a:000, 0, 'lf_job#callback')
-    " Without calling it explicitly before invoking jobstart(),
-    " NeoVim may not find a callback function defined in autoload:
-    execute 'call' l:callback . "(0,0,'load')"
     return jobstart(a:cmd, { "on_exit": l:callback, "lf_data": get(a:000, 1, [bufnr("%")]) })
   endf
 
