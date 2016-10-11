@@ -46,21 +46,74 @@ fun! lf_tex#clean()
   call lf_msg#notice("Aux files removed")
 endf
 
-" Callback function used when a document is typeset asynchronously
-" Note: this function updates the local working directory of the TeX document
-" as a side effect.
-fun! s:callback(bufnr, job, status)
-  " Make sure the window of the given buffer is active
-  execute bufwinnr(a:bufnr) "wincmd" "w"
-  " Set cwd to expand error file correctly
-  execute 'lcd' fnameescape(fnamemodify(bufname(bufnr(a:bufnr)), ':p:h'))
-  execute 'cgetfile' fnameescape(fnamemodify(bufname(bufnr(a:bufnr)), ':p:r').'.log')
-  if a:status == 0
-    cclose
-    call lf_msg#notice("Success!")
+" Asynchronous typesetting {{{
+let s:tex_jobs = []
+
+" Print the status of TeX jobs
+function! lf_tex#job_status()
+  let l:jobs = filter(s:tex_jobs, 'job_status(v:val) == "run"')
+  let l:n = len(l:jobs)
+  call lf_msg#notice(
+        \ 'There '.(l:n == 1 ? 'is' : 'are').' '.(l:n == 0 ? 'no' : l:n)
+        \ .' job'.(l:n == 1 ? '' : 's').' running'
+        \ .(l:n == 0 ? '.' : ' (' . join(l:jobs, ', ').').'))
+endfunction
+
+" Stop all TeX jobs
+function! lf_tex#stop_jobs()
+  let l:jobs = filter(s:tex_jobs, 'job_status(v:val) == "run"')
+  for job in l:jobs
+    call job_stop(job)
+  endfor
+  sleep 1
+  let l:tmp = []
+  for job in l:jobs
+    if job_status(job) == "run"
+      call add(l:tmp, job)
+    endif
+  endfor
+  let s:tex_jobs = l:tmp
+  if empty(s:tex_jobs)
+    call lf_msg#notice('Done. No jobs running.')
   else
-    botright copen
-    call lf_msg#err("There are errors.")
+    call lf_msg#warn('There are still some jobs running. Please try again.')
+  endif
+endfunction
+
+" Function called when typesetting in the background is over.
+" bufnr: number of the buffer that was active when the job was launched
+" path: path of the typeset document (it may be different from bufnr's path)
+fun! s:callback(bufnr, path, job, status)
+  if index(s:tex_jobs, a:job) != -1
+    call remove(s:tex_jobs, index(s:tex_jobs, a:job))
+  endif
+  if a:status < 0 " Assume the job was terminated
+    return
+  endif
+  " Get info about the current window
+  let l:winid = win_getid()               " Save window id
+  let l:efm = &l:errorformat              " Save local errorformat
+  let l:cwd = fnamemodify(getcwd(), ":p") " Save local working directory
+  " Set errorformat to parse TeX errors
+  execute 'setl efm=' . escape(g:tex_errorformat, ' ')
+  try " Set cwd to expand error file correctly
+    execute 'lcd' fnameescape(fnamemodify(a:path, ':h'))
+  catch /.*/
+    execute 'setl efm=' . escape(l:efm, ' ')
+    throw v:exception
+  endtry
+  try
+    execute 'cgetfile' fnameescape(fnamemodify(a:path, ':r') . '.log')
+    botright cwindow
+  finally " Restore cwd and errorformat
+    execute win_id2win(l:winid) . 'wincmd w'
+    execute 'lcd ' . fnameescape(l:cwd)
+    execute 'setl efm=' . escape(l:efm, ' ')
+  endtry
+  if a:status == 0
+    call lf_msg#notice('Success!')
+  else
+    call lf_msg#err('There are errors. ')
   endif
 endf
 
@@ -72,14 +125,38 @@ if has("nvim")
     " this dummy 'load' event.
     if a:event == 'load' | return | endif
     if a:event == 'exit'
-      call s:callback(bufnr('%'), a:job_id, a:data)
+      call s:callback(self.lf_data[0], self.lf_data[1], a:job_id, a:data)
     else
       call lf_msg#err('Unexpected event')
     endif
   endf
 else
-  fun! lf_tex#callback(bufnr, job, status)
-    call s:callback(a:bufnr, a:job, a:status)
+  fun! lf_tex#callback(bufnr, path, job, status)
+    call s:callback(a:bufnr, a:path, a:job, a:status)
   endf
 endif
+
+fun! lf_tex#lualatex()
+  return 'latexmk -lualatex -cd -pv- -synctex='
+      \ . (get(b:, 'tex_synctex', get(g:, 'tex_synctex', 1)) ? '1' : '0')
+      \ . ' -file-line-error -interaction=nonstopmode'
+endf
+
+fun! lf_tex#typeset(...) abort
+  let l:path = fnamemodify(strlen(a:000[0]) > 0 ? a:1 : expand("%"), ":p")
+  let l:cmd = add(split(lf_tex#lualatex()), l:path)
+  if get(g:, 'tex_debug', 0)
+    call lf_msg#warn('Cwd: ' . fnamemodify(getcwd(), ':p'))
+    call lf_msg#warn('Path: ' . l:path)
+    call lf_msg#warn(join(l:cmd))
+  else
+    call lf_msg#notice('Typesetting...')
+  endif
+  call add(s:tex_jobs, lf_job#start(l:cmd,
+        \ 'lf_tex#callback',
+        \ [bufnr("%"), l:path]
+        \ ))
+endf
+" }}}
+" vim: sw=2 fdm=marker
 
