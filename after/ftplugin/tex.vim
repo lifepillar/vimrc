@@ -33,8 +33,6 @@ onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
 vnoremap <buffer> i$ T$ot$
 vnoremap <buffer> a$ F$of$
 
-let g:latexmk = split('latexmk -lualatex -cd -pv- -synctex=1 -file-line-error -interaction=nonstopmode')
-
-command! -nargs=0 LuaLaTeX call lf_msg#notice('Typesetting...')<bar>
-      \ call lf_job#start(g:latexmk+[expand('%:p')], 'lf_tex#callback')
-
+command! -buffer -nargs=? -complete=file LuaLaTeX          call lf_tex#typeset(<q-args>)
+command!         -nargs=0                LuaLaTeXJobStatus call lf_tex#job_status()
+command!         -nargs=0                LuaLatexStopJobs  call lf_tex#stop_jobs()
