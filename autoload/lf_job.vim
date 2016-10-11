@@ -64,8 +64,8 @@ elseif exists("*job_start") " Vim
     return job_start(a:cmd, {
           \ "close_cb": "lf_job#close_cb",
           \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), get(a:000, 1, [bufnr('%')])),
-          \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
-          \ })
+          \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]",
+          \ "err_io": "buffer", "err_name": "[STDERR]" })
   endf
 
 else " Vim (old version)
