@@ -41,18 +41,19 @@ endif
 
 " Thin wrapper over Vim and NeoVim asynchronous job functions.
 " The first argument should be a List. The second (optional) argument is
-" a callback function.
+" a callback function. The third (optional) argument is a List of additional
+" arguments to pass to the callback.
 "
-" Note that Vim and NeoVim use different calling conventions for the callback
-" function. See `:h job_start()` and `:h jobstart()`, respectively.
+" Unfortunately, Vim and NeoVim use different calling conventions for the
+" callback function. See `:h job_start()` and `:h jobstart()`, respectively.
 if has("nvim") " NeoVim
 
   fun! lf_job#start(cmd, ...)
-    let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
+    let l:callback = get(a:000, 0, 'lf_job#callback')
     " Without calling it explicitly before invoking jobstart(),
     " NeoVim may not find a callback function defined in autoload:
     execute 'call' l:callback . "(0,0,'load')"
-    return jobstart(a:cmd, {"on_exit": l:callback})
+    return jobstart(a:cmd, { "on_exit": l:callback, "lf_data": get(a:000, 1, [bufnr("%")]) })
   endf
 
 elseif exists("*job_start") " Vim
@@ -62,7 +63,7 @@ elseif exists("*job_start") " Vim
     silent! bwipeout! STDERR
     return job_start(a:cmd, {
           \ "close_cb": "lf_job#close_cb",
-          \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), [bufnr('%')]),
+          \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), get(a:000, 1, [bufnr('%')])),
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]", "err_io": "buffer", "err_name": "[STDERR]"
           \ })
   endf
@@ -70,10 +71,8 @@ elseif exists("*job_start") " Vim
 else " Vim (old version)
 
   fun! lf_job#start(cmd, ...)
-    let l:callback = a:0 > 0 ? a:1 : 'lf_job#callback'
-    let l:cmd = type(a:cmd) == type([]) ? join(a:cmd) : a:cmd
-    execute "!" . l:cmd
-    execute 'call '.l:callback.'(bufnr("%"), "Synchronous job",'.v:shell_error.')'
+    call lf_msg#err("Function non implemented")
+    return
   endf
 
 endif
