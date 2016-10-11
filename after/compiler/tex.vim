@@ -1,47 +1,39 @@
-" Add warnings that should be ignored to this list:
-let g:tex_ignored_warnings = []
+" The following error format is adapted from vimtex
+" (https://github.com/lervag/vimtex).
 
-" The following error format is adapted from vimtex (https://github.com/lervag/vimtex).
-
-" Push file to file stack
-CompilerSet errorformat=%-P**%f
-CompilerSet errorformat+=%-P**\"%f\"
-
-" Match errors
-CompilerSet errorformat+=%E%f:%l:\ LaTeX\ %trror:\ %m
-CompilerSet errorformat+=%E%f:%l:\ %m
-CompilerSet errorformat+=%E!\ LaTeX\ %trror:\ %m
-CompilerSet errorformat+=%E!LuaTeX\ %trror:\ %m
-CompilerSet errorformat+=%E!\ %m
+let g:tex_errorformat = ''
+      \ . '%-P**%f,'
+      \ . '%-P**\"%f\",'
+      \ . '%E%f:%l: LaTeX %trror: %m,'
+      \ . '%E%f:%l: %m,'
+      \ . '%E! LaTeX %trror: %m,'
+      \ . '%E!LuaTeX %trror: %m,'
+      \ . '%E! %m,'
 
 " More info for undefined control sequences
-CompilerSet errorformat+=%Z<argument>\ %m
+let g:tex_errorformat .= '%Z<argument> %m,'
 
 " More info for some errors
-CompilerSet errorformat+=%Cl.%l\ %m
-
-for s:w in g:tex_ignored_warnings
-  let s:warning = escape(substitute(s:w, '[\,]', '%\\\\&', 'g'), ' ')
-  execute 'CompilerSet errorformat+=%-G%.%#'. s:warning .'%.%#'
-endfor
+let g:tex_errorformat .= '%Cl.%l %m,'
 
 " Match warnings
-CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
-CompilerSet errorformat+=%+W%.%#\ at\ lines\ %l--%*\\d
-CompilerSet errorformat+=%+WLaTeX\ %.%#Warning:\ %m
-CompilerSet errorformat+=%+W%.%#%.%#Warning:\ %m
+let g:tex_errorformat .= '%+WLaTeX %.%#Warning: %.%#line %l%.%#,'
+      \ . '%+W%.%# at lines %l--%*\\d,'
+      \ . '%+WLaTeX %.%#Warning: %m,'
+      \ . '%+W%.%#%.%#Warning: %m,'
 
 " Parse biblatex warnings
-CompilerSet errorformat+=%-C(biblatex)%.%#in\ t%.%#
-CompilerSet errorformat+=%-C(biblatex)%.%#Please\ v%.%#
-CompilerSet errorformat+=%-C(biblatex)%.%#LaTeX\ a%.%#
-CompilerSet errorformat+=%-Z(biblatex)%m
+let g:tex_errorformat .= '%-C(biblatex)%.%#in t%.%#,'
+      \ . '%-C(biblatex)%.%#Please v%.%#,'
+      \ . '%-C(biblatex)%.%#LaTeX a%.%#,'
+      \ . '%-Z(biblatex)%m,'
 
 " Parse hyperref warnings
-CompilerSet errorformat+=%-C(hyperref)%.%#on\ input\ line\ %l.
+let g:tex_errorformat .= '%-C(hyperref)%.%#on input line %l.,'
 
 " Ignore unmatched lines
-CompilerSet errorformat+=%-G%.%#
+let g:tex_errorformat .= '%-G%.%#'
+
+execute 'CompilerSet errorformat=' . escape(g:tex_errorformat, ' ')
 
 CompilerSet makeprg=make
-
