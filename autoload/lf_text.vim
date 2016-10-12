@@ -62,7 +62,16 @@ fun! lf_text#diff_orig()
 endf
 
 " Chained completion that works as I want! {{{
+
+" Note: 'c-n' and 'c-p' use the 'complete' option.
+" Note: in 'c-n' and 'c-p' we use the fact that any key that is not valid in
+" ctrl-x submode silently ends that mode (:h complete_CTRL-Y) and inserts the
+" key. A safe key to use is <c-b> (:h i_CTRL-B-gone). This is needed to be
+" able to use <c-p> after entering ctrl-x submode (pressing <c-p>, say,
+" immediately after <c-x><c-p> does a different thing).
 let s:compl_map = {
+      \ 'c-n'     :  "\<c-x>\<c-b>\<bs>\<c-n>",
+      \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>",
       \ 'defs'    :  "\<c-x>\<c-d>",
       \ 'dict'    :  "\<c-x>\<c-k>",
       \ 'incl'    :  "\<c-x>\<c-i>",
@@ -74,6 +83,8 @@ let s:compl_map = {
       \ }
 
 let s:can_complete = {
+      \ 'c-n'     :  { -> 1 },
+      \ 'c-p'     :  { -> 1 },
       \ 'defs'    :  { -> 1 },
       \ 'dict'    :  { -> strlen(&l:dictionary) > 0 },
       \ 'incl'    :  { -> 1 },
@@ -100,7 +111,7 @@ fun! lf_text#complete_chain(index)
 endf
 
 fun! s:complete(dir)
-  let s:compl_method = get(b:, 'completion_methods', ['omni', 'incl', 'tags', 'dict'])
+  let s:compl_method = get(b:, 'completion_methods', ['omni', 'keyn', 'c-p', 'tags', 'dict'])
   if a:dir == -1
     call reverse(s:compl_method)
   endif
