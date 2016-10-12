@@ -66,8 +66,8 @@ let s:compl_map = {
       \ 'defs'    :  "\<c-x>\<c-d>",
       \ 'dict'    :  "\<c-x>\<c-k>",
       \ 'incl'    :  "\<c-x>\<c-i>",
-      \ 'keyN'    :  "\<c-x>\<c-n>",
-      \ 'keyP'    :  "\<c-x>\<c-p>",
+      \ 'keyn'    :  "\<c-x>\<c-n>",
+      \ 'keyp'    :  "\<c-x>\<c-p>",
       \ 'omni'    :  "\<c-x>\<c-o>",
       \ 'tags'    :  "\<c-x>\<c-]>",
       \ 'user'    :  "\<c-x>\<c-u>"
@@ -77,8 +77,8 @@ let s:can_complete = {
       \ 'defs'    :  { -> 1 },
       \ 'dict'    :  { -> strlen(&l:dictionary) > 0 },
       \ 'incl'    :  { -> 1 },
-      \ 'keyN'    :  { -> 1 },
-      \ 'keyP'    :  { -> 1 },
+      \ 'keyn'    :  { -> 1 },
+      \ 'keyp'    :  { -> 1 },
       \ 'omni'    :  { -> strlen(&l:omnifunc) > 0 },
       \ 'tags'    :  { -> !empty(tagfiles()) },
       \ 'user'    :  { -> strlen(&l:completefunc) > 0 }
