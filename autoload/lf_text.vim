@@ -115,7 +115,7 @@ fun! lf_text#complete_chain(index)
 endf
 
 fun! s:complete(dir)
-  let s:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'keyn', 'c-p', 'dict'])
+  let s:compl_method = get(b:, 'completion_methods', ['omni', 'file', 'keyn', 'c-p', 'dict'])
   if a:dir == -1
     call reverse(s:compl_method)
   endif
