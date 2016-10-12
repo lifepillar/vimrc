@@ -63,17 +63,25 @@ endf
 
 " Chained completion that works as I want! {{{
 let s:compl_map = {
-      \ 'user'    :  "\<c-x>\<c-u>",
+      \ 'defs'    :  "\<c-x>\<c-d>",
+      \ 'dict'    :  "\<c-x>\<c-k>",
+      \ 'incl'    :  "\<c-x>\<c-i>",
+      \ 'keyN'    :  "\<c-x>\<c-n>",
+      \ 'keyP'    :  "\<c-x>\<c-p>",
       \ 'omni'    :  "\<c-x>\<c-o>",
-      \ 'keyword' :  "\<c-x>\<c-n>",
-      \ 'dict'    :  "\<c-x>\<c-k>"
+      \ 'tags'    :  "\<c-x>\<c-]>",
+      \ 'user'    :  "\<c-x>\<c-u>"
       \ }
 
 let s:can_complete = {
-      \ 'user'    :  { -> strlen(&l:completefunc) > 0 },
+      \ 'defs'    :  { -> 1 },
+      \ 'dict'    :  { -> strlen(&l:dictionary) > 0 },
+      \ 'incl'    :  { -> 1 },
+      \ 'keyN'    :  { -> 1 },
+      \ 'keyP'    :  { -> 1 },
       \ 'omni'    :  { -> strlen(&l:omnifunc) > 0 },
-      \ 'keyword' :  { -> 1 },
-      \ 'dict'    :  { -> strlen(&l:dictionary) > 0 }
+      \ 'tags'    :  { -> !empty(tagfiles()) },
+      \ 'user'    :  { -> strlen(&l:completefunc) > 0 }
       \ }
 
 let s:compl_method = []
@@ -92,7 +100,7 @@ fun! lf_text#complete_chain(index)
 endf
 
 fun! s:complete(dir)
-  let s:compl_method = get(b:, 'completion_methods', ['omni', 'keyword', 'dict'])
+  let s:compl_method = get(b:, 'completion_methods', ['omni', 'incl', 'tags', 'dict'])
   if a:dir == -1
     call reverse(s:compl_method)
   endif
