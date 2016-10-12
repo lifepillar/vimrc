@@ -82,25 +82,28 @@ let s:compl_map = {
       \ 'user'    :  "\<c-x>\<c-u>"
       \ }
 
+" Conditions to be verified for a given method to be applied.
 let s:can_complete = {
-      \ 'c-n'     :  { -> 1 },
-      \ 'c-p'     :  { -> 1 },
-      \ 'defs'    :  { -> 1 },
-      \ 'dict'    :  { -> strlen(&l:dictionary) > 0 },
-      \ 'incl'    :  { -> 1 },
-      \ 'keyn'    :  { -> 1 },
-      \ 'keyp'    :  { -> 1 },
-      \ 'omni'    :  { -> strlen(&l:omnifunc) > 0 },
-      \ 'tags'    :  { -> !empty(tagfiles()) },
-      \ 'user'    :  { -> strlen(&l:completefunc) > 0 }
+      \ 'c-n'     :  { t -> 1 },
+      \ 'c-p'     :  { t -> 1 },
+      \ 'defs'    :  { t -> 1 },
+      \ 'dict'    :  { t -> strlen(&l:dictionary) > 0 },
+      \ 'file'    :  { t -> t =~# '/' },
+      \ 'incl'    :  { t -> 1 },
+      \ 'keyn'    :  { t -> 1 },
+      \ 'keyp'    :  { t -> 1 },
+      \ 'omni'    :  { t -> strlen(&l:omnifunc) > 0 },
+      \ 'tags'    :  { t -> !empty(tagfiles()) },
+      \ 'user'    :  { t -> strlen(&l:completefunc) > 0 }
       \ }
 
 let s:compl_method = []
+let s:compl_text = ''
 
 " Workhorse function for chained completion. Do not call directly.
 fun! lf_text#complete_chain(index)
   let i = a:index
-  while i < len(s:compl_method) && !s:can_complete[s:compl_method[i]]()
+  while i < len(s:compl_method) && !s:can_complete[s:compl_method[i]](s:compl_text)
     let i += 1
   endwhile
   if i < len(s:compl_method)
@@ -119,11 +122,13 @@ fun! s:complete(dir)
 endf
 
 fun! lf_text#complete(dir)
-  return pumvisible()
-        \ ? (a:dir == -1 ? "\<c-p>" : "\<c-n>")
-        \ : col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\s')
-        \   ? (a:dir == -1 ? "\<c-d>" : "\<tab>")
-        \   : get(b:, 'lf_tab_complete', s:complete(a:dir))
+  if pumvisible()
+    return a:dir == -1 ? "\<c-p>" : "\<c-n>"
+  endif
+  let s:compl_text = matchstr(strpart(getline('.'), 0, col('.') - 1), '\S\+$')
+  return strlen(s:compl_text) == 0
+        \ ? (a:dir == -1 ? "\<c-d>" : "\<tab>")
+        \ : get(b:, 'lf_tab_complete', s:complete(a:dir))
 endf
 " }}}
 
