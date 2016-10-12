@@ -74,6 +74,7 @@ let s:compl_map = {
       \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>",
       \ 'defs'    :  "\<c-x>\<c-d>",
       \ 'dict'    :  "\<c-x>\<c-k>",
+      \ 'file'    :  "\<c-x>\<c-f>",
       \ 'incl'    :  "\<c-x>\<c-i>",
       \ 'keyn'    :  "\<c-x>\<c-n>",
       \ 'keyp'    :  "\<c-x>\<c-p>",
@@ -114,7 +115,7 @@ fun! lf_text#complete_chain(index)
 endf
 
 fun! s:complete(dir)
-  let s:compl_method = get(b:, 'completion_methods', ['omni', 'keyn', 'c-p', 'dict'])
+  let s:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'keyn', 'c-p', 'dict'])
   if a:dir == -1
     call reverse(s:compl_method)
   endif
