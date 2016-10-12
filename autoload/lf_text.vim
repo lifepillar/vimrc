@@ -61,3 +61,51 @@ fun! lf_text#diff_orig()
   diffthis
 endf
 
+" Chained completion that works as I want! {{{
+let s:compl_map = {
+      \ 'user'    :  "\<c-x>\<c-u>",
+      \ 'omni'    :  "\<c-x>\<c-o>",
+      \ 'keyword' :  "\<c-x>\<c-n>",
+      \ 'dict'    :  "\<c-x>\<c-k>"
+      \ }
+
+let s:can_complete = {
+      \ 'user'    :  { -> strlen(&l:completefunc) > 0 },
+      \ 'omni'    :  { -> strlen(&l:omnifunc) > 0 },
+      \ 'keyword' :  { -> 1 },
+      \ 'dict'    :  { -> strlen(&l:dictionary) > 0 }
+      \ }
+
+let s:compl_method = []
+
+" Workhorse function for chained completion. Do not call directly.
+fun! lf_text#complete_chain(index)
+  let i = a:index
+  while i < len(s:compl_method) && !s:can_complete[s:compl_method[i]]()
+    let i += 1
+  endwhile
+  if i < len(s:compl_method)
+    return s:compl_map[s:compl_method[i]] .
+          \ "\<c-r>=pumvisible()?'':lf_text#complete_chain(".(i+1).")\<cr>"
+  endif
+  return ''
+endf
+
+fun! s:complete(dir)
+  let s:compl_method = get(b:, 'completion_methods', ['omni', 'keyword', 'dict'])
+  if a:dir == -1
+    call reverse(s:compl_method)
+  endif
+  return lf_text#complete_chain(0)
+endf
+
+fun! lf_text#complete(dir)
+  return pumvisible()
+        \ ? (a:dir == -1 ? "\<c-p>" : "\<c-n>")
+        \ : col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\s')
+        \   ? (a:dir == -1 ? "\<c-d>" : "\<tab>")
+        \   : get(b:, 'lf_tab_complete', s:complete(a:dir))
+endf
+" }}}
+
+" vim: sw=2 fdm=marker

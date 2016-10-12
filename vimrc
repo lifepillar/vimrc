@@ -460,17 +460,9 @@
   " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
-  " Move down in pop-up menu, or complete word (with omnifunc if available,
-  " otherwise with ctrl-n), or just use tab. Define b:lf_tab_complete to
-  " override the default mapping for completion.
-  imap <expr><silent> <tab> pumvisible()
-        \ ? "\<c-n>"
-        \ : (col('.')>1 && (matchstr(getline('.'), '\%' . (col('.')-1) . 'c.') =~ '\S')
-          \ ? get(b:, 'lf_tab_complete', strlen(&omnifunc)>0 ? "\<c-x>\<c-o>" : strlen(&completefunc)>0 ? "\<c-x><c-u>" : "\<c-n>")
-          \ : "\<tab>"
-          \ )
-  " Move up in pop-up menu or unindent in Insert mode
-  inoremap <expr><silent> <s-tab> pumvisible() ? "\<c-p>" : "\<c-d>"
+  " Super-cool chained completion!
+  inoremap <expr><silent> <tab>   lf_text#complete(1)
+  inoremap <expr><silent> <s-tab> lf_text#complete(-1)
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
