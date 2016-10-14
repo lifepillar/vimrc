@@ -145,7 +145,7 @@
   " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
   augroup lf_appearance
     autocmd!
-    autocmd VimResized * :wincmd =
+    autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
     " When editing a file, always jump to the last known cursor position.
