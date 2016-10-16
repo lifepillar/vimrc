@@ -64,21 +64,25 @@ endf
 " Chained completion that works as I want! {{{
 
 " Note: 'c-n' and 'c-p' use the 'complete' option.
-" Note: in 'c-n' and 'c-p' we use the fact that any key that is not valid in
-" ctrl-x submode silently ends that mode (:h complete_CTRL-Y) and inserts the
-" key. A safe key to use is <c-b> (:h i_CTRL-B-gone). This is needed to be
-" able to use <c-p> after entering ctrl-x submode (pressing <c-p>, say,
-" immediately after <c-x><c-p> does a different thing).
+" Note: in 'c-n' and 'c-p' we use the fact that pressing <c-x> while in ctrl-x
+" submode doesn't do anything and any key that is not valid in ctrl-x submode
+" silently ends that mode (:h complete_CTRL-Y) and inserts the key. Hence,
+" after <c-x><c-b>, we are surely out of ctrl-x submode. The subsequent <bs>
+" is used to delete the inserted <c-b>. We use <c-b> because it is not mapped
+" (:h i_CTRL-B-gone). This trick is needed to have <c-p> trigger keyword
+" completion under all circumstances, in particular when the current mode is
+" the ctrl-x submode. (pressing <c-p>, say, immediately after <c-x><c-o> would
+" do a different thing).
 let s:compl_map = {
       \ 'c-n'     :  "\<c-x>\<c-b>\<bs>\<c-n>",
-      \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>",
+      \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>\<c-n>",
       \ 'defs'    :  "\<c-x>\<c-d>",
       \ 'dict'    :  "\<c-x>\<c-k>",
-      \ 'file'    :  "\<c-x>\<c-f>",
+      \ 'file'    :  "\<c-x>\<c-f>\<c-p>",
       \ 'incl'    :  "\<c-x>\<c-i>",
-      \ 'keyn'    :  "\<c-x>\<c-n>",
+      \ 'keyn'    :  "\<c-x>\<c-n>\<c-p>",
       \ 'keyp'    :  "\<c-x>\<c-p>",
-      \ 'omni'    :  "\<c-x>\<c-o>",
+      \ 'omni'    :  "\<c-x>\<c-o>\<c-p>",
       \ 'tags'    :  "\<c-x>\<c-]>",
       \ 'user'    :  "\<c-x>\<c-u>"
       \ }
@@ -98,26 +102,26 @@ let s:can_complete = {
       \ 'user'    :  { t -> strlen(&l:completefunc) > 0 }
       \ }
 
-let s:compl_method = []
-let s:compl_text = ''
+let g:compl_method = []
+let g:compl_text = ''
 
 " Workhorse function for chained completion. Do not call directly.
 fun! lf_text#complete_chain(index)
   let i = a:index
-  while i < len(s:compl_method) && !s:can_complete[s:compl_method[i]](s:compl_text)
+  while i < len(g:compl_method) && !s:can_complete[g:compl_method[i]](g:compl_text)
     let i += 1
   endwhile
-  if i < len(s:compl_method)
-    return s:compl_map[s:compl_method[i]] .
+  if i < len(g:compl_method)
+    return s:compl_map[g:compl_method[i]] .
           \ "\<c-r>=pumvisible()?'':lf_text#complete_chain(".(i+1).")\<cr>"
   endif
   return ''
 endf
 
 fun! s:complete(dir)
-  let s:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'keyn', 'c-p', 'dict'])
+  let g:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'c-p'])
   if a:dir == -1
-    call reverse(s:compl_method)
+    call reverse(g:compl_method)
   endif
   return lf_text#complete_chain(0)
 endf
@@ -126,11 +130,27 @@ fun! lf_text#complete(dir)
   if pumvisible()
     return a:dir == -1 ? "\<c-p>" : "\<c-n>"
   endif
-  let s:compl_text = matchstr(strpart(getline('.'), 0, col('.') - 1), '\S\+$')
-  return strlen(s:compl_text) == 0
+  let g:compl_text = matchstr(strpart(getline('.'), 0, col('.') - 1), '\S\+$')
+  return strlen(g:compl_text) == 0
         \ ? (a:dir == -1 ? "\<c-d>" : "\<tab>")
         \ : get(b:, 'lf_tab_complete', s:complete(a:dir))
 endf
+
+let g:completedone = 0
+
+fun! lf_text#autocomplete()
+  if match(strpart(getline('.'), 0, col('.') - 1), '\k\k$') > -1
+    silent call feedkeys("\<tab>", 'i')
+  endif
+endf
+
+let g:count = 0
+
+augroup lf_completion
+  autocmd!
+  autocmd TextChangedI * noautocmd if g:completedone | let g:completedone = 0 | else | silent call lf_text#autocomplete() | endif
+  autocmd CompleteDone * noautocmd let g:completedone = 1
+augroup END
 " }}}
 
 " vim: sw=2 fdm=marker
