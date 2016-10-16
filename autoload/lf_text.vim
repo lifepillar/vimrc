@@ -75,7 +75,7 @@ let s:can_complete = {
       \ 'keyp'    :  { t -> 1 },
       \ 'line'    :  { t -> 1 },
       \ 'omni'    :  { t -> strlen(&l:omnifunc) > 0 },
-      \ 'spel'    :  { t -> &l:spell == 1 },
+      \ 'spel'    :  { t -> &l:spell },
       \ 'tags'    :  { t -> !empty(tagfiles()) },
       \ 'thes'    :  { t -> strlen(&l:thesaurus) > 0 },
       \ 'user'    :  { t -> strlen(&l:completefunc) > 0 }
