@@ -136,7 +136,6 @@ fun! lf_text#complete(dir)
         \ : get(b:, 'lf_tab_complete', s:complete(a:dir))
 endf
 
-let g:completedone = 0
 
 fun! lf_text#autocomplete()
   if match(strpart(getline('.'), 0, col('.') - 1), '\k\k$') > -1
@@ -144,13 +143,23 @@ fun! lf_text#autocomplete()
   endif
 endf
 
-let g:count = 0
+let s:completedone = 0
 
-augroup lf_completion
-  autocmd!
-  autocmd TextChangedI * noautocmd if g:completedone | let g:completedone = 0 | else | silent call lf_text#autocomplete() | endif
-  autocmd CompleteDone * noautocmd let g:completedone = 1
-augroup END
+fun! lf_text#enable_autocompletion()
+  let s:completedone = 0
+  augroup lf_completion
+    autocmd!
+    autocmd TextChangedI * noautocmd if s:completedone | let s:completedone = 0 | else | silent call lf_text#autocomplete() | endif
+    autocmd CompleteDone * noautocmd let s:completedone = 1
+  augroup END
+endf
+
+fun! lf_text#disable_autocompletion()
+  if exists('#lf_completion')
+    autocmd! lf_completion
+    augroup! lf_completion
+  endif
+endf
 " }}}
 
 " vim: sw=2 fdm=marker
