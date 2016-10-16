@@ -62,43 +62,22 @@ fun! lf_text#diff_orig()
 endf
 
 " Chained completion that works as I want! {{{
-
-" Note: 'c-n' and 'c-p' use the 'complete' option.
-" Note: in 'c-n' and 'c-p' we use the fact that pressing <c-x> while in ctrl-x
-" submode doesn't do anything and any key that is not valid in ctrl-x submode
-" silently ends that mode (:h complete_CTRL-Y) and inserts the key. Hence,
-" after <c-x><c-b>, we are surely out of ctrl-x submode. The subsequent <bs>
-" is used to delete the inserted <c-b>. We use <c-b> because it is not mapped
-" (:h i_CTRL-B-gone). This trick is needed to have <c-p> trigger keyword
-" completion under all circumstances, in particular when the current mode is
-" the ctrl-x submode. (pressing <c-p>, say, immediately after <c-x><c-o> would
-" do a different thing).
-let s:compl_map = {
-      \ 'c-n'     :  "\<c-x>\<c-b>\<bs>\<c-n>",
-      \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>\<c-n>",
-      \ 'defs'    :  "\<c-x>\<c-d>",
-      \ 'dict'    :  "\<c-x>\<c-k>",
-      \ 'file'    :  "\<c-x>\<c-f>\<c-p>",
-      \ 'incl'    :  "\<c-x>\<c-i>",
-      \ 'keyn'    :  "\<c-x>\<c-n>\<c-p>",
-      \ 'keyp'    :  "\<c-x>\<c-p>",
-      \ 'omni'    :  "\<c-x>\<c-o>\<c-p>",
-      \ 'tags'    :  "\<c-x>\<c-]>",
-      \ 'user'    :  "\<c-x>\<c-u>"
-      \ }
-
 " Conditions to be verified for a given method to be applied.
 let s:can_complete = {
       \ 'c-n'     :  { t -> 1 },
       \ 'c-p'     :  { t -> 1 },
+      \ 'cmd'     :  { t -> 1 },
       \ 'defs'    :  { t -> 1 },
       \ 'dict'    :  { t -> strlen(&l:dictionary) > 0 },
       \ 'file'    :  { t -> t =~# '/' },
       \ 'incl'    :  { t -> 1 },
       \ 'keyn'    :  { t -> 1 },
       \ 'keyp'    :  { t -> 1 },
+      \ 'line'    :  { t -> 1 },
       \ 'omni'    :  { t -> strlen(&l:omnifunc) > 0 },
+      \ 'spel'    :  { t -> &l:spell == 1 },
       \ 'tags'    :  { t -> !empty(tagfiles()) },
+      \ 'thes'    :  { t -> strlen(&l:thesaurus) > 0 },
       \ 'user'    :  { t -> strlen(&l:completefunc) > 0 }
       \ }
 
@@ -119,7 +98,7 @@ fun! lf_text#complete_chain(index)
 endf
 
 fun! s:complete(dir)
-  let g:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'c-p'])
+  let g:compl_method = get(b:, 'completion_methods', ['file', 'omni', 'keyn',  'incl', 'tags', 'dict'])
   if a:dir == -1
     call reverse(g:compl_method)
   endif
@@ -145,8 +124,35 @@ endf
 
 let s:completedone = 0
 
+" Note: 'c-n' and 'c-p' use the 'complete' option.
+" Note: in 'c-n' and 'c-p' we use the fact that pressing <c-x> while in ctrl-x
+" submode doesn't do anything and any key that is not valid in ctrl-x submode
+" silently ends that mode (:h complete_CTRL-Y) and inserts the key. Hence,
+" after <c-x><c-b>, we are surely out of ctrl-x submode. The subsequent <bs>
+" is used to delete the inserted <c-b>. We use <c-b> because it is not mapped
+" (:h i_CTRL-B-gone). This trick is needed to have <c-p> trigger keyword
+" completion under all circumstances, in particular when the current mode is
+" the ctrl-x submode. (pressing <c-p>, say, immediately after <c-x><c-o> would
+" do a different thing).
 fun! lf_text#enable_autocompletion()
   let s:completedone = 0
+  let s:compl_map = {
+        \ 'c-n'     :  "\<c-x>\<c-b>\<bs>\<c-n>\<c-p>",
+        \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>\<c-n>",
+        \ 'cmd'     :  "\<c-x>\<c-v>\<c-p>",
+        \ 'defs'    :  "\<c-x>\<c-d>\<c-p>",
+        \ 'dict'    :  "\<c-x>\<c-k>\<c-p>",
+        \ 'file'    :  "\<c-x>\<c-f>\<c-p>",
+        \ 'incl'    :  "\<c-x>\<c-i>\<c-p>",
+        \ 'keyn'    :  "\<c-x>\<c-n>\<c-p>",
+        \ 'keyp'    :  "\<c-x>\<c-p>\<c-n>",
+        \ 'line'    :  "\<c-x>\<c-l>\<c-p>",
+        \ 'omni'    :  "\<c-x>\<c-o>\<c-p>",
+        \ 'spel'    :  "\<c-x>s\<c-p>",
+        \ 'tags'    :  "\<c-x>\<c-]>\<c-p>",
+        \ 'thes'    :  "\<c-x>\<c-t>\<c-p>",
+        \ 'user'    :  "\<c-x>\<c-u>\<c-p>"
+        \ }
   augroup lf_completion
     autocmd!
     autocmd TextChangedI * noautocmd if s:completedone | let s:completedone = 0 | else | silent call lf_text#autocomplete() | endif
@@ -159,6 +165,23 @@ fun! lf_text#disable_autocompletion()
     autocmd! lf_completion
     augroup! lf_completion
   endif
+  let s:compl_map = {
+        \ 'c-n'     :  "\<c-x>\<c-b>\<bs>\<c-n>",
+        \ 'c-p'     :  "\<c-x>\<c-b>\<bs>\<c-p>",
+        \ 'cmd'     :  "\<c-x>\<c-v>",
+        \ 'defs'    :  "\<c-x>\<c-d>",
+        \ 'dict'    :  "\<c-x>\<c-k>",
+        \ 'file'    :  "\<c-x>\<c-f>",
+        \ 'incl'    :  "\<c-x>\<c-i>",
+        \ 'line'    :  "\<c-x>\<c-l>",
+        \ 'keyn'    :  "\<c-x>\<c-n>",
+        \ 'keyp'    :  "\<c-x>\<c-p>",
+        \ 'omni'    :  "\<c-x>\<c-o>",
+        \ 'spel'    :  "\<c-x>s",
+        \ 'tags'    :  "\<c-x>\<c-]>",
+        \ 'thes'    :  "\<c-x>\<c-t>",
+        \ 'user'    :  "\<c-x>\<c-u>"
+        \ }
 endf
 " }}}
 
