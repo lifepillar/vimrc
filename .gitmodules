@@ -145,3 +145,6 @@
 [submodule "ledger"]
 	path = pack/bundle/start/ledger
 	url = https://github.com/ledger/vim-ledger.git
+[submodule "mucomplete"]
+	path = pack/my/start/mucomplete
+	url = https://github.com/lifepillar/vim-mucomplete.git
