@@ -461,9 +461,6 @@
   " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
-  " Super-cool chained completion!
-  inoremap <expr><silent> <tab>   lf_text#complete(1)
-  inoremap <expr><silent> <s-tab> lf_text#complete(-1)
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
@@ -565,6 +562,10 @@
   " }}
   " Markdown (Vim) {{
     let g:markdown_fenced_languages = ['pgsql', 'sql']
+  " }}
+  " MUcomplete {{
+    let g:mucomplete#user_mappings = { 'sql' : ["\<c-c>a", "\<c-c>a\<c-p>"] }
+    let g:mucomplete#chains = { 'sql' : ['sql', 'keyp']}
   " }}
   " Netrw (Vim) {{
     let g:netrw_banner=0
