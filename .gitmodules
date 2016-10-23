@@ -136,3 +136,6 @@
 [submodule "mucomplete"]
 	path = pack/my/start/mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete.git
+[submodule "neomake"]
+	path = pack/bundle/opt/neomake
+	url = https://github.com/neomake/neomake
