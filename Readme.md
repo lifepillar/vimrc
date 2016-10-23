@@ -5,7 +5,7 @@
 My own Vim configuration. Some features:
 
 - Foldable and thoroughly commented `vimrc`.
-- Put your customizations into `.vimrc_local`.
+- Put your customizations into `vimrc_local`.
 - 40-column **cheat sheet** always two keys away (courtesy of
   [Cheat40](https://github.com/lifepillar/vim-cheat40)).
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
