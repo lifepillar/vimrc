@@ -130,18 +130,6 @@
 	path = pack/themes/opt/alduin
 	url = https://github.com/AlessandroYorba/Alduin.git
 	shallow = true
-[submodule "deoplete"]
-	path = pack/completion/opt/deoplete
-	url = https://github.com/Shougo/deoplete.nvim.git
-	shallow = true
-[submodule "deoplete-clang"]
-	path = pack/completion/opt/deoplete-clang
-	url = https://github.com/zchee/deoplete-clang.git
-	shallow = true
-[submodule "neoinclude"]
-	path = pack/completion/opt/neoinclude
-	url = https://github.com/Shougo/neoinclude.vim.git
-	shallow = true
 [submodule "ledger"]
 	path = pack/bundle/start/ledger
 	url = https://github.com/ledger/vim-ledger.git
