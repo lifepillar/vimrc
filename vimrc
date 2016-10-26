@@ -96,6 +96,7 @@
   set nohlsearch " Do not highlight search results
   set incsearch " Search as you type
   set ignorecase " Case-insensitive search by default
+  set infercase " Smart case when doing keyword completion
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   set grepprg=ag\ --vimgrep\ $*
   set grepformat^=%f:%l:%c:%m
