@@ -565,8 +565,6 @@
     let g:markdown_fenced_languages = ['pgsql', 'sql']
   " }}
   " MUcomplete {{
-    let g:mucomplete#user_mappings = { 'sql' : ["\<c-c>a", "\<c-c>a\<c-p>"] }
-    let g:mucomplete#chains = { 'sql' : ['sql', 'keyp']}
   " }}
   " Netrw (Vim) {{
     let g:netrw_banner=0
@@ -596,6 +594,7 @@
   " }}
   " SQL (Vim) {{
     let g:sql_type_default = 'pgsql'
+    let g:omni_sql_default_compl_type = 'syntax'
   " }}
   " Syntastic {{
     let g:syntastic_check_on_open = 1
