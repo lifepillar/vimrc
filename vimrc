@@ -692,14 +692,6 @@
   if has('nvim')
     let g:terminal_scrollback_buffer_size = 10000
     set shada=!,'1000,<50,s10,h  " Override viminfo setting
-    " Completion {{
-      packadd! deoplete
-      packadd! deoplete-clang
-      packadd! neoinclude
-      let g:deoplete#enable_at_startup = 1
-      let g:deoplete#sources#clang#libclang_path='/usr/local/opt/llvm/lib/libclang.dylib'
-      let deoplete#sources#clang#clang_header='/usr/local/opt/llvm/include/clang'
-    " }}
   endif
 " }}
 " Init {{
