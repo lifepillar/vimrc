@@ -1,9 +1,5 @@
 " Better auto-completion for things like '\in{...}[fig:...]'
 setlocal iskeyword+=:
-" See :h tex-conceal
-setlocal conceallevel=2
-setlocal omnifunc=syntaxcomplete#Complete
-let g:omni_syntax_group_include_context='mf\w\+,mp\w\+'
 
 " Typeset with ConTeXt MKIV
 nnoremap <silent><buffer> <leader>tt :<c-u>update<cr>:ConTeXt<cr>
