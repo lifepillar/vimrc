@@ -135,3 +135,7 @@
 [submodule "neomake"]
 	path = pack/bundle/opt/neomake
 	url = https://github.com/neomake/neomake
+[submodule "nordisk"]
+	path = pack/themes/opt/nordisk
+	url = https://github.com/kamwitsta/nordisk.git
+	shallow = true
