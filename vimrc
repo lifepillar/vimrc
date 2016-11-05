@@ -693,6 +693,7 @@
   " }}
   " WWDC16 {{
     let g:wwdc16_term_italics = 1
+    let g:wwdc16_term_trans_bg = 1
   " }}
 " }}
 " NeoVim {{
