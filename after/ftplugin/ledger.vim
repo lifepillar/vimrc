@@ -64,7 +64,7 @@ nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>
 inoremap <silent><buffer> <c-t> <Esc>:call ledger#entry()<cr>
 
 " Monthly average
-nnoremap <buffer> <leader>la :<c-u>Ledger reg --collapse -A -O --real --aux-date --monthly -p 'this year' expenses
+nnoremap <buffer> <leader>la :<c-u>Ledger reg --collapse --empty -A -O --real --aux-date --monthly -p 'this year' expenses
 " Annualized budget
 nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year' --real --aux-date --now "
       \ . strftime('%Y', localtime()) . "/12/31 expenses payable income
