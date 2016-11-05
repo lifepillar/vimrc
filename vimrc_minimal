@@ -10,3 +10,4 @@ if !has('nvim')
   set viminfo+=n~/.vim/viminfo
 endif
 
+let g:UltiSnipsExpandTrigger="<c-j>"
