@@ -12,3 +12,4 @@ nnoremap <silent><buffer> <leader>ts :<c-u>call lf_tex#forward_search()<cr>
 
 " Use ConTeXt Beta by default
 let g:context_mtxrun = 'PATH=$HOME/Applications/ConTeXt-Beta/tex/texmf-osx-64/bin:$PATH mtxrun'
+let g:context_synctex = 1
