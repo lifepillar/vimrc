@@ -568,6 +568,9 @@
   " Markdown (Vim) {{
     let g:markdown_fenced_languages = ['pgsql', 'sql']
   " }}
+  " MetaPost (Vim) {{
+    let g:mp_metafun_macros = 1
+  " }}
   " MUcomplete {{
   " }}
   " Netrw (Vim) {{
