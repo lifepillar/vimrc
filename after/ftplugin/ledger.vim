@@ -1,5 +1,5 @@
-" Search include files when auto-completing with <c-n>
-setlocal complete+=i
+setlocal completeopt-=noinsert,noselect
+MUcompleteAutoOff
 
 let g:ledger_table_sep = "\t"
 
