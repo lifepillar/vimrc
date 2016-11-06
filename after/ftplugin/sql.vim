@@ -1,7 +1,13 @@
-" Useful abbreviations
-iab <buffer> t. create table  (<cr><cr>);<up><c-o>3<left>
-iab <buffer> tr. create trigger <cr>[before\|after\|instead of] {event}<cr>on {table}<cr>[not deferrable\|initially immediate]<cr>for each [row\|statement]<cr>execute procedure ();<c-o>5<up>
+" Use <c-i> and <c-o> (in Normal mode) to jump between the different parts of a snippet.
+iab <buffer> t… create table <c-o>ma (<cr><c-o>mb<cr>);<esc>`a`b<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
 
-iab <buffer> s. select *<cr>  from<cr><bs> where<cr><space>order by ;<c-o>3<up>
-iab <buffer> f. create or replace function N<c-o>mn (<cr>P<c-o>mp<cr>) returns T<c-o>mt<cr>language L<c-o>ml as $$<cr>B<c-o>mb<cr>$$;<esc>`n
-iab <buffer> d. create domain N<c-o>mn as A<c-o>ma;
+iab <buffer> tr… create trigger<space><c-o>ma<cr><c-o>mb[before\|after\|instead of] {event}<cr>on
+      \ <c-o>mc[not deferrable\|initially immediate]<cr>for each <c-o>md[row\|statement]<cr><c-d>execute procedure
+      \ (<c-o>me);<cr><esc>`a`b`c`d`e4<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
+
+iab <buffer> s… select *<c-o>ma<cr>  from <c-o>mb<cr><bs> where <c-o>mc<cr>
+      \ order by <c-o>md;<esc>`a`b`c`d3<c-o>R<c-r>=lf_text#eatchar('\s')<cr>
+
+iab <buffer> f… create or replace function <c-o>ma (<cr><c-o>mb<cr>) returns
+      \ <c-o>mc<cr>language <c-o>md as $$<cr><c-o>me<cr>$$;<esc>`a`b`c`d`e4<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
+
