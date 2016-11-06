@@ -66,14 +66,6 @@
 	path = pack/bundle/start/rust
 	url = https://github.com/rust-lang/rust.vim.git
 	shallow = true
-[submodule "ultisnips"]
-	path = pack/bundle/start/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
-	shallow = true
-[submodule "snippets"]
-	path = pack/bundle/start/snippets
-	url = https://github.com/honza/vim-snippets.git
-	shallow = true
 [submodule "repeat"]
 	path = pack/bundle/start/repeat
 	url = https://github.com/tpope/vim-repeat.git

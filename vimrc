@@ -665,10 +665,6 @@
           \ }
     let g:tagbar_type_mf = g:tagbar_type_mp
   " }}
-  " UltiSnips {{
-    let g:UltiSnipsExpandTrigger="<c-j>"
-    let g:UltiSnipsEditSplit = "vertical" " Edit snippets in a vertical split
-  " }}
   " Undotree {{
     let g:undotree_WindowLayout = 2
     let g:undotree_SplitWidth = 40
