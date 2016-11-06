@@ -139,3 +139,7 @@
 	path = pack/themes/opt/nordisk
 	url = https://github.com/kamwitsta/nordisk.git
 	shallow = true
+[submodule "clang_complete"]
+	path = pack/completion/opt/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete.git
+	shallow = true
