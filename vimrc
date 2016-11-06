@@ -580,8 +580,6 @@
   " MetaPost (Vim) {{
     let g:mp_metafun_macros = 1
   " }}
-  " MUcomplete {{
-  " }}
   " Netrw (Vim) {{
     let g:netrw_banner=0
     let g:netrw_bufsettings='noma nomod nu rnu nowrap ro nobl'
