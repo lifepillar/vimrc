@@ -601,7 +601,6 @@
   " Sneak {{
     let g:sneak#streak = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
-    hi link SneakStreakStatusLine StatusLine
   " }}
   " SQL (Vim) {{
     let g:sql_type_default = 'pgsql'
