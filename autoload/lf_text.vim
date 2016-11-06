@@ -61,4 +61,9 @@ fun! lf_text#diff_orig()
   diffthis
 endf
 
+fun! lf_text#eatchar(pat) " See :h abbreviations
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+
 " vim: sw=2 fdm=marker
