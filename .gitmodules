@@ -86,10 +86,6 @@
 	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
 	shallow = true
-[submodule "csapprox"]
-	path = pack/themes/opt/csapprox
-	url = https://github.com/godlygeek/csapprox.git
-	shallow = true
 [submodule "outlaw"]
 	path = pack/my/start/outlaw
 	url = https://github.com/lifepillar/vim-outlaw.git
