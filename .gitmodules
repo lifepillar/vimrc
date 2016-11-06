@@ -127,3 +127,6 @@
 	path = pack/completion/opt/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
 	shallow = true
+[submodule "base2tone"]
+	path = pack/themes/opt/base2tone
+	url = https://github.com/atelierbram/Base2Tone-vim.git
