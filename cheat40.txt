@@ -84,6 +84,7 @@ Vimrc {{{1
 Options {{{2
 Centre text vertically   cok           N
 Toggle Paste mode        «f9»          N
+Toggle autocompletion    coa           N
 Toggle background color  cob           N
 Toggle cursorline        coc           N
 Toggle diff in buffer    cod           N

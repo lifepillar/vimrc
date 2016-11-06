@@ -418,6 +418,7 @@
   nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
   nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
   nnoremap <silent> cob :<c-u>ToggleBackgroundColor<cr>
+  nnoremap <silent> coa :<c-u>MUcompleteAutoToggle<cr>
   nnoremap <silent> coc :<c-u>setlocal cursorline!<cr>
   nnoremap          cod :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
   nnoremap <silent> coh :<c-u>set hlsearch! \| set hlsearch?<cr>
