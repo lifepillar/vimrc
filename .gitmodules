@@ -82,10 +82,6 @@
 	path = pack/themes/opt/onedark
 	url = https://github.com/joshdick/onedark.vim
 	shallow = true
-[submodule "duotones"]
-	path = pack/themes/opt/duotones
-	url = https://github.com/atelierbram/vim-colors_duotones.git
-	shallow = true
 [submodule "sneak"]
 	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
