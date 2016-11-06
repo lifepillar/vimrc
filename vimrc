@@ -488,6 +488,14 @@
     let g:loaded_zipPlugin = 1
     let g:loaded_vimballPlugin = 1
   " }}
+  " clang_complete {{
+    let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
+    let g:clang_complete_auto = 1
+    augroup lf_cpp  " Lazily load clang_complete
+      autocmd!
+      autocmd BufReadPre *.c,*.cpp,*.h,*.hpp packadd clang_complete | autocmd! lf_cpp | augroup! lf_cpp | endif
+    augroup END
+  " }}
   " CtrlP {{
     let g:ctrlp_cmd = 'CtrlPBuffer'
     let g:ctrlp_buftag_types = {
