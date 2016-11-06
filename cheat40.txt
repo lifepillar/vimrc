@@ -53,10 +53,6 @@ Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
 Tagbar {{{2
 Toggle Tagbar            \s            N
-UltiSnips {{{2
-Trigger snippet          «C-j»         I
-Go to next placeholder   «C-j»         I
-Go to prev placeholder   «C-k»         I
 Undotree {{{2
 Toggle Undotree          \u            N
 Git {{{1
