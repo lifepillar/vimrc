@@ -226,7 +226,7 @@
 " }}
 " GUI {{
   if has('gui_running')
-    let s:linespace=2 
+    let s:linespace=2
     set guifont=SF\ Mono:h11
     set guioptions-=aP " Do not use system clipboard by default
     set guioptions-=T  " No toolbar
