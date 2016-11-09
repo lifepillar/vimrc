@@ -470,7 +470,7 @@
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
+  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>+
   vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
   " Git
   nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
