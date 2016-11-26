@@ -130,3 +130,7 @@
 [submodule "base2tone"]
 	path = pack/themes/opt/base2tone
 	url = https://github.com/atelierbram/Base2Tone-vim.git
+[submodule "flatwhite"]
+	path = pack/themes/opt/flatwhite
+	url = https://github.com/kamwitsta/flatwhite-vim.git
+	shallow = true
