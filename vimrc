@@ -697,6 +697,7 @@
 " }}
 " NeoVim {{
   if has('nvim')
+    language en_US.UTF-8
     let g:terminal_scrollback_buffer_size = 10000
     set shada=!,'1000,<50,s10,h  " Override viminfo setting
   endif
