@@ -138,7 +138,14 @@
   set tabpagemax=50
   " Printing
   if has('mac')
-    set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
+    fun! LFPrintFile(fname)
+      call system('pstopdf ' . a:fname)
+      call system('open -a Preview ' . a:fname . '.pdf')
+      call delete(a:fname)
+      call delete(a:fname.'.pdf')
+      return v:shell_error
+    endf
+    set printexpr=LFPrintFile(v:fname_in)
   endif
   set printoptions=syntax:n,number:y
   set printfont=:h9
