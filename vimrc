@@ -116,8 +116,8 @@
 " }}
 " Appearance {{
   if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
-    set t_8f=[38;2;%lu;%lu;%lum  " Needed in tmux
-    set t_8b=[48;2;%lu;%lu;%lum  " Ditto
+    let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
+    let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
     set termguicolors
   endif
   set display=lastline
