@@ -72,12 +72,12 @@ nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year'
       \ %(!options.flat ? depth_spacer : \"\") %-(ansify_if(partial_account(options.flat), blue if color))\\n%/%$1 %$2 %$3\\n
       \%/%(prepend_width ? \" \" * int(prepend_width) : \"\")  --------------------------\\n'"<cr>
 " Balance report
-nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date assets liab
+nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date \(assets or liabilities\)
 " Budget
 nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
 " Cleared report
-nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date assets liab
-nnoremap <buffer> <leader>lC :<c-u>Ledger cleared --real --aux-date --current assets liab
+nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date \(assets or liabilities\)
+nnoremap <buffer> <leader>lC :<c-u>Ledger cleared --real --aux-date --current \(assets or liabilities\)
 " Debit/credit report
 nnoremap <buffer> <leader>ld :<c-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
@@ -87,16 +87,16 @@ nnoremap <buffer> <leader>lE :<c-u>Ledger bal --aux-date tag earnings -p 'this m
 " Cash flow
 nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --aux-date --cleared -p 'last 30 days'<space>
 " Income statement
-nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' income expenses
+nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' \(income or expenses\)
 " Monthly expenses
 nnoremap <buffer> <leader>lm :<c-u>Ledger reg --period-sort '(-amount)' --monthly --aux-date --real -p 'this month' expenses
 " Net worth
-nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly assets liab
+nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly \(assets or liab\)
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Register --pending
 " Register
 nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --aux-date -p 'this month'<space>
 " Savings
-nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real --aux-date -p 'last month' income expenses
+nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real --aux-date -p 'last month' \(income or expenses\)
 " Uncleared transactions
 nnoremap <buffer> <leader>lu :<c-u>Register --uncleared
