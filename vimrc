@@ -383,7 +383,9 @@
 
   command! -nargs=0 ToggleBackgroundColor call lf_theme#toggle_bg_color()
 
-  command! -nargs=0 Colorscheme call lf_find#colorscheme()
+  if !has('gui_running')
+    command! -nargs=0 Colorscheme call lf_find#colorscheme()
+  endif
 
   " Toggle soft wrap
   command! -nargs=0 ToggleWrap call lf_text#toggleWrap()
