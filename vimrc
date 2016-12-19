@@ -121,6 +121,11 @@
     set termguicolors
   endif
   set display=lastline
+  " Show block cursor in Normal mode and line cursor in Insert mode:
+  let &t_ti.="\e[1 q"
+  let &t_SI.="\e[5 q"
+  let &t_EI.="\e[1 q"
+  let &t_te.="\e[0 q"
   set notitle " Do not set the terminal title
   set number " Turn line numbering on
   set relativenumber " Display line numbers relative to the line with the cursor
