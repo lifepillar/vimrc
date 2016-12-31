@@ -503,6 +503,7 @@
   " }}
   " clang_complete {{
     let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
+    let g:clang_user_options = '-std=c++14'
     let g:clang_complete_auto = 1
     augroup lf_cpp  " Lazily load clang_complete
       autocmd!
