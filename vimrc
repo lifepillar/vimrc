@@ -103,6 +103,7 @@
   set complete+=i      " Use included files for completion
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone,noinsert,noselect
+  set completeopt-=preview
   set tags=./tags;,tags " Search upwards for tags by default
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
