@@ -503,6 +503,7 @@
     let g:loaded_getscriptPlugin = 1
     let g:loaded_gzip = 1
     let g:loaded_logiPat = 1
+    let g:loaded_netrwPlugin = 1
     let g:loaded_rrhelper = 1
     let g:loaded_tarPlugin = 1
     let g:loaded_vimballPlugin = 1
@@ -544,6 +545,10 @@
     fun! CtrlP_Progress(...)
       return '%#Warnings# '.a:1.' %* %= %<%#Warnings# '.getcwd().' %*'
     endf
+  " }}
+  " Dirvish {{
+    nmap <leader>e <plug>(dirvish_up)
+    nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
   " }}
   " Easy Align {{
     xmap <leader>a <plug>(EasyAlign)
@@ -600,14 +605,6 @@
   " }}
   " MetaPost (Vim) {{
     let g:mp_metafun_macros = 1
-  " }}
-  " Netrw (Vim) {{
-    let g:netrw_banner=0
-    let g:netrw_bufsettings='noma nomod nu rnu nowrap ro nobl'
-    let g:netrw_list_hide=',\.DS_Store,Icon\?,\.dmg$,^\.git/,\.pyc$,\.o$,\.obj$,\.so$,\.swp$,\.zip$'
-    let g:netrw_sort_options='i'
-    " Open file browser in the directory of the current buffer
-    nnoremap <silent> <leader>e :<c-u>Ex<cr>
   " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
