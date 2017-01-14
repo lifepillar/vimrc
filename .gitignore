@@ -1,11 +1,8 @@
 .DS_Store
 /*~
-/.netrwbook
-/.netrwhist
 /init.vim
 /spell
 /tags
 /view
 /viminfo
 /vimrc_local
-
