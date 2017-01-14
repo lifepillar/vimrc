@@ -500,10 +500,13 @@
   " }}
 " Plugins {{
   " Disabled Vim Plugins {{
+    let g:loaded_getscriptPlugin = 1
     let g:loaded_gzip = 1
+    let g:loaded_logipat = 1
+    let g:loaded_rrhelper = 1
     let g:loaded_tarPlugin = 1
-    let g:loaded_zipPlugin = 1
     let g:loaded_vimballPlugin = 1
+    let g:loaded_zipPlugin = 1
   " }}
   " clang_complete {{
     let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
