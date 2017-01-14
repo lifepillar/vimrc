@@ -137,3 +137,6 @@
 	path = pack/themes/opt/flatwhite
 	url = https://github.com/kamwitsta/flatwhite-vim.git
 	shallow = true
+[submodule "dirvish"]
+	path = pack/bundle/start/dirvish
+	url = https://github.com/justinmk/vim-dirvish.git
