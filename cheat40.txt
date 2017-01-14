@@ -5,6 +5,11 @@ Toggle line comment      gcc           N
 Uncomment block          gcgc          N
 CtrlP {{{2
 Open in buffer mode      «C-p»         N
+Dirvish {{{2
+Help                     g?            N
+Refresh file list        «C-l»         N
+Open in a new tab        t             N
+Hide dot-prefixed files  gh            N
 Easy Align {{{2
 Trigger Easy Align       \a            O
 Goyo {{{2
