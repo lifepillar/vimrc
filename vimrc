@@ -406,8 +406,8 @@
   map <space> <leader>
   set pastetoggle=<f9>
   " Avoid entering Ex mode
-  nnoremap Q <Nop>
-  nnoremap gQ <Nop>
+  nnoremap Q <nop>
+  nnoremap gQ <nop>
   " Change the contrast level for themes that support it.
   nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
