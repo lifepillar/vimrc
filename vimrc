@@ -79,7 +79,7 @@
   set splitright " When splitting vertically, focus goes the right window
   set splitbelow " When splitting horizontally, focus goes to the bottom window
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
-  if has('patch1648') && !has('nvim') " NeoVim loads matchit by default
+  if has('patch-7.4.1649') && !has('nvim') " NeoVim loads matchit by default
     packadd! matchit
   else
     runtime! macros/matchit.vim " Enable % to go to matching keyword/tag
@@ -112,7 +112,7 @@
   " Cscope
   set cscoperelative
   set cscopequickfix=s-,c-,d-,i-,t-,e-
-  if has('patch2033') | set cscopequickfix+=a- | endif
+  if has('patch-7.4.2033') | set cscopequickfix+=a- | endif
 " }}
 " Appearance {{
   if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
