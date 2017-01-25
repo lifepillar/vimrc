@@ -240,10 +240,7 @@
   if has('gui_running')
     let s:linespace=2
     set guifont=SF\ Mono:h11
-    set guioptions-=aP " Do not use system clipboard by default
-    set guioptions-=T  " No toolbar
-    set guioptions-=lL " No left scrollbar
-    set guioptions-=e  " Use Vim tabline
+    set guioptions=gm
     set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
     let &linespace=s:linespace
     set transparency=0
