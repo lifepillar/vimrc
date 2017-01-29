@@ -72,12 +72,12 @@ nnoremap <silent><buffer> <leader>lA :<c-u>execute "Ledger budget -p 'this year'
       \ %(!options.flat ? depth_spacer : \"\") %-(ansify_if(partial_account(options.flat), blue if color))\\n%/%$1 %$2 %$3\\n
       \%/%(prepend_width ? \" \" * int(prepend_width) : \"\")  --------------------------\\n'"<cr>
 " Balance report
-nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date \(assets or liabilities\)
+nnoremap <buffer> <leader>lb :<c-u>Ledger bal --real --aux-date \(\(assets or liabilities\) and \(not prepaid\)\)
 " Budget
 nnoremap <buffer> <leader>lB :<c-u>Ledger budget --real -p 'this year' expenses payable
 " Cleared report
-nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date \(assets or liabilities\)
-nnoremap <buffer> <leader>lC :<c-u>Ledger cleared --real --aux-date --current \(assets or liabilities\)
+nnoremap <buffer> <leader>lc :<c-u>Ledger cleared --real --aux-date \(\(assets or liabilities\) and \(not prepaid\)\)
+nnoremap <buffer> <leader>lC :<c-u>Ledger cleared --real --aux-date --current \(\(assets or liabilities\) and \(not prepaid\)\)
 " Debit/credit report
 nnoremap <buffer> <leader>ld :<c-u>Ledger reg --dc -S date --real -d 'd>=[2 months ago]' 'liabilities:credit card'
 " Expense report
@@ -91,7 +91,7 @@ nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' 
 " Monthly expenses
 nnoremap <buffer> <leader>lm :<c-u>Ledger reg --period-sort '(-amount)' --monthly --aux-date --real -p 'this month' expenses
 " Net worth
-nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly \(assets or liab\)
+nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly \(\(assets or liab\) and \(not prepaid\)\)
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Register --pending
 " Register
