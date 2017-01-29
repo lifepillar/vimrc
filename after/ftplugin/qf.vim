@@ -1,3 +1,7 @@
+fun! LFQuickfixNumLines()
+  return w:["lf_winwd"] >= 60 ? printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ") : ""
+endf
+
 if exists("*getwininfo")
 
   fun! BuildQuickfixStatusLine(nr)
@@ -9,7 +13,7 @@ if exists("*getwininfo")
           \ ? "" : get(getwininfo(win_getid())[0], "loclist", 0) ? "  LOCLIST " : "  QUICKFIX "}
           \ %<%{get(w:, "quickfix_title", "")}
           \ %=
-          \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? "" :  printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ")) : ""}%*'
+          \ %#CurrMode#%{w:["lf_active"] ? LFQuickfixNumLines() : ""}%*%{w:["lf_active"] ? "" : LFQuickfixNumLines()}'
   endf
 
 else
@@ -21,7 +25,7 @@ else
           \ %<%{get(w:, "quickfix_title", "")}
           \ %=
           \ %q
-          \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? "" :  printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ")) : ""}%*'
+          \ %#CurrMode#%{w:["lf_active"] ? LFQuickfixNumLines() : ""}%*%{w:["lf_active"] ? "" : LFQuickfixNumLines()}'
   endf
 
 end
