@@ -113,10 +113,11 @@
 [submodule "ledger"]
 	path = pack/bundle/start/ledger
 	url = https://github.com/ledger/vim-ledger.git
-  shallow = true
+	shallow = true
 [submodule "mucomplete"]
 	path = pack/my/start/mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete.git
+	shallow = true
 [submodule "neomake"]
 	path = pack/bundle/opt/neomake
 	url = https://github.com/neomake/neomake
@@ -132,7 +133,7 @@
 [submodule "base2tone"]
 	path = pack/themes/opt/base2tone
 	url = https://github.com/atelierbram/Base2Tone-vim.git
-  shallow = true
+	shallow = true
 [submodule "flatwhite"]
 	path = pack/themes/opt/flatwhite
 	url = https://github.com/kamwitsta/flatwhite-vim.git
@@ -140,3 +141,4 @@
 [submodule "dirvish"]
 	path = pack/bundle/start/dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
+	shallow = true
