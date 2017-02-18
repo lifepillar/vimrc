@@ -88,15 +88,17 @@ nnoremap <buffer> <leader>lE :<c-u>Ledger bal --aux-date tag earnings -p 'this m
 nnoremap <buffer> <leader>lf :<c-u>Ledger bal --collapse --dc --related --real --aux-date --cleared -p 'last 30 days'<space>
 " Income statement
 nnoremap <buffer> <leader>li :<c-u>Ledger bal --real --aux-date -p 'this month' \(income or expenses\)
-" Monthly expenses
-nnoremap <buffer> <leader>lm :<c-u>Ledger reg --period-sort '(-amount)' --monthly --aux-date --real -p 'this month' expenses
+" Monthly totals
+nnoremap <buffer> <leader>lm :<c-u>Ledger reg --monthly --aux-date --real --collapse -p 'this year' expenses
 " Net worth
 nnoremap <buffer> <leader>ln :<c-u>Ledger reg -F '%10(date)%20(display_total)\n' --collapse --real --aux-date -d 'd>=[this year]' --monthly \(\(assets or liab\) and \(not prepaid\)\)
 " Pending/uncleared transactions
 nnoremap <buffer> <leader>lp :<c-u>Register --pending
 " Register
 nnoremap <buffer> <leader>lr :<c-u>Ledger reg --real --aux-date -p 'this month'<space>
+" Sorted expenses
+nnoremap <buffer> <leader>ls :<c-u>Ledger reg --period-sort '(-amount)' --aux-date --real --monthly -p 'this month' expenses
 " Savings
-nnoremap <buffer> <leader>ls :<c-u>Ledger bal --collapse --real --aux-date -p 'last month' \(income or expenses\)
+nnoremap <buffer> <leader>lS :<c-u>Ledger bal --collapse --real --aux-date -p 'last month' \(income or expenses\)
 " Uncleared transactions
 nnoremap <buffer> <leader>lu :<c-u>Register --uncleared

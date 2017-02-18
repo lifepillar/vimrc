@@ -31,15 +31,16 @@ Budget report            \lB           N
 Cleared report           \lc           N
 Current cleared report   \lC           N
 Debit/credit report      \ld           N
-Earnings report          \lE           N
 Expense report           \le           N
+Earnings report          \lE           N
 Cash flow report         \lf           N
 Income statement         \li           N
-Sorted monthly expenses  \lm           N
+Monthly totals report    \lm           N
 Net worth                \ln           N
 Pending transactions     \lp           N
 Register report          \lr           N
-Savings                  \ls           N
+Sorted expenses          \ls           N
+Savings                  \lS           N
 Uncleared transactions   \lu           N
 Show Marks {{{2
 Toggle show marks        \M            N
