@@ -22,6 +22,7 @@ elseif $TMUX != ""
 
   fun! lf_terminal#open()
     call system('tmux split-window')
+    call system('tmux last-pane')
   endf
 
   " Send the given text to a tmux pane
