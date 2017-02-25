@@ -21,7 +21,7 @@ if has('nvim')
 elseif $TMUX != ""
 
   fun! lf_terminal#open()
-    call lf_msg#warn("Not implemented yet")
+    call system('tmux split-window')
   endf
 
   " Send the given text to a tmux pane
