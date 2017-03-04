@@ -77,7 +77,7 @@
 [submodule "pgsql"]
 	path = pack/my/start/pgsql
 	url = https://github.com/lifepillar/pgsql.vim.git
-	shallow = true
+	shallow = false
 [submodule "onedark"]
 	path = pack/themes/opt/onedark
 	url = https://github.com/joshdick/onedark.vim
@@ -89,19 +89,19 @@
 [submodule "outlaw"]
 	path = pack/my/start/outlaw
 	url = https://github.com/lifepillar/vim-outlaw.git
-	shallow = true
+	shallow = false
 [submodule "wwdc16"]
 	path = pack/my/opt/wwdc16
 	url = https://github.com/lifepillar/vim-wwdc16-theme.git
-	shallow = true
+	shallow = false
 [submodule "solarized8"]
 	path = pack/my/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8
-	shallow = true
+	shallow = false
 [submodule "cheat40"]
 	path = pack/my/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
-	shallow = true
+	shallow = false
 [submodule "lucario"]
 	path = pack/themes/opt/lucario
 	url = https://github.com/raphamorim/lucario.git
@@ -117,11 +117,11 @@
 [submodule "mucomplete"]
 	path = pack/my/start/mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete.git
-	shallow = true
+	shallow = false
 [submodule "neomake"]
 	path = pack/bundle/opt/neomake
 	url = https://github.com/neomake/neomake
-  shallow = true
+	shallow = true
 [submodule "nordisk"]
 	path = pack/themes/opt/nordisk
 	url = https://github.com/kamwitsta/nordisk.git
