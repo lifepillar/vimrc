@@ -153,5 +153,3 @@ Go to tab n              \‹n›          N
 Open file explorer       \e            N
 Browse oldfiles          \r            N
 Choose buffer            \b            N
-Switch buffers (≡ «c-^») ‹n›«c-j»      N
-
