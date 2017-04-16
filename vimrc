@@ -604,6 +604,11 @@
   " MetaPost (Vim) {{
     let g:mp_metafun_macros = 1
   " }}
+  " MUcomplete {{
+    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+    inoremap <expr> <cr> mucomplete#popup_exit("\<cr>")
+  " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
       if exists('b:showmarks')
