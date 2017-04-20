@@ -31,7 +31,6 @@
   set ttimeout
   set ttimeoutlen=100
   set ttyfast
-  set lazyredraw
   set mouse=a
   if !has('nvim')
     if has('mouse_sgr')
