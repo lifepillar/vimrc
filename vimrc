@@ -132,9 +132,8 @@
   set nowrap " Don't wrap lines by default
   set linebreak " If wrapping is enabled, wrap at word boundaries
   set laststatus=2 " Always show status line
-  set shortmess-=l " Don't use abbreviations for 'characters', 'lines'
-  set shortmess-=r " Don't use abbreviations for 'readonly'
-  set shortmess+=c " Suppress ins-completion messages
+  set shortmess-=lr " Don't use abbreviations for 'characters', 'lines', 'readonly'
+  set shortmess+=cI " No intro and suppress ins-completion messages 
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:•,precedes:←,extends:→  " Symbols to use for invisible characters
