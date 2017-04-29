@@ -1,3 +1,4 @@
+setlocal noinfercase
 let b:mucomplete_empty_text = 1
 let b:mucomplete_chain = ['omni', 'keyn', 'incl']
 call extend(g:mucomplete#can_complete, {
