@@ -2,7 +2,7 @@ let b:mucomplete_empty_text = 1
 let b:mucomplete_chain = ['omni', 'keyn', 'incl']
 call extend(g:mucomplete#can_complete, {
       \ 'ledger': {
-      \           'keyn': { t -> t =~# '\a\a$' },
+      \           'keyn': { t -> g:mucomplete_with_key || t =~# '\a\a$' },
       \           'incl': { t -> t =~# '\a\a$' },
       \           'omni': { t -> t =~# '[:A-z]\{2}$\|\%1c$' }
       \           }
@@ -56,7 +56,7 @@ fun! s:ledgerTable(type, args)
 endf
 
 fun! s:ledgerComplete()
-  if match(getline('.'), escape(g:ledger_decimal_sep, '.').'\d\d$') > -1
+  if match(getline('.'), escape(g:ledger_decimal_sep, '.').'\d\d\%'.col('.').'c') > -1
     return "\<c-r>=ledger#autocomplete_and_align()\<cr>"
   else
     return mucomplete#tab_complete(1)
