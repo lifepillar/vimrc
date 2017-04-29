@@ -1,5 +1,12 @@
-setlocal completeopt-=noinsert,noselect
-MUcompleteAutoOff
+let b:mucomplete_empty_text = 1
+let b:mucomplete_chain = ['omni', 'keyn', 'incl']
+call extend(g:mucomplete#can_complete, {
+      \ 'ledger': {
+      \           'keyn': { t -> t =~# '\a\a$' },
+      \           'incl': { t -> t =~# '\a\a$' },
+      \           'omni': { t -> t =~# '[:A-z]\{2}$\|\%1c$' }
+      \           }
+      \ })
 
 let g:ledger_table_sep = "\t"
 
@@ -48,6 +55,14 @@ fun! s:ledgerTable(type, args)
   endif
 endf
 
+fun! s:ledgerComplete()
+  if match(getline('.'), escape(g:ledger_decimal_sep, '.').'\d\d$') > -1
+    return "\<c-r>=ledger#autocomplete_and_align()\<cr>"
+  else
+    return mucomplete#tab_complete(1)
+  endif
+endf
+
 command! -buffer -nargs=+ LedgerTable  call <sid>ledgerTable('register', <q-args>)
 command! -buffer -nargs=+ BalanceTable call <sid>ledgerTable('cleared', <q-args>)
 command! -buffer -nargs=+ BudgetTable  call <sid>ledgerTable('budget', <q-args>)
@@ -57,7 +72,7 @@ nnoremap <silent><buffer> <enter> :call ledger#transaction_state_toggle(line('.'
 " Set today's date as auxiliary date
 nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocompletion and alignment
-inoremap <silent><buffer> <tab> <c-r>=ledger#autocomplete_and_align()<cr>
+imap <expr><silent><buffer> <tab> <sid>ledgerComplete()
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
 " Enter a new transaction based on the text in the current line
 nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>
