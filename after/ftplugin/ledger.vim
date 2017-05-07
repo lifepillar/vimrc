@@ -9,6 +9,7 @@ call extend(g:mucomplete#can_complete, {
       \           }
       \ })
 
+let g:ledger_qf_register_format = '%(date) %-25(payee) %-45(account) %15(amount) %15(total)\n'
 let g:ledger_table_sep = "\t"
 
 let g:ledger_tables = {
