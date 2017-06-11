@@ -142,3 +142,7 @@
 	path = pack/bundle/start/dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
 	shallow = true
+[submodule "wwdc17"]
+	path = pack/my/opt/wwdc17
+	url = https://github.com/lifepillar/vim-wwdc17-theme
+	shallow = false
