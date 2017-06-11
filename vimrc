@@ -713,6 +713,9 @@
     let g:wwdc16_term_italics = 1
     let g:wwdc16_term_trans_bg = 1
   " }}
+  " WWDC17 {{
+    let g:wwdc17_term_italics = 1
+  " }}
 " }}
 " NeoVim {{
   if has('nvim')
