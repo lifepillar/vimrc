@@ -557,8 +557,6 @@
       if has('gui_running')
         "set fullscreen
         set linespace=5
-        set guicursor=n-v-c:ver10
-        set guioptions-=r " hide right scrollbar
       elseif g:colors_name =~# '^solarized8'
         let g:limelight_conceal_ctermfg = (&background ==# 'dark') ? '10' : '14'
       endif
@@ -572,8 +570,6 @@
       if has('gui_running')
         "set nofullscreen
         let &linespace=s:linespace
-        set guicursor=n-v-c:ver20
-        set guioptions+=r
       endif
       set showcmd
       silent call lf_text#disableSoftWrap()
