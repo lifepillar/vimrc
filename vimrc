@@ -402,6 +402,7 @@
   " Avoid entering Ex mode
   nnoremap Q <nop>
   nnoremap gQ <nop>
+  " Easier copy/pasting to/from OS clipboard
   nnoremap <leader>y "*y
   vnoremap <leader>y "*y
   nnoremap <leader>Y "*Y
