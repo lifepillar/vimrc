@@ -460,7 +460,7 @@
   nnoremap <silent> czi :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
   nnoremap <silent> czs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
   nnoremap <silent> czt :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  " Switch between header and implementation files
+  " Switch between header and implementation files (assumes a tags file exists)
   nnoremap <silent> <leader>h :<c-u>call lf_tags#alt_file()<cr>
   " Remove trailing space globally
   nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
@@ -483,7 +483,7 @@
   nnoremap <leader>8 8gt
   nnoremap <leader>9 9gt
   nnoremap <leader>0 10gt
-  " Allow using alt-arrows to jump over words in OS X, as in Terminal.app
+  " Allow using alt-arrows to jump over words in macOS
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
   " Make
