@@ -130,7 +130,6 @@ Find this text string    czt          *N
 Save (only if modified)  \w            N
 Save as root             :WW           N
 Cd to current path       cd            N
-Copy until the EOL       Y             N
 Copy to clipboard        \y            O
 Copy line to clipboard   \Y            N
 Paste from clipboard     \p           VN

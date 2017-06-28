@@ -65,8 +65,6 @@
   set shiftround " Round indent to multiple of shiftwidth (applies to < and >)
   set backspace=indent,eol,start " Intuitive backspacing in insert mode
   set whichwrap+=<,>,[,],h,l " More intuitive arrow movements
-  " Make Y behave like other capitals (use yy to yank the whole line)
-  nnoremap Y y$
   " Smooth scrolling that works both in terminal and in GUI Vim
   nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
   nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
