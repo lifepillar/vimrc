@@ -268,7 +268,7 @@
       autocmd!
       autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
     augroup END
-    set noshowmode " Do not show the current mode because it is displayed in status line
+    set noshowmode " Do not show the current mode because it is displayed in the status line
     set noruler
     let g:default_stl = &statusline
     let g:default_tal = &tabline
