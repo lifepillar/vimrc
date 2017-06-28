@@ -131,6 +131,10 @@ Save (only if modified)  \w            N
 Save as root             :WW           N
 Cd to current path       cd            N
 Copy until the EOL       Y             N
+Copy to clipboard        \y            O
+Copy line to clipboard   \Y            N
+Paste from clipboard     \p           VN
+Paste from clipboard     \P           VN
 Capitalize words         \U            V
 Remove trailing space    \S            N
 Omnicomplete             «Tab»         I

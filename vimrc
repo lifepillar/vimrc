@@ -404,6 +404,13 @@
   " Avoid entering Ex mode
   nnoremap Q <nop>
   nnoremap gQ <nop>
+  nnoremap <leader>y "*y
+  vnoremap <leader>y "*y
+  nnoremap <leader>Y "*Y
+  nnoremap <leader>p "*p
+  vnoremap <leader>p "*p
+  nnoremap <leader>P "*P
+  vnoremap <leader>P "*P
   " Change the contrast level for themes that support it.
   nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
