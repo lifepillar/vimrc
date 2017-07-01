@@ -153,9 +153,9 @@
   set printoptions=syntax:n,number:y
   set printfont=:h9
 
-  " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
   augroup lf_appearance
     autocmd!
+    " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
     autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
