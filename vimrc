@@ -470,7 +470,7 @@
   " Browse recent files (:filter requires Vim 7.4.2244)
   nnoremap <leader>r :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
   " Browse files in the working directory
-  nnoremap <leader>n :<c-u>FuzzyFind<cr>
+  nnoremap <leader>n :<c-u>FindFile<cr>
   " Switch between buffers
   nnoremap <leader>b :<c-u>ls<cr>:b<space>
   " Go to tab 1/2/3 etc
