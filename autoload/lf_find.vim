@@ -25,8 +25,8 @@ fun! lf_find#all_buffers(pattern)
 endf
 
 " Filter a list and return a List of selected items.
-" input is any shell command that sends its output, one item per line, to stdout,
-" or a List of items to be filtered.
+" 'input' is any shell command that sends its output, one item per line, to
+" stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input)
   if has('gui_running') | call lf_msg#warn('Not implemented') | return [] | endif
   if type(a:input) == v:t_string
@@ -37,7 +37,12 @@ fun! lf_find#fuzzy(input)
       let l:cmd  = 'cat '.fnameescape(l:input)
   endif
   let l:output = tempname()
-  silent execute '!'.l:cmd.'|fzf -m >'.fnameescape(l:output)
+  if executable('tput') && filereadable('/dev/tty')
+    " Cool idea adapted from fzf.vim coming with fzf (not the Vim plugin):
+    call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd.'|fzf -m --height 20 >'.fnameescape(l:output).' 2>/dev/tty', &lines))
+  else
+    silent execute '!'.l:cmd.'|fzf -m >'.fnameescape(l:output)
+  endif
   redraw!
   try
     return filereadable(l:output) ? readfile(l:output) : []
