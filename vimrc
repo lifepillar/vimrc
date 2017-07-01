@@ -525,6 +525,7 @@
     let g:ctrlp_cmd = 'CtrlPBuffer'
     if executable('rg')
       let g:ctrlp_user_command = 'rg %s --files --maxdepth=10 --color=never'
+      let g:ctrlp_use_caching = 0
     endif
     let g:ctrlp_buftag_types = {
           \ 'context':  '--language-force=context',
