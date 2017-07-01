@@ -84,6 +84,8 @@ Inside $…$               i$            T
 TeX paragraph            tp            T
 Vimrc {{{1
 Commands {{{2
+Find all in this buffer  :Search …     N
+Find in all open buffers :SearchAll …  N
 Fuzzy find file in dir   :FindFile …   N
 Fuzzy find recent files  :Recent       N
 Grep search (ripgrep)    :Grep         N
@@ -146,8 +148,6 @@ Paste from clipboard     \P           VN
 Capitalize words         \U            V
 Remove trailing space    \S            N
 Omnicomplete             «Tab»         I
-Find all in this buffer  :FindAll …    N
-Find in all open buffers :MultiFind …  N
 Find file in working dir \n            N
 Header ⇄ Implementation  \h            N
 Decrease tab width       \[            N

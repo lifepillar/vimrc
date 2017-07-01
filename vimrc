@@ -342,11 +342,11 @@
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
   command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
-  " Find all in current buffer
-  command! -nargs=1 FindAll call lf_find#buffer(<q-args>)
+  " Find all occurrences of a pattern in the current buffer
+  command! -nargs=1 Search call lf_find#buffer(<q-args>)
 
-  " Find all in all open buffers
-  command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
+  " Find all occurrences of a pattern in all open buffers
+  command! -nargs=1 SearchAll call lf_find#all_buffers(<q-args>)
 
   " Fuzzy search for files inside a directory (default: working dir).
   command! -nargs=? -complete=dir FindFile call lf_find#file(<q-args>)
