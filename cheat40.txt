@@ -83,6 +83,16 @@ Around $…$               a$            T
 Inside $…$               i$            T
 TeX paragraph            tp            T
 Vimrc {{{1
+Commands {{{2
+Fuzzy find file in dir   :FindFile …   N
+Fuzzy find recent files  :Recent       N
+Grep search (ripgrep)    :Grep         N
+Spotlight search ()     :Spotlight …  N
+Diff with last saved     :DiffOrig     N
+Generate or update tags  :Ctags        N
+Set tab width            :TabWid ‹n›   N
+Save as root             :WW           N
+}}}
 Options {{{2
 Centre text vertically   cok           N
 Toggle Paste mode        «f9»          N
@@ -128,7 +138,6 @@ Find this symbol         czs          *N
 Find this text string    czt          *N
 }}}
 Save (only if modified)  \w            N
-Save as root             :WW           N
 Cd to current path       cd            N
 Copy to clipboard        \y            O
 Copy line to clipboard   \Y            N
@@ -137,14 +146,9 @@ Paste from clipboard     \P           VN
 Capitalize words         \U            V
 Remove trailing space    \S            N
 Omnicomplete             «Tab»         I
-Set tab width            :TabWid ‹n›   N
 Find all in this buffer  :FindAll …    N
 Find in all open buffers :MultiFind …  N
-Fuzzy find file in dir   :FuzzyFind …  N
 Find file in working dir \n            N
-Spotlight search ()     :Spotlight …  N
-Diff with last saved     :DiffOrig     N
-Generate or update tags  :Ctags        N
 Header ⇄ Implementation  \h            N
 Decrease tab width       \[            N
 Increase tab width       \]            N

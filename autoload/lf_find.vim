@@ -61,6 +61,14 @@ fun! lf_find#arglist(input_cmd)
   execute "args" join(map(l:arglist, { i,v -> fnameescape(v) }))
 endf
 
+fun! lf_find#file(...) " ... is an optional directory
+  if has('gui_running') || !executable('rg')
+    execute 'CtrlP' (a:0 > 0 ? a:1 : '')
+  else
+    call lf_find#arglist('rg --files' . (a:0 > 0 ? ' '.a:1 : ''))
+  endif
+endf
+
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })

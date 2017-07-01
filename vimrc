@@ -94,7 +94,9 @@
   set ignorecase " Case-insensitive search by default
   set infercase " Smart case when doing keyword completion
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
-  set grepprg=ag\ --vimgrep\ $*
+  if executable('rg')
+    set grepprg=rg\ --vimgrep
+  endif
   set grepformat^=%f:%l:%c:%m
   set keywordprg=:help " Get help for word under cursor by pressing K
   set complete+=i      " Use included files for completion
@@ -331,7 +333,7 @@
   " }}
 " Commands (plugins excluded) {{
   " Grep search
-  command! -nargs=* -complete=file Ag silent grep! <args><bar>bo cwindow<bar>redraw!
+  command! -nargs=* -complete=file Grep silent grep! <args><bar>bo cwindow<bar>redraw!
 
   " Generate tags in the directory of the current buffer
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
@@ -346,8 +348,8 @@
   " Find all in all open buffers
   command! -nargs=1 MultiFind call lf_find#all_buffers(<q-args>)
 
-  " Fuzzy search for files inside a directory (default: working dir). Requires fzf.
-  command! -nargs=? -complete=dir FuzzyFind call lf_find#arglist('ag -g "" '.<q-args>)
+  " Fuzzy search for files inside a directory (default: working dir).
+  command! -nargs=? -complete=dir FindFile call lf_find#file(<q-args>)
 
   " Spotlight search (macOS only)
   command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
@@ -521,6 +523,9 @@
   " }}
   " CtrlP {{
     let g:ctrlp_cmd = 'CtrlPBuffer'
+    if executable('rg')
+      let g:ctrlp_user_command = 'rg %s --files --maxdepth=10 --color=never'
+    endif
     let g:ctrlp_buftag_types = {
           \ 'context':  '--language-force=context',
           \ 'markdown': '--language-force=markdown',
@@ -528,7 +533,7 @@
           \ 'mp':       '--language-force=metapost',
           \ 'mf':       '--language-force=metapost'
           \ }
-    let g:ctrlp_types = ['buf', 'mru']
+    let g:ctrlp_types = ['fil', 'buf', 'mru']
     let g:ctrlp_extensions = ['buffertag', 'tag', 'quickfix']
     let g:ctrlp_open_multiple_files = '2vjr'
     let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'

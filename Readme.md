@@ -28,9 +28,9 @@ My own Vim configuration. Some features:
 Recommended:
 
 - Vim 8.
-- [The Silver Searcher, aka Ag](https://github.com/ggreer/the_silver_searcher);
 - [Exuberant ctags](http://ctags.sourceforge.net);
-- [fzf](https://github.com/junegunn/fzf).
+- [fzf](https://github.com/junegunn/fzf) (only the executable).
+- [ripgrep](https://github.com/BurntSushi/ripgrep);
 
 
 ### Installation
