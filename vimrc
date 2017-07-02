@@ -184,17 +184,18 @@
   let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
   " newMode may be a value as returned by mode(1) or the name of a highlight group
+  " Note: setting highlight groups while computing the status line may cause the
+  " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
   fun! s:updateStatusLineHighlight(newMode)
     execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
     return 1
   endf
 
-  " Setting highlight groups while computing the status line may cause the
-  " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
+  " nr is always the number of the currently active window. In a %{} context, winnr()
+  " always refers to the window to which the status line being drawn belongs. Since this
+  " function is invoked in a %{} context, winnr() may be different from a:nr. We use this
+  " fact to detect whether we are drawing in the active window or in an inactive window.
   fun! SetupStl(nr)
-    " a:nr is always the number of the currently active window.
-    " In a %{} context, winnr() always refers to the window to which the status line being drawn belongs.
-    " Since this function is invoked in a %{} context, winnr() may be different from a:nr.
     return get(extend(w:, {
           \ "lf_active": winnr() != a:nr
             \ ? 0
@@ -210,7 +211,7 @@
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
-          \ %n %t %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : "  ") : g:ma_sym}
+          \ %{winnr()}  %t %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : "  ") : g:ma_sym}
           \ %<%{w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
