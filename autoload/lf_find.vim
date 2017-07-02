@@ -27,7 +27,7 @@ endf
 " Filter a list and return a List of selected items.
 " 'input' is any shell command that sends its output, one item per line, to
 " stdout, or a List of items to be filtered.
-fun! lf_find#fuzzy(input)
+fun! lf_find#fuzzy(input, ...)  " ... optional prompt
   if has('gui_running') | call lf_msg#warn('Not implemented') | return [] | endif
   if type(a:input) == v:t_string
     let l:cmd = a:input
@@ -36,10 +36,11 @@ fun! lf_find#fuzzy(input)
       call writefile(a:input, l:input)
       let l:cmd  = 'cat '.fnameescape(l:input)
   endif
+  let l:prompt = (a:0 > 0 ? "--prompt '".a:1. "> '" : '')
   let l:output = tempname()
   if executable('tput') && filereadable('/dev/tty')
     " Cool idea adapted from fzf.vim coming with fzf (not the Vim plugin):
-    call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd.'|fzf -m --height 20 >'.fnameescape(l:output).' 2>/dev/tty', &lines))
+    call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd.'|fzf -m --height 20 '.l:prompt.' >'.fnameescape(l:output).' 2>/dev/tty', &lines))
   else
     silent execute '!'.l:cmd.'|fzf -m >'.fnameescape(l:output)
   endif
@@ -56,7 +57,7 @@ endf
 
 " Filter a list of paths and populate the arglist with the selected items.
 fun! lf_find#arglist(input_cmd)
-  let l:arglist = lf_find#fuzzy(a:input_cmd)
+  let l:arglist = lf_find#fuzzy(a:input_cmd, 'Choose files')
   if empty(l:arglist) | return | endif
   execute "args" join(map(l:arglist, { i,v -> fnameescape(v) }))
 endf
@@ -72,7 +73,7 @@ endf
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
-  let l:colorscheme = lf_find#fuzzy(l:colors)
+  let l:colorscheme = lf_find#fuzzy(l:colors, 'Colorscheme')
   if !empty(l:colorscheme)
     execute "colorscheme" l:colorscheme[0]
   endif
