@@ -29,8 +29,8 @@ Recommended:
 
 - Vim 8.
 - [Exuberant ctags](http://ctags.sourceforge.net);
-- [fzf](https://github.com/junegunn/fzf) (only the executable).
-- [ripgrep](https://github.com/BurntSushi/ripgrep);
+- [fzf](https://github.com/junegunn/fzf) (only the executable);
+- [ripgrep](https://github.com/BurntSushi/ripgrep).
 
 
 ### Installation
