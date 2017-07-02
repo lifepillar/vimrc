@@ -407,102 +407,107 @@
   " Avoid entering Ex mode
   nnoremap Q <nop>
   nnoremap gQ <nop>
-  " Easier copy/pasting to/from OS clipboard
-  nnoremap <leader>y "*y
-  vnoremap <leader>y "*y
-  nnoremap <leader>Y "*Y
-  nnoremap <leader>p "*p
-  vnoremap <leader>p "*p
-  nnoremap <leader>P "*P
-  vnoremap <leader>P "*P
-  " Change the contrast level for themes that support it.
-  nmap <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
-  nmap <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
   " Change to the directory of the current file
-  nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
-  nnoremap <silent> <leader>w :<c-u>update<cr>
-  nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
-  nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
-  nnoremap <silent> ]a :<c-u><c-r>=v:count1<cr>next<cr>
-  nnoremap <silent> [a :<c-u><c-r>=v:count1<cr>prev<cr>
-  nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
-  nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
-  nnoremap <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
-  nnoremap <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
-  nnoremap <silent> ]L :<c-u>llast<cr>zz
-  nnoremap <silent> [L :<c-u>lfirst<cr>zz
-  nnoremap <silent> ]n :<c-u><c-r>=v:count1<cr>/\v^[<\|=>]{7}<cr>
-  nnoremap <silent> [n :<c-u><c-r>=v:count1<cr>?\v^[<\|=>]{7}<cr>
-  nnoremap <silent> ]q :<c-u><c-r>=v:count1<cr>cnext<cr>zz
-  nnoremap <silent> [q :<c-u><c-r>=v:count1<cr>cprevious<cr>zz
-  nnoremap <silent> ]Q :<c-u>clast<cr>zz
-  nnoremap <silent> [Q :<c-u>cfirst<cr>zz
-  nnoremap <silent> ]t :<c-u><c-r>=v:count1<cr>tn<cr>
-  nnoremap <silent> [t :<c-u><c-r>=v:count1<cr>tp<cr>
-  nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
-  nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
-  nnoremap <silent> cob :<c-u>ToggleBackgroundColor<cr>
-  nnoremap <silent> coc :<c-u>setlocal cursorline!<cr>
-  nnoremap          cod :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
-  nnoremap <silent> coh :<c-u>set hlsearch! \| set hlsearch?<cr>
-  nnoremap <silent> coH :<c-u>call lf_theme#toggle_hi_info()<cr>
-  nnoremap <silent> coi :<c-u>set ignorecase! \| set ignorecase?<cr>
-  nnoremap <silent> cok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
-  nnoremap <silent> col :<c-u>setlocal list!<cr>
-  nnoremap <silent> con :<c-u>setlocal number!<cr>
-  nnoremap <silent> cor :<c-u>setlocal relativenumber!<cr>
-  nnoremap <silent> cos :<c-u>setlocal spell! \| set spell?<cr>
-  nnoremap <silent> cot :<c-u>setlocal expandtab!<cr>
-  nnoremap <silent> cow :<c-u>ToggleWrap<cr>
-  " Cscope
-  nnoremap <silent> cza :<c-u>cs find a <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> czc :<c-u>cs find c <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> czd :<c-u>cs find d <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> cze :<c-u>cs find e <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> czf :<c-u>cs find f <c-r>=expand("<cfile>")<cr><cr>
-  nnoremap <silent> czg :<c-u>cs find g <c-r>=expand("<cword>")<cr><cr>
-  nnoremap <silent> czi :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> czs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <silent> czt :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  " Switch between header and implementation files (assumes a tags file exists)
-  nnoremap <silent> <leader>h :<c-u>call lf_tags#alt_file()<cr>
-  " Remove trailing space globally
-  nnoremap <silent> <leader>S :<c-u>call <sid>removeTrailingSpace()<cr>
-  " Capitalize words in selected text (see h gU)
-  vnoremap <silent> <leader>U :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
-  " Browse recent files (:filter requires Vim 7.4.2244)
-  nnoremap <leader>r :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
-  " Browse files in the working directory
-  nnoremap <leader>n :<c-u>FindFile<cr>
-  " Switch between buffers
-  nnoremap <leader>b :<c-u>ls<cr>:b<space>
-  " Go to tab 1/2/3 etc
-  nnoremap <leader>1 1gt
-  nnoremap <leader>2 2gt
-  nnoremap <leader>3 3gt
-  nnoremap <leader>4 4gt
-  nnoremap <leader>5 5gt
-  nnoremap <leader>6 6gt
-  nnoremap <leader>7 7gt
-  nnoremap <leader>8 8gt
-  nnoremap <leader>9 9gt
-  nnoremap <leader>0 10gt
+  nnoremap <unique> <silent> cd :<c-u>cd %:h \| pwd<cr>
   " Allow using alt-arrows to jump over words in macOS
   cnoremap <esc>b <s-left>
   cnoremap <esc>f <s-right>
+  " Square bracket mappings (many of them inspired by Unimpaired)
+  nnoremap <unique> <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
+  nnoremap <unique> <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
+  nnoremap <unique> <silent> [a :<c-u><c-r>=v:count1<cr>prev<cr>
+  nnoremap <unique> <silent> ]a :<c-u><c-r>=v:count1<cr>next<cr>
+  nnoremap <unique> <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
+  nnoremap <unique> <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
+  nnoremap <unique> <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
+  nnoremap <unique> <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
+  nnoremap <unique> <silent> ]L :<c-u>llast<cr>zz
+  nnoremap <unique> <silent> [L :<c-u>lfirst<cr>zz
+  nnoremap <unique> <silent> ]n :<c-u><c-r>=v:count1<cr>/\v^[<\|=>]{7}<cr>
+  nnoremap <unique> <silent> [n :<c-u><c-r>=v:count1<cr>?\v^[<\|=>]{7}<cr>
+  nnoremap <unique> <silent> ]q :<c-u><c-r>=v:count1<cr>cnext<cr>zz
+  nnoremap <unique> <silent> [q :<c-u><c-r>=v:count1<cr>cprevious<cr>zz
+  nnoremap <unique> <silent> ]Q :<c-u>clast<cr>zz
+  nnoremap <unique> <silent> [Q :<c-u>cfirst<cr>zz
+  nnoremap <unique> <silent> ]t :<c-u><c-r>=v:count1<cr>tn<cr>
+  nnoremap <unique> <silent> [t :<c-u><c-r>=v:count1<cr>tp<cr>
+  " Window navigation
+  nnoremap <unique> <leader>1 1<c-w>w
+  nnoremap <unique> <leader>2 2<c-w>w
+  nnoremap <unique> <leader>3 3<c-w>w
+  nnoremap <unique> <leader>4 4<c-w>w
+  nnoremap <unique> <leader>5 5<c-w>w
+  nnoremap <unique> <leader>6 6<c-w>w
+  nnoremap <unique> <leader>7 7<c-w>w
+  nnoremap <unique> <leader>8 8<c-w>w
+  nnoremap <unique> <leader>9 9<c-w>w
+  nnoremap <unique> <leader>0 10<c-w>w
+  " Easier copy/pasting to/from OS clipboard
+  nnoremap <unique> <leader>y "*y
+  vnoremap <unique> <leader>y "*y
+  nnoremap <unique> <leader>Y "*Y
+  nnoremap <unique> <leader>p "*p
+  vnoremap <unique> <leader>p "*p
+  nnoremap <unique> <leader>P "*P
+  vnoremap <unique> <leader>P "*P
   " Make
-  nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>+
-  vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
+  nnoremap <unique> <silent> <leader>x :<c-u>REPLSendLine<cr>+
+  vnoremap <unique> <silent> <leader>x :<c-u>REPLSendSelection<cr>
+  " Save if there are changes
+  nnoremap <unique> <silent> <leader>w :<c-u>update<cr>
+  " Change the contrast level for themes that support it.
+  nmap     <unique> <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
+  nmap     <unique> <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
+  " Tab width
+  nnoremap <unique> <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
+  nnoremap <unique> <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
+  " Buffers
+  nnoremap <unique> <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
+  nnoremap <unique>          <leader>bb :<c-u>ls<cr>:b<space>
+  nnoremap <unique>          <leader>bd :<c-u>bd<cr>
+  nnoremap <unique>          <leader>bD :<c-u>bd!<cr>
+  " Cscope
+  nnoremap <unique> <silent> <leader>ca :<c-u>cs find a <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>cc :<c-u>cs find c <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>cd :<c-u>cs find d <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>ce :<c-u>cs find e <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>cf :<c-u>cs find f <c-r>=expand("<cfile>")<cr><cr>
+  nnoremap <unique> <silent> <leader>cg :<c-u>cs find g <c-r>=expand("<cword>")<cr><cr>
+  nnoremap <unique> <silent> <leader>ci :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>cs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <unique> <silent> <leader>ct :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  " Edit
+  nnoremap <unique> <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
+  vnoremap <unique> <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
+  " Files
+  nnoremap <unique>          <leader>ff :<c-u>FindFile<cr>
+  nnoremap <unique>          <leader>fz :<c-u>Recent<cr>
+  nnoremap <unique>          <leader>fr :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
   " Git
-  nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
-  nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
-  nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
-  nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
-  nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
-  " Show the revision history for the current file (use :Git log for the full log)
-  nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
+  nnoremap <unique> <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
+  nnoremap <unique> <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
+  nnoremap <unique> <silent> <leader>gd :<c-u>GitDiff<cr>
+  nnoremap <unique> <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
+  nnoremap <unique> <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
+  nnoremap <unique> <silent> <leader>gs :<c-u>call lf_git#status()<cr>
+  " Options
+  nnoremap <unique> <silent> <leader>ob :<c-u>ToggleBackgroundColor<cr>
+  nnoremap <unique> <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
+  nnoremap <unique>          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
+  nnoremap <unique> <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
+  nnoremap <unique> <silent> <leader>oH :<c-u>call lf_theme#toggle_hi_info()<cr>
+  nnoremap <unique> <silent> <leader>oi :<c-u>set ignorecase! \| set ignorecase?<cr>
+  nnoremap <unique> <silent> <leader>ok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
+  nnoremap <unique> <silent> <leader>ol :<c-u>setlocal list!<cr>
+  nnoremap <unique> <silent> <leader>on :<c-u>setlocal number!<cr>
+  nnoremap <unique> <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
+  nnoremap <unique> <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
+  nnoremap <unique> <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
+  nnoremap <unique> <silent> <leader>ow :<c-u>ToggleWrap<cr>
+  " Appeareance (view)
+  nnoremap <unique>          <leader>vc :<c-u>Colorscheme<cr>
   " }}
 " Plugins {{
   " Disabled Vim Plugins {{
@@ -557,16 +562,16 @@
     endf
   " }}
   " Dirvish {{
-    nmap <leader>e <plug>(dirvish_up)
-    nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+    nmap <unique> <leader>d <plug>(dirvish_up)
+    nnoremap <unique> gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
   " }}
   " Easy Align {{
-    xmap <leader>a <plug>(EasyAlign)
-    nmap <leader>a <plug>(EasyAlign)
+    xmap <unique> <leader>ea <plug>(EasyAlign)
+    nmap <unique> <leader>ea <plug>(EasyAlign)
   " }}
   " Goyo {{
     " Toggle distraction-free mode
-    nnoremap <silent> <leader>f :Goyo<cr>
+    nnoremap <unique> <silent> <leader>of :Goyo<cr>
 
     fun! s:goyoEnter()
       if has('gui_running')
@@ -617,7 +622,7 @@
     inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
     inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
     inoremap <expr> <cr> mucomplete#popup_exit("\<cr>")
-    nnoremap <silent> coa :<c-u>MUcompleteAutoToggle<cr>
+    nnoremap <unique> <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
   " }}
   " Show Marks {{
     fun! s:toggleShowMarks()
@@ -627,7 +632,7 @@
         DoShowMarks
       endif
     endf
-    nnoremap <silent> <leader>M :<c-u>call <sid>toggleShowMarks()<cr>
+    nnoremap <unique> <silent> <leader>om :<c-u>call <sid>toggleShowMarks()<cr>
   " }}
   " Sneak {{
     let g:sneak#streak = 1
@@ -643,7 +648,7 @@
     endf
 
     " Toggle tag bar
-    nnoremap <silent> <leader>s :if !exists("g:loaded_tagbar")<bar>packadd tagbar<bar>endif<cr>:TagbarToggle<cr>
+    nnoremap <unique> <silent> <leader>vt :if !exists("g:loaded_tagbar")<bar>packadd tagbar<bar>endif<cr>:TagbarToggle<cr>
     let g:tagbar_autofocus = 1
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
@@ -700,7 +705,7 @@
     let g:undotree_SplitWidth = 40
     let g:undotree_SetFocusWhenToggle = 1
     let g:undotree_TreeNodeShape = '◦'
-    nnoremap <silent> <leader>u :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
+    nnoremap <unique> <silent> <leader>u :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
   " 2HTML (Vim) {{
     let g:html_pre_wrap=1

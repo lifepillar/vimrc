@@ -11,9 +11,9 @@ Refresh file list        «C-l»         N
 Open in a new tab        t             N
 Hide dot-prefixed files  gh            N
 Easy Align {{{2
-Trigger Easy Align       \a            O
+Trigger Easy Align       \ea           O
 Goyo {{{2
-Distraction-free mode    \f            N
+Distraction-free mode    \of           N
 Ledger {{{2
 Run Ledger command       :Ledger …     N
 Ditto, CSV output        :LedgerTab    N
@@ -23,7 +23,6 @@ Reconcile an account     :Reconcile …  N
 Autocomplete or align    «Tab»        IV
 Transaction from text    «C-t»         I
 Next transaction state   «Enter»       N
-Add auxiliary date       \d            N
 Average expenses report  \la           N
 Annualized budget        \lA           N
 Balance report           \lb           N
@@ -42,8 +41,9 @@ Register report          \lr           N
 Sorted expenses          \ls           N
 Savings                  \lS           N
 Uncleared transactions   \lu           N
+Add auxiliary date       \lx           N
 Show Marks {{{2
-Toggle show marks        \M            N
+Toggle show marks        \om           N
 Sneak {{{2
 Jump forward             s‹c›‹c›      VN
 Jump backward            S‹c›‹c›       N
@@ -58,7 +58,7 @@ Replace tags             cst‹c›        N
 Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
 Tagbar {{{2
-Toggle Tagbar            \s            N
+Toggle Tagbar            \vt           N
 Undotree {{{2
 Toggle Undotree          \u            N
 Git {{{1
@@ -83,80 +83,85 @@ Around $…$               a$            T
 Inside $…$               i$            T
 TeX paragraph            tp            T
 Vimrc {{{1
-Commands {{{2
-Find all in this buffer  :Search …     N
-Find in all open buffers :SearchAll …  N
-Fuzzy find file in dir   :FindFile …   N
-Fuzzy find recent files  :Recent       N
-Grep search (ripgrep)    :Grep         N
-Spotlight search ()     :Spotlight …  N
-Diff with last saved     :DiffOrig     N
-Generate or update tags  :Ctags        N
-Set tab width            :TabWid ‹n›   N
-Save as root             :WW           N
-}}}
-Options {{{2
-Centre text vertically   cok           N
-Toggle Paste mode        «f9»          N
-Toggle autocompletion    coa           N
-Toggle background color  cob           N
-Toggle cursorline        coc           N
-Toggle diff in buffer    cod           N
-Toggle hard/soft tabs    cot           N
-Toggle ignore case       coi           N
-Toggle invisibles        col           N
-Toggle line numbers      con           N
-Toggle rel line numbers  cor           N
-Toggle search highlight  coh           N
-Toggle soft wrapping     cow           N
-Toggle spell checking    cos           N
-Debug highlight groups   coH           N
-}}}
-Unimpared-like {{{2
-Add blank line above     [«Spc»        N
-Add blank line below     ]«Spc»        N
-Edit next file (:bn)     [b            N
-Edit prev file (:bp)     ]b            N
-Edit prev in arg list    [a            N
-Edit next in arg list    ]a            N
-Prev in location list    [l            N
-Next in location list    ]l            N
-Prev in quickfix list    [q            N
-Next in quickfix list    ]q            N
-To prev conflict marks   [n            N
-To next conflict marks   ]n            N
-To next matching tag     ]t            N
-To prev matching tag     [t            N
-}}}
-Cscope {{{2
-Find assignments         cza          *N
-Find calling functions   czc          *N
-Find called functions    czd          *N
-Find this egrep pattern  cze          *N
-Find this file           czf          *N
-Find this definition     czg          *N
-Find #includes           czi          *N
-Find this symbol         czs          *N
-Find this text string    czt          *N
-}}}
-Save (only if modified)  \w            N
+Buffers and files {{{2
 Cd to current path       cd            N
+Open file explorer       \d            N
+Find file in working dir \ff           N
+Browse oldfiles          \fr           N
+Fuzzy browse oldfile     \fz           N
+Save (only if modified)  \w            N
+Save as root             :WW           N
+Choose buffer            \bb           N
+Delete buffer            \bd           N
+Force delete buffer      \bD           N
+Edit {{{2
+Omnicomplete             «Tab»         I
 Copy to clipboard        \y            O
 Copy line to clipboard   \Y            N
 Paste from clipboard     \p           VN
 Paste from clipboard     \P           VN
-Capitalize words         \U            V
-Remove trailing space    \S            N
-Omnicomplete             «Tab»         I
-Find file in working dir \n            N
-Header ⇄ Implementation  \h            N
+Add blank line above     [«Spc»        N
+Add blank line below     ]«Spc»        N
+Diff with last saved     :DiffOrig     N
+Capitalize words         \eU           V
+Remove trailing space    \es           N
+View {{{2
+Choose colorscheme       \vc           N
 Decrease tab width       \[            N
 Increase tab width       \]            N
+Set tab width            :TabWid ‹n›   N
 Reduce contrast          \-            N
 Increase contrast        \+            N
+Search {{{2
+Find all in this buffer  :Search …     N
+Find in all open buffers :SearchAll …  N
+Grep search (ripgrep)    :Grep         N
+Spotlight search ()     :Spotlight …  N
+Go {{{2
 Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C
-Go to tab n              \‹n›          N
-Open file explorer       \e            N
-Browse oldfiles          \r            N
-Choose buffer            \b            N
+Header ⇄ Implementation  \ba           N
+Go to window number n    \‹n›          N
+Edit prev in arg list    [a            N
+Edit next in arg list    ]a            N
+Edit next file (:bn)     [b            N
+Edit prev file (:bp)     ]b            N
+Prev in location list    [l            N
+Next in location list    ]l            N
+First in location list   [L            N
+Last in location list    ]L            N
+To prev conflict marks   [n            N
+To next conflict marks   ]n            N
+Prev in quickfix list    [q            N
+Next in quickfix list    ]q            N
+First in quickfix list   [Q            N
+Last in quickfix list    ]Q            N
+To next matching tag     ]t            N
+To prev matching tag     [t            N
+Generate or update tags  :Ctags        N
+Cscope {{{2
+Find assignments         \ca          *N
+Find calling functions   \cc          *N
+Find called functions    \cd          *N
+Find this egrep pattern  \ce          *N
+Find this file           \cf          *N
+Find this definition     \cg          *N
+Find #includes           \ci          *N
+Find this symbol         \cs          *N
+Find this text string    \ct          *N
+Options {{{2
+Toggle Paste mode        «f9»          N
+Toggle autocompletion    \oa           N
+Toggle background color  \ob           N
+Toggle cursorline        \oc           N
+Toggle diff in buffer    \od           N
+Toggle search highlight  \oh           N
+Debug highlight groups   \oH           N
+Toggle ignore case       \oi           N
+Centre text vertically   \ok           N
+Toggle invisibles        \ol           N
+Toggle line numbers      \on           N
+Toggle rel line numbers  \or           N
+Toggle spell checking    \os           N
+Toggle hard/soft tabs    \ot           N
+Toggle soft wrapping     \ow           N

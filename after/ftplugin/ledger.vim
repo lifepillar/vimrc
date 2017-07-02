@@ -72,7 +72,7 @@ command! -buffer -nargs=+ BudgetTable  call <sid>ledgerTable('budget', <q-args>)
 " Toggle transaction state
 nnoremap <silent><buffer> <enter> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Set today's date as auxiliary date
-nnoremap <silent><buffer> <leader>d :call ledger#transaction_date_set('.', "auxiliary")<cr>
+nnoremap <silent><buffer> <leader>lx :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocompletion and alignment
 imap <expr><silent><buffer> <tab> <sid>ledgerComplete()
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
