@@ -192,7 +192,9 @@
   " Setting highlight groups while computing the status line may cause the
   " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
   fun! SetupStl(nr)
+    " a:nr is always the number of the currently active window.
     " In a %{} context, winnr() always refers to the window to which the status line being drawn belongs.
+    " Since this function is invoked in a %{} context, winnr() may be different from a:nr.
     return get(extend(w:, {
           \ "lf_active": winnr() != a:nr
             \ ? 0
