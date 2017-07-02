@@ -605,6 +605,7 @@
   " }}
   " Markdown (Vim) {{
     let g:markdown_fenced_languages = ['pgsql', 'sql']
+    let g:markdown_folding = 1
   " }}
   " MetaPost (Vim) {{
     let g:mp_metafun_macros = 1
