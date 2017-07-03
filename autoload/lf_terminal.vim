@@ -42,11 +42,11 @@ elseif $TMUX != ""
 else
 
   fun! lf_terminal#open()
-    call lf_msg#warn("Not implemented yet")
+    call lf_msg#warn("Please run Vim inside a tmux session")
   endf
 
   fun! lf_terminal#send(lines)
-    call lf_msg#warn("Not implemented yet")
+    call lf_msg#warn("Please run Vim inside a tmux session")
   endf
 
 endif
