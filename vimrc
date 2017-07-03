@@ -470,15 +470,15 @@
   nnoremap <unique>          <leader>bd :<c-u>bd<cr>
   nnoremap <unique>          <leader>bD :<c-u>bd!<cr>
   " Cscope
-  nnoremap <unique> <silent> <leader>ca :<c-u>cs find a <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>cc :<c-u>cs find c <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>cd :<c-u>cs find d <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>ce :<c-u>cs find e <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>cf :<c-u>cs find f <c-r>=expand("<cfile>")<cr><cr>
-  nnoremap <unique> <silent> <leader>cg :<c-u>cs find g <c-r>=expand("<cword>")<cr><cr>
-  nnoremap <unique> <silent> <leader>ci :<c-u>cs find i ^<c-r>=expand("<cfile>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>cs :<c-u>cs find s <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
-  nnoremap <unique> <silent> <leader>ct :<c-u>cs find t <c-r>=expand("<cword>")<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>ca :<c-u>cs find a <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>cc :<c-u>cs find c <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>cd :<c-u>cs find d <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>ce :<c-u>cs find e <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>cf :<c-u>cs find f <c-r>=fnameescape(expand("<cfile>"))<cr><cr>
+  nnoremap <silent> <leader>cg :<c-u>cs find g <c-r>=fnameescape(expand("<cword>"))<cr><cr>
+  nnoremap <silent> <leader>ci :<c-u>cs find i ^<c-r>=fnameescape(expand("<cfile>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>cs :<c-u>cs find s <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
+  nnoremap <silent> <leader>ct :<c-u>cs find t <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
   " Edit
   nnoremap <unique> <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
   vnoremap <unique> <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
