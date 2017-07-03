@@ -246,6 +246,7 @@
     set guicursor=n-v-c:block,i-o-r-ci-cr:ver20
     let &linespace=s:linespace
     set transparency=0
+    cd $HOME/Documents/Outbox
   endif
 " }}
 " Helper functions {{
