@@ -358,9 +358,6 @@
   " Spotlight search (macOS only)
   command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
 
-  " Fuzzy search recently opened files
-  command! -nargs=0 Recent call lf_find#arglist(v:oldfiles)
-
   " See :h :DiffOrig
   command! -nargs=0 DiffOrig call lf_text#diff_orig()
 
@@ -485,7 +482,7 @@
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Files
   nnoremap          <leader>ff :<c-u>FindFile<cr>
-  nnoremap          <leader>fz :<c-u>Recent<cr>
+  nnoremap          <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nnoremap          <leader>fr :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
