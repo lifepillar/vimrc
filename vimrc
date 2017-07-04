@@ -469,6 +469,7 @@
   nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
   nnoremap          <leader>bd :<c-u>bd<cr>
   nnoremap          <leader>bD :<c-u>bd!<cr>
+  nnoremap          <leader>bn :<c-u>enew<cr>
   " Cscope
   nnoremap <silent> <leader>ca :<c-u>cs find a <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
   nnoremap <silent> <leader>cc :<c-u>cs find c <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
