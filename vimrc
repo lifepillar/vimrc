@@ -79,7 +79,7 @@
   nnoremap <c-y> <c-y><c-y>
   set nrformats=hex
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
-  set splitright " When splitting vertically, focus goes the right window
+  set splitright " When splitting vertically, focus goes to the right window
   set splitbelow " When splitting horizontally, focus goes to the bottom window
   set formatoptions+=1j " Do not wrap after a one-letter word and remove extra comment when joining lines
   if has('patch-7.4.1649') && !has('nvim') " NeoVim loads matchit by default
