@@ -165,9 +165,9 @@
     autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
-    " When editing a file, always jump to the last known cursor position.
+    " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &filetype !=# "gitcommit" |
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !=# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
   augroup END
