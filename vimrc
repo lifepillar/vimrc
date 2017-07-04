@@ -33,10 +33,16 @@
   set ttyfast
   set mouse=a
   if !has('nvim')
+    if &term =~# '^\%(screen\|tmux\)'
+      set ttymouse=xterm2
+      " Make bracketed paste mode work inside tmux:
+      let &t_BE = "\033[?2004h"
+      let &t_BD = "\033[?2004l"
+      let &t_PS = "\033[200~"
+      let &t_PE = "\033[201~"
+    endif
     if has('mouse_sgr')
       set ttymouse=sgr " See :h sgr-mouse
-    elseif $TERM =~# '^\%(screen\|tmux\)'
-      set ttymouse=xterm2
     endif
   endif
   set updatetime=1000 " Trigger CursorHold event after one second
