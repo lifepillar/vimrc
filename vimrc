@@ -378,8 +378,6 @@
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
-  command! -nargs=0 ToggleBackgroundColor call lf_theme#toggle_bg_color()
-
   if !has('gui_running')
     command! -nargs=0 Colorscheme call lf_find#colorscheme()
   endif
@@ -487,7 +485,7 @@
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
   nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
   " Options
-  nnoremap <silent> <leader>ob :<c-u>ToggleBackgroundColor<cr>
+  nnoremap <silent> <leader>ob :<c-u>call lf_theme#toggle_bg_color()<cr>
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
   nnoremap          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
   nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
