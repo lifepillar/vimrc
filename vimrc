@@ -383,9 +383,6 @@
   " Toggle soft wrap
   command! -nargs=0 ToggleWrap call lf_text#toggleWrap()
 
-  " Save file with sudo
-  command! -nargs=0  WW :w !sudo tee % >/dev/null
-
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
 " }}
@@ -444,8 +441,6 @@
   " Terminal
   nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>+
   vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
-  " Save if there are changes
-  nnoremap <silent> <leader>w :<c-u>update<cr>
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap     <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
@@ -475,8 +470,11 @@
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Files
   nnoremap          <leader>ff :<c-u>FindFile<cr>
-  nnoremap          <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nnoremap          <leader>fr :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
+  nnoremap <silent> <leader>fw :<c-u>update<cr>
+  nnoremap <silent> <leader>w  :<c-u>update<cr>
+  nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
+  nnoremap          <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>

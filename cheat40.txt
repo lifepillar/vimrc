@@ -89,8 +89,9 @@ Open file explorer       \d            N
 Find file in working dir \ff           N
 Browse oldfiles          \fr           N
 Fuzzy browse oldfile     \fz           N
-Save (only if modified)  \w            N
-Save as root             :WW           N
+Save (only if modified)  \fw           N
+Ditto                    \w            N
+Save as root             \fW           N
 New buffer               \bn           N
 New scratch buffer       \bs           N
 Choose buffer            \bb           N
