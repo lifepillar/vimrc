@@ -101,7 +101,7 @@
   set infercase " Smart case when doing keyword completion
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   if executable('rg')
-    set grepprg=rg\ --vimgrep
+    set grepprg=rg\ -i\ --vimgrep
   endif
   set grepformat^=%f:%l:%c:%m
   set keywordprg=:help " Get help for word under cursor by pressing K
