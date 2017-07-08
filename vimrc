@@ -380,9 +380,6 @@
     command! -nargs=0 Colorscheme call lf_find#colorscheme()
   endif
 
-  " Toggle soft wrap
-  command! -nargs=0 ToggleWrap call lf_text#toggleWrap()
-
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
 " }}
@@ -495,7 +492,7 @@
   nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
-  nnoremap <silent> <leader>ow :<c-u>ToggleWrap<cr>
+  nnoremap <silent> <leader>ow :<c-u>call lf_text#toggleWrap()<cr>
   " Appeareance (view)
   nnoremap          <leader>vc :<c-u>Colorscheme<cr>
   " }}
