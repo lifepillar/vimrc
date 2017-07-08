@@ -92,6 +92,7 @@ Fuzzy browse oldfile     \fz           N
 Save (only if modified)  \w            N
 Save as root             :WW           N
 New buffer               \bn           N
+New scratch buffer       \bs           N
 Choose buffer            \bb           N
 Delete buffer            \bd           N
 Close all other buffers  \b«C-d»       N
