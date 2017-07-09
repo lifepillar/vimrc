@@ -128,6 +128,10 @@ Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C
 Header ⇄ Implementation  \ba           N
 Go to window number n    \‹n›          N
+Go to (tmux) left pane   «A-h»         N
+Go to (tmux) right pane  «A-l»         N
+Go to (tmux) pane below  «A-j»         N
+Go to (tmux) pane above  «A-k»         N
 Edit prev in arg list    [a            N
 Edit next in arg list    ]a            N
 Edit next file (:bn)     [b            N

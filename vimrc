@@ -33,7 +33,7 @@
   set ttyfast
   set mouse=a
   if !has('nvim')
-    if &term =~# '^\%(screen\|tmux\)'
+    if &term =~# '^\%(tmux\|screen\)'
       set ttymouse=xterm2
       " Make bracketed paste mode work inside tmux:
       let &t_BE = "\033[?2004h"
@@ -420,6 +420,22 @@
   nnoremap <leader>8 8<c-w>w
   nnoremap <leader>9 9<c-w>w
   nnoremap <leader>0 10<c-w>w
+  if &term =~# '^\%(tmux\|screen\)'
+    nnoremap <esc>h :<c-u>call lf_tmux#navigate('h')<cr>
+    nnoremap <esc>j :<c-u>call lf_tmux#navigate('j')<cr>
+    nnoremap <esc>k :<c-u>call lf_tmux#navigate('k')<cr>
+    nnoremap <esc>l :<c-u>call lf_tmux#navigate('l')<cr>
+  else
+    nnoremap <esc>l <c-w>l
+    nnoremap <esc>h <c-w>h
+    nnoremap <esc>j <c-w>j
+    nnoremap <esc>k <c-w>k
+  endif
+  " Allow using alt in macOS without enabling “Use Option as Meta key”
+  nmap ¬ <esc>l
+  nmap ˙ <esc>h
+  nmap ∆ <esc>j
+  nmap ˚ <esc>k
   " Easier copy/pasting to/from OS clipboard
   nnoremap <leader>y "*y
   vnoremap <leader>y "*y
