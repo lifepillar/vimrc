@@ -24,6 +24,29 @@ fun! lf_find#all_buffers(pattern)
   bo cwindow
 endf
 
+fun! lf_find#choose_dir(...) " ... is an optional prompt
+  let l:idx = inputlist([get(a:000, 0, "Change directory to:"), "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
+  let l:dir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
+  if strlen(l:dir) <= 0
+    call lf_msg#notice("Cancelled.")
+    return ''
+  endif
+  return l:dir
+endf
+
+fun! lf_find#grep(args)
+  if getcwd() != expand("%:p:h")
+    let l:dir = lf_find#choose_dir()
+    if empty(l:dir)
+      return
+    endif
+    execute 'lcd' l:dir
+  endif
+  execute 'silent grep!' a:args
+  bo cwindow
+  redraw!
+endf
+
 " Filter a list and return a List of selected items.
 " 'input' is any shell command that sends its output, one item per line, to
 " stdout, or a List of items to be filtered.
