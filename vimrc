@@ -126,6 +126,7 @@
     set termguicolors
   endif
   set display=lastline
+  se showtabline=2 " Always show the tab bar
   " Show block cursor in Normal mode and line cursor in Insert mode:
   let &t_ti.="\e[1 q"
   let &t_SI.="\e[5 q"
@@ -238,9 +239,10 @@
 
   fun! BuildTabLine()
     return join(map(
-          \ range(1, tabpagenr('$')),
-          \ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
-          \), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%999X✕ " : "")
+          \   range(1, tabpagenr('$')),
+          \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
+          \ ), '')
+          \ . "%#TabLineFill#%T%=⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
   endf
 
 " }}
