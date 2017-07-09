@@ -94,7 +94,7 @@ endf
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
-  let l:colorscheme = lf_find#fuzzy(l:colors, 'Colorscheme')
+  let l:colorscheme = lf_find#fuzzy(l:colors, 'Theme')
   if !empty(l:colorscheme)
     execute "colorscheme" l:colorscheme[0]
   endif

@@ -375,10 +375,6 @@
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
 
-  if !has('gui_running')
-    command! -nargs=0 Colorscheme call lf_find#colorscheme()
-  endif
-
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
 " }}
@@ -496,7 +492,7 @@
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggleWrap()<cr>
   " Appeareance (view)
-  nnoremap          <leader>vc :<c-u>Colorscheme<cr>
+  nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   " }}
 " GUI {{
   if has('gui_running')
