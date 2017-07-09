@@ -96,8 +96,9 @@ New buffer               \bn           N
 New scratch buffer       \bs           N
 Choose buffer            \bb           N
 Delete buffer            \bd           N
-Close all other buffers  \b«C-d»       N
 Force delete buffer      \bD           N
+Close all other buffers  \b«C-d»       N
+Toggle read-only status  \bw           N
 Edit {{{2
 Omnicomplete             «Tab»         I
 Copy to clipboard        \y            O
