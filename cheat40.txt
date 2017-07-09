@@ -63,10 +63,10 @@ Undotree {{{2
 Toggle Undotree          \u            N
 Git {{{1
 Run Git command          :Git …        N
-Three-way diff           :Conflicts    N
 Status (uses Tig)        \gs           N
 Blame (uses Tig)         \gb           N
 Diff with HEAD           \gd           N
+Three-way diff           \gt           N
 Commit                   \gc           N
 Push                     \gp           N
 Log for this file        \gl           N

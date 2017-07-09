@@ -361,12 +361,6 @@
   " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
   command! -complete=shellcmd -nargs=+ Git call lf_git#exec(<q-args>, "B")
 
-  " Git diff
-  command! -nargs=0 GitDiff call lf_git#diff()
-
-  " Three-way diff.
-  command! -nargs=0 Conflicts call lf_git#three_way_diff()
-
   " Execute an external command and show the output in a new buffer
   command! -complete=shellcmd -nargs=+ Shell call lf_job#to_buffer(<q-args>, "B")
 
@@ -482,10 +476,11 @@
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
-  nnoremap <silent> <leader>gd :<c-u>GitDiff<cr>
+  nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
   nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
+  nnoremap <silent> <leader>gt :<c-u>call lf_git#three_way_diff()<cr>
   " Options
   nnoremap <silent> <leader>ob :<c-u>call lf_theme#toggle_bg_color()<cr>
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
