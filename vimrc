@@ -126,7 +126,7 @@
     set termguicolors
   endif
   set display=lastline
-  se showtabline=2 " Always show the tab bar
+  set showtabline=2 " Always show the tab bar
   " Show block cursor in Normal mode and line cursor in Insert mode:
   let &t_ti.="\e[1 q"
   let &t_SI.="\e[5 q"
