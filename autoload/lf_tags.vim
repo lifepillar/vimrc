@@ -19,12 +19,8 @@ endf
 
 fun! lf_tags#ctags(args)
   if empty(tagfiles()) " New tags file
-    let l:idx = inputlist(["Choose which directory to process:", "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
-    let l:dir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
-    if strlen(l:dir) <= 0
-      call lf_msg#notice("Cancelled.")
-      return
-    endif
+    let l:dir = lf_find#choose_dir('Create tags in:')
+    if empty(l:dir) | return | endif
     let l:dirs = [fnamemodify(l:dir, ':p')]
   else
     let l:dirs = map(tagfiles(), { i,v -> fnamemodify(v, ':p:h') })

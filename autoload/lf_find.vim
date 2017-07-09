@@ -37,9 +37,7 @@ endf
 fun! lf_find#grep(args)
   if getcwd() != expand("%:p:h")
     let l:dir = lf_find#choose_dir()
-    if empty(l:dir)
-      return
-    endif
+    if empty(l:dir) | return | endif
     execute 'lcd' l:dir
   endif
   execute 'silent grep!' a:args
