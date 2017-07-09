@@ -70,10 +70,11 @@ Diff with HEAD           \gd           N
 Commit                   \gc           N
 Push                     \gp           N
 Log for this file        \gl           N
-Shell & Make {{{1
+Commands {{{1
 :! …, output to buffer   :Shell …      N
 Send text to terminal    \x           VN
 :make, then open qf list \m            N
+Vim command to buffer    :CmdBuffer …  N
 TeX {{{1
 Typeset                  \tt           N
 Clean generated files    \tc           N

@@ -368,6 +368,9 @@
   " Execute an external command and show the output in a new buffer
   command! -complete=shellcmd -nargs=+ Shell call lf_job#to_buffer(<q-args>, "B")
 
+  " Execute a Vim command and send the output to a new scratch buffer
+  command! -complete=command -nargs=+ CmdBuffer call lf_buffers#cmd(<q-args>)
+
   " Send text to a terminal
   command! BindTerminal call lf_terminal#open()
   command! REPLSendLine call lf_terminal#send([getline('.')])
@@ -450,6 +453,7 @@
   nnoremap          <leader>bd :<c-u>bd<cr>
   nnoremap          <leader>bD :<c-u>bd!<cr>
   nnoremap          <leader>b<c-d> :<c-u>confirm 1,.-bdelete<cr>:confirm .+,$bdelete<cr>
+  nnoremap          <leader>bm :<c-u>CmdBuffer messages<cr>
   nnoremap          <leader>bn :<c-u>enew<cr>
   nnoremap          <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
   nnoremap          <leader>bw :<c-u>setlocal readonly!<cr>
