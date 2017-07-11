@@ -173,5 +173,6 @@ Toggle invisibles        \ol           N
 Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
 Toggle spell checking    \os           N
+Toggle status line       \oS           N
 Toggle hard/soft tabs    \ot           N
 Toggle soft wrapping     \ow           N
