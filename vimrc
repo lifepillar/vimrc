@@ -421,10 +421,10 @@
   nnoremap <leader>9 9<c-w>w
   nnoremap <leader>0 10<c-w>w
   if &term =~# '^\%(tmux\|screen\)'
-    nnoremap <esc>h :<c-u>call lf_tmux#navigate('h')<cr>
-    nnoremap <esc>j :<c-u>call lf_tmux#navigate('j')<cr>
-    nnoremap <esc>k :<c-u>call lf_tmux#navigate('k')<cr>
-    nnoremap <esc>l :<c-u>call lf_tmux#navigate('l')<cr>
+    nnoremap <silent> <esc>h :<c-u>call lf_tmux#navigate('h')<cr>
+    nnoremap <silent> <esc>j :<c-u>call lf_tmux#navigate('j')<cr>
+    nnoremap <silent> <esc>k :<c-u>call lf_tmux#navigate('k')<cr>
+    nnoremap <silent> <esc>l :<c-u>call lf_tmux#navigate('l')<cr>
   else
     nnoremap <esc>l <c-w>l
     nnoremap <esc>h <c-w>h
