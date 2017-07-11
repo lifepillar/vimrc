@@ -505,6 +505,7 @@
   nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
   nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
+  nnoremap <silent> <leader>oS :<c-u>let &laststatus=2-&laststatus<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggleWrap()<cr>
   " Appeareance (view)
