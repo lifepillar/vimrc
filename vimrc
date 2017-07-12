@@ -558,6 +558,7 @@
     let g:ctrlp_buftag_types = {
           \ 'context':  '--language-force=context',
           \ 'markdown': '--language-force=markdown',
+          \ 'sql':      '--language-force=pgsql',
           \ 'tex':      '--language-force=latex',
           \ 'mp':       '--language-force=metapost',
           \ 'mf':       '--language-force=metapost'
@@ -674,6 +675,22 @@
     let g:tagbar_status_func = 'TagbarStatusLine'
 
     " My Ctags file is at https://github.com/lifepillar/dotfiles
+    let g:tagbar_type_sql = {
+          \ 'ctagstype': 'pgsql',
+          \ 'kinds': [
+          \ 'f:functions',
+          \ 'T:triggers',
+          \ 't:tables',
+          \ 'V:views',
+          \ 'i:indexes',
+          \ 'r:rules',
+          \ 'd:types',
+          \ 'S:sequences',
+          \ 's:schemas',
+          \ 'D:databases'
+          \ ],
+          \ 'sort': 0
+          \ }
     let g:tagbar_type_markdown = {
           \ 'ctagstype': 'markdown',
           \ 'kinds': [
