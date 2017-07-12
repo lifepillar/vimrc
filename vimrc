@@ -585,7 +585,7 @@
   " }}
   " Goyo {{
     " Toggle distraction-free mode
-    nnoremap <silent> <leader>of :Goyo<cr>
+    nnoremap <silent> <leader>vf :Goyo<cr>
 
     fun! s:goyoEnter()
       if has('gui_running')
@@ -720,7 +720,7 @@
     let g:undotree_SplitWidth = 40
     let g:undotree_SetFocusWhenToggle = 1
     let g:undotree_TreeNodeShape = '◦'
-    nnoremap <silent> <leader>u :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
+    nnoremap <silent> <leader>vu :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
   " 2HTML (Vim) {{
     let g:html_pre_wrap=1

@@ -13,7 +13,7 @@ Hide dot-prefixed files  gh            N
 Easy Align {{{2
 Trigger Easy Align       \ea           O
 Goyo {{{2
-Distraction-free mode    \of           N
+Distraction-free mode    \vf           N
 Ledger {{{2
 Run Ledger command       :Ledger …     N
 Ditto, CSV output        :LedgerTab    N
@@ -60,7 +60,7 @@ Remove enclosing tags    dst           N
 Tagbar {{{2
 Toggle Tagbar            \vt           N
 Undotree {{{2
-Toggle Undotree          \u            N
+Toggle Undotree          \vu           N
 Git {{{1
 Run Git command          :Git …        N
 Status (uses Tig)        \gs           N
