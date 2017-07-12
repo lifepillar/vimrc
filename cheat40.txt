@@ -113,6 +113,7 @@ Capitalize words         \eU           V
 Remove trailing space    \es           N
 View {{{2
 Choose colorscheme       \vc           N
+Show/hide status line    \vs           N
 Decrease tab width       \[            N
 Increase tab width       \]            N
 Set tab width            :TabWid ‹n›   N
@@ -173,6 +174,5 @@ Toggle invisibles        \ol           N
 Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
 Toggle spell checking    \os           N
-Toggle status line       \oS           N
 Toggle hard/soft tabs    \ot           N
 Toggle soft wrapping     \ow           N
