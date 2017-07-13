@@ -6,8 +6,8 @@
 "   color scheme is activated.
 "
 " - For UTF-8 symbols to be displayed correctly (e.g., in the status line),
-"   you may need to check "Set locale environment variables on startup" in OS
-"   X Terminal.app's preferences, or "Set locale variables automatically" in
+"   you may need to check "Set locale environment variables on startup" in
+"   Terminal.app's preferences, or "Set locale variables automatically" in
 "   iTerm's Terminal settings. If UTF-8 symbols are not displayed in remote
 "   sessions (that is, when you run Vim on a remote machine to which you are
 "   connected via SSH), make sure that the following line is *not* commented
