@@ -29,7 +29,7 @@
   set fileformats=unix,mac,dos
   if has('langmap') && exists('+langremap') | set nolangremap | endif
   set ttimeout
-  set ttimeoutlen=50  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
+  set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
   set ttyfast
   set mouse=a
   " NeoVim {{
