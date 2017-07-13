@@ -26,7 +26,7 @@ My own Vim configuration. Some features:
 
 ### Requirements
 
-- A fairly recent Vim (7.4 or later) (`brew install vim` recommended on OS X).
+- A fairly recent Vim (7.4 or later) (`brew install vim` recommended on macOS).
 
 Recommended:
 
