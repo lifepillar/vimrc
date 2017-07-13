@@ -42,6 +42,7 @@
     cmap <a-f> <s-right>
   else
   " }}
+    set viminfo=!,'1000,<10000,s10,h,n~/.vim/viminfo
     " Allow using alt-arrows to jump over words in macOS without slowing down <esc>. See :help :set-termcap
     set <s-left>=b
     set <s-right>=f
@@ -80,7 +81,6 @@
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp/backup
   set directory=~/.vim/tmp/swap
-  set viminfo=!,'1000,<10000,s10,h,n~/.vim/viminfo
   set undofile " Enable persistent undo
   set undodir=~/.vim/tmp/undo
   set undolevels=1000 " Maximum number of changes that can be undone
