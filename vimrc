@@ -32,21 +32,30 @@
   set ttimeoutlen=50  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
   set ttyfast
   set mouse=a
-  if !has('nvim')
-      " Allow using alt-arrows to jump over words in macOS without slowing down <esc>. See :help :set-termcap
-      set <s-left>=b
-      set <s-right>=f
-      cmap b <s-left>
-      cmap f <s-right>
-      " Prepare for using alt-hjkl to move between windows
-      set <a-h>=h
-      set <a-j>=j
-      set <a-k>=k
-      set <a-l>=l
-      imap h <a-h>
-      imap j <a-j>
-      imap k <a-k>
-      imap l <a-l>
+  " NeoVim {{
+  if has('nvim')
+    language en_US.UTF-8
+    let g:terminal_scrollback_buffer_size = 10000
+    set shada=!,'1000,<50,s10,h  " Override viminfo setting
+    " Use alt-arrows in the command line (see :help map-alt-keys)
+    cmap <a-b> <s-left>
+    cmap <a-f> <s-right>
+  else
+  " }}
+    " Allow using alt-arrows to jump over words in macOS without slowing down <esc>. See :help :set-termcap
+    set <s-left>=b
+    set <s-right>=f
+    cmap b <s-left>
+    cmap f <s-right>
+    " Prepare for using alt-hjkl to move between windows
+    set <a-h>=h
+    set <a-j>=j
+    set <a-k>=k
+    set <a-l>=l
+    imap h <a-h>
+    imap j <a-j>
+    imap k <a-k>
+    imap l <a-l>
     if &term =~# '^\%(tmux\|screen\)'
       set ttymouse=xterm2
       " Make bracketed paste mode work inside tmux:
@@ -782,16 +791,6 @@
   " WWDC17 {{
     let g:wwdc17_term_italics = 1
   " }}
-" }}
-" NeoVim {{
-  if has('nvim')
-    language en_US.UTF-8
-    let g:terminal_scrollback_buffer_size = 10000
-    set shada=!,'1000,<50,s10,h  " Override viminfo setting
-    " Use alt-arrows in the command line (see above)
-    cmap <a-b> <s-left>
-    cmap <a-f> <s-right>
-  endif
 " }}
 " Init {{
   let g:LargeFile = 20*1024*1024
