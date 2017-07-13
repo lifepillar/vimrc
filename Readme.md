@@ -6,6 +6,10 @@ My own Vim configuration. Some features:
 
 - Foldable and thoroughly commented `vimrc`.
 - Put your customizations into `vimrc_local`.
+- Move freely between Vim and tmux windows using `alt-h`, `alt-j`, `alt-k`,
+  `alt-l` (plugin-free, requires [some
+  configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf)
+  in tmux, too).
 - 40-column **cheat sheet** always two keys away (courtesy of
   [Cheat40](https://github.com/lifepillar/vim-cheat40)).
 - Handcrafted, collapsible, fully customizable, **"plugin-free" status line**
