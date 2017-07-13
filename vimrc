@@ -29,10 +29,24 @@
   set fileformats=unix,mac,dos
   if has('langmap') && exists('+langremap') | set nolangremap | endif
   set ttimeout
-  set ttimeoutlen=100
+  set ttimeoutlen=50
   set ttyfast
   set mouse=a
   if !has('nvim')
+      " Allow using alt-arrows to jump over words in macOS without slowing down <esc>. See :help :set-termcap
+      set <s-left>=b
+      set <s-right>=f
+      cmap b <s-left>
+      cmap f <s-right>
+      " Prepare for using alt-hjkl to move between windows
+      set <a-h>=h
+      set <a-j>=j
+      set <a-k>=k
+      set <a-l>=l
+      imap h <a-h>
+      imap j <a-j>
+      imap k <a-k>
+      imap l <a-l>
     if &term =~# '^\%(tmux\|screen\)'
       set ttymouse=xterm2
       " Make bracketed paste mode work inside tmux:
@@ -387,9 +401,6 @@
   nnoremap gQ <nop>
   " Change to the directory of the current file
   nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
-  " Allow using alt-arrows to jump over words in macOS
-  cnoremap <esc>b <s-left>
-  cnoremap <esc>f <s-right>
   " Square bracket mappings (many of them inspired by Unimpaired)
   nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
   nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
@@ -421,21 +432,21 @@
   nnoremap <leader>9 9<c-w>w
   nnoremap <leader>0 10<c-w>w
   if &term =~# '^\%(tmux\|screen\)'
-    nnoremap <silent> <esc>h :<c-u>call lf_tmux#navigate('h')<cr>
-    nnoremap <silent> <esc>j :<c-u>call lf_tmux#navigate('j')<cr>
-    nnoremap <silent> <esc>k :<c-u>call lf_tmux#navigate('k')<cr>
-    nnoremap <silent> <esc>l :<c-u>call lf_tmux#navigate('l')<cr>
+    nnoremap <silent> <a-h> :<c-u>call lf_tmux#navigate('h')<cr>
+    nnoremap <silent> <a-j> :<c-u>call lf_tmux#navigate('j')<cr>
+    nnoremap <silent> <a-k> :<c-u>call lf_tmux#navigate('k')<cr>
+    nnoremap <silent> <a-l> :<c-u>call lf_tmux#navigate('l')<cr>
   else
-    nnoremap <esc>l <c-w>l
-    nnoremap <esc>h <c-w>h
-    nnoremap <esc>j <c-w>j
-    nnoremap <esc>k <c-w>k
+    nnoremap <a-l> <c-w>l
+    nnoremap <a-h> <c-w>h
+    nnoremap <a-j> <c-w>j
+    nnoremap <a-k> <c-w>k
   endif
   " Allow using alt in macOS without enabling “Use Option as Meta key”
-  nmap ¬ <esc>l
-  nmap ˙ <esc>h
-  nmap ∆ <esc>j
-  nmap ˚ <esc>k
+  nmap ¬ <a-l>
+  nmap ˙ <a-h>
+  nmap ∆ <a-j>
+  nmap ˚ <a-k>
   " Easier copy/pasting to/from OS clipboard
   nnoremap <leader>y "*y
   vnoremap <leader>y "*y
@@ -777,6 +788,9 @@
     language en_US.UTF-8
     let g:terminal_scrollback_buffer_size = 10000
     set shada=!,'1000,<50,s10,h  " Override viminfo setting
+    " Use alt-arrows in the command line (see above)
+    cmap <a-b> <s-left>
+    cmap <a-f> <s-right>
   endif
 " }}
 " Init {{
