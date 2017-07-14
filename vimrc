@@ -51,7 +51,7 @@
     set <a-j>=j
     set <a-k>=k
     set <a-l>=l
-    if &term =~# '^\%(tmux\|screen\)'
+    if $TERM =~# '^\%(tmux\|screen\)'
       set ttymouse=xterm2
       " Make bracketed paste mode work inside tmux:
       let &t_BE = "\033[?2004h"
@@ -435,7 +435,7 @@
   nnoremap <leader>8 8<c-w>w
   nnoremap <leader>9 9<c-w>w
   nnoremap <leader>0 10<c-w>w
-  if &term =~# '^\%(tmux\|screen\)'
+  if $TERM =~# '^\%(tmux\|screen\)'
     nnoremap <silent> <a-h> :<c-u>call lf_tmux#navigate('h')<cr>
     nnoremap <silent> <a-j> :<c-u>call lf_tmux#navigate('j')<cr>
     nnoremap <silent> <a-k> :<c-u>call lf_tmux#navigate('k')<cr>
