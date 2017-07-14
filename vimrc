@@ -668,7 +668,7 @@
         DoShowMarks
       endif
     endf
-    nnoremap <silent> <leader>om :<c-u>call <sid>toggleShowMarks()<cr>
+    nnoremap <silent> <leader>vm :<c-u>call <sid>toggleShowMarks()<cr>
   " }}
   " Sneak {{
     let g:sneak#streak = 1

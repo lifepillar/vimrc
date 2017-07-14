@@ -43,7 +43,7 @@ Savings                  \lS           N
 Uncleared transactions   \lu           N
 Add auxiliary date       \lx           N
 Show Marks {{{2
-Toggle show marks        \om           N
+Show/hide marks          \vm           N
 Sneak {{{2
 Jump forward             s‹c›‹c›      VN
 Jump backward            S‹c›‹c›       N
