@@ -43,20 +43,13 @@
   else
   " }}
     set viminfo=!,'1000,<10000,s10,h,n~/.vim/viminfo
-    " Allow using alt-arrows to jump over words in macOS without slowing down <esc>. See :help :set-termcap
+    " See :help :set-termcap and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
     set <s-left>=b
     set <s-right>=f
-    cmap b <s-left>
-    cmap f <s-right>
-    " Prepare for using alt-hjkl to move between windows
     set <a-h>=h
     set <a-j>=j
     set <a-k>=k
     set <a-l>=l
-    imap h <a-h>
-    imap j <a-j>
-    imap k <a-k>
-    imap l <a-l>
     if &term =~# '^\%(tmux\|screen\)'
       set ttymouse=xterm2
       " Make bracketed paste mode work inside tmux:
