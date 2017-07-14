@@ -32,18 +32,19 @@
   set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
   set ttyfast
   set mouse=a
-  " NeoVim {{
   if has('nvim')
+    " NeoVim {{
     language en_US.UTF-8
     let g:terminal_scrollback_buffer_size = 10000
     set shada=!,'1000,<50,s10,h  " Override viminfo setting
     " Use alt-arrows in the command line (see :help map-alt-keys)
     cmap <a-b> <s-left>
     cmap <a-f> <s-right>
+    " }}
   else
-  " }}
+    " Vim {{
     set viminfo=!,'1000,<10000,s10,h,n~/.vim/viminfo
-    " See :help :set-termcap and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+    " See :set termcap, :h t_ku, :h :set-termcap, and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
     set <s-left>=b
     set <s-right>=f
     set <a-h>=h
@@ -61,6 +62,7 @@
     if has('mouse_sgr')
       set ttymouse=sgr " See :h sgr-mouse
     endif
+    " }}
   endif
   set updatetime=1000 " Trigger CursorHold event after one second
   syntax enable
