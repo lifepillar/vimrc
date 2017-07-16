@@ -84,7 +84,7 @@ fun! lf_find#arglist(input_cmd)
 endf
 
 fun! lf_find#file(...) " ... is an optional directory
-  if has('gui_running') || has('nvim) || !executable('rg')
+  if has('gui_running') || has('nvim') || !executable('rg')
     execute 'CtrlP' (a:0 > 0 ? a:1 : '')
   else
     call lf_find#arglist('rg --files' . (a:0 > 0 ? ' '.a:1 : ''))
