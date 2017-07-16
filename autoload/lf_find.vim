@@ -49,7 +49,7 @@ endf
 " 'input' is any shell command that sends its output, one item per line, to
 " stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input, ...)  " ... optional prompt
-  if has('gui_running') | call lf_msg#warn('Not implemented') | return [] | endif
+  if has('gui_running') || has('nvim') | call lf_msg#warn('Not implemented') | return [] | endif
   if type(a:input) == v:t_string
     let l:cmd = a:input
   else " Assume List
@@ -84,7 +84,7 @@ fun! lf_find#arglist(input_cmd)
 endf
 
 fun! lf_find#file(...) " ... is an optional directory
-  if has('gui_running') || !executable('rg')
+  if has('gui_running') || has('nvim) || !executable('rg')
     execute 'CtrlP' (a:0 > 0 ? a:1 : '')
   else
     call lf_find#arglist('rg --files' . (a:0 > 0 ? ' '.a:1 : ''))
