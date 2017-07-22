@@ -186,7 +186,7 @@
     autocmd ColorScheme * call <sid>customizeTheme()
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !=# 'commit' |
+      \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
   augroup END
