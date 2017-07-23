@@ -11,3 +11,8 @@ iab <buffer> s… select *<c-o>ma<cr>  from <c-o>mb<cr><bs> where <c-o>mc<cr>
 iab <buffer> f… create or replace function <c-o>ma (<cr><c-o>mb<cr>) returns
       \ <c-o>mc<cr>language <c-o>md as $$<cr><c-o>me<cr>$$;<esc>`a`b`c`d`e4<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
 
+iab <buffer> c… comment on <c-o>ma is<cr>
+      \$HERE$<cr>
+      \<c-o>mb<cr>
+      \$HERE$;<esc>`a`b<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
+
