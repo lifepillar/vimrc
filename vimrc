@@ -317,7 +317,7 @@
       return
     endif
     let l:sz = getfsize(bufname('%'))
-    if l:sz >= g:LargeFile || l:sz == -2
+    if l:sz >= g:LargeFile*1024*1024 || l:sz == -2
       let b:lf_stl_warnings = '  Large file '
       return
     endif
@@ -788,7 +788,7 @@
   " }}
 " }}
 " Init {{
-  let g:LargeFile = 20*1024*1024
+  let g:LargeFile = 20
 
   EnableStatusLine
 
