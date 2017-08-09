@@ -479,7 +479,8 @@
   nnoremap          <leader>bm :<c-u>CmdBuffer messages<cr>
   nnoremap          <leader>bn :<c-u>enew<cr>
   nnoremap          <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
-  nnoremap          <leader>bw :<c-u>setlocal readonly!<cr>
+  nnoremap <silent> <leader>br :<c-u>setlocal readonly!<cr>
+  nnoremap <silent> <leader>bw :<c-u>bw<cr>
   " Cscope
   nnoremap <silent> <leader>ca :<c-u>cs find a <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
   nnoremap <silent> <leader>cc :<c-u>cs find c <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
