@@ -184,6 +184,8 @@
     autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
+    " If a file is large, disable syntax highlighting and other stuff
+    autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffers#large(expand("<afile>")) | endif
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
@@ -318,8 +320,7 @@
       unlet! b:lf_stl_warnings
       return
     endif
-    let l:sz = getfsize(bufname('%'))
-    if l:sz >= g:LargeFile*1024*1024 || l:sz == -2
+    if exists('b:lf_large_file')
       let b:lf_stl_warnings = '  Large file '
       return
     endif
@@ -555,7 +556,7 @@
     let g:loaded_netrwPlugin = 1
     let g:loaded_rrhelper = 1
     let g:loaded_tarPlugin = 1
-    let g:loaded_vimballPlugin = 1
+    " let g:loaded_vimballPlugin = 1
     let g:loaded_zipPlugin = 1
   " }}
   " clang_complete {{
@@ -791,7 +792,7 @@
   " }}
 " }}
 " Init {{
-  let g:LargeFile = 20
+  let g:LargeFile = 20*1024*1024 " 20MB
 
   EnableStatusLine
 
