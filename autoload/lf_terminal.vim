@@ -39,7 +39,7 @@ elseif has('terminal')
 
   " Open a new terminal buffer and bind it to the current buffer
   fun! lf_terminal#open()
-    let l:term_id = term_start('', '')
+    let l:term_id = term_start(&shell, {'term_name': 'Terminal'})
     wincmd p " Back to previous window
     let b:lf_bound_terminal = l:term_id
   endf
