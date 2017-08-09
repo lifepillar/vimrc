@@ -18,7 +18,7 @@ if has('nvim')
     call jobsend(b:lf_bound_terminal, add(a:lines, ''))
   endf
 
-elseif $TMUX != ""
+elseif !empty($TMUX)
 
   fun! lf_terminal#open()
     call system('tmux split-window')
@@ -33,6 +33,23 @@ elseif $TMUX != ""
     for line in a:lines
       call system('tmux -u send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(line."\r"))
     endfor
+  endf
+
+elseif has('terminal')
+
+  " Open a new terminal buffer and bind it to the current buffer
+  fun! lf_terminal#open()
+    let l:term_id = term_start('', '')
+    wincmd p " Back to previous window
+    let b:lf_bound_terminal = l:term_id
+  endf
+
+  fun! lf_terminal#send(lines)
+    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
+      let b:lf_bound_terminal = input('Terminal buffer: ')
+    endif
+    call term_sendkeys(b:lf_bound_terminal, join(a:lines)."\<cr>")
+    call term_wait(b:lf_bound_terminal)
   endf
 
 else
