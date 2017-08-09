@@ -465,7 +465,7 @@
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>+
+  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
   vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
