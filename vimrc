@@ -185,7 +185,7 @@
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
     " If a file is large, disable syntax highlighting and other stuff
-    autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffers#large(expand("<afile>")) | endif
+    autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffer#large(expand("<afile>")) | endif
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
@@ -386,7 +386,7 @@
   command! -complete=shellcmd -nargs=+ Shell call lf_job#to_buffer(<q-args>, "B")
 
   " Execute a Vim command and send the output to a new scratch buffer
-  command! -complete=command -nargs=+ CmdBuffer call lf_buffers#cmd(<q-args>)
+  command! -complete=command -nargs=+ CmdBuffer call lf_buffer#cmd(<q-args>)
 
   " Send text to a terminal
   command! BindTerminal call lf_terminal#open()
