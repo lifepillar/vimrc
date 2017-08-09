@@ -49,7 +49,6 @@ elseif has('terminal')
       let b:lf_bound_terminal = str2nr(input('Terminal buffer: '))
     endif
     call term_sendkeys(b:lf_bound_terminal, join(a:lines, "\<cr>")."\<cr>")
-    call term_wait(b:lf_bound_terminal)
   endf
 
 else
