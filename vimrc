@@ -256,11 +256,13 @@
   endf
 
   fun! BuildTabLine()
-    return join(map(
-          \   range(1, tabpagenr('$')),
-          \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
-          \ ), '')
-          \ . "%#TabLineFill#%T%=⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
+    return tabpagenr('$') == 1
+          \ ? "%#TabLineFill#%T%=⌘ %<%{getcwd()} "
+          \ : join(map(
+          \     range(1, tabpagenr('$')),
+          \     '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
+          \   ), '')
+          \   . "%#TabLineFill#%T%=⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
   endf
 
 " }}
