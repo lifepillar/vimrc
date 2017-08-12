@@ -65,12 +65,15 @@ fun! lf_text#eatchar(pat) " See :h abbreviations
   return (c =~ a:pat) ? '' : c
 endfunc
 
+
 " Comment out the specified line by wrapping it with the given comment delimiters.
+" Assumes that lc and rc are properly escaped.
 fun! lf_text#comment_line(lnum, lc, rc, indent)
   call setline(a:lnum, substitute(getline(a:lnum), '^\(\s\{'.a:indent.'}\)\(.*\)$', '\1'.a:lc.' \2'.(empty(a:rc) ? '' : ' '.a:rc), ''))
 endf
 
 " Uncomment the specified line by removing the given comment delimiters.
+" Assumes that lc and rc are properly escaped.
 fun! lf_text#uncomment_line(lnum, lc, rc)
   call setline(a:lnum, substitute(substitute(getline(a:lnum), '\s*'.a:rc.'\s*$', '', ''), '^\(\s*\)'.a:lc.'\s\?\(.*\)$', '\1\2', ''))
 endf
