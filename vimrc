@@ -471,6 +471,11 @@
   " Tab width
   nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
   nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
+  " Comment/uncomment
+  nnoremap          Q :set opfunc=lf_text#comment_out<cr>g@
+  nnoremap         gQ :set opfunc=lf_text#uncomment<cr>g@
+  vnoremap          Q :<c-u>call lf_text#comment_out(visualmode(), 1)<cr>
+  vnoremap         gQ :<c-u>call lf_text#uncomment(visualmode(), 1)<cr>
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
