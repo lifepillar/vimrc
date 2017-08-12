@@ -1,3 +1,5 @@
+setlocal commentstring=--\ %s
+
 " Use <c-i> and <c-o> (in Normal mode) to jump between the different parts of a snippet.
 iab <buffer> t… create table <c-o>ma (<cr><c-o>mb<cr>);<esc>`a`b<c-o>a<c-r>=lf_text#eatchar('\s')<cr>
 
