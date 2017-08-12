@@ -54,10 +54,6 @@
 	path = pack/bundle/start/showmarks
 	url = https://github.com/jacquesbh/vim-showmarks.git
 	shallow = true
-[submodule "commentary"]
-	path = pack/bundle/start/commentary
-	url = https://github.com/tpope/vim-commentary.git
-	shallow = true
 [submodule "swift"]
 	path = pack/bundle/start/swift
 	url = https://github.com/keith/swift.vim.git
