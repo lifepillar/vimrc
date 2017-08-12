@@ -122,3 +122,30 @@ fun! lf_text#uncomment(type, ...) abort
   endwhile
   " TODO: reindent?
 endf
+
+" Currently unused
+fun! lf_text#all_line_comment_delimiters()
+  return filter(map(split(&l:comments, ','), { _,s -> matchstr(s, '^[nbO]*:\zs.\+') }), { _,s -> !empty(s) })
+endf
+
+" Currently unused
+fun! lf_text#all_block_comment_delimiters()
+  let l:block_comments = []
+  let l:comment_parts = split(&l:comments, ',')
+  let [l:i, l:N] = [0, len(l:comment_parts)]
+  while l:i < l:N
+    let l:start = matchstr(l:comment_parts[l:i], 's.*:\zs.\+')
+    if !empty(l:start)
+      let l:i += 1
+      let l:middle = matchstr(l:comment_parts[l:i], 'm.*:\zs.\+')
+      if !empty(l:middle)
+        let l:i += 1
+      endif
+      let l:end = matchstr(l:comment_parts[l:i], 'e.*:\zs.\+')
+      call add(l:block_comments, [l:start, l:middle, l:end])
+    endif
+    let l:i += 1
+  endwhile
+  return l:block_comments
+endf
+
