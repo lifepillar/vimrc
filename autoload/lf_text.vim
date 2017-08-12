@@ -66,17 +66,13 @@ fun! lf_text#eatchar(pat) " See :h abbreviations
 endfunc
 
 " Comment out the specified line by wrapping it with the given comment delimiters.
-fun! lf_text#comment_line(lnum, ldelim, rdelim, indent)
-  let l:lc = escape(a:ldelim, '\/*~$.')
-  let l:rc = escape(a:rdelim, '\/*~$.')
-  call setline(a:lnum, substitute(getline(a:lnum), '^\(\s\{'.a:indent.'}\)\(.*\)$', '\1'.l:lc.' \2'.(empty(l:rc) ? '' : ' '.l:rc), ''))
+fun! lf_text#comment_line(lnum, lc, rc, indent)
+  call setline(a:lnum, substitute(getline(a:lnum), '^\(\s\{'.a:indent.'}\)\(.*\)$', '\1'.a:lc.' \2'.(empty(a:rc) ? '' : ' '.a:rc), ''))
 endf
 
 " Uncomment the specified line by removing the given comment delimiters.
-fun! lf_text#uncomment_line(lnum, ldelim, rdelim)
-  let l:lc = escape(a:ldelim, '\/*~$.')
-  let l:rc = escape(a:rdelim, '\/*~$.')
-  call setline(a:lnum, substitute(substitute(getline(a:lnum), '\s*'.l:rc.'\s*$', '', ''), '^\(\s*\)'.l:lc.'\s\?\(.*\)$', '\1\2', ''))
+fun! lf_text#uncomment_line(lnum, lc, rc)
+  call setline(a:lnum, substitute(substitute(getline(a:lnum), '\s*'.a:rc.'\s*$', '', ''), '^\(\s*\)'.a:lc.'\s\?\(.*\)$', '\1\2', ''))
 endf
 
 fun! lf_text#comment_delimiters()
@@ -88,7 +84,7 @@ fun! lf_text#comment_delimiters()
   if len(l:delim) < 2
     call add(l:delim, '')
   endif
-  return l:delim
+  return [escape(l:delim[0], '\/*~$.'), escape(l:delim[1], '\/*~$.')]
 endf
 
 fun! lf_text#minindent(first, last)
