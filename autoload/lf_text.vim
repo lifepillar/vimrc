@@ -82,7 +82,8 @@ endf
 fun! lf_text#comment_delimiters()
   let l:delim = split(&l:commentstring, '\s*%s\s*')
   if empty(l:delim)
-    throw 'Undefined comment delimiter. Please setlocal commentstring'
+    call lf_msg#err('Undefined comment delimiters. Please setlocal commentstring.')
+    return ['','']
   endif
   if len(l:delim) < 2
     call add(l:delim, '')
