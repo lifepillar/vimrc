@@ -388,10 +388,8 @@
   " Execute a Vim command and send the output to a new scratch buffer
   command! -complete=command -nargs=+ CmdBuffer call lf_buffer#cmd(<q-args>)
 
-  " Send text to a terminal
+  " Open a terminal and "bind" it to the current buffer (see \x mappings below)
   command! BindTerminal call lf_terminal#open()
-  command! REPLSendLine call lf_terminal#send([getline('.')])
-  command! -range=% REPLSendSelection call lf_terminal#send(lf_text#selection(<line1>,<line2>))
 
   " Set the tab width for the current buffer
   command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
@@ -465,8 +463,8 @@
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>REPLSendLine<cr>
-  vnoremap <silent> <leader>x :<c-u>REPLSendSelection<cr>
+  nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>
+  vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap     <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
