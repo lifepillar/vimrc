@@ -156,7 +156,8 @@
   set report=0 " Always show # number yanked/deleted lines
   set nowrap " Don't wrap lines by default
   set linebreak " If wrapping is enabled, wrap at word boundaries
-  set laststatus=2 " Always show status line
+  set laststatus=2 " Always show the status line
+  set showtabline=2 " Always show the tab bar
   set shortmess-=lr " Don't use abbreviations for 'characters', 'lines', 'readonly'
   set shortmess+=cI " No intro and suppress ins-completion messages
   set showcmd " Show (partial) command in the last line of the screen
