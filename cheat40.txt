@@ -1,8 +1,4 @@
 Other Plugins {{{1
-Commentary {{{2
-Comment operator         gc            O
-Toggle line comment      gcc           N
-Uncomment block          gcgc          N
 CtrlP {{{2
 Open in buffer mode      «C-p»         N
 Dirvish {{{2
@@ -108,6 +104,7 @@ Paste from clipboard     \p           VN
 Paste from clipboard     \P           VN
 Add blank line above     [«Spc»        N
 Add blank line below     ]«Spc»        N
+Toggle comment           Q             O
 Diff with last saved     :DiffOrig     N
 Capitalize words         \eU           V
 Remove trailing space    \es           N
