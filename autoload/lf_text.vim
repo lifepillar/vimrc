@@ -65,19 +65,8 @@ fun! lf_text#eatchar(pat) " See :h abbreviations
   return (c =~ a:pat) ? '' : c
 endfunc
 
-
-" Comment out the specified line by wrapping it with the given comment delimiters.
-" Assumes that lc and rc are properly escaped.
-fun! lf_text#comment_line(lnum, lc, rc, indent)
-  call setline(a:lnum, substitute(getline(a:lnum), '^\(\s\{'.a:indent.'}\)\(.*\)$', '\1'.a:lc.' \2'.(empty(a:rc) ? '' : ' '.a:rc), ''))
-endf
-
-" Uncomment the specified line by removing the given comment delimiters.
-" Assumes that lc and rc are properly escaped.
-fun! lf_text#uncomment_line(lnum, lc, rc)
-  call setline(a:lnum, substitute(substitute(getline(a:lnum), '\s*'.a:rc.'\s*$', '', ''), '^\(\s*\)'.a:lc.'\s\?\(.*\)$', '\1\2', ''))
-endf
-
+" Returns a pair of comment delimiters, extracted from 'commentstring'.
+" The delimiters are ready to be used in a regular expression.
 fun! lf_text#comment_delimiters()
   let l:delim = split(&l:commentstring, '\s*%s\s*')
   if empty(l:delim)
@@ -90,7 +79,33 @@ fun! lf_text#comment_delimiters()
   return [escape(l:delim[0], '\/*~$.'), escape(l:delim[1], '\/*~$.')]
 endf
 
-fun! lf_text#minindent(first, last)
+" Comment out a region of text. Assumes that the delimiters are properly escaped.
+fun! lf_text#comment_out(first, last, lc, rc) abort
+  let l:indent = s:minindent(a:first, a:last)
+  for l:lnum in range(a:first, a:last)
+    call setline(l:lnum, substitute(getline(l:lnum), '^\(\s\{'.l:indent.'}\)\(.*\)$', '\1'.a:lc.' \2'.(empty(a:rc) ? '' : ' '.a:rc), ''))
+  endfor
+endf
+
+" Uncomment a region of text. Assumes that the delimiters are properly escaped.
+fun! lf_text#uncomment(first, last, lc, rc) abort
+  for l:lnum in range(a:first, a:last)
+    call setline(l:lnum, substitute(substitute(getline(l:lnum), '\s*'.a:rc.'\s*$', '', ''), '^\(\s*\)'.a:lc.'\s\?\(.*\)$', '\1\2', ''))
+  endfor
+endf
+
+" Comment/uncomment a region of text.
+fun! lf_text#toggle_comment(type, ...) abort " See :h map-operator
+  let [l:lc, l:rc] = lf_text#comment_delimiters()
+  let [l:first, l:last] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
+  if match(getline(l:first), '^\s*'.l:lc) > -1
+    call lf_text#uncomment(l:first, l:last, l:lc, l:rc)
+  else
+    call lf_text#comment_out(l:first, l:last, l:lc, l:rc)
+  endif
+endf
+
+fun! s:minindent(first, last)
   let [l:min, l:i] = [indent(a:first), a:first + 1]
   while l:min > 0 && l:i <= a:last
     if l:min > indent(l:i)
@@ -100,52 +115,3 @@ fun! lf_text#minindent(first, last)
   endwhile
   return l:min
 endf
-
-fun! lf_text#comment_out(type, ...) abort " See :h map-operator
-  let l:delim = lf_text#comment_delimiters()
-  let [l:firstline, l:lastline] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
-  let l:indent = lf_text#minindent(l:firstline, l:lastline)
-  let l:lnum = l:firstline
-  while l:lnum <= l:lastline
-    call lf_text#comment_line(l:lnum, l:delim[0], l:delim[1], l:indent)
-    let l:lnum += 1
-  endwhile
-endf
-
-fun! lf_text#uncomment(type, ...) abort
-  let l:delim = lf_text#comment_delimiters()
-  let [l:firstline, l:lastline] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
-  let l:lnum = l:firstline
-  while l:lnum <= l:lastline
-    call lf_text#uncomment_line(l:lnum, l:delim[0], l:delim[1])
-    let l:lnum += 1
-  endwhile
-  " TODO: reindent?
-endf
-
-" Currently unused
-fun! lf_text#all_line_comment_delimiters()
-  return filter(map(split(&l:comments, ','), { _,s -> matchstr(s, '^[nbO]*:\zs.\+') }), { _,s -> !empty(s) })
-endf
-
-" Currently unused
-fun! lf_text#all_block_comment_delimiters()
-  let l:block_comments = []
-  let l:comment_parts = split(&l:comments, ',')
-  let [l:i, l:N] = [0, len(l:comment_parts)]
-  while l:i < l:N
-    let l:start = matchstr(l:comment_parts[l:i], 's.*:\zs.\+')
-    if !empty(l:start)
-      let l:i += 1
-      let l:middle = matchstr(l:comment_parts[l:i], 'm.*:\zs.\+')
-      if !empty(l:middle)
-        let l:i += 1
-      endif
-      let l:end = matchstr(l:comment_parts[l:i], 'e.*:\zs.\+')
-      call add(l:block_comments, [l:start, l:middle, l:end])
-    endif
-    let l:i += 1
-  endwhile
-  return l:block_comments
-endf
-

@@ -401,6 +401,8 @@
   " Use space as alternative leader
   map <space> <leader>
   set pastetoggle=<f9>
+  " Avoid entering Ex mode by pressing gQ (Q is remapped below)
+  nnoremap gQ <nop>
   " Change to the directory of the current file
   nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
   " Square bracket mappings (many of them inspired by Unimpaired)
@@ -468,11 +470,9 @@
   " Tab width
   nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
   nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
-  " Comment/uncomment (override Q and gQ, so we avoid entering Ex mode by mistake)
-  nnoremap <silent>  Q :set opfunc=lf_text#comment_out<cr>g@
-  nnoremap <silent> gQ :set opfunc=lf_text#uncomment<cr>g@
-  vnoremap <silent>  Q :<c-u>call lf_text#comment_out(visualmode(), 1)<cr>
-  vnoremap <silent> gQ :<c-u>call lf_text#uncomment(visualmode(), 1)<cr>
+  " Comment/uncomment (overrides Q, so we avoid entering Ex mode by mistake)
+  nnoremap <silent>  Q :set opfunc=lf_text#toggle_comment<cr>g@
+  vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
