@@ -1,11 +1,11 @@
-fun! lf_text#enableSoftWrap()
+fun! lf_text#enable_soft_wrap()
   setlocal wrap
   map <buffer> j gj
   map <buffer> k gk
   echomsg "Soft wrap enabled"
 endf
 
-fun! lf_text#disableSoftWrap()
+fun! lf_text#disable_soft_wrap()
   setlocal nowrap
   if mapcheck("j") != ""
     unmap <buffer> j
@@ -15,11 +15,11 @@ fun! lf_text#disableSoftWrap()
 endf
 
 " Toggle soft-wrapped text in the current buffer.
-fun! lf_text#toggleWrap()
+fun! lf_text#toggle_wrap()
   if &l:wrap
-    call lf_text#disableSoftWrap()
+    call lf_text#disable_soft_wrap()
   else
-    call lf_text#enableSoftWrap()
+    call lf_text#enable_soft_wrap()
   endif
 endf
 

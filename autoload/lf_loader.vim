@@ -1,5 +1,5 @@
 " Enable a Pathogen blacklisted plugin.
-fun! lf_loader#loadPlugin(plugin_name)
+fun! lf_loader#load_plugin(plugin_name)
   " Remove the plugin from Pathogen's blacklist
   call filter(g:pathogen_blacklist, "v:val !=? '" . a:plugin_name ."'")
   " Update runtimepath

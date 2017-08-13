@@ -47,7 +47,7 @@ let g:ledger_tables = {
         \ }
       \ }
 
-fun! s:ledgerTable(type, args)
+fun! s:ledger_table(type, args)
   let l:format = join(g:ledger_tables[a:type].fields, g:ledger_table_sep)
   if ledger#output(ledger#report(g:ledger_main, join([a:type, a:args, "-F '".l:format."'"])))
     set modifiable
@@ -57,7 +57,7 @@ fun! s:ledgerTable(type, args)
   endif
 endf
 
-fun! s:ledgerComplete()
+fun! s:ledger_complete()
   if match(getline('.'), escape(g:ledger_decimal_sep, '.').'\d\d\%'.col('.').'c') > -1
     return "\<c-r>=ledger#autocomplete_and_align()\<cr>"
   else
@@ -65,16 +65,16 @@ fun! s:ledgerComplete()
   endif
 endf
 
-command! -buffer -nargs=+ LedgerTable  call <sid>ledgerTable('register', <q-args>)
-command! -buffer -nargs=+ BalanceTable call <sid>ledgerTable('cleared', <q-args>)
-command! -buffer -nargs=+ BudgetTable  call <sid>ledgerTable('budget', <q-args>)
+command! -buffer -nargs=+ LedgerTable  call <sid>ledger_table('register', <q-args>)
+command! -buffer -nargs=+ BalanceTable call <sid>ledger_table('cleared', <q-args>)
+command! -buffer -nargs=+ BudgetTable  call <sid>ledger_table('budget', <q-args>)
 
 " Toggle transaction state
 nnoremap <silent><buffer> <enter> :call ledger#transaction_state_toggle(line('.'), '* !')<cr>
 " Set today's date as auxiliary date
 nnoremap <silent><buffer> <leader>lx :call ledger#transaction_date_set('.', "auxiliary")<cr>
 " Autocompletion and alignment
-imap <expr><silent><buffer> <tab> <sid>ledgerComplete()
+imap <expr><silent><buffer> <tab> <sid>ledger_complete()
 vnoremap <silent><buffer> <tab> :LedgerAlign<cr>
 " Enter a new transaction based on the text in the current line
 nnoremap <silent><buffer> <c-t> :call ledger#entry()<cr>

@@ -157,6 +157,7 @@
   set linebreak " If wrapping is enabled, wrap at word boundaries
   set laststatus=2 " Always show status line
   set showtabline=2 " Always show the tab bar
+  set cmdheight=2 " Increase space for command line
   set shortmess-=lr " Don't use abbreviations for 'characters', 'lines', 'readonly'
   set shortmess+=cI " No intro and suppress ins-completion messages
   set showcmd " Show (partial) command in the last line of the screen
@@ -531,7 +532,7 @@
   nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
-  nnoremap <silent> <leader>ow :<c-u>call lf_text#toggleWrap()<cr>
+  nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
   " Appeareance (view)
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
@@ -800,7 +801,7 @@
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
     let g:pathogen_blacklist = ['tagbar', 'undotree']
     execute pathogen#infect('pack/bundle/start/{}', 'pack/my/start/{}', 'pack/my/opt/{}', 'pack/bundle/opt/{}', 'pack/themes/opt/{}')
-    command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#loadPlugin(<q-args>) " Load a blacklisted plugin
+    command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#load_plugin(<q-args>)
   endif
 
   " Local settings
