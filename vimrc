@@ -622,7 +622,7 @@
         let g:limelight_conceal_ctermfg = (&background ==# 'dark') ? '10' : '14'
       endif
       set scrolloff=999 " Keep the edited line vertically centered
-      silent call lf_text#enableSoftWrap()
+      silent call lf_text#enable_soft_wrap()
       set noshowcmd
       Limelight
     endf
@@ -633,7 +633,7 @@
         let &linespace=s:linespace
       endif
       set showcmd
-      silent call lf_text#disableSoftWrap()
+      silent call lf_text#disable_soft_wrap()
       let &scrolloff=g:default_scrolloff
       Limelight!
     endf
