@@ -664,16 +664,6 @@
     inoremap <expr> <cr> mucomplete#popup_exit("\<cr>")
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
   " }}
-  " Show Marks {{
-    fun! s:toggle_show_marks()
-      if exists('b:showmarks')
-        NoShowMarks
-      else
-        DoShowMarks
-      endif
-    endf
-    nnoremap <silent> <leader>vm :<c-u>call <sid>toggle_show_marks()<cr>
-  " }}
   " Sneak {{
     let g:sneak#streak = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
