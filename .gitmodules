@@ -58,10 +58,6 @@
 	path = pack/bundle/start/swift
 	url = https://github.com/keith/swift.vim.git
 	shallow = true
-[submodule "rust"]
-	path = pack/bundle/start/rust
-	url = https://github.com/rust-lang/rust.vim.git
-	shallow = true
 [submodule "repeat"]
 	path = pack/bundle/start/repeat
 	url = https://github.com/tpope/vim-repeat.git
