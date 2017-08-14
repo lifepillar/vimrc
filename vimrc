@@ -43,7 +43,7 @@
     " }}
   else
     " Vim {{
-    set viminfo=!,'1000,<10000,s10,h,n~/.vim/viminfo
+    set viminfo=!,'100,<10000,s10,h,n~/.vim/viminfo
     " See :set termcap, :h t_ku, :h :set-termcap, and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
     set <s-left>=b  " There's a literal Esc (^[) here and below (it may be invisible, e.g., in GitHub)
     set <s-right>=f
@@ -72,7 +72,6 @@
   set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
-  set history=10000 " Keep a longer history (10000 is the maximum)
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp/backup
   set directory=~/.vim/tmp/swap
