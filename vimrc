@@ -194,7 +194,7 @@
   augroup END
 " }}
 " Status line {{
-  " See :h mode() (some of these are never used in the status line; 't' is from NeoVim)
+  " See :h mode() (some of these are never used in the status line)
   let g:mode_map = {
         \  'n': ['NORMAL',  'NormalMode' ],     'no': ['PENDING', 'NormalMode'  ],  'v': ['VISUAL',  'VisualMode' ],
         \  'V': ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode'  ],  's': ['SELECT',  'VisualMode' ],
