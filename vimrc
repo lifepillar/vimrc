@@ -157,8 +157,7 @@
   set laststatus=2 " Always show status line
   set showtabline=2 " Always show the tab bar
   set cmdheight=2 " Increase space for command line
-  set shortmess-=lr " Don't use abbreviations for 'characters', 'lines', 'readonly'
-  set shortmess+=cI " No intro and suppress ins-completion messages
+  set shortmess+=Icm " No intro, suppress ins-completion messages, use [+] instead of [Modified]
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:•,precedes:←,extends:→  " Symbols to use for invisible characters
