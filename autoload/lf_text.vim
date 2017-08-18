@@ -54,7 +54,6 @@ fun! lf_text#diff_orig()
   silent read ++edit #
   norm ggd_
   autocmd BufWinLeave <buffer> diffoff!
-  silent file [ORIGINAL]
   diffthis
   wincmd p
   diffthis
