@@ -190,7 +190,9 @@
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
+    autocmd SwapExists * call lf_file#swap_exists()
   augroup END
+
 " }}
 " Status line {{
   " See :h mode() (some of these are never used in the status line)
