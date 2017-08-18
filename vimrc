@@ -176,8 +176,9 @@
   endif
   set printoptions=syntax:n,number:y
   set printfont=:h9
-
-  augroup lf_appearance
+" }}
+" Autocommands {{
+  augroup lf_autocmds
     autocmd!
     " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
     autocmd VimResized * wincmd =
