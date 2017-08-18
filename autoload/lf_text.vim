@@ -48,11 +48,13 @@ fun! lf_text#selection()
   end
 endf
 
-fun! lf_text#diff_orig()
+fun! lf_text#diff_orig() " See :help :DiffOrig
+  let l:ft = &filetype
   vert new
   setl buftype=nofile bufhidden=wipe nobuflisted noswapfile
   silent read ++edit #
   norm ggd_
+  execute "setfiletype" l:ft
   autocmd BufWinLeave <buffer> diffoff!
   diffthis
   wincmd p
