@@ -379,7 +379,7 @@
   command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
 
   " See :h :DiffOrig
-  command! -nargs=0 DiffOrig call lf_text#diff_orig()
+  command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
 
   " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
   command! -complete=shellcmd -nargs=+ Git call lf_git#exec(<q-args>, "B")
