@@ -1,4 +1,4 @@
-fun! lf_file#swap_exists()
+fun! lf_file#swap_exists(file)
   echohl WarningMsg
   echon 'Swap file exists: ' . v:swapname
   echohl None
