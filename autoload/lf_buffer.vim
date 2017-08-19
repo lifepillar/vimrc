@@ -14,7 +14,7 @@ fun! lf_buffer#large(name)
   setlocal bufhidden=unload foldmethod=manual nofoldenable noswapfile
   augroup lf_large_buffer
     autocmd!
-    autocmd BufWinEnter <buffer> call s:restore_eventignore()
+    autocmd BufWinEnter <buffer> call <sid>restore_eventignore()
   augroup END
 endf
 
