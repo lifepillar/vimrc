@@ -566,9 +566,14 @@
     let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
     let g:clang_user_options = '-std=c++14'
     let g:clang_complete_auto = 1
-    augroup lf_cpp  " Lazily load clang_complete
+    fun! s:clang_complete_lazy_load()
+      packadd clang_complete
+      autocmd! lf_cpp
+      augroup! lf_cpp
+    endf
+    augroup lf_cpp
       autocmd!
-      autocmd BufReadPre *.c,*.cpp,*.h,*.hpp packadd clang_complete | autocmd! lf_cpp | augroup! lf_cpp | endif
+      autocmd BufReadPre *.c,*.cpp,*.h,*.hpp call <sid>clang_complete_lazy_load()
     augroup END
   " }}
   " CtrlP {{
