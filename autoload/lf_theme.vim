@@ -36,14 +36,11 @@ fun! lf_theme#hi_info()
 endf
 
 fun! lf_theme#toggle_hi_info()
-  if exists("#LF_HI_INFO")
-    augroup LF_HI_INFO
-      autocmd!
-    augroup END
-    augroup! LF_HI_INFO
+  if exists("#lf_hi_info")
+    autocmd! lf_hi_info
+    augroup! lf_hi_info
   else
-    augroup LF_HI_INFO
-      autocmd!
+    augroup lf_hi_info
       autocmd CursorMoved * call lf_theme#hi_info()
     augroup END
   endif
