@@ -143,6 +143,8 @@
     set termguicolors
   endif
   set display=lastline
+  " Get more information from ctrl-g:
+  nnoremap <c-g> 2<c-g>
   " Show block cursor in Normal mode and line cursor in Insert mode:
   let &t_ti.="\e[1 q"
   let &t_SI.="\e[5 q"
