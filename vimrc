@@ -685,7 +685,7 @@
     endf
 
     " Toggle tag bar
-    nnoremap <silent> <leader>vt :if !exists("g:loaded_tagbar")<bar>packadd tagbar<bar>endif<cr>:TagbarToggle<cr>
+    nnoremap <silent> <leader>vt :<c-u>if !exists("g:loaded_tagbar")<bar>packadd tagbar<bar>endif<cr>:TagbarToggle<cr>
     let g:tagbar_autofocus = 1
     let g:tagbar_iconchars = ['▸', '▾']
     let g:tagbar_status_func = 'TagbarStatusLine'
