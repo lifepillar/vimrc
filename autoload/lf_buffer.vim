@@ -23,3 +23,9 @@ fun! s:restore_eventignore()
   autocmd! lf_large_buffer
   augroup! lf_large_buffer
 endf
+
+" Return info about the current buffer as a String suitable to be displayed in
+" the command line or in the tabline.
+fun! lf_buffer#info()
+  return 'Bufnr: ' . bufnr('') . ' Buftype: ' .  &l:buftype
+endf

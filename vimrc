@@ -260,13 +260,11 @@
   endf
 
   fun! BuildTabLine()
-    return tabpagenr('$') == 1
-          \ ? "%#TabLineFill#%T%=⌘ %<%{getcwd()} "
-          \ : join(map(
-          \     range(1, tabpagenr('$')),
-          \     '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
-          \   ), '')
-          \   . "%#TabLineFill#%T%=⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
+    return (tabpagenr('$') == 1 ? '' : join(map(
+          \   range(1, tabpagenr('$')),
+          \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
+          \ ), ''))
+          \ . "%#TabLineFill#%T%=%<%{get(g:,'lf_info',0) ? lf_buffer#info() : ''}  ⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
   endf
 
 " }}
@@ -536,6 +534,7 @@
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
   " Appeareance (view)
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
+  nnoremap <silent> <leader>vi :<c-u>let g:lf_info = !(exists('g:lf_info') && g:lf_info)<cr>:redraw!<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
   " }}
