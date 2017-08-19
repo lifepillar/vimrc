@@ -191,6 +191,7 @@
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
+    " Less intrusive swap prompt
     autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
   augroup END
 " }}
