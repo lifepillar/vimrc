@@ -293,7 +293,7 @@
     if exists("g:default_stl") | return | endif
     augroup lf_warnings
       autocmd!
-      autocmd BufReadPost,BufWritePost * call <sid>updateWarnings()
+      autocmd BufReadPost,BufWritePost * call <sid>update_warnings()
     augroup END
     set noshowmode " Do not show the current mode because it is displayed in the status line
     set noruler
@@ -316,8 +316,7 @@
   endf
 
   " Update trailing space and mixed indent warnings for the current buffer.
-  " See http://got-ravings.blogspot.it/2008/10/vim-pr0n-statusline-whitespace-flags.html
-  fun! s:updateWarnings()
+  fun! s:update_warnings()
     if exists('b:lf_no_warnings')
       unlet! b:lf_stl_warnings
       return
@@ -326,22 +325,16 @@
       let b:lf_stl_warnings = '  Large file '
       return
     endif
-    let l:winview = winsaveview() " Save window state
-    call cursor(1,1) " Start search from the beginning of the file
-    let l:trail = search('\s$', 'cnw')
-    let l:spaces = search('\v^\s* ', 'cnw')
-    let l:tabs = search('\v^\s*\t', 'cnw')
-    if l:trail != 0
-      let b:lf_stl_warnings = '  Trailing space ('.trail.') '
-      if l:spaces != 0 && l:tabs != 0
-        let b:lf_stl_warnings .= 'Mixed indent ('.spaces.'/'.l:tabs.') '
-      endif
-    elseif l:spaces != 0 && l:tabs != 0
-      let b:lf_stl_warnings = '  Mixed indent ('.spaces.'/'.l:tabs.') '
+    let l:trail  = search('\s$',       'cnw')
+    let l:spaces = search('^\s\{-} ',  'cnw')
+    let l:tabs   = search('^\s\{-}\t', 'cnw')
+    if l:trail || (l:spaces && l:tabs)
+      let b:lf_stl_warnings = '  '
+            \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
+            \ . (l:spaces && l:tabs ? 'Mixed indent ('.l:spaces.'/'.l:tabs.') ' : '')
     else
       unlet! b:lf_stl_warnings
     endif
-    call winrestview(l:winview) " Restore window state
   endf
 
   " Delete trailing white space.
@@ -349,7 +342,7 @@
     let l:winview = winsaveview() " Save window state
     keeppatterns %s/\s\+$//e
     call winrestview(l:winview) " Restore window state
-    call s:updateWarnings()
+    call s:update_warnings()
     redraw  " See :h :echo-redraw
     echomsg 'Trailing space removed!'
   endf
