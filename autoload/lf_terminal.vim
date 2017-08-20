@@ -62,6 +62,7 @@ elseif has('terminal')
       call term_wait(a:bn)
     endf
   endif
+
 else
 
   fun! lf_terminal#open()
