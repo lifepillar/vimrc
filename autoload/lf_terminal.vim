@@ -50,41 +50,18 @@ elseif has('terminal')
     endif
     for l:line in a:lines
       call term_sendkeys(b:lf_bound_terminal, l:line . "\<cr>")
-      call WaitFor('term_getline('.b:lf_bound_terminal.')!=""')
+      call s:term_wait(b:lf_bound_terminal)
     endfor
   endf
 
-  " Copied verbatim from vim/src/testdir/shared.vim.
-  " This appears to be more robust than term_wait(). See also:
-  "
-  "     https://github.com/macvim-dev/macvim/issues/542
-  "     https://github.com/vim/vim/issues/1985
-  func! WaitFor(expr, ...)
-    let timeout = get(a:000, 0, 10)
-    " using reltime() is more accurate, but not always available
-    if has('reltime')
-      let start = reltime()
-    else
-      let slept = 0
-    endif
-    for i in range(timeout / 10)
-      try
-        if eval(a:expr)
-          if has('reltime')
-            return float2nr(reltimefloat(reltime(start)) * 1000)
-          endif
-          return slept
-        endif
-      catch
-      endtry
-      if !has('reltime')
-        let slept += 10
-      endif
-      sleep 10m
-    endfor
-    return timeout
-  endfunc
-
+  if has('gui')
+    fun! s:term_wait(bn)
+    endf
+  else
+    fun! s:term_wait(bn)
+      call term_wait(a:bn)
+    endf
+  endif
 else
 
   fun! lf_terminal#open()
