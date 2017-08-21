@@ -73,6 +73,7 @@ if has('terminal') " Vim 8 or later, MacVim
 
   fun! lf_git#push() " FIXME: names with spaces?
     execute 'terminal git -C %:p:h push'
+    wincmd p
   endf
 
   fun! lf_git#execute(cmd)
