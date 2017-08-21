@@ -1,61 +1,11 @@
-let s:winpos_map = {
-      \ "T": "to ",  "t": "abo ", "B": "bo ",  "b": "bel ",
-      \ "L": "to v", "l": "abo v", "R": "bo v", "r": "bel v"
-      \ }
+if has('terminal') " Vim 8 or later, MacVim
 
-" Run a shell command and send its output to a new buffer.
-" cmdline: the command to be executed (String or List);
-" ...    : the position of the output window (see s:winpos_map).
-fun! lf_job#to_buffer(cmdline, ...)
-  let l:cmd = join(map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
-  execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."new"
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  execute '%!'. l:cmd
-  setlocal nomodifiable
-  wincmd p
-endf
-
-if exists("*job_start")
-
-  " Asynchronously run a shell command and send its output to a buffer.
-  " cmdline: the command to be executed (String or List);
-  " ...    : the position of the output window (see s:winpos_map).
-  fun! lf_job#to_buffer_async(cmdline, ...)
-    let l:job = lf_job#start(
-          \ map(type(a:cmdline) == type("") ? split(a:cmdline) : a:cmdline, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)')
-          \ )
-    if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
-      execute get(s:winpos_map, get(a:000, 0, "B"), "bo ")."split +buffer".ch_getbufnr(l:job, "out")
-      wincmd p
-    endif
-
+" Execute an external command and send its output to a new buffer.
+  fun! lf_job#to_buffer(cmd) " FIXME: escaping
+    execute 'botright terminal' (type(a:cmd) == v:t_string ? a:cmd : join(a:cmd, ' '))
   endf
 
-else
-
-  fun! lf_job#to_buffer_async(cmdline, ...)
-    call lf_job#to_buffer(a:cmdline, a:0)
-  endf
-
-endif
-
-" Thin wrapper over Vim and NeoVim asynchronous job functions.
-" The first argument should be a List. The second (optional) argument is
-" a callback function. The third (optional) argument is a List of additional
-" arguments to pass to the callback.
-"
-" Unfortunately, Vim and NeoVim use different calling conventions for the
-" callback function. See `:h job_start()` and `:h jobstart()`, respectively.
-if has("nvim") " NeoVim
-
-  fun! lf_job#start(cmd, ...)
-    let l:callback = get(a:000, 0, 'lf_job#callback')
-    return jobstart(a:cmd, { "on_exit": l:callback, "lf_data": get(a:000, 1, [bufnr("%")]) })
-  endf
-
-elseif exists("*job_start") " Vim
-
-  fun! lf_job#start(cmd, ...)
+  fun! lf_job#start(cmd, ...) " Second parameter is an optional callback
     silent! bwipeout! STDOUT
     silent! bwipeout! STDERR
     return job_start(a:cmd, {
@@ -64,29 +14,6 @@ elseif exists("*job_start") " Vim
           \ "in_io": "null", "out_io": "buffer", "out_name": "[STDOUT]",
           \ "err_io": "buffer", "err_name": "[STDERR]" })
   endf
-
-else " Vim (old version)
-
-  fun! lf_job#start(cmd, ...)
-    call lf_msg#err("Function non implemented")
-    return
-  endf
-
-endif
-
-if has("nvim")
-
-  fun! lf_job#callback(job_id, data, event)
-    if a:event == 'exit'
-      if a:data == 0 " 2nd arg is exit status when event is 'exit'
-        call lf_msg#notice("Success!")
-      else
-        call lf_msg#err("Job failed.")
-      endif
-    endif
-  endf
-
-else
 
   fun! lf_job#close_cb(channel)
     call job_status(ch_getjob(a:channel)) " Trigger exit_cb's callback
@@ -100,5 +27,14 @@ else
     endif
   endf
 
-endif
+else " NeoVim, older Vim
 
+  fun! lf_job#to_buffer(cmd)
+    call lf_legacy#job#to_buffer(a:cmd)
+  endf
+
+  fun! lf_job#start(cmd, ...)
+    call lf_legacy#job#start(a:cmd, get(a:000, 1, 'lf_legacy#job#callback'))
+  endf
+
+endif

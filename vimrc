@@ -374,11 +374,8 @@
   " See :h :DiffOrig
   command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
 
-  " Execute an arbitrary (non-interactive) Git command and show the output in a new buffer.
-  command! -complete=shellcmd -nargs=+ Git call lf_git#exec(<q-args>, "B")
-
-  " Execute an external command and show the output in a new buffer
-  command! -complete=shellcmd -nargs=+ Shell call lf_job#to_buffer(<q-args>, "B")
+  " Execute an arbitrary Git command in a terminal.
+  command! -complete=shellcmd -nargs=+ Git call lf_git#execute(<q-args>)
 
   " Execute a Vim command and send the output to a new scratch buffer
   command! -complete=command -nargs=+ CmdBuffer call lf_buffer#cmd(<q-args>)
@@ -507,7 +504,6 @@
   nnoremap          <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
-  nnoremap <silent> <leader>gc :<c-u>call lf_git#commit()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
   nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>

@@ -1,24 +1,4 @@
-if has('nvim')
-
-  " Open a new terminal buffer and bind it to the current buffer
-  fun! lf_terminal#open()
-    below new
-    terminal
-    let l:term_id = b:terminal_job_id
-    call feedkeys("\<c-\>\<c-n>") " Exit Terminal (Insert) mode
-    wincmd p
-    let b:lf_bound_terminal = l:term_id
-  endf
-
-  " Send the given text to a terminal window
-  fun! lf_terminal#send(lines)
-    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
-      let b:lf_bound_terminal = input('Terminal ID: ')
-    endif
-    call jobsend(b:lf_bound_terminal, add(a:lines, ''))
-  endf
-
-elseif !empty($TMUX)
+if !empty($TMUX)
 
   fun! lf_terminal#open()
     call system('tmux split-window')
@@ -35,12 +15,12 @@ elseif !empty($TMUX)
     endfor
   endf
 
-elseif has('terminal')
+elseif has('terminal') " Vim 8 or later, MacVim
 
   " Open a new terminal buffer and bind it to the current buffer
   fun! lf_terminal#open()
     let l:term_id = term_start(&shell, {'term_name': 'Terminal'})
-    wincmd p " Back to previous window
+    wincmd p
     let b:lf_bound_terminal = l:term_id
   endf
 
@@ -49,12 +29,12 @@ elseif has('terminal')
       let b:lf_bound_terminal = str2nr(input('Terminal buffer: '))
     endif
     for l:line in a:lines
-      call term_sendkeys(b:lf_bound_terminal, l:line . "\<cr>")
+      call term_sendkeys(b:lf_bound_terminal, l:line . "\r")
       call s:term_wait(b:lf_bound_terminal)
     endfor
   endf
 
-  if has('gui')
+  if has('gui_running')
     fun! s:term_wait(bn)
     endf
   else
@@ -66,12 +46,11 @@ elseif has('terminal')
 else
 
   fun! lf_terminal#open()
-    call lf_msg#warn("Please run Vim inside a tmux session")
+    call lf_legacy#terminal#open()
   endf
 
   fun! lf_terminal#send(lines)
-    call lf_msg#warn("Please run Vim inside a tmux session")
+    call lf_legacy#terminal#send(a:lines)
   endf
 
 endif
-
