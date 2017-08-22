@@ -65,7 +65,6 @@ Commit                   \gc           N
 Push                     \gp           N
 Log for this file        \gl           N
 Commands {{{1
-:! …, output to buffer   :Shell …      N
 Send text to terminal    \x           VN
 :make, then open qf list \m            N
 Vim command to buffer    :CmdBuffer …  N
