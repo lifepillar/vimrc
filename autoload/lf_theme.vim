@@ -48,7 +48,10 @@ endf
 
 fun! lf_theme#contrast(delta)
   if !exists("g:colors_name") | return | endif
-  if g:colors_name =~# "^solarized8"
+  if g:colors_name ==# 'wwdc17'
+    let g:wwdc17_high_contrast = 1 - get(g:, 'wwdc17_high_contrast', 0)
+    colorscheme wwdc17
+  elseif g:colors_name =~# "^solarized8"
     let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
     execute "colorscheme" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
   elseif g:colors_name =~# "^gruvbox"
@@ -69,22 +72,25 @@ fun! lf_theme#contrast(delta)
 endf
 
 fun! lf_theme#toggle_bg_color()
-  let l:theme = get(g:, "colors_name", "")
-  if l:theme =~# "^seoul256-light"
+  if empty(get(g:, "colors_name", "")) | return | endif
+  if g:colors_name =~# 'wwdc16'
+    colorscheme wwdc17
+  elseif g:colors_name =~# 'wwdc17'
+    colorscheme wwdc16
+  elseif g:colors_name =~# "^seoul256-light"
     colorscheme seoul256
-  elseif l:theme =~# "^seoul256"
+  elseif g:colors_name =~# "^seoul256"
     colorscheme seoul256-light
-  elseif l:theme =~# "^Tomorrow-Night"
+  elseif g:colors_name =~# "^Tomorrow-Night"
     colorscheme Tomorrow
-  elseif l:theme =~# "^Tomorrow"
+  elseif g:colors_name =~# "^Tomorrow"
     colorscheme Tomorrow-Night-Eighties
-  elseif l:theme =~# "dark"
-    execute "colorscheme" substitute(g:colors_name, 'dark', 'light', '')
-  elseif l:theme =~# "light"
-    execute "colorscheme" substitute(g:colors_name, 'light', 'dark', '')
+  elseif g:colors_name =~? "dark"
+    execute "colorscheme" substitute(g:colors_name, '\(d\)ark', '\=submatch(1)==#"D"?"Light":"light"', '')
+  elseif g:colors_name =~? "light"
+    execute "colorscheme" substitute(g:colors_name, '\(l\)ight', '\=submatch(1)==#"L"?"Dark":"dark"', '')
   else
-    let g:lf_cached_mode = ""  " Force updating status line highlight groups
     let &background = (&background == 'dark') ? 'light' : 'dark'
+    execute "colorscheme" g:colors_name
   endif
 endf
-
