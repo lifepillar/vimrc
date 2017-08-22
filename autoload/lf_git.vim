@@ -95,6 +95,6 @@ else " NeoVim, older Vim
   endf
 
   fun! lf_git#execute(cmd)
-    call lf_git#output(cmd, 'botright')
+    call lf_git#output([a:cmd], 'botright')
   endf
 end
