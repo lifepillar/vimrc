@@ -1,9 +1,4 @@
-if has('terminal') " Vim 8 or later, MacVim
-
-" Execute an external command and send its output to a new buffer.
-  fun! lf_job#to_buffer(cmd) " FIXME: escaping
-    execute 'botright terminal' (type(a:cmd) == v:t_string ? a:cmd : join(a:cmd, ' '))
-  endf
+if exists("*job_start")
 
   fun! lf_job#start(cmd, ...) " Second parameter is an optional callback
     silent! bwipeout! STDOUT
@@ -26,6 +21,28 @@ if has('terminal') " Vim 8 or later, MacVim
       call lf_msg#err("Job failed.")
     endif
   endf
+
+  if has('terminal') " Vim 8 or later, MacVim
+
+    " Execute an external command and send its output to a new buffer.
+    fun! lf_job#to_buffer(cmd) " FIXME: escaping
+      execute 'botright terminal' (type(a:cmd) == v:t_string ? a:cmd : join(a:cmd, ' '))
+    endf
+
+  else
+
+    fun! lf_job#to_buffer(cmd)
+      let l:job = lf_job#start(map(
+            \ type(a:cmd) == type("") ? split(a:cmd) : a:cmd,
+            \ 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)'
+            \ ))
+      if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
+        execute "botright split +buffer".ch_getbufnr(l:job, "out")
+        wincmd p
+      endif
+    endf
+
+  endif
 
 else " NeoVim, older Vim
 

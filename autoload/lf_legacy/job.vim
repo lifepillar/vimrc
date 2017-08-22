@@ -1,36 +1,14 @@
-if exists("*job_start")
-
-  fun! lf_legacy#job#to_buffer(cmd)
-    let l:job = lf_legacy#job#start(map(
-          \ type(a:cmd) == type("") ? split(a:cmd) : a:cmd,
-          \ 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)'
-          \ ))
-    if bufwinnr(ch_getbufnr(l:job, "out")) < 0 " If the buffer is not visible
-      execute "botright split +buffer".ch_getbufnr(l:job, "out")
-      wincmd p
-    endif
-  endf
-
-else " Older Vim, NeoVim
-
-  fun! lf_legacy#job#to_buffer(cmd)
-    let l:cmd = join(map(
-          \ type(a:cmd) == type("") ? split(a:cmd) : a:cmd,
-          \ 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'
-          \ ))
-    botright new
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-    execute '%!'. l:cmd
-    setlocal nomodifiable
-    wincmd p
-  endf
-
-  fun! lf_legacy#job#start(cmd, ...)
-    call lf_msg#err("Function non implemented")
-    return
-  endf
-
-endif
+fun! lf_legacy#job#to_buffer(cmd)
+  let l:cmd = join(map(
+        \ type(a:cmd) == type("") ? split(a:cmd) : a:cmd,
+        \ 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'
+        \ ))
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  execute '%!'. l:cmd
+  setlocal nomodifiable
+  wincmd p
+endf
 
 if has("nvim")
 
@@ -47,6 +25,13 @@ if has("nvim")
         call lf_msg#err("Job failed.")
       endif
     endif
+  endf
+
+else " Old Vim
+
+  fun! lf_legacy#job#start(cmd, ...)
+    call lf_msg#err("Function non implemented")
+    return
   endf
 
 endif
