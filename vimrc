@@ -501,7 +501,7 @@
   nnoremap <silent> <leader>fw :<c-u>update<cr>
   nnoremap <silent> <leader>w  :<c-u>update<cr>
   nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
-  nnoremap          <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
+  nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
