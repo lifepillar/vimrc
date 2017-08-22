@@ -25,6 +25,11 @@ else " Older Vim, NeoVim
     wincmd p
   endf
 
+  fun! lf_legacy#job#start(cmd, ...)
+    call lf_msg#err("Function non implemented")
+    return
+  endf
+
 endif
 
 if has("nvim")
