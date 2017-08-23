@@ -497,7 +497,7 @@
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
   " Files
   nnoremap          <leader>ff :<c-u>FindFile<cr>
-  nnoremap          <leader>fr :<c-u>filter /\c/ browse oldfiles<c-f>3gE<c-c>
+  nnoremap          <leader>fr :<c-u>filter // browse oldfiles<c-f>3gE<c-c>
   nnoremap <silent> <leader>fw :<c-u>update<cr>
   nnoremap <silent> <leader>w  :<c-u>update<cr>
   nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
