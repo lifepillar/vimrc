@@ -470,7 +470,7 @@
   nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
-  nnoremap          <leader>b<c-d> :<c-u>confirm 1,.-bdelete<cr>:confirm .+,$bdelete<cr>
+  nnoremap <silent> <leader>b<c-d> :<c-u>execute (bufnr('') > 1 ? 'confirm 1,.-bd' : '') \| confirm .+,$bd<cr>
   nnoremap <silent> <leader>bm :<c-u>CmdBuffer messages<cr>
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
