@@ -784,9 +784,7 @@
 
   if !has('packages') " Use Pathogen as a fallback
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
-    let g:pathogen_blacklist = ['tagbar', 'undotree']
-    execute pathogen#infect('pack/bundle/start/{}', 'pack/my/start/{}', 'pack/my/opt/{}', 'pack/bundle/opt/{}', 'pack/themes/opt/{}')
-    command! -nargs=1 -complete=customlist,lf_loader#complete LoadPlugin call lf_loader#load_plugin(<q-args>)
+    execute pathogen#infect('pack/{}/opt/{}')
   endif
 
   " Local settings
