@@ -614,8 +614,6 @@
       if has('gui_running')
         "set fullscreen
         set linespace=5
-      elseif g:colors_name =~# '^solarized8'
-        let g:limelight_conceal_ctermfg = (&background ==# 'dark') ? '10' : '14'
       endif
       set scrolloff=999 " Keep the edited line vertically centered
       silent call lf_text#enable_soft_wrap()
