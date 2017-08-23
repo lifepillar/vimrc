@@ -661,7 +661,7 @@
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
   " }}
   " Sneak {{
-    let g:sneak#streak = 1
+    let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
   " }}
   " SQL (Vim) {{
