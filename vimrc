@@ -782,7 +782,7 @@
 
   if !has('packages') " Use Pathogen as a fallback
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
-    execute pathogen#infect('pack/{}/opt/{}')
+    execute pathogen#infect('pack/{}/start/{}', 'pack/{}/opt/{}', 'pack/{}/my/{}')
   endif
 
   " Local settings
