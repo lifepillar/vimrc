@@ -489,9 +489,6 @@
   " Edit
   nnoremap <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
-  inoremap ( ()<c-g>U<left>
-  inoremap [ []<c-g>U<left>
-  inoremap { {}<c-g>U<left>
   inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) ==# ')' ? "\<right>" :  ')'
   inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) ==# ']' ? "\<right>" :  ']'
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
