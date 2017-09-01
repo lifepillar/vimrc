@@ -266,7 +266,7 @@
           \   range(1, tabpagenr('$')),
           \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
           \ ), ''))
-          \ . "%#TabLineFill#%T%=⌘ %<%{getcwd()}  " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
+          \ . "%#TabLineFill#%T%=⌘ %<%{getcwd()} " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
   endf
 
 " }}
