@@ -347,6 +347,11 @@
     echomsg 'Trailing space removed!'
   endf
 
+  " Delete or wipe all buffers except the current one
+  fun! s:delete_others(how) " Argument may be 'delete' or 'wipe'
+    let l:minbufnr = min(filter(range(1, bufnr('$')), 'buf'.(a:how ==# 'delete' ? 'listed' : 'exists').'(v:val)'))
+    execute (bufnr('') > l:minbufnr ? 'confirm '.l:minbufnr.',.-b'.a:how : '') '|confirm .+,$b'.a:how
+  endf
   " }}
 " Commands (plugins excluded) {{
   " Grep search
@@ -470,12 +475,14 @@
   nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
-  nnoremap <silent> <leader>b<c-d> :<c-u>execute (bufnr('') > 1 ? 'confirm 1,.-bd' : '') \| confirm .+,$bd<cr>
+  nnoremap <silent> <leader>b<c-d> :<c-u>call <sid>delete_others('delete')<cr>
   nnoremap <silent> <leader>bm :<c-u>CmdBuffer messages<cr>
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
   nnoremap <silent> <leader>br :<c-u>setlocal readonly!<cr>
   nnoremap <silent> <leader>bw :<c-u>bw<cr>
+  nnoremap <silent> <leader>bW :<c-u>bw!<cr>
+  nnoremap <silent> <leader>b<c-w> :<c-u>call <sid>delete_others('wipe')<cr>
   " Cscope
   nnoremap <silent> <leader>ca :<c-u>cs find a <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>
   nnoremap <silent> <leader>cc :<c-u>cs find c <c-r>=fnameescape(expand("<cword>"))<cr><cr>:bo cwindow<cr>

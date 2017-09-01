@@ -88,11 +88,14 @@ Ditto                    \w            N
 Save as root             \fW           N
 New buffer               \bn           N
 New scratch buffer       \bs           N
+Toggle read-only status  \br           N
 Choose buffer            \bb           N
 Delete buffer            \bd           N
 Force delete buffer      \bD           N
 Close all other buffers  \b«C-d»       N
-Toggle read-only status  \bw           N
+Wipe buffer              \bw           N
+Force wipe buffer        \bW           N
+Wipe all other buffers   \b«C-w»       N
 Edit {{{2
 Omnicomplete             «Tab»         I
 Copy to clipboard        \y            O
