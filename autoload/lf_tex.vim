@@ -41,7 +41,7 @@ fun! lf_tex#clean()
         call delete(ff)
       endfor
     endif
-    call delete(l:subdir) " delete directory (only if empty)
+    call delete(l:subdir, 'd') " delete directory (only if empty)
   endfor
   call lf_msg#notice("Aux files removed")
 endf
