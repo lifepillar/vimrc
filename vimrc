@@ -81,9 +81,6 @@
   set undoreload=10000 " Maximum number of lines to save for undo on a buffer reload
 " }}
 " Editing {{
-  let g:default_scrolloff = 2
-  let &scrolloff=g:default_scrolloff " Keep some context when scrolling
-  set sidescrolloff=5 " Ditto, but for horizontal scrolling
   set autoindent " Use indentation of the first-line when reflowing a paragraph
   set shiftround " Round indent to multiple of shiftwidth (applies to < and >)
   set backspace=indent,eol,start " Intuitive backspacing in insert mode
@@ -142,6 +139,9 @@
     let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
     set termguicolors
   endif
+  let g:default_scrolloff = 2
+  let &scrolloff=g:default_scrolloff " Keep some context when scrolling
+  set sidescrolloff=5 " Ditto, but for horizontal scrolling
   set display=lastline
   " Get more information from ctrl-g:
   nnoremap <c-g> 2<c-g>
