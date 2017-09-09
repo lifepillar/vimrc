@@ -28,6 +28,7 @@
   set nobomb
   set fileformats=unix,mac,dos
   if has('langmap') && exists('+langremap') | set nolangremap | endif
+  set timeoutlen=5000
   set ttimeout
   set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
   set ttyfast
