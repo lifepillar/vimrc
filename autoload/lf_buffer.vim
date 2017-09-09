@@ -23,3 +23,15 @@ fun! s:restore_eventignore()
   autocmd! lf_large_buffer
   augroup! lf_large_buffer
 endf
+
+" Delete all buffers except the current one
+fun! lf_buffer#delete_others()
+  let l:bl = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  execute (bufnr('') > l:bl[0] ? 'confirm '.l:bl[0].',.-bd' : '') (bufnr('') < l:bl[-1] ? '|confirm .+,$bd' : '')
+endf
+
+" Wipe all buffers except the current one
+fun! lf_buffer#wipe_others()
+  let l:min = min(filter(range(1, bufnr('$')), 'bufexists(v:val)'))
+  execute (bufnr('') > l:min ? 'confirm '.l:min.',.-bw' : '') (bufnr('') < bufnr('$') ? '|confirm .+,$bw' : '')
+endf
