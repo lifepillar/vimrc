@@ -16,11 +16,13 @@ let g:tex_errorformat .= '%Z<argument> %m,'
 " More info for some errors
 let g:tex_errorformat .= '%Cl.%l %m,'
 
-" Match warnings
-let g:tex_errorformat .= '%+WLaTeX %.%#Warning: %.%#line %l%.%#,'
-      \ . '%+W%.%# at lines %l--%*\\d,'
-      \ . '%+WLaTeX %.%#Warning: %m,'
-      \ . '%+W%.%#%.%#Warning: %m,'
+if !get(g:, 'lf_latex_no_warnings', 0)
+  " Match warnings
+  let g:tex_errorformat .= '%+WLaTeX %.%#Warning: %.%#line %l%.%#,'
+        \ . '%+W%.%# at lines %l--%*\\d,'
+        \ . '%+WLaTeX %.%#Warning: %m,'
+        \ . '%+W%.%#%.%#Warning: %m,'
+endif
 
 " Parse biblatex warnings
 let g:tex_errorformat .= '%-C(biblatex)%.%#in t%.%#,'
