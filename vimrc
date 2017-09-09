@@ -532,7 +532,7 @@
     let s:linespace=2
     set guifont=SF\ Mono:h11
     set guioptions=gm
-    set guicursor=n-v-c:block,i-o-r-ci-cr:ver20
+    set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
     let &linespace=s:linespace
     set transparency=0
     nnoremap <leader>fz :<c-u>CtrlPMRUFiles<cr>
