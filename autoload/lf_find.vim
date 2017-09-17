@@ -66,14 +66,16 @@ fun! lf_find#fuzzy(input, callback, prompt)
   let l:cmd .= "|fzf -m --prompt '".a:prompt."> '"
   let l:redir = " >".fnameescape(l:outpath)." 2>/dev/tty"
   if has('gui_running')
+    botright 15split
     call term_wait(term_start([&shell, &shellcmdflag, l:cmd.l:redir], {
           \ "term_name": a:prompt,
+          \ "curwin": 1,
           \ "term_finish": "close",
           \ "exit_cb": function('s:get_fzf_output', [l:outpath, a:callback])
           \ }), 20)
   else
     if executable('tput') && filereadable('/dev/tty') " Cool idea adapted from fzf.vim
-      call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd." --height 20 ".l:redir, &lines))
+      call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd." --height 15 ".l:redir, &lines))
     else
       silent execute '!'.l:cmd.l:redir
     endif
