@@ -1,8 +1,9 @@
 if exists("*job_start")
 
   fun! lf_job#start(cmd, ...) " Second parameter is an optional callback
-    silent! bwipeout! STDOUT
-    silent! bwipeout! STDERR
+    for l:buf in ['[STDOUT]', '[STDERR]']
+      call lf_buffer#clear(l:buf)
+    endfor
     return job_start(a:cmd, {
           \ "close_cb": "lf_job#close_cb",
           \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), get(a:000, 1, [bufnr('%')])),

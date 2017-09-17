@@ -35,3 +35,11 @@ fun! lf_buffer#wipe_others()
   let l:min = min(filter(range(1, bufnr('$')), 'bufexists(v:val)'))
   execute (bufnr('') > l:min ? 'confirm '.l:min.',.-bw' : '') (bufnr('') < bufnr('$') ? '|confirm .+,$bw' : '')
 endf
+
+" Clear (delete the content) of the given buffer.
+fun! lf_buffer#clear(name)
+  if bufnr(a:name) > -1
+    silent execute bufnr(a:name) 'bufdo' '1,$delete'
+    silent execute 'buffer' bufnr(@#)
+  endif
+endf
