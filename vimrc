@@ -535,7 +535,6 @@
     set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
     let &linespace=s:linespace
     set transparency=0
-    nnoremap <leader>fz :<c-u>CtrlPMRUFiles<cr>
   endif
 " }}
 " Plugins {{

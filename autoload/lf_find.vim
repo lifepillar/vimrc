@@ -45,58 +45,68 @@ fun! lf_find#grep(args)
   redraw!
 endf
 
+fun! s:get_fzf_output(outpath, callback, channel, status)
+  let l:output = filereadable(a:outpath) ? readfile(a:outpath) : []
+  silent! call delete(a:outpath)
+  call function(a:callback)(l:output)
+endf
+
 " Filter a list and return a List of selected items.
-" 'input' is any shell command that sends its output, one item per line, to
-" stdout, or a List of items to be filtered.
-fun! lf_find#fuzzy(input, ...)  " ... optional prompt
-  if has('gui_running') || has('nvim') | call lf_msg#warn('Not implemented') | return [] | endif
+" 'input' is either a shell command that sends its output, one item per line,
+" to stdout, or a List of items to be filtered.
+fun! lf_find#fuzzy(input, callback, prompt)
   if type(a:input) == v:t_string
     let l:cmd = a:input
   else " Assume List
-      let l:input = tempname()
-      call writefile(a:input, l:input)
-      let l:cmd  = 'cat '.fnameescape(l:input)
+    let l:inpath = tempname()
+    call writefile(a:input, l:inpath)
+    let l:cmd  = 'cat '.fnameescape(l:inpath)
   endif
-  let l:prompt = (a:0 > 0 ? "--prompt '".a:1. "> '" : '')
-  let l:output = tempname()
-  if executable('tput') && filereadable('/dev/tty')
-    " Cool idea adapted from fzf.vim coming with fzf (not the Vim plugin):
-    call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd.'|fzf -m --height 20 '.l:prompt.' >'.fnameescape(l:output).' 2>/dev/tty', &lines))
+  let l:outpath = tempname()
+  let l:cmd .= "|fzf -m --prompt '".a:prompt."> '"
+  let l:redir = " >".fnameescape(l:outpath)." 2>/dev/tty"
+  if has('gui_running')
+    call term_start(["sh", "-c", l:cmd.' --bind ctrl-j:accept'.l:redir], {
+          \ "term_name": a:prompt,
+          \ "term_finish": "close",
+          \ "exit_cb": function('s:get_fzf_output', [l:outpath, a:callback])
+          \ })
   else
-    silent execute '!'.l:cmd.'|fzf -m >'.fnameescape(l:output)
-  endif
-  redraw!
-  try
-    return filereadable(l:output) ? readfile(l:output) : []
-  finally
-    if exists("l:input")
-      silent! call delete(l:input)
+    if executable('tput') && filereadable('/dev/tty') " Cool idea adapted from fzf.vim
+      call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd." --height 20 ".l:redir, &lines))
+    else
+      silent execute '!'.l:cmd.l:redir
     endif
-    silent! call delete(l:output)
-  endtry
+    redraw!
+    if exists('l:inpath')
+      silent! call delete(l:inpath)
+    endif
+    call s:get_fzf_output(l:outpath, a:callback, -1, v:shell_error)
+  endif
+endf
+
+fun! s:set_arglist(paths)
+  if empty(a:paths) | return | endif
+  execute "args" join(map(a:paths, { i,v -> fnameescape(v) }))
 endf
 
 " Filter a list of paths and populate the arglist with the selected items.
 fun! lf_find#arglist(input_cmd)
-  let l:arglist = lf_find#fuzzy(a:input_cmd, 'Choose files')
-  if empty(l:arglist) | return | endif
-  execute "args" join(map(l:arglist, { i,v -> fnameescape(v) }))
+  call lf_find#fuzzy(a:input_cmd, 's:set_arglist', 'Choose files')
 endf
 
 fun! lf_find#file(...) " ... is an optional directory
-  if has('gui_running') || has('nvim') || !executable('rg')
-    execute 'CtrlP' (a:0 > 0 ? a:1 : '')
-  else
-    call lf_find#arglist('rg --files' . (a:0 > 0 ? ' '.a:1 : ''))
-  endif
+  let l:dir = (a:0 > 0 ? ' '.a:1 : ' .')
+  call lf_find#arglist(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
+endf
+
+fun! s:set_colorscheme(colors)
+  if empty(a:colors) | return | endif
+  execute "colorscheme" a:colors[0]
 endf
 
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , { i,v -> fnamemodify(v, ":t:r") })
-  let l:colorscheme = lf_find#fuzzy(l:colors, 'Theme')
-  if !empty(l:colorscheme)
-    execute "colorscheme" l:colorscheme[0]
-  endif
+  call lf_find#fuzzy(l:colors, 's:set_colorscheme', 'Choose colorscheme')
 endf
-
