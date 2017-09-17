@@ -45,9 +45,10 @@ fun! lf_find#grep(args)
   redraw!
 endf
 
-fun! s:get_fzf_output(outpath, callback, channel, status)
+fun! s:get_fzf_output(inpath, outpath, callback, channel, status)
   let l:output = filereadable(a:outpath) ? readfile(a:outpath) : []
   silent! call delete(a:outpath)
+  silent! call delete(a:inpath)
   call function(a:callback)(l:output)
 endf
 
@@ -57,6 +58,7 @@ endf
 fun! lf_find#fuzzy(input, callback, prompt)
   if type(a:input) == v:t_string
     let l:cmd = a:input
+    let l:inpath = ''
   else " Assume List
     let l:inpath = tempname()
     call writefile(a:input, l:inpath)
@@ -71,7 +73,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
           \ "term_name": a:prompt,
           \ "curwin": 1,
           \ "term_finish": "close",
-          \ "exit_cb": function('s:get_fzf_output', [l:outpath, a:callback])
+          \ "exit_cb": function('s:get_fzf_output', [l:inpath, l:outpath, a:callback])
           \ }), 20)
   else
     if executable('tput') && filereadable('/dev/tty') " Cool idea adapted from fzf.vim
@@ -80,10 +82,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
       silent execute '!'.l:cmd.l:redir
     endif
     redraw!
-    if exists('l:inpath')
-      silent! call delete(l:inpath)
-    endif
-    call s:get_fzf_output(l:outpath, a:callback, -1, v:shell_error)
+    call s:get_fzf_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
   endif
 endf
 
