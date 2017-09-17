@@ -66,7 +66,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
   let l:cmd .= "|fzf -m --prompt '".a:prompt."> '"
   let l:redir = " >".fnameescape(l:outpath)." 2>/dev/tty"
   if has('gui_running')
-    call term_wait(term_start(["sh", "-c", l:cmd.l:redir], {
+    call term_wait(term_start([&shell, &shellcmdflag, l:cmd.l:redir], {
           \ "term_name": a:prompt,
           \ "term_finish": "close",
           \ "exit_cb": function('s:get_fzf_output', [l:outpath, a:callback])
