@@ -71,8 +71,10 @@ if has('terminal') " Vim 8 or later, MacVim
     call s:tig('status')
   endf
 
-  fun! lf_git#push() " FIXME: names with spaces?
-    execute 'terminal git -C %:p:h push'
+  fun! lf_git#push()
+    call lf_msg#notice('Pushing...')
+    call term_start(['git', '-C', expand("%:p:h"), 'push'],
+          \ { 'exit_cb': function('lf_job#callback', [bufnr('%')])})
     wincmd p
   endf
 

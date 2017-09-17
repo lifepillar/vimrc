@@ -505,7 +505,7 @@
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
   nnoremap <silent> <leader>gl :<c-u>Git log --oneline -- %:t<cr>
-  nnoremap <silent> <leader>gp :<c-u>echomsg 'Pushing...'<cr>:call lf_git#push()<cr>
+  nnoremap <silent> <leader>gp :<c-u>call lf_git#push()<cr>
   nnoremap <silent> <leader>gs :<c-u>call lf_git#status()<cr>
   nnoremap <silent> <leader>gt :<c-u>call lf_git#three_way_diff()<cr>
   " Options
