@@ -57,7 +57,7 @@ if has('terminal') " Vim 8 or later, MacVim
     execute 'lcd' fnameescape(expand("%:p:h"))
     echomsg getcwd()
     try
-      execute 'botright terminal ++close tig' a:cmd
+      call term_wait(term_start(['tig', a:cmd], { 'term_finish': 'close' }), 20)
     finally
       execute 'lcd' fnameescape(l:oldcwd)
     endtry

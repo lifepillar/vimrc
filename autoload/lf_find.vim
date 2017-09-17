@@ -66,11 +66,11 @@ fun! lf_find#fuzzy(input, callback, prompt)
   let l:cmd .= "|fzf -m --prompt '".a:prompt."> '"
   let l:redir = " >".fnameescape(l:outpath)." 2>/dev/tty"
   if has('gui_running')
-    call term_start(["sh", "-c", l:cmd.' --bind ctrl-j:accept'.l:redir], {
+    call term_wait(term_start(["sh", "-c", l:cmd.l:redir], {
           \ "term_name": a:prompt,
           \ "term_finish": "close",
           \ "exit_cb": function('s:get_fzf_output', [l:outpath, a:callback])
-          \ })
+          \ }), 20)
   else
     if executable('tput') && filereadable('/dev/tty') " Cool idea adapted from fzf.vim
       call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd." --height 20 ".l:redir, &lines))
