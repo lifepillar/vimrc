@@ -20,6 +20,7 @@ if !get(g:, 'lf_latex_no_warnings', 0)
   " Match warnings
   let g:tex_errorformat .= '%+WLaTeX %.%#Warning: %.%#line %l%.%#,'
         \ . '%+W%.%# at lines %l--%*\\d,'
+        \ . '%+W%.%# at line %l,'
         \ . '%+WLaTeX %.%#Warning: %m,'
         \ . '%+W%.%#%.%#Warning: %m,'
 endif
