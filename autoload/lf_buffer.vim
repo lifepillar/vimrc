@@ -37,9 +37,9 @@ fun! lf_buffer#wipe_others()
 endf
 
 " Clear (delete the content) of the given buffer.
-fun! lf_buffer#clear(name)
-  if bufnr(a:name) > -1
-    silent execute bufnr(a:name) 'bufdo' '1,$delete'
+fun! lf_buffer#clear(file_pattern)
+  if bufnr(a:file_pattern) > -1
+    silent execute bufnr(a:file_pattern) 'bufdo' '1,$delete'
     silent execute 'buffer' bufnr(@#)
   endif
 endf
