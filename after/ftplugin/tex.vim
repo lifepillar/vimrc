@@ -37,9 +37,4 @@ command! -buffer -nargs=? -complete=file LuaLaTeX          call lf_tex#typeset(<
 command!         -nargs=0                LuaLaTeXJobStatus call lf_tex#job_status()
 command!         -nargs=0                LuaLatexStopJobs  call lf_tex#stop_jobs()
 
-iab <buffer> eq… \begin{equation}<cr><cr>\end{equation}<up><tab><c-r>=lf_text#eatchar('\s')<cr>
-iab <buffer> fig… \begin{figure}<cr>\begin{center}<cr>\includegraphics[width=.7\textwidth]{<c-o>ma}<cr>\end{center}<cr>\end{figure}<c-r>=lf_text#eatchar('\s')<cr><esc>`a
-iab <buffer> item… \begin{itemize}<cr><cr>\end{itemize}<up><tab>\item<cr><c-r>=lf_text#eatchar('\s')<cr>
-iab <buffer> enum… \begin{enumerate}<cr><cr>\end{enumerate}<up><tab>\item<cr><c-r>=lf_text#eatchar('\s')<cr>
-iab <buffer> i… \item<cr><c-r>=lf_text#eatchar('\s')<cr>
-iab <buffer> tab… \begin{tabular}{<c-o>macc}<cr>\toprule<cr>& \\<cr>\midrule<cr>& \\<cr>\bottomrule<cr>\end{tabular}<c-r>=lf_text#eatchar('\s')<cr><esc>`a
+call lf_text#load_snippets()

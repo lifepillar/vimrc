@@ -1,0 +1,34 @@
+snippet eq
+\begin{eq}
+ ___
+\end{eq}
+
+snippet fig
+\begin{fig}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{___}
+  \end{center}
+\end{fig}
+
+snippet item
+\begin{itemize}
+  \item ___
+\end{itemize}
+
+snippet enum
+\begin{enumerate}
+  \item ___
+\end{enumerate}
+
+snippet i
+\item ___
+
+snippet tab
+\begin{tab}{___cc}
+\toprule
+___ & ___ \\
+\midrule
+___ & ___ \\
+\bottomrule
+\end{tab}
+

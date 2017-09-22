@@ -1,0 +1,43 @@
+snippet ch
+\startchapter[title={___}]
+___
+\stopchapter
+
+snippet s
+\startsection[title={___}]
+___
+\stopsection
+
+snippet ss
+\startsubsection[title={___}]
+___
+\stopsubsection
+
+snippet sss
+\startsubsubsection[title={___}]
+___
+\stopsubsubsection
+
+snippet slide
+\startslide[title={___}]
+___
+\stopslide
+
+snippet fig
+\startplacefigure
+  \externalfigure[___]%
+  [___]
+\stopplacefigure
+
+snippet item
+\startitemize
+  \item ___
+\stopitemize
+
+snippet enum
+\startitemize[n]
+  \item ___
+\stopitemize
+
+snippet i
+\item ___

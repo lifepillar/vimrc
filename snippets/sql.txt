@@ -1,0 +1,37 @@
+snippet t
+create table ___ (
+  ___
+);
+
+snippet s
+select  ___
+  from ___
+ where ___
+ order by ___;
+
+snippet tr
+create trigger  ___
+  [___before|after|instead of] {event}
+  on ___
+  [___not deferrable|initially immediate]
+  for each [___row|statement]
+  execute procedure ___();
+
+snippet f
+create or replace function  ___
+returns ___
+language plpgsql
+security invoker
+set search path = public as
+$$
+begin
+  ___
+end;
+$$;
+
+snippet c
+comment on ___ is
+$HERE$
+___
+$HERE$;
+
