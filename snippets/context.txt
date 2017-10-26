@@ -23,6 +23,11 @@ snippet slide
 ___
 \stopslide
 
+snippet f
+\startformula
+___
+\stopformula
+
 snippet fig
 \startplacefigure
   \externalfigure[___]%
@@ -41,3 +46,13 @@ snippet enum
 
 snippet i
 \item ___
+
+snippet table
+\starttable[|c|cm|]
+\HL
+    \NC\TWO ___     \NC \AR
+    \NC ___ \NC ___ \NC \AR
+\HL
+    \NC ___ \NC ___ \NC \AR
+\HL
+\stoptable
