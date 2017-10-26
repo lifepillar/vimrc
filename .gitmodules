@@ -134,3 +134,6 @@
 	path = pack/my/opt/wwdc17
 	url = https://github.com/lifepillar/vim-wwdc17-theme
 	shallow = false
+[submodule "colortemplate"]
+	path = pack/my/start/colortemplate
+	url = https://github.com/lifepillar/vim-colortemplate.git
