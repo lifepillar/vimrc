@@ -504,7 +504,7 @@
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
   nnoremap          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
   nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
-  nnoremap <silent> <leader>oH :<c-u>call lf_theme#toggle_hi_info()<cr>
+  nnoremap <silent> <leader>oH :<c-u>call colortemplate#syn#toggle()<cr>
   nnoremap <silent> <leader>oi :<c-u>set ignorecase! \| set ignorecase?<cr>
   nnoremap <silent> <leader>ok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
   nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
