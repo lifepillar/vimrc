@@ -53,22 +53,15 @@ endf
 if has('terminal') " Vim 8 or later, MacVim
 
   fun! s:tig(cmd)
-    let l:oldcwd = getcwd()
-    execute 'lcd' fnameescape(expand("%:p:h"))
-    echomsg getcwd()
-    try
-      call term_start(['tig', a:cmd], { 'term_finish': 'close' })
-    finally
-      execute 'lcd' fnameescape(l:oldcwd)
-    endtry
+    call term_start(extend(['tig'], a:cmd), { 'cwd': expand("%:p:h"), 'term_finish': 'close' })
   endf
 
   fun! lf_git#blame()
-    call s:tig('blame +'.expand(line('.')).' -- %:t') " FIXME: names with spaces?
+    call s:tig(['blame', '+'.expand(line('.')), '--', expand('%:t')])
   endf
 
   fun! lf_git#status()
-    call s:tig('status')
+    call s:tig(['status'])
   endf
 
   fun! lf_git#push()
