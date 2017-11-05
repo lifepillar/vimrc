@@ -526,7 +526,7 @@
 " GUI {{
   if has('gui_running')
     let s:linespace=2
-    set guifont=SF\ Mono:h11
+    set guifont=SF\ Mono\ Light:h11
     set guioptions=gm
     set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
     let &linespace=s:linespace
