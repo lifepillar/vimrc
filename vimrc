@@ -46,6 +46,7 @@
     " Vim {{
     set viminfo=!,'100,<10000,s10,h,n~/.vim/viminfo
     " See :set termcap, :h t_ku, :h :set-termcap, and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+    " For terminal mappings, see Key Mappings section
     set <s-left>=b  " There's a literal Esc (^[) here and below (it may be invisible, e.g., in GitHub)
     set <s-right>=f
     set <a-h>=h
@@ -462,6 +463,11 @@
   " Terminal
   nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>
   vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>
+  " Use Alt+arrows to jump between words
+  if has('terminal')
+    tmap <expr> <esc>b lf_terminal#send_keys("\<esc>b")
+    tmap <expr> <esc>f lf_terminal#send_keys("\<esc>f")
+  endif
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap     <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>

@@ -17,6 +17,11 @@ if !empty($TMUX)
 
 elseif has('terminal') " Vim 8 or later, MacVim
 
+  fun! lf_terminal#send_keys(what)
+    call term_sendkeys('', a:what)
+    return ''
+  endf
+
   " Open a new terminal buffer and bind it to the current buffer
   fun! lf_terminal#open()
     let l:term_id = term_start(&shell, {'term_name': 'Terminal'})
