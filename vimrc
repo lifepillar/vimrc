@@ -764,7 +764,6 @@
   " }}
   " Solarized 8 {{
     let g:solarized_statusline = 'low'
-    let g:solarized_term_italics = 1
   " }}
 " }}
 " Init {{
