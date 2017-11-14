@@ -22,7 +22,6 @@
 "       export LANG=en_US.UTF-8
 " }}
 " Environment {{
-  set nocompatible " Must be first line
   set encoding=utf-8
   scriptencoding utf-8
   set nobomb
