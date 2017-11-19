@@ -5,6 +5,7 @@
 My own Vim configuration. Some features:
 
 - Foldable and thoroughly commented `vimrc`.
+- Loads in less than 50ms.
 - Put your customizations into `vimrc_local`.
 - Move freely between Vim and tmux using `⌥-h/j/k/l`
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf)
