@@ -135,7 +135,7 @@
   if has('patch-7.4.2033') | set cscopequickfix+=a- | endif
 " }}
 " Appearance {{
-  if has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app'
+  if has('termguicolors') && $COLORTERM ==# 'truecolor'
     let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
     let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
     set termguicolors
