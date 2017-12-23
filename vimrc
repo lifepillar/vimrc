@@ -464,8 +464,8 @@
   vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>
   " Use Alt+arrows to jump between words
   if has('terminal')
-    tmap <expr> <esc>b lf_terminal#send_keys("\<esc>b")
-    tmap <expr> <esc>f lf_terminal#send_keys("\<esc>f")
+    tnoremap <s-left> <esc>b
+    tnoremap <s-right> <esc>f
   endif
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
