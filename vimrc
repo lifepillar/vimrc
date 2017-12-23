@@ -536,6 +536,8 @@
     set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
     let &linespace=s:linespace
     set transparency=0
+    tnoremap <a-left> <esc>b
+    tnoremap <a-right> <esc>f
   endif
 " }}
 " Plugins {{
