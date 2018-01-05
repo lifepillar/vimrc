@@ -53,7 +53,7 @@ endf
 if has('terminal') " Vim 8 or later, MacVim
 
   fun! s:tig(cmd)
-    call term_start(extend(['tig'], a:cmd), { 'cwd': expand("%:p:h"), 'term_finish': 'close' })
+    botright call term_start(extend(['tig'], a:cmd), { 'cwd': expand("%:p:h"), 'term_finish': 'close' })
   endf
 
   fun! lf_git#blame()
