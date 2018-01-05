@@ -110,6 +110,7 @@ Capitalize words         \eU           V
 Remove trailing space    \es           N
 View {{{2
 Choose colorscheme       \vc           N
+Open quickfix window     \vq           N
 Show/hide status line    \vs           N
 Decrease tab width       \[            N
 Increase tab width       \]            N

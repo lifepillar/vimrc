@@ -523,10 +523,11 @@
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
-  " Appeareance (view)
+  " View/toggle
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
+  nnoremap <silent> <leader>vq :<c-u>botright copen<cr>
   " }}
 " GUI {{
   if has('gui_running')
