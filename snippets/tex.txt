@@ -1,7 +1,7 @@
 snippet eq
-\begin{eq}
+\begin{equation}
  ___
-\end{eq}
+\end{equation}
 
 snippet fig
 \begin{fig}
