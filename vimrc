@@ -654,9 +654,6 @@
     let g:mp_metafun_macros = 1
   " }}
   " MUcomplete {{
-    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-    inoremap <expr> <cr> mucomplete#popup_exit("\<cr>")
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
   " }}
   " Sneak {{
