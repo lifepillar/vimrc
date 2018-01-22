@@ -761,8 +761,7 @@
   " }}
 " }}
 " Themes {{
-  " Gruvbox {{
-    let g:gruvbox_invert_selection = 0
+  " Gruvbox 8 {{
     let g:gruvbox_italic = 1
   " }}
   " Seoul256 {{

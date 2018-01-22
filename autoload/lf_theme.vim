@@ -6,11 +6,6 @@ fun! lf_theme#contrast(delta)
   elseif g:colors_name =~# "^solarized8"
     let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
     execute "colorscheme" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
-  elseif g:colors_name =~# "^gruvbox"
-    let l:schemes = ["hard", "medium", "soft"]
-    execute 'let' ((&background == 'dark') ? 'g:gruvbox_contrast_dark' : 'g:gruvbox_contrast_light') '='
-          \ 'get(l:schemes, ((a:delta+index(l:schemes, (&background == "dark") ? g:gruvbox_contrast_dark : g:gruvbox_contrast_light)) % 3 + 3) % 3)'
-    colorscheme gruvbox
   elseif g:colors_name =~# "^seoul256-light"
     let g:seoul256_light_background = ((a:delta+(g:seoul256_light_background-252)) % 5 + 5) % 5 + 252  " [252-256]
     colorscheme seoul256-light
