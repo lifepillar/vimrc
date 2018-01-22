@@ -781,7 +781,7 @@
 
   if !has('packages') " Use Pathogen as a fallback
     runtime pack/bundle/opt/pathogen/autoload/pathogen.vim " Load Pathogen
-    execute pathogen#infect('pack/{}/start/{}', 'pack/{}/opt/{}', 'pack/{}/my/{}')
+    execute pathogen#infect('pack/{}/start/{}', 'pack/{}/opt/{}')
   endif
 
   " Local settings
@@ -789,6 +789,8 @@
   if filereadable(s:vimrc_local)
     execute 'source' s:vimrc_local
   else
-    colorscheme wwdc16
+    " colorscheme wwdc16
+    set background=dark
+    colorscheme gruvbox8
   endif
 " }}
