@@ -137,3 +137,6 @@
 [submodule "colortemplate"]
 	path = pack/my/start/colortemplate
 	url = https://github.com/lifepillar/vim-colortemplate.git
+[submodule "gruvbox8"]
+	path = pack/my/opt/gruvbox8
+	url = https://github.com/lifepillar/gruvbox8.git
