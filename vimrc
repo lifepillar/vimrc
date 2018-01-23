@@ -763,6 +763,7 @@
 " Themes {{
   " Gruvbox 8 {{
     let g:gruvbox_italic = 1
+    let g:gruvbox_italicize_strings = 1
   " }}
   " Seoul256 {{
     let g:seoul256_background = 236
@@ -788,8 +789,6 @@
   if filereadable(s:vimrc_local)
     execute 'source' s:vimrc_local
   else
-    " colorscheme wwdc16
-    set background=dark
-    colorscheme gruvbox8
+    colorscheme wwdc16
   endif
 " }}
