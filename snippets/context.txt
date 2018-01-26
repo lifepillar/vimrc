@@ -3,6 +3,11 @@ snippet ch
 ___
 \stopchapter
 
+snippet q
+\startquotation
+___
+\stopquotation
+
 snippet s
 \startsection[title={___}]
 ___
