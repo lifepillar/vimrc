@@ -159,8 +159,8 @@ fun! lf_text#expand_snippet()
     call setline('.', l:indent . l:snippet[0])
     call append('.', map(l:snippet[1:-1], { _,t -> l:indent . t}))
     call search('___', 'csW')
-    let @/ = '___'
-    normal 3x
+    let @/ = '___' " Enable moving to (and replacing) the next ___ with gnc
+    normal "_3x
     return ''
   endif
   return '…'
