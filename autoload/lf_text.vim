@@ -148,7 +148,7 @@ fun! lf_text#load_snippets()
     endif
   endfor
   " Start inserting at the next placeholder
-  inoremap <buffer> <c-b> <esc>gnc
+  inoremap <buffer> <c-b> <esc>gn"_c
 endf
 
 fun! lf_text#expand_snippet()
