@@ -227,14 +227,6 @@
     return 1
   endf
 
-  fun! ToSup(n)
-    return tr(string(a:n), "0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
-  endf
-
-  fun! ToSub(n)
-    return tr(string(a:n), "0123456789", "₀₁₂₃₄₅₆₇₈₉")
-  endf
-
   " nr is always the number of the currently active window. In a %{} context, winnr()
   " always refers to the window to which the status line being drawn belongs. Since this
   " function is invoked in a %{} context, winnr() may be different from a:nr. We use this
@@ -255,7 +247,7 @@
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
-          \ %{ToSup(winnr())}/%{ToSub(bufnr("%"))} %{&modified ? g:mod_sym : ""} %t %{&modifiable ? (&readonly ? g:ro_sym : "  ") : g:ma_sym}
+          \ %{winnr()}/%{bufnr("%")} %{&modified ? g:mod_sym : ""} %t %{&modifiable ? (&readonly ? g:ro_sym : "  ") : g:ma_sym}
           \ %<%{w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
