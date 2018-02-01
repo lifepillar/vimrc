@@ -162,7 +162,7 @@
   set shortmess+=Icm " No intro, suppress ins-completion messages, use [+] instead of [Modified]
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
-  set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:◦,precedes:⟨,extends:⟩  " Invisible characters
+  set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:▪,precedes:⟨,extends:⟩  " Invisible characters
   let &showbreak='↪ '
   set tabpagemax=50
   " Printing
