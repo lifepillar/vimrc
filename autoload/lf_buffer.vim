@@ -11,7 +11,7 @@ fun! lf_buffer#large(name)
   syntax clear
   set eventignore+=FileType
   let &backupskip = join(add(split(&backupskip, ','), a:name), ',')
-  setlocal foldmethod=manual nofoldenable noswapfile
+  setlocal foldmethod=manual nofoldenable noswapfile noundofile
   augroup lf_large_buffer
     autocmd!
     autocmd BufWinEnter <buffer> call <sid>restore_eventignore()
