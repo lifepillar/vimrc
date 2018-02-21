@@ -89,7 +89,7 @@ endf
 
 fun! s:set_arglist(paths)
   if empty(a:paths) | return | endif
-  execute "args" join(map(a:paths, { i,v -> fnameescape(v) }))
+  execute "args" join(map(a:paths, 'fnameescape(v:val)'))
 endf
 
 " Filter a list of paths and populate the arglist with the selected items.
