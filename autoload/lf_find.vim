@@ -1,7 +1,7 @@
 " Find all occurrences of a pattern in a file.
 fun! lf_find#buffer(pattern)
   if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
-    call s:warningMessage("Cannot search the quickfix window")
+    call lf_msg#warn("Cannot search the quickfix window")
     return
   endif
   try
