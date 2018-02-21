@@ -15,9 +15,12 @@ endf
 " Find all occurrences of a pattern in all open files.
 fun! lf_find#all_buffers(pattern)
   " Get the list of open files
-  let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'fnameescape(bufname(v:val))')
+  let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))'), 'fnameescape(bufname(v:val))')
+  cexpr [] " Clear quickfix list
   try
-    silent noautocmd execute "vimgrep /" . a:pattern . "/gj " . join(l:files)
+    for l:file in l:files
+      silent noautocmd execute "vimgrepadd /" . a:pattern . "/gj" fnameescape(l:file)
+    endfor
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
     call lf_msg#warn("No match")
   endtry
