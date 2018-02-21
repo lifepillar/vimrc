@@ -18,9 +18,7 @@ fun! lf_find#all_buffers(pattern)
   let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))'), 'fnameescape(bufname(v:val))')
   cexpr [] " Clear quickfix list
   try
-    for l:file in l:files
-      silent noautocmd execute "vimgrepadd /" . a:pattern . "/gj" fnameescape(l:file)
-    endfor
+    silent noautocmd execute "vimgrepadd /" . a:pattern . "/gj" join(map(l:files, 'fnameescape(v:val)'))
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
     call lf_msg#warn("No match")
   endtry
