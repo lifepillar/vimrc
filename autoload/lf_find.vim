@@ -57,33 +57,55 @@ endf
 " 'input' is either a shell command that sends its output, one item per line,
 " to stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input, callback, prompt)
+  let l:fuzzy_finders = {
+        \ 'fzf':     "|fzf -m --height 15 --prompt '".a:prompt."> ' 2>/dev/tty",
+        \ 'fzy':     "|fzy --lines=15 --prompt='".a:prompt."> ' 2>/dev/tty",
+        \ 'pick':    "|pick -X",
+        \ 'selecta': "|selecta 2>/dev/tty",
+        \ 'sk':      "|sk -m --height 15 --prompt '".a:prompt."> '"
+        \ }
+
+  for l:finder in ['sk', 'fzf', 'fzy', 'selecta', 'pick', 'NONE!'] " Sort according to your preference
+    if executable(l:finder) | break | endif
+  endfor
+  if l:finder ==# 'NONE!'
+    call lf_msg#err('No fuzzy finder found')
+    return
+  endif
+  let l:ff = l:fuzzy_finders[l:finder]
+
   if type(a:input) == v:t_string
-    let l:cmd = a:input
     let l:inpath = ''
+    let l:cmd = a:input . l:ff
   else " Assume List
     let l:inpath = tempname()
     call writefile(a:input, l:inpath)
-    let l:cmd  = 'cat '.fnameescape(l:inpath)
+    let l:cmd  = 'cat '.fnameescape(l:inpath) . l:ff
   endif
+
+  if has('terminal') && executable('tput') && filereadable('/dev/tty')
+    let l:output = systemlist(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; ' . l:cmd, &lines))
+    redraw!
+    silent! call delete(a:inpath)
+    call function(a:callback)(l:output)
+    return
+  endif
+
   let l:outpath = tempname()
-  let l:cmd .= "|fzf -m --prompt '".a:prompt."> '"
-  let l:redir = " >".fnameescape(l:outpath)." 2>/dev/tty"
-  if has('gui_running') || (!executable('tput') && has('terminal'))
+  let l:cmd .= " >" . fnameescape(l:outpath)
+
+  if has('gui_running')
     botright 15split
-    call term_start([&shell, &shellcmdflag, l:cmd.l:redir], {
+    call term_start([&shell, &shellcmdflag, l:cmd], {
           \ "term_name": a:prompt,
           \ "curwin": 1,
           \ "term_finish": "close",
           \ "exit_cb": function('s:get_fzf_output', [l:inpath, l:outpath, a:callback])
           \ })
   else
-    if executable('tput') && filereadable('/dev/tty') " Cool idea adapted from fzf.vim
-      call system(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; '.l:cmd." --height 15 ".l:redir, &lines))
-    else
-      silent execute '!'.l:cmd.l:redir
-    endif
-    redraw!
-    call s:get_fzf_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
+   silent execute '!' . l:cmd
+   redraw!
+   call s:get_fzf_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
   endif
 endf
 
