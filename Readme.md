@@ -33,7 +33,12 @@ Recommended:
 
 - Vim 8.
 - [Exuberant ctags](http://ctags.sourceforge.net);
-- [fzf](https://github.com/junegunn/fzf) (only the executable);
+- A fuzzy finder, one among
+  [fzf](https://github.com/junegunn/fzf) (only the executable, not the Vim plugin),
+  [fzy](https://github.com/jhawthorn/fzy),
+  [pick](https://github.com/calleerlandsson/pick),
+  [selecta](https://github.com/garybernhardt/selecta), or
+  [skim](https://github.com/lotabout/skim);
 - [ripgrep](https://github.com/BurntSushi/ripgrep).
 
 
