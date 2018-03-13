@@ -46,18 +46,29 @@ fun! lf_find#grep(args)
   redraw!
 endf
 
-fun! s:get_fzf_output(inpath, outpath, callback, channel, status)
+fun! s:get_ff_output(inpath, outpath, callback, channel, status)
   let l:output = filereadable(a:outpath) ? readfile(a:outpath) : []
   silent! call delete(a:outpath)
   silent! call delete(a:inpath)
   call function(a:callback)(l:output)
 endf
 
+for s:ff_bin in ['sk', 'fzf', 'fzy', 'selecta', 'pick', ''] " Sort according to your preference
+  if executable(s:ff_bin)
+    break
+  endif
+endfor
+
 " Filter a list and return a List of selected items.
 " 'input' is either a shell command that sends its output, one item per line,
 " to stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input, callback, prompt)
-  let l:fuzzy_finders = {
+  if empty(s:ff_bin)
+    call lf_msg#err('No fuzzy finder found')
+    return
+  endif
+
+  let l:ff_cmds = {
         \ 'fzf':     "|fzf -m --height 15 --prompt '".a:prompt."> ' 2>/dev/tty",
         \ 'fzy':     "|fzy --lines=15 --prompt='".a:prompt."> ' 2>/dev/tty",
         \ 'pick':    "|pick -X",
@@ -65,25 +76,18 @@ fun! lf_find#fuzzy(input, callback, prompt)
         \ 'sk':      "|sk -m --height 15 --prompt '".a:prompt."> '"
         \ }
 
-  for l:finder in ['sk', 'fzf', 'fzy', 'selecta', 'pick', 'NONE!'] " Sort according to your preference
-    if executable(l:finder) | break | endif
-  endfor
-  if l:finder ==# 'NONE!'
-    call lf_msg#err('No fuzzy finder found')
-    return
-  endif
-  let l:ff = l:fuzzy_finders[l:finder]
+  let l:ff_cmd = l:ff_cmds[s:ff_bin]
 
   if type(a:input) == v:t_string
     let l:inpath = ''
-    let l:cmd = a:input . l:ff
+    let l:cmd = a:input . l:ff_cmd
   else " Assume List
     let l:inpath = tempname()
     call writefile(a:input, l:inpath)
-    let l:cmd  = 'cat '.fnameescape(l:inpath) . l:ff
+    let l:cmd  = 'cat '.fnameescape(l:inpath) . l:ff_cmd
   endif
 
-  if has('terminal') && executable('tput') && filereadable('/dev/tty')
+  if !has('gui_running') && executable('tput') && filereadable('/dev/tty')
     let l:output = systemlist(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; ' . l:cmd, &lines))
     redraw!
     silent! call delete(a:inpath)
@@ -94,18 +98,18 @@ fun! lf_find#fuzzy(input, callback, prompt)
   let l:outpath = tempname()
   let l:cmd .= " >" . fnameescape(l:outpath)
 
-  if has('gui_running')
+  if has('terminal')
     botright 15split
     call term_start([&shell, &shellcmdflag, l:cmd], {
           \ "term_name": a:prompt,
           \ "curwin": 1,
           \ "term_finish": "close",
-          \ "exit_cb": function('s:get_fzf_output', [l:inpath, l:outpath, a:callback])
+          \ "exit_cb": function('s:get_ff_output', [l:inpath, l:outpath, a:callback])
           \ })
   else
    silent execute '!' . l:cmd
    redraw!
-   call s:get_fzf_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
+   call s:get_ff_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
   endif
 endf
 
