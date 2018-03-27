@@ -247,7 +247,7 @@
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
-          \ %{winnr()}/%{bufnr("%")} %{&modified ? g:mod_sym : " "} %t %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
+          \ %{winnr()}/%n %{&modified ? g:mod_sym : " "} %t %{&modifiable ? (&readonly ? g:ro_sym : " ") : g:ma_sym}
           \ %<%{w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
