@@ -110,7 +110,6 @@
   set softtabstop=2
 " }}
 " Find, replace, and completion {{
-  set nohlsearch " Do not highlight search results
   set incsearch " Search as you type
   set ignorecase " Case-insensitive search by default
   set infercase " Smart case when doing keyword completion
