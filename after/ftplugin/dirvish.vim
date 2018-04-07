@@ -1,4 +1,5 @@
 nmap <buffer> - <plug>(dirvish_up)
+unmap <buffer> <c-p>
 
 " Refresh buffer
 nnoremap <silent> <buffer> <c-l> :<c-u>Dirvish %<cr>
