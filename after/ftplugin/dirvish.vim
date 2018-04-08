@@ -1,5 +1,7 @@
 nmap <buffer> - <plug>(dirvish_up)
-unmap <buffer> <c-p>
+if hasmapto('<c-p>', 'n')
+  nunmap <buffer> <c-p>
+endif
 
 " Refresh buffer
 nnoremap <silent> <buffer> <c-l> :<c-u>Dirvish %<cr>
