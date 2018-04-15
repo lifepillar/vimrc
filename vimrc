@@ -120,7 +120,6 @@
   set grepformat^=%f:%l:%c:%m
   set keywordprg=:help " Get help for word under cursor by pressing K
   set complete+=i      " Use included files for completion
-  set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt+=menuone,noselect
   set completeopt-=preview
   set tags=./tags;,tags " Search upwards for tags by default
