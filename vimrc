@@ -118,8 +118,7 @@
   endif
   set grepformat^=%f:%l:%c:%m
   set keywordprg=:help " Get help for word under cursor by pressing K
-  set completeopt+=menuone,noselect
-  set completeopt-=preview
+  set completeopt=menuone,noselect
   set tags=./tags;,tags " Search upwards for tags by default
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
