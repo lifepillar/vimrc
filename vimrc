@@ -70,7 +70,6 @@
   filetype on " Enable file type detection
   filetype plugin on " Enable loading the plugin files for specific file types
   filetype indent on " Load indent files for specific file types
-  set sessionoptions-=options " See FAQ at https://github.com/tpope/vim-pathogen
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
   " Consolidate temporary files in a central spot
