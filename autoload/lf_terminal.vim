@@ -30,7 +30,7 @@ elseif has('terminal') " Vim 8 or later, MacVim
   endf
 
   fun! lf_terminal#send(lines)
-    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
+    if empty(get(b:, 'lf_bound_terminal', '')) || !bufexists(b:lf_bound_terminal)
       let b:lf_bound_terminal = str2nr(input('Terminal buffer: '))
     endif
     for l:line in a:lines
