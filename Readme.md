@@ -102,7 +102,6 @@ To add a colorscheme, change `bundle/start` with `themes/opt`.
 
 ### Useful resources
 
-- [usevim](http://usevim.com/)
 - [VimGolf](http://vimgolf.com)
 - [VimAwesome](http://vimawesome.com)
 - [vimrcfu](http://vimrcfu.com)
