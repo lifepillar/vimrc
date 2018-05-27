@@ -470,7 +470,7 @@
   vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
-  nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
+  nnoremap          <leader>bb :<c-u>ls<cr>:b
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
   nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
