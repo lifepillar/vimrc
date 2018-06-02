@@ -454,10 +454,13 @@
   " Terminal
   nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>+
   vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>`>+
-  " Use Alt+arrows to jump between words
   if has('terminal')
+    " Use Alt+arrows to jump between words
     tnoremap <s-left> <esc>b
     tnoremap <s-right> <esc>f
+    " Allow to scroll with the mouse when in Terminal mode
+    tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
+    tnoremap  <silent> <f8> <c-w>:call lf_terminal#toggle_scrollwheelup()<cr>
   endif
   " Change the contrast level for themes that support it.
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
