@@ -50,3 +50,11 @@ fun! lf_tags#ctags(args)
   endfor
 endf
 
+fun! lf_tags#load_cscope_db()
+  let l:db = findfile("cscope.out", ".;") " See :h findfile()
+  if !empty(l:db)
+    execute "cscope add" fnameescape(l:db)
+  endif
+  return !empty(l:db)
+endf
+
