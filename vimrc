@@ -178,7 +178,7 @@
   augroup lf_autocmds
     autocmd!
     " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
-    autocmd VimResized * wincmd =
+    " autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
     " If a file is large, disable syntax highlighting and other stuff
