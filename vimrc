@@ -698,6 +698,16 @@
           \ ],
           \ 'sort': 0
           \ }
+    let g:tagbar_type_rmd = {
+          \ 'ctagstype': 'rmarkdown',
+          \ 'kinds': [
+          \ 's:sections',
+          \ 'r:snippets',
+          \ 'l:links',
+          \ 'i:images'
+          \ ],
+          \ 'sort': 0
+          \ }
     let g:tagbar_type_tex = {
           \ 'ctagstype': 'latex',
           \ 'kinds': [
