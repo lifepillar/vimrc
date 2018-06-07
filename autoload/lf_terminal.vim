@@ -48,6 +48,18 @@ elseif has('terminal') " Vim 8 or later, MacVim
     endf
   endif
 
+  fun! lf_terminal#enter_normal_mode()
+    return &buftype ==# 'terminal' && mode('') ==# 't' ? "\<c-w>N\<c-y>" : ''
+  endf
+
+  fun! lf_terminal#toggle_scrollwheelup()
+    if maparg('<scrollwheelup>', 't') ==# ''
+      tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
+    else
+      tunmap <scrollwheelup>
+    endif
+  endf
+
 else
 
   fun! lf_terminal#open()
