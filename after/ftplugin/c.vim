@@ -1,3 +1,4 @@
+setlocal commentstring=//%s
 
 " Cscope
 if !lf_tags#load_cscope_db()
