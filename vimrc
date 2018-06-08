@@ -527,6 +527,7 @@
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
+  nnoremap <silent> <leader>vl :<c-u>botright lopen<cr>
   nnoremap <silent> <leader>vq :<c-u>botright copen<cr>
   " }}
 " GUI {{
