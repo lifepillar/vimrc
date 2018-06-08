@@ -474,7 +474,7 @@
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b
-  nnoremap               <c-p> :<c-u>call lf_find#buffer(0)<cr>
+  nnoremap <silent>      <c-p> :<c-u>call lf_find#buffer(0)<cr>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
   nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
@@ -493,8 +493,8 @@
   inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) ==# ']' ? "\<right>" :  ']'
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
   " Files
-  nnoremap          <leader>ff :<c-u>FindFile<cr>
-  nnoremap          <leader>fr :<c-u>call lf_find#arglist(v:oldfiles)<cr>
+  nnoremap <silent> <leader>ff :<c-u>FindFile<cr>
+  nnoremap <silent> <leader>fr :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nnoremap <silent> <leader>fw :<c-u>update<cr>
   nnoremap <silent> <leader>w  :<c-u>update<cr>
   nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
