@@ -146,6 +146,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
   let l:seq_new = 0  " Current position in the undo tree
   botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ nonumber\ norelativenumber\ noswapfile\ nowrap
+  let l:cur_buf = bufnr('%') " Store current buffer number
   if type(a:input) ==# v:t_string
     let l:input = systemlist(a:input)
     call setline(1, l:input)
@@ -174,11 +175,13 @@ fun! lf_find#interactively(input, callback, prompt) abort
         let l:seq_new = get(undotree(), 'seq_cur', 0)
         call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
       elseif ch ==# 0x1B " Escape
-        bwipe
+        wincmd p
+        execute "bwipe" l:cur_buf
         return
       elseif ch ==# 0x0D " Enter
         let l:result = [getline('.')]
-        bwipe
+        wincmd p
+        execute "bwipe" l:cur_buf
         call function(a:callback)(l:result)
         return
       elseif ch ==# 0x0B " CTRL-K
@@ -190,7 +193,8 @@ fun! lf_find#interactively(input, callback, prompt) abort
       echo a:prompt l:filter.l:cursor
     endwhile
   catch /^Vim:Interrupt$/  " CTRL-C
-    bwipe
+    wincmd p
+    execute "bwipe" l:cur_buf
   finally
     " Restore cursor
     let &t_ve = l:t_ve
