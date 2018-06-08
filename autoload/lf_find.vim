@@ -167,7 +167,9 @@ fun! lf_find#interactively(input, callback, prompt) abort
         wincmd p
         execute "bwipe" l:cur_buf
         call s:clear_prompt()
-        call function(a:callback)(l:result)
+        if !empty(l:result[0])
+          call function(a:callback)(l:result)
+        endif
         return
       elseif ch ==# 0x0B " CTRL-K
         norm k
