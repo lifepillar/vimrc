@@ -567,39 +567,6 @@
       autocmd BufReadPre *.c,*.cpp,*.h,*.hpp call <sid>clang_complete_lazy_load()
     augroup END
   " }}
-  " CtrlP {{
-    let g:ctrlp_cmd = 'CtrlPBuffer'
-    if executable('rg')
-      let g:ctrlp_user_command = 'rg %s --files --maxdepth=10 --color=never'
-      let g:ctrlp_use_caching = 0
-    endif
-    let g:ctrlp_buftag_types = {
-          \ 'context':  '--language-force=context',
-          \ 'markdown': '--language-force=markdown',
-          \ 'sql':      '--language-force=pgsql',
-          \ 'tex':      '--language-force=latex',
-          \ 'mp':       '--language-force=metapost',
-          \ 'mf':       '--language-force=metapost'
-          \ }
-    let g:ctrlp_types = ['fil', 'buf', 'mru']
-    let g:ctrlp_extensions = ['buffertag', 'tag', 'quickfix']
-    let g:ctrlp_open_multiple_files = '2vjr'
-    let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-    let s:ctrlp_section_map = {"mru files": "recent"}
-    let g:ctrlp_status_func = {'main': 'CtrlP_Main', 'prog': 'CtrlP_Progress'}
-    let g:ctrlp_switch_buffer = 0
-
-    fun! CtrlP_Main(...) " See :h ctrlp_status_func
-      let l:section = get(s:ctrlp_section_map, a:5, a:5)
-      return a:1 ==# 'prt'
-            \ ? '%#InsertMode# '.l:section.' %* %<'.getcwd().' %= %#InsertMode#'.(a:3?' regex ':' match ').a:2.' %*'
-            \ : '%#VisualMode# '.l:section.' %* %<'.getcwd().' %= %#VisualMode# select %*'
-    endf
-
-    fun! CtrlP_Progress(...)
-      return '%#Warnings# '.a:1.' %* %= %<%#Warnings# '.getcwd().' %*'
-    endf
-  " }}
   " Dirvish {{
     nmap <leader>d <plug>(dirvish_up)
     nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>

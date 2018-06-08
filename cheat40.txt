@@ -1,6 +1,4 @@
 Other Plugins {{{1
-CtrlP {{{2
-Open in buffer mode      «C-p»         N
 Dirvish {{{2
 Help                     g?            N
 Refresh file list        «C-l»         N
