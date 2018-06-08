@@ -127,6 +127,7 @@ endf
 "           take one argument (a List).
 fun! lf_find#interactively(input, callback, prompt) abort
   let l:cursor = '_' " Cursor displayed at the prompt
+  let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
   botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ nonumber\ norelativenumber\ noswapfile\ nowrap
@@ -142,7 +143,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:t_ve = &t_ve
   set t_ve=
   redraw
-  echo a:prompt l:cursor
+  echo l:prompt l:cursor
   try
     while 1
       let ch = getchar()
@@ -177,7 +178,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
         execute "normal" nr2char(ch)
       endif
       redraw
-      echo a:prompt l:filter.l:cursor
+      echo l:prompt l:filter.l:cursor
     endwhile
   catch /^Vim:Interrupt$/  " CTRL-C
     wincmd p
@@ -209,7 +210,7 @@ endf
 
 fun! lf_find#file(...) " ... is an optional directory
   let l:dir = (a:0 > 0 ? ' '.a:1 : ' .')
-  call lf_find#arglist(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
+  call lf_find#arglist_fuzzy(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
 endf
 
 "
@@ -255,8 +256,7 @@ fun! lf_find#in_qflist()
     call lf_msg#warn('Quickfix list is empty')
     return
   endif
-  " call lf_find#interactively(map(l:qflist, { i,v -> printf('%d %s', i+1, trim(v['text'])) }), 's:jump_to_qf_entry', 'Filter quickfix entry:')
-  call lf_find#interactively(split(execute('clist'), "\n"), 's:jump_to_qf_entry', 'Filter quickfix entry:')
+  call lf_find#interactively(split(execute('clist'), "\n"), 's:jump_to_qf_entry', 'Filter quickfix entry')
 endf
 
 fun! lf_find#in_loclist(winnr)
@@ -265,8 +265,7 @@ fun! lf_find#in_loclist(winnr)
     call lf_msg#warn('Location list is empty')
     return
   endif
-  " call lf_find#interactively(map(l:loclist, { i,v -> printf('%d %s', i+1, trim(v['text'])) }), 's:jump_to_loclist_entry', 'Filter loclist entry:')
-  call lf_find#interactively(split(execute('llist'), "\n"), 's:jump_to_loclist_entry', 'Filter loclist entry:')
+  call lf_find#interactively(split(execute('llist'), "\n"), 's:jump_to_loclist_entry', 'Filter loclist entry')
 endf
 
 "
