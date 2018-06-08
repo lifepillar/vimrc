@@ -356,10 +356,10 @@
   command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
   " Find all occurrences of a pattern in the current buffer
-  command! -nargs=1 Search call lf_find#buffer(<q-args>)
+  command! -nargs=1 Search call lf_find#in_buffer(<q-args>)
 
   " Find all occurrences of a pattern in all open buffers
-  command! -nargs=1 SearchAll call lf_find#all_buffers(<q-args>)
+  command! -nargs=1 SearchAll call lf_find#in_all_buffers(<q-args>)
 
   " Fuzzy search for files inside a directory (default: working dir).
   command! -nargs=? -complete=dir FindFile call lf_find#file(<q-args>)
@@ -473,7 +473,8 @@
   vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
-  nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
+  nnoremap          <leader>bb :<c-u>ls<cr>:b
+  nnoremap               <c-p> :<c-u>call lf_find#buffer(0)<cr>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
   nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
@@ -481,6 +482,7 @@
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
   nnoremap <silent> <leader>br :<c-u>setlocal readonly!<cr>
+  nnoremap <silent> <leader>bt :<c-u>call lf_find#buffer_tag()<cr>
   nnoremap <silent> <leader>bw :<c-u>bw<cr>
   nnoremap <silent> <leader>bW :<c-u>bw!<cr>
   nnoremap <silent> <leader>b<c-w> :<c-u>call lf_buffer#wipe_others()<cr>
@@ -492,11 +494,11 @@
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
   " Files
   nnoremap          <leader>ff :<c-u>FindFile<cr>
-  nnoremap          <leader>fr :<c-u>filter // browse oldfiles<s-left><s-left><left><left>
+  nnoremap          <leader>fr :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nnoremap <silent> <leader>fw :<c-u>update<cr>
   nnoremap <silent> <leader>w  :<c-u>update<cr>
   nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
-  nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist(v:oldfiles)<cr>
+  nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist_fuzzy(v:oldfiles)<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>

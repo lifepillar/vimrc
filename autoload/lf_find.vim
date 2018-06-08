@@ -1,5 +1,5 @@
 " Find all occurrences of a pattern in a file.
-fun! lf_find#buffer(pattern)
+fun! lf_find#in_buffer(pattern)
   if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
     call lf_msg#warn("Cannot search the quickfix window")
     return
@@ -13,7 +13,7 @@ fun! lf_find#buffer(pattern)
 endf
 
 " Find all occurrences of a pattern in all open files.
-fun! lf_find#all_buffers(pattern)
+fun! lf_find#in_all_buffers(pattern)
   " Get the list of open files
   let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))'), 'fnameescape(bufname(v:val))')
   cexpr [] " Clear quickfix list
@@ -113,19 +113,9 @@ fun! lf_find#fuzzy(input, callback, prompt)
   endif
 endf
 
-fun! s:set_arglist(paths)
-  if empty(a:paths) | return | endif
-  execute "args" join(map(a:paths, 'fnameescape(v:val)'))
-endf
-
-" Filter a list of paths and populate the arglist with the selected items.
-fun! lf_find#arglist(input_cmd)
-  call lf_find#fuzzy(a:input_cmd, 's:set_arglist', 'Choose files')
-endf
-
-fun! lf_find#file(...) " ... is an optional directory
-  let l:dir = (a:0 > 0 ? ' '.a:1 : ' .')
-  call lf_find#arglist(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
+fun! s:clear_prompt()
+  redraw
+  echo "\r"
 endf
 
 " Interactively filter a list of items as you type, and execute an action on
@@ -139,7 +129,6 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:cursor = '_' " Cursor displayed at the prompt
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
-  let l:seq_new = 0  " Current position in the undo tree
   botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ nonumber\ norelativenumber\ noswapfile\ nowrap
   let l:cur_buf = bufnr('%') " Store current buffer number
   if type(a:input) ==# v:t_string
@@ -165,18 +154,19 @@ fun! lf_find#interactively(input, callback, prompt) abort
         endif
       elseif ch >=# 0x20 " Printable character
         let l:filter .= nr2char(ch)
-        let l:seq_old = l:seq_new
+        let l:seq_old = get(undotree(), 'seq_cur', 0)
         execute 'silent g!:' . escape(l:filter, ':') . ':norm dd'
         let l:seq_new = get(undotree(), 'seq_cur', 0)
         call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
       elseif ch ==# 0x1B " Escape
         wincmd p
         execute "bwipe" l:cur_buf
-        return
+        return s:clear_prompt()
       elseif ch ==# 0x0D " Enter
         let l:result = [getline('.')]
         wincmd p
         execute "bwipe" l:cur_buf
+        call s:clear_prompt()
         call function(a:callback)(l:result)
         return
       elseif ch ==# 0x0B " CTRL-K
@@ -190,16 +180,66 @@ fun! lf_find#interactively(input, callback, prompt) abort
   catch /^Vim:Interrupt$/  " CTRL-C
     wincmd p
     execute "bwipe" l:cur_buf
+    return s:clear_prompt()
   finally
-    " Restore cursor
-    let &t_ve = l:t_ve
-    redraw
-    echo "\r"
+    let &t_ve = l:t_ve " Restore cursor
   endtry
 endf
 
+
+"
+" Find file
+"
+fun! s:set_arglist(paths)
+  if empty(a:paths) | return | endif
+  execute "args" join(map(a:paths, 'fnameescape(v:val)'))
+endf
+
+" Filter a list of paths and populate the arglist with the selected items.
+fun! lf_find#arglist(input_cmd)
+  call lf_find#interactively(a:input_cmd, 's:set_arglist', 'Choose files')
+endf
+
+" Fuzzy filter a list of paths and populate the arglist with the selected items.
+fun! lf_find#arglist_fuzzy(input_cmd)
+  call lf_find#fuzzy(a:input_cmd, 's:set_arglist', 'Choose files')
+endf
+
+fun! lf_find#file(...) " ... is an optional directory
+  let l:dir = (a:0 > 0 ? ' '.a:1 : ' .')
+  call lf_find#arglist(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
+endf
+
+"
+" Find buffer
+"
+fun! s:switch_buffer(buffers)
+  execute "buffer" split(a:buffers[0], '\s\+')[0]
+endf
+
+
+" When 'unlisted' is set to 1, show also unlisted buffers
+fun! lf_find#buffer(unlisted)
+  let l:buffers = split(execute('ls'.(a:unlisted ? '!' : '')), "\n")
+  call lf_find#interactively(l:buffers, 's:switch_buffer', 'Switch buffer')
+endf
+
+"
+" Find tag in current buffer
+"
+fun! s:jump_to_tag(tags)
+  let [l:tag, l:bufname, l:line] = split(a:tags[0], '\s\+')
+  execute "buffer" "+".l:line l:bufname
+endf
+
+fun! lf_find#buffer_tag()
+  call lf_find#interactively(lf_tags#file_tags('%', &ft), 's:jump_to_tag', 'Choose tag')
+endf
+
+"
+" Find colorscheme
+"
 fun! s:set_colorscheme(colors)
-  if empty(a:colors) | return | endif
   execute "colorscheme" a:colors[0]
 endf
 

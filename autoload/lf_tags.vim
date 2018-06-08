@@ -58,3 +58,66 @@ fun! lf_tags#load_cscope_db()
   return !empty(l:db)
 endf
 
+" Adapted from CtrlP's buffertag.vim
+let s:types = {
+  \ 'ant':        '%sant',
+  \ 'asm':        '%sasm',
+  \ 'aspperl':    '%sasp',
+  \ 'aspvbs':     '%sasp',
+  \ 'awk':        '%sawk',
+  \ 'beta':       '%sbeta',
+  \ 'c':          '%sc',
+  \ 'cpp':        '%sc++',
+  \ 'cs':         '%sc#',
+  \ 'cobol':      '%scobol',
+  \ 'context':    '%scontext',
+  \ 'delphi':     '%spascal',
+  \ 'dosbatch':   '%sdosbatch',
+  \ 'eiffel':     '%seiffel',
+  \ 'erlang':     '%serlang',
+  \ 'expect':     '%stcl',
+  \ 'fortran':    '%sfortran',
+  \ 'go':         '%sgo',
+  \ 'html':       '%shtml',
+  \ 'java':       '%sjava',
+  \ 'javascript': '%sjavascript',
+  \ 'lisp':       '%slisp',
+  \ 'lua':        '%slua',
+  \ 'make':       '%smake',
+  \ 'markdown':   '%smarkdown',
+  \ 'matlab':     '%smatlab',
+  \ 'mf':         '%smetapost',
+  \ 'mp':         '%smetapost',
+  \ 'ocaml':      '%socaml',
+  \ 'pascal':     '%spascal',
+  \ 'perl':       '%sperl',
+  \ 'php':        '%sphp',
+  \ 'python':     '%spython',
+  \ 'rexx':       '%srexx',
+  \ 'rmd':        '%srmarkdown',
+  \ 'ruby':       '%sruby',
+  \ 'rust':       '%srust',
+  \ 'scheme':     '%sscheme',
+  \ 'sh':         '%ssh',
+  \ 'csh':        '%ssh',
+  \ 'zsh':        '%ssh',
+  \ 'scala':      '%sscala',
+  \ 'slang':      '%sslang',
+  \ 'sml':        '%ssml',
+  \ 'sql':        '%spgsql',
+  \ 'tex':        '%slatex',
+  \ 'tcl':        '%stcl',
+  \ 'vera':       '%svera',
+  \ 'verilog':    '%sverilog',
+  \ 'vhdl':       '%svhdl',
+  \ 'vim':        '%svim',
+  \ 'yacc':       '%syacc',
+  \ }
+
+cal map(s:types, 'printf(v:val, "--language-force=")')
+
+fun! lf_tags#file_tags(path, ft)
+    return systemlist('ctags -f - --sort=no --excmd=number --fields= --extra= --file-scope=yes '
+          \ . get(s:types, a:ft, '') . ' '
+          \ . shellescape(expand(a:path)))
+endf
