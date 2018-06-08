@@ -63,8 +63,8 @@ endfor
 " 'input' is either a shell command that sends its output, one item per line,
 " to stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input, callback, prompt)
-  if empty(s:ff_bin)
-    call lf_msg#err('No fuzzy finder found')
+  if empty(s:ff_bin) " Fallback
+    call lf_find#interactively(a:input, a:callback, a:prompt)
     return
   endif
 
@@ -78,7 +78,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
 
   let l:ff_cmd = l:ff_cmds[s:ff_bin]
 
-  if type(a:input) == v:t_string
+  if type(a:input) ==# v:t_string
     let l:inpath = ''
     let l:cmd = a:input . l:ff_cmd
   else " Assume List
@@ -133,8 +133,74 @@ fun! s:set_colorscheme(colors)
   execute "colorscheme" a:colors[0]
 endf
 
+" Interactively filter a list of items as you type, and execute an action on
+" the selected item. Sort of a poor man's CtrlP.
+"
+" input:    either a shell command that sends its output, one item per line,
+"           to stdout, or a List of items to be filtered.
+" callback: the function to be called on the filtered item. The function must
+"           take one argument (a List).
+fun! lf_find#interactively(input, callback, prompt) abort
+  let l:cursor = '_' " Cursor displayed at the prompt
+  let l:filter = ''  " Text used to filter the list
+  let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
+  let l:seq_new = 0  " Current position in the undo tree
+  botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ nonumber\ norelativenumber\ noswapfile\ nowrap
+  if type(a:input) ==# v:t_string
+    let l:input = systemlist(a:input)
+    call setline(1, l:input)
+  else " Assume List
+    call setline(1, a:input)
+  endif
+  setlocal cursorline
+  " Hide cursor
+  let l:t_ve = &t_ve
+  set t_ve=
+  redraw
+  echo a:prompt l:cursor
+  try
+    while 1
+      let ch = getchar()
+      if ch ==# "\<bs>" " Backspace
+        let l:filter = l:filter[:-2]
+        let l:undo = empty(l:undoseq) ? 0 : remove(l:undoseq, -1)
+        if l:undo
+          silent norm u
+        endif
+      elseif ch >=# 0x20 " Printable character
+        let l:filter .= nr2char(ch)
+        let l:seq_old = l:seq_new
+        execute 'silent g!:' . escape(l:filter, ':') . ':norm dd'
+        let l:seq_new = get(undotree(), 'seq_cur', 0)
+        call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
+      elseif ch ==# 0x1B " Escape
+        bwipe
+        return
+      elseif ch ==# 0x0D " Enter
+        let l:result = [getline('.')]
+        bwipe
+        call function(a:callback)(l:result)
+        return
+      elseif ch ==# 0x0B " CTRL-K
+        norm k
+      elseif index([0x02, 0x04, 0x06, 0x0A, 0x15], ch) >= 0 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
+        execute "normal" nr2char(ch)
+      endif
+      redraw
+      echo a:prompt l:filter.l:cursor
+    endwhile
+  catch /^Vim:Interrupt$/  " CTRL-C
+    bwipe
+  finally
+    " Restore cursor
+    let &t_ve = l:t_ve
+    redraw
+    echo "\r"
+  endtry
+endf
+
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
-  call lf_find#fuzzy(l:colors, 's:set_colorscheme', 'Choose colorscheme')
+  call lf_find#interactively(l:colors, 's:set_colorscheme', 'Choose colorscheme')
 endf
