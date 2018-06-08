@@ -19,7 +19,7 @@ My own Vim configuration. Some features:
   [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
   when I decided that simple is better (and Powerline fonts are an ugly hack
   anyway).
-- Home-made interactive finder, à la poor man's CtrlP.
+- Home-made interactive finder, *à la* poor man's CtrlP.
 - **Distraction-free mode** (courtesy of
   [Goyo](https://github.com/junegunn/goyo.vim) and
   [Limelight](https://github.com/junegunn/limelight.vim)).
