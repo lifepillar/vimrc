@@ -113,7 +113,9 @@ fun! lf_find#fuzzy(input, callback, prompt)
   endif
 endf
 
-fun! s:clear_prompt()
+fun! s:filter_close(bufnr)
+  wincmd p
+  execute "bwipe" a:bufnr
   redraw
   echo "\r"
 endf
@@ -160,14 +162,10 @@ fun! lf_find#interactively(input, callback, prompt) abort
         let l:seq_new = get(undotree(), 'seq_cur', 0)
         call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
       elseif ch ==# 0x1B " Escape
-        wincmd p
-        execute "bwipe" l:cur_buf
-        return s:clear_prompt()
+        return s:filter_close(l:cur_buf)
       elseif ch ==# 0x0D " Enter
         let l:result = [getline('.')]
-        wincmd p
-        execute "bwipe" l:cur_buf
-        call s:clear_prompt()
+        call s:filter_close(l:cur_buf)
         if !empty(l:result[0])
           call function(a:callback)(l:result)
         endif
@@ -181,9 +179,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       echo l:prompt l:filter.l:cursor
     endwhile
   catch /^Vim:Interrupt$/  " CTRL-C
-    wincmd p
-    execute "bwipe" l:cur_buf
-    return s:clear_prompt()
+    return s:filter_close(l:cur_buf)
   finally
     let &t_ve = l:t_ve " Restore cursor
   endtry
