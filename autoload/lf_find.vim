@@ -128,11 +128,6 @@ fun! lf_find#file(...) " ... is an optional directory
   call lf_find#arglist(executable('rg') ? 'rg --files'.l:dir : 'find'.l:dir.' -type f')
 endf
 
-fun! s:set_colorscheme(colors)
-  if empty(a:colors) | return | endif
-  execute "colorscheme" a:colors[0]
-endf
-
 " Interactively filter a list of items as you type, and execute an action on
 " the selected item. Sort of a poor man's CtrlP.
 "
@@ -201,6 +196,11 @@ fun! lf_find#interactively(input, callback, prompt) abort
     redraw
     echo "\r"
   endtry
+endf
+
+fun! s:set_colorscheme(colors)
+  if empty(a:colors) | return | endif
+  execute "colorscheme" a:colors[0]
 endf
 
 fun! lf_find#colorscheme()
