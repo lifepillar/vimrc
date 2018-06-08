@@ -237,6 +237,37 @@ fun! lf_find#buffer_tag()
 endf
 
 "
+" Find in quickfix/location list
+"
+fun! s:jump_to_qf_entry(items)
+  execute "crewind" matchstr(a:items[0], '^\s*\d\+', '')
+endf
+
+fun! s:jump_to_loclist_entry(items)
+  execute "lrewind" matchstr(a:items[0], '^\s*\d\+', '')
+endf
+
+fun! lf_find#in_qflist()
+  let l:qflist = getqflist()
+  if empty(l:qflist)
+    call lf_msg#warn('Quickfix list is empty')
+    return
+  endif
+  " call lf_find#interactively(map(l:qflist, { i,v -> printf('%d %s', i+1, trim(v['text'])) }), 's:jump_to_qf_entry', 'Filter quickfix entry:')
+  call lf_find#interactively(split(execute('clist'), "\n"), 's:jump_to_qf_entry', 'Filter quickfix entry:')
+endf
+
+fun! lf_find#in_loclist(winnr)
+  let l:loclist = getloclist(a:winnr)
+  if empty(l:loclist)
+    call lf_msg#warn('Location list is empty')
+    return
+  endif
+  " call lf_find#interactively(map(l:loclist, { i,v -> printf('%d %s', i+1, trim(v['text'])) }), 's:jump_to_loclist_entry', 'Filter loclist entry:')
+  call lf_find#interactively(split(execute('llist'), "\n"), 's:jump_to_loclist_entry', 'Filter loclist entry:')
+endf
+
+"
 " Find colorscheme
 "
 fun! s:set_colorscheme(colors)

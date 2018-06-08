@@ -81,7 +81,7 @@ Buffers and files {{{2
 Cd to current path       cd            N
 Open file explorer       \d            N
 Find file in working dir \ff           N
-Browse oldfiles          \fr           N
+Browse/filter old files  \fr           N
 Fuzzy browse oldfile     \fz           N
 Save (only if modified)  \fw           N
 Ditto                    \w            N
@@ -89,7 +89,8 @@ Save as root             \fW           N
 New buffer               \bn           N
 New scratch buffer       \bs           N
 Toggle read-only status  \br           N
-Choose buffer            \bb           N
+List buffers             \bb           N
+Filter and switch buffer «c-p»         N
 Delete buffer            \bd           N
 Force delete buffer      \bD           N
 Close all other buffers  \b«C-d»       N
@@ -122,6 +123,8 @@ Find all in this buffer  :Search …     N
 Find in all open buffers :SearchAll …  N
 Grep search (ripgrep)    :Grep         N
 Spotlight search ()     :Spotlight …  N
+Filter quickfix list     \qf           N
+Filter location list     \lf           N
 Go {{{2
 Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C

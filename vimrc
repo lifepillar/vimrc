@@ -520,6 +520,9 @@
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
+  " Quickfix/Location list
+  nnoremap <silent> <leader>lf :<c-u>call lf_find#in_loclist(0)<cr>
+  nnoremap <silent> <leader>qf :<c-u>call lf_find#in_qflist()<cr>
   " View/toggle
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
