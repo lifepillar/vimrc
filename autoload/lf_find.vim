@@ -118,7 +118,6 @@ fun! s:filter_close(bufnr)
   execute "bwipe" a:bufnr
   redraw
   echo "\r"
-  return []
 endf
 
 " Interactively filter a list of items as you type, and execute an action on
@@ -126,7 +125,7 @@ endf
 "
 " input:    either a shell command that sends its output, one item per line,
 "           to stdout, or a List of items to be filtered.
-fun! lf_find#interactively(input, prompt) abort
+fun! lf_find#interactively(input, callback, prompt) abort
   let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
@@ -167,9 +166,12 @@ fun! lf_find#interactively(input, prompt) abort
     elseif ch ==# 0x1B " Escape
       return s:filter_close(l:cur_buf)
     elseif ch ==# 0x0D " Enter
-      let l:result = empty(getline('.')) ? [] : [getline('.')]
+      let l:result = [getline('.')]
       call s:filter_close(l:cur_buf)
-      return l:result
+      if !empty(l:result[0])
+        call function(a:callback)(l:result)
+      endif
+      return
     elseif ch ==# 0x0C " CTRL-L (clear)
       call setline(1, type(a:input) ==# v:t_string ? l:input : a:input)
       let l:undoseq = []
@@ -196,7 +198,7 @@ endf
 
 " Filter a list of paths and populate the arglist with the selected items.
 fun! lf_find#arglist(input_cmd)
-  call s:set_arglist(lf_find#interactively(a:input_cmd, 'Choose file'))
+  call lf_find#interactively(a:input_cmd, 's:set_arglist', 'Choose file')
 endf
 
 " Fuzzy filter a list of paths and populate the arglist with the selected items.
@@ -213,7 +215,6 @@ endf
 " Find buffer
 "
 fun! s:switch_to_buffer(buffers)
-  if empty(a:buffers) | return | endif
   execute "buffer" split(a:buffers[0], '\s\+')[0]
 endf
 
@@ -221,32 +222,29 @@ endf
 " When 'unlisted' is set to 1, show also unlisted buffers
 fun! lf_find#buffer(unlisted)
   let l:buffers = split(execute('ls'.(a:unlisted ? '!' : '')), "\n")
-  call s:switch_to_buffer(lf_find#interactively(l:buffers, 'Switch buffer'))
+  call lf_find#interactively(l:buffers, 's:switch_to_buffer', 'Switch buffer')
 endf
 
 "
 " Find tag in current buffer
 "
 fun! s:jump_to_tag(tags)
-  if empty(a:tags) | return | endif
   let [l:tag, l:bufname, l:line] = split(a:tags[0], '\s\+')
   execute "buffer" "+".l:line l:bufname
 endf
 
 fun! lf_find#buffer_tag()
-  call s:jump_to_tag(lf_find#interactively(lf_tags#file_tags('%', &ft), 'Choose tag'))
+  call lf_find#interactively(lf_tags#file_tags('%', &ft), 's:jump_to_tag', 'Choose tag')
 endf
 
 "
 " Find in quickfix/location list
 "
 fun! s:jump_to_qf_entry(items)
-  if empty(a:items) | return | endif
   execute "crewind" matchstr(a:items[0], '^\s*\d\+', '')
 endf
 
 fun! s:jump_to_loclist_entry(items)
-  if empty(a:items) | return | endif
   execute "lrewind" matchstr(a:items[0], '^\s*\d\+', '')
 endf
 
@@ -256,7 +254,7 @@ fun! lf_find#in_qflist()
     call lf_msg#warn('Quickfix list is empty')
     return
   endif
-  call s:jump_to_qf_entry(lf_find#interactively(split(execute('clist'), "\n"), 'Filter quickfix entry'))
+  call lf_find#interactively(split(execute('clist'), "\n"), 's:jump_to_qf_entry', 'Filter quickfix entry')
 endf
 
 fun! lf_find#in_loclist(winnr)
@@ -265,19 +263,18 @@ fun! lf_find#in_loclist(winnr)
     call lf_msg#warn('Location list is empty')
     return
   endif
-  call s:jump_to_loclist_entry(lf_find#interactively(split(execute('llist'), "\n"), 'Filter loclist entry'))
+  call lf_find#interactively(split(execute('llist'), "\n"), 's:jump_to_loclist_entry', 'Filter loclist entry')
 endf
 
 "
 " Find colorscheme
 "
 fun! s:set_colorscheme(colors)
-  if empty(a:colors) | return | endif
   execute "colorscheme" a:colors[0]
 endf
 
 fun! lf_find#colorscheme()
   let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
   let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
-  call s:set_colorscheme(lf_find#interactively(l:colors, 'Choose colorscheme'))
+  call lf_find#interactively(l:colors, 's:set_colorscheme', 'Choose colorscheme')
 endf
