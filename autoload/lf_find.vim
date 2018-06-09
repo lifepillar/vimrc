@@ -172,6 +172,11 @@ fun! lf_find#interactively(input, callback, prompt) abort
         return
       elseif ch ==# 0x0B " CTRL-K
         norm k
+      elseif ch ==# 0x0C " CTRL-L
+        call setline(1, type(a:input) ==# v:t_string ? l:input : a:input)
+        let l:undoseq = []
+        let l:filter = ''
+        redraw
       elseif index([0x02, 0x04, 0x06, 0x0A, 0x15], ch) >= 0 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
         execute "normal" nr2char(ch)
       endif
