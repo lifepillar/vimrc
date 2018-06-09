@@ -46,11 +46,11 @@ fun! lf_find#grep(args)
   redraw!
 endf
 
-fun! s:get_ff_output(inpath, outpath, callback, channel, status)
+fun! s:get_ff_output(inpath, outpath)
   let l:output = filereadable(a:outpath) ? readfile(a:outpath) : []
   silent! call delete(a:outpath)
   silent! call delete(a:inpath)
-  call function(a:callback)(l:output)
+  return l:output
 endf
 
 for s:ff_bin in ['sk', 'fzf', 'fzy', 'selecta', 'pick', ''] " Sort according to your preference
@@ -62,10 +62,9 @@ endfor
 " Filter a list and return a List of selected items.
 " 'input' is either a shell command that sends its output, one item per line,
 " to stdout, or a List of items to be filtered.
-fun! lf_find#fuzzy(input, callback, prompt)
+fun! lf_find#fuzzy(input, prompt)
   if empty(s:ff_bin) " Fallback
-    call lf_find#interactively(a:input, a:callback, a:prompt)
-    return
+    return lf_find#interactively(a:input, a:prompt)
   endif
 
   let l:ff_cmds = {
@@ -91,8 +90,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
     let l:output = systemlist(printf('tput cup %d >/dev/tty; tput cnorm >/dev/tty; ' . l:cmd, &lines))
     redraw!
     silent! call delete(a:inpath)
-    call function(a:callback)(l:output)
-    return
+    return l:output
   endif
 
   let l:outpath = tempname()
@@ -109,7 +107,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
   else
    silent execute '!' . l:cmd
    redraw!
-   call s:get_ff_output(l:inpath, l:outpath, a:callback, -1, v:shell_error)
+   return s:get_ff_output(l:inpath, l:outpath)
   endif
 endf
 
@@ -195,13 +193,13 @@ fun! s:set_arglist(paths)
 endf
 
 " Filter a list of paths and populate the arglist with the selected items.
-fun! lf_find#arglist(input_cmd)
-  call s:set_arglist(lf_find#interactively(a:input_cmd, 'Choose file'))
+fun! lf_find#arglist(input)
+  call s:set_arglist(lf_find#interactively(a:input, 'Choose file'))
 endf
 
 " Fuzzy filter a list of paths and populate the arglist with the selected items.
-fun! lf_find#arglist_fuzzy(input_cmd)
-  call lf_find#fuzzy(a:input_cmd, 's:set_arglist', 'Choose files')
+fun! lf_find#arglist_fuzzy(input)
+  call s:set_arglist(lf_find#fuzzy(a:input, 'Choose files'))
 endf
 
 fun! lf_find#file(...) " ... is an optional directory
