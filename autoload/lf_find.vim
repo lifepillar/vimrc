@@ -128,7 +128,6 @@ endf
 " callback: the function to be called on the filtered item. The function must
 "           take one argument (a List).
 fun! lf_find#interactively(input, callback, prompt) abort
-  let l:cursor = '_' " Cursor displayed at the prompt
   let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
@@ -141,53 +140,48 @@ fun! lf_find#interactively(input, callback, prompt) abort
     call setline(1, a:input)
   endif
   setlocal cursorline
-  " Hide cursor
-  let l:t_ve = &t_ve
-  set t_ve=
   redraw
-  echo l:prompt l:cursor
-  try
-    while 1
+  echo l:prompt . ' '
+  while 1
+    try
       let ch = getchar()
-      if ch ==# "\<bs>" " Backspace
-        let l:filter = l:filter[:-2]
-        let l:undo = empty(l:undoseq) ? 0 : remove(l:undoseq, -1)
-        if l:undo
-          silent norm u
-        endif
-      elseif ch >=# 0x20 " Printable character
-        let l:filter .= nr2char(ch)
-        let l:seq_old = get(undotree(), 'seq_cur', 0)
-        execute 'silent g!:' . escape(l:filter, ':') . ':norm dd'
-        let l:seq_new = get(undotree(), 'seq_cur', 0)
-        call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
-      elseif ch ==# 0x1B " Escape
-        return s:filter_close(l:cur_buf)
-      elseif ch ==# 0x0D " Enter
-        let l:result = [getline('.')]
-        call s:filter_close(l:cur_buf)
-        if !empty(l:result[0])
-          call function(a:callback)(l:result)
-        endif
-        return
-      elseif ch ==# 0x0B " CTRL-K
-        norm k
-      elseif ch ==# 0x0C " CTRL-L
-        call setline(1, type(a:input) ==# v:t_string ? l:input : a:input)
-        let l:undoseq = []
-        let l:filter = ''
-        redraw
-      elseif index([0x02, 0x04, 0x06, 0x0A, 0x15], ch) >= 0 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
-        execute "normal" nr2char(ch)
+    catch /^Vim:Interrupt$/  " CTRL-C
+      return s:filter_close(l:cur_buf)
+    endtry
+    if ch ==# "\<bs>" " Backspace
+      let l:filter = l:filter[:-2]
+      let l:undo = empty(l:undoseq) ? 0 : remove(l:undoseq, -1)
+      if l:undo
+        silent norm u
       endif
+    elseif ch >=# 0x20 " Printable character
+      let l:filter .= nr2char(ch)
+      let l:seq_old = get(undotree(), 'seq_cur', 0)
+      execute 'silent g!:' . escape(l:filter, ':') . ':norm dd'
+      let l:seq_new = get(undotree(), 'seq_cur', 0)
+      call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
+    elseif ch ==# 0x1B " Escape
+      return s:filter_close(l:cur_buf)
+    elseif ch ==# 0x0D " Enter
+      let l:result = [getline('.')]
+      call s:filter_close(l:cur_buf)
+      if !empty(l:result[0])
+        call function(a:callback)(l:result)
+      endif
+      return
+    elseif ch ==# 0x0C " CTRL-L (clear)
+      call setline(1, type(a:input) ==# v:t_string ? l:input : a:input)
+      let l:undoseq = []
+      let l:filter = ''
       redraw
-      echo l:prompt l:filter.l:cursor
-    endwhile
-  catch /^Vim:Interrupt$/  " CTRL-C
-    return s:filter_close(l:cur_buf)
-  finally
-    let &t_ve = l:t_ve " Restore cursor
-  endtry
+    elseif ch ==# 0x0B " CTRL-K
+      norm k
+    elseif index([0x02, 0x04, 0x06, 0x0A, 0x15], ch) >= 0 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
+      execute "normal" nr2char(ch)
+    endif
+    redraw
+    echo l:prompt l:filter
+  endwhile
 endf
 
 
