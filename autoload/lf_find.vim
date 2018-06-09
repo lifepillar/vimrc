@@ -142,6 +142,7 @@ fun! lf_find#interactively(input, prompt) abort
   redraw
   echo l:prompt . ' '
   while 1
+    let l:error = 0 " Set to 1 when pattern is invalid
     try
       let ch = getchar()
     catch /^Vim:Interrupt$/  " CTRL-C
@@ -156,7 +157,11 @@ fun! lf_find#interactively(input, prompt) abort
     elseif ch >=# 0x20 " Printable character
       let l:filter .= nr2char(ch)
       let l:seq_old = get(undotree(), 'seq_cur', 0)
-      execute 'silent g!:' . escape(l:filter, ':') . ':norm dd'
+      try
+        execute 'silent g!:\m' . escape(l:filter, '~\[:') . ':norm dd'
+      catch /^Vim\%((\a\+)\)\=:E/
+        let l:error = 1
+      endtry
       let l:seq_new = get(undotree(), 'seq_cur', 0)
       call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
     elseif ch ==# 0x1B " Escape
@@ -176,7 +181,7 @@ fun! lf_find#interactively(input, prompt) abort
       execute "normal" nr2char(ch)
     endif
     redraw
-    echo l:prompt l:filter
+    echo (l:error ? '[Invalid pattern] ' : '').l:prompt l:filter
   endwhile
 endf
 
