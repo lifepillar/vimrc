@@ -157,7 +157,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       let l:filter .= nr2char(ch)
       let l:seq_old = get(undotree(), 'seq_cur', 0)
       try
-        execute 'silent g!:\m' . escape(l:filter, '~\[:') . ':norm dd'
+        execute 'silent g!:\m' . escape(l:filter, '~\[:') . ':norm "_dd'
       catch /^Vim\%((\a\+)\)\=:E/
         let l:error = 1
       endtry
