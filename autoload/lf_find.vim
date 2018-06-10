@@ -221,7 +221,7 @@ endf
 
 " When 'unlisted' is set to 1, show also unlisted buffers
 fun! lf_find#buffer(unlisted)
-  let l:buffers = split(execute('ls'.(a:unlisted ? '!' : '')), "\n")
+  let l:buffers = map(split(execute('ls'.(a:unlisted ? '!' : '')), "\n"), { i,v -> substitute(v, '"\(.*\)"\s*line\s*\d\+$', '\1', '') })
   call lf_find#interactively(l:buffers, 's:switch_to_buffer', 'Switch buffer')
 endf
 
