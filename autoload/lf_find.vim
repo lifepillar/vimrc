@@ -129,7 +129,9 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
-  botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ nonumber\ norelativenumber\ noswapfile\ nowrap
+  botright 10new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\
+        \ nonumber\ norelativenumber\ noswapfile\ nowrap\ winfixheight\
+        \ foldmethod=manual\ nofoldenable
   let l:cur_buf = bufnr('%') " Store current buffer number
   if type(a:input) ==# v:t_string
     let l:input = systemlist(a:input)
