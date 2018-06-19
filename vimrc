@@ -535,7 +535,7 @@
     let s:linespace=2
     set guifont=SF\ Mono\ Light:h11
     set guioptions=gm
-    set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
+    set guicursor=n-v-c:block-blinkoff0,i-o-r-ci-cr:ver15-blinkoff0
     let &linespace=s:linespace
     set transparency=0
     tnoremap <a-left> <esc>b
