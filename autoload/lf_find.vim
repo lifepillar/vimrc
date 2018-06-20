@@ -113,8 +113,16 @@ fun! lf_find#fuzzy(input, callback, prompt)
   endif
 endf
 
-fun! s:filter_close(bufnr)
+fun! s:filter_close(bufnr, ...)
   wincmd p
+  let l:split = get(a:000, 0, '')
+  if l:split ==# 'S'
+    split
+  elseif l:split ==# 'V'
+    vsplit
+  elseif l:split ==# 'T'
+    tabnew
+  endif
   execute "bwipe" a:bufnr
   redraw
   echo "\r"
@@ -168,12 +176,12 @@ fun! lf_find#interactively(input, callback, prompt) abort
       endtry
       let l:seq_new = get(undotree(), 'seq_cur', 0)
       call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
-    elseif ch ==# 0x1B " Escape
       norm gg
+    elseif ch ==# 0x1B " Escape (cancel)
       return s:filter_close(l:cur_buf)
-    elseif ch ==# 0x0D " Enter
+    elseif ch ==# 0x0D || ch ==# 0x13 || ch ==# 0x16 || ch ==# 0x14 " Enter/CTRL-S/CTRL-V/CTRL-T (accept)
       let l:result = [getline('.')]
-      call s:filter_close(l:cur_buf)
+      call s:filter_close(l:cur_buf, nr2char(ch + 64))
       if !empty(l:result[0])
         call function(a:callback)(l:result)
       endif
@@ -185,7 +193,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       redraw
     elseif ch ==# 0x0B " CTRL-K
       norm k
-    elseif index([0x02, 0x04, 0x06, 0x0A, 0x15], ch) >= 0 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
+    elseif ch ==# 0x02 || ch ==# 0x04 || ch ==# 0x06 || ch ==# 0x0A || ch ==# 0x15 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
       execute "normal" nr2char(ch)
     endif
     redraw
