@@ -157,6 +157,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       if l:undo
         silent norm u
       endif
+      norm gg
     elseif ch >=# 0x20 " Printable character
       let l:filter .= nr2char(ch)
       let l:seq_old = get(undotree(), 'seq_cur', 0)
@@ -168,6 +169,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       let l:seq_new = get(undotree(), 'seq_cur', 0)
       call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
     elseif ch ==# 0x1B " Escape
+      norm gg
       return s:filter_close(l:cur_buf)
     elseif ch ==# 0x0D " Enter
       let l:result = [getline('.')]
