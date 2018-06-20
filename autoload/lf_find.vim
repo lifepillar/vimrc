@@ -118,6 +118,7 @@ fun! s:filter_close(bufnr)
   execute "bwipe" a:bufnr
   redraw
   echo "\r"
+  let &scrolloff=g:default_scrolloff
 endf
 
 " Interactively filter a list of items as you type, and execute an action on
@@ -133,6 +134,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
         \ nonumber\ norelativenumber\ noswapfile\ nowrap\ winfixheight\
         \ foldmethod=manual\ nofoldenable\ modifiable\ noreadonly
   let l:cur_buf = bufnr('%') " Store current buffer number
+  set scrolloff=0
   if type(a:input) ==# v:t_string
     let l:input = systemlist(a:input)
     call setline(1, l:input)
