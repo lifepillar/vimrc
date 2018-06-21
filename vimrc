@@ -141,10 +141,11 @@
   set display=lastline
   " Get more information from ctrl-g:
   nnoremap <c-g> 2<c-g>
-  " Show block cursor in Normal mode and line cursor in Insert mode:
-  let &t_ti.="\e[1 q"
-  let &t_SI.="\e[5 q"
-  let &t_EI.="\e[1 q"
+  " Show block cursor in Normal mode and line cursor in Insert mode
+  " (use odd numbers for blinking cursor):
+  let &t_ti.="\e[2 q"
+  let &t_SI.="\e[6 q"
+  let &t_EI.="\e[2 q"
   let &t_te.="\e[0 q"
   set notitle " Do not set the terminal title
   set number " Turn line numbering on
