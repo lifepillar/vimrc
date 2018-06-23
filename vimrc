@@ -472,6 +472,9 @@
   " Comment/uncomment (overrides Q, so we avoid entering Ex mode by mistake)
   nnoremap <silent>  Q :set opfunc=lf_text#toggle_comment<cr>g@
   vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>
+  " Save buffer
+  nnoremap <silent> <leader>w :<c-u>update<cr>
+  nnoremap          <leader>W :<c-u>w !sudo tee % >/dev/null<cr>
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b
@@ -493,13 +496,13 @@
   inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) ==# ')' ? "\<right>" :  ')'
   inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) ==# ']' ? "\<right>" :  ']'
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
-  " Files
+  " Find/filter 
   nnoremap <silent> <leader>ff :<c-u>FindFile<cr>
   nnoremap <silent> <leader>fr :<c-u>call lf_find#arglist(v:oldfiles)<cr>
-  nnoremap <silent> <leader>fw :<c-u>update<cr>
-  nnoremap <silent> <leader>w  :<c-u>update<cr>
-  nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist_fuzzy(v:oldfiles)<cr>
+  " Quickfix/Location list
+  nnoremap <silent> <leader>fl :<c-u>call lf_find#in_loclist(0)<cr>
+  nnoremap <silent> <leader>fq :<c-u>call lf_find#in_qflist()<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
@@ -521,9 +524,6 @@
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
-  " Quickfix/Location list
-  nnoremap <silent> <leader>lf :<c-u>call lf_find#in_loclist(0)<cr>
-  nnoremap <silent> <leader>qf :<c-u>call lf_find#in_qflist()<cr>
   " View/toggle
   nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>

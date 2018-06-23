@@ -1,7 +1,6 @@
 Other Plugins {{{1
 Dirvish {{{2
 Help                     g?            N
-Refresh file list        «C-l»         N
 Open in a new tab        t             N
 Hide dot-prefixed files  gh            N
 Easy Align {{{2
@@ -59,7 +58,6 @@ Status (uses Tig)        \gs           N
 Blame (uses Tig)         \gb           N
 Diff with HEAD           \gd           N
 Three-way diff           \gt           N
-Commit                   \gc           N
 Push                     \gp           N
 Log for this file        \gl           N
 Commands {{{1
@@ -81,9 +79,8 @@ Open file explorer       \d            N
 Find file in working dir \ff           N
 Browse/filter old files  \fr           N
 Fuzzy browse oldfile     \fz           N
-Save (only if modified)  \fw           N
-Ditto                    \w            N
-Save as root             \fW           N
+Save (only if modified)  \w            N
+Save as root             \W            N
 New buffer               \bn           N
 New scratch buffer       \bs           N
 Toggle read-only status  \br           N
@@ -113,7 +110,7 @@ Open quickfix window     \vq           N
 Show/hide status line    \vs           N
 Decrease tab width       \[            N
 Increase tab width       \]            N
-Set tab width            :TabWid ‹n›   N
+Set tab width            :TabWidth ‹n› N
 Reduce contrast          \-            N
 Increase contrast        \+            N
 Search {{{2
@@ -121,8 +118,8 @@ Find all in this buffer  :Search …     N
 Find in all open buffers :SearchAll …  N
 Grep search (ripgrep)    :Grep         N
 Spotlight search ()     :Spotlight …  N
-Filter quickfix list     \qf           N
-Filter location list     \lf           N
+Filter location list     \fl           N
+Filter quickfix list     \fq           N
 Go {{{2
 Next word ()            «Alt-→»       C
 Prev word ()            «Alt-←»       C
