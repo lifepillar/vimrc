@@ -205,10 +205,10 @@
         \  'V': ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode'  ],  's': ['SELECT',  'VisualMode' ],
         \  'S': ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode'  ],  'i': ['INSERT',  'InsertMode' ],
         \ 'ic': ['COMPLETE','InsertMode' ],     'ix': ['CTRL-X',  'InsertMode'  ],  'R': ['REPLACE', 'ReplaceMode'],
-        \ 'Rc': ['COMPLETE','ReplaceMode'],     'Rv': ['REPLACE', 'ReplaceMode' ], 'Rx': ['CTRL-X',  'ReplaceMode'],
+        \ 'Rc': ['COMPLETE','ReplaceMode'],     'Rv': ['VREPLACE','ReplaceMode' ], 'Rx': ['CTRL-X',  'ReplaceMode'],
         \  'c': ['COMMAND', 'CommandMode'],     'cv': ['COMMAND', 'CommandMode' ], 'ce': ['COMMAND', 'CommandMode'],
         \  'r': ['PROMPT',  'CommandMode'],     'rm': ['-MORE-',  'CommandMode' ], 'r?': ['CONFIRM', 'CommandMode'],
-        \  '!': ['SHELL',   'CommandMode'],      't': ['TERMINAL', 'CommandMode']}
+        \  '!': ['SHELL',   'CommandMode'],      't': ['TERMINAL','CommandMode' ]}
 
   let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
