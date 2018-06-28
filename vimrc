@@ -496,7 +496,7 @@
   inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) ==# ')' ? "\<right>" :  ')'
   inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) ==# ']' ? "\<right>" :  ']'
   inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
-  " Find/filter 
+  " Find/filter
   nnoremap <silent> <leader>ff :<c-u>FindFile<cr>
   nnoremap <silent> <leader>fr :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist_fuzzy(v:oldfiles)<cr>
