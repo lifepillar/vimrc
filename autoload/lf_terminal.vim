@@ -37,6 +37,7 @@ elseif has('terminal') " Vim 8 or later, MacVim
       call term_sendkeys(b:lf_bound_terminal, l:line . "\r")
       call s:term_wait(b:lf_bound_terminal)
     endfor
+    call cursor(line('.') + 1, 1)
   endf
 
   if has('gui_running')

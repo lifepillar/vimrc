@@ -453,8 +453,8 @@
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>+
-  vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>`>+
+  nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>
+  vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>
   if has('terminal')
     " Use Alt+arrows to jump between words
     tnoremap <s-left> <esc>b
