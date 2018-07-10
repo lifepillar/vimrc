@@ -12,12 +12,14 @@ snippet fig
 
 snippet item
 \begin{itemize}
-  \item ___
+  \item
+  ___
 \end{itemize}
 
 snippet enum
 \begin{enumerate}
-  \item ___
+  \item
+  ___
 \end{enumerate}
 
 snippet i
