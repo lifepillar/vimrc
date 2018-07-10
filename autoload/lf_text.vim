@@ -143,7 +143,7 @@ fun! lf_text#load_snippets()
     if l:line =~ '^snippet'
       let l:key = matchstr(l:line, '^snippet\s\+\zs.\+$')
       let b:lf_snippets[l:key] = []
-    else
+    elseif !empty(l:line)
       call add(b:lf_snippets[l:key], l:line)
     endif
   endfor
@@ -152,15 +152,20 @@ fun! lf_text#load_snippets()
 endf
 
 fun! lf_text#expand_snippet()
-  let l:key = matchstr(getline('.'), '\S\+\%'.col('.').'c')
-  let l:snippet = get(b:lf_snippets, l:key, [])
-  if !empty(l:snippet)
+  " Get word in front of the cursor and tail of line
+  let l:match = matchlist(getline('.'), '\(\S\+\%'.col('.').'c\)\(.*\)$')
+  if empty(l:match) | return '…' | endif
+    let [l:key, l:tail] = [l:match[1], l:match[2]]
+    let l:snippet = get(b:lf_snippets, l:key, [])
+  if !empty(l:snippet) " Expand snippet
     let l:indent = matchstr(getline('.'), '^\s\+')
     call setline('.', l:indent . l:snippet[0])
     call append('.', map(l:snippet[1:-1], { _,t -> l:indent . t}))
     call search('___', 'csW')
+    let l:save_cursor = getcurpos()
     let @/ = '___' " Enable moving to (and replacing) the next ___ with gnc
-    normal "_3x
+    execute '.s/\(\s\?\)___/\1'.l:tail.'/'
+    call setpos('.', l:save_cursor)
     return ''
   endif
   return '…'

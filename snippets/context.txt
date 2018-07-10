@@ -41,21 +41,24 @@ snippet fig
 
 snippet item
 \startitemize
-  \item ___
+  \item
+  ___
 \stopitemize
 
 snippet enum
 \startitemize[n]
-  \item ___
+  \item
+  ___
 \stopitemize
 
 snippet i
-\item ___
+\item
+___
 
 snippet table
 \starttable[|c|cm|]
 \HL
-    \NC\TWO ___     \NC \AR
+    \NC\TWO ___ \NC \AR
     \NC ___ \NC ___ \NC \AR
 \HL
     \NC ___ \NC ___ \NC \AR

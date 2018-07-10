@@ -1,6 +1,6 @@
 snippet eq
 \begin{equation}
- ___
+  ___
 \end{equation}
 
 snippet fig
@@ -21,7 +21,8 @@ snippet enum
 \end{enumerate}
 
 snippet i
-\item ___
+\item
+___
 
 snippet tab
 \begin{tab}{___cc}

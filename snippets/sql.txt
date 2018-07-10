@@ -4,13 +4,13 @@ create table ___ (
 );
 
 snippet s
-select  ___
+select ___
   from ___
  where ___
  order by ___;
 
 snippet tr
-create trigger  ___
+create trigger ___
   [___before|after|instead of] {event}
   on ___
   [___not deferrable|initially immediate]
@@ -18,7 +18,7 @@ create trigger  ___
   execute procedure ___();
 
 snippet f
-create or replace function  ___
+create or replace function ___
 returns ___
 language plpgsql
 security invoker
