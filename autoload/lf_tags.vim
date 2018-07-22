@@ -114,7 +114,7 @@ let s:types = {
   \ 'yacc':       '%syacc',
   \ }
 
-cal map(s:types, 'printf(v:val, "--language-force=")')
+call map(s:types, 'printf(v:val, "--language-force=")')
 
 fun! lf_tags#file_tags(path, ft)
     return systemlist('ctags -f - --sort=no --excmd=number --fields= --extra= --file-scope=yes '
