@@ -1,7 +1,18 @@
+snippet dm
+\begin{displaymath}
+  ___
+\end{displaymath}
+
 snippet eq
 \begin{equation}
   ___
 \end{equation}
+
+snippet align
+\begin{align*}
+  ___ & ___ \\
+  ___ & ___ \\
+\end{align*}
 
 snippet fig
 \begin{fig}
@@ -34,4 +45,14 @@ ___ & ___ \\
 ___ & ___ \\
 \bottomrule
 \end{tab}
+
+snippet verb
+\begin{verbatim}
+  ___
+\end{verbatim}
+
+snippet be
+\begin{___}
+  ___
+\end{___}
 
