@@ -145,6 +145,7 @@
   " (use odd numbers for blinking cursor):
   let &t_ti.="\e[2 q"
   let &t_SI.="\e[6 q"
+  let &t_SR.="\e[4 q"
   let &t_EI.="\e[2 q"
   let &t_te.="\e[0 q"
   set notitle " Do not set the terminal title
@@ -536,7 +537,7 @@
     let s:linespace=2
     set guifont=SF\ Mono\ Light:h11
     set guioptions=gm
-    set guicursor=n-v-c:block-blinkoff0,i-o-r-ci-cr:ver15-blinkoff0
+    set guicursor=n-v-c:block-blinkoff0,i-o-ci:ver15-blinkoff0,r-cr:hor10-blinkoff0
     let &linespace=s:linespace
     set transparency=0
     tnoremap <a-left> <esc>b
