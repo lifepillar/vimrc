@@ -538,6 +538,7 @@
     set guifont=SF\ Mono\ Light:h11
     set guioptions=gm
     set guicursor=n-v-c:block-blinkoff0,i-o-ci:ver15-blinkoff0,r-cr:hor10-blinkoff0
+    set sidescrolloff=0
     let &linespace=s:linespace
     set transparency=0
     tnoremap <a-left> <esc>b
