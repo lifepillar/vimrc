@@ -163,7 +163,8 @@ fun! lf_text#expand_snippet()
     call append('.', map(l:snippet[1:-1], { _,t -> l:indent . t}))
     call search('___', 'csW')
     let l:save_cursor = getcurpos()
-    let @/ = '___' " Enable moving to (and replacing) the next ___ with gnc
+    " Enable searching for ___ with // and ?? and replacing the next ___ with gnc:
+    let @/ = '___'
     execute '.s/\(\s\?\)___/\1'.l:tail.'/'
     call setpos('.', l:save_cursor)
     return ''
