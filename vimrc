@@ -626,8 +626,8 @@
   " }}
   " MUcomplete {{
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
-    imap <expr> <up> pumvisible() ? "\<plug>(MUcompleteExtendBwd)" : "\<up>"
-    imap <expr> <down> pumvisible() ? "\<plug>(MUcompleteExtendFwd)" : "\<down>"
+    imap <expr> <up> mucomplete#extend_bwd("\<up>")
+    imap <expr> <down> mucomplete#extend_fwd("\<down>")
   " }}
   " Sneak {{
     let g:sneak#label = 1
