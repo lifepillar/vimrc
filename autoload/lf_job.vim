@@ -1,10 +1,11 @@
 if exists("*job_start")
 
-  fun! lf_job#start(cmd, ...) " Second parameter is an optional callback
+  fun! lf_job#start(cwd, cmd, ...) " Third parameter is an optional callback
     for l:buf in ['^STDOUT$', '^STDERR$']
       call lf_buffer#clear(l:buf)
     endfor
     return job_start(a:cmd, {
+          \ "cwd": a:cwd,
           \ "close_cb": "lf_job#close_cb",
           \ "exit_cb": function(get(a:000, 0, "lf_job#callback"), get(a:000, 1, [bufnr('%')])),
           \ "in_io": "null", "out_io": "buffer", "out_name": "STDOUT",
@@ -33,7 +34,7 @@ if exists("*job_start")
   else
 
     fun! lf_job#to_buffer(cmd)
-      let l:job = lf_job#start(map(
+      let l:job = lf_job#start(getcwd(), map(
             \ type(a:cmd) == type("") ? split(a:cmd) : a:cmd,
             \ 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : expand(v:val)'
             \ ))
@@ -51,8 +52,8 @@ else " NeoVim, older Vim
     call lf_legacy#job#to_buffer(a:cmd)
   endf
 
-  fun! lf_job#start(cmd, ...)
-    call lf_legacy#job#start(a:cmd, get(a:000, 1, 'lf_legacy#job#callback'))
+  fun! lf_job#start(cwd, cmd, ...)
+    call lf_legacy#job#start(a:cwd, a:cmd, get(a:000, 1, 'lf_legacy#job#callback'))
   endf
 
 endif

@@ -12,9 +12,9 @@ endf
 
 if has("nvim")
 
-  fun! lf_legacy#job#start(cmd, ...) " Second parameter is an optional callback
+  fun! lf_legacy#job#start(cwd, cmd, ...) " Third parameter is an optional callback
     let l:callback = get(a:000, 0, 'lf_legacy#job#callback')
-    return jobstart(a:cmd, { "on_exit": l:callback, "lf_data": get(a:000, 1, [bufnr("%")]) })
+    return jobstart(a:cmd, { "cwd": a:cwd, "on_exit": l:callback, "lf_data": get(a:000, 1, [bufnr("%")]) })
   endf
 
   fun! lf_legacy#job#callback(job_id, data, event)
@@ -29,7 +29,7 @@ if has("nvim")
 
 else " Old Vim
 
-  fun! lf_legacy#job#start(cmd, ...)
+  fun! lf_legacy#job#start(cwd, cmd, ...)
     call lf_msg#err("Function non implemented")
     return
   endf

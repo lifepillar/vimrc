@@ -31,22 +31,16 @@ fun! lf_tags#ctags(args)
       return
     endif
     call lf_msg#notice('Tagging ' . l:tagdir)
-    let l:oldcwd = getcwd()
-    execute 'lcd' l:tagdir
-    try
-      let s:res = lf_job#start(['ctags',
-            \ '-R',
-            \ '--sort=foldcase',
-            \ '--extra=+fq',
-            \ '--fields=+iaS',
-            \ '--c++-kinds=+p',
-            \ '--exclude=cache',
-            \ '--exclude=third_party',
-            \ '--exclude=tmp',
-            \ '--exclude=*.html'] + split(a:args))
-    finally
-      execute 'lcd' l:oldcwd
-    endtry
+    let s:res = lf_job#start(l:tagdir, ['ctags',
+          \ '-R',
+          \ '--sort=foldcase',
+          \ '--extra=+fq',
+          \ '--fields=+iaS',
+          \ '--c++-kinds=+p',
+          \ '--exclude=cache',
+          \ '--exclude=third_party',
+          \ '--exclude=tmp',
+          \ '--exclude=*.html'] + split(a:args))
   endfor
 endf
 
