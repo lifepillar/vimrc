@@ -44,6 +44,15 @@ fun! lf_tags#ctags(args)
   endfor
 endf
 
+fun! lf_tags#cscope(args)
+  let l:dir = getcwd()
+  if l:dir != expand("%:p:h")
+    let l:dir = lf_find#choose_dir()
+    if empty(l:dir) | return | endif
+  endif
+  let s:res = lf_job#start(l:dir, ['cscope', '-R', '-q', '-b'] + split(a:args))
+endf
+
 fun! lf_tags#load_cscope_db()
   let l:db = findfile("cscope.out", ".;") " See :h findfile()
   if !empty(l:db)

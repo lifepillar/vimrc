@@ -350,8 +350,9 @@
   " Grep search
   command! -nargs=* -complete=file Grep call lf_find#grep(<q-args>)
 
-  " Generate tags in the directory of the current buffer
+  " Generate tags and cscope db in the directory of the current buffer
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
+  command! -nargs=* -complete=shellcmd Cscope call lf_tags#cscope(<q-args>)
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()

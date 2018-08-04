@@ -145,8 +145,9 @@ First in quickfix list   [Q            N
 Last in quickfix list    ]Q            N
 To next matching tag     ]t            N
 To prev matching tag     [t            N
-Generate or update tags  :Ctags        N
+Create/update tags       :Ctags        N
 Cscope {{{2
+Create/update cscope db  :Cscope       N
 Find assignments         \ca          *N
 Find calling functions   \cc          *N
 Find called functions    \cd          *N
