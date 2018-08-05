@@ -2,50 +2,44 @@
 " containing the file of the current buffer, and send the output to a new
 " buffer.
 " args: a List providing the arguments for git
-" opencmd : command to open the terminal window.
-fun! lf_git#output(args, opencmd)
-  let l:args = join(map(a:args, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
-  let l:gitdir = shellescape(expand("%:p:h"))
-  execute a:opencmd "new"
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  execute '%!git -C' l:gitdir l:args
+" where: a Vim command specifying where the window should be opened
+fun! lf_git#output(args, where) abort
+  call lf_buffer#cmd(expand("%:p:h"), ['git'] + a:args, a:where)
   setlocal nomodifiable
-  wincmd p
 endf
 
 " Show a vertical diff (use <c-w> K to arrange horizontally)
 " between the current buffer and its last committed version.
-fun! lf_git#diff()
+fun! lf_git#diff() abort
   let l:ft = getbufvar("%", '&ft') " Get the file type
-  call lf_git#output(['show', 'HEAD:./'.shellescape(expand('%:t'))], 'rightbelow vertical')
-  diffthis
-  wincmd p
+  let l:fn = expand('%:t')
+  call lf_git#output(['show', 'HEAD:./'.l:fn], 'rightbelow vertical')
   let &l:filetype = l:ft
-  silent file [HEAD]
-  autocmd BufWinLeave <buffer> diffoff!
+  execute 'silent file' l:fn '[HEAD]'
   diffthis
+  autocmd BufWinLeave <buffer> diffoff!
   wincmd p
+  diffthis
 endf
 
 " Show a three-way diff. Useful for fixing merge conflicts.
 " This assumes that the current file is the working copy, of course.
-fun! lf_git#three_way_diff()
+fun! lf_git#three_way_diff() abort
   let l:ft = getbufvar("%", "&ft") " Get the file type
+  let l:fn = expand('%:t')
   " Show the version from the current branch on the left
-  call lf_git#output(['show', ':2:./'.shellescape(expand('%:t'))], "leftabove vertical")
-  setlocal buflisted
+  call lf_git#output(['show', ':2:./'.l:fn], "leftabove vertical")
   let &l:filetype = l:ft
-  file OURS
-  autocmd BufWinLeave <buffer> diffoff!
+  execute 'silent file' l:fn '[OURS]'
   diffthis
+  autocmd BufWinLeave <buffer> diffoff!
   wincmd p
   " Show version from the other branch on the right
-  call lf_git#output(['show', ':3:./'.shellescape(expand('%:t'))], 'rightbelow vertical')
-  setlocal buflisted
+  call lf_git#output(['show', ':3:./'.l:fn], 'rightbelow vertical')
   let &l:filetype = l:ft
-  file OTHER
-  autocmd BufWinLeave <buffer> diffoff!
+  execute 'silent file' l:fn '[OTHER]'
   diffthis
+  autocmd BufWinLeave <buffer> diffoff!
   wincmd p
   diffthis
 endf
