@@ -505,6 +505,9 @@
   " Quickfix/Location list
   nnoremap <silent> <leader>fl :<c-u>call lf_find#in_loclist(0)<cr>
   nnoremap <silent> <leader>fq :<c-u>call lf_find#in_qflist()<cr>
+  " Fossil
+  nnoremap <silent> <leader><c-f><c-d> :<c-u>call lf_fossil#diff()<cr>
+  nnoremap <silent> <leader><c-f><c-t> :<c-u>call lf_fossil#three_way_diff()<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>

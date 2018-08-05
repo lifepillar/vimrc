@@ -52,6 +52,9 @@ Tagbar {{{2
 Toggle Tagbar            \vt           N
 Undotree {{{2
 Toggle Undotree          \vu           N
+Fossil {{{1
+Diff with checkout       \«C-f»«C-d»   N
+Three-way diff           \«C-f»«C-t»   N
 Git {{{1
 Run Git command          :Git …        N
 Status (uses Tig)        \gs           N
