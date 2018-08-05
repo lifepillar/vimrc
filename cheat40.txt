@@ -63,7 +63,7 @@ Log for this file        \gl           N
 Commands {{{1
 Send text to terminal    \x           VN
 :make, then open qf list \m            N
-Vim command to buffer    :CmdBuffer …  N
+Vim command to buffer    :VimCmd …     N
 TeX {{{1
 Typeset                  \tt           N
 Clean generated files    \tc           N

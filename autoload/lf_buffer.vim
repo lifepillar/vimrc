@@ -1,7 +1,20 @@
 " Send the output of a Vim command to a new scratch buffer
-fun! lf_buffer#cmd(cmd)
+fun! lf_buffer#vim_cmd(cmd)
   botright new +setlocal\ buftype=nofile\ bufhidden=wipe\ nobuflisted\ noswapfile\ nowrap
   call append(0, split(execute(a:cmd), "\n"))
+endf
+
+" Send the output of a shell command to a new scratch buffer
+" cwd: change local directory to cwd before running the command
+" args: a List whose first item is the command name and the remaining items are
+" the command's arguments
+" open: a Vim command specifying where the window should be opened
+fun! lf_buffer#cmd(cwd, args, open) abort
+  let l:cmd = join(map(a:args, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
+  execute a:open "new"
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  execute 'lcd' a:cwd
+  execute '%!' l:cmd
 endf
 
 " Ignore syntax highlighting, filetype, etc…

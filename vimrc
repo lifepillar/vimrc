@@ -377,7 +377,7 @@
   command! -complete=shellcmd -nargs=+ Git call lf_git#execute(<q-args>)
 
   " Execute a Vim command and send the output to a new scratch buffer
-  command! -complete=command -nargs=+ CmdBuffer call lf_buffer#cmd(<q-args>)
+  command! -complete=command -nargs=+ VimCmd call lf_buffer#vim_cmd(<q-args>)
 
   " Open a terminal and "bind" it to the current buffer (see \x mappings below)
   command! BindTerminal call lf_terminal#open()
