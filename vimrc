@@ -251,7 +251,7 @@
 " }}
 " Tabline {{
   fun! BuildTabLabel(nr)
-    return ' '.a:nr.' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/")
+    return a:nr.' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
   endf
 
   fun! BuildTabLine()
