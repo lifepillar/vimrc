@@ -638,6 +638,8 @@
     imap <expr> <down> mucomplete#extend_fwd("\<down>")
   " }}
   " Sneak {{
+    nmap gs <plug>Sneak_s
+    nmap gS <plug>Sneak_S
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
   " }}

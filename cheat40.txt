@@ -36,8 +36,8 @@ Savings                  \lS           N
 Uncleared transactions   \lu           N
 Add auxiliary date       \lx           N
 Sneak {{{2
-Jump forward             s‹c›‹c›      VN
-Jump backward            S‹c›‹c›       N
+Jump forward             gs‹c›‹c›     VN
+Jump backward            gS‹c›‹c›      N
 Jump forward             z‹c›‹c›       M
 Jump backward            Z‹c›‹c›      VM
 Surround {{{2
