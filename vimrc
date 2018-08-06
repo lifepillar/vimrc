@@ -72,7 +72,7 @@
   filetype indent on " Load indent files for specific file types
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
-  " Consolidate temporary files in a central spot
+  " Consolidate temporary files into a central spot
   set backupdir=~/.vim/tmp/backup
   set directory=~/.vim/tmp/swap
   set undofile " Enable persistent undo
@@ -179,8 +179,6 @@
 " Autocommands {{
   augroup lf_autocmds
     autocmd!
-    " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
-    " autocmd VimResized * wincmd =
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
     " If a file is large, disable syntax highlighting and other stuff
