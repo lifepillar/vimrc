@@ -78,7 +78,7 @@ fun! lf_find#fuzzy(input, callback, prompt)
 
   let l:ff_cmd = l:ff_cmds[s:ff_bin]
 
-  if type(a:input) ==# v:t_string
+  if type(a:input) ==# 1 " v:t_string
     let l:inpath = ''
     let l:cmd = a:input . l:ff_cmd
   else " Assume List
@@ -143,7 +143,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
         \ foldmethod=manual\ nofoldenable\ modifiable\ noreadonly
   let l:cur_buf = bufnr('%') " Store current buffer number
   set scrolloff=0
-  if type(a:input) ==# v:t_string
+  if type(a:input) ==# 1 " v:t_string
     let l:input = systemlist(a:input)
     call setline(1, l:input)
   else " Assume List
@@ -187,7 +187,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       endif
       return
     elseif ch ==# 0x0C " CTRL-L (clear)
-      call setline(1, type(a:input) ==# v:t_string ? l:input : a:input)
+      call setline(1, type(a:input) ==# 1 ? l:input : a:input) " 1 == v:t_string
       let l:undoseq = []
       let l:filter = ''
       redraw
