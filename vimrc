@@ -251,11 +251,7 @@
 " }}
 " Tabline {{
   fun! BuildTabLabel(nr)
-    return " " . a:nr
-          \ . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . "◦" . " ")
-          \ . (get(extend(t:, {
-          \ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
-          \ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+    return ' '.a:nr.' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/")
   endf
 
   fun! BuildTabLine()
