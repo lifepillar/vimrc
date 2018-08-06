@@ -544,9 +544,11 @@
     set guicursor=n-v-c:block-blinkoff0,i-o-ci:ver15-blinkoff0,r-cr:hor10-blinkoff0
     set sidescrolloff=0
     let &linespace=s:linespace
-    set transparency=0
-    tnoremap <a-left> <esc>b
-    tnoremap <a-right> <esc>f
+    if !has('ios')
+      set transparency=0
+      tnoremap <a-left> <esc>b
+      tnoremap <a-right> <esc>f
+    endif
   endif
 " }}
 " Plugins {{
@@ -554,7 +556,6 @@
     let g:loaded_getscriptPlugin = 1
     let g:loaded_gzip = 1
     let g:loaded_logiPat = 1
-    let g:loaded_netrwPlugin = 1
     let g:loaded_rrhelper = 1
     let g:loaded_tarPlugin = 1
     let g:loaded_vimballPlugin = 1
@@ -574,9 +575,18 @@
       autocmd BufReadPre *.c,*.cpp,*.h,*.hpp call <sid>clang_complete_lazy_load()
     augroup END
   " }}
-  " Dirvish {{
-    nmap <leader>d <plug>(dirvish_up)
-    nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+  " Dirvish/Netrw {{
+    if has('ios') " Use Netrw
+      let g:loaded_dirvish = 1
+      let g:netrw_banner = 0
+      let g:netrw_bufsettings = 'noswf noma nomod nu rnu nowrap ro nobl'
+      let g:netrw_sort_options = 'i'
+      nnoremap <silent> <leader>d :<c-u>Ex<cr>
+    else " Use Dirvish
+      let g:loaded_netrwPlugin = 1
+      nmap <leader>d <plug>(dirvish_up)
+      nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+    endif
   " }}
   " Easy Align {{
     xmap <leader>ea <plug>(EasyAlign)
