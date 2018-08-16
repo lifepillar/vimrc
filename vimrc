@@ -198,16 +198,13 @@
   augroup END
 " }}
 " Status line {{
-  " See :h mode() (some of these are never used in the status line)
+  " See :h mode()
   let g:mode_map = {
-        \  'n': ['NORMAL',  'NormalMode' ],     'no': ['PENDING', 'NormalMode'  ],  'v': ['VISUAL',  'VisualMode' ],
-        \  'V': ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode'  ],  's': ['SELECT',  'VisualMode' ],
-        \  'S': ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode'  ],  'i': ['INSERT',  'InsertMode' ],
-        \ 'ic': ['COMPLETE','InsertMode' ],     'ix': ['CTRL-X',  'InsertMode'  ],  'R': ['REPLACE', 'ReplaceMode'],
-        \ 'Rc': ['COMPLETE','ReplaceMode'],     'Rv': ['VREPLACE','ReplaceMode' ], 'Rx': ['CTRL-X',  'ReplaceMode'],
-        \  'c': ['COMMAND', 'CommandMode'],     'cv': ['COMMAND', 'CommandMode' ], 'ce': ['COMMAND', 'CommandMode'],
-        \  'r': ['PROMPT',  'CommandMode'],     'rm': ['-MORE-',  'CommandMode' ], 'r?': ['CONFIRM', 'CommandMode'],
-        \  '!': ['SHELL',   'CommandMode'],      't': ['TERMINAL','CommandMode' ]}
+        \ 'n': ['NORMAL', 'NormalMode' ], 'i': ['INSERT', 'InsertMode' ],      'R': ['REPLACE', 'ReplaceMode'],
+        \ 'v': ['VISUAL', 'VisualMode' ], 'V': ['V-LINE', 'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ],
+        \ 's': ['SELECT', 'VisualMode' ], 'S': ['S-LINE', 'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ],
+        \ 'c': ['COMMAND','CommandMode'], 'r': ['PROMPT', 'CommandMode'],      't': ['TERMINAL','CommandMode'],
+        \ '!': ['SHELL',  'CommandMode']}
 
   let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
@@ -227,9 +224,9 @@
     return get(extend(w:, {
           \ "lf_active": winnr() != a:nr
             \ ? 0
-            \ : (mode(1) ==# get(g:, "lf_cached_mode", "")
+            \ : (mode() ==# get(g:, "lf_cached_mode", "")
               \ ? 1
-              \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode"))
+              \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode"))
               \ ),
           \ "lf_winwd": winwidth(winnr())
           \ }), "", "")
@@ -238,7 +235,7 @@
   " Build the status line the way I want - no fat light plugins!
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
-          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
+          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
           \ %{winnr()}/%n %{&modified ? "◦" : " "} %t %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
           \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")) : ""}
           \ %=
