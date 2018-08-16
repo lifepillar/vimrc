@@ -208,7 +208,7 @@
 
   let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
-  " newMode may be a value as returned by mode(1) or the name of a highlight group
+  " newMode may be a value as returned by mode() or the name of a highlight group
   " Note: setting highlight groups while computing the status line may cause the
   " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
   fun! s:updateStatusLineHighlight(newMode)
