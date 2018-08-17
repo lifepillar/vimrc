@@ -240,7 +240,7 @@
           \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")) : ""}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
-          \ . get(g:ff_map, &ff, "?") . (&expandtab ? " ˽ " : " ⇥ ") . &tabstop}
+          \ . get(g:ff_map, &ff, "?") . " " . (&expandtab ? "˽" : "⇥")}
           \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
           \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
@@ -373,8 +373,8 @@
   " Open a terminal and "bind" it to the current buffer (see \x mappings below)
   command! BindTerminal call lf_terminal#open()
 
-  " Set the tab width for the current buffer
-  command! -nargs=1 TabWidth call lf_text#set_tab_width(<q-args>)
+  " Get/set the tab width for the current buffer
+  command! -nargs=? TabWidth call lf_text#tab_width(<args>)
 
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
@@ -460,8 +460,8 @@
   nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
   nmap     <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
   " Tab width
-  nnoremap <silent> <leader>] :<c-u>call lf_text#set_tab_width(&tabstop + v:count1)<cr>
-  nnoremap <silent> <leader>[ :<c-u>call lf_text#set_tab_width(&tabstop - v:count1)<cr>
+  nnoremap <silent> <leader>] :<c-u>call lf_text#tab_width(&tabstop + v:count1)<cr>
+  nnoremap <silent> <leader>[ :<c-u>call lf_text#tab_width(&tabstop - v:count1)<cr>
   " Comment/uncomment (overrides Q, so we avoid entering Ex mode by mistake)
   nnoremap <silent>  Q :set opfunc=lf_text#toggle_comment<cr>g@
   vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>

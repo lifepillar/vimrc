@@ -23,14 +23,17 @@ fun! lf_text#toggle_wrap()
   endif
 endf
 
-" Set the tab width in the current buffer (see also http://vim.wikia.com/wiki/Indenting_source_code).
-fun! lf_text#set_tab_width(w)
-  let l:twd = a:w > 0 ? a:w : 1 " Disallow non-positive width
-  " For the following assignment, see :help let-&.
-  " See also http://stackoverflow.com/questions/12170606/how-to-set-numeric-variables-in-vim-functions.
-  let &l:tabstop=l:twd
-  let &l:shiftwidth=l:twd
-  let &l:softtabstop=l:twd
+" Without arguments, just prints the current tab width. Otherwise, sets the
+" tab width for the current buffer and prints the new value.
+fun! lf_text#tab_width(...)
+  if a:0 > 0
+    let l:twd = a:1 > 0 ? a:1 : 1 " Disallow non-positive width
+    " For the following assignments, see :help let-&.
+    let &l:tabstop=l:twd
+    let &l:shiftwidth=l:twd
+    let &l:softtabstop=l:twd
+  endif
+  echo &l:tabstop
 endf
 
 " Returns the currently selected text as a List.
