@@ -240,7 +240,7 @@
           \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")) : ""}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
-          \ . get(g:ff_map, &ff, "?") . " " . (&expandtab ? "˽" : "⇥")}
+          \ . get(g:ff_map, &ff, "?") . (&expandtab ? " " : " ⇥ ")}
           \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
           \ : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
           \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
