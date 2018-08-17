@@ -287,8 +287,12 @@ fun! s:set_colorscheme(colors)
   execute "colorscheme" a:colors[0]
 endf
 
+let s:colors = []
+
 fun! lf_find#colorscheme()
-  let l:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
-  let l:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
-  call lf_find#interactively(l:colors, 's:set_colorscheme', 'Choose colorscheme')
+  if empty(s:colors)
+    let s:colors = map(globpath(&runtimepath, "colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
+    let s:colors += map(globpath(&packpath, "pack/*/{opt,start}/*/colors/*.vim", v:false, v:true) , 'fnamemodify(v:val, ":t:r")')
+  endif
+  call lf_find#interactively(s:colors, 's:set_colorscheme', 'Choose colorscheme')
 endf
