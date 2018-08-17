@@ -155,6 +155,7 @@ fun! lf_text#load_snippets()
 endf
 
 fun! lf_text#expand_snippet()
+  if !exists('b:lf_snippets') | return '…' | endif
   " Get word in front of the cursor and tail of line
   let l:match = matchlist(getline('.'), '\(\S\+\%'.col('.').'c\)\(.*\)$')
   if empty(l:match) | return '…' | endif
