@@ -237,7 +237,7 @@
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
           \ %{winnr()}/%n %{&modified ? "◦" : " "} %t %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
-          \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")) : ""}
+          \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:~:h")) : ""}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
           \ . get(g:ff_map, &ff, "?") . (&expandtab ? " " : " ⇥ ")}
