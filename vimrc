@@ -200,13 +200,11 @@
 " Status line {{
   " See :h mode()
   let g:mode_map = {
-        \ 'n': ['NORMAL', 'NormalMode' ], 'i': ['INSERT', 'InsertMode' ],      'R': ['REPLACE', 'ReplaceMode'],
-        \ 'v': ['VISUAL', 'VisualMode' ], 'V': ['V-LINE', 'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ],
-        \ 's': ['SELECT', 'VisualMode' ], 'S': ['S-LINE', 'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ],
-        \ 'c': ['COMMAND','CommandMode'], 'r': ['PROMPT', 'CommandMode'],      't': ['TERMINAL','CommandMode'],
-        \ '!': ['SHELL',  'CommandMode']}
-
-  let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
+        \ 'n': ['N', 'NormalMode' ], 'i': ['I', 'InsertMode' ],      'R': ['R', 'ReplaceMode'],
+        \ 'v': ['V', 'VisualMode' ], 'V': ['V', 'VisualMode' ], "\<c-v>": ['V', 'VisualMode' ],
+        \ 's': ['S', 'VisualMode' ], 'S': ['S', 'VisualMode' ], "\<c-s>": ['S', 'VisualMode' ],
+        \ 'c': ['C','CommandMode'],  'r': ['P', 'CommandMode'],      't': ['T','CommandMode'],
+        \ '!': ['!',  'CommandMode']}
 
   " newMode may be a value as returned by mode() or the name of a highlight group
   " Note: setting highlight groups while computing the status line may cause the
@@ -236,14 +234,12 @@
   fun! BuildStatusLine(nr)
     return '%{SetupStl('.a:nr.')}
           \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
-          \ %{winnr()}/%n %{&modified ? "◦" : " "} %t %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
+          \ %{winnr()} %{&modified ? "◦" : " "} %t (%n) %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
           \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:~:h")) : ""}
           \ %=
           \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
-          \ . get(g:ff_map, &ff, "?") . (&expandtab ? " " : " ⇥ ")}
-          \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
-          \ : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
-          \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
+          \ . &ff . (&expandtab ? "" : " ⇥ ")} %l:%v %P
+          \ %#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
   endf
 " }}
 " Tabline {{
@@ -319,7 +315,7 @@
     let l:spaces = search('^\s\{-} ',  'cnw')
     let l:tabs   = search('^\s\{-}\t', 'cnw')
     if l:trail || (l:spaces && l:tabs)
-      let b:lf_stl_warnings = '  '
+      let b:lf_stl_warnings = ' '
             \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
             \ . (l:spaces && l:tabs ? 'Mixed indent ('.l:spaces.'/'.l:tabs.') ' : '')
     else
