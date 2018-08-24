@@ -471,7 +471,7 @@
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
   nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
-  nnoremap <silent> <leader>bm :<c-u>CmdBuffer messages<cr>
+  nnoremap <silent> <leader>bm :<c-u>VimCmd messages<cr>
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
   nnoremap <silent> <leader>br :<c-u>setlocal readonly!<cr>
