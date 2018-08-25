@@ -192,8 +192,8 @@
     autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
 
     if exists('##CmdlineEnter') " See :h incsearch
-      autocmd CmdlineEnter /,\? :set hlsearch
-      autocmd CmdlineLeave /,\? :set nohlsearch
+      autocmd CmdlineEnter * :set hlsearch
+      autocmd CmdlineLeave * :set nohlsearch
     endif
   augroup END
 " }}
