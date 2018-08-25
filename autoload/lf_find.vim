@@ -145,7 +145,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   " botright 10new does not set the right height, e.g., if the quickfix window is open
   " botright 1new | 9wincmd +
   botright 10new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile
+  setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile noundofile
         \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly
   let l:cur_buf = bufnr('%') " Store current buffer number
   set scrolloff=0
