@@ -1,5 +1,10 @@
 setlocal commentstring=//%s
 
+if !exists('g:loaded_neomake')
+  packadd neomake
+endif
+call neomake#configure#automake('nw', 1000)
+
 " Cscope
 if !lf_tags#load_cscope_db()
   finish
