@@ -113,20 +113,23 @@ fun! lf_find#fuzzy(input, callback, prompt)
   endif
 endf
 
-fun! s:filter_close(bufnr, ...)
+fun! s:filter_close(bufnr, action, winrestsize)
+  " Move to previous window, wipe search buffer, and restore window layout
   wincmd p
-  let l:split = get(a:000, 0, '')
-  if l:split ==# 'S'
+  execute "bwipe!" a:bufnr
+  exe a:winrestsize
+  let &scrolloff=g:default_scrolloff
+
+  if a:action ==# 'S'
     split
-  elseif l:split ==# 'V'
+  elseif a:action ==# 'V'
     vsplit
-  elseif l:split ==# 'T'
+  elseif a:action ==# 'T'
     tabnew
   endif
-  execute "bwipe" a:bufnr
+
   redraw
   echo "\r"
-  let &scrolloff=g:default_scrolloff
 endf
 
 " Interactively filter a list of items as you type, and execute an action on
@@ -138,6 +141,9 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
+  let l:winrestsize = winrestcmd() " Save current window layout
+  " botright 10new does not set the right height, e.g., if the quickfix window is open
+  " botright 1new | 9wincmd +
   botright 10new
   setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile
         \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly
@@ -157,7 +163,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
     try
       let ch = getchar()
     catch /^Vim:Interrupt$/  " CTRL-C
-      return s:filter_close(l:cur_buf)
+      return s:filter_close(l:cur_buf, '', l:winrestsize)
     endtry
     if ch ==# "\<bs>" " Backspace
       let l:filter = l:filter[:-2]
@@ -178,10 +184,10 @@ fun! lf_find#interactively(input, callback, prompt) abort
       call add(l:undoseq, l:seq_new != l:seq_old) " seq_new != seq_old iff buffer has changed
       norm gg
     elseif ch ==# 0x1B " Escape (cancel)
-      return s:filter_close(l:cur_buf)
+      return s:filter_close(l:cur_buf, '', l:winrestsize)
     elseif ch ==# 0x0D || ch ==# 0x13 || ch ==# 0x16 || ch ==# 0x14 " Enter/CTRL-S/CTRL-V/CTRL-T (accept)
       let l:result = [getline('.')]
-      call s:filter_close(l:cur_buf, nr2char(ch + 64))
+      call s:filter_close(l:cur_buf, nr2char(ch + 64), l:winrestsize)
       if !empty(l:result[0])
         call function(a:callback)(l:result)
       endif
