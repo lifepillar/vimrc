@@ -143,8 +143,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:undoseq = [] " Stack to tell whether to undo when pressing backspace (1 = undo, 0 = do not undo)
   let l:winrestsize = winrestcmd() " Save current window layout
   " botright 10new does not set the right height, e.g., if the quickfix window is open
-  " botright 1new | 9wincmd +
-  botright 10new
+  botright 1new | 9wincmd +
   setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile noundofile
         \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly
   let l:cur_buf = bufnr('%') " Store current buffer number
