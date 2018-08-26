@@ -642,8 +642,7 @@
   " }}
   " Tagbar {{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
-      return (a:current ? '%#NormalMode# Tagbar %* ' : '%#StatusLineNC# Tagbar ') . winnr() . ' ' . a:fname
-
+      return (a:current ? '%#NormalMode# Tagbar %* ' : '%#StatusLineNC# Tagbar  ') . winnr() . ' ' . a:fname
     endf
 
     " Toggle tag bar
