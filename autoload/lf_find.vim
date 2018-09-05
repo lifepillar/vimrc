@@ -146,6 +146,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   botright 1new | 9wincmd +
   setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile noundofile
         \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly
+  setlocal statusline=%#CurrMode#\ Finder\ %*\ %l\ of\ %L
   let l:cur_buf = bufnr('%') " Store current buffer number
   set scrolloff=0
   if type(a:input) ==# 1 " v:t_string
@@ -158,6 +159,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   redraw
   echo l:prompt . ' '
   while 1
+    let &ro=&ro " Force status line update
     let l:error = 0 " Set to 1 when pattern is invalid
     try
       let ch = getchar()
