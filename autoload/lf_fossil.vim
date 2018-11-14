@@ -28,3 +28,8 @@ fun! lf_fossil#three_way_diff() abort
   wincmd p
   diffthis
 endf
+
+" Commit changes to the current file.
+fun! lf_fossil#commit() abort
+  botright call term_start(['fossil', 'commit', expand('%')], { 'cwd': expand("%:p:h"), 'term_finish': 'close' })
+endf

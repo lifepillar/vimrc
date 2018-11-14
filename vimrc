@@ -495,6 +495,7 @@
   " Fossil
   nnoremap <silent> <leader><c-f><c-d> :<c-u>call lf_fossil#diff()<cr>
   nnoremap <silent> <leader><c-f><c-t> :<c-u>call lf_fossil#three_way_diff()<cr>
+  nnoremap <silent> <leader><c-f><c-k> :<c-u>call lf_fossil#commit()<cr>
   " Git
   nnoremap <silent> <leader>gb :<c-u>call lf_git#blame()<cr>
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
