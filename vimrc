@@ -552,7 +552,7 @@
   " clang_complete {{
     let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
     let g:clang_user_options = '-std=c++14'
-    let g:clang_complete_auto = 1
+    let g:clang_complete_auto = 0
     fun! s:clang_complete_lazy_load()
       packadd clang_complete
       autocmd! lf_cpp
