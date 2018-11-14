@@ -630,6 +630,7 @@
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
     imap <expr> <up> mucomplete#extend_bwd("\<up>")
     imap <expr> <down> mucomplete#extend_fwd("\<down>")
+    inoremap <expr> <cr> pumvisible() ? "<c-y><cr>" : "<cr>"
   " }}
   " Sneak {{
     nmap <c-s> <plug>Sneak_s
