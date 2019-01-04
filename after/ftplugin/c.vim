@@ -1,4 +1,5 @@
 setlocal commentstring=//%s
+setlocal cinoptions+=*200
 
 if !exists('g:loaded_neomake')
   packadd neomake
