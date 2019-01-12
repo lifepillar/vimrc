@@ -1,3 +1,12 @@
+snippet s
+\section{___}
+
+snippet ss
+\subsection{___}
+
+snippet sss
+\subsubsection{___}
+
 snippet dm
 \begin{displaymath}
   ___
@@ -50,6 +59,26 @@ snippet verb
 \begin{verbatim}
   ___
 \end{verbatim}
+
+snippet def
+\begin{definition}
+___
+\end{definition}
+
+snippet th
+\begin{theorem}
+___
+\end{theorem}
+
+snippet lemma
+\begin{lemma}
+___
+\end{lemma}
+
+snippet ex
+\begin{example
+___
+\end{example}
 
 snippet be
 \begin{___}
