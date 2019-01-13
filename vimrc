@@ -189,7 +189,7 @@
       \   exe "normal! g`\"" |
       \ endif
     " Less intrusive swap prompt
-    autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
+    autocmd SwapExists * call lf_buffer#swap_exists(expand("<afile>"))
 
     if exists('##CmdlineEnter') " See :h incsearch
       autocmd CmdlineEnter * :set hlsearch
