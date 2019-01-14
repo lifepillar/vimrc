@@ -115,8 +115,6 @@ Show/hide status line    \vs           N
 Decrease tab width       \[            N
 Increase tab width       \]            N
 Set tab width            :TabWidth ‹n› N
-Reduce contrast          \-            N
-Increase contrast        \+            N
 Search {{{2
 Find all in this buffer  :Search …     N
 Find in all open buffers :SearchAll …  N
@@ -164,7 +162,6 @@ Find this text string    \ct          *N
 Options {{{2
 Toggle Paste mode        «f9»          N
 Toggle autocompletion    \oa           N
-Toggle background color  \ob           N
 Toggle cursorline        \oc           N
 Toggle diff in buffer    \od           N
 Toggle search highlight  \oh           N

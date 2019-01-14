@@ -449,9 +449,6 @@
     tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
     tnoremap <silent> <f8> <c-w>:call lf_terminal#toggle_scrollwheelup()<cr>
   endif
-  " Change the contrast level for themes that support it.
-  nmap     <silent> <leader>- :<c-u>call lf_theme#contrast(-v:count1)<cr>
-  nmap     <silent> <leader>+ :<c-u>call lf_theme#contrast(v:count1)<cr>
   " Tab width
   nnoremap <silent> <leader>] :<c-u>call lf_text#tab_width(&tabstop + v:count1)<cr>
   nnoremap <silent> <leader>[ :<c-u>call lf_text#tab_width(&tabstop - v:count1)<cr>
@@ -503,7 +500,6 @@
   nnoremap <silent> <leader>gs :<c-u>call lf_run#cmd(['git', 'status'])<cr>
   nnoremap <silent> <leader>gt :<c-u>call lf_git#three_way_diff()<cr>
   " Options
-  nnoremap <silent> <leader>ob :<c-u>call lf_theme#toggle_bg_color()<cr>
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
   nnoremap          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
   nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
