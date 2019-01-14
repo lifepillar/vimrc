@@ -2,7 +2,7 @@
 fun! lf_fossil#diff() abort
   let l:ft = getbufvar("%", '&ft')
   let l:fn = expand('%:t')
-  call lf_buffer#cmd(expand("%:p:h"), ['fossil', 'cat', l:fn], 'rightbelow vertical')
+  call lf_run#cmd(['fossil', 'cat', l:fn], { 'pos': 'rightbelow vertical'})
   let &l:filetype = l:ft
   execute 'silent file' l:fn '[CHECKOUT]'
   setlocal nomodifiable
@@ -29,7 +29,3 @@ fun! lf_fossil#three_way_diff() abort
   diffthis
 endf
 
-" Commit changes to the current file.
-fun! lf_fossil#commit() abort
-  botright call term_start(['fossil', 'commit', expand('%')], { 'cwd': expand("%:p:h"), 'term_finish': 'close' })
-endf

@@ -53,16 +53,17 @@ Toggle Tagbar            \vt           N
 Undotree {{{2
 Toggle Undotree          \vu           N
 Fossil {{{1
-Diff with checkout       \«C-f»«C-d»   N
-Three-way diff           \«C-f»«C-t»   N
+Status                   \fs           N
+Commit                   \fk           N
+Sync                     \fp           N
+Diff with checkout       \fd           N
+Three-way diff           \ft           N
 Git {{{1
-Run Git command          :Git …        N
-Status (uses Tig)        \gs           N
-Blame (uses Tig)         \gb           N
+Status                   \gs           N
+Commit                   \gk           N
+Push                     \gp           N
 Diff with HEAD           \gd           N
 Three-way diff           \gt           N
-Push                     \gp           N
-Log for this file        \gl           N
 Commands {{{1
 Send text to terminal    \x           VN
 :make, then open qf list \m            N

@@ -147,10 +147,10 @@ fun! lf_tex#typeset(...) abort
   else
     call lf_msg#notice('Typesetting...')
   endif
-  call add(s:tex_jobs, lf_job#start(getcwd(), l:cmd,
-        \ 'lf_tex#callback',
-        \ [bufnr("%"), l:path]
-        \ ))
+  call add(s:tex_jobs, lf_run#job(l:cmd, {
+        \ 'cb': 'lf_tex#callback',
+        \ 'args': [bufnr("%"), l:path]
+        \ }))
 endf
 " }}}
 " vim: sw=2 fdm=marker

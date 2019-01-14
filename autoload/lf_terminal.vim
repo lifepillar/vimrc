@@ -1,21 +1,23 @@
-if !empty($TMUX)
+if has('terminal') " Vim 8 or later, MacVim
 
-  fun! lf_terminal#open()
-    call system('tmux split-window')
-    call system('tmux last-pane')
+  " Asynchronously run an interactive shell command in a terminal window.
+  " By default, the command is run in the directory of the current buffer, and
+  " the terminal window is closed as soon as the job is done.
+  "
+  " cmd: the command to be run with its arguments, as a List
+  " ...: an optional Dictionary of additional options, which are passed to
+  " term_start().
+  "
+  " Returns: the buffer number of the terminal window.
+  "
+  " Example: call lf_run#interactive('bc')
+  fun! lf_terminal#run(cmd, ...) abort
+    let l:bufnr = term_start(a:cmd, extend({
+          \ 'cwd': expand('%:p:h'),
+          \ 'term_rows': 20,
+          \ }, get(a:000, 0, {})))
+    return l:bufnr
   endf
-
-  " Send the given text to a tmux pane
-  fun! lf_terminal#send(lines)
-    if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
-      let b:lf_bound_terminal = input('Tmux pane number: ')
-    endif
-    for line in a:lines
-      call system('tmux -u send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(line."\r"))
-    endfor
-  endf
-
-elseif has('terminal') " Vim 8 or later, MacVim
 
   fun! lf_terminal#send_keys(what)
     call term_sendkeys('', a:what)
@@ -63,12 +65,38 @@ elseif has('terminal') " Vim 8 or later, MacVim
 
 else
 
-  fun! lf_terminal#open()
-    call lf_legacy#terminal#open()
+  fun! lf_terminal#run(cmd, ...)
+    call lf_msg#err("Function non implemented")
   endf
 
-  fun! lf_terminal#send(lines)
-    call lf_legacy#terminal#send(a:lines)
-  endf
+  if !empty($TMUX)
+
+    fun! lf_terminal#open()
+      call system('tmux split-window')
+      call system('tmux last-pane')
+    endf
+
+    " Send the given text to a tmux pane
+    fun! lf_terminal#send(lines)
+      if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
+        let b:lf_bound_terminal = input('Tmux pane number: ')
+      endif
+      for line in a:lines
+        call system('tmux -u send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(line."\r"))
+      endfor
+    endf
+
+  else
+
+    fun! lf_terminal#open()
+      call lf_msg#err("Function non implemented")
+    endf
+
+    fun! lf_terminal#send(lines)
+      call lf_msg#err("Function non implemented")
+    endf
+
+  endif
 
 endif
+
