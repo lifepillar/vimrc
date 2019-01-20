@@ -31,7 +31,7 @@ fun! lf_tags#ctags(args)
       return
     endif
     call lf_msg#notice('Tagging ' . l:tagdir)
-    let s:res = lf_job#start(l:tagdir, ['ctags',
+    let s:res = lf_run#job(['ctags',
           \ '-R',
           \ '--sort=foldcase',
           \ '--extra=+fq',
@@ -40,7 +40,8 @@ fun! lf_tags#ctags(args)
           \ '--exclude=cache',
           \ '--exclude=third_party',
           \ '--exclude=tmp',
-          \ '--exclude=*.html'] + split(a:args))
+          \ '--exclude=*.html'] + split(a:args),
+          \ { 'cwd': l:tagdir })
   endfor
 endf
 
@@ -50,7 +51,7 @@ fun! lf_tags#cscope(args)
     let l:dir = lf_find#choose_dir()
     if empty(l:dir) | return | endif
   endif
-  let s:res = lf_job#start(l:dir, ['cscope', '-R', '-q', '-b'] + split(a:args))
+  let s:res = lf_run#job(['cscope', '-R', '-q', '-b'] + split(a:args), {'cwd': l:dir})
 endf
 
 fun! lf_tags#load_cscope_db()
