@@ -476,9 +476,6 @@
   " Edit
   nnoremap <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
-  inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) ==# ')' ? "\<right>" :  ')'
-  inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) ==# ']' ? "\<right>" :  ']'
-  inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) ==# '}' ? "\<right>" :  '}'
   " Find/filter
   nnoremap <silent> <leader>ff :<c-u>FindFile<cr>
   nnoremap <silent> <c-n>      :<c-u>call lf_find#arglist(v:oldfiles)<cr>
