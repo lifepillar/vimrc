@@ -4,7 +4,7 @@ fun! lf_buffer#large(name)
   let b:lf_large_file = 1
   syntax clear
   set eventignore+=FileType
-  let &backupskip = join(add(split(&backupskip, ','), a:name), ',')
+  let &backupskip .= ',' . a:name
   setlocal foldmethod=manual nofoldenable noswapfile noundofile
   augroup lf_large_buffer
     autocmd!

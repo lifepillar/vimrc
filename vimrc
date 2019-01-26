@@ -182,7 +182,11 @@
     " Hook for overriding a theme's default
     autocmd ColorScheme * call <sid>customizeTheme()
     " If a file is large, disable syntax highlighting and other stuff
-    autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffer#large(expand("<afile>")) | endif
+    autocmd BufReadPre *
+          \ let s = getfsize(expand("<afile>")) |
+          \ if s > g:LargeFile || s == -2 |
+          \   call lf_buffer#large(fnamemodify(expand("<afile>"), ":p")) |
+          \ endif
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
