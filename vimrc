@@ -189,9 +189,9 @@
           \ endif
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
-      \   exe "normal! g`\"" |
-      \ endif
+          \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
+          \   exe "normal! g`\"" |
+          \ endif
     " Less intrusive swap prompt
     autocmd SwapExists * call lf_buffer#swap_exists(expand("<afile>"))
 
