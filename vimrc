@@ -312,7 +312,7 @@
       return
     endif
     if exists('b:lf_large_file')
-      let b:lf_stl_warnings = '  Large file '
+      let b:lf_stl_warnings = ' Large file '
       return
     endif
     let l:trail  = search('\s$',       'cnw')
