@@ -27,7 +27,7 @@ fun! lf_tex#clean()
   let l:currdir = expand("%:p:h")
   let l:tmpdirs = ['out']
   let l:suffixes = [
-        \ 'aux', 'bbl', 'blg', 'fdb_latexmk', 'fls', 'log', 'nav',
+        \ 'aux', 'bbl', 'blg', 'dvi', 'fdb_latexmk', 'fls', 'log', 'nav',
         \ 'out', 'snm', 'tmp', 'toc', 'synctex.gz', 'synctex.gz(busy)',
         \ 'tuc', 'vimout', 'vrb'
         \ ]
