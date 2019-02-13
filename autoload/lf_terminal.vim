@@ -9,8 +9,6 @@ if has('terminal') " Vim 8 or later, MacVim
   " term_start().
   "
   " Returns: the buffer number of the terminal window.
-  "
-  " Example: call lf_run#interactive('bc')
   fun! lf_terminal#run(cmd, ...) abort
     let l:bufnr = term_start(a:cmd, extend({
           \ 'cwd': expand('%:p:h'),
