@@ -131,26 +131,24 @@ else
   endf
 endif
 
-fun! lf_tex#lualatex()
-  return 'latexmk -lualatex -cd -pv- -synctex='
-      \ . (get(b:, 'tex_synctex', get(g:, 'tex_synctex', 1)) ? '1' : '0')
-      \ . ' -file-line-error -interaction=nonstopmode'
-endf
-
-fun! lf_tex#typeset(...) abort
-  let l:path = fnamemodify(strlen(a:000[0]) > 0 ? a:1 : expand("%"), ":p")
-  let l:cmd = add(split(lf_tex#lualatex()), l:path)
-  if get(g:, 'tex_debug', 0)
-    call lf_msg#warn('Cwd: ' . fnamemodify(getcwd(), ':p'))
-    call lf_msg#warn('Path: ' . l:path)
-    call lf_msg#warn(join(l:cmd))
+fun! lf_tex#typeset(options, ...) abort
+  let l:path = fnamemodify(a:0 > 0 && strlen(a:1) > 0 ? a:1 : expand("%"), ":p")
+  let l:cmd = extend(extend(["latexmk"], get(a:options, "latexmk", [])), [
+        \ "-pv-",
+        \ "-synctex=" . (get(b:, "tex_synctex", get(g:, "tex_synctex", 1)) ? "1" : "0"),
+        \ "-file-line-error",
+        \ "-interaction=nonstopmode",
+        \ fnamemodify(l:path, ":t")])
+  call lf_msg#notice('Typesetting...')
+  if get(a:options, "use_term", 0)
+    call lf_terminal#run(["/bin/sh", "-c", join(l:cmd)], {"cwd": fnamemodify(l:path, ":h")})
   else
-    call lf_msg#notice('Typesetting...')
+    call add(s:tex_jobs, lf_run#job(l:cmd, {
+          \ "cb": "lf_tex#callback",
+          \ "cwd": fnamemodify(l:path, ":h"),
+          \ "args": [bufnr("%"), l:path]
+          \ }))
   endif
-  call add(s:tex_jobs, lf_run#job(l:cmd, {
-        \ 'cb': 'lf_tex#callback',
-        \ 'args': [bufnr("%"), l:path]
-        \ }))
 endf
 " }}}
 " vim: sw=2 fdm=marker

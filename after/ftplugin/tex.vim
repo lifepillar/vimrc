@@ -5,8 +5,9 @@ set iskeyword+=:
 " See :h tex-conceal
 setlocal conceallevel=0
 
-" Typeset with LuaLaTeX
+" Typeset with lualatex/pdflatex
 nnoremap <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
+nnoremap <silent><buffer> <leader>tp :<c-u>update<cr>:PdfLaTeX<cr>
 " Clean generated files:
 nnoremap <silent><buffer> <leader>tc :<c-u>call lf_tex#clean()<cr>
 " Open PDF previewer (Skim):
@@ -33,8 +34,9 @@ onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
 vnoremap <buffer> i$ T$ot$
 vnoremap <buffer> a$ F$of$
 
-command! -buffer -nargs=? -complete=file LuaLaTeX          call lf_tex#typeset(<q-args>)
-command!         -nargs=0                LuaLaTeXJobStatus call lf_tex#job_status()
-command!         -nargs=0                LuaLatexStopJobs  call lf_tex#stop_jobs()
+command! -buffer -nargs=? -complete=file LuaLaTeX       call lf_tex#typeset({'latexmk': ['-lualatex']}, <q-args>)
+command! -buffer -nargs=? -complete=file PdfLaTeX       call lf_tex#typeset({'latexmk': ['-pdf']}, <q-args>)
+command!         -nargs=0                LaTeXJobStatus call lf_tex#job_status()
+command!         -nargs=0                LatexStopJobs  call lf_tex#stop_jobs()
 
 call lf_text#load_snippets()
