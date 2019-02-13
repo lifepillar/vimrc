@@ -132,20 +132,22 @@ else
 endif
 
 fun! lf_tex#typeset(options, ...) abort
-  let l:path = fnamemodify(a:0 > 0 && strlen(a:1) > 0 ? a:1 : expand("%"), ":p")
+  let l:path = fnamemodify(a:0 > 0 && strlen(a:1) > 0 ? a:1 : expand("%"), ":p") " Full path
+  let l:cwd = fnamemodify(l:path, ":h")                                          " Working directory
+  let l:filename = fnamemodify(l:path, ":t")                                     " Name of the file to typeset
   let l:cmd = extend(extend(["latexmk"], get(a:options, "latexmk", [])), [
         \ "-pv-",
         \ "-synctex=" . (get(b:, "tex_synctex", get(g:, "tex_synctex", 1)) ? "1" : "0"),
         \ "-file-line-error",
         \ "-interaction=nonstopmode",
-        \ fnamemodify(l:path, ":t")])
+        \ l:filename])
   call lf_msg#notice('Typesetting...')
   if get(a:options, "use_term", 0)
-    call lf_terminal#run(["/bin/sh", "-c", join(l:cmd)], {"cwd": fnamemodify(l:path, ":h")})
+    call lf_terminal#run(l:cmd, {"cwd": l:cwd})
   else
     call add(s:tex_jobs, lf_run#job(l:cmd, {
           \ "cb": "lf_tex#callback",
-          \ "cwd": fnamemodify(l:path, ":h"),
+          \ "cwd": l:cwd,
           \ "args": [bufnr("%"), l:path]
           \ }))
   endif
