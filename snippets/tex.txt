@@ -24,11 +24,11 @@ snippet align
 \end{align*}
 
 snippet fig
-\begin{fig}
+\begin{figure}
   \begin{center}
     \includegraphics[width=.7\textwidth]{___}
   \end{center}
-\end{fig}
+\end{figure}
 
 snippet item
 \begin{itemize}
