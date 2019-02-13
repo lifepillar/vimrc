@@ -47,13 +47,13 @@ snippet i
 ___
 
 snippet tab
-\begin{tab}{___cc}
+\begin{tabular}{___cc}
 \toprule
 ___ & ___ \\
 \midrule
 ___ & ___ \\
 \bottomrule
-\end{tab}
+\end{tabular}
 
 snippet verb
 \begin{verbatim}
