@@ -145,7 +145,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
   " botright 10new does not set the right height, e.g., if the quickfix window is open
   botright 1new | 9wincmd +
   setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile noundofile
-        \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly
+        \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly nospell
   setlocal statusline=%#CommandMode#\ Finder\ %*\ %l\ of\ %L
   let l:cur_buf = bufnr('%') " Store current buffer number
   set scrolloff=0
