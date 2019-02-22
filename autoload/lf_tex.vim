@@ -10,17 +10,7 @@ fun! lf_tex#preview()
 endf
 
 fun! lf_tex#forward_search()
-  " The command assumes Skim.app installed with Homebrew Cask (which symlinks
-  " displayline in /usr/local/bin)
-  silent execute join([
-        \ '!displayline',
-        \ line('.'),
-        \ shellescape(lf_tex#file('pdf')),
-        \ shellescape(expand('%:p'))
-        \ ])
-  if !has("gui_running")
-    redraw!
-  endif
+  call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), expand('%:p')])
 endf
 
 fun! lf_tex#clean()
