@@ -5,6 +5,7 @@ if !exists('g:loaded_neomake')
   packadd neomake
 endif
 call neomake#configure#automake('nw', 1000)
+setlocal signcolumn=yes
 
 " Cscope
 if !lf_tags#load_cscope_db()
