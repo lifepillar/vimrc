@@ -525,9 +525,9 @@
 " GUI {{
   if has('gui_running')
     let s:linespace=2
-    set guifont=SF\ Mono\ Light:h11
+    set guifont=SF\ Mono\ Regular:h10
     set guioptions=gm
-    set guicursor=n-c:block-blinkoff0,v:blinkwait100-blinkon500-blinkoff500,i-o-ci:ver15-blinkoff0,r-cr:hor10-blinkoff0
+    set guicursor=n-c:block-blinkoff0,v:blinkwait100-blinkon500-blinkoff500,i-o-ci:ver15-blinkwait100-blinkon600-blinkoff600,r-cr:hor10-blinkoff0
     set sidescrolloff=0
     let &linespace=s:linespace
     if !has('ios')
