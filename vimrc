@@ -451,6 +451,21 @@
     " Use Alt+arrows to jump between words
     tnoremap <s-left> <esc>b
     tnoremap <s-right> <esc>f
+    " Jump to another window directly from terminal mode
+    tnoremap ¬ <c-w>l
+    tnoremap ˙ <c-w>h
+    tnoremap ∆ <c-w>j
+    tnoremap ˚ <c-w>k
+    tnoremap <c-w>1 <c-w>:1wincmd w<cr>
+    tnoremap <c-w>2 <c-w>:2wincmd w<cr>
+    tnoremap <c-w>3 <c-w>:3wincmd w<cr>
+    tnoremap <c-w>4 <c-w>:4wincmd w<cr>
+    tnoremap <c-w>5 <c-w>:5wincmd w<cr>
+    tnoremap <c-w>6 <c-w>:6wincmd w<cr>
+    tnoremap <c-w>7 <c-w>:7wincmd w<cr>
+    tnoremap <c-w>8 <c-w>:8wincmd w<cr>
+    tnoremap <c-w>9 <c-w>:9wincmd w<cr>
+    tnoremap <c-w>0 <c-w>:10wincmd w<cr>
     " Allow scrolling with the mouse when in Terminal mode
     tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
     tnoremap <silent> <f8> <c-w>:call lf_terminal#toggle_scrollwheelup()<cr>
