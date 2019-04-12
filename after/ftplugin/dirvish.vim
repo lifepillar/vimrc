@@ -6,5 +6,12 @@ silent! unmap <buffer> <c-p>
 nnoremap <nowait> <silent> <buffer> t :call dirvish#open('tabedit', 0)<cr>
 xnoremap <nowait> <silent> <buffer> t :call dirvish#open('tabedit', 0)<cr>
 
-" Hide dot-prefixed files (restore with <c-l>)
-nnoremap <nowait> <silent> <buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>
+fun! BuildDirvishStatusLine(nr)
+  return '%{SetupStl('.a:nr.')}
+        \%#CurrMode#%{w:["lf_active"] ? "  BROWSE " : ""}%*
+        \%{w:["lf_active"] ? "" : "  BROWSE "} %{winnr()} %f %= %l:%v %P '
+endf
+
+if exists("g:default_stl")
+  setlocal statusline=%!BuildDirvishStatusLine(winnr())
+endif
