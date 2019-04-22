@@ -198,8 +198,10 @@ fun! lf_find#interactively(input, callback, prompt) abort
       let l:undoseq = []
       let l:filter = ''
       redraw
-    elseif ch ==# 0x0B " CTRL-K
+    elseif ch ==# 0x0B || ch ==# "\<up>" || ch ==# "\<left>" " 0x0B == CTRL-K
       norm k
+    elseif ch ==# "\<down>" || ch ==# "\<right>"
+      norm j
     elseif ch ==# 0x02 || ch ==# 0x04 || ch ==# 0x06 || ch ==# 0x0A || ch ==# 0x15 " CTRL-B, CTRL-D, CTRL-F, CTRL-J, CTRL-U
       execute "normal" nr2char(ch)
     endif
