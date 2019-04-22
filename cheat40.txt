@@ -112,6 +112,7 @@ View {{{2
 Choose colorscheme       \vc           N
 Open quickfix window     \vq           N
 Show/hide status line    \vs           N
+Toggle window zoom       \vz           N
 Decrease tab width       \[            N
 Increase tab width       \]            N
 Set tab width            :TabWidth ‹n› N

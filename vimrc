@@ -536,6 +536,7 @@
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
   nnoremap <silent> <leader>vl :<c-u>botright lopen<cr>
   nnoremap <silent> <leader>vq :<c-u>botright copen<cr>
+  nnoremap <silent> <leader>vz :<c-u>call lf_win#zoom_toggle()<cr>
   " }}
 " GUI {{
   if has('gui_running')
