@@ -110,6 +110,8 @@ Capitalize words         \eU           V
 Remove trailing space    \es           N
 View {{{2
 Choose colorscheme       \vc           N
+Open location window     \vl           N
+View marks               \vm           N
 Open quickfix window     \vq           N
 View registers           \vr           N
 Show/hide status line    \vs           N
