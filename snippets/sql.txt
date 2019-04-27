@@ -21,8 +21,7 @@ snippet f
 create or replace function ___
 returns ___
 language plpgsql
-security invoker
-set search path = public as
+security invoker as
 $$
 begin
   ___
