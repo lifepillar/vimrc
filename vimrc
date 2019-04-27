@@ -543,7 +543,7 @@
   if has('gui_running')
     let s:linespace=2
     set guifont=SF\ Mono\ Regular:h10
-    set guioptions=gm
+    set guioptions=!cgm
     set guicursor=n-c:blinkwait100-blinkon600-blinkoff600
     set guicursor+=v:blinkwait100-blinkon400-blinkoff400
     set guicursor+=i-o-ci:ver15-blinkwait100-blinkon600-blinkoff600
