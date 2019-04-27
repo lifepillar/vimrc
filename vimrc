@@ -542,7 +542,8 @@
 " GUI {{
   if has('gui_running')
     let s:linespace=2
-    set guifont=SF\ Mono\ Regular:h10
+    set guifont=SFMono-Regular:h10,IBMPlexMono:h10
+    set guifont+=SourceCodePro-Regular:h11,Menlo-Regular:h11,Courier:h11
     set guioptions=!cgm
     set guicursor=n-c:blinkwait100-blinkon600-blinkoff600
     set guicursor+=v:blinkwait100-blinkon400-blinkoff400
