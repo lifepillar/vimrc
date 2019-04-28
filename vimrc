@@ -141,6 +141,9 @@
   set display=lastline
   " Get more information from ctrl-g:
   nnoremap <c-g> 2<c-g>
+  " Set italics mode (not done by all systems, e.g., FreeBSD)
+  let &t_ZH="\e[3m"
+  let &t_ZR="\e[23m"
   " Show block cursor in Normal mode and line cursor in Insert mode
   " (use odd numbers for blinking cursor):
   let &t_ti.="\e[2 q"
