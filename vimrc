@@ -1,5 +1,6 @@
-" Modeline and Notes {{
-" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fcs=vert\:| fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" Modeline and Notes {{{
+" vim: set sw=2 ts=2 sts=0 et fdm=marker fcs= :nospell:
+"
 "
 " - To override the settings of a color scheme, create a file
 "   after/colors/<theme name>.vim It will be automatically loaded after the
@@ -20,8 +21,8 @@
 "
 "       export LC_ALL=en_US.UTF-8
 "       export LANG=en_US.UTF-8
-" }}
-" Environment {{
+" }}}
+" Environment {{{
   set encoding=utf-8
   scriptencoding utf-8
   set nobomb
@@ -33,16 +34,16 @@
   set ttyfast
   set mouse=a
   if has('nvim')
-    " NeoVim {{
+    " NeoVim {{{
     language en_US.UTF-8
     let g:terminal_scrollback_buffer_size = 10000
     set shada=!,'1000,<50,s10,h  " Override viminfo setting
     " Use alt-arrows in the command line (see :help map-alt-keys)
     cmap <a-b> <s-left>
     cmap <a-f> <s-right>
-    " }}
+    " }}}
   else
-    " Vim {{
+    " Vim {{{
     set viminfo=!,'300,<10000,s10,h,n~/.vim/viminfo
     " See :set termcap, :h t_ku, :h :set-termcap, and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
     " For terminal mappings, see Key Mappings section
@@ -63,7 +64,7 @@
     if has('mouse_sgr')
       set ttymouse=sgr " See :h sgr-mouse
     endif
-    " }}
+    " }}}
   endif
   set updatetime=500 " Trigger CursorHold event after half a second
   syntax enable
@@ -79,8 +80,8 @@
   set undodir=~/.vim/tmp/undo
   set undolevels=1000 " Maximum number of changes that can be undone
   set undoreload=10000 " Maximum number of lines to save for undo on a buffer reload
-" }}
-" Editing {{
+" }}}
+" Editing {{{
   set autoindent " Use indentation of the first-line when reflowing a paragraph
   set shiftround " Round indent to multiple of shiftwidth (applies to < and >)
   set backspace=indent,eol,start " Intuitive backspacing in insert mode
@@ -107,8 +108,8 @@
   set tabstop=2
   set shiftwidth=2
   set softtabstop=2
-" }}
-" Find, replace, and completion {{
+" }}}
+" Find, replace, and completion {{{
   set incsearch " Search as you type
   set ignorecase " Case-insensitive search by default
   set infercase " Smart case when doing keyword completion
@@ -128,8 +129,8 @@
   set cscoperelative
   set cscopequickfix=s-,c-,d-,i-,t-,e-
   if has('patch-7.4.2033') | set cscopequickfix+=a- | endif
-" }}
-" Appearance {{
+" }}}
+" Appearance {{{
   if has('termguicolors') && $COLORTERM ==# 'truecolor'
     let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
     let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
@@ -178,8 +179,8 @@
   endif
   set printoptions=syntax:n,number:y
   set printfont=:h9
-" }}
-" Autocommands {{
+" }}}
+" Autocommands {{{
   augroup lf_autocmds
     autocmd!
     " Hook for overriding a theme's default
@@ -205,8 +206,8 @@
 
     autocmd TerminalOpen * set nonumber norelativenumber signcolumn=no
   augroup END
-" }}
-" Status line {{
+" }}}
+" Status line {{{
   " See :h mode()
   let g:mode_map = {
         \ 'n': ['N', 'NormalMode' ], 'i': ['I', 'InsertMode' ],      'R': ['R', 'ReplaceMode'],
@@ -251,7 +252,7 @@
           \ %#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
   endf
 " }}
-" Tabline {{
+" Tabline {{{
   fun! BuildTabLabel(nr, active)
     return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
   endf
@@ -264,8 +265,8 @@
           \ . "%#TabLineFill#%T%=⌘ %<%{&columns < 100 ? fnamemodify(getcwd(), ':t') : getcwd()} " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
   endf
 
-" }}
-" Helper functions {{
+" }}}
+" Helper functions {{{
   " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
   fun! s:smoothScroll(up)
     execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
@@ -341,8 +342,8 @@
     redraw  " See :h :echo-redraw
     echomsg 'Trailing space removed!'
   endf
-" }}
-" Commands (plugins excluded) {{
+" }}}
+" Commands (plugins excluded) {{{
   " Grep search
   command! -nargs=* -complete=file Grep call lf_find#grep(<q-args>)
 
@@ -380,8 +381,8 @@
 
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
-" }}
-" Key mappings (plugins excluded) {{
+" }}}
+" Key mappings (plugins excluded) {{{
   " Use space as alternative leader
   map <space> <leader>
   set pastetoggle=<f9>
@@ -541,8 +542,8 @@
   nnoremap <silent> <leader>vl :<c-u>botright lopen<cr>
   nnoremap <silent> <leader>vq :<c-u>botright copen<cr>
   nnoremap <silent> <leader>vz :<c-u>call lf_win#zoom_toggle()<cr>
-  " }}
-" GUI {{
+  " }}}
+" GUI {{{
   if has('gui_running')
     let s:linespace=2
     set guifont=SFMono-Regular:h10,IBMPlexMono:h10
@@ -561,9 +562,9 @@
       tnoremap <a-right> <esc>f
     endif
   endif
-" }}
-" Plugins {{
-  " Disabled Vim Plugins {{
+" }}}
+" Plugins {{{
+  " Disabled Vim Plugins {{{
     let g:loaded_getscriptPlugin = 1
     let g:loaded_gzip = 1
     let g:loaded_logiPat = 1
@@ -571,8 +572,8 @@
     let g:loaded_tarPlugin = 1
     let g:loaded_vimballPlugin = 1
     let g:loaded_zipPlugin = 1
-  " }}
-  " clang_complete {{
+  " }}}
+  " clang_complete {{{
     let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
     let g:clang_user_options = '-std=c++14'
     let g:clang_complete_auto = 0
@@ -585,8 +586,8 @@
       autocmd!
       autocmd BufReadPre *.c,*.cpp,*.h,*.hpp call <sid>clang_complete_lazy_load()
     augroup END
-  " }}
-  " Dirvish/Netrw {{
+  " }}}
+  " Dirvish/Netrw {{{
     if has('ios') " Use Netrw
       let g:loaded_dirvish = 1
       let g:netrw_banner = 0
@@ -598,12 +599,12 @@
       nmap <leader>d <plug>(dirvish_up)
       nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
     endif
-  " }}
-  " Easy Align {{
+  " }}}
+  " Easy Align {{{
     xmap <leader>ea <plug>(EasyAlign)
     nmap <leader>ea <plug>(EasyAlign)
-  " }}
-  " Goyo {{
+  " }}}
+  " Goyo {{{
     " Toggle distraction-free mode
     nnoremap <silent> <leader>vf :Goyo<cr>
 
@@ -631,8 +632,8 @@
 
     autocmd! User GoyoEnter nested call <sid>goyoEnter()
     autocmd! User GoyoLeave nested call <sid>goyoLeave()
-  " }}
-  " Ledger {{
+  " }}}
+  " Ledger {{{
     let g:ledger_extra_options = '--check-payees --explicit --pedantic --wide'
     let g:ledger_maxwidth = 63
     let g:ledger_fillstring = ''
@@ -642,30 +643,31 @@
     let g:ledger_default_commodity = 'EUR'
     let g:ledger_commodity_before = 0
     let g:ledger_commodity_sep = ' '
-  " }}
-  " Markdown (Vim) {{
+  " }}}
+  " Markdown (Vim) {{{
     let g:markdown_fenced_languages = ['pgsql', 'sql']
-  " }}
-  " MetaPost (Vim) {{
+  " }}}
+  " MetaPost (Vim) {{{
     let g:mp_metafun_macros = 1
-  " }}
-  " MUcomplete {{
+  " }}}
+  " MUcomplete {{{
     nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
     imap <expr> <up> mucomplete#extend_bwd("\<up>")
     imap <expr> <down> mucomplete#extend_fwd("\<down>")
     inoremap <expr> <cr> pumvisible() ? "<c-y><cr>" : "<cr>"
-  " }}
-  " Sneak {{
+    let g:mucomplete#chains = { 'default': ['path', 'omni', 'c-p', 'dict', 'uspl'] }
+  " }}}
+  " Sneak {{{
     nmap <c-s> <plug>Sneak_s
     nmap gs <plug>Sneak_S
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
-  " }}
-  " SQL (Vim) {{
+  " }}}
+  " SQL (Vim) {{{
     let g:sql_type_default = 'pgsql'
     let g:omni_sql_default_compl_type = 'syntax'
-  " }}
-  " Tagbar {{
+  " }}}
+  " Tagbar {{{
     fun! TagbarStatusLine(current, sort, fname, flags, ...) abort
       return (a:current ? '%#NormalMode# Tagbar %* ' : '%#StatusLineNC# Tagbar  ') . winnr() . ' ' . a:fname
     endf
@@ -749,21 +751,21 @@
           \ 'sort': 0
           \ }
     let g:tagbar_type_mf = g:tagbar_type_mp
-  " }}
-  " Undotree {{
+  " }}}
+  " Undotree {{{
     let g:undotree_WindowLayout = 2
     let g:undotree_SplitWidth = 40
     let g:undotree_SetFocusWhenToggle = 1
     let g:undotree_TreeNodeShape = '◦'
     nnoremap <silent> <leader>vu :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
-  " }}
-  " 2HTML (Vim) {{
+  " }}}
+  " 2HTML (Vim) {{{
     let g:html_pre_wrap=1
     let g:html_use_encoding="UTF-8"
     let g:html_font=["Consolas", "Menlo"]
-  " }}
-" }}
-" Themes {{
+  " }}}
+" }}}
+" Themes {{{
   if has('ios')
     let g:wwdc16_no_italics = 1
     let g:wwdc17_no_italics = 1
@@ -775,8 +777,8 @@
     let g:solarized_statusline = 'low'
     let g:solarized_term_italics = 1
   endif
-" }}
-" Init {{
+" }}}
+" Init {{{
   let g:LargeFile = 20*1024*1024 " 20MB
 
   EnableStatusLine
@@ -793,4 +795,4 @@
   else
     colorscheme wwdc16
   endif
-" }}
+" }}}
