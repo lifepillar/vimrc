@@ -224,34 +224,39 @@
     return 1
   endf
 
-  " nr is always the number of the currently active window. In a %{} context, winnr()
-  " always refers to the window to which the status line being drawn belongs. Since this
-  " function is invoked in a %{} context, winnr() may be different from a:nr. We use this
-  " fact to detect whether we are drawing in the active window or in an inactive window.
-  fun! SetupStl(nr)
-    return get(extend(w:, {
-          \ "lf_active": winnr() != a:nr
+  " if has('patch-8.1.1372') " TODO: use g:statusline_winid and/or g:actual_curwin
+  if 0
+
+  else
+    " nr is always the number of the currently active window. In a %{} context, winnr()
+    " always refers to the window to which the status line being drawn belongs. Since this
+    " function is invoked in a %{} context, winnr() may be different from a:nr. We use this
+    " fact to detect whether we are drawing in the active window or in an inactive window.
+    fun! SetupStl(nr)
+      return get(extend(w:, {
+            \ "lf_active": winnr() != a:nr
             \ ? 0
             \ : (mode() ==# get(g:, "lf_cached_mode", "")
-              \ ? 1
-              \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode"))
-              \ ),
-          \ "lf_winwd": winwidth(winnr())
-          \ }), "", "")
-  endf
+            \ ? 1
+            \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode"))
+            \ ),
+            \ "lf_winwd": winwidth(winnr())
+            \ }), "", "")
+    endf
 
-  " Build the status line the way I want - no fat light plugins!
-  fun! BuildStatusLine(nr)
-    return '%{SetupStl('.a:nr.')}
-          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
-          \ %{(w:["lf_active"] ? "" : "   ") . winnr()} %{&modified ? "◦" : " "} %t (%n) %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
-          \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:~:h")) : ""}
-          \ %=
-          \ %a %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
-          \ . &ff . (&expandtab ? "" : " ⇥ ")} %l:%v %P
-          \ %#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
-  endf
-" }}
+    " Build the status line the way I want - no fat light plugins!
+    fun! BuildStatusLine(nr)
+      return '%{SetupStl('.a:nr.')}
+            \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
+            \ %{(w:["lf_active"] ? "" : "   ") . winnr()} %{&modified ? "◦" : " "} %t (%n) %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
+            \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:~:h")) : ""}
+            \ %=
+            \ %a %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
+            \ . &ff . (&expandtab ? "" : " ⇥ ")} %l:%v %P
+            \ %#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
+    endf
+  endif
+" }}}
 " Tabline {{{
   fun! BuildTabLabel(nr, active)
     return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
