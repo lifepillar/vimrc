@@ -3,7 +3,7 @@ fun! lf_tex#file(suffix)
 endf
 
 fun! lf_tex#preview()
-  silent execute '!open -a Skim.app ' . shellescape(lf_tex#file('pdf')) . ' >&/dev/null 2>&1 &'
+  silent execute '!open -a Skim.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
   if !has("gui_running")
     redraw!
   endif
