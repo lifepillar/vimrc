@@ -771,17 +771,9 @@
   " }}}
 " }}}
 " Themes {{{
-  if has('ios')
-    let g:wwdc16_no_italics = 1
-    let g:wwdc17_no_italics = 1
-  else
-    let g:gruvbox_italic = 1
-    let g:gruvbox_italicize_strings = 1
-    let g:seoul256_background = 236
-    let g:seoul256_light_background = 255
-    let g:solarized_statusline = 'low'
-    let g:solarized_term_italics = 1
-  endif
+  let g:seoul256_background = 236
+  let g:seoul256_light_background = 255
+  let g:solarized_statusline = 'low'
 " }}}
 " Init {{{
   let g:LargeFile = 20*1024*1024 " 20MB
