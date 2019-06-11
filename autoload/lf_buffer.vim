@@ -32,10 +32,12 @@ endf
 
 " Clear (delete the content) of the given buffer.
 fun! lf_buffer#clear(file_pattern)
+  let l:view = winsaveview()
   if bufnr(a:file_pattern) > -1
     silent execute bufnr(a:file_pattern) 'bufdo' '1,$delete'
     silent execute 'buffer' bufnr(@#)
   endif
+  call winrestview(l:view)
 endf
 
 fun! lf_buffer#swap_exists(file)
