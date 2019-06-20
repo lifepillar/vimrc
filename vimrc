@@ -203,8 +203,6 @@
       autocmd CmdlineEnter * :set hlsearch
       autocmd CmdlineLeave * :set nohlsearch
     endif
-
-    autocmd TerminalOpen * set nonumber norelativenumber signcolumn=no
   augroup END
 " }}}
 " Status line {{{
