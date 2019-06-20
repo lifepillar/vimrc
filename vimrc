@@ -237,13 +237,13 @@ if has('patch-8.1.1372') " Has g:statusline_winid
           \ . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
-          \ %a %w %{&ft} %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
+          \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
           \ %l:%v %P "
           \ . "%#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
           \ : '    ' . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
-          \ %w %{&ft} %l:%v %P "
+          \ %w %y %l:%v %P "
   endf
 else
   call lf_legacy_stl#init()
