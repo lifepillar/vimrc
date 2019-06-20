@@ -6,12 +6,15 @@ silent! unmap <buffer> <c-p>
 nnoremap <nowait> <silent> <buffer> t :call dirvish#open('tabedit', 0)<cr>
 xnoremap <nowait> <silent> <buffer> t :call dirvish#open('tabedit', 0)<cr>
 
-fun! BuildDirvishStatusLine(nr)
-  return '%{SetupStl('.a:nr.')}
-        \%#CurrMode#%{w:["lf_active"] ? "  BROWSE " : ""}%*
-        \%{w:["lf_active"] ? "" : "  BROWSE "} %{winnr()} %f %= %l:%v %P '
-endf
+if has('patch-8.1.1372') " Has g:statusline_winid
+  fun! LFBuildDirvishStatusLine()
+    return '%#'.LFStlHighlight().'# BROWSE %* %{winnr()} %f %= %l:%v %P '
+  endf
+else
+  call lf_legacy_stl#dirvish()
+endif
 
 if exists("g:default_stl")
-  setlocal statusline=%!BuildDirvishStatusLine(winnr())
+  setlocal statusline=%!LFBuildDirvishStatusLine()
 endif
+

@@ -214,7 +214,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
         \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
         \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
         \ 'c': 'CommandMode', 'r': 'CommandMode',     't': 'CommandMode',
-        \ '!': 'CommandMode'
+        \ '!': 'CommandMode',  '': 'StatusLineNC'
         \ }
 
   let g:lf_stlm = {
@@ -224,7 +224,13 @@ if has('patch-8.1.1372') " Has g:statusline_winid
         \ 'c': 'C',           'r': 'P',               't': 'T',
         \ '!': '!'}
 
-  fun! BuildStatusLine()
+  fun! LFStlHighlight()
+    return get(g:lf_stlh,
+          \    g:statusline_winid ==# win_getid() ? mode() : '',
+          \   'Warnings')
+  endf
+
+  fun! LFBuildStatusLine()
     return g:statusline_winid ==# win_getid()
           \ ? '%#'.get(g:lf_stlh, mode(), 'Warnings').'# '
           \ . get(g:lf_stlm, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ')
@@ -248,7 +254,7 @@ endif
     return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
   endf
 
-  fun! BuildTabLine()
+  fun! LFBuildTabLine()
     return (tabpagenr('$') == 1 ? '' : join(map(
           \   range(1, tabpagenr('$')),
           \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.",".(v:val == tabpagenr()).")}"'
@@ -286,8 +292,8 @@ endif
     set noruler
     let g:default_stl = &statusline
     let g:default_tal = &tabline
-    set statusline=%!BuildStatusLine()
-    set tabline=%!BuildTabLine()
+    set statusline=%!LFBuildStatusLine()
+    set tabline=%!LFBuildTabLine()
   endf
 
   fun! s:disableStatusLine()

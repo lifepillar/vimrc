@@ -24,7 +24,7 @@ fun! SetupStl(curwin)
   return get(extend(w:, { 'lf_active': winnr() ==# a:curwin }), '', '')
 endf
 
-fun! BuildStatusLine()
+fun! LFBuildStatusLine()
   return '%{SetupStl('.winnr().')}%#'.get(g:lf_stlh, mode(), 'Warnings')."#
         \%{w:['lf_active']
         \?'  '.get(g:lf_stlm,mode(),mode()).(&paste?' PASTE ':' ')
@@ -46,3 +46,59 @@ endf
 
 fun! lf_legacy_stl#init()
 endf
+
+" Local status lines
+
+fun! lf_legacy_stl#help()
+  fun! LFBuildHelpStatusLine()
+    return '%{SetupStl('.winnr().')}%#'
+          \ . get(g:lf_stlh, mode(), 'Warnings')
+          \ .'#%{w:["lf_active"] ? "  HELP " : ""}%*
+          \%{w:["lf_active"] ? "" : "  HELP "} %{winnr()} %t (%n) %= %l:%v %P '
+  endf
+endf
+
+fun! lf_legacy_stl#undotree()
+  fun! LFBuildUndotreeStatusLine()
+    return '%{SetupStl('.winnr().')}%#'
+          \ . get(g:lf_stlh, mode(), 'Warnings')
+          \ . '#%{w:["lf_active"] ? "  Undotree " : ""}%*
+          \%{w:["lf_active"] ? "" : "  Undotree"}
+          \ %<%{t:undotree.GetStatusLine()} %*'
+  endf
+endf
+
+fun! lf_legacy_stl#dirvish()
+  fun! LFBuildDirvishStatusLine()
+    return '%{SetupStl('.winnr().')}%#'
+          \ . get(g:lf_stlh, mode(), 'Warnings')
+          \ . '#%{w:["lf_active"] ? "  BROWSE " : ""}%*
+          \%{w:["lf_active"] ? "" : "  BROWSE "} %{winnr()} %f %= %l:%v %P '
+  endf
+endf
+
+if exists("*getwininfo")
+  fun! LFQuickfixTag()
+    return get(getwininfo(win_getid())[0], "loclist", 0) ? "  LOCLIST " : "  QUICKFIX "
+  endf
+else
+  fun! LFQuickfixTag()
+    return 'QUICKFIX'
+  endf
+endif
+
+fun! LFQuickfixNumLines()
+  return winwidth(0) >= 60 ? printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ") : ""
+endf
+
+fun! lf_legacy_stl#quickfix()
+  fun! LFBuildQuickfixStatusLine()
+    return '%{SetupStl('.winnr().')}%#'
+          \ . get(g:lf_stlh, mode(), 'Warnings')
+          \ .'#%{w:["lf_active"] ? LFQuickfixTag() : "" }%*
+          \%{w:["lf_active"] ? "" : LFQuickfixTag()}
+          \ %{winnr()}  %<%{get(w:, "quickfix_title", "")}
+          \ %= %q %{LFQuickfixNumLines()}'
+  endf
+endf
+
