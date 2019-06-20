@@ -208,54 +208,42 @@
   augroup END
 " }}}
 " Status line {{{
-  " See :h mode()
-  let g:mode_map = {
-        \ 'n': ['N', 'NormalMode' ], 'i': ['I', 'InsertMode' ],      'R': ['R', 'ReplaceMode'],
-        \ 'v': ['V', 'VisualMode' ], 'V': ['V', 'VisualMode' ], "\<c-v>": ['V', 'VisualMode' ],
-        \ 's': ['S', 'VisualMode' ], 'S': ['S', 'VisualMode' ], "\<c-s>": ['S', 'VisualMode' ],
-        \ 'c': ['C','CommandMode'],  'r': ['P', 'CommandMode'],      't': ['T','CommandMode'],
-        \ '!': ['!',  'CommandMode']}
+if has('patch-8.1.1372') " Has g:statusline_winid
+  " Build the status line the way I want - no fat light plugins!
+  " For the keys, see :h mode()
+  let g:mode_hl = {
+        \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
+        \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
+        \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
+        \ 'c': 'CommandMode', 'r': 'CommandMode',     't': 'CommandMode',
+        \ '!': 'CommandMode'
+        \ }
 
-  " newMode may be a value as returned by mode() or the name of a highlight group
-  " Note: setting highlight groups while computing the status line may cause the
-  " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
-  fun! s:updateStatusLineHighlight(newMode)
-    execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
-    return 1
+  let g:mode_text = {
+        \ 'n': 'N',           'i': 'I',               'R': 'R',
+        \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
+        \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
+        \ 'c': 'C',           'r': 'P',               't': 'T',
+        \ '!': '!'}
+
+  fun! BuildStatusLine()
+    return g:statusline_winid ==# win_getid()
+          \ ? '%#'.get(g:mode_hl, mode(), 'Warnings').'# '
+          \ . get(g:mode_text, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ')
+          \ . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
+          \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+          \ %=
+          \ %a %w %{&ft} %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
+          \ %l:%v %P "
+          \ . "%#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
+          \ : '    ' . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
+          \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+          \ %=
+          \ %w %{&ft} %l:%v %P "
   endf
-
-  " if has('patch-8.1.1372') " TODO: use g:statusline_winid and/or g:actual_curwin
-  if 0
-
-  else
-    " nr is always the number of the currently active window. In a %{} context, winnr()
-    " always refers to the window to which the status line being drawn belongs. Since this
-    " function is invoked in a %{} context, winnr() may be different from a:nr. We use this
-    " fact to detect whether we are drawing in the active window or in an inactive window.
-    fun! SetupStl(nr)
-      return get(extend(w:, {
-            \ "lf_active": winnr() != a:nr
-            \ ? 0
-            \ : (mode() ==# get(g:, "lf_cached_mode", "")
-            \ ? 1
-            \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode() }), "lf_cached_mode"))
-            \ ),
-            \ "lf_winwd": winwidth(winnr())
-            \ }), "", "")
-    endf
-
-    " Build the status line the way I want - no fat light plugins!
-    fun! BuildStatusLine(nr)
-      return '%{SetupStl('.a:nr.')}
-            \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(), [mode()])[0] . (&paste ? " PASTE " : " ") : ""}%*
-            \ %{(w:["lf_active"] ? "" : "   ") . winnr()} %{&modified ? "◦" : " "} %t (%n) %{&modifiable ? (&readonly ? "▪" : " ") : "✗"}
-            \ %<%{empty(&buftype) ? (w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:~:h")) : ""}
-            \ %=
-            \ %a %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
-            \ . &ff . (&expandtab ? "" : " ⇥ ")} %l:%v %P
-            \ %#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
-    endf
-  endif
+else
+  call lf_legacy_stl#init()
+endif
 " }}}
 " Tabline {{{
   fun! BuildTabLabel(nr, active)
@@ -300,7 +288,7 @@
     set noruler
     let g:default_stl = &statusline
     let g:default_tal = &tabline
-    set statusline=%!BuildStatusLine(winnr()) " winnr() is always the number of the *active* window
+    set statusline=%!BuildStatusLine()
     set tabline=%!BuildTabLine()
   endf
 
