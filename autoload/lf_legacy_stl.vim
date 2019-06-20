@@ -1,6 +1,6 @@
 " Build the status line the way I want - no fat light plugins!
 " For the keys, see :h mode()
-let g:mode_hl = {
+let g:lf_stlh = {
       \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
       \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
       \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
@@ -8,7 +8,7 @@ let g:mode_hl = {
       \ '!': 'CommandMode'
       \ }
 
-let g:mode_text = {
+let g:lf_stlm = {
       \ 'n': 'N',           'i': 'I',               'R': 'R',
       \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
       \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
@@ -25,9 +25,9 @@ fun! SetupStl(curwin)
 endf
 
 fun! BuildStatusLine()
-  return '%{SetupStl('.winnr().')}%#'.get(g:mode_hl, mode(), 'Warnings')."#
+  return '%{SetupStl('.winnr().')}%#'.get(g:lf_stlh, mode(), 'Warnings')."#
         \%{w:['lf_active']
-        \?'  '.get(g:mode_text,mode(),mode()).(&paste?' PASTE ':' ')
+        \?'  '.get(g:lf_stlm,mode(),mode()).(&paste?' PASTE ':' ')
         \:''}%*
         \ %{(w:['lf_active']?'':'   ').winnr()}
         \ %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}

@@ -209,7 +209,7 @@
 if has('patch-8.1.1372') " Has g:statusline_winid
   " Build the status line the way I want - no fat light plugins!
   " For the keys, see :h mode()
-  let g:mode_hl = {
+  let g:lf_stlh = {
         \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
         \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
         \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
@@ -217,7 +217,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
         \ '!': 'CommandMode'
         \ }
 
-  let g:mode_text = {
+  let g:lf_stlm = {
         \ 'n': 'N',           'i': 'I',               'R': 'R',
         \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
         \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
@@ -226,8 +226,8 @@ if has('patch-8.1.1372') " Has g:statusline_winid
 
   fun! BuildStatusLine()
     return g:statusline_winid ==# win_getid()
-          \ ? '%#'.get(g:mode_hl, mode(), 'Warnings').'# '
-          \ . get(g:mode_text, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ')
+          \ ? '%#'.get(g:lf_stlh, mode(), 'Warnings').'# '
+          \ . get(g:lf_stlm, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ')
           \ . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
