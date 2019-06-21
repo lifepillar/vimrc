@@ -230,20 +230,23 @@ if has('patch-8.1.1372') " Has g:statusline_winid
           \   'Warnings')
   endf
 
-  fun! LFBuildStatusLine()
-    return g:statusline_winid ==# win_getid()
-          \ ? '%#'.get(g:lf_stlh, mode(), 'Warnings').'# '
-          \ . get(g:lf_stlm, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ')
-          \ . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
+  let s:stl = "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
           \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
           \ %l:%v %P "
           \ . "%#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
-          \ : '    ' . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
+
+  let s:stlnc = '    ' . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
           \ %w %y %l:%v %P "
+
+  fun! LFBuildStatusLine()
+    return g:statusline_winid ==# win_getid()
+          \ ? '%#'.get(g:lf_stlh, mode(), 'Warnings').'# '
+          \ . get(g:lf_stlm, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ') . s:stl
+          \ : s:stlnc
   endf
 else
   call lf_legacy_stl#init()
