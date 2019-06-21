@@ -1,5 +1,5 @@
 " Modeline and Notes {{{
-" vim: set sw=2 ts=2 sts=0 et fdm=marker fcs= :nospell:
+" vim: set sw=2 ts=2 sts=0 et fdm=marker :nospell:
 "
 "
 " - To override the settings of a color scheme, create a file
