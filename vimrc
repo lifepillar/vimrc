@@ -240,7 +240,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
   let s:stlnc = '    ' . "%{winnr()} %{&mod?'◦':' '} %t (%n) %{&ma?(&ro?'▪':' '):'✗'}
           \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
           \ %=
-          \ %w %y %l:%v %P "
+          \ %w %y  %l:%v %P "
 
   fun! LFBuildStatusLine()
     return g:statusline_winid ==# win_getid()
