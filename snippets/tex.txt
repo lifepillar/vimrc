@@ -76,7 +76,7 @@ ___
 \end{lemma}
 
 snippet ex
-\begin{example
+\begin{example}
 ___
 \end{example}
 
