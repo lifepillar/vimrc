@@ -7,6 +7,12 @@ endif
 call neomake#configure#automake('nw', 1000)
 setlocal signcolumn=yes
 
+inoremap <buffer> (<cr> (<cr>)<esc>O
+inoremap <buffer> {<cr> {<cr>}<esc>O
+inoremap <buffer> {; {<cr>};<esc>O
+inoremap <buffer> {, {<cr>},<esc>O
+inoremap <buffer> [<cr> [<cr>]<esc>O
+
 " Cscope
 if !lf_tags#load_cscope_db()
   finish
