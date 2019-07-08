@@ -578,7 +578,9 @@ endif
     let g:clang_user_options = '-std=c++14'
     let g:clang_complete_auto = 0
     fun! s:clang_complete_lazy_load()
-      packadd clang_complete
+      if has('python') || has('python3')
+        packadd clang_complete
+      endif
       autocmd! lf_cpp
       augroup! lf_cpp
     endf
