@@ -322,8 +322,8 @@ endif
       return
     endif
     let l:trail  = search('\s$',       'cnw')
-    let l:spaces = search('^\s\{-} ',  'cnw')
-    let l:tabs   = search('^\s\{-}\t', 'cnw')
+    let l:spaces = search('^  ',       'cnw')
+    let l:tabs   = search('^\t',       'cnw')
     if l:trail || (l:spaces && l:tabs)
       let b:lf_stl_warnings = ' '
             \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
