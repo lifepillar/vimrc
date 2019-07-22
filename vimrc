@@ -74,8 +74,12 @@
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
   " Consolidate temporary files into a central spot
-  set backupdir=~/.vim/tmp/backup
-  set directory=~/.vim/tmp/swap
+  if has("patch-8.1.0251")
+    set backupdir=~/.vim/tmp/backup//
+  else
+    set backupdir=~/.vim/tmp/backup
+  endif
+  set directory=~/.vim/tmp/swap//
   set undofile " Enable persistent undo
   set undodir=~/.vim/tmp/undo
   set undolevels=1000 " Maximum number of changes that can be undone
