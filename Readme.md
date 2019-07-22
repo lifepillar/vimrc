@@ -49,6 +49,7 @@ Recommended:
     cd ~
     git clone --depth 1 https://github.com/lifepillar/vimrc.git .vim
     cd .vim
+    chmod 700 ./tmp ./tmp/{backup,swap,undo}
     git checkout -b local
     # We use shallow submodules; --remote makes sure we are able to check them out:
     git submodule update --init --remote
