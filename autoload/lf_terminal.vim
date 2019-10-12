@@ -34,6 +34,9 @@ if has('terminal') " Vim 8 or later, MacVim
       let b:lf_bound_terminal = str2nr(input('Terminal buffer: '))
     endif
     for l:line in a:lines
+      if &ft == 'outlaw'
+        let l:line = substitute(l:line, '^\s*|\s*', '', '')  " Remove leading |
+      endif
       call term_sendkeys(b:lf_bound_terminal, l:line . "\r")
       call s:term_wait(b:lf_bound_terminal)
     endfor
@@ -80,6 +83,9 @@ else
         let b:lf_bound_terminal = input('Tmux pane number: ')
       endif
       for line in a:lines
+        if &ft == 'outlaw'
+          let l:line = substitute(l:line, '^\s*|\s*', '', '')  " Remove leading |
+        endif
         call system('tmux -u send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(line."\r"))
       endfor
     endf
