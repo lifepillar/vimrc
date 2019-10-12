@@ -1,0 +1,6 @@
+snippet ifn
+#ifndef ___
+#define ___
+___
+#endif
+

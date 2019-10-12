@@ -1,5 +1,7 @@
 setlocal commentstring=//%s
 setlocal cinoptions+=*200
+setlocal foldmethod=syntax
+setlocal foldlevel=10
 
 if !exists('g:loaded_neomake')
   packadd neomake
@@ -7,11 +9,7 @@ endif
 call neomake#configure#automake('nw', 1000)
 setlocal signcolumn=yes
 
-inoremap <buffer> (<cr> (<cr>)<esc>O
-inoremap <buffer> {<cr> {<cr>}<esc>O
-inoremap <buffer> {; {<cr>};<esc>O
-inoremap <buffer> {, {<cr>},<esc>O
-inoremap <buffer> [<cr> [<cr>]<esc>O
+call lf_text#load_snippets()
 
 " Cscope
 if !lf_tags#load_cscope_db()
