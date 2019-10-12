@@ -166,7 +166,9 @@
   set cmdheight=2 " Increase space for command line
   set shortmess+=Icm " No intro, suppress ins-completion messages, use [+] instead of [Modified]
   set showcmd " Show (partial) command in the last line of the screen
-  set diffopt+=vertical " Diff in vertical mode
+  if has('patch-8.1.0360')
+    set diffopt+=internal,algorithm:patience
+  endif
   set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:▪,precedes:⟨,extends:⟩  " Invisible characters
   let &showbreak='└ '
   set tabpagemax=50
