@@ -140,7 +140,11 @@ endf
 "
 " To expand a snippet, type its name followed by … (alt-. in macOS).
 fun! lf_text#load_snippets()
-  let l:file = readfile($HOME.'/.vim/snippets/'.&ft.'.txt')
+  try
+    let l:file = readfile($HOME.'/.vim/snippets/'.&ft.'.txt')
+  catch /.*/
+    return
+  endtry
   let b:lf_snippets = {}
   for l:line in l:file
     if l:line =~ '^snippet'
