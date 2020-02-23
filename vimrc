@@ -512,6 +512,8 @@ endif
   nnoremap <silent> <c-n>      :<c-u>call lf_find#arglist(v:oldfiles)<cr>
   nmap     <silent> <leader>fr <c-n>
   nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist_fuzzy(v:oldfiles)<cr>
+  " Man page for word under cursor (note that man.vim redefines <leader>K)
+  nnoremap <silent> <leader>K  :<c-u>runtime ftplugin/man.vim<cr>:normal \K<cr>
   " Quickfix/Location list
   nnoremap <silent> <leader>fl :<c-u>call lf_find#in_loclist(0)<cr>
   nnoremap <silent> <leader>fq :<c-u>call lf_find#in_qflist()<cr>

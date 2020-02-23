@@ -124,6 +124,7 @@ Find all in this buffer  :Search …     N
 Find in all open buffers :SearchAll …  N
 Grep search (ripgrep)    :Grep         N
 Spotlight search ()     :Spotlight …  N
+Open man page            \K            *
 Filter location list     \fl           N
 Filter quickfix list     \fq           N
 Go {{{2
