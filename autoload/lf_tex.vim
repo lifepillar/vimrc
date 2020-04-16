@@ -3,14 +3,22 @@ fun! lf_tex#file(suffix)
 endf
 
 fun! lf_tex#preview()
-  silent execute '!open -a Skim.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
+  if get(g:, 'lf_tex_previewer', '') ==# 'Skim'
+    silent execute '!open -a Skim.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
+  else
+    silent execute '!open -a TeXShop.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
+  endif
   if !has("gui_running")
     redraw!
   endif
 endf
 
 fun! lf_tex#forward_search()
-  call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), expand('%:p')])
+  if get(g:, 'lf_tex_previewer', '') ==# 'Skim'
+    call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), expand('%:p')])
+  else " For texshop.sh see TeXShop.app > Help > Changes and search for 'sync_preview'
+    call lf_run#job(['/usr/local/bin/texshop.sh', line('.'), '1', expand('%:p')])
+  endif
 endf
 
 fun! lf_tex#clean()
