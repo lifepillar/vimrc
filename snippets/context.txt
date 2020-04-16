@@ -5,7 +5,7 @@ ___
 
 snippet q
 \startquotation
-___
+  ___
 \stopquotation
 
 snippet s
@@ -25,13 +25,18 @@ ___
 
 snippet slide
 \startslide[title={___}]
-___
+  ___
 \stopslide
 
 snippet f
 \startformula
-___
+  ___
 \stopformula
+
+snippet align
+\startalign
+  ___
+\stopalign
 
 snippet fig
 \startplacefigure
