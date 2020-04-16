@@ -93,9 +93,6 @@
   " Smooth scrolling that works both in terminal and in GUI Vim
   nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
   nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
-  " Scroll the viewport faster
-  nnoremap <c-e> <c-e><c-e>
-  nnoremap <c-y> <c-y><c-y>
   set nrformats=hex
   set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
   set splitright " When splitting vertically, focus goes to the right window
