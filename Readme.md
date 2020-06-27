@@ -104,9 +104,9 @@ To add a colorscheme, change `bundle/start` with `themes/opt`.
 
 ### Useful resources
 
-- [VimGolf](http://vimgolf.com)
-- [VimAwesome](http://vimawesome.com)
-- [vimrcfu](http://vimrcfu.com)
+- [VimGolf](https://vimgolf.com)
+- [VimAwesome](https://vimawesome.com)
+- [vimrcfu](https://vimrcfu.com)
 - [vim-galore](https://github.com/mhinz/vim-galore)
-- [vimcolors](http://vimcolors.com)
+- [vimcolors](https://vimcolors.com)
 
