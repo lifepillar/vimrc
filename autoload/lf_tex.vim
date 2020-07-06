@@ -2,22 +2,67 @@ fun! lf_tex#file(suffix)
   return expand('%:p:r') . '.' . a:suffix
 endf
 
+if has('mac')
+  let s:default_viewer = 'TeXShop'
+else
+  let s:default_viewer = 'Okular'
+endif
+
+fun! s:view_in_texshop(f)
+  silent execute '!open -a TeXShop.app ' .. a:f .. ' >/dev/null 2>&1'
+endf
+
+fun! s:search_in_texshop(f, l)
+  " For texshop.sh, see TeXShop.app > Help > Changes and search for 'sync_preview'
+  call lf_run#job(['/usr/local/bin/texshop.sh', line('.'), '1', a:f])
+endf
+
+fun! s:view_in_skim(f)
+  silent execute '!open -a Skim.app ' .. a:f .. ' >/dev/null 2>&1'
+endf
+
+fun! s:search_in_skim(f, l)
+  call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), a:f])
+endf
+
+fun! s:view_in_okular(f)
+  silent execute '!okular --unique ' .. a:f .. ' >/dev/null 2>&1 &'
+endf
+
+fun! s:search_in_okular(f, l)
+  call lf_run#job(['okular', '--unique', lf_tex#file('pdf') .. '#src:' .. line('.') .. a:f])
+endf
+
+let s:preview = {
+      \ 'TeXShop': function('s:view_in_texshop'),
+      \ 'Skim': function('s:view_in_skim'),
+      \ 'Okular': function('s:view_in_okular'),
+      \ }
+
+let s:forward_search = {
+      \ 'TeXShop': function('s:search_in_texshop'),
+      \ 'Skim': function('s:search_in_skim'),
+      \ 'Okular': function('s:search_in_okular'),
+      \ }
+
 fun! lf_tex#preview()
-  if get(g:, 'lf_tex_previewer', '') ==# 'Skim'
-    silent execute '!open -a Skim.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
+  let l:viewer = get(g:, 'lf_tex_previewer', s:default_viewer)
+  if has_key(s:preview, l:viewer)
+    call s:preview[l:viewer](shellescape(lf_tex#file('pdf')))
+    if !has("gui_running")
+      redraw!
+    endif
   else
-    silent execute '!open -a TeXShop.app ' . shellescape(lf_tex#file('pdf')) . ' >/dev/null 2>&1'
-  endif
-  if !has("gui_running")
-    redraw!
+    call lf_msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
   endif
 endf
 
 fun! lf_tex#forward_search()
-  if get(g:, 'lf_tex_previewer', '') ==# 'Skim'
-    call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), expand('%:p')])
-  else " For texshop.sh see TeXShop.app > Help > Changes and search for 'sync_preview'
-    call lf_run#job(['/usr/local/bin/texshop.sh', line('.'), '1', expand('%:p')])
+  let l:viewer = get(g:, 'lf_tex_previewer', s:default_viewer)
+  if has_key(s:preview, l:viewer)
+    call s:forward_search[l:viewer](expand('%:p'), line('.'))
+  else
+    call lf_msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
   endif
 endf
 
