@@ -153,6 +153,7 @@
   let &t_SR.="\e[4 q"
   let &t_EI.="\e[2 q"
   let &t_te.="\e[0 q"
+  set foldmethod=marker
   set notitle " Do not set the terminal title
   set number " Turn line numbering on
   set relativenumber " Display line numbers relative to the line with the cursor
