@@ -562,7 +562,6 @@ endif
     set sidescrolloff=0
     let &linespace=s:linespace
     if !has('ios')
-      set transparency=0
       let $TERM='xterm-256color'
       tnoremap <a-left> <esc>b
       tnoremap <a-right> <esc>f
