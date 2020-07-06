@@ -33,16 +33,30 @@ fun! s:search_in_okular(f, l)
   call lf_run#job(['okular', '--unique', lf_tex#file('pdf') .. '#src:' .. line('.') .. a:f])
 endf
 
+fun! s:view_in_zathura(f)
+  silent execute '!zathura ' .. a:f .. ' >/dev/null 2>&1 &'
+endf
+
+" For backward search, create ~/.config/zathurarc with the following content:
+"     set synctex true
+"     set synctex-editor-command "gvim --remote-silent +%{line} %{input}"
+" Use Ctrl-Click to jump to GVim
+fun! s:search_in_zathura(f, l)
+  call lf_run#job(['zathura', '--synctex-forward', line('.') .. ':1:' .. a:f, lf_tex#file('pdf')])
+endf
+
 let s:preview = {
       \ 'TeXShop': function('s:view_in_texshop'),
       \ 'Skim': function('s:view_in_skim'),
       \ 'Okular': function('s:view_in_okular'),
+      \ 'Zathura': function('s:view_in_zathura'),
       \ }
 
 let s:forward_search = {
       \ 'TeXShop': function('s:search_in_texshop'),
       \ 'Skim': function('s:search_in_skim'),
       \ 'Okular': function('s:search_in_okular'),
+      \ 'Zathura': function('s:search_in_zathura'),
       \ }
 
 fun! lf_tex#preview()
