@@ -24,7 +24,8 @@ if !get(g:, 'lf_latex_no_warnings', 0)
         \ . '%+W%.%# at line %l,'
         \ . '%WLaTeX %.%#Warning: %m,'
         \ . '%+W%.%#%.%#Warning: %m,'
-        \ . '%Z%.%# on input line %l.,'
+        \ . '%Z%.%# on input line %l.%#,'
+        \ . '%Z%.%# line %l.,'
         \ . '%C(Font) %m.,'
 endif
 
