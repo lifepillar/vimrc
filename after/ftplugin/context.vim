@@ -11,7 +11,7 @@ nnoremap <silent><buffer> <leader>tv :<c-u>call lf_tex#preview()<cr>
 nnoremap <silent><buffer> <leader>ts :<c-u>call lf_tex#forward_search()<cr>
 
 " Use ConTeXt Beta by default
-let g:context_mtxrun = 'PATH=$HOME/Applications/ConTeXt-Beta/tex/texmf-osx-64/bin:$PATH mtxrun'
+let g:context_mtxrun = 'PATH=$HOME/Applications/context-osx-64/tex/texmf-osx-64/bin:$PATH mtxrun'
 let g:context_synctex = 1
 
 call lf_text#load_snippets()
