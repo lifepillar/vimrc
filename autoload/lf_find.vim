@@ -64,7 +64,7 @@ endfor
 " to stdout, or a List of items to be filtered.
 fun! lf_find#fuzzy(input, callback, prompt)
   if empty(s:ff_bin) " Fallback
-    call lf_find#interactively(a:input, a:callback, a:prompt)
+    call lf_find#interactively(systemlist(a:input), a:callback, a:prompt)
     return
   endif
 
@@ -118,7 +118,6 @@ fun! s:filter_close(bufnr, action, winrestsize)
   wincmd p
   execute "bwipe!" a:bufnr
   exe a:winrestsize
-  let &scrolloff=g:default_scrolloff
 
   if a:action ==# 'S'
     split
@@ -135,8 +134,7 @@ endf
 " Interactively filter a list of items as you type, and execute an action on
 " the selected item. Sort of a poor man's CtrlP.
 "
-" input:    either a shell command that sends its output, one item per line,
-"           to stdout, or a List of items to be filtered.
+" input:    A List of items to be filtered.
 fun! lf_find#interactively(input, callback, prompt) abort
   let l:prompt = a:prompt . '>'
   let l:filter = ''  " Text used to filter the list
@@ -144,18 +142,12 @@ fun! lf_find#interactively(input, callback, prompt) abort
   let l:winrestsize = winrestcmd() " Save current window layout
   " botright 10new does not set the right height, e.g., if the quickfix window is open
   botright 1new | 9wincmd +
-  setlocal buftype=nofile bufhidden=wipe nobuflisted nonumber norelativenumber noswapfile noundofile
-        \  nowrap winfixheight foldmethod=manual nofoldenable modifiable noreadonly nospell
+  setlocal buftype=nofile bufhidden=wipe cursorline foldmethod=manual modifiable
+        \  nobuflisted nofoldenable nonumber noreadonly norelativenumber nospell
+        \  noswapfile noundofile nowrap scrolloff=0 winfixheight
   setlocal statusline=%#CommandMode#\ Finder\ %*\ %l\ of\ %L
   let l:cur_buf = bufnr('%') " Store current buffer number
-  set scrolloff=0
-  if type(a:input) ==# 1 " v:t_string
-    let l:input = systemlist(a:input)
-    call setline(1, l:input)
-  else " Assume List
-    call setline(1, a:input)
-  endif
-  setlocal cursorline
+  call setline(1, a:input)
   redraw
   echo l:prompt . ' '
   while 1
@@ -170,7 +162,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       let l:filter = l:filter[:-2]
       let l:undo = empty(l:undoseq) ? 0 : remove(l:undoseq, -1)
       if l:undo
-        silent norm u
+        undo
       endif
       norm gg
     elseif ch >=# 0x20 " Printable character
@@ -194,7 +186,7 @@ fun! lf_find#interactively(input, callback, prompt) abort
       endif
       return
     elseif ch ==# 0x0C " CTRL-L (clear)
-      call setline(1, type(a:input) ==# 1 ? l:input : a:input) " 1 == v:t_string
+      call setline(1, a:input)
       let l:undoseq = []
       let l:filter = ''
       redraw

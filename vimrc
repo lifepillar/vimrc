@@ -369,7 +369,7 @@ endif
   command! -nargs=? -complete=dir FindFile call lf_find#file(<q-args>)
 
   " Spotlight search (macOS only)
-  command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist('mdfind '.<q-args>)
+  command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist(systemlist('mdfind '.<q-args>))
 
   " See :h :DiffOrig
   command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
