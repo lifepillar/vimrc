@@ -158,25 +158,25 @@ fun! lf_text#load_snippets()
   inoremap <buffer> <c-b> <esc>gn"_c
 endf
 
-fun! lf_text#expand_snippet()
-  if !exists('b:lf_snippets') | return '…' | endif
-  " Get word in front of the cursor and tail of line
-  let l:match = matchlist(getline('.'), '\(\S\+\%'.col('.').'c\)\(.*\)$')
-  if empty(l:match) | return '…' | endif
-    let [l:key, l:tail] = [l:match[1], l:match[2]]
+fun! lf_text#expand_snippet(trigger)
+  if !exists('b:lf_snippets') | return a:trigger | endif
+  " Get start of the line, word in front of the cursor, and tail of the line
+  let l:match = matchlist(getline('.'), '^\(.\{-}\)\(\S\+\%' .. col('.') .. 'c\)\(.*\)$')
+  if empty(l:match) | return a:trigger | endif
+    let [l:head, l:key, l:tail] = [l:match[1], l:match[2], l:match[3]]
     let l:snippet = get(b:lf_snippets, l:key, [])
   if !empty(l:snippet) " Expand snippet
-    let l:indent = matchstr(getline('.'), '^\s\+')
-    call setline('.', l:indent . l:snippet[0])
-    call append('.', map(l:snippet[1:-1], { _,t -> l:indent . t}))
+    let l:indent = repeat(' ', col('.') - strlen(l:key) - 1)
+    call setline('.', l:head .. l:snippet[0] .. l:tail)
+    call append('.', map(l:snippet[1:-1], { _,t -> l:indent .. t}))
     call cursor('.', 1)
     call search('___', 'csW')
     let l:save_cursor = getcurpos()
     " Enable searching for ___ with // and ?? and replacing the next ___ with gnc:
     let @/ = '___'
-    execute '.s/\(\s\?\)___/\1'.l:tail.'/'
+    execute '.s/\(\s\?\)___/\1/'
     call setpos('.', l:save_cursor)
     return ''
   endif
-  return '…'
+  return a:trigger
 endf

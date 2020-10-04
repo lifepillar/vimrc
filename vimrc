@@ -449,7 +449,7 @@ endif
   nnoremap <leader>P "*P
   vnoremap <leader>P "*P
   " Insert snippet
-  inoremap <silent> … <c-r>=lf_text#expand_snippet()<cr>
+  inoremap <silent> … <c-r>=lf_text#expand_snippet('…')<cr>
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
