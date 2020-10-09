@@ -45,7 +45,7 @@
   else
     " Vim {{{
     set viminfo=!,'300,<10000,s10,h,n~/.vim/viminfo
-    " See :set termcap, :h t_ku, :h :set-termcap, and http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+    " See :set termcap, :h t_ku, :h :set-termcap, and https://vim.fandom.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
     " For terminal mappings, see Key Mappings section
     set <s-left>=b  " There's a literal Esc (^[) here and below (it may be invisible, e.g., in GitHub)
     set <s-right>=f
