@@ -132,3 +132,6 @@
 [submodule "gruvbox8"]
 	path = pack/my/opt/gruvbox8
 	url = https://github.com/lifepillar/gruvbox8.git
+[submodule "zeef"]
+	path = pack/my/start/zeef
+	url = https://github.com/lifepillar/vim-zeef.git
