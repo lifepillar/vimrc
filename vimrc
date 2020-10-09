@@ -284,6 +284,9 @@ endif
 
   fun! s:customizeTheme()
     let g:lf_cached_mode = ""  " Force updating highlight groups
+    hi link ZeefName CommandMode
+    hi link ZeefMatch InsertMode
+    hi link ZeefSelected VisualMode
     if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
       execute "runtime after/themes/" . g:colors_name . ".vim"
     endif
@@ -351,6 +354,9 @@ endif
   " Grep search
   command! -nargs=* -complete=file Grep call lf_find#grep(<q-args>)
 
+  " Spotlight search (macOS only)
+  command! -nargs=* -complete=shellcmd Spotlight call zeef#args(systemlist('mdfind '.<q-args>))
+
   " Generate tags and cscope db in the directory of the current buffer
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
   command! -nargs=* -complete=shellcmd Cscope call lf_tags#cscope(<q-args>)
@@ -366,10 +372,7 @@ endif
   command! -nargs=1 SearchAll call lf_find#in_all_buffers(<q-args>)
 
   " Fuzzy search for files inside a directory (default: working dir).
-  command! -nargs=? -complete=dir FindFile call lf_find#file(<q-args>)
-
-  " Spotlight search (macOS only)
-  command! -nargs=* -complete=shellcmd Spotlight call lf_find#arglist(systemlist('mdfind '.<q-args>))
+  command! -nargs=? -complete=dir FindFile call lf_find#fuzzy_files(<q-args>)
 
   " See :h :DiffOrig
   command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
@@ -490,7 +493,7 @@ endif
   " Buffers
   nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b
-  nnoremap <silent>      <c-p> :<c-u>call lf_find#buffer(0)<cr>
+  nnoremap <silent>      <c-p> :<c-u>call zeef#buffer({'unlisted' : 0})<cr>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
   nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
@@ -498,7 +501,7 @@ endif
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
   nnoremap <silent> <leader>br :<c-u>setlocal readonly!<cr>
-  nnoremap <silent> <leader>bt :<c-u>call lf_find#buffer_tag()<cr>
+  nnoremap <silent> <leader>bt :<c-u>call zeef#buffer_tags()<cr>
   nnoremap <silent> <leader>bw :<c-u>bw<cr>
   nnoremap <silent> <leader>bW :<c-u>bw!<cr>
   nnoremap <silent> <leader>b<c-w> :<c-u>call lf_buffer#wipe_others()<cr>
@@ -506,15 +509,15 @@ endif
   nnoremap <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
   " Find/filter
-  nnoremap <silent> <leader>ff :<c-u>FindFile<cr>
-  nnoremap <silent> <c-n>      :<c-u>call lf_find#arglist(v:oldfiles)<cr>
+  nnoremap <silent> <leader>ff :<c-u>call zeef#files()<cr>
+  nnoremap <silent> <c-n>      :<c-u>call zeef#args(v:oldfiles)<cr>
   nmap     <silent> <leader>fr <c-n>
-  nnoremap <silent> <leader>fz :<c-u>call lf_find#arglist_fuzzy(v:oldfiles)<cr>
+  nnoremap <silent> <leader>fz :<c-u>call lf_find#fuzzy_files(<q-args>)<cr>
+  " Quickfix/Location list
+  nnoremap <silent> <leader>fl :<c-u>call zeef#loclist(0)<cr>
+  nnoremap <silent> <leader>fq :<c-u>call zeef#qflist()<cr>
   " Man page for word under cursor (note that man.vim redefines <leader>K)
   nnoremap <silent> <leader>K  :<c-u>runtime ftplugin/man.vim<cr>:normal \K<cr>
-  " Quickfix/Location list
-  nnoremap <silent> <leader>fl :<c-u>call lf_find#in_loclist(0)<cr>
-  nnoremap <silent> <leader>fq :<c-u>call lf_find#in_qflist()<cr>
   " Fossil
   nnoremap <silent> <leader>fd :<c-u>call lf_fossil#diff()<cr>
   nnoremap <silent> <leader>fk :<c-u>call lf_terminal#run(['fossil', 'commit'])<cr>
@@ -541,7 +544,7 @@ endif
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
   " View/toggle
-  nnoremap <silent> <leader>vc :<c-u>call lf_find#colorscheme()<cr>
+  nnoremap <silent> <leader>vc :<c-u>call zeef#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
   nnoremap <silent> <leader>vr :<c-u>registers<cr>
   nnoremap <silent> <leader>vs :<c-u>let &laststatus=2-&laststatus<cr>
