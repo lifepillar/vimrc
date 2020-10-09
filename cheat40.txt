@@ -82,7 +82,7 @@ Cd to current path       cd            N
 Open file explorer       \d            N
 Find file in working dir \ff           N
 Browse/filter old files  \fr           N
-Fuzzy browse oldfile     \fz           N
+Fuzzy find files         \fz           N
 Save (only if modified)  \w            N
 Save as root             \W            N
 New buffer               \bn           N
