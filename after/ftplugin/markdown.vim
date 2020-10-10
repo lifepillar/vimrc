@@ -32,12 +32,15 @@ fun CompleteInternalLink(findstart, base)
     let l:col = match(getline('.'), '[[\zs\S*\%' .. col('.') .. 'c')
     return l:col == -1 ? -3 : l:col
   else
-    return s:get_notes(a:base)
+    let s:matches = s:get_notes(a:base)
+    return map(s:matches, '{"word": fnamemodify(v:val, ":t"), "abbr": v:val}')
   endif
 endf
 
 let b:mucomplete_chain = ['user', 'path', 'keyn', 'dict', 'uspl']
 
-lcd %:h
+let s:root = finddir("Notes", ".;")
+execute "lcd" (empty(s:root) ? "%:h" : s:root)
+unlet s:root
 
 call lf_text#load_snippets()
