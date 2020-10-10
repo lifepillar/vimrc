@@ -11,6 +11,7 @@ setlocal spell
 setlocal spelllang=en
 setlocal suffixesadd=.md
 setlocal textwidth=80
+setlocal wrap
 
 " Partially inspired by https://vimways.org/2019/personal-notetaking-in-vim/
 
