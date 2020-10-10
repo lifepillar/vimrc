@@ -6,10 +6,13 @@ setlocal dictionary=/usr/share/dict/words
 setlocal iskeyword+=[
 " Disable HTML completion function set by the Markdown plugin:
 setlocal omnifunc=
+setlocal path=.,**3/
 setlocal spell
 setlocal spelllang=en
 setlocal suffixesadd=.md
 setlocal textwidth=80
+
+" Partially inspired by https://vimways.org/2019/personal-notetaking-in-vim/
 
 fun markdown#set_arglist(result)
   execute "args" join(map(a:result, 'fnameescape(v:val) .. ".md"'))
@@ -19,7 +22,7 @@ endf
 nnoremap <silent> <buffer> <leader>n :<c-u>call zeef#open(<sid>get_notes(''), 'markdown#set_arglist', 'Select notes')<cr>
 
 fun s:get_notes(base)
-  return map(glob(printf('%s*.md', a:base), 1, 1, 0), 'fnamemodify(v:val, ":r")')
+  return map(glob(printf('**/%s*.md', a:base), 1, 1, 0), 'fnamemodify(v:val, ":r")')
 endf
 
 " Suggest notes (i.e., Markdown files) in the current directory after [[.
