@@ -361,6 +361,8 @@ endif
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
   command! -nargs=* -complete=shellcmd Cscope call lf_tags#cscope(<q-args>)
 
+  command! -nargs=* Zet call lf_text#new_note(<q-args>)
+
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
   command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()

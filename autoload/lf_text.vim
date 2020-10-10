@@ -180,3 +180,9 @@ fun! lf_text#expand_snippet(trigger)
   endif
   return a:trigger
 endf
+
+fun! lf_text#new_note(name)
+  execute "edit" substitute(a:name, '\s', '-', 'g') .. '.md'
+  call setline(1, '# ' .. substitute(a:name, '\v<(.)(\w*)', '\u\1\L\2', 'g'))
+endf
+
