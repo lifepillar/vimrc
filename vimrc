@@ -512,7 +512,7 @@ endif
   nnoremap <silent> <leader>ff :<c-u>call zeef#files()<cr>
   nnoremap <silent> <c-n>      :<c-u>call zeef#args(v:oldfiles)<cr>
   nmap     <silent> <leader>fr <c-n>
-  nnoremap <silent> <leader>fz :<c-u>call lf_find#fuzzy_files(<q-args>)<cr>
+  nnoremap <silent> <leader>fz :<c-u>call lf_find#fuzzy_files()<cr>
   " Quickfix/Location list
   nnoremap <silent> <leader>fl :<c-u>call zeef#loclist(0)<cr>
   nnoremap <silent> <leader>fq :<c-u>call zeef#qflist()<cr>
