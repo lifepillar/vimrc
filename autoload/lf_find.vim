@@ -41,7 +41,9 @@ fun! lf_find#grep(args)
     if empty(l:dir) | return | endif
     execute 'lcd' l:dir
   endif
-  execute 'silent grep!' shellescape(fnameescape(a:args))
+  let l:chars = (&grepprg =~# 'internal' ? '#' : '#%')
+  let l:rg = (&grepprg =~# '^\f\+rg\s')
+  execute 'silent grep!' shellescape(escape(a:args, l:chars)) (l:rg ? '': '**/*')
   botright cwindow
   redraw!
 endf
