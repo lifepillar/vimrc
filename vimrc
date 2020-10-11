@@ -350,10 +350,10 @@ endif
 " }}}
 " Commands (plugins excluded) {{{
   " Grep search
-  command! -nargs=* -complete=file Grep call lf_find#grep(<q-args>)
+  command! -nargs=+ Grep call lf_find#grep(<q-args>)
 
   " Spotlight search (macOS only)
-  command! -nargs=* -complete=shellcmd Spotlight call zeef#args(systemlist('mdfind '.<q-args>))
+  command! -nargs=* -complete=shellcmd Spotlight call zeef#args(systemlist('mdfind ' .. <q-args>))
 
   " Generate tags and cscope db in the directory of the current buffer
   command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
