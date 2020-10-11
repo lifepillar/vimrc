@@ -285,8 +285,6 @@ endif
   fun! s:customizeTheme()
     let g:lf_cached_mode = ""  " Force updating highlight groups
     hi link ZeefName CommandMode
-    hi link ZeefMatch InsertMode
-    hi link ZeefSelected VisualMode
     if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
       execute "runtime after/themes/" . g:colors_name . ".vim"
     endif
