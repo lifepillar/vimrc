@@ -41,7 +41,7 @@ fun! lf_find#grep(args)
     if empty(l:dir) | return | endif
     execute 'lcd' l:dir
   endif
-  execute 'silent grep!' a:args
+  execute 'silent grep!' shellescape(fnameescape(a:args))
   botright cwindow
   redraw!
 endf
