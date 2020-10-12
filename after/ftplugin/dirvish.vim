@@ -11,7 +11,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
     return '%#'.LFStlHighlight().'# BROWSE %* %{winnr()} %f %= %l:%v %P '
   endf
 else
-  call lf_legacy_stl#dirvish()
+  call legacy#statusline#dirvish()
 endif
 
 if exists("g:default_stl")

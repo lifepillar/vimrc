@@ -9,7 +9,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
           \ . ' %* %{winnr()}  %<%{get(w:, "quickfix_title", "")} %= %q %{LFQuickfixNumLines()}'
   endf
 else
-  call lf_legacy_stl#quickfix()
+  call legacy#statusline#quickfix()
 endif
 
 if exists("g:default_stl")

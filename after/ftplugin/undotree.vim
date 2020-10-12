@@ -3,7 +3,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
     return '%#'.LFStlHighlight().'# Undotree %* %<%{t:undotree.GetStatusLine()} %*'
   endf
 else
-  call lf_legacy_stl#undotree()
+  call legacy#statusline#undotree()
 endif
 
 if exists("g:default_stl")

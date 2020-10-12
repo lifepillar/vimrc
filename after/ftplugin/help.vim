@@ -3,7 +3,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
     return '%#'.LFStlHighlight().'# HELP %* %{winnr()} %t (%n) %= %l:%v %P '
   endf
 else
-  call lf_legacy_stl#help()
+  call legacy#statusline#help()
 endif
 
 if exists("g:default_stl")

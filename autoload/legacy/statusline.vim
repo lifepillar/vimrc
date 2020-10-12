@@ -44,12 +44,12 @@ fun! LFBuildStatusLine()
         \ %#Warnings#%{w:['lf_active']?get(b:,'lf_stl_warnings',''):''}%*"
 endf
 
-fun! lf_legacy_stl#init()
+fun! legacy#statusline#init()
 endf
 
 " Local status lines
 
-fun! lf_legacy_stl#help()
+fun! legacy#statusline#help()
   fun! LFBuildHelpStatusLine()
     return '%{SetupStl('.winnr().')}%#'
           \ . get(g:lf_stlh, mode(), 'Warnings')
@@ -58,7 +58,7 @@ fun! lf_legacy_stl#help()
   endf
 endf
 
-fun! lf_legacy_stl#undotree()
+fun! legacy#statusline#undotree()
   fun! LFBuildUndotreeStatusLine()
     return '%{SetupStl('.winnr().')}%#'
           \ . get(g:lf_stlh, mode(), 'Warnings')
@@ -68,7 +68,7 @@ fun! lf_legacy_stl#undotree()
   endf
 endf
 
-fun! lf_legacy_stl#dirvish()
+fun! legacy#statusline#dirvish()
   fun! LFBuildDirvishStatusLine()
     return '%{SetupStl('.winnr().')}%#'
           \ . get(g:lf_stlh, mode(), 'Warnings')
@@ -91,7 +91,7 @@ fun! LFQuickfixNumLines()
   return winwidth(0) >= 60 ? printf(" %d line%s", line("$"), line("$") > 1 ? "s " : " ") : ""
 endf
 
-fun! lf_legacy_stl#quickfix()
+fun! legacy#statusline#quickfix()
   fun! LFBuildQuickfixStatusLine()
     return '%{SetupStl('.winnr().')}%#'
           \ . get(g:lf_stlh, mode(), 'Warnings')

@@ -253,7 +253,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
           \ : s:stlnc
   endf
 else
-  call lf_legacy_stl#init()
+  call legacy#statusline#init()
 endif
 " }}}
 " Tabline {{{
