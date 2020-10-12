@@ -428,10 +428,10 @@ endif
   nnoremap <leader>9 9<c-w>w
   nnoremap <leader>0 10<c-w>w
   if $TERM =~# '^\%(tmux\|screen\)'
-    nnoremap <silent> <a-h> :<c-u>call lf_tmux#navigate('h')<cr>
-    nnoremap <silent> <a-j> :<c-u>call lf_tmux#navigate('j')<cr>
-    nnoremap <silent> <a-k> :<c-u>call lf_tmux#navigate('k')<cr>
-    nnoremap <silent> <a-l> :<c-u>call lf_tmux#navigate('l')<cr>
+    nnoremap <silent> <a-h> :<c-u>call local#tmux#navigate('h')<cr>
+    nnoremap <silent> <a-j> :<c-u>call local#tmux#navigate('j')<cr>
+    nnoremap <silent> <a-k> :<c-u>call local#tmux#navigate('k')<cr>
+    nnoremap <silent> <a-l> :<c-u>call local#tmux#navigate('l')<cr>
   else
     nnoremap <a-l> <c-w>l
     nnoremap <a-h> <c-w>h
