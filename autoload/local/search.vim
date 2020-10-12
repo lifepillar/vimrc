@@ -44,7 +44,7 @@ fun! local#search#grep(args)
     execute 'lcd' l:dir
   endif
   let l:chars = (&grepprg =~# 'internal' ? '#' : '#%')
-  let l:rg = (&grepprg =~# '^\f\+rg\s')
+  let l:rg = (&grepprg =~# '^\f*rg\s')
   execute 'silent grep!' shellescape(escape(a:args, l:chars)) (l:rg ? '': '**/*')
   botright cwindow
   redraw!
