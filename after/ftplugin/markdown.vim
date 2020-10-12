@@ -1,5 +1,5 @@
 setlocal autoindent
-setlocal completefunc=CompleteInternalLink
+setlocal completefunc=local#markdown#complete
 setlocal conceallevel=2
 setlocal dictionary=/usr/share/dict/words
 " Enable completion after [[:
@@ -13,29 +13,8 @@ setlocal suffixesadd=.md
 setlocal textwidth=80
 setlocal wrap
 
-" Partially inspired by https://vimways.org/2019/personal-notetaking-in-vim/
-
-fun markdown#set_arglist(result)
-  execute "args" join(map(a:result, 'fnameescape(v:val) .. ".md"'))
-endf
-
 " Search notes in the current directory
-nnoremap <silent> <buffer> <leader>n :<c-u>call zeef#open(<sid>get_notes(''), 'markdown#set_arglist', 'Select notes')<cr>
-
-fun s:get_notes(base)
-  return map(glob(printf('**/%s*.md', a:base), 1, 1, 0), 'fnamemodify(v:val, ":r")')
-endf
-
-" Suggest notes (i.e., Markdown files) in the current directory after [[.
-fun CompleteInternalLink(findstart, base)
-  if a:findstart
-    let l:col = match(getline('.'), '[[\zs\S*\%' .. col('.') .. 'c')
-    return l:col == -1 ? -3 : l:col
-  else
-    let s:matches = s:get_notes(a:base)
-    return map(s:matches, '{"word": fnamemodify(v:val, ":t"), "abbr": v:val}')
-  endif
-endf
+nnoremap <silent> <buffer> <leader>n :<c-u>call zeef#open(local#markdown#notes(''), 'local#markdown#set_arglist', 'Choose notes')<cr>
 
 let b:mucomplete_chain = ['user', 'path', 'keyn', 'dict', 'uspl']
 
