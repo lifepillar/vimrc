@@ -6,25 +6,13 @@
 	path = pack/bundle/start/goyo
 	url = https://github.com/junegunn/goyo.vim.git
 	shallow = true
-[submodule "jellybeans"]
-	path = pack/themes/opt/jellybeans
-	url = https://github.com/nanotech/jellybeans.vim.git
-	shallow = true
 [submodule "limelight"]
 	path = pack/bundle/start/limelight
 	url = https://github.com/junegunn/limelight.vim.git
 	shallow = true
-[submodule "seoul256"]
-	path = pack/themes/opt/seoul256
-	url = https://github.com/junegunn/seoul256.vim.git
-	shallow = true
 [submodule "tagbar"]
 	path = pack/bundle/opt/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-	shallow = true
-[submodule "tomorrow"]
-	path = pack/themes/opt/tomorrow
-	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 	shallow = true
 [submodule "undotree"]
 	path = pack/bundle/opt/undotree
@@ -38,10 +26,6 @@
 	path = pack/bundle/start/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 	shallow = true
-[submodule "papercolor"]
-	path = pack/themes/opt/papercolor
-	url = https://github.com/NLKNguyen/papercolor-theme.git
-	shallow = true
 [submodule "swift"]
 	path = pack/bundle/start/swift
 	url = https://github.com/keith/swift.vim.git
@@ -50,18 +34,10 @@
 	path = pack/bundle/start/repeat
 	url = https://github.com/tpope/vim-repeat.git
 	shallow = true
-[submodule "pencil"]
-	path = pack/themes/opt/pencil
-	url = https://github.com/reedes/vim-colors-pencil.git
-	shallow = true
 [submodule "pgsql"]
 	path = pack/my/start/pgsql
 	url = https://github.com/lifepillar/pgsql.vim.git
 	shallow = false
-[submodule "onedark"]
-	path = pack/themes/opt/onedark
-	url = https://github.com/joshdick/onedark.vim
-	shallow = true
 [submodule "sneak"]
 	path = pack/bundle/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
@@ -82,10 +58,6 @@
 	path = pack/my/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
 	shallow = false
-[submodule "alduin"]
-	path = pack/themes/opt/alduin
-	url = https://github.com/AlessandroYorba/Alduin.git
-	shallow = true
 [submodule "ledger"]
 	path = pack/bundle/start/ledger
 	url = https://github.com/ledger/vim-ledger.git
@@ -98,21 +70,9 @@
 	path = pack/bundle/opt/neomake
 	url = https://github.com/neomake/neomake
 	shallow = true
-[submodule "nordisk"]
-	path = pack/themes/opt/nordisk
-	url = https://github.com/kamwitsta/nordisk.git
-	shallow = true
 [submodule "clang_complete"]
 	path = pack/completion/opt/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
-	shallow = true
-[submodule "base2tone"]
-	path = pack/themes/opt/base2tone
-	url = https://github.com/atelierbram/Base2Tone-vim.git
-	shallow = true
-[submodule "flatwhite"]
-	path = pack/themes/opt/flatwhite
-	url = https://github.com/kamwitsta/flatwhite-vim.git
 	shallow = true
 [submodule "dirvish"]
 	path = pack/bundle/start/dirvish
