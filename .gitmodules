@@ -82,10 +82,6 @@
 	path = pack/my/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
 	shallow = false
-[submodule "lucario"]
-	path = pack/themes/opt/lucario
-	url = https://github.com/raphamorim/lucario.git
-	shallow = true
 [submodule "alduin"]
 	path = pack/themes/opt/alduin
 	url = https://github.com/AlessandroYorba/Alduin.git
