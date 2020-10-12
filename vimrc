@@ -350,7 +350,7 @@ endif
 " }}}
 " Commands (plugins excluded) {{{
   " Grep search
-  command! -nargs=+ Grep call lf_find#grep(<q-args>)
+  command! -nargs=+ Grep call local#search#grep(<q-args>)
 
   " Spotlight search (macOS only)
   command! -nargs=* -complete=shellcmd Spotlight call zeef#args(systemlist('mdfind ' .. <q-args>))
@@ -366,13 +366,13 @@ endif
   command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
   " Find all occurrences of a pattern in the current buffer
-  command! -nargs=1 Search call lf_find#in_buffer(<q-args>)
+  command! -nargs=1 Search call local#search#buffer(<q-args>)
 
   " Find all occurrences of a pattern in all open buffers
-  command! -nargs=1 SearchAll call lf_find#in_all_buffers(<q-args>)
+  command! -nargs=1 SearchAll call local#search#all_buffers(<q-args>)
 
   " Fuzzy search for files inside a directory (default: working dir).
-  command! -nargs=? -complete=dir FindFile call lf_find#fuzzy_files(<q-args>)
+  command! -nargs=? -complete=dir FindFile call local#search#fuzzy_files(<q-args>)
 
   " See :h :DiffOrig
   command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
@@ -512,7 +512,7 @@ endif
   nnoremap <silent> <leader>ff :<c-u>call zeef#files()<cr>
   nnoremap <silent> <c-n>      :<c-u>call zeef#args(v:oldfiles)<cr>
   nmap     <silent> <leader>fr <c-n>
-  nnoremap <silent> <leader>fz :<c-u>call lf_find#fuzzy_files()<cr>
+  nnoremap <silent> <leader>fz :<c-u>call local#search#fuzzy_files()<cr>
   " Quickfix/Location list
   nnoremap <silent> <leader>fl :<c-u>call zeef#loclist(0)<cr>
   nnoremap <silent> <leader>fq :<c-u>call zeef#qflist()<cr>

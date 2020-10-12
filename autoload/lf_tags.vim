@@ -19,7 +19,7 @@ endf
 
 fun! lf_tags#ctags(args)
   if empty(tagfiles()) " New tags file
-    let l:dir = lf_find#choose_dir('Create tags in:')
+    let l:dir = local#search#choose_dir('Create tags in:')
     if empty(l:dir) | return | endif
     let l:dirs = [fnamemodify(l:dir, ':p')]
   else
@@ -48,7 +48,7 @@ endf
 fun! lf_tags#cscope(args)
   let l:dir = getcwd()
   if l:dir != expand("%:p:h")
-    let l:dir = lf_find#choose_dir()
+    let l:dir = local#search#choose_dir()
     if empty(l:dir) | return | endif
   endif
   let s:res = lf_run#job(['cscope', '-R', '-q', '-b'] + split(a:args), {'cwd': l:dir})

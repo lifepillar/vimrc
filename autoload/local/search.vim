@@ -1,5 +1,6 @@
-" Find all occurrences of a pattern in a file.
-fun! lf_find#in_buffer(pattern)
+" Find all occurrences of a pattern in the current buffer.
+" Collect the result in the location list.
+fun! local#search#buffer(pattern)
   if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
     call lf_msg#warn("Cannot search the quickfix window")
     return
@@ -12,8 +13,9 @@ fun! lf_find#in_buffer(pattern)
   botright lwindow
 endf
 
-" Find all occurrences of a pattern in all open files.
-fun! lf_find#in_all_buffers(pattern)
+" Find all occurrences of a pattern in all open buffers.
+" Show the result in the quickfix window.
+fun! local#search#all_buffers(pattern)
   " Get the list of open files
   let l:files = map(filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))'), 'fnameescape(bufname(v:val))')
   cexpr [] " Clear quickfix list
@@ -25,7 +27,7 @@ fun! lf_find#in_all_buffers(pattern)
   botright cwindow
 endf
 
-fun! lf_find#choose_dir(...) " ... is an optional prompt
+fun! local#search#choose_dir(...) " ... is an optional prompt
   let l:idx = inputlist([get(a:000, 0, "Change directory to:"), "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
   let l:dir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
   if strlen(l:dir) <= 0
@@ -35,9 +37,9 @@ fun! lf_find#choose_dir(...) " ... is an optional prompt
   return l:dir
 endf
 
-fun! lf_find#grep(args)
+fun! local#search#grep(args)
   if getcwd() != expand("%:p:h")
-    let l:dir = lf_find#choose_dir()
+    let l:dir = local#search#choose_dir()
     if empty(l:dir) | return | endif
     execute 'lcd' l:dir
   endif
@@ -64,7 +66,7 @@ endfor
 " Fuzzy filter a list and return a List of selected items.
 " 'input' is either a shell command that sends its output, one item per line,
 " to stdout, or a List of items to be filtered.
-fun! lf_find#fuzzy(input, callback, prompt)
+fun! local#search#fuzzy(input, callback, prompt)
   if empty(s:ff_bin) " Fallback
     return zeef#open(type(a:input)) == 1 ? systemlist(a:input) : a:input, a:callback, a:prompt)
   endif
@@ -115,12 +117,12 @@ fun! lf_find#fuzzy(input, callback, prompt)
 endf
 
 " Fuzzy filter a list of paths and populate the arglist with the selected items.
-fun! lf_find#fuzzy_arglist(input)
-  call lf_find#fuzzy(a:input, 'zeef#set_arglist', 'Choose files')
+fun! local#search#fuzzy_arglist(input)
+  call local#search#fuzzy(a:input, 'zeef#set_arglist', 'Choose files')
 endf
 
-fun! lf_find#fuzzy_files(...) " ... is an optional directory
-  let l:dir = (a:0 > 0 ? ' '.a:1 : ' .')
-  call lf_find#fuzzy_arglist(executable('rg') ? 'rg --files' .. l:dir : 'find' .. l:dir .. ' -type f')
+fun! local#search#fuzzy_files(...) " ... is an optional directory
+  let l:dir = (a:0 > 0 ? ' ' .. a:1 : ' .')
+  call local#search#fuzzy_arglist(executable('rg') ? 'rg --files' .. l:dir : 'find' .. l:dir .. ' -type f')
 endf
 
