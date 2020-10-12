@@ -9,7 +9,7 @@ if has('terminal') " Vim 8 or later, MacVim
   " term_start().
   "
   " Returns: the buffer number of the terminal window.
-  fun! lf_terminal#run(cmd, ...) abort
+  fun! local#term#run(cmd, ...) abort
     let l:bufnr = term_start(a:cmd, extend({
           \ 'cwd': expand('%:p:h'),
           \ 'term_rows': 20,
@@ -17,19 +17,19 @@ if has('terminal') " Vim 8 or later, MacVim
     return l:bufnr
   endf
 
-  fun! lf_terminal#send_keys(what)
+  fun! local#term#send_keys(what)
     call term_sendkeys('', a:what)
     return ''
   endf
 
   " Open a new terminal buffer and bind it to the current buffer
-  fun! lf_terminal#open()
+  fun! local#term#open()
     let l:term_id = term_start(&shell, {'term_name': 'Terminal'})
     wincmd p
     let b:lf_bound_terminal = l:term_id
   endf
 
-  fun! lf_terminal#send(lines)
+  fun! local#term#send(lines)
     if empty(get(b:, 'lf_bound_terminal', '')) || !bufexists(b:lf_bound_terminal)
       let b:lf_bound_terminal = str2nr(input('Terminal buffer: '))
     endif
@@ -37,7 +37,7 @@ if has('terminal') " Vim 8 or later, MacVim
       if &ft == 'outlaw'
         let l:line = substitute(l:line, '^\s*|\s*', '', '')  " Remove leading |
       endif
-      call term_sendkeys(b:lf_bound_terminal, l:line . "\r")
+      call term_sendkeys(b:lf_bound_terminal, l:line .. "\r")
       call s:term_wait(b:lf_bound_terminal)
     endfor
     call cursor(line('.') + 1, 1)
@@ -52,13 +52,13 @@ if has('terminal') " Vim 8 or later, MacVim
     endf
   endif
 
-  fun! lf_terminal#enter_normal_mode()
+  fun! local#term#enter_normal_mode()
     return &buftype ==# 'terminal' && mode('') ==# 't' ? "\<c-w>N\<c-y>" : ''
   endf
 
-  fun! lf_terminal#toggle_scrollwheelup()
+  fun! local#term#toggle_scrollwheelup()
     if maparg('<scrollwheelup>', 't') ==# ''
-      tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
+      tnoremap <silent> <expr> <scrollwheelup> local#term#enter_normal_mode()
     else
       tunmap <scrollwheelup>
     endif
@@ -66,19 +66,19 @@ if has('terminal') " Vim 8 or later, MacVim
 
 else
 
-  fun! lf_terminal#run(cmd, ...)
+  fun! local#term#run(cmd, ...)
     call local#msg#err("Function non implemented")
   endf
 
   if !empty($TMUX)
 
-    fun! lf_terminal#open()
+    fun! local#term#open()
       call system('tmux split-window')
       call system('tmux last-pane')
     endf
 
     " Send the given text to a tmux pane
-    fun! lf_terminal#send(lines)
+    fun! local#term#send(lines)
       if !exists('b:lf_bound_terminal') || empty(b:lf_bound_terminal)
         let b:lf_bound_terminal = input('Tmux pane number: ')
       endif
@@ -86,17 +86,17 @@ else
         if &ft == 'outlaw'
           let l:line = substitute(l:line, '^\s*|\s*', '', '')  " Remove leading |
         endif
-        call system('tmux -u send-keys -l -t '.b:lf_bound_terminal.' "" '.shellescape(line."\r"))
+        call system('tmux -u send-keys -l -t ' .. b:lf_bound_terminal .. ' "" ' .. shellescape(line .. "\r"))
       endfor
     endf
 
   else
 
-    fun! lf_terminal#open()
+    fun! local#term#open()
       call local#msg#err("Function non implemented")
     endf
 
-    fun! lf_terminal#send(lines)
+    fun! local#term#send(lines)
       call local#msg#err("Function non implemented")
     endf
 

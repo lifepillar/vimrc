@@ -200,7 +200,7 @@ fun! lf_tex#typeset(options, ...) abort
         \ l:filename])
   call local#msg#notice('Typesetting...')
   if get(a:options, "use_term", 0)
-    call lf_terminal#run(l:cmd, {"cwd": l:cwd})
+    call local#term#run(l:cmd, {"cwd": l:cwd})
   else
     call add(s:tex_jobs, local#run#job(l:cmd, {
           \ "cb": "lf_tex#callback",

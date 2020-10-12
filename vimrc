@@ -381,7 +381,7 @@ endif
   command! -complete=command -nargs=+ VimCmd call local#run#vim_cmd(<q-args>)
 
   " Open a terminal and "bind" it to the current buffer (see \x mappings below)
-  command! BindTerminal call lf_terminal#open()
+  command! BindTerminal call local#term#open()
 
   " Get/set the tab width for the current buffer
   command! -nargs=? TabWidth call lf_text#tab_width(<args>)
@@ -456,8 +456,8 @@ endif
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
-  nnoremap <silent> <leader>x :<c-u>call lf_terminal#send([getline('.')])<cr>
-  vnoremap <silent> <leader>x :<c-u>call lf_terminal#send(lf_text#selection())<cr>
+  nnoremap <silent> <leader>x :<c-u>call local#term#send([getline('.')])<cr>
+  vnoremap <silent> <leader>x :<c-u>call local#term#send(lf_text#selection())<cr>
   if has('terminal')
     " Use Alt+arrows to jump between words
     tnoremap <s-left> <esc>b
@@ -478,8 +478,8 @@ endif
     tnoremap <c-w>9 <c-w>:9wincmd w<cr>
     tnoremap <c-w>0 <c-w>:10wincmd w<cr>
     " Allow scrolling with the mouse when in Terminal mode
-    tnoremap <silent> <expr> <scrollwheelup> lf_terminal#enter_normal_mode()
-    tnoremap <silent> <f8> <c-w>:call lf_terminal#toggle_scrollwheelup()<cr>
+    tnoremap <silent> <expr> <scrollwheelup> local#term#enter_normal_mode()
+    tnoremap <silent> <f8> <c-w>:call local#term#toggle_scrollwheelup()<cr>
   endif
   " Tab width
   nnoremap <silent> <leader>] :<c-u>call lf_text#tab_width(&tabstop + v:count1)<cr>
@@ -520,14 +520,14 @@ endif
   nnoremap <silent> <leader>K  :<c-u>runtime ftplugin/man.vim<cr>:normal \K<cr>
   " Fossil
   nnoremap <silent> <leader>fd :<c-u>call local#fossil#diff()<cr>
-  nnoremap <silent> <leader>fk :<c-u>call lf_terminal#run(['fossil', 'commit'])<cr>
-  nnoremap <silent> <leader>fp :<c-u>call lf_terminal#run(['fossil', 'sync'])<cr>
+  nnoremap <silent> <leader>fk :<c-u>call local#term#run(['fossil', 'commit'])<cr>
+  nnoremap <silent> <leader>fp :<c-u>call local#term#run(['fossil', 'sync'])<cr>
   nnoremap <silent> <leader>fs :<c-u>call local#run#cmd(['fossil', 'status'])<cr>
   nnoremap <silent> <leader>ft :<c-u>call local#fossil#three_way_diff()<cr>
   " Git
   nnoremap <silent> <leader>gd :<c-u>call local#git#diff()<cr>
-  nnoremap <silent> <leader>gk :<c-u>call lf_terminal#run(['git', 'commit'])<cr>
-  nnoremap <silent> <leader>gp :<c-u>call lf_terminal#run(['git', 'push'])<cr>
+  nnoremap <silent> <leader>gk :<c-u>call local#term#run(['git', 'commit'])<cr>
+  nnoremap <silent> <leader>gp :<c-u>call local#term#run(['git', 'push'])<cr>
   nnoremap <silent> <leader>gs :<c-u>call local#run#cmd(['git', 'status'])<cr>
   nnoremap <silent> <leader>gt :<c-u>call local#git#three_way_diff()<cr>
   " Options
