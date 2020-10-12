@@ -67,7 +67,7 @@ if has('terminal') " Vim 8 or later, MacVim
 else
 
   fun! lf_terminal#run(cmd, ...)
-    call lf_msg#err("Function non implemented")
+    call local#msg#err("Function non implemented")
   endf
 
   if !empty($TMUX)
@@ -93,11 +93,11 @@ else
   else
 
     fun! lf_terminal#open()
-      call lf_msg#err("Function non implemented")
+      call local#msg#err("Function non implemented")
     endf
 
     fun! lf_terminal#send(lines)
-      call lf_msg#err("Function non implemented")
+      call local#msg#err("Function non implemented")
     endf
 
   endif

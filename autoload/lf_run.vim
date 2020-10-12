@@ -72,16 +72,16 @@ if exists("*job_start")
 
   fun! lf_run#callback(bufnr, job, status)
     if a:status == 0
-      call lf_msg#notice("Success!")
+      call local#msg#notice("Success!")
     else
-      call lf_msg#err("Job failed.")
+      call local#msg#err("Job failed.")
     endif
   endf
 
 else
 
   fun! lf_run#job(cmd, ...)
-    call lf_msg#err('Function not implemented.')
+    call local#msg#err('Function not implemented.')
   endf
 
 endif

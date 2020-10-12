@@ -46,7 +46,7 @@ fun! lf_text#selection()
     let l:lines[0] = l:lines[0][col1 - 1:]
     return l:lines
   else
-    call lf_msg#warn("No selection markers")
+    call local#msg#warn("No selection markers")
     return []
   end
 endf
@@ -73,7 +73,7 @@ endfunc
 fun! lf_text#comment_delimiters()
   let l:delim = split(&l:commentstring, '\s*%s\s*')
   if empty(l:delim)
-    call lf_msg#err('Undefined comment delimiters. Please setlocal commentstring.')
+    call local#msg#err('Undefined comment delimiters. Please setlocal commentstring.')
     return ['','']
   endif
   if len(l:delim) < 2

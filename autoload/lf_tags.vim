@@ -27,10 +27,10 @@ fun! lf_tags#ctags(args)
   endif
   for l:tagdir in l:dirs
     if !isdirectory(l:tagdir)
-      call lf_msg#warn("Directory " . l:tagdir . " does not exist.")
+      call local#msg#warn("Directory " . l:tagdir . " does not exist.")
       return
     endif
-    call lf_msg#notice('Tagging ' . l:tagdir)
+    call local#msg#notice('Tagging ' . l:tagdir)
     let s:res = lf_run#job(['ctags',
           \ '-R',
           \ '--sort=foldcase',

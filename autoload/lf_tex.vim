@@ -67,7 +67,7 @@ fun! lf_tex#preview()
       redraw!
     endif
   else
-    call lf_msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
+    call local#msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
   endif
 endf
 
@@ -76,7 +76,7 @@ fun! lf_tex#forward_search()
   if has_key(s:preview, l:viewer)
     call s:forward_search[l:viewer](expand('%:p'), line('.'))
   else
-    call lf_msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
+    call local#msg#err('Unknown previewer: ' .. l:viewer .. '. Please set g:lf_tex_previewer')
   endif
 endf
 
@@ -100,7 +100,7 @@ fun! lf_tex#clean()
     endif
     call delete(l:subdir, 'd') " delete directory (only if empty)
   endfor
-  call lf_msg#notice("Aux files removed")
+  call local#msg#notice("Aux files removed")
 endf
 
 " Asynchronous typesetting {{{
@@ -110,7 +110,7 @@ let s:tex_jobs = []
 function! lf_tex#job_status()
   let l:jobs = filter(s:tex_jobs, 'job_status(v:val) == "run"')
   let l:n = len(l:jobs)
-  call lf_msg#notice(
+  call local#msg#notice(
         \ 'There '.(l:n == 1 ? 'is' : 'are').' '.(l:n == 0 ? 'no' : l:n)
         \ .' job'.(l:n == 1 ? '' : 's').' running'
         \ .(l:n == 0 ? '.' : ' (' . join(l:jobs, ', ').').'))
@@ -131,9 +131,9 @@ function! lf_tex#stop_jobs()
   endfor
   let s:tex_jobs = l:tmp
   if empty(s:tex_jobs)
-    call lf_msg#notice('Done. No jobs running.')
+    call local#msg#notice('Done. No jobs running.')
   else
-    call lf_msg#warn('There are still some jobs running. Please try again.')
+    call local#msg#warn('There are still some jobs running. Please try again.')
   endif
 endfunction
 
@@ -168,9 +168,9 @@ fun! s:callback(bufnr, path, job, status)
     execute 'setl efm=' . escape(l:efm, ' ')
   endtry
   if a:status == 0
-    call lf_msg#notice('Success!')
+    call local#msg#notice('Success!')
   else
-    call lf_msg#err('There are errors.')
+    call local#msg#err('There are errors.')
   endif
 endf
 
@@ -179,7 +179,7 @@ if has("nvim")
     if a:event == 'exit'
       call s:callback(self.lf_data[0], self.lf_data[1], a:job_id, a:data)
     else
-      call lf_msg#err('Unexpected event')
+      call local#msg#err('Unexpected event')
     endif
   endf
 else
@@ -198,7 +198,7 @@ fun! lf_tex#typeset(options, ...) abort
         \ "-file-line-error",
         \ "-interaction=nonstopmode",
         \ l:filename])
-  call lf_msg#notice('Typesetting...')
+  call local#msg#notice('Typesetting...')
   if get(a:options, "use_term", 0)
     call lf_terminal#run(l:cmd, {"cwd": l:cwd})
   else

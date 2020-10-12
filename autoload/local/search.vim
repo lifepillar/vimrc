@@ -2,13 +2,13 @@
 " Collect the result in the location list.
 fun! local#search#buffer(pattern)
   if getbufvar(winbufnr(winnr()), "&ft") ==# "qf"
-    call lf_msg#warn("Cannot search the quickfix window")
+    call local#msg#warn("Cannot search the quickfix window")
     return
   endif
   try
     silent noautocmd execute printf("lvimgrep /%s/gj %s", a:pattern, fnameescape(expand("%")))
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-    call lf_msg#warn("No match")
+    call local#msg#warn("No match")
   endtry
   botright lwindow
 endf
@@ -22,7 +22,7 @@ fun! local#search#all_buffers(pattern)
   try
     silent noautocmd execute printf("vimgrepadd /%s/gj %s", a:pattern, join(l:files))
   catch /^Vim\%((\a\+)\)\=:E480/  " Pattern not found
-    call lf_msg#warn("No match")
+    call local#msg#warn("No match")
   endtry
   botright cwindow
 endf
@@ -31,7 +31,7 @@ fun! local#search#choose_dir(...) " ... is an optional prompt
   let l:idx = inputlist([get(a:000, 0, "Change directory to:"), "1. ".getcwd(), "2. ".expand("%:p:h"), "3. Other"])
   let l:dir = (l:idx == 1 ? getcwd() : (l:idx == 2 ? expand("%:p:h") : (l:idx == 3 ? fnamemodify(input("Directory: ", "", "file"), ':p') : "")))
   if strlen(l:dir) <= 0
-    call lf_msg#notice("Cancelled.")
+    call local#msg#notice("Cancelled.")
     return ''
   endif
   return l:dir
