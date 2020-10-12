@@ -1,4 +1,4 @@
-fun! lf_win#zoom_toggle() abort
+fun! local#win#zoom_toggle() abort
   if winnr('$') == 1 | return | endif " Only one window
 
   if exists('t:zoom_restore')
