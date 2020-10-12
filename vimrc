@@ -193,7 +193,7 @@
     autocmd BufReadPre *
           \ let s = getfsize(expand("<afile>")) |
           \ if s > g:LargeFile || s == -2 |
-          \   call lf_buffer#large(fnamemodify(expand("<afile>"), ":p")) |
+          \   call local#buffer#large(fnamemodify(expand("<afile>"), ":p")) |
           \ endif
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
@@ -201,7 +201,7 @@
           \   exe "normal! g`\"" |
           \ endif
     " Less intrusive swap prompt
-    autocmd SwapExists * call lf_buffer#swap_exists(expand("<afile>"))
+    autocmd SwapExists * call local#buffer#swap_exists(expand("<afile>"))
 
     if exists('##CmdlineEnter') " See :h incsearch
       autocmd CmdlineEnter :,/,\? :set hlsearch
@@ -496,7 +496,7 @@ endif
   nnoremap <silent>      <c-p> :<c-u>call zeef#buffer({'unlisted' : 0})<cr>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>
   nnoremap <silent> <leader>bD :<c-u>bd!<cr>
-  nnoremap <silent> <leader>b<c-d> :<c-u>call lf_buffer#delete_others()<cr>
+  nnoremap <silent> <leader>b<c-d> :<c-u>call local#buffer#delete_others()<cr>
   nnoremap <silent> <leader>bm :<c-u>VimCmd messages<cr>
   nnoremap <silent> <leader>bn :<c-u>enew<cr>
   nnoremap <silent> <leader>bs :<c-u>vnew +setlocal\ buftype=nofile\ bufhidden=wipe\ noswapfile<cr>
@@ -504,7 +504,7 @@ endif
   nnoremap <silent> <leader>bt :<c-u>call zeef#buffer_tags()<cr>
   nnoremap <silent> <leader>bw :<c-u>bw<cr>
   nnoremap <silent> <leader>bW :<c-u>bw!<cr>
-  nnoremap <silent> <leader>b<c-w> :<c-u>call lf_buffer#wipe_others()<cr>
+  nnoremap <silent> <leader>b<c-w> :<c-u>call local#buffer#wipe_others()<cr>
   " Edit
   nnoremap <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
   vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>

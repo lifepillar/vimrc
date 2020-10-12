@@ -45,7 +45,7 @@ if exists("*job_start")
   "      'fg': if set to 1, show the stdout buffer (default: 0).
   fun! lf_run#job(cmd, ...)
     for l:buf in ['^STDOUT$', '^STDERR$']
-      call lf_buffer#clear(l:buf)
+      call local#buffer#clear(l:buf)
     endfor
     let l:opt = get(a:000, 0, {})
     let l:job = job_start(a:cmd, {
