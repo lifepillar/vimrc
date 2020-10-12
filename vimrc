@@ -188,7 +188,7 @@
   augroup lf_autocmds
     autocmd!
     " Hook for overriding a theme's default
-    autocmd ColorScheme * call <sid>customizeTheme()
+    autocmd ColorScheme * call <sid>customizeColorscheme()
     " If a file is large, disable syntax highlighting and other stuff
     autocmd BufReadPre *
           \ let s = getfsize(expand("<afile>")) |
@@ -282,7 +282,7 @@ endif
     endfor
   endf
 
-  fun! s:customizeTheme()
+  fun! s:customizeColorscheme()
     let g:lf_cached_mode = ""  " Force updating highlight groups
     hi link ZeefName CommandMode
     if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
