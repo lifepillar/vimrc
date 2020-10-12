@@ -519,11 +519,11 @@ endif
   " Man page for word under cursor (note that man.vim redefines <leader>K)
   nnoremap <silent> <leader>K  :<c-u>runtime ftplugin/man.vim<cr>:normal \K<cr>
   " Fossil
-  nnoremap <silent> <leader>fd :<c-u>call lf_fossil#diff()<cr>
+  nnoremap <silent> <leader>fd :<c-u>call local#fossil#diff()<cr>
   nnoremap <silent> <leader>fk :<c-u>call lf_terminal#run(['fossil', 'commit'])<cr>
   nnoremap <silent> <leader>fp :<c-u>call lf_terminal#run(['fossil', 'sync'])<cr>
   nnoremap <silent> <leader>fs :<c-u>call lf_run#cmd(['fossil', 'status'])<cr>
-  nnoremap <silent> <leader>ft :<c-u>call lf_fossil#three_way_diff()<cr>
+  nnoremap <silent> <leader>ft :<c-u>call local#fossil#three_way_diff()<cr>
   " Git
   nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
   nnoremap <silent> <leader>gk :<c-u>call lf_terminal#run(['git', 'commit'])<cr>

@@ -1,5 +1,5 @@
 " Diff between the current buffer and the version currently checked out.
-fun! lf_fossil#diff() abort
+fun! local#fossil#diff() abort
   let l:ft = getbufvar("%", '&ft')
   let l:fn = expand('%:t')
   call lf_run#cmd(['fossil', 'cat', l:fn], { 'pos': 'rightbelow vertical'})
@@ -12,7 +12,7 @@ fun! lf_fossil#diff() abort
   diffthis
 endf
 
-fun! lf_fossil#three_way_diff() abort
+fun! local#fossil#three_way_diff() abort
   let l:ft = getbufvar("%", "&ft") " Get the file type
   " Show the version from the current branch on the left
   execute 'leftabove vsplit' expand("%:p") . '-baseline'
