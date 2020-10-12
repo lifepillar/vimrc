@@ -2,7 +2,7 @@
 fun! local#fossil#diff() abort
   let l:ft = getbufvar("%", '&ft')
   let l:fn = expand('%:t')
-  call lf_run#cmd(['fossil', 'cat', l:fn], { 'pos': 'rightbelow vertical'})
+  call local#run#cmd(['fossil', 'cat', l:fn], { 'pos': 'rightbelow vertical'})
   let &l:filetype = l:ft
   execute 'silent file' l:fn '[CHECKOUT]'
   setlocal nomodifiable

@@ -14,7 +14,7 @@ endf
 
 fun! s:search_in_texshop(f, l)
   " For texshop.sh, see TeXShop.app > Help > Changes and search for 'sync_preview'
-  call lf_run#job(['/usr/local/bin/texshop.sh', line('.'), '1', a:f])
+  call local#run#job(['/usr/local/bin/texshop.sh', line('.'), '1', a:f])
 endf
 
 fun! s:view_in_skim(f)
@@ -22,7 +22,7 @@ fun! s:view_in_skim(f)
 endf
 
 fun! s:search_in_skim(f, l)
-  call lf_run#job(['displayline', line('.'), lf_tex#file('pdf'), a:f])
+  call local#run#job(['displayline', line('.'), lf_tex#file('pdf'), a:f])
 endf
 
 fun! s:view_in_okular(f)
@@ -30,7 +30,7 @@ fun! s:view_in_okular(f)
 endf
 
 fun! s:search_in_okular(f, l)
-  call lf_run#job(['okular', '--unique', lf_tex#file('pdf') .. '#src:' .. line('.') .. a:f])
+  call local#run#job(['okular', '--unique', lf_tex#file('pdf') .. '#src:' .. line('.') .. a:f])
 endf
 
 fun! s:view_in_zathura(f)
@@ -42,7 +42,7 @@ endf
 "     set synctex-editor-command "gvim --remote-silent +%{line} %{input}"
 " Use Ctrl-Click to jump to GVim
 fun! s:search_in_zathura(f, l)
-  call lf_run#job(['zathura', '--synctex-forward', line('.') .. ':1:' .. a:f, lf_tex#file('pdf')])
+  call local#run#job(['zathura', '--synctex-forward', line('.') .. ':1:' .. a:f, lf_tex#file('pdf')])
 endf
 
 let s:preview = {
@@ -202,7 +202,7 @@ fun! lf_tex#typeset(options, ...) abort
   if get(a:options, "use_term", 0)
     call lf_terminal#run(l:cmd, {"cwd": l:cwd})
   else
-    call add(s:tex_jobs, lf_run#job(l:cmd, {
+    call add(s:tex_jobs, local#run#job(l:cmd, {
           \ "cb": "lf_tex#callback",
           \ "cwd": l:cwd,
           \ "args": [bufnr("%"), l:path]

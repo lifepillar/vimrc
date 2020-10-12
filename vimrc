@@ -378,7 +378,7 @@ endif
   command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
 
   " Execute a Vim command and send the output to a new scratch buffer
-  command! -complete=command -nargs=+ VimCmd call lf_run#vim_cmd(<q-args>)
+  command! -complete=command -nargs=+ VimCmd call local#run#vim_cmd(<q-args>)
 
   " Open a terminal and "bind" it to the current buffer (see \x mappings below)
   command! BindTerminal call lf_terminal#open()
@@ -522,13 +522,13 @@ endif
   nnoremap <silent> <leader>fd :<c-u>call local#fossil#diff()<cr>
   nnoremap <silent> <leader>fk :<c-u>call lf_terminal#run(['fossil', 'commit'])<cr>
   nnoremap <silent> <leader>fp :<c-u>call lf_terminal#run(['fossil', 'sync'])<cr>
-  nnoremap <silent> <leader>fs :<c-u>call lf_run#cmd(['fossil', 'status'])<cr>
+  nnoremap <silent> <leader>fs :<c-u>call local#run#cmd(['fossil', 'status'])<cr>
   nnoremap <silent> <leader>ft :<c-u>call local#fossil#three_way_diff()<cr>
   " Git
   nnoremap <silent> <leader>gd :<c-u>call local#git#diff()<cr>
   nnoremap <silent> <leader>gk :<c-u>call lf_terminal#run(['git', 'commit'])<cr>
   nnoremap <silent> <leader>gp :<c-u>call lf_terminal#run(['git', 'push'])<cr>
-  nnoremap <silent> <leader>gs :<c-u>call lf_run#cmd(['git', 'status'])<cr>
+  nnoremap <silent> <leader>gs :<c-u>call local#run#cmd(['git', 'status'])<cr>
   nnoremap <silent> <leader>gt :<c-u>call local#git#three_way_diff()<cr>
   " Options
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>

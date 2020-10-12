@@ -5,7 +5,7 @@
 " args: a List providing the arguments for git
 " where: a Vim command specifying where the window should be opened
 fun! s:git(args, where) abort
-  call lf_run#cmd(['git'] + a:args, {'pos': a:where})
+  call local#run#cmd(['git'] + a:args, {'pos': a:where})
   setlocal nomodifiable
 endf
 

@@ -1,7 +1,7 @@
 " Send the output of a Vim command to a new scratch buffer.
 "
-" Example: :call lf_run#vim_cmd('digraphs')
-fun! lf_run#vim_cmd(cmd)
+" Example: :call local#run#vim_cmd('digraphs')
+fun! local#run#vim_cmd(cmd)
   botright 10new
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   call append(0, split(execute(a:cmd), "\n"))
@@ -16,7 +16,7 @@ endf
 " ...: a Dictionary with additional options:
 "      'cwd': change to this directory before running the command
 "      'pos': Vim command specifying where the output window should be opened.
-fun! lf_run#cmd(cmd, ...) abort
+fun! local#run#cmd(cmd, ...) abort
   let l:opt = get(a:000, 0, {})
   if !has_key(l:opt, 'cwd')
     let l:opt['cwd'] = fnameescape(expand('%:p:h'))
@@ -43,15 +43,15 @@ if exists("*job_start")
   "      'cb': an exit callback;
   "      'args': optional List of arguments for the callback;
   "      'fg': if set to 1, show the stdout buffer (default: 0).
-  fun! lf_run#job(cmd, ...)
+  fun! local#run#job(cmd, ...)
     for l:buf in ['^STDOUT$', '^STDERR$']
       call local#buffer#clear(l:buf)
     endfor
     let l:opt = get(a:000, 0, {})
     let l:job = job_start(a:cmd, {
           \ "cwd"     : get(l:opt, "cwd", getcwd()),
-          \ "close_cb": "lf_run#close_cb",
-          \ "exit_cb" : function(get(l:opt, "cb", "lf_run#callback"),
+          \ "close_cb": "local#run#close_cb",
+          \ "exit_cb" : function(get(l:opt, "cb", "local#run#callback"),
           \                      get(l:opt, 'args', [bufnr('%')])),
           \ "in_io"   : "null",
           \ "out_io"  : "buffer",
@@ -66,11 +66,11 @@ if exists("*job_start")
     return l:job
   endf
 
-  fun! lf_run#close_cb(channel)
+  fun! local#run#close_cb(channel)
     call job_status(ch_getjob(a:channel)) " Trigger exit_cb's callback
   endf
 
-  fun! lf_run#callback(bufnr, job, status)
+  fun! local#run#callback(bufnr, job, status)
     if a:status == 0
       call local#msg#notice("Success!")
     else
@@ -80,7 +80,7 @@ if exists("*job_start")
 
 else
 
-  fun! lf_run#job(cmd, ...)
+  fun! local#run#job(cmd, ...)
     call local#msg#err('Function not implemented.')
   endf
 

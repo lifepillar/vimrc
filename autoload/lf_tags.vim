@@ -31,7 +31,7 @@ fun! lf_tags#ctags(args)
       return
     endif
     call local#msg#notice('Tagging ' . l:tagdir)
-    let s:res = lf_run#job(['ctags',
+    let s:res = local#run#job(['ctags',
           \ '-R',
           \ '--sort=foldcase',
           \ '--extra=+fq',
@@ -51,7 +51,7 @@ fun! lf_tags#cscope(args)
     let l:dir = local#search#choose_dir()
     if empty(l:dir) | return | endif
   endif
-  let s:res = lf_run#job(['cscope', '-R', '-q', '-b'] + split(a:args), {'cwd': l:dir})
+  let s:res = local#run#job(['cscope', '-R', '-q', '-b'] + split(a:args), {'cwd': l:dir})
 endf
 
 fun! lf_tags#load_cscope_db()
