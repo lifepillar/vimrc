@@ -525,11 +525,11 @@ endif
   nnoremap <silent> <leader>fs :<c-u>call lf_run#cmd(['fossil', 'status'])<cr>
   nnoremap <silent> <leader>ft :<c-u>call local#fossil#three_way_diff()<cr>
   " Git
-  nnoremap <silent> <leader>gd :<c-u>call lf_git#diff()<cr>
+  nnoremap <silent> <leader>gd :<c-u>call local#git#diff()<cr>
   nnoremap <silent> <leader>gk :<c-u>call lf_terminal#run(['git', 'commit'])<cr>
   nnoremap <silent> <leader>gp :<c-u>call lf_terminal#run(['git', 'push'])<cr>
   nnoremap <silent> <leader>gs :<c-u>call lf_run#cmd(['git', 'status'])<cr>
-  nnoremap <silent> <leader>gt :<c-u>call lf_git#three_way_diff()<cr>
+  nnoremap <silent> <leader>gt :<c-u>call local#git#three_way_diff()<cr>
   " Options
   nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
   nnoremap          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>

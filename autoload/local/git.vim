@@ -11,10 +11,10 @@ endf
 
 " Show a vertical diff between the current buffer and its last committed
 " version.
-fun! lf_git#diff() abort
+fun! local#git#diff() abort
   let l:ft = getbufvar("%", '&ft') " Get the file type
   let l:fn = expand('%:t')
-  call s:git(['show', 'HEAD:./'.l:fn], 'rightbelow vertical')
+  call s:git(['show', 'HEAD:./' .. l:fn], 'rightbelow vertical')
   let &l:filetype = l:ft
   execute 'silent file' l:fn '[HEAD]'
   diffthis
@@ -25,18 +25,18 @@ endf
 
 " Show a three-way diff. Useful for fixing merge conflicts.
 " This assumes that the current file is the working copy, of course.
-fun! lf_git#three_way_diff() abort
+fun! local#git#three_way_diff() abort
   let l:ft = getbufvar("%", "&ft") " Get the file type
   let l:fn = expand('%:t')
   " Show the version from the current branch on the left
-  call s:git(['show', ':2:./'.l:fn], "leftabove vertical")
+  call s:git(['show', ':2:./' .. l:fn], "leftabove vertical")
   let &l:filetype = l:ft
   execute 'silent file' l:fn '[OURS]'
   diffthis
   autocmd BufWinLeave <buffer> diffoff!
   wincmd p
   " Show version from the other branch on the right
-  call s:git(['show', ':3:./'.l:fn], 'rightbelow vertical')
+  call s:git(['show', ':3:./' .. l:fn], 'rightbelow vertical')
   let &l:filetype = l:ft
   execute 'silent file' l:fn '[OTHER]'
   diffthis
