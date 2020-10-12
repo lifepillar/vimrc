@@ -15,13 +15,13 @@ endf
 fun! local#fossil#three_way_diff() abort
   let l:ft = getbufvar("%", "&ft") " Get the file type
   " Show the version from the current branch on the left
-  execute 'leftabove vsplit' expand("%:p") . '-baseline'
+  execute 'leftabove vsplit' expand("%:p") .. '-baseline'
   let &l:filetype = l:ft
   diffthis
   autocmd BufWinLeave <buffer> diffoff!
   wincmd p
   " Show version from the other branch on the right
-  execute 'rightbelow vsplit' expand("%:p") . '-merge'
+  execute 'rightbelow vsplit' expand("%:p") .. '-merge'
   let &l:filetype = l:ft
   diffthis
   autocmd BufWinLeave <buffer> diffoff!
