@@ -356,8 +356,8 @@ endif
   command! -nargs=* -complete=shellcmd Spotlight call zeef#args(systemlist('mdfind ' .. <q-args>))
 
   " Generate tags and cscope db in the directory of the current buffer
-  command! -nargs=* -complete=shellcmd Ctags call lf_tags#ctags(<q-args>)
-  command! -nargs=* -complete=shellcmd Cscope call lf_tags#cscope(<q-args>)
+  command! -nargs=* -complete=shellcmd Ctags call local#tags#ctags(<q-args>)
+  command! -nargs=* -complete=shellcmd Cscope call local#tags#cscope(<q-args>)
 
   command! -nargs=* Zet call lf_text#new_note(<q-args>)
 
@@ -491,7 +491,7 @@ endif
   nnoremap <silent> <leader>w :<c-u>update<cr>
   nnoremap          <leader>W :<c-u>w !sudo tee % >/dev/null<cr>
   " Buffers
-  nnoremap <silent> <leader>ba :<c-u>call lf_tags#alt_file()<cr>
+  nnoremap <silent> <leader>ba :<c-u>call local#tags#alt_file()<cr>
   nnoremap          <leader>bb :<c-u>ls<cr>:b
   nnoremap <silent>      <c-p> :<c-u>call zeef#buffer({'unlisted' : 0})<cr>
   nnoremap <silent> <leader>bd :<c-u>bd<cr>

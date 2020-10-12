@@ -12,7 +12,7 @@ setlocal signcolumn=yes
 call lf_text#load_snippets()
 
 " Cscope
-if !lf_tags#load_cscope_db()
+if !local#tags#load_cscope_db()
   finish
 endif
 

@@ -5,8 +5,8 @@
 "
 " The dictionary below maps the suffix of the current file to a list of
 " candidate suffixes for alternate files.
-fun! lf_tags#alt_file()
-  execute "tjump" '/^'.expand("%:t:r").'\.\('.join(get(
+fun! local#tags#alt_file()
+  execute "tjump" '/^'.expand("%:t:r") .. '\.\(' .. join(get(
         \ {
         \ 'c':   ['h'],
         \ 'cpp': ['h','hpp'],
@@ -14,10 +14,10 @@ fun! lf_tags#alt_file()
         \ 'hpp': ['cpp'],
         \ 'vim': ['vim']
         \ },
-        \  expand("%:e"), ['UNKNOWN EXTENSION']), '\\|') . '\)$'
+        \  expand("%:e"), ['UNKNOWN EXTENSION']), '\\|')  ..  '\)$'
 endf
 
-fun! lf_tags#ctags(args)
+fun! local#tags#ctags(args)
   if empty(tagfiles()) " New tags file
     let l:dir = local#search#choose_dir('Create tags in:')
     if empty(l:dir) | return | endif
@@ -27,10 +27,10 @@ fun! lf_tags#ctags(args)
   endif
   for l:tagdir in l:dirs
     if !isdirectory(l:tagdir)
-      call local#msg#warn("Directory " . l:tagdir . " does not exist.")
+      call local#msg#warn("Directory " .. l:tagdir .. " does not exist.")
       return
     endif
-    call local#msg#notice('Tagging ' . l:tagdir)
+    call local#msg#notice('Tagging ' .. l:tagdir)
     let s:res = local#run#job(['ctags',
           \ '-R',
           \ '--sort=foldcase',
@@ -45,7 +45,7 @@ fun! lf_tags#ctags(args)
   endfor
 endf
 
-fun! lf_tags#cscope(args)
+fun! local#tags#cscope(args)
   let l:dir = getcwd()
   if l:dir != expand("%:p:h")
     let l:dir = local#search#choose_dir()
@@ -54,7 +54,7 @@ fun! lf_tags#cscope(args)
   let s:res = local#run#job(['cscope', '-R', '-q', '-b'] + split(a:args), {'cwd': l:dir})
 endf
 
-fun! lf_tags#load_cscope_db()
+fun! local#tags#load_cscope_db()
   let l:db = findfile("cscope.out", ".;") " See :h findfile()
   if !empty(l:db)
     execute "cscope add" fnameescape(l:db)
@@ -120,8 +120,8 @@ let s:types = {
 
 call map(s:types, 'printf(v:val, "--language-force=")')
 
-fun! lf_tags#file_tags(path, ft)
+fun! local#tags#file_tags(path, ft)
     return systemlist('ctags -f - --sort=no --excmd=number --fields= --extra= --file-scope=yes '
-          \ . get(s:types, a:ft, '') . ' '
-          \ . shellescape(expand(a:path)))
+          \ .. get(s:types, a:ft, '') .. ' '
+          \ .. shellescape(expand(a:path)))
 endf
