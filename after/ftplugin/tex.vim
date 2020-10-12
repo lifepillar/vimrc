@@ -39,4 +39,4 @@ command! -buffer -nargs=? -complete=file PdfLaTeX       call local#tex#typeset({
 command!         -nargs=0                LaTeXJobStatus call local#tex#job_status()
 command!         -nargs=0                LatexStopJobs  call local#tex#stop_jobs()
 
-call lf_text#load_snippets()
+call local#text#load_snippets()

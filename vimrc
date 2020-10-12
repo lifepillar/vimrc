@@ -359,7 +359,7 @@ endif
   command! -nargs=* -complete=shellcmd Ctags call local#tags#ctags(<q-args>)
   command! -nargs=* -complete=shellcmd Cscope call local#tags#cscope(<q-args>)
 
-  command! -nargs=* Zet call lf_text#new_note(<q-args>)
+  command! -nargs=* Zet call local#text#new_note(<q-args>)
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
@@ -375,7 +375,7 @@ endif
   command! -nargs=? -complete=dir FindFile call local#search#fuzzy_files(<q-args>)
 
   " See :h :DiffOrig
-  command! -nargs=0 -bar DiffOrig call lf_text#diff_orig()
+  command! -nargs=0 -bar DiffOrig call local#text#diff_orig()
 
   " Execute a Vim command and send the output to a new scratch buffer
   command! -complete=command -nargs=+ VimCmd call local#run#vim_cmd(<q-args>)
@@ -384,7 +384,7 @@ endif
   command! BindTerminal call local#term#open()
 
   " Get/set the tab width for the current buffer
-  command! -nargs=? TabWidth call lf_text#tab_width(<args>)
+  command! -nargs=? TabWidth call local#text#tab_width(<args>)
 
   " Clean up old undo files
   command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
@@ -452,12 +452,12 @@ endif
   nnoremap <leader>P "*P
   vnoremap <leader>P "*P
   " Insert snippet
-  inoremap <silent> … <c-r>=lf_text#expand_snippet('…')<cr>
+  inoremap <silent> … <c-r>=local#text#expand_snippet('…')<cr>
   " Make
   nnoremap <silent> <leader>m :<c-u>update<cr>:silent make<bar>redraw!<bar>bo cwindow<cr>
   " Terminal
   nnoremap <silent> <leader>x :<c-u>call local#term#send([getline('.')])<cr>
-  vnoremap <silent> <leader>x :<c-u>call local#term#send(lf_text#selection())<cr>
+  vnoremap <silent> <leader>x :<c-u>call local#term#send(local#text#selection())<cr>
   if has('terminal')
     " Use Alt+arrows to jump between words
     tnoremap <s-left> <esc>b
@@ -482,11 +482,11 @@ endif
     tnoremap <silent> <f8> <c-w>:call local#term#toggle_scrollwheelup()<cr>
   endif
   " Tab width
-  nnoremap <silent> <leader>] :<c-u>call lf_text#tab_width(&tabstop + v:count1)<cr>
-  nnoremap <silent> <leader>[ :<c-u>call lf_text#tab_width(&tabstop - v:count1)<cr>
+  nnoremap <silent> <leader>] :<c-u>call local#text#tab_width(&tabstop + v:count1)<cr>
+  nnoremap <silent> <leader>[ :<c-u>call local#text#tab_width(&tabstop - v:count1)<cr>
   " Comment/uncomment (overrides Q, so we avoid entering Ex mode by mistake)
-  nnoremap <silent>  Q :set opfunc=lf_text#toggle_comment<cr>g@
-  vnoremap <silent>  Q :<c-u>call lf_text#toggle_comment(visualmode(), 1)<cr>
+  nnoremap <silent>  Q :set opfunc=local#text#toggle_comment<cr>g@
+  vnoremap <silent>  Q :<c-u>call local#text#toggle_comment(visualmode(), 1)<cr>
   " Save buffer
   nnoremap <silent> <leader>w :<c-u>update<cr>
   nnoremap          <leader>W :<c-u>w !sudo tee % >/dev/null<cr>
@@ -542,7 +542,7 @@ endif
   nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
-  nnoremap <silent> <leader>ow :<c-u>call lf_text#toggle_wrap()<cr>
+  nnoremap <silent> <leader>ow :<c-u>call local#text#toggle_wrap()<cr>
   " View/toggle
   nnoremap <silent> <leader>vc :<c-u>call zeef#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
@@ -624,7 +624,7 @@ endif
         set linespace=5
       endif
       set scrolloff=999 " Keep the edited line vertically centered
-      silent call lf_text#enable_soft_wrap()
+      silent call local#text#enable_soft_wrap()
       set noshowcmd
       Limelight
     endf
@@ -635,7 +635,7 @@ endif
         let &linespace=s:linespace
       endif
       set showcmd
-      silent call lf_text#disable_soft_wrap()
+      silent call local#text#disable_soft_wrap()
       let &scrolloff=g:default_scrolloff
       Limelight!
     endf

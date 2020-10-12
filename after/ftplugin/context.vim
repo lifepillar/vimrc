@@ -14,4 +14,4 @@ nnoremap <silent><buffer> <leader>ts :<c-u>call local#tex#forward_search()<cr>
 let g:context_mtxrun = 'PATH=$HOME/Applications/context-osx-64/tex/texmf-osx-64/bin:$PATH mtxrun'
 let g:context_synctex = 1
 
-call lf_text#load_snippets()
+call local#text#load_snippets()

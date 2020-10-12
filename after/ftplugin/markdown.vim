@@ -22,4 +22,4 @@ let s:root = finddir("Notes", ".;")
 execute "lcd" (empty(s:root) ? "%:h" : s:root)
 unlet s:root
 
-call lf_text#load_snippets()
+call local#text#load_snippets()

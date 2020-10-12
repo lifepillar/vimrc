@@ -9,7 +9,7 @@ endif
 call neomake#configure#automake('nw', 1000)
 setlocal signcolumn=yes
 
-call lf_text#load_snippets()
+call local#text#load_snippets()
 
 " Cscope
 if !local#tags#load_cscope_db()

@@ -1,11 +1,11 @@
-fun! lf_text#enable_soft_wrap()
+fun! local#text#enable_soft_wrap()
   setlocal wrap
   map <buffer> j gj
   map <buffer> k gk
   echomsg "Soft wrap enabled"
 endf
 
-fun! lf_text#disable_soft_wrap()
+fun! local#text#disable_soft_wrap()
   setlocal nowrap
   if mapcheck("j") != ""
     unmap <buffer> j
@@ -15,17 +15,17 @@ fun! lf_text#disable_soft_wrap()
 endf
 
 " Toggle soft-wrapped text in the current buffer.
-fun! lf_text#toggle_wrap()
+fun! local#text#toggle_wrap()
   if &l:wrap
-    call lf_text#disable_soft_wrap()
+    call local#text#disable_soft_wrap()
   else
-    call lf_text#enable_soft_wrap()
+    call local#text#enable_soft_wrap()
   endif
 endf
 
 " Without arguments, just prints the current tab width. Otherwise, sets the
 " tab width for the current buffer and prints the new value.
-fun! lf_text#tab_width(...)
+fun! local#text#tab_width(...)
   if a:0 > 0
     let l:twd = a:1 > 0 ? a:1 : 1 " Disallow non-positive width
     " For the following assignments, see :help let-&.
@@ -37,7 +37,7 @@ fun! lf_text#tab_width(...)
 endf
 
 " Returns the currently selected text as a List.
-fun! lf_text#selection()
+fun! local#text#selection()
   if getpos("'>") != [0, 0, 0, 0]
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
@@ -51,7 +51,7 @@ fun! lf_text#selection()
   end
 endf
 
-fun! lf_text#diff_orig() " See :help :DiffOrig
+fun! local#text#diff_orig() " See :help :DiffOrig
   vert new
   setl buftype=nofile bufhidden=wipe nobuflisted noswapfile
   silent read ++edit #
@@ -63,14 +63,14 @@ fun! lf_text#diff_orig() " See :help :DiffOrig
   diffthis
 endf
 
-fun! lf_text#eatchar(pat) " See :h abbreviations
+fun! local#text#eatchar(pat) " See :h abbreviations
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
 
 " Returns a pair of comment delimiters, extracted from 'commentstring'.
 " The delimiters are ready to be used in a regular expression.
-fun! lf_text#comment_delimiters()
+fun! local#text#comment_delimiters()
   let l:delim = split(&l:commentstring, '\s*%s\s*')
   if empty(l:delim)
     call local#msg#err('Undefined comment delimiters. Please setlocal commentstring.')
@@ -83,28 +83,28 @@ fun! lf_text#comment_delimiters()
 endf
 
 " Comment out a region of text. Assumes that the delimiters are properly escaped.
-fun! lf_text#comment_out(first, last, lc, rc) abort
+fun! local#text#comment_out(first, last, lc, rc) abort
   let l:indent = s:minindent(a:first, a:last)
   for l:lnum in range(a:first, a:last)
-    call setline(l:lnum, substitute(getline(l:lnum), '^\(\s\{'.l:indent.'}\)\(.*\)$', '\1'.a:lc.' \2'.(empty(a:rc) ? '' : ' '.a:rc), ''))
+    call setline(l:lnum, substitute(getline(l:lnum), '^\(\s\{' .. l:indent .. '}\)\(.*\)$', '\1' .. a:lc .. ' \2' .. (empty(a:rc) ? '' : ' ' .. a:rc), ''))
   endfor
 endf
 
 " Uncomment a region of text. Assumes that the delimiters are properly escaped.
-fun! lf_text#uncomment(first, last, lc, rc) abort
+fun! local#text#uncomment(first, last, lc, rc) abort
   for l:lnum in range(a:first, a:last)
-    call setline(l:lnum, substitute(substitute(getline(l:lnum), '\s*'.a:rc.'\s*$', '', ''), '^\(\s*\)'.a:lc.'\s\?\(.*\)$', '\1\2', ''))
+    call setline(l:lnum, substitute(substitute(getline(l:lnum), '\s*' .. a:rc .. '\s*$', '', ''), '^\(\s*\)' .. a:lc .. '\s\?\(.*\)$', '\1\2', ''))
   endfor
 endf
 
 " Comment/uncomment a region of text.
-fun! lf_text#toggle_comment(type, ...) abort " See :h map-operator
-  let [l:lc, l:rc] = lf_text#comment_delimiters()
+fun! local#text#toggle_comment(type, ...) abort " See :h map-operator
+  let [l:lc, l:rc] = local#text#comment_delimiters()
   let [l:first, l:last] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
-  if match(getline(l:first), '^\s*'.l:lc) > -1
-    call lf_text#uncomment(l:first, l:last, l:lc, l:rc)
+  if match(getline(l:first), '^\s*' .. l:lc) > -1
+    call local#text#uncomment(l:first, l:last, l:lc, l:rc)
   else
-    call lf_text#comment_out(l:first, l:last, l:lc, l:rc)
+    call local#text#comment_out(l:first, l:last, l:lc, l:rc)
   endif
 endf
 
@@ -139,9 +139,9 @@ endf
 " mode.
 "
 " To expand a snippet, type its name followed by … (alt-. in macOS).
-fun! lf_text#load_snippets()
+fun! local#text#load_snippets()
   try
-    let l:file = readfile($HOME.'/.vim/snippets/'.&ft.'.txt')
+    let l:file = readfile($HOME .. '/.vim/snippets/' .. &ft .. '.txt')
   catch /.*/
     return
   endtry
@@ -158,7 +158,7 @@ fun! lf_text#load_snippets()
   inoremap <buffer> <c-b> <esc>gn"_c
 endf
 
-fun! lf_text#expand_snippet(trigger)
+fun! local#text#expand_snippet(trigger)
   if !exists('b:lf_snippets') | return a:trigger | endif
   " Get start of the line, word in front of the cursor, and tail of the line
   let l:match = matchlist(getline('.'), '^\(.\{-}\)\(\S\+\%' .. col('.') .. 'c\)\(.*\)$')
@@ -181,7 +181,7 @@ fun! lf_text#expand_snippet(trigger)
   return a:trigger
 endf
 
-fun! lf_text#new_note(name)
+fun! local#text#new_note(name)
   execute "edit" substitute(a:name, '\s', '-', 'g') .. '.md'
   call setline(1, '# ' .. substitute(a:name, '\v<(.)(\w*)', '\u\1\L\2', 'g'))
 endf
