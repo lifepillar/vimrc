@@ -1,11 +1,9 @@
 ## My Vim setup
 
-![WWDC16](https://raw.github.com/lifepillar/Resources/master/vimrc/screenshot.png)
-
 My own Vim configuration. Some features:
 
 - Foldable and thoroughly commented `vimrc`.
-- Loads in less than 50ms.
+- Loads in way less than 50ms.
 - Put your customizations into `vimrc_local`.
 - Move freely between Vim and tmux using `⌥-h/j/k/l`
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf)
@@ -19,7 +17,7 @@ My own Vim configuration. Some features:
   [ca915737](https://github.com/lifepillar/vimrc/commit/ca9157376be876b030e5306adf38efd7093b870a),
   when I decided that simple is better (and Powerline fonts are an ugly hack
   anyway).
-- Home-made interactive finder, *à la* poor man's CtrlP.
+- Uses Zeef, aka wise man's CtrlP.
 - **Distraction-free mode** (courtesy of
   [Goyo](https://github.com/junegunn/goyo.vim) and
   [Limelight](https://github.com/junegunn/limelight.vim)).
@@ -99,7 +97,8 @@ To add `Foo` as an optional plugin, change `start` with `opt` (it works if Vim
 has packages, otherwise you also have to add the plugin to
 `g:pathogen_blacklist`).
 
-To add a colorscheme, change `bundle/start` with `themes/opt`.
+To add a color scheme, change `bundle/start` with `bundle/opt` (create the
+directory if it does not exist).
 
 
 ### Useful resources
