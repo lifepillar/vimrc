@@ -187,19 +187,21 @@
 " Autocommands {{{
   augroup lf_autocmds
     autocmd!
-    " Hook for overriding a theme's default
-    autocmd ColorScheme * call <sid>customizeColorscheme()
+    autocmd ColorScheme * call <sid>customizeHighlight()
+
     " If a file is large, disable syntax highlighting and other stuff
     autocmd BufReadPre *
           \ let s = getfsize(expand("<afile>")) |
           \ if s > g:LargeFile || s == -2 |
           \   call local#buffer#large(fnamemodify(expand("<afile>"), ":p")) |
           \ endif
+
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
           \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
           \   exe "normal! g`\"" |
           \ endif
+
     " Less intrusive swap prompt
     autocmd SwapExists * call local#buffer#swap_exists(expand("<afile>"))
 
@@ -282,12 +284,9 @@ endif
     endfor
   endf
 
-  fun! s:customizeColorscheme()
+  fun! s:customizeHighlight()
     let g:lf_cached_mode = ""  " Force updating highlight groups
     hi link ZeefName CommandMode
-    if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
-      execute "runtime after/colors/" . g:colors_name . ".vim"
-    endif
   endf
 
   fun! s:enableStatusLine()
