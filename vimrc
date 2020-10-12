@@ -286,6 +286,12 @@ endif
 
   fun! s:customizeHighlight()
     let g:lf_cached_mode = ""  " Force updating highlight groups
+    hi default link Warnings    ErrorMsg
+    hi default link NormalMode  StatusLine
+    hi default link InsertMode  DiffText
+    hi default link VisualMode  Visual
+    hi default link ReplaceMode DiffChange
+    hi default link CommandMode PmenuSel
     hi link ZeefName CommandMode
   endf
 
