@@ -286,7 +286,7 @@ endif
     let g:lf_cached_mode = ""  " Force updating highlight groups
     hi link ZeefName CommandMode
     if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
-      execute "runtime after/themes/" . g:colors_name . ".vim"
+      execute "runtime after/colors/" . g:colors_name . ".vim"
     endif
   endf
 
@@ -775,7 +775,7 @@ endif
     let g:html_font=["Consolas", "Menlo"]
   " }}}
 " }}}
-" Themes {{{
+" Color schemes {{{
   let g:seoul256_background = 236
   let g:seoul256_light_background = 255
   let g:solarized_statusline = 'low'
