@@ -9,11 +9,11 @@ setlocal conceallevel=0
 nnoremap <silent><buffer> <leader>tt :<c-u>update<cr>:LuaLaTeX<cr>
 nnoremap <silent><buffer> <leader>tp :<c-u>update<cr>:PdfLaTeX<cr>
 " Clean generated files:
-nnoremap <silent><buffer> <leader>tc :<c-u>call lf_tex#clean()<cr>
+nnoremap <silent><buffer> <leader>tc :<c-u>call local#tex#clean()<cr>
 " Open PDF previewer (Skim):
-nnoremap <silent><buffer> <leader>tv :<c-u>call lf_tex#preview()<cr>
+nnoremap <silent><buffer> <leader>tv :<c-u>call local#tex#preview()<cr>
 " Forward search using Skim:
-nnoremap <silent><buffer> <leader>ts :<c-u>call lf_tex#forward_search()<cr>
+nnoremap <silent><buffer> <leader>ts :<c-u>call local#tex#forward_search()<cr>
 
 let s:tp_regex = '^$\|^\s*\(\\item\|\\begin\|\\end\|\\\(sub\)*section\|\\label\|\(small\|med\|big\)skip\)'
 
@@ -34,9 +34,9 @@ onoremap <silent><buffer> a$ :<c-u>normal! F$vf$<cr>
 vnoremap <buffer> i$ T$ot$
 vnoremap <buffer> a$ F$of$
 
-command! -buffer -nargs=? -complete=file LuaLaTeX       call lf_tex#typeset({'latexmk': ['-lualatex']}, <q-args>)
-command! -buffer -nargs=? -complete=file PdfLaTeX       call lf_tex#typeset({'latexmk': ['-pdf']}, <q-args>)
-command!         -nargs=0                LaTeXJobStatus call lf_tex#job_status()
-command!         -nargs=0                LatexStopJobs  call lf_tex#stop_jobs()
+command! -buffer -nargs=? -complete=file LuaLaTeX       call local#tex#typeset({'latexmk': ['-lualatex']}, <q-args>)
+command! -buffer -nargs=? -complete=file PdfLaTeX       call local#tex#typeset({'latexmk': ['-pdf']}, <q-args>)
+command!         -nargs=0                LaTeXJobStatus call local#tex#job_status()
+command!         -nargs=0                LatexStopJobs  call local#tex#stop_jobs()
 
 call lf_text#load_snippets()

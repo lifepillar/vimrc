@@ -1,4 +1,4 @@
-fun! lf_tex#file(suffix)
+fun! local#tex#file(suffix)
   return expand('%:p:r') . '.' . a:suffix
 endf
 
@@ -22,7 +22,7 @@ fun! s:view_in_skim(f)
 endf
 
 fun! s:search_in_skim(f, l)
-  call local#run#job(['displayline', line('.'), lf_tex#file('pdf'), a:f])
+  call local#run#job(['displayline', line('.'), local#tex#file('pdf'), a:f])
 endf
 
 fun! s:view_in_okular(f)
@@ -30,7 +30,7 @@ fun! s:view_in_okular(f)
 endf
 
 fun! s:search_in_okular(f, l)
-  call local#run#job(['okular', '--unique', lf_tex#file('pdf') .. '#src:' .. line('.') .. a:f])
+  call local#run#job(['okular', '--unique', local#tex#file('pdf') .. '#src:' .. line('.') .. a:f])
 endf
 
 fun! s:view_in_zathura(f)
@@ -42,7 +42,7 @@ endf
 "     set synctex-editor-command "gvim --remote-silent +%{line} %{input}"
 " Use Ctrl-Click to jump to GVim
 fun! s:search_in_zathura(f, l)
-  call local#run#job(['zathura', '--synctex-forward', line('.') .. ':1:' .. a:f, lf_tex#file('pdf')])
+  call local#run#job(['zathura', '--synctex-forward', line('.') .. ':1:' .. a:f, local#tex#file('pdf')])
 endf
 
 let s:preview = {
@@ -59,10 +59,10 @@ let s:forward_search = {
       \ 'Zathura': function('s:search_in_zathura'),
       \ }
 
-fun! lf_tex#preview()
+fun! local#tex#preview()
   let l:viewer = get(g:, 'lf_tex_previewer', s:default_viewer)
   if has_key(s:preview, l:viewer)
-    call s:preview[l:viewer](shellescape(lf_tex#file('pdf')))
+    call s:preview[l:viewer](shellescape(local#tex#file('pdf')))
     if !has("gui_running")
       redraw!
     endif
@@ -71,7 +71,7 @@ fun! lf_tex#preview()
   endif
 endf
 
-fun! lf_tex#forward_search()
+fun! local#tex#forward_search()
   let l:viewer = get(g:, 'lf_tex_previewer', s:default_viewer)
   if has_key(s:preview, l:viewer)
     call s:forward_search[l:viewer](expand('%:p'), line('.'))
@@ -80,7 +80,7 @@ fun! lf_tex#forward_search()
   endif
 endf
 
-fun! lf_tex#clean()
+fun! local#tex#clean()
   let l:currdir = expand("%:p:h")
   let l:tmpdirs = ['out']
   let l:suffixes = [
@@ -107,7 +107,7 @@ endf
 let s:tex_jobs = []
 
 " Print the status of TeX jobs
-function! lf_tex#job_status()
+function! local#tex#job_status()
   let l:jobs = filter(s:tex_jobs, 'job_status(v:val) == "run"')
   let l:n = len(l:jobs)
   call local#msg#notice(
@@ -117,7 +117,7 @@ function! lf_tex#job_status()
 endfunction
 
 " Stop all TeX jobs
-function! lf_tex#stop_jobs()
+function! local#tex#stop_jobs()
   let l:jobs = filter(s:tex_jobs, 'job_status(v:val) == "run"')
   for job in l:jobs
     call job_stop(job)
@@ -175,7 +175,7 @@ fun! s:callback(bufnr, path, job, status)
 endf
 
 if has("nvim")
-  fun! lf_tex#callback(job_id, data, event)
+  fun! local#tex#callback(job_id, data, event)
     if a:event == 'exit'
       call s:callback(self.lf_data[0], self.lf_data[1], a:job_id, a:data)
     else
@@ -183,12 +183,12 @@ if has("nvim")
     endif
   endf
 else
-  fun! lf_tex#callback(bufnr, path, job, status)
+  fun! local#tex#callback(bufnr, path, job, status)
     call s:callback(a:bufnr, a:path, a:job, a:status)
   endf
 endif
 
-fun! lf_tex#typeset(options, ...) abort
+fun! local#tex#typeset(options, ...) abort
   let l:path = fnamemodify(a:0 > 0 && strlen(a:1) > 0 ? a:1 : expand("%"), ":p") " Full path
   let l:cwd = fnamemodify(l:path, ":h")                                          " Working directory
   let l:filename = fnamemodify(l:path, ":t")                                     " Name of the file to typeset
@@ -203,7 +203,7 @@ fun! lf_tex#typeset(options, ...) abort
     call local#term#run(l:cmd, {"cwd": l:cwd})
   else
     call add(s:tex_jobs, local#run#job(l:cmd, {
-          \ "cb": "lf_tex#callback",
+          \ "cb": "local#tex#callback",
           \ "cwd": l:cwd,
           \ "args": [bufnr("%"), l:path]
           \ }))
