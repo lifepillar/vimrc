@@ -183,6 +183,17 @@ endf
 
 fun! local#text#new_note(name)
   execute "edit" substitute(a:name, '\s', '-', 'g') .. '.md'
-  call setline(1, '# ' .. substitute(a:name, '\v<(.)(\w*)', '\u\1\L\2', 'g'))
+  call setline(1, [
+        \ 'tags:',
+        \ 'links:',
+        \ 'created: ' .. strftime('%Y %b %d %H:%M'),
+        \ '',
+        \ '---',
+        \ '',
+        \ '# ' .. substitute(a:name, '\v<(.)(\w*)', '\u\1\L\2', 'g'),
+        \ '',
+        \ '',
+        \ ])
+  norm G
 endf
 
