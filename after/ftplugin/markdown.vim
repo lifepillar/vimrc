@@ -19,7 +19,7 @@ nnoremap <silent> <buffer> <leader>n :<c-u>call zeef#open(local#markdown#notes('
 let b:mucomplete_chain = ['user', 'path', 'keyn', 'dict', 'uspl']
 
 let s:root = finddir("Notes", ".;")
-execute "lcd" (empty(s:root) ? "%:h" : s:root)
+execute "lcd" (empty(s:root) && !empty(expand("%")) ? "%:h" : s:root)
 unlet s:root
 
 call local#text#load_snippets()
