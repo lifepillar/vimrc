@@ -2,7 +2,6 @@ fun! local#text#enable_soft_wrap()
   setlocal wrap
   map <buffer> j gj
   map <buffer> k gk
-  echomsg "Soft wrap enabled"
 endf
 
 fun! local#text#disable_soft_wrap()
@@ -11,7 +10,6 @@ fun! local#text#disable_soft_wrap()
     unmap <buffer> j
     unmap <buffer> k
   endif
-  echomsg "Soft wrap disabled"
 endf
 
 " Toggle soft-wrapped text in the current buffer.
