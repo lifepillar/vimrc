@@ -180,7 +180,7 @@ fun! local#text#expand_snippet(trigger)
 endf
 
 fun! local#text#new_note(name)
-  execute "edit" substitute(a:name, '\s', '-', 'g') .. '.md'
+  execute "edit" fnameescape(fnamemodify(a:name, ':h') .. '/' .. substitute(tolower(fnamemodify(a:name, ':t')), '\s', '-', 'g') .. '.md')
   call setline(1, [
         \ 'tags:',
         \ 'links:',
@@ -188,7 +188,7 @@ fun! local#text#new_note(name)
         \ '',
         \ '---',
         \ '',
-        \ '# ' .. substitute(a:name, '\v<(.)(\w*)', '\u\1\L\2', 'g'),
+        \ '# ' .. substitute(fnamemodify(a:name, ':t'), '\v<(\l)(\l+)', '\u\1\L\2', 'g'),
         \ '',
         \ '',
         \ ])

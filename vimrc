@@ -364,7 +364,7 @@ endif
   command! -nargs=* -complete=shellcmd Ctags call local#tags#ctags(<q-args>)
   command! -nargs=* -complete=shellcmd Cscope call local#tags#cscope(<q-args>)
 
-  command! -nargs=* Zet call local#text#new_note(<q-args>)
+  command! -nargs=* -complete=dir Zet call local#text#new_note(<q-args>)
 
   " Custom status line
   command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
