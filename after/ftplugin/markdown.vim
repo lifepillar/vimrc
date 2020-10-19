@@ -6,8 +6,8 @@ setlocal foldexpr=local#markdown#fold(v:lnum)
 setlocal foldmethod=expr
 setlocal foldminlines=0
 setlocal foldtext=local#markdown#foldtext()
-" Enable completion after [[:
-setlocal iskeyword+=[
+" Enable completion after [[ and #
+setlocal iskeyword+=[,#
 " Disable HTML completion function set by the Markdown plugin:
 setlocal omnifunc=
 setlocal path=.,**3/
