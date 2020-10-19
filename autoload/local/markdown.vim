@@ -15,13 +15,10 @@ fun! local#markdown#tags(base)
   return systemlist("rg -o --no-line-number --no-heading --trim -I ' " .. (a:base == '#' ? '#[a-z]' : a:base) .. "[a-z0-9]*' **/*.md | sort | uniq")
 endf
 
-" Suggest notes (i.e., Markdown files) in the current directory after [[.
+" Suggest notes (i.e., Markdown files) in the current directory after [[ or tags after #.
 fun! local#markdown#complete(findstart, base)
   if a:findstart
-    let l:col = match(getline('.'), '#[a-z]*\%' .. col('.') .. 'c')
-    if l:col == -1
-      let l:col = match(getline('.'), '[[\zs\S*\%' .. col('.') .. 'c')
-    endif
+    let l:col = match(getline('.'), '\%(#[a-z]*\|[[\zs\S*\)\%' .. col('.') .. 'c')
     return l:col == -1 ? -3 : l:col
   else
     if a:base =~# '^#'
