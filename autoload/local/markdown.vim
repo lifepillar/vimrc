@@ -12,7 +12,7 @@ endf
 " NOTE: ctags doesn't cut it here, because it would return at most one tag per line.
 fun! local#markdown#tags(base)
   let l:grep = executable('rg') ? 'rg': 'grep'
-  return systemlist("rg -o --no-line-number --no-heading --trim -I ' " .. (a:base == "#[a-z]" ? a:base : "#[a-z]") .. "[a-z0-9]*' **/*.md | sort | uniq")
+  return systemlist("rg -o --no-line-number --no-heading --trim -I ' " .. (a:base == '#' ? '#[a-z]' : a:base) .. "[a-z0-9]*' **/*.md | sort | uniq")
 endf
 
 " Suggest notes (i.e., Markdown files) in the current directory after [[.
