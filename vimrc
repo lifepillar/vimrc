@@ -512,7 +512,7 @@ endif
   nnoremap <silent> <leader>b<c-w> :<c-u>call local#buffer#wipe_others()<cr>
   " Edit
   nnoremap <silent> <leader>es :<c-u>call <sid>removeTrailingSpace()<cr>
-  vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(.)(\w*)/\u\1\L\2/g<cr>
+  vnoremap <silent> <leader>eU :<c-u>s/\%V\v<(\l)(\w+)/\u\1\L\2/g<cr>
   " Find/filter
   nnoremap <silent> <leader>ff :<c-u>call zeef#files()<cr>
   nnoremap <silent> <c-n>      :<c-u>call zeef#args(v:oldfiles)<cr>
