@@ -12,8 +12,44 @@ fun! s:view_in_texshop(f)
   silent execute '!open -a TeXShop.app ' .. a:f .. ' >/dev/null 2>&1'
 endf
 
+" To make forward/backward search work in TeXShop, you need the following:
+"
+" 1. Create /usr/local/bin/othereditor (the name cannot be changed) with the
+"    following content:
+"
+"        #!/bin/sh
+"        /usr/local/bin/mvim --remote-silent +"$1" "$2"
+"
+" 2. Create /usr/local/bin/texshop.sh, with the following content
+"    (see TeXShop.app > Help > Changes and search for 'sync_preview'):
+"
+"       #!/bin/bash
+"       MyShellVar=$1
+"       MyShellVas=$2
+"       MyShellVat=$3
+"       osascript <<EOD
+"         tell application "TeXShop"
+"           activate
+"           set the front_document to the front document
+"           set MyAppVar to $MyShellVar
+"           set MyAppVas to $MyShellVas
+"           set MyAppVat to "$MyShellVat"
+"           tell front_document
+"             sync_preview_line theLine MyAppVar
+"             sync_preview_index theIndex MyAppVas
+"             sync_preview_name theName MyAppVat
+"             return 0
+"           end tell
+"         end tell
+"       EOD
+"
+" 3. Check "Configure for External Editor" in TeXShop's Preferences.
+" 4. Set the following hidden preference:
+"
+"     defaults write TeXShop OtherEditorSync YES
+"
+" 5. Typeset with SyncTeX enabled (which is the default here)!
 fun! s:search_in_texshop(f, l)
-  " For texshop.sh, see TeXShop.app > Help > Changes and search for 'sync_preview'
   call local#run#job(['/usr/local/bin/texshop.sh', line('.'), '1', a:f])
 endf
 
