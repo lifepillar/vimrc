@@ -33,6 +33,11 @@ snippet f
   ___
 \stopformula
 
+snippet tt
+\starttyping
+  ___
+\stoptyping
+
 snippet align
 \startalign
   ___
