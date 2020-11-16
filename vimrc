@@ -781,8 +781,6 @@ endif
   " }}}
 " }}}
 " Color schemes {{{
-  let g:seoul256_background = 236
-  let g:seoul256_light_background = 255
   let g:solarized_statusline = 'low'
 " }}}
 " Init {{{
