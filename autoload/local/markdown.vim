@@ -12,7 +12,7 @@ endf
 " NOTE: ctags doesn't cut it here, because it would return at most one tag per line.
 fun! local#markdown#tags(base)
   let l:pattern = "' " .. (a:base == '#' ? '#[a-z]' : a:base) .. "[a-z0-9]*'"
-  return systemlist(executable('rg')
+  silent return systemlist(executable('rg')
         \ ? "rg -o --no-line-number --no-heading --trim -I " .. l:pattern .. " **/*.md|sort|uniq"
         \ :  "grep -h -o " .. l:pattern .. " **/*.md|sed 's/^ //'|sort|uniq")
 endf
