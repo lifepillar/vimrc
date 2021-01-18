@@ -180,7 +180,9 @@ fun! local#text#expand_snippet(trigger)
 endf
 
 fun! local#text#new_note(name)
-  execute "edit" fnameescape(fnamemodify(a:name, ':h') .. '/' .. substitute(tolower(fnamemodify(a:name, ':t')), '\s', '-', 'g') .. '.md')
+  let l:dir = fnamemodify(a:name, ':p:h')
+  call mkdir(l:dir, 'p')
+  execute "edit" fnameescape(l:dir .. '/' .. substitute(tolower(fnamemodify(a:name, ':t')), '\s', '-', 'g') .. '.md')
   call setline(1, [
         \ 'tags:',
         \ 'links:',
@@ -193,5 +195,6 @@ fun! local#text#new_note(name)
         \ '',
         \ ])
   norm G
+  write
 endf
 
