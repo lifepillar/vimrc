@@ -202,6 +202,11 @@
           \   exe "normal! g`\"" |
           \ endif
 
+    " Add a file to the list of recently edited files as soon as it is unloaded.
+    " Note: this is a temporary change, with no effect on what is written into
+    " the viminfo file later (see :h v:oldfiles).
+    autocmd BufUnload * call add(v:oldfiles, fnamemodify(expand("<afile>"), ":p"))
+
     " Less intrusive swap prompt
     autocmd SwapExists * call local#buffer#swap_exists(expand("<afile>"))
 
