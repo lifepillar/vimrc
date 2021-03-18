@@ -1,7 +1,7 @@
 compiler tex
 
 " Better auto-completion for things like '\label{fig:...'
-set iskeyword+=:
+setlocal iskeyword+=:
 " See :h tex-conceal
 setlocal conceallevel=0
 
