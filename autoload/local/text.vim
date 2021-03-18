@@ -1,26 +1,3 @@
-fun! local#text#enable_soft_wrap()
-  setlocal wrap
-  map <buffer> j gj
-  map <buffer> k gk
-endf
-
-fun! local#text#disable_soft_wrap()
-  setlocal nowrap
-  if mapcheck("j") != ""
-    unmap <buffer> j
-    unmap <buffer> k
-  endif
-endf
-
-" Toggle soft-wrapped text in the current buffer.
-fun! local#text#toggle_wrap()
-  if &l:wrap
-    call local#text#disable_soft_wrap()
-  else
-    call local#text#enable_soft_wrap()
-  endif
-endf
-
 " Without arguments, just prints the current tab width. Otherwise, sets the
 " tab width for the current buffer and prints the new value.
 fun! local#text#tab_width(...)

@@ -10,9 +10,6 @@ setlocal path=.,**3/
 setlocal spell
 setlocal spelllang=en
 setlocal suffixesadd=.md
-setlocal textwidth=80
-
-call local#text#enable_soft_wrap()
 
 " Search notes in the current directory
 nnoremap <silent> <buffer> <leader>n :<c-u>call zeef#open(local#markdown#notes(''), 'local#markdown#set_arglist', 'Choose notes')<cr>

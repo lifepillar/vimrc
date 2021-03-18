@@ -547,7 +547,7 @@ endif
   nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
   nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
   nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
-  nnoremap <silent> <leader>ow :<c-u>call local#text#toggle_wrap()<cr>
+  nnoremap <silent> <leader>ow :<c-u>setlocal wrap!<cr>
   " View/toggle
   nnoremap <silent> <leader>vc :<c-u>call zeef#colorscheme()<cr>
   nnoremap <silent> <leader>vm :<c-u>marks<cr>
@@ -629,7 +629,7 @@ endif
         set linespace=5
       endif
       set scrolloff=999 " Keep the edited line vertically centered
-      silent call local#text#enable_soft_wrap()
+      setlocal wrap
       set noshowcmd
       Limelight
     endf
@@ -640,7 +640,7 @@ endif
         let &linespace=s:linespace
       endif
       set showcmd
-      silent call local#text#disable_soft_wrap()
+      setlocal nowrap
       let &scrolloff=g:default_scrolloff
       Limelight!
     endf
