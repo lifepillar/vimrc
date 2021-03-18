@@ -32,13 +32,3 @@ fun! local#markdown#complete(findstart, base)
   endif
 endf
 
-fun! local#markdown#fold(lnum)
-  return getline(a:lnum) =~# '\m^ \{,3}#\+ \+'
-        \ ? '>' .. (1 + indent(a:lnum) / shiftwidth())
-        \ : '='
-endf
-
-fun! local#markdown#foldtext()
-  return getline(v:foldstart)
-endf
-

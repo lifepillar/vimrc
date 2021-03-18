@@ -2,10 +2,6 @@ setlocal autoindent
 setlocal completefunc=local#markdown#complete
 setlocal conceallevel=2
 setlocal dictionary=/usr/share/dict/words
-setlocal foldexpr=local#markdown#fold(v:lnum)
-setlocal foldmethod=expr
-setlocal foldminlines=0
-setlocal foldtext=local#markdown#foldtext()
 " Enable completion after [[ and #
 setlocal iskeyword+=[,#
 " Disable HTML completion function set by the Markdown plugin:
