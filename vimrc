@@ -68,9 +68,7 @@
   endif
   set updatetime=500 " Trigger CursorHold event after half a second
   syntax enable
-  filetype on " Enable file type detection
-  filetype plugin on " Enable loading the plugin files for specific file types
-  filetype indent on " Load indent files for specific file types
+  filetype plugin indent on " Enable file type detection
   set autoread " Re-read file if it is changed by an external program
   set hidden " Allow buffer switching without saving
   " Consolidate temporary files into a central spot
