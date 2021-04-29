@@ -1,3 +1,5 @@
+**ARCHIVED:** I am gradually moving my personal projects to Fossil.
+
 ## My Vim setup
 
 My own Vim configuration. Some features:
